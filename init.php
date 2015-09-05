@@ -1,0 +1,65 @@
+<?php
+
+namespace fewbricks;
+
+require_once('lib/helpers.php');
+
+// Master-parent-Yoda-class
+require('lib/brick.php');
+
+require('lib/acf/field-group.php');
+require('lib/acf/layout.php');
+
+/**
+ * Autoloader for our brickclasses
+ * @param $class
+ */
+function bricks_autoloader($class)
+{
+
+    $namespace_parts = explode('\\', $class);
+
+    // Make sure that we are dealing with something in fewbricks
+    if ($namespace_parts[0] === 'fewbricks') {
+
+        $file_name = str_replace('_', '-', end($namespace_parts)) . '.php';
+
+        if ($namespace_parts[1] === 'bricks') {
+
+            require('bricks/' . $file_name);
+
+        } else {
+
+            require('lib/acf/fields/' . $file_name);
+        }
+
+    }
+
+}
+
+spl_autoload_register('fewbricks\bricks_autoloader');
+
+/**
+ * @todo A better way for this
+ */
+global $fewbricks_save_json;
+
+// Stuff that is only required in the backend needs not to be required if local json is used.
+if (((!defined('FEWBRICKS_USE_JSON') || FEWBRICKS_USE_JSON === false) && function_exists('register_field_group')) || $fewbricks_save_json === true) {
+
+    // Require the main set up file for field groups.
+    require('field-groups/init.php');
+
+}
+
+function add_admin_menu()
+{
+
+    \add_submenu_page('edit.php?post_type=acf-field-group', 'fewbricks', 'Fewbricks', 'activate_plugins', 'fewbricks',
+        function () {
+            require_once(__DIR__ . '/admin/admin.php');
+        });
+
+}
+
+add_action('admin_menu', __NAMESPACE__ . '\\add_admin_menu');
