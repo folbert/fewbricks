@@ -13,7 +13,6 @@ class repeater extends field
      * @param $key
      * @param $name
      * @param $label
-     * @param array $settings
      */
     public function __construct($label, $name, $key)
     {
@@ -40,6 +39,30 @@ class repeater extends field
 
     }
 
+
+    /**
+     * @param $arg
+     */
+    public function add_field($arg)
+    {
+
+        wp_die('Message from Fewbricks: In order to be consistent with ACFs terminology, there is no function <code>add_field</code> for repeaters. Use <code>add_sub_field</code> instead.');
+
+    }
+
+    /**
+     * @param $field_object
+     * @return $this
+     */
+    public function add_sub_field($field_object)
+    {
+
+        $this->settings['sub_fields'][] = $field_object->get_settings($this);
+
+        return $this;
+
+    }
+
     /**
      * @param \fewbricks\bricks\brick $brick
      * @return $this
@@ -60,16 +83,30 @@ class repeater extends field
     }
 
     /**
-     * @param $field_object
-     * @return $this
+     * @param repeater $repeater
+     * @return repeater $this
      */
-    public function add_sub_field($field_object)
+    public function add_repeater($repeater)
     {
 
-        $this->settings['sub_fields'][] = $field_object->get_settings($this);
+        $this->settings['sub_fields'][] = $repeater->get_settings($this);
 
         return $this;
 
     }
+
+    /**
+     * @param flexible_content $flexible_content
+     * @return $this
+     */
+    public function add_flexible_content($flexible_content)
+    {
+
+        $this->add_sub_field($flexible_content);
+
+        return $this;
+
+    }
+
 
 }

@@ -15,7 +15,6 @@ class layout
      * @param $key
      * @param string $name
      * @param string $label
-     * @param array $layout_settings
      */
     public function __construct($label, $name, $key)
     {
@@ -33,9 +32,31 @@ class layout
     }
 
     /**
+     * @param $arg
+     */
+    public function add_field($arg)
+    {
+
+        wp_die('Message from Fewbricks: In order to be consistent with ACFs terminology, there is no function <code>add_field</code> for layouts. Use <code>add_sub_field</code> instead.');
+
+    }
+
+    /**
+     * @param $field_object
+     * @return $this
+     */
+    public function add_sub_field($field_object)
+    {
+
+        $this->settings['sub_fields'][] = $field_object->get_settings($this);
+
+        return $this;
+
+    }
+
+    /**
      * Dont add more than one brick to a layout
      * @param \fewbricks\bricks\brick $brick
-     * @internal param array $args
      * @return $this
      */
     public function add_brick($brick)
@@ -51,7 +72,32 @@ class layout
 
         // Set name and label of layout to that of the brick
         $this->set_setting('name', $brick->get_setting('name'));
-        $this->set_setting('label', $brick->get_setting('label'));
+
+        if($this->get_setting('label') === '') {
+
+            $this->set_setting('label', $brick->get_setting('label'));
+
+        }
+
+    }
+
+    /**
+     * @param \fewbricks\acf\fields\repeater $repeater
+     */
+    public function add_repeater($repeater)
+    {
+
+        $this->add_sub_field($repeater);
+
+    }
+
+    /**
+     * @param \fewbricks\acf\fields\flexible_content $flexible_content
+     */
+    public function add_flexible_content($flexible_content)
+    {
+
+        $this->add_sub_field($flexible_content);
 
     }
 

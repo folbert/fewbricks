@@ -16,6 +16,8 @@ $location = [
 
 $fg = (new fewacf\field_group('Main content 1', '150901113b', $location, 1));
 
+$fg->add_brick(new bricks\flexible_brick('a_flex_brick', '1509062209a'));
+
 $fg->add_brick((new bricks\buttons_list('button_list', '1509052316o'))->set_field_label_prefix('Button list'));
 $fg->add_brick((new bricks\standard_list('a_list', '1509042107u'))->set_field_label_prefix('A list'));
 $fg->add_brick((new bricks\standard_list('another_list', '1509042107o'))->set_field_label_prefix('Another list'));
@@ -33,6 +35,7 @@ $fg->add_field(new acf_fields\text('Some text', 'some_text', '1509011120p'));
 $fg->add_field(new acf_fields\text('Some more text', 'some_more_text', '1509011120x'));
 $fg->add_brick((new bricks\youtube('youtube_1', '1509011120x'))->set_field_label_prefix('Det draaaar!'));
 $fg->add_brick((new bricks\button('button', '1509032106a')));
+$fg->add_brick((new bricks\button('button2', '1509032106b')));
 
 $fg->register();
 

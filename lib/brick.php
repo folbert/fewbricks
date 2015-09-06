@@ -70,7 +70,12 @@ class brick
     /**
      * @var
      */
-    protected $view;
+    protected $layouts;
+
+    /**
+     * @var
+     */
+    protected $get_html_args;
 
 
     /**
@@ -109,6 +114,7 @@ class brick
     }
 
     /**
+     * @param $object_to_get_for
      * @return array
      */
     public function get_settings($object_to_get_for)
@@ -148,32 +154,6 @@ class brick
     }
 
     /**
-     * Get settings for a field of the brick. We need this function since we modify
-     * the key of the field by adding the key of the brick and therefore can not call the field directly.
-     * @param $field_name
-     * @return field|false
-     */
-    public function get_field_by_name($field_name)
-    {
-
-        $settings = false;
-
-        foreach ($this->fields AS $field) {
-
-            if ($field['name'] == $field_name) {
-
-                $settings = $field;
-                break;
-
-            }
-
-        }
-
-        return $settings;
-
-    }
-
-    /**
      * @param \fewbricks\acf\fields\field $field
      * @return mixed
      */
@@ -197,12 +177,22 @@ class brick
     }
 
     /**
-     * @param $repeater_to_add
+     * @param \fewbricks\acf\fields\repeater $repeater
      */
-    protected function add_repeater($repeater_to_add)
+    protected function add_repeater($repeater)
     {
 
-        $this->add_field($repeater_to_add);
+        $this->add_field($repeater);
+
+    }
+
+    /**
+     * @param \fewbricks\acf\fields\flexible_content $flexible_content
+     */
+    protected function add_flexible_content($flexible_content)
+    {
+
+        $this->add_field($flexible_content);
 
     }
 
@@ -212,24 +202,12 @@ class brick
     private function prepare_settings($object_to_prepare_for)
     {
 
-        $this->prepare_key($object_to_prepare_for);
-
         if (!is_a($object_to_prepare_for, '\fewbricks\acf\field_group')) {
 
             $this->prepare_name($object_to_prepare_for);
             $this->prepare_label($object_to_prepare_for);
 
         }
-
-    }
-
-    /**
-     * @param $object_to_prepare_for
-     */
-    private function prepare_key($object_to_prepare_for)
-    {
-
-        $this->set_key($object_to_prepare_for->get_setting('key') . '_' . $this->get_setting('key'));
 
     }
 
@@ -277,38 +255,6 @@ class brick
     }
 
     /**
-     * @param $common_field_name
-     */
-    protected function add_common_field($common_field_name)
-    {
-
-    }
-
-    /**
-     * @param $repeater
-     */
-    /*
-    protected function add_repeater($repeater)
-    {
-
-        $this->fields[] = $repeater->get_settings();
-
-    }
-    */
-
-    /**
-     * @param flexible_content $flexible_content
-     */
-    /*
-    protected function add_flexible_content($flexible_content) {
-
-        $flexible_content->set_name($this->name . '_' . $flexible_content->get_name());
-        $flexible_content->set_key($this->key . '_' . $flexible_content->get_key());
-
-    }
-    */
-
-    /**
      * @param $data_name
      * @return string
      */
@@ -321,7 +267,7 @@ class brick
 
     /**
      * @param $data_key
-     * @param $repeater_name The name of the repeater that the field with the data is in.
+     * @param string $repeater_name The name of the repeater that the field with the data is in.
      * @return bool|mixed|null|void
      */
     protected function get_data_value_in_repeater($data_key, $repeater_name)
@@ -491,11 +437,15 @@ class brick
      * @param bool|false $layouts
      * @return string
      */
-    public function get_html($args = [], $layouts = false) {
+    public function get_html($args = [], $layouts = false)
+    {
 
-        $html = $this->get_brick_html($args);
+        // Letäs store them here for more flexibility
+        $this->get_html_args = $args;
 
-        if($layouts === false) {
+        $html = $this->get_brick_html();
+
+        if ($layouts === false) {
             $html = $this->get_layouted_html($html);
         }
 
@@ -580,21 +530,40 @@ class brick
 
     /**
      * @param $key
+     * @return $this
      */
     public function set_key($key)
     {
 
         $this->key = $key;
 
+        return $this;
+
     }
 
     /**
      * @param $name
+     * @return $this
      */
     public function set_name($name)
     {
 
         $this->name = $name;
+
+        return $this;
+
+    }
+
+    /**
+     * @param $label
+     * @return $this
+     */
+    public function set_label($label)
+    {
+
+        $this->label = $label;
+
+        return $this;
 
     }
 
@@ -613,6 +582,7 @@ class brick
 
     /**
      * @param $suffix
+     * @return $this
      */
     public function set_field_label_suffix($suffix)
     {
@@ -626,12 +596,15 @@ class brick
     /**
      * This function makes sure that we have means to get essential settings in the same way as for fields etc.
      * @param $name
-     * @return string
+     * @param $value
+     * @return $this
      */
     public function set_setting($name, $value)
     {
 
         $this->{$name} = $value;
+
+        return $this;
 
 
     }
@@ -695,8 +668,6 @@ class brick
 
         return $value;
 
-
     }
-
 
 }

@@ -37,8 +37,8 @@ class flexible_content extends field
     }
 
     /**
-     * @param layout $layout
-     * @return layout
+     * @param \fewbricks\acf\layout $layout
+     * @return \fewbricks\acf\layout
      */
     public function add_layout($layout)
     {
@@ -50,7 +50,7 @@ class flexible_content extends field
     }
 
     /**
-     * @param $layouts
+     * @param array $layouts
      */
     public function add_layouts($layouts)
     {

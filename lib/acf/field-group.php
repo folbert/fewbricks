@@ -2,8 +2,6 @@
 
 namespace fewbricks\acf;
 
-use fewbricks\bricks\brick;
-
 // @todo Only if in dev mode
 global $debug_keys;
 $debug_keys = [];
@@ -127,11 +125,14 @@ class field_group
 
     /**
      * @param \fewbricks\acf\fields\flexible_content $flexible_content
+     * @return fields\flexible_content
      */
     public function add_flexible_content($flexible_content)
     {
 
         $this->settings['fields'][] = $flexible_content->get_settings($this);
+
+        return $flexible_content;
 
     }
 
@@ -167,6 +168,8 @@ class field_group
 
         }
 
+        $this->settings['fields'] = $this->set_unique_keys($this->settings['fields'], $this->settings['key']);
+
         if (FEWBRICKS_DEV_MODE) {
 
             if (isset($_GET['dumpfewbricksfields'])) {
@@ -194,12 +197,94 @@ class field_group
     }
 
     /**
+     * In order to create unique keys, we prepend teh key of a parent to its kids and so on down the field settings tree.
+     * @param $fields
+     * @param $base_key
+     */
+    private function set_unique_keys($fields, $base_key)
+    {
+
+        foreach ($fields as $field_key => $field_settings) {
+
+            // Store the original key to ease debugging
+            $fields[$field_key]['original_key'] = $fields[$field_key]['key'];
+
+            // Start off new key with base key
+            $new_key = $base_key;
+
+            // Lets add the brick key if we have one. This will only be set if
+            // the field is part of a brick (which is a concept added by Fewbricks and of which ACF has no idea)
+            if(isset($field_settings['brick_key'])) {
+
+                $new_key .= '_' . $field_settings['brick_key'];
+
+            }
+
+            // Lets store the new key we have built so far for future needs
+            $new_base_key = $new_key;
+
+            // Add the current fields key to complete the new key
+            $new_key .= '_' . $fields[$field_key]['key'];
+
+            // Give the field the brand new key
+            $fields[$field_key]['key'] = $new_key;
+
+            // Lets keep the array key of any item that we should traverse down.
+            $field_settings_rabbit_hole_array_key = false;
+
+            if (isset($field_settings['fields']) && is_array($field_settings['fields'])) {
+
+                $field_settings_rabbit_hole_array_key = 'fields';
+
+            } elseif (isset($field_settings['sub_fields']) && is_array($field_settings['sub_fields'])) {
+
+                $field_settings_rabbit_hole_array_key = 'sub_fields';
+
+            } elseif (isset($field_settings['layouts']) && is_array($field_settings['layouts'])) {
+
+                $field_settings_rabbit_hole_array_key = 'layouts';
+
+            }
+
+            // Do we have a key to go down?
+            if($field_settings_rabbit_hole_array_key !== false) {
+
+                // Recursion!
+                $fields[$field_key][$field_settings_rabbit_hole_array_key] =
+                    $this->set_unique_keys($field_settings[$field_settings_rabbit_hole_array_key], $new_key);
+
+            }
+
+            // Lets fix the conditional logic
+            if(isset($field_settings['conditional_logic']) && !empty($field_settings['conditional_logic'])) {
+
+                foreach($field_settings['conditional_logic'] AS $lvl_1_key => $lvl_1_value) {
+
+                    foreach($field_settings['conditional_logic'][$lvl_1_key] AS $lvl_2_key => $lvl_2_value) {
+
+                        $fields[$field_key]['conditional_logic'][$lvl_1_key][$lvl_2_key]['field'] =
+                            $new_base_key . '_' .
+                            $field_settings['conditional_logic'][$lvl_1_key][$lvl_2_key]['field'];
+
+                    }
+
+                }
+
+            }
+
+        }
+
+        return $fields;
+
+    }
+
+    /**
      * Checks for duplicate keys. This functions hould not be called in a production environment since
      * it will cause wp_die if a duplicate key is found and will also slow down performance by looping lots
      * of multidimensional arrays.
-     * @param $array
+     * @param $fields
      */
-    function check_keys($array)
+    function check_keys($fields)
     {
 
         global $debug_keys;
@@ -207,7 +292,7 @@ class field_group
         $error_string = false;
         $name_of_looped_field = false;
 
-        foreach ($array as $key => $value) {
+        foreach ($fields as $key => $value) {
 
             if (!$error_string && is_array($value)) {
 
@@ -220,7 +305,7 @@ class field_group
 
                     $error_string = 'The key <b>' . $value . '</b> already exists.';
 
-                } elseif(substr($value, 0, 1) == '_' || substr($value, -1) == '_') {
+                } elseif (substr($value, 0, 1) == '_' || substr($value, -1) == '_') {
 
                     $error_string = 'A key must not start or end with an underscore. You have probably forgotten to set a key somewhere. Key with errors: <b>' . $value . '</b>';
 
@@ -230,7 +315,7 @@ class field_group
 
                 }
 
-            } elseif($key === 'name') {
+            } elseif ($key === 'name') {
 
                 $name_of_looped_field = $value;
 
@@ -238,9 +323,11 @@ class field_group
 
             if ($error_string !== false && $name_of_looped_field !== false) {
 
-                $die_string = 'Fatal error when adding field group "' . $this->settings['title'] . '". ';
+                $die_string = 'Message from Fewbricks: ';
+                $die_string .= 'Fatal error when adding field group "' . $this->settings['title'] . '". ';
                 $die_string .= $error_string . ' ';
                 $die_string .= 'Please use another key for field "' . $name_of_looped_field . '"';
+                //$die_string .= '<hr><pre>' . print_r(debug_backtrace(), true) . '</pre>';
                 wp_die($die_string);
 
             }
@@ -294,7 +381,7 @@ class field_group
             foreach ($names_of_items_to_show AS $name_of_item_to_show) {
 
                 // Find the key of the item in settings having the value of the key we want to show...
-                if (false !== ($item_key = array_search($keys_of_item_to_show, $default_items_to_hide))) {
+                if (false !== ($item_key = array_search($name_of_item_to_show, $default_items_to_hide))) {
 
                     // ...and remove that item from our settings array.
                     unset($default_items_to_hide[$item_key]);
@@ -326,7 +413,7 @@ class field_group
     public function print_settings()
     {
 
-        echo  '<h3>Field group: ' . $this->settings['title'] . '</h3>';
+        echo '<h3>Field group: ' . $this->settings['title'] . '</h3>';
         \fewture\vd($this->settings);
 
     }

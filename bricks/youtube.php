@@ -32,14 +32,14 @@ class youtube extends project_brick
         );
 
         $this->add_brick((new button('button', '1509042128i'))->set_field_label_prefix('Youtube button'));
+        //$this->add_brick((new buttons_list('buttons', '1509062216'))->set_field_label_prefix('Wooo'));
 
     }
 
     /**
-     * @param $args
      * @return string
      */
-    protected function get_brick_html($args = [])
+    protected function get_brick_html()
     {
 
         $html = $this->get_headline_html('headline');

@@ -80,6 +80,7 @@ class button extends project_brick {
 
     /**
      * @param array $args
+     * @return string|void
      */
     public function get_html($args = [])
     {

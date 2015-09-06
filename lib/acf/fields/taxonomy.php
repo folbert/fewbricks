@@ -13,7 +13,6 @@ class taxonomy extends field
      * @param string $label
      * @param string $name
      * @param string $key
-     * @param array $custom_settings
      */
     public function __construct($label, $name, $key)
     {

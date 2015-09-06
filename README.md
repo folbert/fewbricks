@@ -59,7 +59,7 @@ Each brick has its own class placed in the folder named "bricks". Each class hav
   
  * `set_fields()` - this is where you specify the fields that the brick should handle. For example a text field, a wysiwyg field, a repeater with another module and a file upload. Or maybe it's a flexible content with a couple of layouts. 
  
- * `get_brick_html($args = [])` - this function should return the HTML for the brick..
+ * `get_brick_html()` - this function should return the HTML for the brick..
  
  ###Creating a standard brick
  
@@ -95,10 +95,9 @@ Each brick has its own class placed in the folder named "bricks". Each class hav
         
             /**
              *  This function will be called in the frontend when displaying the brick.
-             * @param array $args An array of extra arguments passed to the brick
              * @return string
              */
-            public function get_brick_html($args = [])
+            public function get_brick_html()
             {
         
             }
@@ -185,7 +184,7 @@ By setting Fewbricks in developer mode, some extra debugging related to Febricks
 If developer mode is enabled, you can also var dump the fields settings each time a field group is registered. This is done by passing a get variable named "dumpfewbricksfields" to any page.
 
 ##Important
-Due to restrictions in the WordPress table structure, the max length of a field name is 64 characters. So if you have fields that go a couple of levels deep (for example a brick in a flexible field that have a repeater), you may run out of space for the name. Therefore, it is wise to shorten names so instead of for example "download_button", use "dl_btn". This should be considered whe creating instances of bricks and fields. If the value of a field is not saved, the reason is most likely that the name is too long. Note that the name that is displayed when hovering the question mark next to the label is the name that you should use to get the field. This name is not the name that the field is stored as in the DB.
+Due to restrictions in the WordPress table structure, the max length of a field name is 64 characters. So if you have fields that go a couple of levels deep (for example a brick in a flexible field that have a repeater), you may run out of space for the name. Therefore, it is wise to shorten names so instead of for example "download_button", use "dl_btn". This should be considered whe creating instances of bricks and fields. If the value of a field is not saved, the reason is most likely that the name is too long. Note that the name that is displayed when hovering the question mark next to the label is the name that you should use to get the field. This name is not the name that the field is stored as in the DB. 
 
 ##ACF Local JSON
 fewbricks supports [ACF Local JSON](http://www.advancedcustomfields.com/resources/local-json/). Follow these steps to activate local-json:
