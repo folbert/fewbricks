@@ -88,7 +88,7 @@ class field
     }
 
     /**
-     * @param $object_to_get_for
+     * @param \fewbricks\acf\field-groups|\fewbricks\acf\layout|\fewbricks\acf\fields\repeater|\fewbricks\acf\fields\flexible_content|\fewbricks\bricks\brick $object_to_get_for
      * @return array
      */
     public function get_settings($object_to_get_for)
@@ -123,7 +123,7 @@ class field
     }
 
     /**
-     * @param $object_to_prepare_for
+     * @param repeater|flexible_content|\fewbricks\bricks\brick $object_to_prepare_for
      */
     private function prepare_name($object_to_prepare_for) {
 
@@ -142,7 +142,7 @@ class field
     }
 
     /**
-     * @param $object_to_prepare_for
+     * @param repeater|flexible_content|\fewbricks\bricks\brick $object_to_prepare_for
      * @param $setting
      */
     private function prepare_label_addition($object_to_prepare_for, $setting) {

@@ -38,28 +38,3 @@ $fg->add_brick((new bricks\button('button', '1509032106a')));
 $fg->add_brick((new bricks\button('button2', '1509032106b')));
 
 $fg->register();
-
-/*
-$fg = new fewacf\field_group('1509011031a', 'Made of standard bricks', $location, 2);
-$fg->add_brick(new bricks\youtube('youtube_test_2000', ['label_prefix' => 'YouTube 1'], '1509011316p'));
-$fg->add_brick(new bricks\youtube('youtube_test_3000', ['label_prefix' => 'YouTube 2'], '1509011317u'));
-$fg->register();
-
-
-$fg = new fewacf\field_group('1509011131o', 'Flexible columns brick 1', $location, 3);
-$fg->add_brick(new bricks\flexible_columns('flexcol1', ['nr_of_columns' => 3], '1509011317o'));
-$fg->register();
-
-$fg = new fewacf\field_group('1509011155i', 'Flexible columns brick 2', $location, 4);
-$fg->add_brick(new bricks\flexible_columns('flexcol3', ['nr_of_columns' => 3], '1509011211d'));
-$fg->register();
-
-$fg = new fewacf\field_group('1504171906y', 'Main content', $location, 1); //
-$fc = new fewacf\flexible_content('1501291723y', 'main_content_bricks', 'Bricks');
-$fc->add_layout((new fewacf\layout('1504171054p'))->add_brick(new bricks\youtube('youtube', [], '1509011432p')));
-//$fc->add_layout((new fewacf\layout('1504172116i'))->add_brick(new bricks\flexible_brick('flexmod', [], '1509011439y')));
-//$fc->add_layout((new fewacf\layout('1508191105x'))->add_brick(new bricks\flexible_content('fco', ['nr_of_columns' => 2], '1509011440s')));
-//$fc->add_layout((new fewacf\layout('1508240841o'))->add_brick(new bricks\flexible_columns('fc', ['nr_of_columns' => 2], '1509011440b')));
-$fg->add_field($fc);
-$fg->register();
-*/

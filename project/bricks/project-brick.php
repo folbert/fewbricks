@@ -19,13 +19,12 @@ class project_brick extends brick {
     private static $headline_tag = false;
 
     /**
-     * @param string $label
      * @param string $name
      * @param string $key
      */
-    public function __construct($label = '', $name = '', $key = '') {
+    public function __construct($name = '', $key = '') {
 
-        parent::__construct($label, $name, $key);
+        parent::__construct($name, $key);
 
     }
 

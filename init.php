@@ -26,10 +26,12 @@ function bricks_autoloader($class)
 
         if ($namespace_parts[1] === 'bricks') {
 
-            require('bricks/' . $file_name);
+            /** @noinspection PhpIncludeInspection */
+            require('project/bricks/' . $file_name);
 
         } else {
 
+            /** @noinspection PhpIncludeInspection */
             require('lib/acf/fields/' . $file_name);
         }
 
@@ -45,10 +47,10 @@ spl_autoload_register('fewbricks\bricks_autoloader');
 global $fewbricks_save_json;
 
 // Stuff that is only required in the backend needs not to be required if local json is used.
-if (((!defined('FEWBRICKS_USE_JSON') || FEWBRICKS_USE_JSON === false) && function_exists('register_field_group')) || $fewbricks_save_json === true) {
+if (((!defined('FEWBRICKS_USE_ACF_JSON') || FEWBRICKS_USE_ACF_JSON === false) && function_exists('register_field_group')) || $fewbricks_save_json === true) {
 
     // Require the main set up file for field groups.
-    require('field-groups/init.php');
+    require('project/field-groups/init.php');
 
 }
 
@@ -63,3 +65,9 @@ function add_admin_menu()
 }
 
 add_action('admin_menu', __NAMESPACE__ . '\\add_admin_menu');
+
+if(defined('FEWBRICKS_DEV_MODE') && FEWBRICKS_DEV_MODE === true) {
+
+    require_once(get_template_directory() . '/fewbricks/extras/acf-field-snitch/activate.php');
+
+}

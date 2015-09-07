@@ -49,7 +49,7 @@ The settings that all fields have in common are key, name and label:
 ##Creating a brick
 
 ###General
-Each brick has its own class placed in the folder named "bricks". Each class have a number of fields. Field instances can either be created directly in a brick, but a brick may also reuse existing bricks or use common bricks that are set in a separate file. If you are adding a common field to a brick or filed group, it is very imprtant that you add it using the function `add_common_field`.
+Each brick has its own class placed in the folder named "bricks". Each class have a number of fields. Field instances can either be created directly in a brick, but a brick may also reuse existing bricks.
  
  First, make sure that a brick that does exactly what you want to achieve does not already exist. If it doesn't, see if a brick doing almost what you want to achieve exists. If it does, consider extending that brick or at least copy the existing code and use it as a start template for your new brick.
  
@@ -176,7 +176,6 @@ There are some settings that we have added to make using Fewbricks easier.
 
 *For fields and bricks*
 `field_label_prefix` - Text to prepend on labels. We will automatically add a space between the prefix and the original label. Note that if you set this on a brick, all the bricks fields, including fields for any sub brick, will get the prefix.
-`field_label_suffix` - Same as with the prefix, but this text will be appended.
 
 ##Developer mode
 By setting Fewbricks in developer mode, some extra debugging related to Febricks and ACF will become available. Also, every time a field group is registered, a check for duplicate keys will be carried out. You enable developer mode by setting a constant, preferrably in wp-config.php, named FEWBRICKS_DEV_MODE to true.
@@ -187,14 +186,12 @@ If developer mode is enabled, you can also var dump the fields settings each tim
 Due to restrictions in the WordPress table structure, the max length of a field name is 64 characters. So if you have fields that go a couple of levels deep (for example a brick in a flexible field that have a repeater), you may run out of space for the name. Therefore, it is wise to shorten names so instead of for example "download_button", use "dl_btn". This should be considered whe creating instances of bricks and fields. If the value of a field is not saved, the reason is most likely that the name is too long. Note that the name that is displayed when hovering the question mark next to the label is the name that you should use to get the field. This name is not the name that the field is stored as in the DB. 
 
 ##ACF Local JSON
-fewbricks supports [ACF Local JSON](http://www.advancedcustomfields.com/resources/local-json/). Follow these steps to activate local-json:
+Fewbricks supports [ACF Local JSON](http://www.advancedcustomfields.com/resources/local-json/). Using this hosuls speed things up a bit sinvesince we dont have to execute all the PHP-code that Fewbricks is made up of. Follow these steps to activate local-json:
 
 1. As outlined in the [ACF instructions for local JSON](http://www.advancedcustomfields.com/resources/local-json/): in the themes directory, create a directory named acf-json.
-2. In the admin area, navigate to the fewbricks page which is placed in the ACF menu. Click "Build JSON" and let the page finsih reloading.
-3. In a file that is always included, preferably wp-config.php, define a constant named FEWBRICKS_USE_JSON: `define('FEWBRICKS_USE_JSON', true)`.
-4. In fewbricks/init.php, make sure that the line where field-groups/init.php is included is wrapped in an if-statement:
-`if(((!defined('FEWBRICKS_USE_JSON') || FEWBRICKS_USE_JSON === false) && function_exists('register_field_group')) || $fewbricks_save_json === true) {`
-5. That's all there is to it.
+2. In the admin area, navigate to the Fewbricks admin page which is placed in the ACF menu. Click "Build JSON" and let the page reload.
+3. In a file that is always included, preferably wp-config.php, define a constant named FEWBRICKS_USE_JSON: `define('FEWBRICKS_USE_ACF_JSON', true)`.
+4. That's all there is to it. ACF will now load settings from the JSON-files in the acf-json directory created in step 1. 
 
 ###Important about local JSON
-Every time you edit any fields in a field group och brick, you will need to rebuild the local JSON by taking the action outlined in step 2 above. On esuggested workflow is that you activate local json by in all environments by following step 3 above. Then when you edit a modules fields, you will be reminded of that you need to rebuild the JSON. When you are ready to push to live, the JSOn will be up to date. Since all ACF definitions already are in the field groups/bricks, the only purpose of using local JSON is to increase performance by not having to execute all the field group definitionsand its bricks.
+Every time you edit any fields in a field group or brick, you will need to rebuild the local JSON by taking the action outlined in step 2 above. One suggested workflow is that you activate local json by in all environments by following step 3 above. Then when you edit a modules fields and don't see the changes in the editing area of a page/post/options etc., you will be reminded of that you need to rebuild the JSON. When you are ready to push to live, the JSON will be up to date. Since all ACF definitions already are in the field groups/bricks, the only purpose of using local JSON is to increase performance by not having to execute all the field group definitions and its bricks.

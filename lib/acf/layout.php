@@ -42,7 +42,7 @@ class layout
     }
 
     /**
-     * @param $field_object
+     * @param \fewbricks\acf\fields\field $field_object
      * @return $this
      */
     public function add_sub_field($field_object)

@@ -51,7 +51,7 @@ class repeater extends field
     }
 
     /**
-     * @param $field_object
+     * @param field $field_object
      * @return $this
      */
     public function add_sub_field($field_object)

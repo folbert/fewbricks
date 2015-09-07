@@ -17,7 +17,7 @@ class brick
 {
 
     /**
-     * @var Name
+     * @var string
      */
     private $name;
 
@@ -114,7 +114,7 @@ class brick
     }
 
     /**
-     * @param $object_to_get_for
+     * @param \fewbricks\acf\field-group|\fewbricks\acf\layout|\fewbricks\acf\fields\repeater|\fewbricks\acf\fields\flexible_content|\fewbricks\bricks\brick $object_to_get_for
      * @return array
      */
     public function get_settings($object_to_get_for)
@@ -212,7 +212,7 @@ class brick
     }
 
     /**
-     * @param $object_to_prepare_for
+     * @param \fewbricks\acf\fields\repeater|\fewbricks\acf\fields\flexible_content|\fewbricks\bricks\brick $object_to_prepare_for
      */
     private function prepare_name($object_to_prepare_for)
     {
@@ -233,7 +233,7 @@ class brick
     }
 
     /**
-     * @param $object_to_prepare_for
+     * @param \fewbricks\acf\fields\repeater|\fewbricks\acf\fields\flexible_content|\fewbricks\bricks\brick $object_to_prepare_for
      * @param $setting
      */
     private function prepare_label_addition($object_to_prepare_for, $setting)
@@ -471,6 +471,7 @@ class brick
 
                 ob_start();
 
+                /** @noinspection PhpIncludeInspection */
                 include(__DIR__ . '/../layouts/' . $layout . '.php');
 
                 $html = ob_get_clean();
@@ -561,6 +562,7 @@ class brick
     public function set_label($label)
     {
 
+        /** @noinspection PhpUndefinedFieldInspection */
         $this->label = $label;
 
         return $this;

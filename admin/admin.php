@@ -37,6 +37,7 @@ if (isset($_POST['fewbricks_buildjson'])) {
 
         global $fewbricks_save_json;
         $fewbricks_save_json = true;
+        /** @noinspection PhpIncludeInspection */
         require(get_template_directory() . '/fewbricks/field-groups/init.php');
 
         $fewbricks_success_message = 'ACF JSON files have been saved.';
@@ -56,7 +57,7 @@ if (isset($_POST['fewbricks_buildjson'])) {
 <?php
 if ($fewbricks_success_message !== false) {
     ?>
-    <div id="message" class="updated notice is-dismissible below-h2"><p><?php echo $success_message; ?></p>
+    <div id="message" class="updated notice is-dismissible below-h2"><p><?php echo $fewbricks_success_message; ?></p>
         <button type="button" class="notice-dismiss"><span class="screen-reader-text">Dismiss this notice.</span>
         </button>
     </div>
@@ -104,6 +105,10 @@ if ($fewbricks_success_message !== false) {
                         }
 
                         echo '</ul>';
+
+                    } else {
+
+                        echo 'There are no files in the directory "acf-json"';
 
                     }
 

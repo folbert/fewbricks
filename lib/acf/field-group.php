@@ -92,7 +92,7 @@ class field_group
     }
 
     /**
-     * @param $field
+     * @param \fewbricks\acf\fields\field $field
      * @return $this
      */
     public function add_field($field)
@@ -105,7 +105,7 @@ class field_group
     }
 
     /**
-     * @param $brick
+     * @param \fewbricks\bricks\brick $brick
      * @return $this
      */
     public function add_brick($brick)
@@ -137,20 +137,12 @@ class field_group
     }
 
     /**
-     * @param $common_field_name
-     * @param $name_prefix
-     */
-    public function add_common_field($common_field_name, $name_prefix)
-    {
-
-
-    }
-
-    /**
      * Register a field group.
      */
     public function register()
     {
+
+        global $fewbricks_save_json;
 
         if (!isset($this->settings['names_of_items_to_hide_on_screen']) && !isset($this->settings['names_of_items_to_show_on_screen'])) {
 
@@ -176,7 +168,7 @@ class field_group
 
                 $this->print_settings();
 
-            } else {
+            } else if(!$fewbricks_save_json) {
 
                 $this->check_keys($this->settings['fields']);
 
@@ -184,15 +176,15 @@ class field_group
 
         }
 
-        global $fewbricks_save_json;
-
         if ($fewbricks_save_json === true) {
 
             $this->save_json();
 
-        }
+        } else {
 
-        register_field_group($this->settings);
+            register_field_group($this->settings);
+
+        }
 
     }
 
@@ -230,21 +222,7 @@ class field_group
             $fields[$field_key]['key'] = $new_key;
 
             // Lets keep the array key of any item that we should traverse down.
-            $field_settings_rabbit_hole_array_key = false;
-
-            if (isset($field_settings['fields']) && is_array($field_settings['fields'])) {
-
-                $field_settings_rabbit_hole_array_key = 'fields';
-
-            } elseif (isset($field_settings['sub_fields']) && is_array($field_settings['sub_fields'])) {
-
-                $field_settings_rabbit_hole_array_key = 'sub_fields';
-
-            } elseif (isset($field_settings['layouts']) && is_array($field_settings['layouts'])) {
-
-                $field_settings_rabbit_hole_array_key = 'layouts';
-
-            }
+            $field_settings_rabbit_hole_array_key = $this->get_rabbit_hole_array_key($field_settings);
 
             // Do we have a key to go down?
             if($field_settings_rabbit_hole_array_key !== false) {
@@ -279,12 +257,40 @@ class field_group
     }
 
     /**
+     * @param array $field_settings
+     * @return bool|string
+     */
+    private function get_rabbit_hole_array_key($field_settings)
+    {
+
+        // Lets keep the array key of any item that we should traverse down.
+        $field_settings_rabbit_hole_array_key = false;
+
+        if (isset($field_settings['fields']) && is_array($field_settings['fields'])) {
+
+            $field_settings_rabbit_hole_array_key = 'fields';
+
+        } elseif (isset($field_settings['sub_fields']) && is_array($field_settings['sub_fields'])) {
+
+            $field_settings_rabbit_hole_array_key = 'sub_fields';
+
+        } elseif (isset($field_settings['layouts']) && is_array($field_settings['layouts'])) {
+
+            $field_settings_rabbit_hole_array_key = 'layouts';
+
+        }
+
+        return $field_settings_rabbit_hole_array_key;
+
+    }
+
+    /**
      * Checks for duplicate keys. This functions hould not be called in a production environment since
      * it will cause wp_die if a duplicate key is found and will also slow down performance by looping lots
      * of multidimensional arrays.
      * @param $fields
      */
-    function check_keys($fields)
+    private function check_keys($fields)
     {
 
         global $debug_keys;
@@ -292,13 +298,15 @@ class field_group
         $error_string = false;
         $name_of_looped_field = false;
 
-        foreach ($fields as $key => $value) {
+        foreach ($fields as $array_key => $value) {
 
             if (!$error_string && is_array($value)) {
+                // If we have not already run into an error and we are dealting with an array
 
                 $this->check_keys($value);
 
-            } elseif ($key === 'key') {
+            } elseif ($array_key === 'key') {
+
 
                 if (array_search($value, $debug_keys) !== false) {
                     // If key already exists
@@ -306,6 +314,7 @@ class field_group
                     $error_string = 'The key <b>' . $value . '</b> already exists.';
 
                 } elseif (substr($value, 0, 1) == '_' || substr($value, -1) == '_') {
+                    // If the key starts or ends with an underscore
 
                     $error_string = 'A key must not start or end with an underscore. You have probably forgotten to set a key somewhere. Key with errors: <b>' . $value . '</b>';
 
@@ -315,19 +324,19 @@ class field_group
 
                 }
 
-            } elseif ($key === 'name') {
+            } elseif ($array_key === 'name') {
 
                 $name_of_looped_field = $value;
 
             }
 
             if ($error_string !== false && $name_of_looped_field !== false) {
+                // If we have an error and have found the name
 
                 $die_string = 'Message from Fewbricks: ';
                 $die_string .= 'Fatal error when adding field group "' . $this->settings['title'] . '". ';
                 $die_string .= $error_string . ' ';
                 $die_string .= 'Please use another key for field "' . $name_of_looped_field . '"';
-                //$die_string .= '<hr><pre>' . print_r(debug_backtrace(), true) . '</pre>';
                 wp_die($die_string);
 
             }
@@ -337,12 +346,12 @@ class field_group
     }
 
     /**
-     * Remove and keep are mutually exclusive. If you pass hide, show will be ignored.
-     * Pass (false, []) to apply the values in show
-     * @param bool $names_of_items_to_hide
-     * @param bool $names_of_items_to_show
+     * This function hides and/or removes items on the edit screen for where the field group is present.
+     * Note that hide and showare mutually exclusive. If you pass anything but false to hide, show will be ignored.
+     * Pass (false, []) to apply the values in show.
+     * @param bool|array $names_of_items_to_hide
+     * @param bool|array $names_of_items_to_show
      * @return array
-     * @todo Add description in readme about this feature
      */
     private function get_hide_on_screen_settings($names_of_items_to_hide = false, $names_of_items_to_show = false)
     {
@@ -397,7 +406,7 @@ class field_group
     }
 
     /**
-     *
+     * Write settings to json file
      */
     private function save_json()
     {
