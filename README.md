@@ -65,7 +65,7 @@ Each brick has its own class placed in the folder named "bricks". Each class hav
  
  Let's create a standard brick with a text field and a wysiwyg-area. This is of course not a very impressive example since we are basically adding a brick that does what WordPress does out of the box. But it's a good place to start showing how to create stuff in fewbricks.
  
- 1. In the folder "bricks", create a file named headline-and-content.php.
+ 1. In the folder "project/bricks", create a file named headline-and-content.php.
  2. Add this code to the file
           
         namespace fewbricks\bricks;
@@ -111,7 +111,7 @@ Each brick has its own class placed in the folder named "bricks". Each class hav
     
     With the code above, we have added two fields. One text-field and one wysiwyg-field. Each field has gotten a label to display to the administrator, a name we can use when getting the data for the field and a site-wide-unique key (*very important that they are unique on a site wide level*).
     
-  4. Let's add our new brick to a field group: in the folder field-groups, either create a new file or edit an existing one. If you create a new one, make sure to require it in field-groups/init.php. Add this code to the field groups file:
+  4. Let's add our new brick to a field group: in the folder project/field-groups, either create a new file or edit an existing one. If you create a new one, make sure to require it in field-groups/init.php. Add this code to the field groups file:
   
         $fg = new fewbricks\acf\field_group('Test content', '1504201020o', $location, 1);
         $fg->add_brick(new fewbricks\bricks\text_and_content('text_and_content_test', [], '1509041512c');
@@ -176,6 +176,7 @@ There are some settings that we have added to make using Fewbricks easier.
 
 *For fields and bricks*
 `field_label_prefix` - Text to prepend on labels. We will automatically add a space between the prefix and the original label. Note that if you set this on a brick, all the bricks fields, including fields for any sub brick, will get the prefix.
+`field_label_suffix` - Same as above but a suffix.
 
 ##Developer mode
 By setting Fewbricks in developer mode, some extra debugging related to Febricks and ACF will become available. Also, every time a field group is registered, a check for duplicate keys will be carried out. You enable developer mode by setting a constant, preferrably in wp-config.php, named FEWBRICKS_DEV_MODE to true.

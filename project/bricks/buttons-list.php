@@ -23,19 +23,8 @@ class buttons_list extends project_brick {
     public function set_fields()
     {
 
-        $this->add_field(new acf_fields\text('A Headline', 'headline', '1509052316y'));
-
-        $this->add_repeater(
-            (new acf_fields\repeater('Buttons', 'buttons', '1509052323a'))
-                ->add_brick(new button('button', '15092323u'))
-                ->add_repeater(
-                    (new acf_fields\repeater('Sub repeater', 'sup_rep', '1509062035t'))
-                        ->add_sub_field(new acf_fields\text('Sub repeater text', 'txt', '1509062036y'))
-                )
-        );
-
-        $this->add_brick(new flexible_brick('flexbrick', '1509062243r'));
-        $this->add_brick((new flexible_brick('flexbrick2', '1509062243s'))->set_field_label_prefix('APA!!!'));
+        $this->add_field(new acf_fields\text('Buttons list headline', 'headline', '1509052316y'));
+        $this->add_repeater(new acf_fields\repeater('Buttons', 'buttons', '1509052323a'));
 
     }
 
@@ -46,7 +35,13 @@ class buttons_list extends project_brick {
     public function get_html($args = [])
     {
 
-        return '';
+        $html = '
+          <div class="row">
+            <h2>' . $this->get_field() . '</h2>
+          </div>
+        ';
+
+        return $html;
 
     }
 

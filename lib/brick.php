@@ -2,7 +2,6 @@
 
 /**
  * @todo Enable removing settings. Like brick name for text in flexible columns. And then remove brick name for demos.
- * @todo Improve acf.js
  */
 
 namespace fewbricks\bricks;
@@ -197,6 +196,26 @@ class brick
     }
 
     /**
+     * @param string $common_field_array_key A key corresponding to an item in the fewbricks_common_fields array
+     * @param string $key A site wide unique key for the field
+     * @param array $settings Anye extra settings to set on the field. Can be used to override existing settings as well.
+     */
+    protected function add_common_field($common_field_array_key, $key, $settings = []) {
+
+        global $fewbricks_common_fields;
+
+        if(isset($fewbricks_common_fields[$common_field_array_key])) {
+
+            $field = clone $fewbricks_common_fields[$common_field_array_key];
+            $field->set_setting('key', $key);
+            $field->set_settings($settings);
+            $this->add_field($field);
+
+        }
+
+    }
+
+    /**
      * @param $object_to_prepare_for
      */
     private function prepare_settings($object_to_prepare_for)
@@ -270,10 +289,10 @@ class brick
      * @param string $repeater_name The name of the repeater that the field with the data is in.
      * @return bool|mixed|null|void
      */
-    protected function get_data_value_in_repeater($data_key, $repeater_name)
+    protected function get_field_in_repeater($data_key, $repeater_name)
     {
 
-        //return $this->get_data_value($repeater_name . '_' . $data_key, false, true);
+        //return $this->get_field($repeater_name . '_' . $data_key, false, true);
 
     }
 
@@ -283,7 +302,7 @@ class brick
      * @param bool $get_from_sub_field
      * @return bool|mixed|null|void
      */
-    protected function get_data_value($data_key, $prepend_this_name = true, $get_from_sub_field = false)
+    protected function get_field($data_key, $prepend_this_name = true, $get_from_sub_field = false)
     {
 
         if ($prepend_this_name) {
@@ -361,7 +380,7 @@ class brick
         // Make sure we have something to return
         if (!$fetched_from_custom_data && is_null($data_value)) {
 
-            die('brick->get_data_value() - data not found for name "' . $name . '"');
+            die('brick->get_field() - data not found for name "' . $name . '"');
 
         }
 
@@ -411,7 +430,6 @@ class brick
     protected function get_child_brick($brick_class_name, $name, $is_layout = false, $is_sub_field = false)
     {
 
-        /*
         $brick_class_name = 'fewbricks\bricks\\' . $brick_class_name;
 
         // If we are currently in a layout, we know that any child is also in a layout.
@@ -428,7 +446,6 @@ class brick
             ->set_is_layout($is_layout)
             ->set_is_sub_field($is_sub_field)
             ->set_is_option($this->is_option);
-        */
 
     }
 
@@ -500,32 +517,38 @@ class brick
     }
 
     /**
-     * @param $is_layout
+     * @param boolean $is_layout
      */
     public function set_is_layout($is_layout)
     {
 
         $this->is_layout = $is_layout;
 
+        return $this;
+
     }
 
     /**
-     * @param $is_option
+     * @param boolean $is_option
      */
     public function set_is_option($is_option)
     {
 
         $this->is_option = $is_option;
 
+        return $this;
+
     }
 
     /**
-     * @param $is_sub_field
+     * @param boolean $is_sub_field
      */
     public function set_is_sub_field($is_sub_field)
     {
 
         $this->is_sub_field = $is_sub_field;
+
+        return $this;
 
     }
 

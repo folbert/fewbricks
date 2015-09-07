@@ -23,6 +23,8 @@ class button extends project_brick {
     public function set_fields()
     {
 
+        $this->add_field(new acf_fields\text('Text', 'text', '1509072239o'));
+
         $this->add_field((new acf_fields\select('Type', 'type', '1509032104a'))
             ->set_setting('choices',
             [
@@ -84,6 +86,12 @@ class button extends project_brick {
      */
     public function get_html($args = [])
     {
+
+        $html = '
+        <a class="btn btn-default">' . $this->get_field('text') . '</a>
+        ';
+
+        return $html;
 
     }
 

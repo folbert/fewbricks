@@ -31,7 +31,7 @@
 $snippet = "<?php
     echo '<p>' . get_field('some_text') . '</p>';
     echo '<p>' . get_field('some_more_text') . '</p>';
-    echo (new \fewbricks\bricks\youtube('youtube_1'))->get_html();
+    echo (new \fewbricks\bricks\video('video_1'))->get_html();
 ?>";
 ?>
 
@@ -46,7 +46,7 @@ $snippet = "<?php
 <?php
 echo '<p>' . get_field('some_text') . '</p>';
 echo '<p>' . get_field('some_more_text') . '</p>';
-echo (new \fewbricks\bricks\youtube('youtube_1'))->get_html();
+echo (new \fewbricks\bricks\video('video_1'))->get_html();
 ?>
 
 </div>

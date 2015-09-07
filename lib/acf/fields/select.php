@@ -31,7 +31,7 @@ class select extends field
             'choices' => [
                 //'value' => 'Text',
             ],
-            'default_value' => 'value2',
+            'default_value' => '',
             'allow_null' => 1,
             'multiple' => 0,
             'ui' => 0,

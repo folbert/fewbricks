@@ -37,7 +37,7 @@ class project_brick extends brick {
 
         $this->set_headline_tag();
 
-        $headline = ($value !== false ? $value : $this->get_data_value($data_key));
+        $headline = ($value !== false ? $value : $this->get_field($data_key));
 
         $html = '';
 

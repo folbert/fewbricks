@@ -1,9 +1,5 @@
 <?php
 
-/**
- * @todo Make sure that JSOn is used if it exists
- */
-
 $fewbricks_success_message = false;
 $fewbricks_error_message = false;
 

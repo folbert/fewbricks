@@ -41,19 +41,19 @@ function bricks_autoloader($class)
 
 spl_autoload_register('fewbricks\bricks_autoloader');
 
-/**
- * @todo A better way for this
- */
 global $fewbricks_save_json;
 
 // Stuff that is only required in the backend needs not to be required if local json is used.
 if (((!defined('FEWBRICKS_USE_ACF_JSON') || FEWBRICKS_USE_ACF_JSON === false) && function_exists('register_field_group')) || $fewbricks_save_json === true) {
 
-    // Require the main set up file for field groups.
+    require('project/common-fields/init.php');
     require('project/field-groups/init.php');
 
 }
 
+/**
+ * Lets add a menu item to the ACF menu
+ */
 function add_admin_menu()
 {
 
@@ -66,6 +66,9 @@ function add_admin_menu()
 
 add_action('admin_menu', __NAMESPACE__ . '\\add_admin_menu');
 
+/**
+ * Developer mode?
+ */
 if(defined('FEWBRICKS_DEV_MODE') && FEWBRICKS_DEV_MODE === true) {
 
     require_once(get_template_directory() . '/fewbricks/extras/acf-field-snitch/activate.php');

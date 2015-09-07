@@ -2,9 +2,10 @@
 
 namespace fewbricks\acf;
 
-// @todo Only if in dev mode
-global $debug_keys;
-$debug_keys = [];
+if(FEWBRICKS_DEV_MODE) {
+    global $debug_keys;
+    $debug_keys = [];
+}
 
 /**
  * Class field_group

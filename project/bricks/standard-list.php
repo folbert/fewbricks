@@ -23,10 +23,13 @@ class standard_list extends project_brick {
     public function set_fields()
     {
 
-        $this->add_field(new acf_fields\text('Headline', 'headline', '1509052105r'));
+        $this->add_field(new acf_fields\text('List headline', 'list_headline', '1509052105r'));
 
-        $this->add_repeater((new acf_fields\repeater('Items', 'items', '1509052105s'))
-            ->add_sub_field(new acf_fields\text('Item text', 'item_text', '1509052124u')));
+        $this->add_common_field('demo_background_color', '1509052128y');
+
+        $this->add_repeater((new acf_fields\repeater('Items', 'list_items', '1509052105s'))
+            ->add_sub_field(new acf_fields\text('Item headline', 'list_item_headline', '1509072209i'))
+            ->add_sub_field(new acf_fields\textarea('Item text', 'list_item_text', '1509052124u')));
 
     }
 

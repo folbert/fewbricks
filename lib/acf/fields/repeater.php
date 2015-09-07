@@ -108,5 +108,25 @@ class repeater extends field
 
     }
 
+    /**
+     * @param string $common_field_array_key A key corresponding to an item in the fewbricks_common_fields array
+     * @param string $key A site wide unique key for the field
+     * @param array $settings Anye extra settings to set on the field. Can be used to override existing settings as well.
+     */
+    protected function add_common_field($common_field_array_key, $key, $settings = []) {
+
+        global $fewbricks_common_fields;
+
+        if(isset($fewbricks_common_fields[$common_field_array_key])) {
+
+            $field = clone $fewbricks_common_fields[$common_field_array_key];
+            $field->set_setting('key', $key);
+            $field->set_settings($settings);
+            $this->add_sub_field($field);
+
+        }
+
+    }
+
 
 }
