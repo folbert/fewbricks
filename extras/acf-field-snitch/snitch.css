@@ -1,0 +1,50 @@
+.acf-snitch {
+	display: none;
+	float: right;
+	margin-left: 10px;
+}
+
+.acf-snitch .field {
+	display: inline-block;
+	font-size: 0.8em;
+	border-radius: 3px;
+	padding-left: 3px;
+	padding-right: 3px;
+	margin-left: 5px;
+	font-family: monospace;
+}
+
+.acf-snitch .field.field_name {
+	background-color: #FFE7A1;
+	border: 1px solid #F1D031;
+}
+
+.acf-snitch .field.field_key {
+	background-color: azure;
+	border: 1px solid #00b3ee;
+}
+
+.acf-snitch .field.row_layout {
+	background-color: #ccffcc;
+	border: 1px solid #00C31F;
+}
+
+.acf-fc-layout-handle .acf-snitch {
+	margin-top: -2px;
+	margin-right: 45px;
+}
+
+#side-sortables .acf-snitch .field {
+	display: block;
+}
+
+.acf-snitch.full-w {
+	float: none;
+	margin-left: 0px;
+	margin-bottom: 5px;
+	text-align: right;
+}
+
+body.acf-snitch-on .acf-snitch {
+	display: block;
+}
