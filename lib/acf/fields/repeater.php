@@ -70,6 +70,8 @@ class repeater extends field
     public function add_brick($brick)
     {
 
+        $brick->set_is_sub_field(true);
+
         $brick_settings = $brick->get_settings($this);
 
         foreach ($brick_settings['fields'] AS $brick_field) {

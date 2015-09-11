@@ -62,6 +62,8 @@ class layout
     public function add_brick($brick)
     {
 
+        $brick->set_is_layout(true);
+
         $brick_fields = $brick->get_settings($this)['fields'];
 
         foreach ($brick_fields as $brick_field) {
