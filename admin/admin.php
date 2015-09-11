@@ -34,7 +34,7 @@ if (isset($_POST['fewbricks_buildjson'])) {
         global $fewbricks_save_json;
         $fewbricks_save_json = true;
         /** @noinspection PhpIncludeInspection */
-        require(get_template_directory() . '/fewbricks/field-groups/init.php');
+        require(get_template_directory() . '/fewbricks/project/field-groups/init.php');
 
         $fewbricks_success_message = 'ACF JSON files have been saved.';
 
