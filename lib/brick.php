@@ -1,9 +1,5 @@
 <?php
 
-/**
- * @todo Enable removing settings. Like brick name for text in flexible columns. And then remove brick name for demos.
- */
-
 namespace fewbricks\bricks;
 
 use fewbricks\acf as acf;
@@ -69,11 +65,6 @@ class brick
     /**
      * @var
      */
-    protected $layouts;
-
-    /**
-     * @var
-     */
     protected $get_html_args;
 
 
@@ -95,7 +86,6 @@ class brick
         $this->field_label_prefix = '';
         $this->field_label_suffix = '';
         $this->data = [];
-        $this->view = false;
 
     }
 
@@ -129,25 +119,23 @@ class brick
 
             // We need a hidden field to tell us what class we are dealing with when looping layouts in the frontend.
             $this->add_field((new acf\fields\hidden('Brick class', 'brick_class', '7001010000a'))
-                ->set_setting('default_value', \fewbricks\helpers\get_real_class_name($this)));
+              ->set_setting('default_value', \fewbricks\helpers\get_real_class_name($this)));
 
-        } else {
-            if (is_a($object_to_get_for, 'fewbricks\acf\fields\repeater')) {
+        } elseif (is_a($object_to_get_for, 'fewbricks\acf\fields\repeater')) {
 
-                $this->set_is_sub_field(true);
+            $this->set_is_sub_field(true);
 
-            }
         }
 
         return [
-            'name' => $this->name,
-            'key' => $this->key,
-            'is_layout' => $this->is_layout,
-            'is_sub_field' => $this->is_sub_field,
-            'is_option' => $this->is_option,
-            'fields' => $this->fields,
-            'field_label_prefix' => $this->field_label_prefix,
-            'field_label_suffix' => $this->field_label_suffix
+          'name' => $this->name,
+          'key' => $this->key,
+          'is_layout' => $this->is_layout,
+          'is_sub_field' => $this->is_sub_field,
+          'is_option' => $this->is_option,
+          'fields' => $this->fields,
+          'field_label_prefix' => $this->field_label_prefix,
+          'field_label_suffix' => $this->field_label_suffix
         ];
 
     }
@@ -200,11 +188,12 @@ class brick
      * @param string $key A site wide unique key for the field
      * @param array $settings Anye extra settings to set on the field. Can be used to override existing settings as well.
      */
-    protected function add_common_field($common_field_array_key, $key, $settings = []) {
+    protected function add_common_field($common_field_array_key, $key, $settings = [])
+    {
 
         global $fewbricks_common_fields;
 
-        if(isset($fewbricks_common_fields[$common_field_array_key])) {
+        if (isset($fewbricks_common_fields[$common_field_array_key])) {
 
             $field = clone $fewbricks_common_fields[$common_field_array_key];
             $field->set_setting('key', $key);
@@ -285,43 +274,41 @@ class brick
     }
 
     /**
-     * @param $data_key
      * @param string $repeater_name The name of the repeater that the field with the data is in.
+     * @param $data_name
      * @return bool|mixed|null|void
      */
-    protected function get_field_in_repeater($data_key, $repeater_name)
+    protected function get_field_in_repeater($repeater_name, $data_name)
     {
 
-        //return $this->get_field($repeater_name . '_' . $data_key, false, true);
+        return $this->get_field($repeater_name . '_' . $data_name, false, true);
 
     }
 
     /**
-     * @param $data_key
+     * @param $data_name
      * @param bool $prepend_this_name
      * @param bool $get_from_sub_field
      * @return bool|mixed|null|void
      */
-    protected function get_field($data_key, $prepend_this_name = true, $get_from_sub_field = false)
+    protected function get_field($data_name, $prepend_this_name = true, $get_from_sub_field = false)
     {
 
         if ($prepend_this_name) {
 
-            if (substr($data_key, 0, 1) !== '_') {
-                $data_key = '_' . $data_key;
+            if (substr($data_name, 0, 1) !== '_') {
+                $data_name = '_' . $data_name;
             }
 
-            $name = $this->name . $data_key;
+            $name = $this->name . $data_name;
 
         } else {
 
-            $name = $data_key;
+            $name = $data_name;
 
         }
 
         $data_value = null;
-
-        $fetched_from_custom_data = false;
 
         // Do we have some manually set data?
         if ($this->data !== false && array_key_exists($name, $this->data)) {
@@ -365,22 +352,11 @@ class brick
 
                 }
 
-            } else {
+            } elseif (null !== ($value = get_field($name))) {
 
-                if (null !== ($value = get_field($name))) {
-
-                    $data_value = $value;
-
-                }
+                $data_value = $value;
 
             }
-
-        }
-
-        // Make sure we have something to return
-        if (!$fetched_from_custom_data && is_null($data_value)) {
-
-            die('brick->get_field() - data not found for name "' . $name . '"');
 
         }
 
@@ -399,7 +375,7 @@ class brick
         if ($this->is_option) {
             $outcome = have_rows($this->get_data_name('_' . $name), 'option');
         } else {
-            $outcome = have_rows($name);
+            $outcome = have_rows($this->name . '_' . $name);
         }
 
         return $outcome;
@@ -407,15 +383,25 @@ class brick
     }
 
     /**
-     * @param $brick_class_name
-     * @param $repeater_name
-     * @param $brick_name
-     * @return mixed
+     * Wrapper function for ACFs the_row to avoid confucsion on when to use $this or not for ACF functions.
      */
-    protected function get_child_brick_in_repeater($brick_class_name, $repeater_name, $brick_name)
+    protected function the_row()
     {
 
-        //return $this->get_child_brick($brick_class_name, $repeater_name . '_' . $brick_name, false, true);
+        the_row();
+
+    }
+
+    /**
+     * @param $repeater_name
+     * @param $brick_name
+     * @param $brick_class_name
+     * @return mixed
+     */
+    protected function get_child_brick_in_repeater($repeater_name, $brick_name, $brick_class_name)
+    {
+
+        return $this->get_child_brick($brick_class_name, $repeater_name . '_' . $brick_name, false, true);
 
     }
 
@@ -432,20 +418,37 @@ class brick
 
         $brick_class_name = 'fewbricks\bricks\\' . $brick_class_name;
 
-        // If we are currently in a layout, we know that any child is also in a layout.
-        if (!$is_layout) {
-            $is_layout = $this->is_layout;
+        // If we have not forced either sub field or layout
+        if(!$is_layout && !$is_sub_field) {
+
+            if (!$is_layout) {
+
+                // If we are currently in a layout, we know that any child is also in a layout.
+                $is_layout = $this->is_layout;
+
+                if ($is_layout) {
+                    $name = $this->name . '_' . $name;
+                }
+
+            }
+
+            if (!$is_sub_field) {
+
+                // If we are currently in a sub field, we know that any child is also in a sub field.
+                $is_sub_field = $this->is_sub_field;
+
+                if ($is_sub_field) {
+                    $name = $this->name . '_' . $name;
+                }
+
+            }
+
         }
 
-        // If we are currently in a sub field, we know that any child is also in a sub field.
-        if (!$is_sub_field) {
-            $is_sub_field = $this->is_sub_field;
-        }
-
-        return (new $brick_class_name($this->name . '_' . $name))
-            ->set_is_layout($is_layout)
-            ->set_is_sub_field($is_sub_field)
-            ->set_is_option($this->is_option);
+        return (new $brick_class_name($name))
+          ->set_is_layout($is_layout)
+          ->set_is_sub_field($is_sub_field)
+          ->set_is_option($this->is_option);
 
     }
 
@@ -462,8 +465,8 @@ class brick
 
         $html = $this->get_brick_html();
 
-        if ($layouts === false) {
-            $html = $this->get_layouted_html($html);
+        if ($layouts !== false) {
+            $html = $this->get_layouted_html($html, $layouts);
         }
 
         return $html;
@@ -489,7 +492,7 @@ class brick
                 ob_start();
 
                 /** @noinspection PhpIncludeInspection */
-                include(__DIR__ . '/../layouts/' . $layout . '.php');
+                include(__DIR__ . '/../project/layouts/' . $layout . '.php');
 
                 $html = ob_get_clean();
 
@@ -517,7 +520,8 @@ class brick
     }
 
     /**
-     * @param boolean $is_layout
+     * @param $is_layout
+     * @return $this
      */
     public function set_is_layout($is_layout)
     {
@@ -529,7 +533,8 @@ class brick
     }
 
     /**
-     * @param boolean $is_option
+     * @param $is_option
+     * @return $this
      */
     public function set_is_option($is_option)
     {
@@ -541,7 +546,8 @@ class brick
     }
 
     /**
-     * @param boolean $is_sub_field
+     * @param $is_sub_field
+     * @return $this
      */
     public function set_is_sub_field($is_sub_field)
     {

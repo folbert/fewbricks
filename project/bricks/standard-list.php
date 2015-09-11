@@ -34,13 +34,41 @@ class standard_list extends project_brick {
     }
 
     /**
-     * @param array $args
      * @return string
      */
-    public function get_html($args = [])
+    protected function get_brick_html()
     {
 
-        return '';
+        $html = '
+          <div class="row">
+            <div class="col-xs-12">
+                <h2>' . $this->get_field('list_headline') . '</h2>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-xs-12">';
+
+        if($this->have_rows('list_items')) {
+
+            while($this->have_rows('list_items')) {
+
+                $this->the_row();
+
+                $html .= '<li>';
+                $html .= '<h3>' . $this->get_field_in_repeater('list_items', 'list_item_headline') . '</h3>';
+                $html .= $this->get_field_in_repeater('list_items', 'list_item_text');
+                $html .= '</li>';
+
+            }
+
+        }
+
+        $html .= '
+            </div>
+          </div> <!-- /.row -->
+        ';
+
+        return $html;
 
     }
 

@@ -5,7 +5,7 @@ namespace fewbricks\bricks;
 use fewbricks\acf\fields as acf_fields;
 
 /**
- * Class demo_youtube
+ * Class video
  * @package fewbricks\bricks
  */
 class video extends project_brick
@@ -57,6 +57,8 @@ class video extends project_brick
                 </div>';
 
         }
+
+        //\fewture\vd($this->get_setting('name'));
 
         if('' !== ($button_html = ($this->get_child_brick('button', 'button')->get_html()))) {
 

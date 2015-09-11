@@ -29,7 +29,7 @@ class file extends field
                 'class' => '',
                 'id' => '',
             ),
-            'return_format' => 'array',
+            'return_format' => 'id',
             'library' => 'all',
         ];
 

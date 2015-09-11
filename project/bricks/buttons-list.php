@@ -24,21 +24,41 @@ class buttons_list extends project_brick {
     {
 
         $this->add_field(new acf_fields\text('Buttons list headline', 'headline', '1509052316y'));
-        $this->add_repeater(new acf_fields\repeater('Buttons', 'buttons', '1509052323a'));
+        $this->add_repeater((new acf_fields\repeater('Buttons', 'buttons', '1509052323a'))
+          ->add_brick(new button('button', '1509111350i')));
 
     }
 
     /**
-     * @param array $args
      * @return string
      */
-    public function get_html($args = [])
+    protected function get_brick_html()
     {
 
         $html = '
           <div class="row">
-            <h2>' . $this->get_field() . '</h2>
+            <div class="col-xs-12">
+                <h2>' . $this->get_field('headline') . '</h2>
+            </div>
           </div>
+          <div class="row">
+            <div class="col-xs-12">';
+
+        if($this->have_rows('buttons')) {
+
+            while($this->have_rows('buttons')) {
+
+                $this->the_row();
+
+                $html .= $this->get_child_brick_in_repeater('buttons', 'button', 'button')->get_html();
+
+            }
+
+        }
+
+        $html .= '
+            </div>
+          </div> <!-- /.row -->
         ';
 
         return $html;

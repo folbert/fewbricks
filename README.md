@@ -32,7 +32,7 @@ Field groups, flexible content, repeaters and fields. All of those are names tha
  Make sure that the requirements are met and then include or require the file init.php found at the root of this package.
 
 ##Fields
-The field types that are available for creating bricks are exactly the same field types that can be used in ACF. The settings for each field are also the same and have the same name as in ACF. This means that if you want to find out what you can do with a field you can either look in the class for that field, located in lib/acf/fields, or you can create a field in ACFs GUI and then use ACFs export-to-code-functionality to see the available options for a field and how they should be set.
+The field types that are available for creating bricks are exactly the same field types that can be used in ACF. The settings for each field are also the same and have the same name as in ACF. This means that if you want to find out what you can do with a field you can either look in the class for that field, located in lib/acf/fields, or you can create a field in ACFs GUI and then use ACFs export-to-code-functionality to see the available options for a field and how they should be set. If ACF is updated with new field options, it doesn't matter if those options are available in the field classes in lib/acf/fields or not since they will be merged with ACFs field classes anyways.
 
 The settings that all fields have in common are key, name and label:
 
@@ -40,11 +40,11 @@ The settings that all fields have in common are key, name and label:
 
 * name - Must be unique on its level. This means that if you create a bunch of field instances in a brick, you can not give two fields in the brick the same name. However, if you for example are re-using bricks in a brick, you don't have to worry that a field in the re-used bricks may have the same name as a field in the "master brick".
 
-* key - Must be a unique value across the theme. We recommend that you use something like the time and date for this. So for example if you are registering a field at 10.45 on April 6, 2015, you would set the key to something like 1504061045y (or whatever format you like your dates in) where the last character is a random one. Unless you register another brick at the same minute and for some reason use the same random number, you will never risk having two identical values. You can *not* use a dynamic value such as time(). Also note that you *must* add a letter somewhere in the key. If you put Fewbricks in developer mode (se separate section in this ReadMe), you will get a warning if you have used duplicate keys.   
+* key - **Must be a unique value across the theme.** This value must never be changed since it is what ACF uses to find data in the database. We recommend that you use something like the time and date for this. So for example if you are registering a field at 10.45 on April 6, 2015, you would set the key to something like 1504061045y (or whatever format you like your dates in) where the last character is a random one. Unless you register another brick at the same minute and for some reason use the same random number, you will never risk having two identical values. You can *not* use a dynamic value such as time(). Also note that you *must* add a letter somewhere in the key. If you put Fewbricks in developer mode (se separate section in this ReadMe), you will get a warning if you have used duplicate keys.   
  
 * settings - You can set all other settings that a field have by passing an associative array as the third argument when creating a field instance. Any keys in that array should correspond to keys in the array found in the function `get_settings()` in each field class in lib/acf/fields/.
 
-*Note:* If you add an add-on field, you must create a field-class for that field in lib/acf/fields/. Just as we have done with the hidden field.
+**Note:** If you add an add-on field, you must create a field-class for that field in lib/acf/fields/. Just as we have done with the hidden field.
 
 ##Creating a brick
 
@@ -169,8 +169,6 @@ If a string or array is passed, a file with the name(s) is then included after t
 * `$html` - the core html of the brick
 * `$this` - an instance of the current brick class. This can be used to find out for example what background color should be set on the wrapping row using something like `$this->get_data_value('bg')`.
 
-For this to work, the get_html-function of the brick must have been implemented properly (returning `parent::get_layouted_html($html, $layouts)`)
-
 ## Fewbricks specific settings for fields and bricks
 There are some settings that we have added to make using Fewbricks easier.
 
@@ -187,7 +185,7 @@ If developer mode is enabled, you can also var dump the fields settings each tim
 Due to restrictions in the WordPress table structure, the max length of a field name is 64 characters. So if you have fields that go a couple of levels deep (for example a brick in a flexible field that have a repeater), you may run out of space for the name. Therefore, it is wise to shorten names so instead of for example "download_button", use "dl_btn". This should be considered whe creating instances of bricks and fields. If the value of a field is not saved, the reason is most likely that the name is too long. Note that the name that is displayed when hovering the question mark next to the label is the name that you should use to get the field. This name is not the name that the field is stored as in the DB. 
 
 ##ACF Local JSON
-Fewbricks supports [ACF Local JSON](http://www.advancedcustomfields.com/resources/local-json/). Using this hosuls speed things up a bit sinvesince we dont have to execute all the PHP-code that Fewbricks is made up of. Follow these steps to activate local-json:
+Fewbricks supports [ACF Local JSON](http://www.advancedcustomfields.com/resources/local-json/). Using this hosuls speed things up a bit since we dont have to execute all the PHP-code that Fewbricks is made up of. Follow these steps to activate local-json:
 
 1. As outlined in the [ACF instructions for local JSON](http://www.advancedcustomfields.com/resources/local-json/): in the themes directory, create a directory named acf-json.
 2. In the admin area, navigate to the Fewbricks admin page which is placed in the ACF menu. Click "Build JSON" and let the page reload.

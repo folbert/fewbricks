@@ -14,25 +14,57 @@ $location = [
     ]
 ];
 
+// --- FIELD GROUP 1 ---
+
+// Create filed group
 $fg = (new fewacf\field_group('Main content 1', '150901113b', $location, 1));
 
-$fg->add_brick((new bricks\buttons_list('button_list', '1509052316o'))->set_field_label_prefix('Button list'));
-$fg->add_brick((new bricks\standard_list('a_list', '1509042107u'))->set_field_label_prefix('A list'));
-$fg->add_brick((new bricks\standard_list('another_list', '1509042107o'))->set_field_label_prefix('Another list'));
-
-$fc = (new acf_fields\flexible_content('Flexible content 1', 'fc1', '150901113c'));
-$l = new fewacf\layout('Layout 1', 'layout_1', '1509042218o');
-$l->add_brick(new bricks\video('video', '1509042222u'));
-$fc->add_layout($l);
-$l = new fewacf\layout('Layout 1', 'layout_2', '1509060002y');
-$l->add_brick(new bricks\buttons_list('blist2', '1509060001t'));
-$fc->add_layout($l);
-$fg->add_flexible_content($fc);
-
+// Add some fields
 $fg->add_field(new acf_fields\text('Some text', 'some_text', '1509011120p'));
 $fg->add_field(new acf_fields\text('Some more text', 'some_more_text', '1509011120x'));
+
+// Add a brick
 $fg->add_brick((new bricks\video('video_1', '1509011120x'))->set_field_label_prefix('A great video'));
-$fg->add_brick((new bricks\button('button', '1509032106a')));
-$fg->add_brick((new bricks\button('button2', '1509032106b')));
+
+// Register the field group
+$fg->register();
+
+
+
+
+// --- FIELD GROUP 2 ---
+$fg = (new fewacf\field_group('Main content 2', '1509111339o', $location, 2));
+$fg->add_brick((new bricks\buttons_list('button_list', '1509052316o'))->set_field_label_prefix('Button list'));
+$fg->add_brick((new bricks\standard_list('a_list', '1509042107u'))->set_field_label_prefix('A list'));
+$fg->register();
+
+
+
+
+// --- FIELD GROUP 3 ---
+$fg = (new fewacf\field_group('Main content 3', '1509111453p', $location, 3));
+
+$fc = (new acf_fields\flexible_content('Flexible content 1', 'fc1', '150901113c'));
+
+// Leave name empty of you want it o be set to the same as that of the brick that you add
+$l = new fewacf\layout('', 'layout_1', '1509042218o');
+$l->add_brick(new bricks\video('video', '1509042222u'));
+$fc->add_layout($l);
+
+$l = new fewacf\layout('', 'layout_2', '1509060002y');
+$l->add_brick(new bricks\buttons_list('blist2', '1509060001t'));
+$fc->add_layout($l);
+
+$fg->add_flexible_content($fc);
+
+$fg->register();
+
+
+
+
+// --- FIELD GROUP 4 ---
+$fg = (new fewacf\field_group('Main content 4', '1509111553y', $location, 4));
+
+$fg->add_brick(new bricks\flexible_brick('fb1', '1509111553r'));
 
 $fg->register();
