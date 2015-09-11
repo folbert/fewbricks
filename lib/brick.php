@@ -24,17 +24,17 @@ class brick
     /**
      * @var bool
      */
-    private $is_layout;
+    protected $is_layout;
 
     /**
      * @var bool
      */
-    private $is_option;
+    protected $is_option;
 
     /**
      * @var bool
      */
-    private $is_sub_field;
+    protected $is_sub_field;
 
     /**
      * @var array
@@ -67,6 +67,12 @@ class brick
      */
     protected $get_html_args;
 
+    /**
+     * @var array
+     * A place to store arbitrary arguments.
+     */
+    protected $args;
+
 
     /**
      * @param string $name Name to use when fetching data for the brick
@@ -85,6 +91,7 @@ class brick
         $this->fields = [];
         $this->field_label_prefix = '';
         $this->field_label_suffix = '';
+        $this->args = [];
         $this->data = [];
 
     }
@@ -112,6 +119,7 @@ class brick
         $this->prepare_settings($object_to_get_for);
 
         $this->set_fields();
+        $this->set_project_fields();
 
         if (is_a($object_to_get_for, 'fewbricks\acf\layout')) {
 
@@ -202,6 +210,18 @@ class brick
 
         }
 
+    }
+
+    /**
+     * @param $name
+     * @param $value
+     * @return $this
+     */
+    public function set_arg($name, $value)
+    {
+        $this->args[$name] = $value;
+
+        return $this;
     }
 
     /**
