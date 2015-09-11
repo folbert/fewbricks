@@ -27,7 +27,7 @@
 <h1>Fewbricks demo</h1>
 
 <p>This page is using the template named "fewbricks demo" which gets its bricks in the file
-    fewbricks/field-groups/field-groups-demo.php. If you are logged in, you can <a
+    fewbricks/project/field-groups/field-groups-demo.php. If you are logged in, you can <a
         href="<?php echo get_edit_post_link(); ?>" target="_blank">edit the content here</a>.</p>
 
 
@@ -47,7 +47,7 @@ $snippet = "<?php
 
     // Create an instance of a brick and pass the name given when adding it to the field group
     // lets also pass two layouts for demo purposes.
-    echo (new \fewbricks\bricks\video('video_1'))->get_html([], ['demo-layout-1', 'demo-layout-2']);
+    echo (new \fewbricks\bricks\demo_video('video_1'))->get_html([], ['demo-layout-1', 'demo-layout-2']);
 
 ?>";
 ?>
@@ -63,7 +63,7 @@ $snippet = "<?php
     <?php
     echo '<p>' . get_field('some_text') . '</p>';
     echo '<p>' . get_field('some_more_text') . '</p>';
-    echo (new \fewbricks\bricks\video('video_1'))->get_html([], ['demo-layout-1', 'demo-layout-2']);
+    echo (new \fewbricks\bricks\demo_video('video_1'))->get_html([], ['demo-layout-1', 'demo-layout-2']);
     ?>
 
 </div>
@@ -77,8 +77,8 @@ $snippet = "<?php
 
 <?php
 $snippet = "<?php
-    echo (new \\fewbricks\\bricks\\buttons_list('button_list'))->get_html();
-    echo (new \\fewbricks\\bricks\\standard_list('a_list'))->get_html();
+    echo (new \\fewbricks\\bricks\\demo_buttons_list('button_list'))->get_html();
+    echo (new \\fewbricks\\bricks\\demo_standard_list('a_list'))->get_html();
 ?>";
 ?>
 
@@ -91,8 +91,8 @@ $snippet = "<?php
 <div class="demo-output-wrapper">
 
     <?php
-    echo (new \fewbricks\bricks\buttons_list('button_list'))->get_html();
-    echo (new \fewbricks\bricks\standard_list('a_list'))->get_html();
+    echo (new \fewbricks\bricks\demo_buttons_list('button_list'))->get_html();
+    echo (new \fewbricks\bricks\demo_standard_list('a_list'))->get_html();
     ?>
 
 </div>
@@ -153,7 +153,7 @@ $snippet = "<?php
 
 <?php
 $snippet = "<?php
-    echo (new \\fewbricks\\bricks\\flexible_brick('fb1'))->get_html();
+    echo (new \\fewbricks\\bricks\\demo_flexible_brick('fb1'))->get_html();
 ?>";
 ?>
 
@@ -166,7 +166,7 @@ $snippet = "<?php
 <div class="demo-output-wrapper">
 
     <?php
-    echo (new \fewbricks\bricks\flexible_brick('fb1'))->get_html();
+    echo (new \fewbricks\bricks\demo_flexible_brick('fb1'))->get_html();
     ?>
 
 </div>

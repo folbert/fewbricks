@@ -11,7 +11,8 @@ namespace fewbricks\bricks;
  * Class project_brick
  * @package fewbricks\bricks
  */
-class project_brick extends brick {
+class project_brick extends brick
+{
 
     /**
      * @var bool
@@ -22,9 +23,18 @@ class project_brick extends brick {
      * @param string $name
      * @param string $key
      */
-    public function __construct($name = '', $key = '') {
+    public function __construct($name = '', $key = '')
+    {
 
         parent::__construct($name, $key);
+
+    }
+
+    /**
+     * Called after set_fields have been called. Use to add settings that every brick in the project should have.
+     */
+    public function set_project_fields()
+    {
 
     }
 
@@ -33,7 +43,8 @@ class project_brick extends brick {
      * @param bool $value
      * @return string
      */
-    protected function get_headline_html($data_key, $value = false) {
+    protected function get_headline_html($data_key, $value = false)
+    {
 
         $this->set_headline_tag();
 
@@ -41,7 +52,7 @@ class project_brick extends brick {
 
         $html = '';
 
-        if(!empty($headline)) {
+        if (!empty($headline)) {
 
             $html .= '<' . self::$headline_tag . '>' . $headline . '</' . self::$headline_tag . '>';
 
@@ -54,9 +65,10 @@ class project_brick extends brick {
     /**
      *
      */
-    protected function set_headline_tag() {
+    protected function set_headline_tag()
+    {
 
-        switch(self::$headline_tag) {
+        switch (self::$headline_tag) {
 
             case 'h1' :
 

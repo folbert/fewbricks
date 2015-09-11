@@ -8,7 +8,7 @@ use fewbricks\acf\fields as acf_fields;
  * Class video
  * @package fewbricks\bricks
  */
-class video extends project_brick
+class demo_video extends project_brick
 {
 
     /**
@@ -31,7 +31,11 @@ class video extends project_brick
                 ])
         );
 
-        $this->add_brick((new button('button', '1509042128i'))->set_field_label_prefix('Youtube button'));;
+        $this->add_brick((new demo_button('button', '1509042128i'))->set_field_label_prefix('Youtube button'));
+
+        if(!isset($this->args['no_bg_color']) || !$this->args['no_bg_color']) {
+            $this->add_common_field('demo_background_color', '1509112010i');
+        }
 
     }
 
@@ -60,7 +64,7 @@ class video extends project_brick
 
         //\fewture\vd($this->get_setting('name'));
 
-        if('' !== ($button_html = ($this->get_child_brick('button', 'button')->get_html()))) {
+        if('' !== ($button_html = ($this->get_child_brick('demo_button', 'button')->get_html()))) {
 
             $html .= $button_html;
 

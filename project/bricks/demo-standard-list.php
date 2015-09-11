@@ -8,7 +8,7 @@ use fewbricks\acf\fields as acf_fields;
  * Class text_and_content
  * @package fewbricks\bricks
  */
-class standard_list extends project_brick {
+class demo_standard_list extends project_brick {
 
     /**
      * @var string This will be the default label showing up in the editor area for the administrator.

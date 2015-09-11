@@ -8,7 +8,7 @@ use fewbricks\acf\fields as acf_fields;
  * Class text_and_content
  * @package fewbricks\bricks
  */
-class button extends project_brick
+class demo_button extends project_brick
 {
 
     /**

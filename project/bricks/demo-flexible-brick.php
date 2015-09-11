@@ -9,7 +9,7 @@ use fewbricks\acf\layout;
  * Class flexible_brick
  * @package fewbricks\bricks
  */
-class flexible_brick extends project_brick
+class demo_flexible_brick extends project_brick
 {
 
     /**
@@ -26,11 +26,11 @@ class flexible_brick extends project_brick
         $fc = new acf_fields\flexible_content('Modulez', 'modules', '1509111554i');
 
         $l = new layout('', 'l1', '1509111555a');
-        $l->add_brick(new video('video', '1509111556x'));
+        $l->add_brick(new demo_video('video', '1509111556x'));
         $fc->add_layout($l);
 
         $l = new layout('', 'l2', '1509111557u');
-        $l->add_brick(new button('button', '1509111556s'));
+        $l->add_brick(new demo_button('button', '1509111556s'));
         $fc->add_layout($l);
 
         $this->add_flexible_content($fc);
