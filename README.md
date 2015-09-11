@@ -94,10 +94,12 @@ Each brick has its own class placed in the folder named "bricks". Each class hav
             }
         
             /**
-             *  This function will be called in the frontend when displaying the brick.
+             * This function will be used in the frontend when displaying the brick.
+             * It will be called by the parents class function get_html(). See that function
+             * for info on what data you have at your disposal. 
              * @return string
              */
-            public function get_brick_html()
+            protected function get_brick_html()
             {
         
             }
