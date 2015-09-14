@@ -441,27 +441,9 @@ class brick
         // If we have not forced either sub field or layout
         if(!$is_layout && !$is_sub_field) {
 
-            if (!$is_layout) {
-
-                // If we are currently in a layout, we know that any child is also in a layout.
-                $is_layout = $this->is_layout;
-
-                if ($is_layout) {
-                    $name = $this->name . '_' . $name;
-                }
-
-            }
-
-            if (!$is_sub_field) {
-
-                // If we are currently in a sub field, we know that any child is also in a sub field.
-                $is_sub_field = $this->is_sub_field;
-
-                if ($is_sub_field) {
-                    $name = $this->name . '_' . $name;
-                }
-
-            }
+            $is_layout = $this->is_layout;
+            $is_sub_field = $this->is_sub_field;
+            $name = $this->name . '_' . $name;
 
         }
 
