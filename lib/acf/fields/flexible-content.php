@@ -75,7 +75,7 @@ class flexible_content extends field
 
         if (is_null($class_name)) {
 
-            die('get_brick_class_name_of_layout() could not find a hidden field named ' . $base_name . '_brick_class .');
+            die('get_sub_field_brick_instance() could not find a hidden field named ' . $row_layout . '_brick_class .');
 
         }
 

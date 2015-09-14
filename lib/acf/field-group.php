@@ -165,11 +165,15 @@ class field_group
 
         if (FEWBRICKS_DEV_MODE) {
 
-            if (isset($_GET['dumpfewbricksfields'])) {
+            if($fewbricks_save_json === true) {
+
+                $this->save_json();
+
+            } elseif (isset($_GET['dumpfewbricksfields'])) {
 
                 $this->print_settings();
 
-            } else if(!$fewbricks_save_json) {
+            } else {
 
                 $this->check_keys($this->settings['fields']);
 
@@ -177,15 +181,7 @@ class field_group
 
         }
 
-        if ($fewbricks_save_json === true) {
-
-            $this->save_json();
-
-        } else {
-
-            register_field_group($this->settings);
-
-        }
+        register_field_group($this->settings);
 
     }
 

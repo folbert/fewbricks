@@ -50,7 +50,6 @@ class demo_video extends project_brick
 
         if (false !== ($url = $this->get_video_url())) {
 
-
             $html .= '
               <div class="row">
                   <div class="col-xs-12">
@@ -61,8 +60,6 @@ class demo_video extends project_brick
                 </div>';
 
         }
-
-        //\fewture\vd($this->get_setting('name'));
 
         if('' !== ($button_html = ($this->get_child_brick('demo_button', 'button')->get_html()))) {
 

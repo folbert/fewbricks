@@ -170,3 +170,32 @@ $snippet = "<?php
     ?>
 
 </div>
+
+
+
+
+
+
+<h2 class="demo-h2">Field Group "Main content 5"</h2>
+
+<p><b>This code:</b></p>
+
+<?php
+$snippet = "<?php
+    echo (new \\fewbricks\\bricks\\demo_flexible_brick('fb1'))->get_html();
+?>";
+?>
+
+<code>
+    <?php echo highlight_string($snippet, true); ?>
+</code>
+
+<p><b>..outputs all of the below between the red lines</b></p>
+
+<div class="demo-output-wrapper">
+
+    <?php
+    echo (new \fewbricks\bricks\demo_flexible_columns('fcol1'))->set_setting('nr_of_columns', 2)->get_html();
+    ?>
+
+</div>

@@ -70,3 +70,13 @@ $fg = (new fewacf\field_group('Main content 4', '1509111553y', $location, 4));
 $fg->add_brick(new bricks\demo_flexible_brick('fb1', '1509111553r'));
 
 $fg->register();
+
+
+
+
+// --- FIELD GROUP 5 ---
+$fg = (new fewacf\field_group('Main content 5', '1509141034o', $location, 5));
+
+$fg->add_brick((new bricks\demo_flexible_columns('fcol1', '1509141034p'))->set_setting('nr_of_columns', 2));
+
+$fg->register();

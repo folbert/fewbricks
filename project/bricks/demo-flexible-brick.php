@@ -23,7 +23,7 @@ class demo_flexible_brick extends project_brick
     public function set_fields()
     {
 
-        $fc = new acf_fields\flexible_content('Modulez', 'modules', '1509111554i');
+        $fc = new acf_fields\flexible_content('Modules', 'modules', '1509111554i');
 
         $l = new layout('', 'l1', '1509111555a');
         $l->add_brick(new demo_video('video', '1509111556x'));
@@ -49,7 +49,7 @@ class demo_flexible_brick extends project_brick
 
             $this->the_row();
 
-            echo acf_fields\flexible_content::get_sub_field_brick_instance()->get_html();
+            $html .= acf_fields\flexible_content::get_sub_field_brick_instance()->get_html();
 
         }
 
