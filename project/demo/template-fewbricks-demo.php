@@ -195,7 +195,7 @@ $snippet = "<?php
 <div class="demo-output-wrapper">
 
     <?php
-    echo (new \fewbricks\bricks\demo_flexible_columns('fcol1'))->set_setting('nr_of_columns', 2)->get_html();
+    echo (new \fewbricks\bricks\demo_flexible_columns('fcol1'))->set_arg('nr_of_columns', 2)->get_html();
     ?>
 
 </div>

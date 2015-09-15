@@ -23,7 +23,7 @@ class demo_flexible_columns extends project_brick
     public function set_fields()
     {
 
-        $nr_of_columns = $this->get_setting('nr_of_columns');
+        $nr_of_columns = $this->get_arg('nr_of_columns');
 
         for ($column_nr = 1; $column_nr <= $nr_of_columns; $column_nr++) {
 
@@ -42,7 +42,7 @@ class demo_flexible_columns extends project_brick
     protected function get_brick_html()
     {
 
-        $nr_of_columns = $this->get_setting('nr_of_columns');
+        $nr_of_columns = $this->get_arg('nr_of_columns');
 
         $column_classes = $this->get_column_classes($nr_of_columns);
 

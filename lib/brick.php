@@ -225,6 +225,23 @@ class brick
     }
 
     /**
+     * @param $name The name of the argument to get
+     * @param $default The value to return if there is no argument with the sent name.
+     * @return mixed The value of the argument or default if the argument ha snot been set
+     */
+    public function get_arg($name, $default = false)
+    {
+
+        $value = $default;
+
+        if(isset($this->args[$name])) {
+            $value = $this->args[$name];
+        }
+
+        return $value;
+    }
+
+    /**
      * @param $object_to_prepare_for
      */
     private function prepare_settings($object_to_prepare_for)
