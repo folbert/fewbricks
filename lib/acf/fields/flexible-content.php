@@ -71,15 +71,7 @@ class flexible_content extends field
 
         $row_layout = get_row_layout();
 
-        $class_name = (get_sub_field($row_layout . '_brick_class'));
-
-        if (is_null($class_name)) {
-
-            die('get_sub_field_brick_instance() could not find a hidden field named ' . $row_layout . '_brick_class .');
-
-        }
-
-        $class_name = 'fewbricks\bricks\\' . $class_name;
+        $class_name = 'fewbricks\bricks\\' . self::get_sub_field_brick_class_name();
 
         $instance = new $class_name($row_layout);
 
@@ -92,10 +84,19 @@ class flexible_content extends field
     /**
      * @return string
      */
-    public static function get_brick_class_name()
-    {
+    public static function get_sub_field_brick_class_name() {
 
+        $row_layout = get_row_layout();
 
+        $class_name = (get_sub_field($row_layout . '_brick_class'));
+
+        if (is_null($class_name)) {
+
+            die('get_sub_field_brick_instance() could not find a hidden field named ' . $row_layout . '_brick_class .');
+
+        }
+
+        return $class_name;
 
     }
 
