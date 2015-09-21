@@ -42,7 +42,7 @@ The settings that all fields have in common are key, name and label:
 
 * key - **Must be a unique value across the theme.** This value must never be changed since it is what ACF uses to find data in the database. We recommend that you use something like the time and date for this. So for example if you are registering a field at 10.45 on April 6, 2015, you would set the key to something like 1504061045y (or whatever format you like your dates in) where the last character is a random one. Unless you register another brick at the same minute and for some reason use the same random number, you will never risk having two identical values. You can *not* use a dynamic value such as time(). Also note that you *must* add a letter somewhere in the key. If you put Fewbricks in developer mode (se separate section in this ReadMe), you will get a warning if you have used duplicate keys.   
  
-* settings - You can set all other settings that a field have by passing an associative array as the third argument when creating a field instance. Any keys in that array should correspond to keys in the array found in the function `get_settings()` in each field class in lib/acf/fields/.
+* settings - You can set all other settings that a field have by passing an associative array as the third argument when creating a field instance. Any keys in that array should correspond to keys in the `base_settings` in each field class in lib/acf/fields/.
 
 **Note:** If you add an add-on field, you must create a field-class for that field in lib/acf/fields/. Just as we have done with the hidden field.
 

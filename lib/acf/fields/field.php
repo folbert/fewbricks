@@ -19,17 +19,17 @@ class field
      */
     private $key_prepared;
 
-
     /**
      * @param string $label
      * @param string $name
      * @param string $key
-     * @param $settings
+     * @param array $base_settings
+     * @param array $custom_settings
      */
-    public function __construct($label, $name, $key, $settings)
+    public function __construct($label, $name, $key, $base_settings = [], $custom_settings = [])
     {
 
-        $this->settings = $settings;
+        $this->settings = array_merge($base_settings, $custom_settings);
         $this->settings['label'] = $label;
         $this->settings['name'] = $name;
         $this->settings['key'] = $key;

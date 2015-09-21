@@ -36,7 +36,7 @@ class radio extends field
             'layout' => 'vertical',
         ];
 
-        parent::__construct($label, $name, $key, $base_settings);
+        parent::__construct($label, $name, $key, $base_settings, $custom_settings);
 
     }
 

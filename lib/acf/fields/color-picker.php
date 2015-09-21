@@ -32,7 +32,7 @@ class color_picker extends field
             'default_value' => '',
         ];
 
-        parent::__construct($label, $name, $key, $base_settings);
+        parent::__construct($label, $name, $key, $base_settings, $custom_settings);
 
     }
 

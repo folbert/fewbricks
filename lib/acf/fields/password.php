@@ -36,7 +36,7 @@ class password extends field
             'disabled' => 0,
         ];
 
-        parent::__construct($label, $name, $key, $base_settings);
+        parent::__construct($label, $name, $key, $base_settings, $custom_settings);
 
     }
 

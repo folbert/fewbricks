@@ -32,7 +32,7 @@ class message extends field
             'message' => '',
         ];
 
-        parent::__construct($label, $name, $key, $base_settings);
+        parent::__construct($label, $name, $key, $base_settings, $custom_settings);
 
     }
 

@@ -35,7 +35,7 @@ class email extends field
             'append' => '',
         ];
 
-        parent::__construct($label, $name, $key, $base_settings);
+        parent::__construct($label, $name, $key, $base_settings, $custom_settings);
 
     }
 

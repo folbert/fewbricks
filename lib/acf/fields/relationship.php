@@ -42,7 +42,7 @@ class relationship extends field
             'return_format' => 'object',
         ];
 
-        parent::__construct($label, $name, $key, $base_settings);
+        parent::__construct($label, $name, $key, $base_settings, $custom_settings);
 
     }
 

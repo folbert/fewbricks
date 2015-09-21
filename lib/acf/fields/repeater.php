@@ -10,14 +10,15 @@ class repeater extends field
 {
 
     /**
-     * @param $key
-     * @param $name
-     * @param $label
+     * @param string $label
+     * @param string $name
+     * @param string $key
+     * @param array $custom_settings
      */
-    public function __construct($label, $name, $key)
+    public function __construct($label, $name, $key, $custom_settings = [])
     {
 
-        $settings = [
+        $base_settings = [
             'prefix' => '',
             'type' => 'repeater',
             'instructions' => '',
@@ -35,7 +36,7 @@ class repeater extends field
             'sub_fields' => []
         ];
 
-        parent::__construct($label, $name, $key, $settings);
+        parent::__construct($label, $name, $key, $base_settings, $custom_settings);
 
     }
 

@@ -13,8 +13,9 @@ class wysiwyg extends field
      * @param string $label
      * @param string $name
      * @param string $key
+     * @param array $custom_settings
      */
-    public function __construct($label, $name, $key)
+    public function __construct($label, $name, $key, $custom_settings = [])
     {
 
         $base_settings = [
@@ -34,7 +35,7 @@ class wysiwyg extends field
             'media_upload' => 1,
         ];
 
-        parent::__construct($label, $name, $key, $base_settings);
+        parent::__construct($label, $name, $key, $base_settings, $custom_settings);
 
     }
 

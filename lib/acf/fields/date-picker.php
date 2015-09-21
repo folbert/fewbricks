@@ -34,7 +34,7 @@ class date_picker extends field
             'first_day' => 1,
         ];
 
-        parent::__construct($label, $name, $key, $base_settings);
+        parent::__construct($label, $name, $key, $base_settings, $custom_settings);
 
     }
 

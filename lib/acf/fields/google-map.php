@@ -35,7 +35,7 @@ class google_map extends field
             'height' => '',
         ];
 
-        parent::__construct($label, $name, $key, $base_settings);
+        parent::__construct($label, $name, $key, $base_settings, $custom_settings);
 
     }
 

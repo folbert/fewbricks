@@ -42,7 +42,7 @@ class gallery extends field
             'mime_types' => '',
         ];
 
-        parent::__construct($label, $name, $key, $base_settings);
+        parent::__construct($label, $name, $key, $base_settings, $custom_settings);
 
     }
 
