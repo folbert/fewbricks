@@ -24,12 +24,15 @@ class post_object extends field
             'instructions' => '',
             'required' => 0,
             'conditional_logic' => 0,
-            'wrapper' => array(
+            'wrapper' => [
                 'width' => '',
                 'class' => '',
                 'id' => '',
-            ),
-            'post_type' => [],
+            ],
+            'post_type' => [
+                0 => 'post',
+                1 => 'page'
+            ],
             'taxonomy' => '',
             'allow_null' => 0,
             'multiple' => 0,
