@@ -35,7 +35,7 @@ class taxonomy extends field
             'load_save_terms' => 0,
             'return_format' => 'object',
             'multiple' => 0,
-            'add_term' => 1,
+            'add_term' => 0,
             'save_terms' => 0,
             'load_terms' => 0,
         ];
