@@ -35,6 +35,9 @@ class taxonomy extends field
             'load_save_terms' => 0,
             'return_format' => 'object',
             'multiple' => 0,
+            'add_term' => 1,
+            'save_terms' => 0,
+            'load_terms' => 0,
         ];
 
         parent::__construct($label, $name, $key, $base_settings, $custom_settings);
