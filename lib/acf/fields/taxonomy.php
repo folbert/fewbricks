@@ -32,7 +32,6 @@ class taxonomy extends field
             'taxonomy' => '',
             'field_type' => 'select',
             'allow_null' => 0,
-            'load_save_terms' => 0,
             'return_format' => 'object',
             'multiple' => 0,
             'add_term' => 0,
