@@ -33,7 +33,7 @@ class field_group
 
         // Since the result of using this class will be an array,
         // we might as well store everything in an array right away.
-        $this->settings = [
+        $base_settings = [
             'key' => $key,
             'title' => $title,
             'fields' => [],
@@ -45,6 +45,8 @@ class field_group
             'instruction_placement' => 'label',
             'hide_on_screen' => []
         ];
+
+        $this->settings = array_merge($base_settings, $settings);
 
     }
 
