@@ -73,6 +73,11 @@ class brick
      */
     protected $args;
 
+    /**
+     * @var
+     */
+    private $post_id_to_get_field_from;
+
 
     /**
      * @param string $name Name to use when fetching data for the brick
@@ -91,6 +96,7 @@ class brick
         $this->fields = [];
         $this->field_label_prefix = '';
         $this->field_label_suffix = '';
+        $this->post_id_to_get_field_from = false;
         $this->args = [];
         $this->data = [];
 
@@ -127,7 +133,7 @@ class brick
 
             // We need a hidden field to tell us what class we are dealing with when looping layouts in the frontend.
             $this->add_field((new acf\fields\hidden('Brick class', 'brick_class', '7001010000a'))
-              ->set_setting('default_value', \fewbricks\helpers\get_real_class_name($this)));
+                ->set_setting('default_value', \fewbricks\helpers\get_real_class_name($this)));
 
         } elseif (is_a($object_to_get_for, 'fewbricks\acf\fields\repeater')) {
 
@@ -136,14 +142,14 @@ class brick
         }
 
         return [
-          'name' => $this->name,
-          'key' => $this->key,
-          'is_layout' => $this->is_layout,
-          'is_sub_field' => $this->is_sub_field,
-          'is_option' => $this->is_option,
-          'fields' => $this->fields,
-          'field_label_prefix' => $this->field_label_prefix,
-          'field_label_suffix' => $this->field_label_suffix
+            'name' => $this->name,
+            'key' => $this->key,
+            'is_layout' => $this->is_layout,
+            'is_sub_field' => $this->is_sub_field,
+            'is_option' => $this->is_option,
+            'fields' => $this->fields,
+            'field_label_prefix' => $this->field_label_prefix,
+            'field_label_suffix' => $this->field_label_suffix
         ];
 
     }
@@ -313,22 +319,24 @@ class brick
     /**
      * @param string $repeater_name The name of the repeater that the field with the data is in.
      * @param $data_name
+     * @param bool $post_id Specific post id
      * @return bool|mixed|null|void
      */
-    protected function get_field_in_repeater($repeater_name, $data_name)
+    protected function get_field_in_repeater($repeater_name, $data_name, $post_id = false)
     {
 
-        return $this->get_field($repeater_name . '_' . $data_name, false, true);
+        return $this->get_field($repeater_name . '_' . $data_name, $post_id, false, true);
 
     }
 
     /**
      * @param $data_name
+     * @param bool $post_id
      * @param bool $prepend_this_name
      * @param bool $get_from_sub_field
      * @return bool|mixed|null|void
      */
-    protected function get_field($data_name, $prepend_this_name = true, $get_from_sub_field = false)
+    protected function get_field($data_name, $post_id = false, $prepend_this_name = true, $get_from_sub_field = false)
     {
 
         if ($prepend_this_name) {
@@ -345,15 +353,18 @@ class brick
 
         }
 
+        if($post_id === false && $this->post_id_to_get_field_from !== false) {
+            $post_id = $this->post_id_to_get_field_from;
+        }
+
         $data_value = null;
 
         // Do we have some manually set data?
         if ($this->data !== false && array_key_exists($name, $this->data)) {
 
             $data_value = $this->data[$name];
-            $fetched_from_custom_data = true;
 
-        } elseif ($get_from_sub_field || $this->is_layout || $this->is_sub_field) {
+        } elseif ($post_id === false && ($get_from_sub_field || $this->is_layout || $this->is_sub_field)) {
 
             // We should get data using acf functions and we are dealign with
             // layout or sub field
@@ -389,7 +400,7 @@ class brick
 
                 }
 
-            } elseif (null !== ($value = get_field($name))) {
+            } elseif (null !== ($value = get_field($name, $post_id))) {
 
                 $data_value = $value;
 
@@ -465,9 +476,9 @@ class brick
         }
 
         return (new $brick_class_name($name))
-          ->set_is_layout($is_layout)
-          ->set_is_sub_field($is_sub_field)
-          ->set_is_option($this->is_option);
+            ->set_is_layout($is_layout)
+            ->set_is_sub_field($is_sub_field)
+            ->set_is_option($this->is_option);
 
     }
 
@@ -700,6 +711,15 @@ class brick
     }
 
     /**
+     * @return string
+     */
+    public function get_name() {
+
+        return $this->name;
+
+    }
+
+    /**
      * This function makes sure that we have means to get essential settings in the same way as for fields etc.
      * @param string $name
      * @param string $default_value
@@ -717,6 +737,27 @@ class brick
         }
 
         return $value;
+
+    }
+
+    /**
+     * Set a value that should be passed as the second argument to ACFs get_field.
+     * Note that it can also be options, taxonomies, users etc.
+     * @link http://www.advancedcustomfields.com/resources/get_field/
+     * @param $post_id
+     */
+    public function set_post_id_to_get_field_from($post_id) {
+
+        $this->post_id_to_get_field_from = $post_id;
+
+    }
+
+    /**
+     * @return bool
+     */
+    public function get_post_id_to_get_field_from() {
+
+        return $this->post_id_to_get_field_from;
 
     }
 
