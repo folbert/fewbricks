@@ -78,6 +78,11 @@ class brick
      */
     private $post_id_to_get_field_from;
 
+    /**
+     * @var
+     */
+    private $layouts;
+
 
     /**
      * @param string $name Name to use when fetching data for the brick
@@ -99,6 +104,7 @@ class brick
         $this->post_id_to_get_field_from = false;
         $this->args = [];
         $this->data = [];
+        $this->layouts = [];
 
     }
 
@@ -490,13 +496,49 @@ class brick
     public function get_html($args = [], $layouts = false)
     {
 
-        // Letäs store them here for more flexibility
+        if (is_string($layouts)) {
+
+            $this->add_layout($layout);
+
+        } elseif (is_array($layouts)) {
+
+            foreach ($layouts AS $layout) {
+                $this->add_layout($layout);
+            }
+
+        }
+
+        // Let's store them here for more flexibility
         $this->get_html_args = $args;
 
         $html = $this->get_brick_html();
 
-        if ($layouts !== false) {
-            $html = $this->get_layouted_html($html, $layouts);
+        $html = $this->get_layouted_html($html);
+
+        return $html;
+
+    }
+
+    /**
+     * @param $html
+     * @return string
+     */
+    public function get_layouted_html($html)
+    {
+
+        if (!empty($this->layouts)) {
+
+            foreach ($this->layouts AS $layout) {
+
+                ob_start();
+
+                /** @noinspection PhpIncludeInspection */
+                include(__DIR__ . '/../project/layouts/' . $layout . '.php');
+
+                $html = ob_get_clean();
+
+            }
+
         }
 
         return $html;
@@ -746,7 +788,8 @@ class brick
      * @link http://www.advancedcustomfields.com/resources/get_field/
      * @param $post_id
      */
-    public function set_post_id_to_get_field_from($post_id) {
+    public function set_post_id_to_get_field_from($post_id)
+    {
 
         $this->post_id_to_get_field_from = $post_id;
 
@@ -755,9 +798,21 @@ class brick
     /**
      * @return bool
      */
-    public function get_post_id_to_get_field_from() {
+    public function get_post_id_to_get_field_from()
+    {
 
         return $this->post_id_to_get_field_from;
+
+    }
+
+    /**
+     * @param $layout
+     */
+    public function add_layout($layout)
+    {
+
+        // Avoid nesting the same layouts
+        $this->layouts[$layout] = $layout;
 
     }
 
