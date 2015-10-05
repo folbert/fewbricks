@@ -83,6 +83,11 @@ class brick
      */
     private $layouts;
 
+    /**
+     * @var
+     */
+    private $fields_to_remove;
+
 
     /**
      * @param string $name Name to use when fetching data for the brick
@@ -105,6 +110,7 @@ class brick
         $this->args = [];
         $this->data = [];
         $this->layouts = [];
+        $this->fields_to_remove = [];
 
     }
 
@@ -132,6 +138,7 @@ class brick
 
         $this->set_fields();
         $this->set_project_fields();
+        $this->remove_fields();
 
         if (is_a($object_to_get_for, 'fewbricks\acf\layout')) {
 
@@ -830,6 +837,29 @@ class brick
         }
 
         $this->data[$name] = $value;
+
+    }
+
+    /**
+     *
+     */
+    private function remove_fields()
+    {
+
+        foreach ($this->fields_to_remove AS $field_to_remove) {
+
+            foreach($this->fields AS $field_key => $field) {
+
+                if($field['name'] == $field_to_remove) {
+
+                    unset($this->fields[$field_key]);
+                    break;
+
+                }
+
+            }
+
+        }
 
     }
 
