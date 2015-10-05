@@ -820,11 +820,12 @@ class brick
      * Use this to set custom data for the brick.
      * @param $name
      * @param $value
-     * @param $append_this_name
+     * @param $prepend_this_name
      */
-    public function set_data_item($name, $value, $append_this_name = true) {
+    public function set_data_item($name, $value, $prepend_this_name = true)
+    {
 
-        if($append_this_name) {
+        if ($prepend_this_name) {
             $name = $this->name . '_' . $name;
         }
 
