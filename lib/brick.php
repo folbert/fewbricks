@@ -816,4 +816,20 @@ class brick
 
     }
 
+    /**
+     * Use this to set custom data for the brick.
+     * @param $name
+     * @param $value
+     * @param $append_this_name
+     */
+    public function add_data_item($name, $value, $append_this_name = true) {
+
+        if($append_this_name) {
+            $name = $this->name . '_' . $name;
+        }
+
+        $this->data[$name] = $value;
+
+    }
+
 }
