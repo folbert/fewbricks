@@ -112,6 +112,8 @@ class brick
         $this->layouts = [];
         $this->fields_to_remove = [];
 
+        $this->args['brick_css_class'] = [];
+
     }
 
     /**
@@ -244,8 +246,8 @@ class brick
     }
 
     /**
-     * @param $name The name of the argument to get
-     * @param $default The value to return if there is no argument with the sent name.
+     * @param string $name The name of the argument to get
+     * @param boolean $default The value to return if there is no argument with the sent name.
      * @return mixed The value of the argument or default if the argument ha snot been set
      */
     public function get_arg($name, $default = false)
@@ -553,37 +555,6 @@ class brick
     }
 
     /**
-     * @param $html
-     * @param string|array $layouts
-     * @return string
-     */
-    public function get_layouted_html($html, $layouts = [])
-    {
-
-        if (is_string($layouts)) {
-            $layouts = [$layouts];
-        }
-
-        if (!empty($layouts)) {
-
-            foreach ($layouts AS $layout) {
-
-                ob_start();
-
-                /** @noinspection PhpIncludeInspection */
-                include(__DIR__ . '/../project/layouts/' . $layout . '.php');
-
-                $html = ob_get_clean();
-
-            }
-
-        }
-
-        return $html;
-
-    }
-
-    /**
      * @param $fields_to_add
      */
     public function add_fields($fields_to_add)
@@ -860,6 +831,35 @@ class brick
             }
 
         }
+
+    }
+
+    /**
+     * @param $class_name
+     */
+    public function add_css_class($class_name)
+    {
+
+        $this->args['brick_css_class'][] = $class_name;
+
+    }
+
+    /**
+     * @param $sub_brick_name
+     * @param $name_setting
+     * @return mixed
+     */
+    protected function create_sub_brick_object($sub_brick_name, $name_setting)
+    {
+
+        $sub_brick_name = '\fewbricks\bricks\\' . $sub_brick_name;
+
+        $object = new $sub_brick_name($this->get_name() . '_' . $name_setting);
+        $object->set_is_layout($this->is_layout);
+        $object->set_is_sub_field($this->is_sub_field);
+        $object->set_is_option($this->is_option);
+
+        return $object;
 
     }
 
