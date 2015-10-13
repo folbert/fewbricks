@@ -88,6 +88,11 @@ class brick
      */
     private $fields_to_remove;
 
+    /**
+     * @var
+     */
+    protected $is_sub_brick;
+
 
     /**
      * @param string $name Name to use when fetching data for the brick
@@ -111,6 +116,7 @@ class brick
         $this->data = [];
         $this->layouts = [];
         $this->fields_to_remove = [];
+        $this->is_sub_brick = false;
 
         $this->args['brick_css_class'] = [];
 
@@ -841,6 +847,16 @@ class brick
     {
 
         $this->args['brick_css_class'][] = $class_name;
+
+    }
+
+    /**
+     * @param $is_sub_brick
+     */
+    public function set_is_sub_brick($is_sub_brick)
+    {
+
+        $this->is_sub_brick = $is_sub_brick;
 
     }
 
