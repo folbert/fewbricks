@@ -1,18 +1,21 @@
+#Legal
+Fewbricks and its developers are in no way associated with Advanced Custom Fields. Fewbricks is released under GPLv3.
+
 #Fewbricks
 
 Fewbricks is a module system developed by [FEW Agency](http://fewagency.se). It is built on top of the awesome plugin [Advanced Custom Fields](http://www.advancedcustomfields.com/) (ACF) v5 PRO meaning that you must have that installed for this to work.
 
 The system was created for the following reasons:
  
- * Portability and reusability. Almost all web sites have a couple of building blocks (bricks or modules) in common. This can, for example, be "plain text", "image with text to the right", "image with text to the left", "image", "YouTube-video" and so on. Using a module system which is completely built using code (instead of storing settings in the database as ACF does out of the box) we can reuse such bricks without setting them up every time. Yes, ACF does come with the export functionality but it is still cumbersome to cherrypick bricks for each project.
+ * Portability and reusability. Almost all web sites have a couple of building blocks (bricks or modules) in common. This can, for example, be "plain text", "image with text to the right", "image with text to the left", "image", "YouTube-video" and so on. Using a module system which is completely built using code (instead of storing settings in the database as ACF does out of the box) we can reuse such bricks without setting them up every time we set up a new site. Yes, ACF does come with the export functionality but it is still cumbersome to cherrypick bricks for each project.
  
- * Flexible ACF. This is probably the most important, and also the original, reason as to why this system was created. Since, in Fewbricks, all ACF-fields are set up using code, we can reuse fields and even other bricks across multiple bricks. This means that if we need to have, for example, a button in multiple bricks and places, we can create that brick once and then reuse that code all over the place. Now, imagine that the button have multiple settings and must give the administrator the ability to select a style and a functionality (internal link, external link, mail, download etc.) every time a button is used. Having to set that up in multiple times in ACFs visual editor would be a lot of work and you know that the client will want to add functionality to the button all of a sudden :)
+ * Flexible ACF. This is probably the most important, and also the original, reason as to why this system was created. Since, in Fewbricks, all ACF-fields are set up using code, we can reuse fields and even other bricks across multiple bricks. This means that if we need to have, for example, a button in multiple bricks and places, we can create that brick once and then reuse that code all over the place. Now, imagine that the button have multiple settings and must give the administrator the ability to select a style and a functionality (internal link, external link, mail, download etc.) every time a button is used. Having to set that up in multiple times in ACFs visual editor would be a lot of work and you know that the client will want to add new functionality to the button all of a sudden :)
  
  * Cleaner way to output HTML. By having each brick outout its own HTML, figuring out where to make changes in a brick becomes a breeze. Even if the brick is used in multiple places and loops, the HTML is edited in one place.
  
  * Easier to see what fields belong to a brick. Instead of having to switch between WP Admin and code to see what you named a specific field, you have it all in one brick class file.
  
- * Extensibility. Since each brick is a class, we can easily create a new brick which adds new fields and maybe its own output.
+ * Extensibility. Since each brick is a class, we can easily create a new brick which adds new fields and/or its own output.
    
 ##Requirements
 PHP 5.4+
@@ -28,8 +31,10 @@ Field groups, flexible content, repeaters and fields. All of those are names tha
  
  We recommend that you create at least one test field group using ACFs GUI and set it's location settings to "post type is equal to post" _and_ "post type is equal to page". That way the field group will never show up anywhere in the administration system and you can use it as a playground.
  
- ##Installation
- Make sure that the requirements are met and then include or require the file init.php found at the root of this package.
+##Installation
+ 1. Create a directory in your theme directory
+ 2. Make sure that the requirements are met
+ 3. Include or require the file init.php found at the root of this package
 
 ##Fields
 The field types that are available for creating bricks are exactly the same field types that can be used in ACF. The settings for each field are also the same and have the same name as in ACF. This means that if you want to find out what you can do with a field you can either look in the class for that field, located in lib/acf/fields, or you can create a field in ACFs GUI and then use ACFs export-to-code-functionality to see the available options for a field and how they should be set. If ACF is updated with new field options, it doesn't matter if those options are available in the field classes in lib/acf/fields or not since they will be merged with ACFs field classes anyways.
@@ -40,7 +45,7 @@ The settings that all fields have in common are key, name and label:
 
 * name - Must be unique on its level. This means that if you create a bunch of field instances in a brick, you can not give two fields in the brick the same name. However, if you for example are re-using bricks in a brick, you don't have to worry that a field in the re-used bricks may have the same name as a field in the "master brick".
 
-* key - **Must be a unique value across the theme.** This value must never be changed since it is what ACF uses to find data in the database. We recommend that you use something like the time and date for this. So for example if you are registering a field at 10.45 on April 6, 2015, you would set the key to something like 1504061045y (or whatever format you like your dates in) where the last character is a random one. Unless you register another brick at the same minute and for some reason use the same random number, you will never risk having two identical values. You can *not* use a dynamic value such as time(). Also note that you *must* add a letter somewhere in the key. If you put Fewbricks in developer mode (se separate section in this ReadMe), you will get a warning if you have used duplicate keys.   
+* key - **Must be a unique value across the theme.** This value must never be changed since it is what ACF uses to find data in the database. We recommend that you use something like the time and date for this. So for example if you are registering a field at 10.45 on April 6, 2015, you would set the key to something like 1504061045u (or whatever format you like your dates in) where the last character is a random one. Unless you register another brick at the same minute and for some reason use the same random letter, you will never risk having two identical values. You can *not* use a dynamic value such as time(). Also note that you *must* add a letter somewhere in the key. If you put Fewbricks in developer mode (se separate section in this ReadMe), you will get a warning if you have used duplicate keys.   
  
 * settings - You can set all other settings that a field have by passing an associative array as the third argument when creating a field instance. Any keys in that array should correspond to keys in the `base_settings` in each field class in lib/acf/fields/.
 
@@ -86,7 +91,7 @@ Each brick has its own class placed in the folder named "bricks". Each class hav
             protected $label = 'Headline and content';
         
             /**
-             * This is where all the fields for the brick will be set-
+             * This is where all the fields for the brick will be set.
              */
             public function set_fields()
             {
@@ -116,12 +121,13 @@ Each brick has its own class placed in the folder named "bricks". Each class hav
   4. Let's add our new brick to a field group: in the folder project/field-groups, either create a new file or edit an existing one. If you create a new one, make sure to require it in field-groups/init.php. Add this code to the field groups file:
   
         $fg = new fewbricks\acf\field_group('Test content', '1504201020o', $location, 1);
-        $fg->add_brick(new fewbricks\bricks\text_and_content('text_and_content_test', [], '1509041512c');
+        $fg->add_brick(new fewbricks\bricks\text_and_content('text_and_content_test', '1509041512c');
         $fg->register();
         
-    Here we create a new field group with a name, a site-wide-unique key, a location (more about that in a minute) and an order. That last one indicates where the field group should be positioned when editing the content of the page. If you want to set any of the other setting available to a field group, you can pass an assocative array with those settings as the fifth argument.
+    Here we create a new field group with a name, a site-wide-unique key, a location (more about that in a minute) and an order. The order indicates where the field group should be positioned when editing the content of the page. If you want to set any of the other setting available to a field group, you can pass an assocative array with those settings as the fifth argument.
     
-    We then add a brick to the field group. The brick gets instantiated with a name (text_and_content_test) that should be unique for all bricks and fields added to the first level of field groups. As the second argument, we pass an empty array (which you can use to pass ) We then set a site-wide-unique key for the brick.
+    We then add a brick to the field group. The brick gets instantiated with a name (text_and_content_test) that should be unique for all bricks and fields added to the first level of field groups.
+     We also send a site-wide-unique key for the brick.
     
     The location is an assocative array that may look something like this:
     
@@ -139,33 +145,37 @@ Each brick has its own class placed in the folder named "bricks". Each class hav
     
 5. When the location has been set, load something in the backend where the field group should show up (any page if you have used the location example above). You should now see the field group on the page and the original content-wysiwyg should be gone.
     
-    Add some content in the headline and content field and load up the page in the frontend. Your content is not being displayed? That's expected since the get_html-function is empty. Let's fix that now.
+    Add some content in the headline and content field and load up the page in the frontend. Is your content not being displayed? That's expected since the get_html-function is empty. Let's fix that now.
     
 6. In the get_html-function, add this code:
 
-        $html = '<h1>' . $this->get_data_value('headline') . '</h1>';
-        $html .= 'The content: ' . $this->get_data_value('content');
-        return parent::get_layouted_html($html, $layouts);
+        $html = '<h1>' . $this->get_field('headline') . '</h1>';
+        $html .= 'The content: ' . $this->get_field('content');
+        return $html
         
-    `get_data_value()` is a wrapper function for ACFs `get_field()` which takes care of adding any needed prefixes to get the value. Note that we are using the name values that we set when adding fields under step 3 above. At the last line, we make sure that the HTML is wrapped in any layouts that the developer passed to get_html. More about layouts later in this document.
+    `get_field()` is a wrapper function for ACFs own `get_field()` which takes care of adding any needed prefixes to get the value. Note that we are using the name values that we set when adding fields under step 3 above.
     
   7. One last thing to have the content of the brick show up: in the code creating the page in the frontend, add the following code where you want the content to show up:
   
-        echo (new fewbricks\bricks\text_and_content('text_and_content_test'))->get_html();
+        echo (new fewbricks\bricks\text_and_content('text_and_content_test'))->get_html(['arg1' => 'argval1'], ['demo-layout-1']);
         
     Note that we are using the name (text_and_content_test) that we set when adding the brick to the field group in step 4.
+    
+    The first argument are any values that you want to pass to the brick. This can be useful for example to tell the brick what page it is being loaded at or if a certain css class should be added to it.
+    
+    Argument number two is an array of layouts that you want to wrap the html in. See the section "Brick layouts" a cpl of lines down in this document,
     
     Now, reload the frontend and you should have whatever content you added to the brick in he backend show up.
     
 ###Is that all fewbricks is capable of?
-Nope. Like we said, you can create flexible content, repeaters, bricks incorporating other bricks and also create field groups on the fly. For more on how to do this, check the files starting with "demo" in the directories "field-groups", "demo", "bricks" and "layouts". Don't miss the brick named "demo-flexible-brick"!
+Nope. Like we said, you can create flexible content, repeaters, bricks incorporating other bricks and also create field groups on the fly. For more on how to do this, check the files in the directories "field-groups", "demo", "bricks" and "layouts". Don't miss the brick named "demo-flexible-brick"!
   
 ##Brick layouts
 Often when printing bricks you want to have some wrapping HTML that is the same for each brick. This can for example be Bootstraps "row" and "col"-divs. Other times, you might only want the "core html" of the brick without anything wrapping it. So we have created very (very, very indeed) basic layout system. 
 
 Layout files are stored in the layouts directory and used by passing the names of the files without the file extension (.php) to the `get_html`-function of a brick. If you dont want to use a layout, don't pass anything (or `false`) to the function.
 
-If a string or array is passed, a file with the name(s) is then included after the core html of a brick has been built. This means that you have access to these variables in a layout-file:
+If a string or array is passed, the file(s) with the name(s) is then included after the core html of a brick has been built. This means that you have access to these variables in a layout-file:
 
 * `$html` - the core html of the brick
 * `$this` - an instance of the current brick class. This can be used to find out for example what background color should be set on the wrapping row using something like `$this->get_data_value('bg')`.
@@ -178,10 +188,10 @@ There are some settings that we have added to make using Fewbricks easier.
 `field_label_suffix` - Same as above but a suffix.
 
 ##What about styling?
-Do as you want but one idea is that you create a css/less/sass/what-have-you file for each module and place it alongside the PHP-file and giving it the same name as the PHP-file.
+Do as you want but one idea is that you create a css/less/sass/what-have-you file for each module and place it alongside the PHP-file and giving it the same name as the PHP-file. So for example the brick "image-and-text.php" would have a style file names "image-and-text.css/scss/less".
 
 ##Developer mode
-By setting Fewbricks in developer mode, some extra debugging related to Febricks and ACF will become available. Also, every time a field group is registered, a check for duplicate keys will be excuted. You enable developer mode by setting a constant, preferrably in wp-config.php, named FEWBRICKS_DEV_MODE to true:
+By setting Fewbricks in developer mode, some extra debugging related to Fewbricks and ACF will become available. Also, every time a field group is registered, a check for duplicate keys will be excuted. You enable developer mode by setting a constant, preferrably in wp-config.php, named FEWBRICKS_DEV_MODE to true:
 `define('FEWBRICKS_DEV_MODE', true)`
 
 If developer mode is enabled, you can also var dump the fields settings each time a field group is registered. This is done by passing a get variable named "dumpfewbricksfields" to any page like so: http://mywordpressinstall.com/wp-admin/?dumpfewbricksfields .
@@ -196,6 +206,9 @@ The code displaying the field info was originally found in the plugin [ACF: Fiel
 Due to restrictions in the WordPress table structure, the max length of a field name is 64 characters. So if you have fields that go a couple of levels deep (for example a brick in a flexible field that have a repeater), you may run out of space for the name. Therefore, it is wise to shorten names so instead of for example "download_button", use "dl_btn". This should be considered whe creating instances of bricks and fields. If the value of a field is not saved, the reason is most likely that the name is too long.
 
 ##ACF Local JSON
+
+**Warning: Local JSON under Fewbricks is somewhat buggy and may not work in some circumstances.**
+
 Fewbricks supports [ACF Local JSON](http://www.advancedcustomfields.com/resources/local-json/). Using this should speed things up a bit since we dont have to execute all the PHP-code that Fewbricks is made up of. Follow these steps to activate local-JSON:
 
 1. As outlined in the [ACF instructions for local JSON](http://www.advancedcustomfields.com/resources/local-json/): in the themes directory, create a directory named acf-json.
