@@ -504,8 +504,9 @@ class brick
     }
 
     /**
-     * @param array $args
-     * @param bool|false $layouts
+     * @param array $args Any arguments that you need to pass to the brick on runtime. Available as $this->get_html_args
+     * @param bool|false $layouts Any layouts that you want to wrap the brick in. Array or string with the name
+     * of the layout (without .php). Layouts should be placed in project/layouts/
      * @return string
      */
     public function get_html($args = [], $layouts = false)
