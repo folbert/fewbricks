@@ -2,7 +2,7 @@
 
 namespace fewbricks\acf;
 
-if(FEWBRICKS_DEV_MODE) {
+if(defined('FEWBRICKS_DEV_MODE') && FEWBRICKS_DEV_MODE === true) {
     global $debug_keys;
     $debug_keys = [];
 }
@@ -181,7 +181,7 @@ class field_group
 
         $this->settings['fields'] = $this->set_unique_keys($this->settings['fields'], $this->settings['key']);
 
-        if (FEWBRICKS_DEV_MODE) {
+        if(defined('FEWBRICKS_DEV_MODE') && FEWBRICKS_DEV_MODE === true) {
 
             if($fewbricks_save_json === true) {
 
