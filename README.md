@@ -32,8 +32,8 @@ Field groups, flexible content, repeaters and fields. All of those are names tha
  We recommend that you create at least one test field group using ACFs GUI and set it's location settings to "post type is equal to post" _and_ "post type is equal to page". That way the field group will never show up anywhere in the administration system and you can use it as a playground.
  
 ##Installation
- 1. Create a directory in your theme directory
- 2. Make sure that the requirements are met
+ 1. Make sure that the requirements are met
+ 2. Download this repo and unzip it to a directory named fewbricks in your themes directory
  3. Include or require the file init.php found at the root of this package
 
 ##Fields
