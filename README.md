@@ -19,7 +19,9 @@ The system was created for the following reasons:
    
 ##Requirements
 PHP 5.4+
+
 [Advanced Custom Fields](http://www.advancedcustomfields.com/) 5+ PRO
+
 [Hidden field for Advanced Custom Fields](https://github.com/folbert/acf-hidden) This allows us to store settings in a brick. For example how many columns a multi column brick should have.
 
 ##Basic idea
