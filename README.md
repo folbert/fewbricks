@@ -1,3 +1,6 @@
+#WordPress plugin
+I have begiun working on turning this into a WordPres splugin instead where you install most of the files as any plugin and then the files in the project folder are moved to a folder in the theme. Makes more sense to do it that way. Hopefully it will be all done and testertested no later than the end of April.
+
 #Legal
 Fewbricks and its developers are in no way associated with Advanced Custom Fields. Fewbricks is released under GPLv3.
 
