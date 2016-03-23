@@ -14,7 +14,7 @@ class demo_video extends project_brick
     /**
      * @var string
      */
-    protected $label = 'Video';
+    protected $label = 'Demo Video';
 
     /**
      *

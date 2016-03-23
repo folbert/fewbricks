@@ -16,7 +16,7 @@ class demo_standard_list extends project_brick
      * It can be overridden by passing an item with the key "label" in the array that is the second argument when
      * creating a brick.
      */
-    protected $label = 'List';
+    protected $label = 'Demo List';
 
     /**
      * This is where all the fields for the brick will be set-

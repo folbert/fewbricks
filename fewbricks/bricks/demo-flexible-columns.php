@@ -15,7 +15,7 @@ class demo_flexible_columns extends project_brick
     /**
      * @var string
      */
-    protected $label = 'Flexible Columns';
+    protected $label = 'Demo Flexible Columns';
 
     /**
      *

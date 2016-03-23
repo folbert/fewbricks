@@ -15,7 +15,7 @@ class demo_flexible_brick extends project_brick
     /**
      * @var string
      */
-    protected $label = 'Flexible Brick';
+    protected $label = 'Demo Flexible Brick';
 
     /**
      *
