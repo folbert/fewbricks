@@ -52,9 +52,9 @@ The system was created for the following reasons:
  Some experience with ACF and knowledge about what a field, field group etc is is recommended and that can all be read up on in the [documentation for ACF](http://www.advancedcustomfields.com/resources).
  
 ## Installation
- 1. Make sure that the [requirements](#requirements) are met
- 2. Add to your pluginfolder as you would any other WordPress plugin.
- 3. In the main folder named fewbricks, there is another folder named "fewbricks". Move that folder to your theme folder and do not **rename** it or any of its child directories. All your custom code will reside in this folder.
+ 1. Make sure that the [requirements](#requirements) are met. If you are using Composer, we will install the plugin "Hidden field for ACF" for you. If you are not using Composer, please install the "Hidden field for ACF" manually.
+ 2. Add Fewbricks to your pluginfolder manually or by using Composer.
+ 3. In the main folder named fewbricks, there is a folder also named "fewbricks". Move that folder to your theme folder and do __not__ rename it or any of its child directories. All your custom code will reside in this folder.
  4. Activate the plugin.
  
  __Important__ 
@@ -72,7 +72,11 @@ The system was created for the following reasons:
  Other than that, feel free to delete all other files or add new folders but do __not__ delete or rename any of the existing folders.
  
 ## Demo
-After having carried out the installation steps, if you go to a standard page in the backend, you should see that the normal WYSIWYG area have been replaced by a bunch of boxes with the title "Fewbricks demo area [1-5]". Those boxes are defined in [theme]/fewbricks/field-groups/field-group-demo-1.php which in turn is reuired in the file init.php in the same folder.
+After having carried out the installation steps, if you edit a standard page in the backend, you should see that the normal WYSIWYG area have been replaced by a bunch of boxes with the title "Fewbricks demo area [1-5]". Those boxes are defined in [theme]/fewbricks/field-groups/field-group-demo-1.php which in turn is required in the file init.php in the same folder.
+
+Play around with adding some data to fields and adding flexible content etc.
+
+To display what you have entered, copy the content of [theme]/fewbricks/demo/template-fewbricks-demo.php to the template for a standard page. In the frontend, load up the page that you have played around with and you should now see your data presented there. 
  
 ## Usage
 
