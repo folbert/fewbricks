@@ -8,6 +8,7 @@ I have begun working on turning this into a WordPres splugin instead where you i
 + [About](#about)
 + [Requirements](#requirements)
 + [Installation](#installation)
++ [Demo](#demo)
 + [Usage](#usage)
     + [Fields](#fields)
     + [Creating a brick](#creating-a-brick)
@@ -53,8 +54,25 @@ The system was created for the following reasons:
 ## Installation
  1. Make sure that the [requirements](#requirements) are met
  2. Add to your pluginfolder as you would any other WordPress plugin.
- 3. In the main folder named fewbricks, there is another folder named fewbricks. Move that folder to your theme folder. This is where all your custom code will reside.
+ 3. In the main folder named fewbricks, there is another folder named "fewbricks". Move that folder to your theme folder and do not **rename** it or any of its child directories. All your custom code will reside in this folder.
  4. Activate the plugin.
+ 
+ __Important__ 
+ When you move the directory in step 3 it gets completely disconnected from any future updates to Fewbricks. This is all good since you are gonna want to create your own field groups, bricks layouts and so on. It may be that we add some new demos to the fewbricks/fewbricks directory but that will not affect your custom code in any way and you will never have to overwrite your [theme]/fewbricks with an updated fewbricks/fewbricks.
+     
+ Do not delete any of these files in [theme]/fewbricks/:
+ 
+ + field-groups/init.php
+ + common-fields/init.php
+ + bricks/project-brick.php
+    + This file have a couple of functions prefixed with "demo". Keep those functions as long as you want the demo to work. After that, feel free to delete them.
+ 
+ As long as you want the demos to work, also keep all files prefixed with "demo". As for the folder named "demo"; read about that under [Demo](#demo) further down in this document.
+ 
+ Other than that, feel free to delete all other files or add new folders but do __not__ delete or rename any of the existing folders.
+ 
+## Demo
+After having carried out the installation steps, if you go to a standard page in the backend, you should see that the normal WYSIWYG area have been replaced by a bunch of boxes with the title "Fewbricks demo area [1-5]". Those boxes are defined in [theme]/fewbricks/field-groups/field-group-demo-1.php which in turn is reuired in the file init.php in the same folder.
  
 ## Usage
 
