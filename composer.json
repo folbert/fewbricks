@@ -1,7 +1,7 @@
 {
   "name": "folbert/fewbricks",
   "type": "library",
-  "description": "Modular system for Advanced Custo Fields",
+  "description": "Modular system for Advanced Custom Fields",
   "keywords": ["acf","advanced custom fields", "wordpress", "modules", "reusable"],
   "homepage": "https://github.com/folbert/fewbricks",
   "license": "GPLv3",
