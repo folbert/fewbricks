@@ -14,8 +14,10 @@ $location = [
     ]
 ];
 
-// --- FIELD GROUP 1 ---
 
+/**
+ * Main content 1
+ */
 // Create field group
 $fg = (new fewacf\field_group('Main content 1', '150901113b', $location, 1));
 
@@ -31,15 +33,17 @@ $fg->add_brick((new bricks\demo_video('video_1', '1509011120x'))
 // Register the field group
 $fg->register();
 
-
-// --- FIELD GROUP 2 ---
+/**
+ * Main content 2
+ */
 $fg = (new fewacf\field_group('Main content 2', '1509111339o', $location, 2));
 $fg->add_brick((new bricks\demo_buttons_list('button_list', '1509052316o'))->set_field_label_prefix('Button list'));
 $fg->add_brick((new bricks\demo_standard_list('a_list', '1509042107u'))->set_field_label_prefix('A list'));
 $fg->register();
 
-
-// --- FIELD GROUP 3 ---
+/**
+ * Main content 3
+ */
 $fg = (new fewacf\field_group('Main content 3', '1509111453p', $location, 3));
 
 $fc = (new acf_fields\flexible_content('Flexible content 1', 'fc1', '150901113c'));
@@ -58,7 +62,9 @@ $fg->add_flexible_content($fc);
 $fg->register();
 
 
-// --- FIELD GROUP 4 ---
+/**
+ * Main content 4
+ */
 $fg = (new fewacf\field_group('Main content 4', '1509111553y', $location, 4));
 
 $fg->add_brick(new bricks\demo_flexible_brick('fb1', '1509111553r'));
@@ -66,7 +72,9 @@ $fg->add_brick(new bricks\demo_flexible_brick('fb1', '1509111553r'));
 $fg->register();
 
 
-// --- FIELD GROUP 5 ---
+/**
+ * Main content 5
+ */
 $fg = (new fewacf\field_group('Main content 5', '1509141034o', $location, 5));
 
 $fg->add_brick((new bricks\demo_flexible_columns('fcol1', '1509141034p'))->set_arg('nr_of_columns', 2));
