@@ -14,63 +14,93 @@ namespace fewbricks;
 
 defined('ABSPATH') or die('No script kiddies please!');
 
-/**
- * Set some variables that will be reused
- */
-$fewbricks_lib_dir_path = __DIR__ . '/lib/';
 $fewbricks_template_directory = get_template_directory() . '/';
 
-/**
- * Require stuff to get us started
- */
-require_once($fewbricks_lib_dir_path . 'helpers.php');
+// If ACF is not present
+if(!class_exists('acf')) {
 
-// Master-parent-Yoda-class
-require($fewbricks_lib_dir_path . 'brick.php');
+    add_action('admin_notices', function() {
 
-require($fewbricks_lib_dir_path . 'acf/field-group.php');
-require($fewbricks_lib_dir_path . 'acf/layout.php');
+        echo '
+          <div class="error notice">
+            <p>In order to use Fewbricks, please make sure that <a href="http://www.advancedcustomfields.com/">Advanced Custom Fields 5 Pro</a> is installed.</p>
+          </div>
+        ';
 
-$fewbricks_dev_mode = defined(FEWBRICKS_DEV_MODE) && FEWBRICKS_DEV_MODE === true;
+    });
 
-/**
- * Autoloader for fewbricksclasses
- * @param $class
- */
-function autoloader($class)
-{
+} else if(!file_exists($fewbricks_template_directory . 'fewbricks')) {
 
-    $namespace_parts = explode('\\', $class);
+    add_action('admin_notices', function() {
 
-    // Make sure that we are dealing with something in fewbricks
-    if ($namespace_parts[0] === 'fewbricks') {
+        echo '
+          <div class="error notice">
+            <p>In order to use Fewbricks, please make sure that you have copied the directory "fewbricks" in plugins/fewbricks/ to your theme directory. Read more under in the <a href="https://github.com/folbert/fewbricks/blob/master/README.md">README</a>.</p>
+          </div>
+        ';
 
-        $file_name = str_replace('_', '-', end($namespace_parts)) . '.php';
+    });
 
-        if ($namespace_parts[1] === 'bricks') {
+} else { // All requirements met
 
-            $brick_path = get_template_directory() . '/fewbricks/bricks/' . $file_name;
+    /**
+     * Set some variables that will be reused
+     */
+    $fewbricks_lib_dir_path = __DIR__ . '/lib/';
 
-            /** @noinspection PhpIncludeInspection */
-            if(!@include($brick_path)) {
+    /**
+     * Require stuff to get us started
+     */
+    require_once($fewbricks_lib_dir_path . 'helpers.php');
 
-                wp_die('<h1>Error message from Fewbricks.</h1><p>Could not locate brick ' . $file_name . '. Tried ' . $brick_path . '.</p>');
+    // Master-parent-Yoda-class
+    require($fewbricks_lib_dir_path . 'brick.php');
 
-            }
+    require($fewbricks_lib_dir_path . 'acf/field-group.php');
+    require($fewbricks_lib_dir_path . 'acf/layout.php');
 
-        } else {
+    $fewbricks_dev_mode = (defined('FEWBRICKS_DEV_MODE') && FEWBRICKS_DEV_MODE === true);
 
-            $lib_path = __DIR__ . '/lib/acf/fields/' . $file_name;
+    /**
+     * Autoloader for fewbricksclasses
+     * @param $class
+     */
+    function autoloader($class)
+    {
 
-            /** @noinspection PhpIncludeInspection */
-            if (!@include($lib_path)) {
+        $namespace_parts = explode('\\', $class);
 
-                $template_path = get_template_directory() . '/fewbricks/fields/' . $file_name;
+        // Make sure that we are dealing with something in fewbricks
+        if ($namespace_parts[0] === 'fewbricks') {
+
+            $file_name = str_replace('_', '-', end($namespace_parts)) . '.php';
+
+            if ($namespace_parts[1] === 'bricks') {
+
+                $brick_path = get_template_directory() . '/fewbricks/bricks/' . $file_name;
 
                 /** @noinspection PhpIncludeInspection */
-                if(!@include($template_path)) {
+                if(!@include($brick_path)) {
 
-                    wp_die('<h1>Error message from Fewbricks.</h1><p>Could not locate field ' . $file_name . '. Tried ' . $lib_path . ' and ' .$template_path . '.</p>');
+                    wp_die('<h1>Error message from Fewbricks.</h1><p>Could not locate brick ' . $file_name . '. Tried ' . $brick_path . '.</p>');
+
+                }
+
+            } else {
+
+                $lib_path = __DIR__ . '/lib/acf/fields/' . $file_name;
+
+                /** @noinspection PhpIncludeInspection */
+                if (!@include($lib_path)) {
+
+                    $template_path = get_template_directory() . '/fewbricks/fields/' . $file_name;
+
+                    /** @noinspection PhpIncludeInspection */
+                    if(!@include($template_path)) {
+
+                        wp_die('<h1>Error message from Fewbricks.</h1><p>Could not locate field ' . $file_name . '. Tried ' . $lib_path . ' and ' .$template_path . '.</p>');
+
+                    }
 
                 }
 
@@ -80,60 +110,60 @@ function autoloader($class)
 
     }
 
-}
+    spl_autoload_register(__NAMESPACE__ . '\\autoloader');
 
-spl_autoload_register(__NAMESPACE__ . '\\autoloader');
+    global $fewbricks_save_json;
 
-global $fewbricks_save_json;
+    /**
+     * Stuff that is only required in the backend doesnt needs to be required if local json is used.
+     */
+    if (((!defined('FEWBRICKS_USE_ACF_JSON') || FEWBRICKS_USE_ACF_JSON === false) && function_exists('register_field_group')) || $fewbricks_save_json === true) {
 
-/**
- * Stuff that is only required in the backend doesnt needs to be required if local json is used.
- */
-if (((!defined('FEWBRICKS_USE_ACF_JSON') || FEWBRICKS_USE_ACF_JSON === false) && function_exists('register_field_group')) || $fewbricks_save_json === true) {
+        require($fewbricks_template_directory . 'fewbricks/common-fields/init.php');
+        require($fewbricks_template_directory . 'fewbricks/field-groups/init.php');
 
-    require($fewbricks_template_directory . 'fewbricks/common-fields/init.php');
-    require($fewbricks_template_directory . 'fewbricks/field-groups/init.php');
+    }
 
-}
+    /**
+     * If we are in dev mode and have dumped fields theres no need to continue.
+     */
+    if ($fewbricks_dev_mode && isset($_GET['dumpfewbricksfields'])) {
 
-/**
- * If we are in dev mode and have dumped fields theres no need to continue.
- */
-if ($fewbricks_dev_mode && isset($_GET['dumpfewbricksfields'])) {
+        die();
 
-    die();
+    }
 
-}
+    /**
+     * Lets add a menu item to the ACF menu
+     */
+    function add_admin_menu()
+    {
 
-/**
- * Lets add a menu item to the ACF menu
- */
-function add_admin_menu()
-{
+        \add_submenu_page('edit.php?post_type=acf-field-group', 'fewbricksdev', 'Fewbricks DEV', 'activate_plugins',
+            'fewbricksdev',
+            function () {
+                require_once(__DIR__ . '/admin/dev.php');
+            });
 
-    \add_submenu_page('edit.php?post_type=acf-field-group', 'fewbricksdev', 'Fewbricks DEV', 'activate_plugins',
-        'fewbricksdev',
-        function () {
-            require_once(__DIR__ . '/admin/dev.php');
-        });
+    }
 
-}
+    if ($fewbricks_dev_mode) {
 
-if ($fewbricks_dev_mode) {
+        add_action('admin_menu', __NAMESPACE__ . '\\add_admin_menu');
 
-    add_action('admin_menu', __NAMESPACE__ . '\\add_admin_menu');
+    }
 
-}
+    /**
+     * Should we display info about the ACF fields?
+     * FEWBRICKS_SHOW_ACF_INFO Gives us a way to hide info event if dev mode is activated
+     */
+    if (
+        (defined('FEWBRICKS_SHOW_ACF_INFO') && FEWBRICKS_SHOW_ACF_INFO === false) ||
+        (!defined('FEWBRICKS_HIDE_ACF_INFO') && $fewbricks_dev_mode === true)
+    ) {
 
-/**
- * Should we display info about the ACF fields?
- * FEWBRICKS_SHOW_ACF_INFO Gives us a way to hide info event if dev mode is activated
- */
-if (
-    (defined('FEWBRICKS_SHOW_ACF_INFO') && FEWBRICKS_SHOW_ACF_INFO === false) ||
-    (!defined('FEWBRICKS_HIDE_ACF_INFO') && $fewbricks_dev_mode === true)
-) {
+        require_once(__DIR__ . '/extras/acf-field-snitch/activate.php');
 
-    require_once(__DIR__ . '/extras/acf-field-snitch/activate.php');
+    }
 
 }
