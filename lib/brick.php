@@ -506,7 +506,7 @@ class brick
     /**
      * @param array $args Any arguments that you need to pass to the brick on runtime. Available as $this->get_html_args
      * @param bool|false $layouts Any layouts that you want to wrap the brick in. Array or string with the name
-     * of the layout (without .php). Layouts should be placed in project/layouts/
+     * of the layout (without .php). Layouts must be placed in [theme]/fewbricks/layouts/
      * @return string
      */
     public function get_html($args = [], $layouts = false)
@@ -544,12 +544,14 @@ class brick
 
         if (!empty($this->layouts)) {
 
+            $theme_path = get_template_directory() . '/';
+
             foreach ($this->layouts AS $layout) {
 
                 ob_start();
 
                 /** @noinspection PhpIncludeInspection */
-                include(__DIR__ . '/../project/layouts/' . $layout . '.php');
+                include($theme_path . 'fewbricks/layouts/' . $layout . '.php');
 
                 $html = ob_get_clean();
 
