@@ -28,7 +28,7 @@ class demo_flexible_columns extends project_brick
         for ($column_nr = 1; $column_nr <= $nr_of_columns; $column_nr++) {
 
             $this->add_field((new acf_fields\tab('Column ' . $column_nr, 'column_' . $column_nr,
-              '1509141033a' . $column_nr)));
+                '1509141033a' . $column_nr)));
 
             $this->add_brick(new demo_flexible_brick('fb' . $column_nr, '1509141034a' . $column_nr));
 
@@ -77,8 +77,7 @@ class demo_flexible_columns extends project_brick
 
         $column_classes = '';
 
-        switch($nr_of_columns)
-        {
+        switch ($nr_of_columns) {
 
             case '2' :
 

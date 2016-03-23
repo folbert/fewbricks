@@ -45,7 +45,7 @@ class demo_flexible_brick extends project_brick
 
         $html = '';
 
-        while ($this->have_rows('modules') ) {
+        while ($this->have_rows('modules')) {
 
             $this->the_row();
 

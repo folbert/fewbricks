@@ -27,77 +27,78 @@ class demo_button extends project_brick
         $this->add_field(new acf_fields\text('Text', 'text', '1509072239o'));
 
         $this->add_field((new acf_fields\select('Type', 'type', '1509032104a'))
-          ->set_settings([
-            'choices' => [
-              'internal' => 'Internal',
-              'external' => 'External',
-              'email' => 'E-mail',
-              'download' => 'Download'
-            ],
-            'allow_null' => 'false'
-          ])
+            ->set_settings([
+                'choices' => [
+                    'internal' => 'Internal',
+                    'external' => 'External',
+                    'email' => 'E-mail',
+                    'download' => 'Download'
+                ],
+                'allow_null' => 'false'
+            ])
         );
 
         $this->add_field(
-          (new acf_fields\post_object('Item', 'internal_item', '1509032109u'))->set_setting('conditional_logic',
-            [
-              [
+            (new acf_fields\post_object('Item', 'internal_item', '1509032109u'))->set_setting('conditional_logic',
                 [
-                  'field' => '1509032104a',
-                  'operator' => '==',
-                  'value' => 'internal',
-                ],
-              ]
-            ]
-          ));
+                    [
+                        [
+                            'field' => '1509032104a',
+                            'operator' => '==',
+                            'value' => 'internal',
+                        ],
+                    ]
+                ]
+            ));
 
         $this->add_field(
-          (new acf_fields\url('URL', 'external_url', '1509032109r'))->set_setting('conditional_logic',
-            [
-              [
+            (new acf_fields\url('URL', 'external_url', '1509032109r'))->set_setting('conditional_logic',
                 [
-                  'field' => '1509032104a',
-                  'operator' => '==',
-                  'value' => 'external',
-                ],
-              ]
-            ]
-          ));
+                    [
+                        [
+                            'field' => '1509032104a',
+                            'operator' => '==',
+                            'value' => 'external',
+                        ],
+                    ]
+                ]
+            ));
 
         $this->add_field((new acf_fields\email('E-mail', 'email', '1509032109s'))->set_setting('conditional_logic',
-          [
             [
-              [
-                'field' => '1509032104a',
-                'operator' => '==',
-                'value' => 'email',
-              ],
+                [
+                    [
+                        'field' => '1509032104a',
+                        'operator' => '==',
+                        'value' => 'email',
+                    ],
+                ]
             ]
-          ]
         ));
 
         $this->add_field((new acf_fields\file('File', 'file', '1509032109t'))->set_setting('conditional_logic',
-          [
             [
-              [
-                'field' => '1509032104a',
-                'operator' => '==',
-                'value' => 'download',
-              ],
+                [
+                    [
+                        'field' => '1509032104a',
+                        'operator' => '==',
+                        'value' => 'download',
+                    ],
+                ]
             ]
-          ]
         ));
 
-        $this->add_field((new acf_fields\true_false('Open link in new window/tab', 'target_blank', '1509111327a'))->set_setting('conditional_logic',
-          [
+        $this->add_field((new acf_fields\true_false('Open link in new window/tab', 'target_blank',
+            '1509111327a'))->set_setting('conditional_logic',
             [
-              [
-                'field' => '1509032104a',
-                'operator' => '!=',
-                'value' => 'email',
-              ],
+                [
+                    [
+                        'field' => '1509032104a',
+                        'operator' => '!=',
+                        'value' => 'email',
+                    ],
+                ]
             ]
-          ]
         ));
 
     }

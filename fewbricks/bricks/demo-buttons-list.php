@@ -8,7 +8,8 @@ use fewbricks\acf\fields as acf_fields;
  * Class text_and_content
  * @package fewbricks\bricks
  */
-class demo_buttons_list extends project_brick {
+class demo_buttons_list extends project_brick
+{
 
     /**
      * @var string This will be the default label showing up in the editor area for the administrator.
@@ -25,9 +26,9 @@ class demo_buttons_list extends project_brick {
 
         $this->add_field(new acf_fields\text('Buttons list headline', 'headline', '1509052316y'));
         $this->add_repeater((new acf_fields\repeater('Buttons', 'buttons', '1509052323a'))
-          ->add_brick(new demo_button('button', '1509111350i')));
+            ->add_brick(new demo_button('button', '1509111350i')));
 
-        if(!isset($this->args['no_bg_color']) || !$this->args['no_bg_color']) {
+        if (!isset($this->args['no_bg_color']) || !$this->args['no_bg_color']) {
             $this->add_common_field('demo_background_color', '1509112010i');
         }
 
@@ -48,9 +49,9 @@ class demo_buttons_list extends project_brick {
           <div class="row">
             <div class="col-xs-12">';
 
-        if($this->have_rows('buttons')) {
+        if ($this->have_rows('buttons')) {
 
-            while($this->have_rows('buttons')) {
+            while ($this->have_rows('buttons')) {
 
                 $this->the_row();
 

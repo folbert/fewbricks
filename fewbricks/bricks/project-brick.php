@@ -31,7 +31,9 @@ class project_brick extends brick
     }
 
     /**
-     * Called after set_fields have been called. Use to add settings that every brick in the project should have.
+     * This function must exist regardless of if it has a body or not.
+     * Called after set_fields have been called.
+     * Use to add any fields that every brick in the project should have.
      */
     public function set_project_fields()
     {
@@ -43,10 +45,10 @@ class project_brick extends brick
      * @param bool $value
      * @return string
      */
-    protected function get_headline_html($data_key, $value = false)
+    protected function demo_get_headline_html($data_key, $value = false)
     {
 
-        $this->set_headline_tag();
+        $this->demo_set_headline_tag();
 
         $headline = ($value !== false ? $value : $this->get_field($data_key));
 
@@ -65,7 +67,7 @@ class project_brick extends brick
     /**
      *
      */
-    protected function set_headline_tag()
+    protected function demo_set_headline_tag()
     {
 
         switch (self::$headline_tag) {

@@ -33,7 +33,7 @@ class demo_video extends project_brick
 
         $this->add_brick((new demo_button('button', '1509042128i'))->set_field_label_prefix('Youtube button'));
 
-        if(!isset($this->args['no_bg_color']) || !$this->args['no_bg_color']) {
+        if (!isset($this->args['no_bg_color']) || !$this->args['no_bg_color']) {
             $this->add_common_field('demo_background_color', '1509112010i');
         }
 
@@ -45,8 +45,7 @@ class demo_video extends project_brick
     protected function get_brick_html()
     {
 
-        $html = $this->get_headline_html('headline');
-
+        $html = $this->demo_get_headline_html('headline');
 
         if (false !== ($url = $this->get_video_url())) {
 
@@ -61,7 +60,7 @@ class demo_video extends project_brick
 
         }
 
-        if('' !== ($button_html = ($this->get_child_brick('demo_button', 'button')->get_html()))) {
+        if ('' !== ($button_html = ($this->get_child_brick('demo_button', 'button')->get_html()))) {
 
             $html .= $button_html;
 
@@ -71,31 +70,38 @@ class demo_video extends project_brick
 
     }
 
+    /**
+     * @return bool|mixed|null|void
+     */
     private function get_video_url()
     {
 
-        $url = false;
+        $url = $this->get_field('url');
 
-        preg_match('/src="(.+?)"/', $this->get_field('url'), $matches);
+        if (!empty($url)) {
 
-        $url_match = $matches[1];
+            preg_match('/src="(.+?)"/', $this->get_field('url'), $matches);
 
-        if (isset($matches[1])) {
+            $url_match = $matches[1];
 
-            $params = [];
-            $params['showinfo'] = 0;
-            $params['modestbranding'] = 1;
-            $params['theme'] = 'light';
-            $params['rel'] = 0;
-            $params['wmode'] = 'transparent';
+            if (isset($matches[1])) {
 
-            if (!empty($params)) {
-                $url = add_query_arg($params, $url_match);
+                $params = [];
+                $params['showinfo'] = 0;
+                $params['modestbranding'] = 1;
+                $params['theme'] = 'light';
+                $params['rel'] = 0;
+                $params['wmode'] = 'transparent';
+
+                if (!empty($params)) {
+                    $url = add_query_arg($params, $url_match);
+                }
+
             }
 
         }
 
-        return $url;
+        return (empty($url) ? false : $url);
 
     }
 
