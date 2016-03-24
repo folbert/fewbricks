@@ -2,6 +2,6 @@
 
 + Improve on readme
 
-+ Descrive layouts
++ Describe layouts
 
 + Make ACF Json work
