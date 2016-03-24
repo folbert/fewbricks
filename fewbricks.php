@@ -19,11 +19,23 @@ $fewbricks_template_directory = get_template_directory() . '/';
 // If ACF is not present
 if(!class_exists('acf')) {
 
-    add_action('admin_notices', function() {
+    add_action('admin_notices', function () {
 
         echo '
           <div class="error notice">
-            <p>In order to use Fewbricks, please make sure that <a href="http://www.advancedcustomfields.com/">Advanced Custom Fields 5 Pro</a> is installed.</p>
+            <p>In order to use Fewbricks, please make sure that <a href="http://www.advancedcustomfields.com/">Advanced Custom Fields 5 Pro</a> is installed and activated.</p>
+          </div>
+        ';
+
+    });
+
+} else if(!file_exists(plugin_dir_path(__FILE__) . '../acf-hidden/acf-hidden.php')) {
+
+    add_action('admin_notices', function () {
+
+        echo '
+          <div class="error notice">
+            <p>In order to use Fewbricks, please make sure that <a href="https://github.com/folbert/acf-hidden">Hidden field</a> for Advanced Custom Fields is installed and activated.</p>
           </div>
         ';
 
