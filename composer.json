@@ -15,6 +15,6 @@
   ],
   "require": {
     "php": ">=5.4.0",
-    "folbert/acf-hidden": "dev-master"
+    "folbert/acf-hidden": ">=1.0"
   }
 }
