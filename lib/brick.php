@@ -387,8 +387,7 @@ class brick
 
         } elseif ($post_id === false && ($get_from_sub_field || $this->is_layout || $this->is_sub_field)) {
 
-            // We should get data using acf functions and we are dealign with
-            // layout or sub field
+            // We should get data using acf functions and we are dealing with layout or sub field
 
             // Is it an ACF option?
             if ($this->is_option === true) {
@@ -505,21 +504,23 @@ class brick
 
     /**
      * @param array $args Any arguments that you need to pass to the brick on runtime. Available as $this->get_html_args
-     * @param bool|false $layouts Any layouts that you want to wrap the brick in. Array or string with the name
-     * of the layout (without .php). Layouts must be placed in [theme]/fewbricks/layouts/
+     * @param mixed $brick_layouts Any layouts that you want to wrap the brick in. Array or string with the name
+     * of the layout (without .php). Layouts must be placed in [theme]/fewbricks/brick-layouts/
      * @return string
      */
-    public function get_html($args = [], $layouts = false)
+    public function get_html($args = [], $brick_layouts = false)
     {
 
-        if (is_string($layouts)) {
+        if (is_string($brick_layouts)) {
 
-            $this->add_layout($layout);
+            $this->add_brick_layout($brick_layouts);
 
-        } elseif (is_array($layouts)) {
+        } elseif (is_array($brick_layouts)) {
 
-            foreach ($layouts AS $layout) {
-                $this->add_layout($layout);
+            foreach ($brick_layouts AS $brick_layout) {
+
+                $this->add_brick_layout($brick_layout);
+
             }
 
         }
@@ -529,7 +530,7 @@ class brick
 
         $html = $this->get_brick_html();
 
-        $html = $this->get_layouted_html($html);
+        $html = $this->get_brick_layouted_html($html);
 
         return $html;
 
@@ -539,19 +540,19 @@ class brick
      * @param $html
      * @return string
      */
-    public function get_layouted_html($html)
+    public function get_brick_layouted_html($html)
     {
 
-        if (!empty($this->layouts)) {
+        if (!empty($this->brick_layouts)) {
 
             $theme_path = get_template_directory() . '/';
 
-            foreach ($this->layouts AS $layout) {
+            foreach ($this->brick_layouts AS $brick_layout) {
 
                 ob_start();
 
                 /** @noinspection PhpIncludeInspection */
-                include($theme_path . 'fewbricks/layouts/' . $layout . '.php');
+                include($theme_path . 'fewbricks/brick-layouts/' . $brick_layout . '.php');
 
                 $html = ob_get_clean();
 
@@ -793,13 +794,13 @@ class brick
     }
 
     /**
-     * @param $layout
+     * @param $brick_layout
      */
-    public function add_layout($layout)
+    public function add_brick_layout($brick_layout)
     {
 
-        // Avoid nesting the same layouts
-        $this->layouts[$layout] = $layout;
+        // Avoid nesting brick layouts
+        $this->brick_layouts[$brick_layout] = $brick_layout;
 
     }
 

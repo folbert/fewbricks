@@ -58,7 +58,7 @@ The system was created for the following reasons:
  4. Activate the plugin.
  
  __Important__ 
- When you move the directory in step 3 it gets completely disconnected from any future updates to Fewbricks. This is all good since you are gonna want to create your own field groups, bricks layouts and so on. It may be that we add some new demos to the fewbricks/fewbricks directory but that will not affect your custom code in any way and you will never have to overwrite your [theme]/fewbricks with an updated fewbricks/fewbricks.
+ When you move the directory in step 3 it gets completely disconnected from any future updates to Fewbricks. This is all good since you are gonna want to create your own field groups, bricks, brick layouts and so on. It may be that we add some new demos to the fewbricks/fewbricks directory but that will not affect your custom code in any way and you will never have to overwrite your [theme]/fewbricks with an updated fewbricks/fewbricks.
      
  Do not delete any of these files in [theme]/fewbricks/:
  
@@ -206,20 +206,22 @@ Each brick has its own class placed in the folder named "bricks". Each class hav
     
     The first argument are any values that you want to pass to the brick. This can be useful for example to tell the brick what page it is being loaded at or if a certain css class should be added to it.
     
-    Argument number two is an array of layouts that you want to wrap the html in. See the section "Brick layouts" a cpl of lines down in this document,
+    Argument number two is an array of brick layouts that you want to wrap the html in. See the section "Brick layouts" a cpl of lines down in this document,
     
     Now, reload the frontend and you should have whatever content you added to the brick in he backend show up.
     
 #### Is that all Fewbricks can do?
-Nope. Like we said, you can create flexible content, repeaters, bricks incorporating other bricks and also create field groups on the fly. For more on how to do this, check the files in the directories "field-groups", "demo", "bricks" and "layouts". Don't miss the brick named "demo-flexible-brick"!
+Nope. Like we said, you can create flexible content, repeaters, bricks incorporating other bricks and also create field groups on the fly. For more on how to do this, check the files in the directories "field-groups", "demo", "bricks" and "brick-layouts". Don't miss the brick named "demo-flexible-brick"!
 
 ### Important about naming fields
 Due to restrictions in the WordPress table structure, the max length of a field name is 64 characters. So if you have fields that go a couple of levels deep (for example a brick in a flexible field that have a repeater), you may run out of space for the name. Therefore, it is wise to shorten names so instead of for example "download_button", use "dl_btn". This should be considered whe creating instances of bricks and fields. If the value of a field is not saved, the reason is most likely that the name is too long.
   
 ### Brick layouts
-Often when printing bricks you want to have some wrapping HTML that is the same for each brick. This can for example be Bootstraps "row" and "col"-divs. Other times, you might only want the "core html" of the brick without anything wrapping it. So we have created very (very, very indeed) basic layout system. 
+Brick layouts is not the same as layouts in ACF.
 
-Layout files are stored in the layouts directory and used by passing the names of the files without the file extension (.php) to the `get_html`-function of a brick. If you dont want to use a layout, don't pass anything (or `false`) to the function.
+Often when printing bricks you want to have some wrapping HTML that is the same for each brick. This can for example be Bootstraps "row" and "col"-divs. Other times, you might only want the "core html" of the brick without anything wrapping it. So we have created a basic layout system.
+
+Brick layout files are stored in the brick-layouts directory and are used by passing the name(s) of the file(s) without the file extension (.php) to the `get_html`-function of a brick. If you dont want to use a brick layout, don't pass anything (or `false`) to the function.
 
 If a string or array is passed, the file(s) with the name(s) is then included after the core html of a brick has been built. This means that you have access to these variables in a layout-file:
 

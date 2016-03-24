@@ -2,6 +2,6 @@
 
 + Improve on readme
 
-+ Describe layouts
++ Describe brick layouts
 
 + Make ACF Json work
