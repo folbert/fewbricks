@@ -5,6 +5,7 @@ I have begun working on turning this into a WordPres splugin instead where you i
 
 ## TOC
 + [Legal](#legal)
++ [Dictionary](#dictionary)
 + [About](#about)
 + [Requirements](#requirements)
 + [Installation](#installation)
@@ -26,6 +27,13 @@ I have begun working on turning this into a WordPres splugin instead where you i
         
 ## Legal
 Fewbricks and its developers are in no way associated with Advanced Custom Fields. Fewbricks is released under GPLv3.
+
+## Dictionary
+All the following words will be explained in detail later in this document,
+
++ Field - Same as in ACF. For example text, textarea, select, true/false, flexible content etc.
++ Brick - A collection of fields.
++ Brick Layout - Not to be confused with ACFs layouts. Brick layouts are like layouts in the [Blade templating system](https://laravel.com/docs/5.2/blade#defining-a-layout).
 
 ## About
 Fewbricks is a module system developed by [Björn Folbert](http://folbert.com) at [FEW Agency](http://fewagency.se). It is built on top of the awesome plugin [Advanced Custom Fields](http://www.advancedcustomfields.com/) (ACF) v5 PRO meaning that you must have that installed for this to work.
@@ -217,15 +225,15 @@ Nope. Like we said, you can create flexible content, repeaters, bricks incorpora
 Due to restrictions in the WordPress table structure, the max length of a field name is 64 characters. So if you have fields that go a couple of levels deep (for example a brick in a flexible field that have a repeater), you may run out of space for the name. Therefore, it is wise to shorten names so instead of for example "download_button", use "dl_btn". This should be considered whe creating instances of bricks and fields. If the value of a field is not saved, the reason is most likely that the name is too long.
   
 ### Brick layouts
-Brick layouts is not the same as layouts in ACF.
+Brick layouts are not the same as layouts in ACF.
 
 Often when printing bricks you want to have some wrapping HTML that is the same for each brick. This can for example be Bootstraps "row" and "col"-divs. Other times, you might only want the "core html" of the brick without anything wrapping it. So we have created a basic layout system.
 
 Brick layout files are stored in the brick-layouts directory and are used by passing the name(s) of the file(s) without the file extension (.php) to the `get_html`-function of a brick. If you dont want to use a brick layout, don't pass anything (or `false`) to the function.
 
-If a string or array is passed, the file(s) with the name(s) is then included after the core html of a brick has been built. This means that you have access to these variables in a layout-file:
+If a string or array is passed, the file(s) with the name(s) is then included after the core html of a brick has been built. This means that you have access to these variables in a brick layout-file:
 
-* `$html` - the core html of the brick
+* `$html` - the html of the brick
 * `$this` - an instance of the current brick class. This can be used to find out for example what background color should be set on the wrapping row using something like `$this->get_data_value('bg')`.
 
 ### Fewbricks specific settings for fields and bricks
