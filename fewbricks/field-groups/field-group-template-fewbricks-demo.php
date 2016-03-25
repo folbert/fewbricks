@@ -65,7 +65,7 @@ $fewbricks_fg->register();
  * Flexible content on the fly.
  * Showing how it is possible to build complex flexible contents on the fly
  */
-$fewbricks_fg = (new fewacf\field_group('Fewbricks Demo - Flexible content on the fly', '1509111453p', $fewbricks_fg_location, 3));
+$fewbricks_fg = (new fewacf\field_group('Fewbricks Demo - Flexible content on the fly', '1509111453p', $fewbricks_fg_location, 35));
 
 $fewbricks_fc = (new acf_fields\flexible_content('Flexible content 1', 'fc1', '150901113c'));
 
