@@ -1,6 +1,7 @@
 <?php
 /**
  * Demo brick layout.
+ * A layout have access to the current brick via $this and the bricks HTML via $html.
  */
 ?>
 
