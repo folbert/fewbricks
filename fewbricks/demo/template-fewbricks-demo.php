@@ -68,42 +68,62 @@ echo (new \fewbricks\bricks\demo_jumbotron('jumbotron'))->get_html();
 
 
 <div class="container">
+  <div class="row">
+    <div class="col-xs-12">
 
-  <?php
+      <?php
 
-  echo (new \fewbricks\bricks\demo_flexible_columns('fcol1'))->get_html();
+      echo (new \fewbricks\bricks\demo_flexible_columns('fcol1'))->get_html();
 
-  ?>
+      ?>
 
-  <hr>
+      <hr>
 
-  <?php
+      <?php
 
-  echo (new \fewbricks\bricks\demo_flexible_columns('fcol2'))->get_html();
+      echo (new \fewbricks\bricks\demo_flexible_columns('fcol2'))->get_html();
 
-  ?>
+      ?>
 
-  <hr>
+      <hr>
 
-  <?php
+      <?php
+      // loop through the rows of data
+      while ( have_rows('fc1') ) {
 
-  echo (new \fewbricks\bricks\demo_buttons_list('buttons_list'))->get_html(false, ['demo-layout-1']);
+        the_row();
 
-  ?>
+        echo \fewbricks\acf\fields\flexible_content::get_sub_field_brick_instance()->get_html(false, ['demo-layout-2']);
 
-  <hr>
+      }
 
-  <?php
+      ?>
 
-  echo (new \fewbricks\bricks\demo_standard_list('a_list'))->get_html(false);
+      <hr>
 
-  ?>
+      <?php
 
-  <hr>
+      echo (new \fewbricks\bricks\demo_buttons_list('buttons_list'))->get_html(false, ['demo-layout-1']);
 
-  <footer>
-    <p><?php echo get_field('footer_text'); ?></p>
-  </footer>
+      ?>
+
+      <hr>
+
+      <?php
+
+      echo (new \fewbricks\bricks\demo_standard_list('a_list'))->get_html(false);
+
+      ?>
+
+      <hr>
+
+      <footer>
+        <p><?php echo get_field('footer_text'); ?></p>
+      </footer>
+
+    </div>
+  </div>
+
 </div> <!-- /container -->
 
 <?php
