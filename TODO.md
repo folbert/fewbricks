@@ -1,7 +1,5 @@
 # TODO
 
-+ Improve on readme
-
-+ Describe brick layouts
++ Describe demo (moving template)
 
 + Make ACF Json work
