@@ -38,21 +38,7 @@ class demo_jumbotron extends project_brick
     public function get_brick_html()
     {
 
-        $button_brick = $this->get_child_brick('demo_button', 'button');
-        $button_brick->set_css_class('btn btn-primary btn-lg');
-
-        $html = '
-        <div class="jumbotron">
-          <div class="container">
-            <h1>' . $this->get_field('headline') . '</h1>
-            <div>
-                ' . $this->get_field('text') . '
-            </div>
-            ' . $button_brick->get_html() . '
-          </div>
-        </div>';
-
-        return $html;
+        return $this->get_brick_template_html();
 
     }
 

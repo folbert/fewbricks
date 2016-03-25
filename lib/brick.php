@@ -261,7 +261,7 @@ class brick
 
         $value = $default;
 
-        if(isset($this->args[$name])) {
+        if (isset($this->args[$name])) {
             $value = $this->args[$name];
         }
 
@@ -374,7 +374,7 @@ class brick
 
         }
 
-        if($post_id === false && $this->post_id_to_get_field_from !== false) {
+        if ($post_id === false && $this->post_id_to_get_field_from !== false) {
             $post_id = $this->post_id_to_get_field_from;
         }
 
@@ -487,7 +487,7 @@ class brick
         $brick_class_name = 'fewbricks\bricks\\' . $brick_class_name;
 
         // If we have not forced either sub field or layout
-        if(!$is_layout && !$is_sub_field) {
+        if (!$is_layout && !$is_sub_field) {
 
             $is_layout = $this->is_layout;
             $is_sub_field = $this->is_sub_field;
@@ -533,6 +533,27 @@ class brick
         $html = $this->get_brick_layouted_html($html);
 
         return $html;
+
+    }
+
+    /**
+     * Executes a template file for the current class and returns the output.
+     * @return string
+     */
+    protected function get_brick_template_html()
+    {
+
+        $template_path = get_template_directory() .
+            '/fewbricks/bricks/' .
+            str_replace('_', '-', \fewbricks\helpers\get_real_class_name($this)) .
+            '.template.php';
+
+        ob_start();
+
+        /** @noinspection PhpIncludeInspection */
+        include($template_path);
+
+        return ob_get_clean();
 
     }
 
@@ -743,7 +764,8 @@ class brick
     /**
      * @return string
      */
-    public function get_name() {
+    public function get_name()
+    {
 
         return $this->name;
 
@@ -829,9 +851,9 @@ class brick
 
         foreach ($this->fields_to_remove AS $field_to_remove) {
 
-            foreach($this->fields AS $field_key => $field) {
+            foreach ($this->fields AS $field_key => $field) {
 
-                if($field['name'] == $field_to_remove) {
+                if ($field['name'] == $field_to_remove) {
 
                     unset($this->fields[$field_key]);
                     break;

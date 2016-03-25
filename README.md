@@ -207,13 +207,22 @@ Each brick has its own class placed in the folder named "bricks". Each class hav
     
     Add some content in the headline and content field and load up the page in the frontend. Is your content not being displayed? That's expected since the get_html-function is empty. Let's fix that now.
     
-6. In the get_html-function, add this code:
+6. There are two ways of getting the HTML of a brick. Either have `get_brick_html()` return the HTML which, in our example, would require us to paste the following lines to that function in headline-and-content.php.
 
         $html = '<h1>' . $this->get_field('headline') . '</h1>';
         $html .= 'The content: ' . $this->get_field('content');
         return $html
         
-    `get_field()` is a wrapper function for ACFs own `get_field()` which takes care of adding any needed prefixes to get the value. Note that we are using the name values that we set when adding fields under step 3 above.
+    Or, you can build the HTML in an external file named after the name of the brick class it belongs to. So for our example class `headline_and_content` we would create the file [themes]/fewbricks/bricks/headline-and-content.template.php and put the following lines in it:
+    
+        <?php
+        
+            echo '<h1>' . $this->get_field('headline') . '</h1>
+                The content: ' . $this->get_field('content');
+                
+    There really is not much difference between the two ways. Including external files will have some minor impact on performance but if you feel that having the HTML in an external file is the way to go, go ahead. 
+        
+    The `get_field()`-function being used is a wrapper function for ACFs own `get_field()` which takes care of adding any needed prefixes to get the value. Note that we are using the name values that we set when adding fields under step 3 above.
     
   7. One last thing to have the content of the brick show up: in the code creating the page in the frontend, add the following code where you want the content to show up:
   
