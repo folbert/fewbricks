@@ -1,200 +1,99 @@
-<style>
-  code {
-    display: block;
-    word-break: break-all;
-    padding: 8px;
-  }
-
-  p {
-    margin-top: 10px;
-  }
-
-  .demo-output-wrapper {
-    border: solid red;
-    border-width: 4px 0;
-    padding: 18px 0;
-  }
-
-  .demo-h2 {
-    background: black;
-    color: white;
-    text-align: center;
-    padding: 8px;
-  }
-
-</style>
-
-<h1>Fewbricks demo</h1>
-
-<p>This page is using the template named "fewbricks demo" which gets its bricks in the file
-  fewbricks/project/field-groups/field-groups-demo.php. If you are logged in, you can <a
-      href="<?php echo get_edit_post_link(); ?>" target="_blank">edit the content here</a>.</p>
-
-
-
-
-
-<h2 class="demo-h2">Field Group "Main content 1"</h2>
-
-<p><b>This code:</b></p>
-
 <?php
-$snippet = "<?php
+/**
+ * Template Name: Fewbricks Demo
+ */
 
-    // To get data from fields added directly to the field group we can use standard ACF get_field()
-    echo '<p>' . get_field('some_text') . '</p>';
-    echo '<p>' . get_field('some_more_text') . '</p>';
-
-    // Create an instance of a brick and pass the name given when adding it to the field group
-    // lets also pass two layouts for demo purposes.
-    echo (new \fewbricks\bricks\demo_video('video_1'))->get_html([], ['demo-layout-1', 'demo-layout-2']);
-
-?>";
+/**
+ * This is for showing how Fewbricks works.
+ */
 ?>
 
-<code>
-  <?php echo highlight_string($snippet, true); ?>
-</code>
+<!doctype html>
+<html class="no-js" lang="">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>Fewbricks Demo</title>
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<p><b>...outputs all of the below between the red lines</b></p>
-
-<div class="demo-output-wrapper">
-
-  <?php
-  echo '<p>' . get_field('some_text') . '</p>';
-  echo '<p>' . get_field('some_more_text') . '</p>';
-  echo (new \fewbricks\bricks\demo_video('video_1'))->get_html([], ['demo-layout-1', 'demo-layout-2']);
-  ?>
-
-</div>
-
-
-
-
-<h2 class="demo-h2">Field Group "Main content 2"</h2>
-
-<p><b>This code:</b></p>
-
-<?php
-$snippet = "<?php
-    echo (new \\fewbricks\\bricks\\demo_buttons_list('button_list'))->get_html();
-    echo (new \\fewbricks\\bricks\\demo_standard_list('a_list'))->get_html();
-?>";
-?>
-
-<code>
-  <?php echo highlight_string($snippet, true); ?>
-</code>
-
-<p><b>..outputs all of the below between the red lines</b></p>
-
-<div class="demo-output-wrapper">
-
-  <?php
-  echo (new \fewbricks\bricks\demo_buttons_list('button_list'))->get_html();
-  echo (new \fewbricks\bricks\demo_standard_list('a_list'))->get_html();
-  ?>
-
-</div>
-
-<h2 class="demo-h2">Field Group "Main content 3"</h2>
-
-<p><b>This code:</b></p>
-
-<?php
-$snippet = "<?php
-    // loop through the rows of data
-    while ( have_rows('fc1') ) {
-
-        the_row();
-
-        echo \\fewbricks\\acf\\fields\\flexible_content::get_sub_field_brick_instance()
-          ->get_html();
-
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+  <style>
+    code {
+      display: block;
+      word-break: break-all;
+      padding: 8px;
     }
 
-?>";
-?>
+    p {
+      margin-top: 10px;
+    }
 
-<code>
-  <?php echo highlight_string($snippet, true); ?>
-</code>
+    .demo-output-wrapper {
+      border: solid red;
+      border-width: 4px 0;
+      padding: 18px 0;
+    }
 
-<p><b>..outputs all of the below between the red lines</b></p>
+    .demo-h2 {
+      background: black;
+      color: white;
+      text-align: center;
+      padding: 8px;
+    }
+  </style>
 
-<div class="demo-output-wrapper">
-
-  <?php
-  // loop through the rows of data
-  while ( have_rows('fc1') ) {
-
-    the_row();
-
-    echo \fewbricks\acf\fields\flexible_content::get_sub_field_brick_instance()
-        ->get_html();
-
-  }
-
-  ?>
-
-</div>
-
-
-
-
-
-
-<h2 class="demo-h2">Field Group "Main content 4"</h2>
-
-<p><b>This code:</b></p>
+  <!--[if lt IE 9]>
+  <script src="js/vendor/html5-3.6-respond-1.4.2.min.js"></script>
+  <![endif]-->
+</head>
+<body>
 
 <?php
-$snippet = "<?php
-    echo (new \\fewbricks\\bricks\\demo_flexible_brick('fb1'))->get_html();
-?>";
+
+echo (new \fewbricks\bricks\demo_jumbotron('jumbotron'))->get_html();
+
 ?>
 
-<code>
-  <?php echo highlight_string($snippet, true); ?>
-</code>
 
-<p><b>..outputs all of the below between the red lines</b></p>
-
-<div class="demo-output-wrapper">
+<div class="container">
 
   <?php
-  echo (new \fewbricks\bricks\demo_flexible_brick('fb1'))->get_html();
+
+  echo (new \fewbricks\bricks\demo_flexible_columns('fcol1'))->get_html();
+
   ?>
 
-</div>
-
-
-
-
-
-
-<h2 class="demo-h2">Field Group "Main content 5"</h2>
-
-<p><b>This code:</b></p>
-
-<?php
-$snippet = "<?php
-    echo (new \\fewbricks\\bricks\\demo_flexible_brick('fb1'))->get_html();
-?>";
-?>
-
-<code>
-  <?php echo highlight_string($snippet, true); ?>
-</code>
-
-<p><b>..outputs all of the below between the red lines</b></p>
-
-<div class="demo-output-wrapper">
+  <hr>
 
   <?php
-  echo (new \fewbricks\bricks\demo_flexible_columns('fcol1'))->set_arg('nr_of_columns', 2)->get_html();
+
+  echo (new \fewbricks\bricks\demo_flexible_columns('fcol2'))->get_html();
+
   ?>
 
-</div>
+  <hr>
 
-<?php wp_link_pages(['before' => '<nav class="page-nav"><p>' . __('Pages:', 'sage'), 'after' => '</p></nav>']); ?>
+  <?php
+
+  echo (new \fewbricks\bricks\demo_buttons_list('buttons_list'))->get_html(false, ['demo-layout-1']);
+
+  ?>
+
+  <hr>
+
+  <?php
+
+  echo (new \fewbricks\bricks\demo_standard_list('a_list'))->get_html(false);
+
+  ?>
+
+  <hr>
+
+  <footer>
+    <p><?php echo get_field('footer_text'); ?></p>
+  </footer>
+</div> <!-- /container -->
+
+</body>
+</html>

@@ -25,12 +25,20 @@ class demo_flexible_brick extends project_brick
 
         $fc = new acf_fields\flexible_content('Modules', 'modules', '1509111554i');
 
-        $l = new layout('', 'l1', '1509111555a');
-        $l->add_brick(new demo_video('video', '1509111556x'));
+        $l = new layout('', 'text', '1603250048a');
+        $l->add_brick(new demo_headline('headline', '1603250048b'));
         $fc->add_layout($l);
 
-        $l = new layout('', 'l2', '1509111557u');
+        $l = new layout('', 'headline', '1603250054a');
+        $l->add_brick(new demo_text('text', '1603250054b'));
+        $fc->add_layout($l);
+
+        $l = new layout('', 'button', '1509111557u');
         $l->add_brick(new demo_button('button', '1509111556s'));
+        $fc->add_layout($l);
+
+        $l = new layout('', 'video', '1509111555a');
+        $l->add_brick(new demo_video('video', '1509111556x'));
         $fc->add_layout($l);
 
         $this->add_flexible_content($fc);

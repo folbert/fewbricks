@@ -80,11 +80,17 @@ The system was created for the following reasons:
  Other than that, feel free to delete all other files or add new folders but do __not__ delete or rename any of the existing folders.
  
 ## Demo
-After having carried out the installation steps, if you edit a standard page in the backend, you should see that the normal WYSIWYG area have been replaced by a bunch of boxes with the title "Fewbricks demo area [1-5]". Those boxes are defined in [theme]/fewbricks/field-groups/field-group-demo-1.php which in turn is required in the file init.php in the same folder.
+After having carried out the installation steps, you can set up the demo by following these steps:
+  
+1. Create a file named "template-fewbricks-demo.php".
+2. Copy the content of [theme]/fewbricks/demo/template-fewbricks-demo.php and paste it into the file created in step 1. Please note that this template is completely standalone and does not include any WP head or your themes stylesheets. This is only because it is a demo and we want to make sure we have a clean Bootstrap page to work with.
+3. Go to the admin area of WordPress, create a new page, select the template "Fewbricks Demo" and hit "Update"/"Publish".
+4. You should now, instead of the standard WYSIWYG area, see a bunch of fields and buttons that looks like the standard ACF GUI. That is actually what it is with the exception that they have been put there using Febwricks. Head on over to [theme]/fewbricks/field-groups/init.php to start tracking what is going on and how everything works.
+5. Play around with adding some data to fields and adding flexible content etc.
+6. Hit "Update" and go to the frontend to see what you have created.
+7. If you have not already done so, have a look at the code of "template-fewbricks-demo.php" to see how to get Febwricks to display data.
 
-Play around with adding some data to fields and adding flexible content etc.
-
-To display what you have entered, copy the content of [theme]/fewbricks/demo/template-fewbricks-demo.php to the template for a standard page. In the frontend, load up the page that you have played around with and you should now see your data presented there. 
+Hopefully you now have a better understanding of how Febricks works. Keep on reading this deocument to the end to understand even more.
  
 ## Usage
 
@@ -121,7 +127,7 @@ Each brick has its own class placed in the folder named "bricks". Each class hav
 #### Creating a standard brick
  Let's create a standard brick with a text field and a wysiwyg-area. This is of course not a very impressive example since we are basically adding a brick that does what WordPress does out of the box. But it's a good place to start showing how to create stuff in fewbricks.
  
- 1. In the folder "project/bricks", create a file named headline-and-content.php.
+ 1. In the folder "[theme]/fewbricks/bricks", create a file named headline-and-content.php.
  2. Add this code to the file
           
         namespace fewbricks\bricks;
@@ -132,7 +138,7 @@ Each brick has its own class placed in the folder named "bricks". Each class hav
          * Class text_and_content
          * @package fewbricks\bricks
          */
-        class text_and_content extends project_brick {
+        class headline_and_content extends project_brick {
         
             /**
              * @var string This will be the default label showing up in the editor area for the administrator.
@@ -167,18 +173,19 @@ Each brick has its own class placed in the folder named "bricks". Each class hav
         $this->add_field(new acf_fields\text('Headline', 'headline', 1509041509a'));
         $this->add_field(new acf_fields\wysiwyg('Content', 'content', '1509041509b'));
     
-    With the code above, we have added two fields. One text-field and one wysiwyg-field. Each field has gotten a label to display to the administrator, a name we can use when getting the data for the field and a site-wide-unique key (*very important that they are unique on a site wide level*).
+    With the code above, we have added two fields. One text-field and one wysiwyg-field. Each field has gotten a label to display to the administrator, a name we can use when getting the data for the field and a site-wide-unique key. It is __very important__ that the keys are unique on a site wide level.
     
-  4. Let's add our new brick to a field group: in the folder project/field-groups, either create a new file or edit an existing one. If you create a new one, make sure to require it in field-groups/init.php. Add this code to the field groups file:
+  4. Let's add our new brick to a field group: in the folder [theme]/fewbricks/field-groups, either create a new PHP-file or edit an existing one. If you create a new one, make sure to require it in [theme]/field-groups/init.php. Add this code to the field groups file:
   
         $fg = new fewbricks\acf\field_group('Test content', '1504201020o', $location, 1);
         $fg->add_brick(new fewbricks\bricks\text_and_content('text_and_content_test', '1509041512c');
         $fg->register();
         
-    Here we create a new field group with a name, a site-wide-unique key, a location (more about that in a minute) and an order. The order indicates where the field group should be positioned when editing the content of the page. If you want to set any of the other setting available to a field group, you can pass an assocative array with those settings as the fifth argument.
+    Here we create a new field group with a name, a site-wide-unique key, a location (more about that in a minute) and an order. The order indicates where the field group should be positioned in relation to other field groups when editing the content of the page. A field group with order 1 is positioned before a field group with order set to 2, 2 before 3 and s on. If you want to set any of the other settings available to a field group, you can pass an assocative array with those settings as the fifth argument. To find out what settings are available, check out the code in the constructor of plugins/fewbricks/lib/acf/field-group.php .
     
-    We then add a brick to the field group. The brick gets instantiated with a name (text_and_content_test) that should be unique for all bricks and fields added to the first level of field groups.
-     We also send a site-wide-unique key for the brick.
+    We then add a brick to the field group. The brick gets instantiated with a name (text_and_content_test) that should be unique for all bricks and fields added to field groups.
+    
+    We also pass a site-wide-unique key for the brick.
     
     The location is an assocative array that may look something like this:
     
@@ -186,11 +193,13 @@ Each brick has its own class placed in the folder named "bricks". Each class hav
           [
             [
               'param' => 'post_type',
-				      'operator' => '==',
-				      'value' => 'page',
+              'operator' => '==',
+              'value' => 'page',
             ],
           ]
         ]
+        
+    Store that array in a variable named `$location` that you add to the field group file that you are working on and make sura that `$location` is set before the code in step 4 above.
         
     Locations can be tricky so use the playground field group that we recommend that you create (see under "Basic idea" for more info on this). Using the example above, the field group will show up on all pages.
     
@@ -208,13 +217,9 @@ Each brick has its own class placed in the folder named "bricks". Each class hav
     
   7. One last thing to have the content of the brick show up: in the code creating the page in the frontend, add the following code where you want the content to show up:
   
-        echo (new fewbricks\bricks\text_and_content('text_and_content_test'))->get_html(['arg1' => 'argval1'], ['demo-layout-1']);
+        echo (new fewbricks\bricks\text_and_content('text_and_content_test'))->get_html();
         
     Note that we are using the name (text_and_content_test) that we set when adding the brick to the field group in step 4.
-    
-    The first argument are any values that you want to pass to the brick. This can be useful for example to tell the brick what page it is being loaded at or if a certain css class should be added to it.
-    
-    Argument number two is an array of brick layouts that you want to wrap the html in. See the section "Brick layouts" a cpl of lines down in this document,
     
     Now, reload the frontend and you should have whatever content you added to the brick in he backend show up.
     

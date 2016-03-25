@@ -82,19 +82,23 @@ class demo_video extends project_brick
 
             preg_match('/src="(.+?)"/', $this->get_field('url'), $matches);
 
-            $url_match = $matches[1];
-
             if (isset($matches[1])) {
 
-                $params = [];
-                $params['showinfo'] = 0;
-                $params['modestbranding'] = 1;
-                $params['theme'] = 'light';
-                $params['rel'] = 0;
-                $params['wmode'] = 'transparent';
+                $url_match = $matches[1];
 
-                if (!empty($params)) {
-                    $url = add_query_arg($params, $url_match);
+                if (isset($matches[1])) {
+
+                    $params = [];
+                    $params['showinfo'] = 0;
+                    $params['modestbranding'] = 1;
+                    $params['theme'] = 'light';
+                    $params['rel'] = 0;
+                    $params['wmode'] = 'transparent';
+
+                    if (!empty($params)) {
+                        $url = add_query_arg($params, $url_match);
+                    }
+
                 }
 
             }

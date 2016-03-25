@@ -11,6 +11,8 @@ use fewbricks\acf\fields as acf_fields;
 class demo_button extends project_brick
 {
 
+    private $css_class = false;
+
     /**
      * @var string This will be the default label showing up in the editor area for the administrator.
      * It can be overridden by passing an item with the key "label" in the array that is the second argument when
@@ -24,8 +26,6 @@ class demo_button extends project_brick
     public function set_fields()
     {
 
-        $this->add_field(new acf_fields\text('Text', 'text', '1509072239o'));
-
         $this->add_field((new acf_fields\select('Type', 'type', '1509032104a'))
             ->set_settings([
                 'choices' => [
@@ -34,9 +34,12 @@ class demo_button extends project_brick
                     'email' => 'E-mail',
                     'download' => 'Download'
                 ],
-                'allow_null' => 'false'
+                'allow_null' => 'false',
+                'default_value' => 'internal'
             ])
         );
+
+        $this->add_field(new acf_fields\text('Text', 'text', '1509072239o'));
 
         $this->add_field(
             (new acf_fields\post_object('Item', 'internal_item', '1509032109u'))->set_setting('conditional_logic',
@@ -100,6 +103,16 @@ class demo_button extends project_brick
                 ]
             ]
         ));
+
+    }
+
+    /**
+     * @param $css_class
+     */
+    public function set_css_class($css_class)
+    {
+
+        $this->css_class = $css_class;
 
     }
 
@@ -237,20 +250,22 @@ class demo_button extends project_brick
 
     /**
      * @param $text
-     * @param $specific_attributes
+     * @param $attributes
      * @return string
      */
-    private function get_button_html($specific_attributes, $text = false)
+    private function get_button_html($attributes, $text = false)
     {
-
-        $standard_attributes = [];
-
-        $attributes = array_merge($standard_attributes, $specific_attributes);
 
         if (isset($attributes['class'])) {
             $attributes['class'] = 'btn ' . $attributes['class'];
         } else {
             $attributes['class'] = 'btn';
+        }
+
+        if(!empty($this->css_class)) {
+
+            $attributes['class'] .= ' ' . $this->css_class;
+
         }
 
         $html = '<a';

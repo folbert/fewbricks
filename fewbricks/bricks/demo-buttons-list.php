@@ -25,7 +25,10 @@ class demo_buttons_list extends project_brick
     {
 
         $this->add_field(new acf_fields\text('Buttons list headline', 'headline', '1509052316y'));
-        $this->add_repeater((new acf_fields\repeater('Buttons', 'buttons', '1509052323a'))
+
+        $this->add_repeater((new acf_fields\repeater('Buttons', 'buttons', '1509052323a', [
+            'button_label' => 'Add button'
+        ]))
             ->add_brick(new demo_button('button', '1509111350i')));
 
         if (!isset($this->args['no_bg_color']) || !$this->args['no_bg_color']) {
@@ -47,7 +50,8 @@ class demo_buttons_list extends project_brick
             </div>
           </div>
           <div class="row">
-            <div class="col-xs-12">';
+            <div class="col-xs-12">
+                <ul>';
 
         if ($this->have_rows('buttons')) {
 
@@ -55,13 +59,14 @@ class demo_buttons_list extends project_brick
 
                 $this->the_row();
 
-                $html .= $this->get_child_brick_in_repeater('buttons', 'button', 'demo_button')->get_html();
+                $html .= '<li>' . $this->get_child_brick_in_repeater('buttons', 'button', 'demo_button')->get_html() . '</li>';
 
             }
 
         }
 
         $html .= '
+              </ul>
             </div>
           </div> <!-- /.row -->
         ';

@@ -34,6 +34,11 @@ class demo_flexible_columns extends project_brick
 
         }
 
+        // Lets store the nr of columns in a hidden field
+        $this->add_field(new acf_fields\hidden('-', 'nr_of_columns', '1603250004e', [
+            'default_value' => $nr_of_columns
+        ]));
+
     }
 
     /**
@@ -42,7 +47,7 @@ class demo_flexible_columns extends project_brick
     protected function get_brick_html()
     {
 
-        $nr_of_columns = $this->get_arg('nr_of_columns');
+        $nr_of_columns = $this->get_field('nr_of_columns');
 
         $column_classes = $this->get_column_classes($nr_of_columns);
 
