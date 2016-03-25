@@ -17,6 +17,17 @@
   <meta name="description" content="">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
+  <?php
+  if(class_exists('QueryMonitor')) {
+  ?>
+    <link rel="stylesheet" href="<?php echo plugins_url('query-monitor'); ?>/assets/query-monitor.css" type="text/css"
+          media="all"/>
+  <?php
+  }
+  ?>
+
+
+
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
   <style>
     code {
@@ -94,6 +105,12 @@ echo (new \fewbricks\bricks\demo_jumbotron('jumbotron'))->get_html();
     <p><?php echo get_field('footer_text'); ?></p>
   </footer>
 </div> <!-- /container -->
+
+<?php
+
+wp_footer();
+
+?>
 
 </body>
 </html>
