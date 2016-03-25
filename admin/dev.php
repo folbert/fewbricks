@@ -75,14 +75,11 @@ if(defined('FEWBRICKS_DEV_MODE') && FEWBRICKS_DEV_MODE === true) {
 
                 <form action="" method="post">
 
-                    <p>Click the button below to build local JSON. Local JSON is an ACF feature which "is similar to
-                        caching and both dramatically speeds up ACF and allows for version control over your field
-                        settings". Read more about it at <a
-                          href="http://www.advancedcustomfields.com/resources/local-json/" target="_blank">the ACF
-                            site</a></p>
+                    <p>Click the button below to build local JSON. Local JSON is an ACF feature which "is similar to caching and both dramatically speeds up ACF and allows for version control over your field settings". Read more about it at <a href="http://www.advancedcustomfields.com/resources/local-json/" target="_blank">the ACF site</a></p>
 
                     <p>Note that building JSON will first delete _all_ files in the acf-json directory.</p>
-                    <input type="submit" name="fewbricks_buildjson" value="Build JSON" class="button"/>
+
+                    <input type="submit" name="fewbricks_buildjson" value="Build ACF Local JSON" class="button"/>
                 </form>
 
                 <h4>Current files in acf-json</h4>
@@ -132,7 +129,7 @@ if(defined('FEWBRICKS_DEV_MODE') && FEWBRICKS_DEV_MODE === true) {
                 <form action="" method="post">
 
                     <p>Click the button below to empty the folder containing the ACF Local JSON-files.</p>
-                    <input type="submit" name="fewbricks_deletejson" value="Delete JSON" class="button"/>
+                    <input type="submit" name="fewbricks_deletejson" value="Delete ACF Local JSON" class="button"/>
                 </form>
 
             </div>
@@ -145,14 +142,21 @@ if(defined('FEWBRICKS_DEV_MODE') && FEWBRICKS_DEV_MODE === true) {
 
             <div class="inner">
 
-                <p>By setting Fewbricks in developer mode, some extra debugging related to Febricks and ACF will become
-                    available. Also, every time a field group is registered, a check for duplicate keys will be carried
-                    out.</p>
+                <p>By setting Fewbricks in developer mode, some extra debugging related to Febricks and ACF will become available. Also, every time a field group is registered, a check for duplicate keys will be carried out. Please make sure that you don't have developer mode enabled on production servers since this will have impact on performance. Read more about Febricks developer mode in the README file.</p>
 
-                <p>If developer mode is enabled, you can also var dump the fields settings each time a field group is
-                    registered. This is done by adding a get variable named "dumpfewbricksfields" to any page. For
-                    example <a href="<?php echo get_option('home'); ?>/?dumpfewbricksfields"
-                               target="_blank"><?php echo get_option('home'); ?>/?dumpfewbricksfields</a></p>
+                <?php
+                if(defined('FEWBRICKS_DEV_MODE') && FEWBRICKS_DEV_MODE) {
+                ?>
+                  <p>Fewbricks developer mode is active.</p>
+                <?php
+                } else {
+                ?>
+                  <p>Fewbricks developer mode is _not_ active.</p>
+                <?php
+                }
+                ?>
+
+                <p>If developer mode is enabled, you can also var dump all registered field groups and its fields each time a field group is registered. This is done by adding a get variable named "dumpfewbricksfields" to any page. For example <a href="<?php echo get_option('home'); ?>/?dumpfewbricksfields" target="_blank"><?php echo get_option('home'); ?>/?dumpfewbricksfields</a></p>
 
             </div>
 
