@@ -442,7 +442,10 @@ class field_group
     {
 
         echo '<h3>Field group: ' . $this->settings['title'] . '</h3>';
-        \fewture\vd($this->settings);
+
+        echo '<pre>';
+        print_r($this->settings);
+        echo '</pre>';
 
     }
 
