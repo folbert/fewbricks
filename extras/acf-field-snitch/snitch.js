@@ -7,10 +7,10 @@ jQuery(function($) {
 
 	var listenKeyboard = function() {
 
+    /*
 		var timesHit = 0;
 		var timesTimer = null;
 
-		/*
 		$('body').on('keydown', function(ev) {
 
 			if(ev.keyCode !== 27) return;
@@ -67,32 +67,6 @@ jQuery(function($) {
 			var field = $('<span class="field row_layout">').text($(this).data('layout'));
 			field.appendTo(box);
 			box.prependTo($(this).find('.acf-fc-layout-handle'));
-		});
-	};
-
-	var enableCopySnitchToClipboard = function() {
-		var client = new ZeroClipboard();
-
-		client.on('complete', function() {
-			$(this).animate({
-				'opacity': 0.2
-			}, 100).animate({
-				'opacity': 1
-			}, 100).animate({
-				'opacity': 0.2
-			}, 100).animate({
-				'opacity': 1
-			}, 100);
-		});
-
-		$('body').on('mouseover', '.acf-snitch .field', function() {
-			var field = $(this);
-			if(field.data('has-zeroclipboard')) return ZeroClipboard.activate(field[0]);
-
-			field.attr('data-clipboard-text', $.trim(field.text()));
-			field.data('has-zeroclipboard', true);
-
-			ZeroClipboard.activate(field[0]);
 		});
 	};
 

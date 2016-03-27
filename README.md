@@ -277,7 +277,7 @@ By setting Fewbricks in developer mode, some extra debugging related to Fewbrick
 If developer mode is enabled, you can also var dump the fields settings each time a field group is registered. This is done by passing a get variable named "dumpfewbricksfields" to any page like so: http://mywordpressinstall.com/wp-admin/?dumpfewbricksfields .
 
 #### Field info
-If you use the technique described above to enter developer mode, you will also get info about each field in the form of a yellow and blue info field next to each field in the backend. The yellow field hold the name of the field and the blue one holds the id. If you want the developer mode activated but not displaying the field info, add the following code to the same file that you activated developer mode in:
+If you use the technique described above to enter developer mode, you will also get info about each field in the form of a yellow and blue info field next to each field in the backend. The yellow field hold the name of the field and the blue one holds the id. If you want the developer mode activated but not displaying the field info (it uses JS which can be annoying even in dev mode), add the following code to the same file that you activated developer mode in:
  `define('FEWBRICKS_HIDE_ACF_INFO', true)`
 
 The code displaying the field info was originally found in the plugin [ACF: Field Snitch](https://sv.wordpress.org/plugins/advanced-custom-fields-field-snitch/) by [Stupid Studio](https://stupid-studio.com/) and modified by [Bryan Willis](https://gist.github.com/bryanwillis/bbfdce5febd3db16c53c#file-acf-field-snitch-v5-js) to work with verison 5 of ACF. 

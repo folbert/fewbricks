@@ -167,10 +167,10 @@ if(!class_exists('acf')) {
 
     /**
      * Should we display info about the ACF fields?
-     * FEWBRICKS_SHOW_ACF_INFO Gives us a way to hide info event if dev mode is activated
+     * FEWBRICKS_HIDE_ACF_INFO Gives us a way to hide info event if dev mode is activated
      */
     if (
-        (defined('FEWBRICKS_SHOW_ACF_INFO') && FEWBRICKS_SHOW_ACF_INFO === false) ||
+        (defined('FEWBRICKS_HIDE_ACF_INFO') && FEWBRICKS_HIDE_ACF_INFO === false) ||
         (!defined('FEWBRICKS_HIDE_ACF_INFO') && $fewbricks_dev_mode === true)
     ) {
 
