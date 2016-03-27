@@ -57,6 +57,7 @@ class demo_flexible_brick extends project_brick
 
             $this->the_row();
 
+            /** @noinspection PhpUndefinedMethodInspection */
             $html .= acf_fields\flexible_content::get_sub_field_brick_instance()->get_html();
 
         }

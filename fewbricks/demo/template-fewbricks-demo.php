@@ -4,7 +4,10 @@
  */
 
 /**
- * This is for showing how Fewbricks works.
+ * This file holds code for showing how to use Fewbricks in your templates.
+ * In order to use out of the box, don't add any wp_head or similar code to it since we want a clean
+ * Bootstrap setup.
+ * We are also including CSS for Query Monitor in case you are running that.
  */
 ?>
 
@@ -18,6 +21,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   <?php
+  /**
+   * Style QueryMonitor if that is being used.
+   */
   if(class_exists('QueryMonitor')) {
   ?>
     <link rel="stylesheet" href="<?php echo plugins_url('query-monitor'); ?>/assets/query-monitor.css" type="text/css"
@@ -25,8 +31,6 @@
   <?php
   }
   ?>
-
-
 
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
   <style>
@@ -39,24 +43,8 @@
     p {
       margin-top: 10px;
     }
-
-    .demo-output-wrapper {
-      border: solid red;
-      border-width: 4px 0;
-      padding: 18px 0;
-    }
-
-    .demo-h2 {
-      background: black;
-      color: white;
-      text-align: center;
-      padding: 8px;
-    }
   </style>
 
-  <!--[if lt IE 9]>
-  <script src="js/vendor/html5-3.6-respond-1.4.2.min.js"></script>
-  <![endif]-->
 </head>
 <body>
 
@@ -65,7 +53,6 @@
 echo (new \fewbricks\bricks\demo_jumbotron('jumbotron'))->get_html();
 
 ?>
-
 
 <div class="container">
   <div class="row">
@@ -93,6 +80,7 @@ echo (new \fewbricks\bricks\demo_jumbotron('jumbotron'))->get_html();
 
         the_row();
 
+        /** @noinspection PhpUndefinedMethodInspection */
         echo \fewbricks\acf\fields\flexible_content::get_sub_field_brick_instance()->get_html(false, ['demo-layout-2']);
 
       }

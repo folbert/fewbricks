@@ -65,7 +65,7 @@ class flexible_content extends field
     }
 
     /**
-     * @return brick
+     * @return \fewbricks\brick
      */
     public static function get_sub_field_brick_instance()
     {
@@ -73,9 +73,10 @@ class flexible_content extends field
         $row_layout = get_row_layout();
 
         $class_name = 'fewbricks\bricks\\' . self::get_sub_field_brick_class_name();
-
+        
         $instance = new $class_name($row_layout);
 
+        /** @noinspection PhpUndefinedMethodInspection */
         $instance->set_is_layout(true);
 
         return $instance;

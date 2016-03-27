@@ -3,7 +3,6 @@
 namespace fewbricks\bricks;
 
 use fewbricks\acf\fields as acf_fields;
-use fewbricks\acf\layout;
 
 /**
  * Class flexible_brick

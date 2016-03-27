@@ -93,6 +93,10 @@ class brick
      */
     protected $is_sub_brick;
 
+    /**
+     * @var
+     */
+    private $brick_layouts;
 
     /**
      * @param string $name Name to use when fetching data for the brick
@@ -117,6 +121,7 @@ class brick
         $this->layouts = [];
         $this->fields_to_remove = [];
         $this->is_sub_brick = false;
+        $this->brick_layouts = [];
 
         $this->args['brick_css_class'] = [];
 
@@ -144,7 +149,9 @@ class brick
 
         $this->prepare_settings($object_to_get_for);
 
+        /** @noinspection PhpUndefinedMethodInspection */
         $this->set_fields();
+        /** @noinspection PhpUndefinedMethodInspection */
         $this->set_project_fields();
         $this->remove_fields();
 
@@ -231,7 +238,9 @@ class brick
         if (isset($fewbricks_common_fields[$common_field_array_key])) {
 
             $field = clone $fewbricks_common_fields[$common_field_array_key];
+            /** @noinspection PhpUndefinedMethodInspection */
             $field->set_setting('key', $key);
+            /** @noinspection PhpUndefinedMethodInspection */
             $field->set_settings($settings);
             $this->add_field($field);
 
@@ -495,6 +504,7 @@ class brick
 
         }
 
+        /** @noinspection PhpUndefinedMethodInspection */
         return (new $brick_class_name($name))
             ->set_is_layout($is_layout)
             ->set_is_sub_field($is_sub_field)
@@ -528,6 +538,7 @@ class brick
         // Let's store them here for more flexibility
         $this->get_html_args = $args;
 
+        /** @noinspection PhpUndefinedMethodInspection */
         $html = $this->get_brick_html();
 
         $html = $this->get_brick_layouted_html($html);
@@ -897,8 +908,11 @@ class brick
         $sub_brick_name = '\fewbricks\bricks\\' . $sub_brick_name;
 
         $object = new $sub_brick_name($this->get_name() . '_' . $name_setting);
+        /** @noinspection PhpUndefinedMethodInspection */
         $object->set_is_layout($this->is_layout);
+        /** @noinspection PhpUndefinedMethodInspection */
         $object->set_is_sub_field($this->is_sub_field);
+        /** @noinspection PhpUndefinedMethodInspection */
         $object->set_is_option($this->is_option);
 
         return $object;

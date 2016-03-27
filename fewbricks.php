@@ -12,7 +12,8 @@ License: GPLv3
 
 namespace fewbricks;
 
-defined('ABSPATH') or die('No script kiddies please!');
+// Exit if accessed directly
+if( ! defined( 'ABSPATH' ) ) exit;
 
 $fewbricks_template_directory = get_template_directory() . '/';
 

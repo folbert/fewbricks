@@ -99,6 +99,7 @@ class field
         if(is_a($object_to_get_for, 'fewbricks\bricks\brick')) {
 
             // We will need this later on to build a unique key.
+            /** @noinspection PhpUndefinedMethodInspection */
             $this->settings['brick_key'] = $object_to_get_for->get_setting('key');
 
         }

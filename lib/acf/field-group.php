@@ -2,9 +2,13 @@
 
 namespace fewbricks\acf;
 
+// If we are in dev mode...
 if(defined('FEWBRICKS_DEV_MODE') && FEWBRICKS_DEV_MODE === true) {
+
+    // Create place to keep keys of all fields/bricks etc.
     global $debug_keys;
     $debug_keys = [];
+
 }
 
 /**
@@ -134,7 +138,9 @@ class field_group
         if (isset($fewbricks_common_fields[$common_field_array_key])) {
 
             $field = clone $fewbricks_common_fields[$common_field_array_key];
+            /** @noinspection PhpUndefinedMethodInspection */
             $field->set_setting('key', $key);
+            /** @noinspection PhpUndefinedMethodInspection */
             $field->set_settings($settings);
             $this->add_field($field);
 
@@ -207,6 +213,7 @@ class field_group
      * In order to create unique keys, we prepend teh key of a parent to its kids and so on down the field settings tree.
      * @param $fields
      * @param $base_key
+     * @return mixed
      */
     private function set_unique_keys($fields, $base_key)
     {

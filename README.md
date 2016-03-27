@@ -1,7 +1,7 @@
 # Fewbricks
 
 ## WordPress plugin
-I have begun working on turning this into a WordPres splugin instead where you install most of the files as any plugin and then the files in the project folder are moved to a folder in the theme. It makes more sense to do it that way. Hopefully it will be all done and testertested no later than the end of April.
+I have begun working on turning this into a WordPress plugin instead where you install most of the files as any plugin and then the files in the project folder are moved to a folder in the theme. It makes more sense to do it that way. Hopefully it will be all done and tested no later than the end of April 2016.
 
 ## TOC
 + [Legal](#legal)

@@ -115,7 +115,9 @@ class layout
         if(isset($fewbricks_common_fields[$common_field_array_key])) {
 
             $field = clone $fewbricks_common_fields[$common_field_array_key];
+            /** @noinspection PhpUndefinedMethodInspection */
             $field->set_setting('key', $key);
+            /** @noinspection PhpUndefinedMethodInspection */
             $field->set_settings($settings);
             $this->add_sub_field($field);
 

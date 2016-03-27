@@ -2,6 +2,11 @@
 
 namespace fewbricks\helpers;
 
+/**
+ * Get the name of the class of an object without namspaces.
+ * @param $object
+ * @return mixed
+ */
 function get_real_class_name($object)
 {
 
