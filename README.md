@@ -283,15 +283,14 @@ If you use the technique described above to enter developer mode, you will also 
 The code displaying the field info was originally found in the plugin [ACF: Field Snitch](https://sv.wordpress.org/plugins/advanced-custom-fields-field-snitch/) by [Stupid Studio](https://stupid-studio.com/) and modified by [Bryan Willis](https://gist.github.com/bryanwillis/bbfdce5febd3db16c53c#file-acf-field-snitch-v5-js) to work with verison 5 of ACF. 
 
 ### ACF Local JSON
+Fewbrikcs does support [ACF Local JSON](http://www.advancedcustomfields.com/resources/local-json/) but tests show that there is hardly any performance differences between standard Fewbricks and Local JSON. This is most likely due to the fact that neither use any DB-queries like standard ACF does.
 
-**Warning: Local JSON for Fewbricks is nots table yet. Us ewith caution.**
-
-Fewbricks supports [ACF Local JSON](http://www.advancedcustomfields.com/resources/local-json/). Using this should speed things up a bit since we dont have to execute all the PHP-code that Fewbricks is made up of. Follow these steps to activate local-JSON:
+If you still want to use Local JSON, follow these steps to activate it:
 
 1. As outlined in the [ACF instructions for local JSON](http://www.advancedcustomfields.com/resources/local-json/): in the themes directory, create a directory named acf-json.
 2. In the admin area, navigate to the Fewbricks admin page which is placed in the ACF menu. Click "Build JSON" and let the page reload.
 3. In a file that is always included, preferably wp-config.php, define a constant named FEWBRICKS_USE_JSON: `define('FEWBRICKS_USE_ACF_JSON', true)`.
 4. That's all there is to it. ACF will now load settings from the JSON-files in the acf-json directory created in step 1. 
 
-#### Important about local JSON
-Every time you edit any fields in a field group or brick, you will need to rebuild the local JSON by taking the action outlined in step 2 above. One suggested workflow is that you always have local josn activated in all environments but production by following step 3 above. Then when you edit a modules fields and don't see the changes in the editing area of a page/post/options etc., you will be reminded of that you need to rebuild the JSON. When you are ready to push to production, the JSON will be up to date. Since all ACF definitions already are in the field groups/bricks, the only purpose of using local JSON is to increase performance by not having to execute all the field group definitions and its bricks.
+#### Important about local JSON 
+Every time you edit any fields in a field group or brick, you will need to rebuild the local JSON by taking the action outlined in step 2 above. One suggested workflow is that you always have Local JSON activated in all environments including development. Then when you edit a modules' fields and don't see the changes in the editing area of a page/post/options etc., you will be reminded of that you need to rebuild the JSON. When you are ready to push to production, the JSON will be up to date.

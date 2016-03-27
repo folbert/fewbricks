@@ -21,7 +21,7 @@ class demo_button extends project_brick
     protected $label = 'Demo Button';
 
     /**
-     * This is where all the fields for the brick will be set-
+     * This is where all the fields for the brick will be set.
      */
     public function set_fields()
     {

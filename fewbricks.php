@@ -151,7 +151,7 @@ if(!class_exists('acf')) {
     function add_admin_menu()
     {
 
-        \add_submenu_page('edit.php?post_type=acf-field-group', 'fewbricksdev', 'Fewbricks DEV', 'activate_plugins',
+        \add_submenu_page('edit.php?post_type=acf-field-group', 'Fewbricks', 'Fewbricks', 'activate_plugins',
             'fewbricksdev',
             function () {
                 require_once(__DIR__ . '/admin/dev.php');
