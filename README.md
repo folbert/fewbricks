@@ -203,35 +203,45 @@ Each brick has its own class placed in the folder named "bricks". Each class hav
         
     Locations can be tricky so use the playground field group that we recommend that you create (see under "Basic idea" for more info on this). Using the example above, the field group will show up on all pages.
     
-5. When the location has been set, load something in the backend where the field group should show up (any page if you have used the location example above). You should now see the field group on the page and the original content-wysiwyg should be gone.
+5. When the location has been set, load something in the backend where the field group should show up (which will be any page if you have used the location example above). You should now see the field group on the page and the original content-wysiwyg should be gone.
     
     Add some content in the headline and content field and load up the page in the frontend. Is your content not being displayed? That's expected since the get_html-function is empty. Let's fix that now.
     
-6. There are two ways of getting the HTML of a brick. Either have `get_brick_html()` return the HTML which, in our example, would require us to paste the following lines to that function in headline-and-content.php.
+6. Now, add the following code where you want the content to show up (again, using the example code above, this would be in the standard page template):
 
-        $html = '<h1>' . $this->get_field('headline') . '</h1>';
-        $html .= 'The content: ' . $this->get_field('content');
-        return $html
-        
-    Or, you can build the HTML in an external file named after the name of the brick class it belongs to. So for our example class `headline_and_content` we would create the file [themes]/fewbricks/bricks/headline-and-content.template.php and put the following lines in it:
-    
         <?php
-        
-            echo '<h1>' . $this->get_field('headline') . '</h1>
-                The content: ' . $this->get_field('content');
-                
-    There really is not much difference between the two ways. Including external files will have some minor impact on performance but if you feel that having the HTML in an external file is the way to go, go ahead. 
-        
-    The `get_field()`-function being used is a wrapper function for ACFs own `get_field()` which takes care of adding any needed prefixes to get the value. Note that we are using the name values that we set when adding fields under step 3 above.
+            echo (new fewbricks\bricks\text_and_content('text_and_content_test'))->get_html();
+        ?>
     
-  7. One last thing to have the content of the brick show up: in the code creating the page in the frontend, add the following code where you want the content to show up:
-  
-        echo (new fewbricks\bricks\text_and_content('text_and_content_test'))->get_html();
-        
     Note that we are using the name (text_and_content_test) that we set when adding the brick to the field group in step 4.
     
-    Now, reload the frontend and you should have whatever content you added to the brick in he backend show up.
+    Almost done, we need to check out step 7 first.
     
+7. In probably every case you will want the brick to output something. That's where the function `get_brick_html()` in each brick class comes in to play. This function must be present in all brick-classes and should return (not echo) what you want printed.
+ 
+    What you decide to do in `get_brick_html()` is completely up to you, but here are three different ways:
+ 
+    1. Build the HTML directly in the function and return it HTML. In our example, this could look something like the following code which you can simply paste to `get_brick_html()`.
+
+            $html = '<h1>' . $this->get_field('headline') . '</h1>';
+            $html .= 'The content: ' . $this->get_field('content');
+            return $html
+        
+    2. Build the HTML in an external file named after the name of the brick class it belongs to. So for our example class `headline_and_content` we would create the file [themes]/fewbricks/bricks/headline-and-content.template.php and put the following lines in it:
+    
+            <?php
+            echo '<h1>' . $this->get_field('headline') . '</h1>
+            The content: ' . $this->get_field('content');
+            ?>
+            
+        We are using this approach in [theme]/fewbricks/bricks/demo-jumbotron.php. The template-file have access to the same data and variables that you have if you are building the HTML right in `get_brick_html()`.
+                
+    3. If you are using a templating system, you can use that. We have included an example of how to utilize [Timber](http://upstatement.com/timber/) in an commented out version of `get_brick_html` in [theme]/fewbricks/bricks/demo-video.php.
+                
+    Including external files like in i and ii will have some minor impact on performance but if you feel that having the HTML in an external file is the way to go, go ahead. 
+        
+    The `get_field()`-function being used is a wrapper function for ACFs own `get_field()` which takes care of adding any needed prefixes to get the value. Note that we are using the name values that we set when adding fields under step 3 above.
+   
 #### Is that all Fewbricks can do?
 Nope. Like we said, you can create flexible content, repeaters, bricks incorporating other bricks and also create field groups on the fly. For more on how to do this, check the files in the directories "field-groups", "demo", "bricks" and "brick-layouts". Don't miss the brick named "demo-flexible-brick"!
 

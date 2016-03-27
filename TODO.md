@@ -1,10 +1,10 @@
 # TODO
 
-+ Describe demo (moving template)
++ Twig support for bricks?
 
-+ Describe external template
++ Twig support in layouts?
 
-+ Blade-support?
++ Filter in gethtml?
 
 + Make ACF Json work
 

@@ -71,6 +71,25 @@ class demo_video extends project_brick
     }
 
     /**
+     * Function to show what Twig could do for you
+     * @return string
+     */
+    /*
+    protected function get_brick_html()
+    {
+
+        $data = [
+            'headline' => $this->demo_get_headline_html('headline'),
+            'url' => $this->get_video_url(),
+            'button_html' => $this->get_child_brick('demo_button', 'button')->get_html()
+        ];
+
+        return \Timber::compile('demo-video.twig', $data);
+
+    }
+    */
+
+    /**
      * @return bool|mixed|null|void
      */
     private function get_video_url()

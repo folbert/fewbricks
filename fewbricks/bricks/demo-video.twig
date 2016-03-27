@@ -1,0 +1,15 @@
+{{ headline }}
+
+{% if url != false %}
+<div class="row">
+<div class="col-xs-12">
+    <div class="embed-responsive embed-responsive-16by9">
+        <iframe src="{{ url }}" allowfullscreen></iframe>
+    </div>
+</div>
+</div>
+{% endif %}
+
+{% if button_html is not empty %}
+    {{ button_html }}
+{%  endif %}
