@@ -12,89 +12,87 @@ class brick
 {
 
     /**
-     * @var string
+     * @var string The name of the brick
      */
     private $name;
 
     /**
-     * @var string
+     * @var string The key of the brick. Must be unique across the site.
      */
     private $key;
 
     /**
-     * @var bool
+     * @var bool True if the brick is a layout for flexible content
      */
     protected $is_layout;
 
     /**
-     * @var bool
+     * @var bool True if the brick belongs to an ACF options page.
      */
     protected $is_option;
 
     /**
-     * @var bool
+     * @var bool True if the brick is a sub field for a repeater
      */
     protected $is_sub_field;
 
     /**
-     * @var array
+     * @var array The fields that the brick have.
      */
     private $fields;
 
     /**
-     * @var string
+     * @var string An optional text to prepend to the labels of the fields of the brick.
      */
     private $field_label_prefix;
 
     /**
-     * @var
+     * @var string An optional text to append to the labels of the fields of the brick.
      */
     private $field_label_suffix;
 
     /**
-     * @var bool|array
+     * @var bool|array Data for the brick
      */
     protected $data = false;
 
     /**
-     * Extra settings to allow for greater flexibility for the arguments.
-     * @var array
+     * @var array Extra settings to allow for greater flexibility for the arguments.
      */
     protected $settings;
 
     /**
-     * @var
+     * @var array Extra settings that is passed to get_html() / get_brick_html()
      */
     protected $get_html_args;
 
     /**
-     * @var array
-     * A place to store arbitrary arguments.
+     * @var array A place to store arbitrary arguments.
      */
     protected $args;
 
     /**
-     * @var
+     * @var array What post id we should get field from.
      */
     private $post_id_to_get_field_from;
 
     /**
-     * @var
+     * @var array Any layouts that the brick has if it is a flexible content.
      */
     private $layouts;
 
     /**
-     * @var
+     * @var array Any fields that we should remove will be added to this array.
      */
     private $fields_to_remove;
 
     /**
-     * @var
+     * @var boolean True if the brick is sub brick of another brick.
      */
     protected $is_sub_brick;
 
     /**
-     * @var
+     * @var array Any brick layouts that should be used when ouputting the brick.
      */
     private $brick_layouts;
 
@@ -128,8 +126,8 @@ class brick
     }
 
     /**
-     * @param $data
-     * @return $this
+     * @param array $data
+     * @return brick $this
      */
     public function set_data($data)
     {
@@ -141,6 +139,7 @@ class brick
     }
 
     /**
+     * Get settings of a field.
      * @param \fewbricks\acf\field-group|\fewbricks\acf\layout|\fewbricks\acf\fields\repeater|\fewbricks\acf\fields\flexible_content|\fewbricks\bricks\brick $object_to_get_for
      * @return array
      */
@@ -183,6 +182,7 @@ class brick
     }
 
     /**
+     * Add a field to the brick.
      * @param \fewbricks\acf\fields\field $field
      * @return mixed
      */
@@ -196,6 +196,7 @@ class brick
     }
 
     /**
+     * Add a sub brick to the brick.
      * @param brick $brick_to_add
      */
     protected function add_brick($brick_to_add)
@@ -206,6 +207,7 @@ class brick
     }
 
     /**
+     * Add a repeater to the brick.
      * @param \fewbricks\acf\fields\repeater $repeater
      */
     protected function add_repeater($repeater)
@@ -216,6 +218,7 @@ class brick
     }
 
     /**
+     * Add a flexible content to the brick.
      * @param \fewbricks\acf\fields\flexible_content $flexible_content
      */
     protected function add_flexible_content($flexible_content)
@@ -226,6 +229,7 @@ class brick
     }
 
     /**
+     * Add a common field to the brick.
      * @param string $common_field_array_key A key corresponding to an item in the fewbricks_common_fields array
      * @param string $key A site wide unique key for the field
      * @param array $settings Anye extra settings to set on the field. Can be used to override existing settings as well.
@@ -249,6 +253,7 @@ class brick
     }
 
     /**
+     * Set an argument.
      * @param $name
      * @param $value
      * @return $this
@@ -261,6 +266,7 @@ class brick
     }
 
     /**
+     * Get an argument.
      * @param string $name The name of the argument to get
      * @param boolean $default The value to return if there is no argument with the sent name.
      * @return mixed The value of the argument or default if the argument ha snot been set
@@ -278,6 +284,7 @@ class brick
     }
 
     /**
+     * Prepare settings of the brick.
      * @param $object_to_prepare_for
      */
     private function prepare_settings($object_to_prepare_for)
