@@ -4,7 +4,7 @@ namespace fewbricks\acf\fields;
 
 /**
  * Class true_false
- * @package fewbricks\acf
+ * @package fewbricks\acf\fields
  */
 class true_false extends field
 {

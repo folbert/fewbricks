@@ -4,7 +4,7 @@ namespace fewbricks\acf\fields;
 
 /**
  * Class password
- * @package fewbricks\acf
+ * @package fewbricks\acf\fields
  */
 class password extends field
 {

@@ -4,7 +4,7 @@ namespace fewbricks\acf\fields;
 
 /**
  * Class oembed
- * @package fewbricks\acf
+ * @package fewbricks\acf\fields
  */
 class oembed extends field
 {

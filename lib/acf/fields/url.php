@@ -4,7 +4,7 @@ namespace fewbricks\acf\fields;
 
 /**
  * Class url
- * @package fewbricks\acf
+ * @package fewbricks\acf\fields
  */
 class url extends field
 {

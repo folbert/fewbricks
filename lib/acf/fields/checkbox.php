@@ -4,7 +4,7 @@ namespace fewbricks\acf\fields;
 
 /**
  * Class checkbox
- * @package fewbricks\acf
+ * @package fewbricks\acf\fields
  */
 class checkbox extends field
 {

@@ -4,7 +4,7 @@ namespace fewbricks\acf\fields;
 
 /**
  * Class email
- * @package fewbricks\acf
+ * @package fewbricks\acf\fields
  */
 class email extends field
 {

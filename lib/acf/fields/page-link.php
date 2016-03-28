@@ -4,7 +4,7 @@ namespace fewbricks\acf\fields;
 
 /**
  * Class page_link
- * @package fewbricks\acf
+ * @package fewbricks\acf\fields
  */
 class page_link extends field
 {

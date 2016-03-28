@@ -4,7 +4,7 @@ namespace fewbricks\acf\fields;
 
 /**
  * Class radio
- * @package fewbricks\acf
+ * @package fewbricks\acf\fields
  */
 class radio extends field
 {

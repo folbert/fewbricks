@@ -4,7 +4,7 @@ namespace fewbricks\acf\fields;
 
 /**
  * Class repeater
- * @package fewbricks\acf
+ * @package fewbricks\acf\fields
  */
 class repeater extends field
 {

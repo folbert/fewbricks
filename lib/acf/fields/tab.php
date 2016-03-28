@@ -4,7 +4,7 @@ namespace fewbricks\acf\fields;
 
 /**
  * Class tab
- * @package fewbricks\acf
+ * @package fewbricks\acf\fields
  */
 class tab extends field
 {

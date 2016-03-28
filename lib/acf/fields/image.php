@@ -4,7 +4,7 @@ namespace fewbricks\acf\fields;
 
 /**
  * Class image
- * @package fewbricks\acf
+ * @package fewbricks\acf\fields
  */
 class image extends field
 {

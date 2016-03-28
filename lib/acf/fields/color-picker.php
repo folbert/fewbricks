@@ -4,7 +4,7 @@ namespace fewbricks\acf\fields;
 
 /**
  * Class color_picker
- * @package fewbricks\acf
+ * @package fewbricks\acf\fields
  */
 class color_picker extends field
 {

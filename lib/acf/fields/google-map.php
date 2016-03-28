@@ -4,7 +4,7 @@ namespace fewbricks\acf\fields;
 
 /**
  * Class google_map
- * @package fewbricks\acf
+ * @package fewbricks\acf\fields
  */
 class google_map extends field
 {

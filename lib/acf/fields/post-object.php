@@ -4,7 +4,7 @@ namespace fewbricks\acf\fields;
 
 /**
  * Class post_object
- * @package fewbricks\acf
+ * @package fewbricks\acf\fields
  */
 class post_object extends field
 {

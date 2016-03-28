@@ -4,7 +4,7 @@ namespace fewbricks\acf\fields;
 
 /**
  * Class gallery
- * @package fewbricks\acf
+ * @package fewbricks\acf\fields
  */
 class gallery extends field
 {

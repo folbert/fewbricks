@@ -4,7 +4,7 @@ namespace fewbricks\acf\fields;
 
 /**
  * Class wysiwyg
- * @package fewbricks\acf
+ * @package fewbricks\acf\fields
  */
 class wysiwyg extends field
 {

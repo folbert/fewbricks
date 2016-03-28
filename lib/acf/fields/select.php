@@ -4,7 +4,7 @@ namespace fewbricks\acf\fields;
 
 /**
  * Class select
- * @package fewbricks\acf
+ * @package fewbricks\acf\fields
  */
 class select extends field
 {

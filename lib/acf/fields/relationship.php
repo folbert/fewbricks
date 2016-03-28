@@ -4,7 +4,7 @@ namespace fewbricks\acf\fields;
 
 /**
  * Class relationship
- * @package fewbricks\acf
+ * @package fewbricks\acf\fields
  */
 class relationship extends field
 {

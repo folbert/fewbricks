@@ -4,7 +4,7 @@ namespace fewbricks\acf\fields;
 
 /**
  * Class hidden
- * @package fewbricks\acf
+ * @package fewbricks\acf\fields
  */
 class hidden extends field
 {

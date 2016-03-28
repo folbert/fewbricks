@@ -4,6 +4,7 @@ namespace fewbricks\acf\fields;
 
 /**
  * Class flexible_content
+ * @package fewbricks\acf\fields
  */
 class flexible_content extends field
 {
