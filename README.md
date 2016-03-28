@@ -60,7 +60,7 @@ The system was created for the following reasons:
  Some experience with ACF and knowledge about what a field, field group etc is is recommended and that can all be read up on in the [documentation for ACF](http://www.advancedcustomfields.com/resources).
  
 ## Installation
- 1. Make sure that the [requirements](#requirements) are met. If you are using Composer, we will install the plugin "Hidden field for ACF" for you. If you are not using Composer, please install the "Hidden field for ACF" manually.
+ 1. Make sure that the [requirements](#requirements) are met. If you are not using Composer, please install the "Hidden field for ACF" manually.
  2. Add Fewbricks to your pluginfolder manually or by using Composer.
  3. In the main folder named fewbricks, there is a folder also named "fewbricks". Move that folder to your theme folder and do __not__ rename it or any of its child directories. All your custom code will reside in this folder.
  4. Activate the plugin.
@@ -109,7 +109,7 @@ The settings that all fields have in common are key, name and label:
  
 * settings - You can set all other settings that a field have by passing an associative array as the third argument when creating a field instance. Any keys in that array should correspond to keys in the `base_settings` in each field class in lib/acf/fields/.
 
-**Note:** If you add an add-on field, you must create a field-class for that field in [your theme]/fewbricks/acf/fields/. Just as we have done with the hidden field.
+**Note:** If you add an add-on field, you must create a field class for that field in [theme]/fewbricks/acf/fields/. We have placed an example class in that folder to explain what a field class should hold.
 
 ### Creating a brick
 Each brick has its own class placed in the folder named "bricks". Each class have a number of fields. Field instances can either be created directly in a brick, but a brick may also reuse existing bricks.
