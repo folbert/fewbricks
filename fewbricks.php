@@ -30,7 +30,7 @@ if(!class_exists('acf')) {
 
     });
 
-} else if(!file_exists(plugin_dir_path(__FILE__) . '../acf-hidden/acf-hidden.php')) {
+} else if(!file_exists(plugin_dir_path(__FILE__) . '../acf-fewbricks-hidden/acf-fewbricks-hidden.php')) {
 
     add_action('admin_notices', function () {
 
