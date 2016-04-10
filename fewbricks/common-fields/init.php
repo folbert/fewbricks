@@ -5,4 +5,4 @@
  * But if you will not be using the common fields functionality, feel free to delete all content in it.
  */
 
-require('common-fields-demo.php');
+require(__DIR__ . '/common-fields-demo.php');

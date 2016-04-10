@@ -9,4 +9,4 @@
  * DO NOT use require_once since that will break stuff.
  */
 
-require('field-group-template-fewbricks-demo.php');
+require(__DIR__ . '/field-group-template-fewbricks-demo.php');
