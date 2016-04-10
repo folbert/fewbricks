@@ -55,12 +55,12 @@ The system was created for the following reasons:
 ## Requirements
  + PHP 5.4+
  + [Advanced Custom Fields](http://www.advancedcustomfields.com/) 5+ PRO
- + [Hidden field for Advanced Custom Fields](https://github.com/folbert/acf-hidden) This allows us to store settings in a brick. For example how many columns a multi column brick should have.
+ + [Fewbricks Hidden Field for Advanced Custom Fields](https://github.com/folbert/acf-fewbricks-hidden) This allows us to store settings in a brick. For example how many columns a multi column brick should have.
  
  Some experience with ACF and knowledge about what a field, field group etc is is recommended and that can all be read up on in the [documentation for ACF](http://www.advancedcustomfields.com/resources).
  
 ## Installation
- 1. Make sure that the [requirements](#requirements) are met. If you are not using Composer, please install the "Hidden field for ACF" manually.
+ 1. Make sure that the [requirements](#requirements) are met. If you are not using Composer, please install the "Fewbricks Hidden field for ACF" manually and make sure that its folder is named "acf-fewbricks-hidden".
  2. Add Fewbricks to your pluginfolder manually or by using Composer.
  3. In the main folder named fewbricks, there is a folder also named "fewbricks". Move that folder to your theme folder and do __not__ rename it or any of its child directories. All your custom code will reside in this folder.
  4. Activate the plugin.
@@ -277,7 +277,7 @@ By setting Fewbricks in developer mode, some extra debugging related to Fewbrick
 If developer mode is enabled, you can also var dump the fields settings each time a field group is registered. This is done by passing a get variable named "dumpfewbricksfields" to any page like so: http://mywordpressinstall.com/wp-admin/?dumpfewbricksfields .
 
 #### Field info
-If you use the technique described above to enter developer mode, you will also get info about each field in the form of a yellow and blue info field next to each field in the backend. The yellow field hold the name of the field and the blue one holds the id. If you want the developer mode activated but not displaying the field info (it uses JS which can be annoying even in dev mode), add the following code to the same file that you activated developer mode in:
+If you use the technique described above to enter developer mode, you will also get info about each field in the form of a yellow and blue info field next to each field in the backend. The yellow field hold the name of the field and the blue one holds the key. If you want the developer mode activated but not displaying the field info (it uses JS which can be annoying even in dev mode), add the following code to the same file that you activated developer mode in:
  `define('FEWBRICKS_HIDE_ACF_INFO', true)`
 
 The code displaying the field info was originally found in the plugin [ACF: Field Snitch](https://sv.wordpress.org/plugins/advanced-custom-fields-field-snitch/) by [Stupid Studio](https://stupid-studio.com/) and modified by [Bryan Willis](https://gist.github.com/bryanwillis/bbfdce5febd3db16c53c#file-acf-field-snitch-v5-js) to work with verison 5 of ACF. 

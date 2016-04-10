@@ -6,7 +6,7 @@ namespace fewbricks\acf\fields;
  * Class hidden
  * @package fewbricks\acf\fields
  */
-class hidden extends field
+class fewbricks_hidden extends field
 {
 
     /**
@@ -23,7 +23,7 @@ class hidden extends field
 
         $base_settings = [
             'prefix' => '',
-            'type' => 'hidden',
+            'type' => 'fewbricks_hidden',
             'instructions' => '',
             'required' => 0,
             'conditional_logic' => 0,

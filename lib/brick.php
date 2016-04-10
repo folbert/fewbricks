@@ -159,7 +159,7 @@ class brick
             $this->set_is_layout(true);
 
             // We need a hidden field to tell us what class we are dealing with when looping layouts in the frontend.
-            $this->add_field((new acf\fields\hidden('Brick class', 'brick_class', '7001010000a'))
+            $this->add_field((new acf\fields\fewbricks_hidden('Brick class', 'brick_class', '7001010000a'))
                 ->set_setting('default_value', \fewbricks\helpers\get_real_class_name($this)));
 
         } elseif (is_a($object_to_get_for, 'fewbricks\acf\fields\repeater')) {
