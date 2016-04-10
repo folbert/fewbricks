@@ -24,7 +24,7 @@ if(!class_exists('acf')) {
 
         echo '
           <div class="error notice">
-            <p>In order to use Fewbricks, please make sure that <a href="http://www.advancedcustomfields.com/">Advanced Custom Fields 5 Pro</a> is installed and activated.</p>
+            <p>You have activated the plugin "Fewbricks". In order to use it, please make sure that <a href="http://www.advancedcustomfields.com/">Advanced Custom Fields 5 Pro</a> is installed and activated.</p>
           </div>
         ';
 
@@ -35,10 +35,10 @@ if(!class_exists('acf')) {
     add_action('admin_notices', function () {
 
         echo '
-          <div class="error notice">
-            <p>In order to use Fewbricks, please make sure that <a href="https://github.com/folbert/acf-hidden">Hidden field</a> for Advanced Custom Fields is installed and activated.</p>
-          </div>
-        ';
+      <div class="error notice">
+        <p>You have activated the plugin "Fewbricks". In order to use it, please make sure that <a href="https://github.com/folbert/acf-fewbricks-hidden">Fewbricks Hidden Field</a> for Advanced Custom Fields is installed and activated.</p>
+      </div>
+    ';
 
     });
 
@@ -47,10 +47,10 @@ if(!class_exists('acf')) {
     add_action('admin_notices', function() {
 
         echo '
-          <div class="error notice">
-            <p>In order to use Fewbricks, please make sure that you have copied the directory "fewbricks" in plugins/fewbricks/ to your theme directory. Read more under in the <a href="https://github.com/folbert/fewbricks/blob/master/README.md">README</a>.</p>
-          </div>
-        ';
+  <div class="error notice">
+    <p>You have activated the plugin "Fewbricks". In order to use it, please make sure that you have copied the directory "fewbricks" in plugins/fewbricks/ to your theme directory. Read more under in the <a href="https://github.com/folbert/fewbricks/blob/master/README.md">README</a>.</p>
+  </div>
+';
 
     });
 
