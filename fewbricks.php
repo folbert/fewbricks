@@ -15,46 +15,91 @@ namespace fewbricks;
 // Exit if accessed directly
 if( ! defined( 'ABSPATH' ) ) exit;
 
-$fewbricks_template_directory = get_template_directory() . '/';
+// Only perform requirement checks in admin system.
+// If any requirements are not met, this should be discovered by devs before pushing to production so let's save
+// some CPU on the frontend.
+if(is_admin()) {
 
-// If ACF is not present
-if(!class_exists('acf')) {
+    // If ACF is not present
+    if(!class_exists('acf')) {
 
-    add_action('admin_notices', function () {
+        add_action('admin_notices', function () {
 
-        echo '
-          <div class="error notice">
-            <p>You have activated the plugin "Fewbricks". In order to use it, please make sure that <a href="http://www.advancedcustomfields.com/">Advanced Custom Fields 5 Pro</a> is installed and activated.</p>
-          </div>
-        ';
+            echo '
+              <div class="error notice">
+                <p>You have activated the plugin "Fewbricks". In order to use it, please make sure that <a href="http://www.advancedcustomfields.com/">Advanced Custom Fields 5 Pro</a> is installed and activated.</p>
+              </div>
+            ';
 
-    });
+        });
 
-} else if(!file_exists(plugin_dir_path(__FILE__) . '../acf-fewbricks-hidden/acf-fewbricks-hidden.php')) {
+    } else if(!file_exists(plugin_dir_path(__FILE__) . '../acf-fewbricks-hidden/acf-fewbricks-hidden.php')) {
+        // If acf-fewbricks-hidden is not where it's supposed to be. Note that this check does not tell us if
+        // acf-fewbricks-hidden is activated or not.
 
-    add_action('admin_notices', function () {
+        add_action('admin_notices', function () {
 
-        echo '
-      <div class="error notice">
-        <p>You have activated the plugin "Fewbricks". In order to use it, please make sure that <a href="https://github.com/folbert/acf-fewbricks-hidden">Fewbricks Hidden Field</a> for Advanced Custom Fields is installed and activated.</p>
-      </div>
-    ';
+            echo '
+              <div class="error notice">
+                <p>You have activated the plugin "Fewbricks". In order to use it, please make sure that <a href="https://github.com/folbert/acf-fewbricks-hidden">Fewbricks Hidden Field</a> for Advanced Custom Fields is installed.</p>
+              </div>
+            ';
 
-    });
+        });
 
-} else if(!file_exists($fewbricks_template_directory . 'fewbricks')) {
+    } else if(!file_exists(get_template_directory() . '/fewbricks')) {
+        // Make sure that the fewbricks/fewbricks-directory has been moved to the template directory.
 
-    add_action('admin_notices', function() {
+        add_action('admin_notices', function() {
 
-        echo '
-  <div class="error notice">
-    <p>You have activated the plugin "Fewbricks". In order to use it, please make sure that you have copied the directory "fewbricks" in plugins/fewbricks/ to your theme directory. Read more under in the <a href="https://github.com/folbert/fewbricks/blob/master/README.md">README</a>.</p>
-  </div>
-';
+            echo '
+              <div class="error notice">
+                <p>You have activated the plugin "Fewbricks". In order to use it, please make sure that you have copied the directory "fewbricks" in plugins/fewbricks/ to your theme directory. Read more under in the <a href="https://github.com/folbert/fewbricks/blob/master/README.md">README</a>.</p>
+              </div>
+            ';
 
-    });
+        });
 
-} else { // All requirements met
+    } else {
+        // So far, so good...
+
+        // ... but let's also check that acf-fewbricks-hidden really have been activated.
+        add_action('admin_init', function() {
+
+            if (!is_plugin_active('acf-fewbricks-hidden/acf-fewbricks-hidden.php')) {
+
+                add_action('admin_notices', function () {
+
+                    echo '
+                      <div class="error notice">
+                        <h1>Important</h1><p>You have activated the plugin "Fewbricks". In order to use it, please make sure that <a href="https://github.com/folbert/acf-fewbricks-hidden">Fewbricks Hidden Field</a> for Advanced Custom Fields is activated.</p>
+                      </div>
+                    ';
+
+                });
+
+            }
+
+        });
+
+        // There is no way to check if a plugin is activated without using an earlier action than admin_init and
+        // we don't want to postpone construct until then. So we construct Fewbricks here without being shure that
+        // acf-fewbricks-hidden is activated.
+        \fewbricks\construct();
+
+    }
+
+} else {
+    // Not in admin system, so assume that all is good.
+
+    \fewbricks\construct();
+
+}
+
+/**
+ * Start Fewbricks
+ */
+function construct() {
 
     /**
      * Set some variables that will be reused
@@ -78,7 +123,7 @@ if(!class_exists('acf')) {
      * Autoloader for fewbricksclasses
      * @param $class
      */
-    function autoloader($class)
+    spl_autoload_register(function ($class)
     {
 
         $namespace_parts = explode('\\', $class);
@@ -121,9 +166,7 @@ if(!class_exists('acf')) {
 
         }
 
-    }
-
-    spl_autoload_register(__NAMESPACE__ . '\\autoloader');
+    });
 
     global $fewbricks_save_json;
 
@@ -131,6 +174,8 @@ if(!class_exists('acf')) {
      * Stuff that is only required in the backend doesnt needs to be required if local json is used.
      */
     if (((!defined('FEWBRICKS_USE_ACF_JSON') || FEWBRICKS_USE_ACF_JSON === false) && function_exists('register_field_group')) || $fewbricks_save_json === true) {
+
+        $fewbricks_template_directory = get_template_directory() . '/';
 
         require($fewbricks_template_directory . 'fewbricks/common-fields/init.php');
         require($fewbricks_template_directory . 'fewbricks/field-groups/init.php');
@@ -149,20 +194,16 @@ if(!class_exists('acf')) {
     /**
      * Lets add a menu item to the ACF menu
      */
-    function add_admin_menu()
-    {
-
-        \add_submenu_page('edit.php?post_type=acf-field-group', 'Fewbricks', 'Fewbricks', 'activate_plugins',
-            'fewbricksdev',
-            function () {
-                require_once(__DIR__ . '/admin/dev.php');
-            });
-
-    }
-
     if ($fewbricks_dev_mode) {
 
-        add_action('admin_menu', __NAMESPACE__ . '\\add_admin_menu');
+        add_action('admin_menu', function() {
+
+            \add_submenu_page('edit.php?post_type=acf-field-group', 'Fewbricks', 'Fewbricks', 'activate_plugins',
+                'fewbricksdev',
+                function () {
+                    require_once(__DIR__ . '/admin/dev.php');
+                });
+        });
 
     }
 
