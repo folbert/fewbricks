@@ -1,7 +1,8 @@
 # Fewbricks
 
-## WordPress plugin
-I have begun working on turning this into a WordPress plugin instead where you install most of the files as any plugin and then the files in the project folder are moved to a folder in the theme. It makes more sense to do it that way. Hopefully it will be all done and tested no later than the end of April 2016.
+Please see [this issue](https://github.com/folbert/fewbricks/issues/2#issuecomment-208723764) on why Fewbricks is not in the WordPress Plugin Directory.
+
+Please note that Fewbricks is still in beta. E.t.a of stable version is April 2016.
 
 ## TOC
 + [Legal](#legal)
