@@ -250,9 +250,11 @@ Due to restrictions in the WordPress table structure, the max length of a field 
 ### Brick layouts
 Brick layouts are not the same as layouts in ACF.
 
-Often when printing bricks you want to have some wrapping HTML that is the same for each brick. This can for example be Bootstraps "row" and "col"-divs. Other times, you might only want the "core html" of the brick without anything wrapping it. So we have created a basic layout system.
+Often when printing bricks you want to have some wrapping HTML that is the same for each brick. This can for example be Bootstraps "row" and "col"-divs. Other times, you might only want the "core html" of the brick without anything wrapping it. To keep it DRY, we have created a basic layout system.
 
-Brick layout files are stored in the brick-layouts directory and are used by passing the name(s) of the file(s) without the file extension (.php) to the `get_html`-function of a brick. If you dont want to use a brick layout, don't pass anything (or `false`) to the function.
+Brick layout files are stored in the brick-layouts directory and are used by passing the name(s) of the file(s) without the file extension (.php) to the `get_html`-function of a brick. If you dont want to use brick layouts, don't pass anything (or `false`) to the function.
+
+You can also create layouts using Timber. The only thing you have to do different compared to when using a basic PHP-file is to include '.twig' in the filename when passing it to `get_html`.
 
 If a string or array is passed, the file(s) with the name(s) is then included after the core html of a brick has been built. This means that you have access to these variables in a brick layout-file:
 

@@ -99,7 +99,7 @@ echo (new \fewbricks\bricks\demo_jumbotron('jumbotron'))->get_html();
 
       <?php
 
-      echo (new \fewbricks\bricks\demo_standard_list('a_list'))->get_html(false);
+      echo (new \fewbricks\bricks\demo_standard_list('a_list'))->get_html(false, ['demo-layout-2', 'demo-layout-3.twig']);
 
       ?>
 

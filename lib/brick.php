@@ -588,12 +588,23 @@ class brick
 
             foreach ($this->brick_layouts AS $brick_layout) {
 
-                ob_start();
+                if(substr($brick_layout, -5) === '.twig') {
 
-                /** @noinspection PhpIncludeInspection */
-                include($theme_path . 'fewbricks/brick-layouts/' . $brick_layout . '.php');
+                    $html = \Timber::compile($theme_path . 'fewbricks/brick-layouts/' . $brick_layout, [
+                        'html' => $html,
+                        'this' => $this
+                    ]);
 
-                $html = ob_get_clean();
+                } else {
+
+                    ob_start();
+
+                    /** @noinspection PhpIncludeInspection */
+                    include($theme_path . 'fewbricks/brick-layouts/' . $brick_layout . '.php');
+
+                    $html = ob_get_clean();
+
+                }
 
             }
 
