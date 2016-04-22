@@ -151,9 +151,11 @@ Each brick has its own class placed in the folder named "bricks". Each class hav
 2. Copy the code from the file [_brick-boilerplate.php](fewbricks/bricks/_brick-boilerplate.php) and paste it into your newly created file.
  
 3. Now, lets add the fields to the brick. In the set_fields-function, add this code:
-  
-        $this->add_field(new acf_fields\text('Headline', 'headline', 1509041509a'));
-        $this->add_field(new acf_fields\wysiwyg('Content', 'content', '1509041509b'));
+
+    ```php
+    $this->add_field(new acf_fields\text('Headline', 'headline', 1509041509a'));
+    $this->add_field(new acf_fields\wysiwyg('Content', 'content', '1509041509b'));
+    ```
     
     With the code above, we have added two fields. One text-field and one wysiwyg-field. Each field has gotten a label to display to the administrator, a name we can use when getting the data for the field and a site-wide-unique key. It is __very important__ that the keys are unique on a site wide level.
     
@@ -211,20 +213,20 @@ Each brick has its own class placed in the folder named "bricks". Each class hav
  
     1. Build the HTML directly in the function and return it HTML. In our example, this could look something like the following code which you can simply paste to `get_brick_html()`.
 
-    ```php
-    $html = '<h1>' . $this->get_field('headline') . '</h1>';
-    $html .= 'The content: ' . $this->get_field('content');
-    return $html
-    ```
+        ```php
+        $html = '<h1>' . $this->get_field('headline') . '</h1>';
+        $html .= 'The content: ' . $this->get_field('content');
+        return $html
+        ```
         
     2. Build the HTML in an external file named after the name of the brick class it belongs to. So for our example class `headline_and_content` we would create the file [themes]/fewbricks/bricks/headline-and-content.template.php and put the following lines in it:
     
-    ```php
-    <?php
-    echo '<h1>' . $this->get_field('headline') . '</h1>
-    The content: ' . $this->get_field('content');
-    ?>
-    ```
+        ```php
+        <?php
+        echo '<h1>' . $this->get_field('headline') . '</h1>
+        The content: ' . $this->get_field('content');
+        ?>
+        ```
             
         We are using this approach in [theme]/fewbricks/bricks/demo-jumbotron.php. The template-file have access to the same data and variables that you have if you are building the HTML right in `get_brick_html()`.
                 
