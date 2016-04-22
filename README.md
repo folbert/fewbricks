@@ -64,11 +64,12 @@ The system was created for the following reasons:
  
  2. Add Fewbricks to your plugin folder using one of the following techniques
  
-    * Composer 
+    * Install using Composer 
     > composer require folbert/fewbricks
+    I have set the repository type of the package to "wordpress-plugin" which may be good to know since you will want Fewbricks to end up in the plugins directory and not in the default vendor directory for Composer packages. If you want to get started using Composer with WordPress (and potentially stepping your WP game up in lots of other ways, I highly recommend using [Bedrock](https://roots.io/bedrock/) from the team behind Roots/[Sage](https://roots.io/sage/))
      
-    * Manually by downloading [the latest release](/releases).
-    If you are installing Fewbricks this way, also install [Fewbricks Hidden field for ACF](https://github.com/folbert/acf-fewbricks-hidden) and make sure that its folder is named "acf-fewbricks-hidden".
+    * Install manually by downloading [the latest release](/releases).
+    If you are installing Fewbricks this way, you must also install [Fewbricks Hidden field for ACF](https://github.com/folbert/acf-fewbricks-hidden) and make sure that its folder is named "acf-fewbricks-hidden".
  
  3. In the main folder named "fewbricks", there is a folder also named "fewbricks". Move that folder to your theme folder and do __not__ rename it or any of its child directories. All your custom code will reside in this folder.
  
