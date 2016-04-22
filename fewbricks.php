@@ -5,7 +5,7 @@ Plugin Name: Fewbricks
 Plugin URI: https://github.com/fewagency/fewbricks
 Description: A module extension to Advanced Custom Fields
 Author: Björn Folbert
-Version: 0.9
+Version: 1.0
 Author URI: http://folbert.com
 License: GPLv3
 */
