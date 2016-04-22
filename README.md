@@ -128,55 +128,18 @@ Each brick has its own class placed in the folder named "bricks". Each class hav
 #### Creating a standard brick
  Let's create a standard brick with a text field and a wysiwyg-area. This is of course not a very impressive example since we are basically adding a brick that does what WordPress does out of the box. But it's a good place to start showing how to create stuff in fewbricks.
  
- 1. In the folder "[theme]/fewbricks/bricks", create a file named headline-and-content.php.
- 2. Add this code to the file
-          
-        namespace fewbricks\bricks;
-        
-        use fewbricks\acf\fields as acf_fields;
-        
-        /**
-         * Class text_and_content
-         * @package fewbricks\bricks
-         */
-        class headline_and_content extends project_brick {
-        
-            /**
-             * @var string This will be the default label showing up in the editor area for the administrator.
-             * It can be overridden by passing an item with the key "label" in the array that is the second argument when
-             * creating a brick.
-             */
-            protected $label = 'Headline and content';
-        
-            /**
-             * This is where all the fields for the brick will be set.
-             */
-            public function set_fields()
-            {
-        
-            }
-        
-            /**
-             * This function will be used in the frontend when displaying the brick.
-             * It will be called by the parents class function get_html(). See that function
-             * for info on what data you have at your disposal. 
-             * @return string
-             */
-            protected function get_brick_html()
-            {
-        
-            }
-        
-        }
-
-  3. Now, lets add the fields to the brick. In the set_fields-function, add this code:
+1. In the folder "[theme]/fewbricks/bricks", create a file named headline-and-content.php.
+ 
+2. Copy the code from the file [_brick-boilerplate.php](fewbricks/bricks/_brick-boilerplate.php) and paste it into your newly created file.
+ 
+3. Now, lets add the fields to the brick. In the set_fields-function, add this code:
   
         $this->add_field(new acf_fields\text('Headline', 'headline', 1509041509a'));
         $this->add_field(new acf_fields\wysiwyg('Content', 'content', '1509041509b'));
     
     With the code above, we have added two fields. One text-field and one wysiwyg-field. Each field has gotten a label to display to the administrator, a name we can use when getting the data for the field and a site-wide-unique key. It is __very important__ that the keys are unique on a site wide level.
     
-  4. Let's add our new brick to a field group: in the folder [theme]/fewbricks/field-groups, either create a new PHP-file or edit an existing one. If you create a new one, make sure to require it in [theme]/field-groups/init.php. Add this code to the field groups file:
+4. Let's add our new brick to a field group: in the folder [theme]/fewbricks/field-groups, either create a new PHP-file or edit an existing one. If you create a new one, make sure to require it in [theme]/field-groups/init.php. Add this code to the field groups file:
   
         $fg = new fewbricks\acf\field_group('Test content', '1504201020o', $location, 1);
         $fg->add_brick(new fewbricks\bricks\text_and_content('text_and_content_test', '1509041512c');
@@ -289,8 +252,11 @@ Fewbrikcs does support [ACF Local JSON](http://www.advancedcustomfields.com/reso
 If you still want to use Local JSON, follow these steps to activate it:
 
 1. As outlined in the [ACF instructions for local JSON](http://www.advancedcustomfields.com/resources/local-json/): in the themes directory, create a directory named acf-json.
+
 2. In the admin area, navigate to the Fewbricks admin page which is placed in the ACF menu. Click "Build JSON" and let the page reload.
+
 3. In a file that is always included, preferably wp-config.php, define a constant named FEWBRICKS_USE_JSON: `define('FEWBRICKS_USE_ACF_JSON', true)`.
+
 4. That's all there is to it. ACF will now load settings from the JSON-files in the acf-json directory created in step 1. 
 
 #### Important about local JSON 
