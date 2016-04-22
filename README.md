@@ -219,7 +219,7 @@ Each brick has its own class placed in the folder named "bricks". Each class hav
         return $html
         ```
         
-    2. Build the HTML in an external file named after the name of the brick class it belongs to. So for our example class `headline_and_content` we would create the file [themes]/fewbricks/bricks/headline-and-content.template.php and put the following lines in it:
+    2. Build the HTML in an external file named after the name of the brick class it belongs to. So for our example class `headline_and_content` we would create the file [theme]/fewbricks/bricks/headline-and-content.template.php (note the .template part of the name) and put the following lines in it:
     
         ```php
         <?php
@@ -227,8 +227,12 @@ Each brick has its own class placed in the folder named "bricks". Each class hav
         The content: ' . $this->get_field('content');
         ?>
         ```
+        
+        The template-file have access to the same data and variables that you have if you are building the HTML right in `get_brick_html()`.
+        
+        For your convenience, the main brick-class have a function named `get_brick_template_html()` for this. It will look for a template file with the name structure described above, include that file and return the outcome of it.
             
-        We are using this approach in [theme]/fewbricks/bricks/demo-jumbotron.php. The template-file have access to the same data and variables that you have if you are building the HTML right in `get_brick_html()`.
+        We are using this approach in [theme]/fewbricks/bricks/demo-jumbotron.php.
                 
     3. If you are using a templating system, you can use that. We have included an example of how to utilize [Timber](http://upstatement.com/timber/) in an commented out version of `get_brick_html` in [theme]/fewbricks/bricks/demo-video.php.
                 
