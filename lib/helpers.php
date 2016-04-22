@@ -19,3 +19,40 @@ function get_real_class_name($object)
     return $classname;
 
 }
+
+/**
+ * @return bool
+ */
+function is_fewbricks_in_developer_mode()
+{
+
+    return defined('FEWBRICKS_DEV_MODE') && FEWBRICKS_DEV_MODE === true;
+
+}
+
+/**
+ * @return bool
+ */
+function use_acf_json()
+{
+    return defined('FEWBRICKS_USE_ACF_JSON') && FEWBRICKS_USE_ACF_JSON === true;
+
+}
+
+/**
+ * @return mixed
+ */
+function acf_exists()
+{
+    return class_exists('acf');
+}
+
+/**
+ * 
+ */
+function hide_acf_info()
+{
+
+    return defined('FEWBRICKS_HIDE_ACF_INFO') && FEWBRICKS_HIDE_ACF_INFO === true;
+    
+}

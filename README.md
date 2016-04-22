@@ -277,25 +277,25 @@ There are some settings that we have added to make using Fewbricks easier.
 There are no restrictions on how you organize your CSS related to fewbricks. One idea is that you create a css/less/sass/what-have-you file for each module and place it alongside the PHP-file in the bricks-fodler and giving it the same name as the PHP-file. So for example the brick "image-and-text.php" would have a style file names "image-and-text.[css|scss|less]". But you caould just as well place the CSS in regular CSS files in your assets directory or any other way you want to.
 
 ### Developer mode
-By setting Fewbricks in developer mode, some extra debugging related to Fewbricks and ACF will become available. Also, every time a field group is registered, a check for duplicate keys will be excuted. You enable developer mode by setting a constant, preferrably in wp-config.php, named FEWBRICKS_DEV_MODE to true:
+By setting Fewbricks in developer mode, some extra debugging related to Fewbricks and ACF will become available. Also, every time a field group is registered, a check for duplicate keys will be executed. You enable developer mode by setting a constant, preferrably in wp-config.php, named FEWBRICKS_DEV_MODE to true:
 `define('FEWBRICKS_DEV_MODE', true)`
 
-If developer mode is enabled, you can also var dump the fields settings each time a field group is registered. This is done by passing a get variable named "dumpfewbricksfields" to any page like so: http://mywordpressinstall.com/wp-admin/?dumpfewbricksfields .
+If developer mode is enabled, you can also var dump the fields settings each time a field group is registered. This is done by passing a get variable named "dumpfewbricksfields" to any page like so: http://mywordpressinstall.com/wp-admin/?dumpfewbricksfield .
 
 #### Field info
-If you use the technique described above to enter developer mode, you will also get info about each field in the form of a yellow and blue info field next to each field in the backend. The yellow field hold the name of the field and the blue one holds the key. If you want the developer mode activated but not displaying the field info (it uses JS which can be annoying even in dev mode), add the following code to the same file that you activated developer mode in:
+If you use the technique described above to enter developer mode, you will also get info about each field in the form of a yellow and blue info field next to each field in the backend. The yellow field displays the name of the field and the blue one holds the key. If you want the developer mode activated but not displaying the field info (it uses JavaScript which can cause stuff on the admin screen to jump around and load slowly which can be annoying even in developer mode), add the following code to the same file that you activated developer mode in:
  `define('FEWBRICKS_HIDE_ACF_INFO', true)`
 
 The code displaying the field info was originally found in the plugin [ACF: Field Snitch](https://sv.wordpress.org/plugins/advanced-custom-fields-field-snitch/) by [Stupid Studio](https://stupid-studio.com/) and modified by [Bryan Willis](https://gist.github.com/bryanwillis/bbfdce5febd3db16c53c#file-acf-field-snitch-v5-js) to work with verison 5 of ACF. 
 
 ### ACF Local JSON
-Fewbrikcs does support [ACF Local JSON](http://www.advancedcustomfields.com/resources/local-json/) but tests show that there is hardly any performance differences between standard Fewbricks and Local JSON. This is most likely due to the fact that neither use any DB-queries like standard ACF does.
+Fewbrikcs does support [ACF Local JSON](http://www.advancedcustomfields.com/resources/local-json/) but tests show that there is hardly any performance differences between standard Fewbricks and Local JSON. This is most likely due to the fact that neither use any DB-queries to get the field groups like standard ACF does.
 
 If you still want to use Local JSON, follow these steps to activate it:
 
 1. As outlined in the [ACF instructions for local JSON](http://www.advancedcustomfields.com/resources/local-json/): in the themes directory, create a directory named acf-json.
 
-2. In the admin area, navigate to the Fewbricks admin page which is placed in the ACF menu. Click "Build JSON" and let the page reload.
+2. In the admin area, navigate to the Fewbricks admin page (this page is only visible if Fewbricks is set in developer mode) which is placed in the ACF menu. Click "Build JSON" and let the page reload.
 
 3. In a file that is always included, preferably wp-config.php, define a constant named FEWBRICKS_USE_JSON: `define('FEWBRICKS_USE_ACF_JSON', true)`.
 

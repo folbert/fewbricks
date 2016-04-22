@@ -3,7 +3,7 @@
 namespace fewbricks\acf;
 
 // If we are in dev mode...
-if(defined('FEWBRICKS_DEV_MODE') && FEWBRICKS_DEV_MODE === true) {
+if(\fewbricks\helpers\is_fewbricks_in_developer_mode()) {
 
     // Create place to keep keys of all fields/bricks etc.
     global $debug_keys;
@@ -187,7 +187,7 @@ class field_group
 
         $this->settings['fields'] = $this->set_unique_keys($this->settings['fields'], $this->settings['key']);
 
-        if(defined('FEWBRICKS_DEV_MODE') && FEWBRICKS_DEV_MODE === true) {
+        if(\fewbricks\helpers\is_fewbricks_in_developer_mode()) {
 
             if($fewbricks_save_json === true) {
 

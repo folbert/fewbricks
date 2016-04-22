@@ -1,6 +1,6 @@
 <?php
 
-if(defined('FEWBRICKS_DEV_MODE') && FEWBRICKS_DEV_MODE === true) {
+if(\fewbricks\helpers\is_fewbricks_in_developer_mode()) {
 
     $fewbricks_success_message = false;
     $fewbricks_error_message = false;
@@ -142,19 +142,19 @@ if(defined('FEWBRICKS_DEV_MODE') && FEWBRICKS_DEV_MODE === true) {
 
             <div class="inner">
 
-                <p>By setting Fewbricks in developer mode, some extra debugging related to Febricks and ACF will become available. Also, every time a field group is registered, a check for duplicate keys will be carried out. Please make sure that you don't have developer mode enabled on production servers since this will have impact on performance. Read more about Febricks developer mode in the README file.</p>
+              <?php
+                if(\fewbricks\helpers\is_fewbricks_in_developer_mode()) {
+              ?>
+                <p>Fewbricks developer mode is active.</p>
+              <?php
+              } else {
+              ?>
+                <p>Fewbricks developer mode is _not_ active.</p>
+              <?php
+              }
+              ?>
 
-                <?php
-                if(defined('FEWBRICKS_DEV_MODE') && FEWBRICKS_DEV_MODE) {
-                ?>
-                  <p>Fewbricks developer mode is active.</p>
-                <?php
-                } else {
-                ?>
-                  <p>Fewbricks developer mode is _not_ active.</p>
-                <?php
-                }
-                ?>
+                <p>By setting Fewbricks in developer mode, some extra debugging related to Febricks and ACF will become available. Also, every time a field group is registered, a check for duplicate keys will be carried out. Please make sure that you don't have developer mode enabled on production servers since this will have impact on performance. Read more about Fewbricks developer mode and how to enable it in the <a href="https://github.com/folbert/fewbricks/blob/master/README.md">Fewbricks README file</a>.</p>
 
                 <p>If developer mode is enabled, you can also var dump all registered field groups and its fields each time a field group is registered. This is done by adding a get variable named "dumpfewbricksfields" to any page. For example <a href="<?php echo get_option('home'); ?>/?dumpfewbricksfields" target="_blank"><?php echo get_option('home'); ?>/?dumpfewbricksfields</a></p>
 

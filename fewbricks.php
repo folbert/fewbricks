@@ -12,15 +12,17 @@ License: GPLv3
 
 namespace fewbricks;
 
+use fewbricks\helpers;
+
 // Exit if accessed directly
 if( ! defined( 'ABSPATH' ) ) exit;
 
 // Only perform requirement checks in admin system.
 // If any requirements are not met, this should be discovered by devs before pushing to production so let's save
-// some CPU on the frontend.
+// some CPU cycles on the frontend by not running all these checks there.
 if(is_admin()) {
 
-    // If ACF is not present
+    // If ACF is not present.
     if(!class_exists('acf')) {
 
         add_action('admin_notices', function () {
@@ -101,14 +103,8 @@ if(is_admin()) {
  */
 function construct() {
 
-    /**
-     * Set some variables that will be reused
-     */
     $fewbricks_lib_dir_path = __DIR__ . '/lib/';
 
-    /**
-     * Require stuff to get us started
-     */
     require_once($fewbricks_lib_dir_path . 'helpers.php');
 
     // Master-parent-Yoda-class
@@ -117,7 +113,7 @@ function construct() {
     require($fewbricks_lib_dir_path . 'acf/field-group.php');
     require($fewbricks_lib_dir_path . 'acf/layout.php');
 
-    $fewbricks_dev_mode = (defined('FEWBRICKS_DEV_MODE') && FEWBRICKS_DEV_MODE === true);
+    $fewbricks_dev_mode = \fewbricks\helpers\is_fewbricks_in_developer_mode();
 
     /**
      * Autoloader for fewbricksclasses
@@ -140,7 +136,7 @@ function construct() {
                 /** @noinspection PhpIncludeInspection */
                 if(!@include($brick_path)) {
 
-                    wp_die('<h1>Error message from Fewbricks.</h1><p>Could not locate brick ' . $file_name . '. Tried ' . $brick_path . '.</p>');
+                    wp_die('<h1>Error message from Fewbricks.</h1><p>Could not locate brick ' . $brick_path . $file_name . '.</p>');
 
                 }
 
@@ -156,7 +152,7 @@ function construct() {
                     /** @noinspection PhpIncludeInspection */
                     if(!@include($template_path)) {
 
-                        wp_die('<h1>Error message from Fewbricks.</h1><p>Could not locate field ' . $file_name . '. Tried ' . $lib_path . ' and ' .$template_path . '.</p>');
+                        wp_die('<h1>Error message from Fewbricks.</h1><p>Could not locate field ' . $file_name . '. Looked in ' . $lib_path . ' and ' .$template_path . '.</p>');
 
                     }
 
@@ -173,7 +169,7 @@ function construct() {
     /**
      * Stuff that is only required in the backend doesnt needs to be required if local json is used.
      */
-    if (((!defined('FEWBRICKS_USE_ACF_JSON') || FEWBRICKS_USE_ACF_JSON === false) && function_exists('register_field_group')) || $fewbricks_save_json === true) {
+    if ((!\fewbricks\helpers\use_acf_json() && \fewbricks\helpers\acf_exists()) || $fewbricks_save_json === true) {
 
         $fewbricks_template_directory = get_template_directory() . '/';
 
@@ -212,7 +208,7 @@ function construct() {
      * FEWBRICKS_HIDE_ACF_INFO Gives us a way to hide info event if dev mode is activated
      */
     if (
-        (defined('FEWBRICKS_HIDE_ACF_INFO') && FEWBRICKS_HIDE_ACF_INFO === false) ||
+        (!helpers\hide_acf_info()) ||
         (!defined('FEWBRICKS_HIDE_ACF_INFO') && $fewbricks_dev_mode === true)
     ) {
 
