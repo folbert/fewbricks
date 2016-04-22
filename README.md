@@ -54,10 +54,15 @@ The system was created for the following reasons:
  * Extensibility. Since each brick is a class, we can easily create a new brick which adds new fields and/or its own output. 
  
 ## Requirements
- + PHP 5.4+
- + [Advanced Custom Fields](http://www.advancedcustomfields.com/) 5+ PRO
- + [Fewbricks Hidden Field for Advanced Custom Fields](https://github.com/folbert/acf-fewbricks-hidden) This allows us to store settings in a brick. For example how many columns a multi column brick should have.
- + Some experience with ACF and knowledge about what a field, field group etc is is recommended and that can all be read up on in the [documentation for ACF](http://www.advancedcustomfields.com/resources).
+ *  PHP 5.4+
+ 
+ *  [Advanced Custom Fields](http://www.advancedcustomfields.com/) 5+ PRO
+ 
+ *  [Fewbricks Hidden Field for Advanced Custom Fields](https://github.com/folbert/acf-fewbricks-hidden) This allows us to store settings in a brick. For example how many columns a multi column brick should have.
+ 
+ * Fewbricks also supports [Timber](http://upstatement.com/timber/) but having that installed is not a requirement
+ 
+ *  Some experience with ACF and knowledge about what a field, field group etc is is recommended and that can all be read up on in the [documentation for ACF](http://www.advancedcustomfields.com/resources).
  
 ## Installation
  1. Make sure that the [requirements](#requirements) are met.
