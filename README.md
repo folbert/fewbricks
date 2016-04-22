@@ -57,38 +57,56 @@ The system was created for the following reasons:
  + PHP 5.4+
  + [Advanced Custom Fields](http://www.advancedcustomfields.com/) 5+ PRO
  + [Fewbricks Hidden Field for Advanced Custom Fields](https://github.com/folbert/acf-fewbricks-hidden) This allows us to store settings in a brick. For example how many columns a multi column brick should have.
- 
- Some experience with ACF and knowledge about what a field, field group etc is is recommended and that can all be read up on in the [documentation for ACF](http://www.advancedcustomfields.com/resources).
+ + Some experience with ACF and knowledge about what a field, field group etc is is recommended and that can all be read up on in the [documentation for ACF](http://www.advancedcustomfields.com/resources).
  
 ## Installation
- 1. Make sure that the [requirements](#requirements) are met. If you are not using Composer, please install the "Fewbricks Hidden field for ACF" manually and make sure that its folder is named "acf-fewbricks-hidden".
- 2. Add Fewbricks to your pluginfolder manually or by using Composer.
- 3. In the main folder named fewbricks, there is a folder also named "fewbricks". Move that folder to your theme folder and do __not__ rename it or any of its child directories. All your custom code will reside in this folder.
- 4. Activate the plugin.
+ 1. Make sure that the [requirements](#requirements) are met.
+ 
+ 2. Add Fewbricks to your plugin folder using one of the following techniques
+ 
+    * Composer 
+    > composer require folbert/fewbricks
+     
+    * Manually by downloading [the latest release](/releases).
+    If you are installing Fewbricks this way, also install [Fewbricks Hidden field for ACF](https://github.com/folbert/acf-fewbricks-hidden) and make sure that its folder is named "acf-fewbricks-hidden".
+ 
+ 3. In the main folder named "fewbricks", there is a folder also named "fewbricks". Move that folder to your theme folder and do __not__ rename it or any of its child directories. All your custom code will reside in this folder.
+ 
+ 4. Activate Fewbricks and "Advanced Custom Fields: Hidden Field for Fewbricks" as you would any other plugins.
  
  __Important__ 
- When you move the directory in step 3 it gets completely disconnected from any future updates to Fewbricks. This is all good since you are gonna want to create your own field groups, bricks, brick layouts and so on. It may be that we add some new demos to the fewbricks/fewbricks directory but that will not affect your custom code in any way and you will never have to overwrite your [theme]/fewbricks with an updated fewbricks/fewbricks.
+ When you move the directory in step 3 it gets completely disconnected from any future updates to Fewbricks. This is all good since you are gonna want to create your own field groups, bricks, brick layouts and so on. It may be that we add some new demos to the fewbricks/fewbricks directory but that will not affect your custom code in any way and you should never overwrite your [theme]/fewbricks with an updated fewbricks/fewbricks.
      
- Do not delete any of these files in [theme]/fewbricks/:
+ Do not delete or rename any of these files and folder in [theme]/fewbricks/:
  
- + field-groups/init.php
- + common-fields/init.php
- + bricks/project-brick.php
-    + This file have a couple of functions prefixed with "demo". Keep those functions as long as you want the demo to work. After that, feel free to delete them.
+ * acf/
+ * brick-layouts/
+ * bricks/
+ * common-fields
+ * field-groups/
+ * field-groups/init.php
+ * common-fields/init.php
+ * bricks/project-brick.php - This file have a couple of functions prefixed with "demo". Keep those functions as long as you want the demo to work. After that, feel free to delete them.
  
- As long as you want the demos to work, also keep all files prefixed with "demo". As for the folder named "demo"; read about that under [Demo](#demo) further down in this document.
+ Also as long as you want the demos to work, keep all files prefixed with "demo". As for the folder named "demo"; read about that under [Demo](#demo) further down in this document.
  
- Other than that, feel free to delete all other files or add new folders but do __not__ delete or rename any of the existing folders.
+ Other than that, feel free to delete all other files or add new files and folders as you see fit.
  
 ## Demo
 After having carried out the installation steps, you can set up the demo by following these steps:
   
 1. Create a file named "template-fewbricks-demo.php".
+
 2. Copy the content of [theme]/fewbricks/demo/template-fewbricks-demo.php and paste it into the file created in step 1. Please note that this template is completely standalone and does not include any WP head or your themes stylesheets. This is only because it is a demo and we want to make sure we have a clean Bootstrap page to work with.
+
 3. Go to the admin area of WordPress, create a new page, select the template "Fewbricks Demo" and hit "Update"/"Publish".
+
 4. You should now, instead of the standard WYSIWYG area, see a bunch of fields and buttons that looks like the standard ACF GUI. That is actually what it is with the exception that they have been put there using Febwricks. Head on over to [theme]/fewbricks/field-groups/init.php to start tracking what is going on and how everything works.
+
 5. Play around with adding some data to fields and adding flexible content etc.
+
 6. Hit "Update" and go to the frontend to see what you have created.
+
 7. If you have not already done so, have a look at the code of "template-fewbricks-demo.php" to see how to get Febwricks to display data.
 
 Hopefully you now have a better understanding of how Febricks works. Keep on reading this deocument to the end to understand even more.
@@ -141,9 +159,11 @@ Each brick has its own class placed in the folder named "bricks". Each class hav
     
 4. Let's add our new brick to a field group: in the folder [theme]/fewbricks/field-groups, either create a new PHP-file or edit an existing one. If you create a new one, make sure to require it in [theme]/field-groups/init.php. Add this code to the field groups file:
   
-        $fg = new fewbricks\acf\field_group('Test content', '1504201020o', $location, 1);
-        $fg->add_brick(new fewbricks\bricks\text_and_content('text_and_content_test', '1509041512c');
-        $fg->register();
+    ```php
+    $fg = new fewbricks\acf\field_group('Test content', '1504201020o', $location, 1);
+    $fg->add_brick(new fewbricks\bricks\text_and_content('text_and_content_test', '1509041512c');
+    $fg->register();
+    ```
         
     Here we create a new field group with a name, a site-wide-unique key, a location (more about that in a minute) and an order. The order indicates where the field group should be positioned in relation to other field groups when editing the content of the page. A field group with order 1 is positioned before a field group with order set to 2, 2 before 3 and s on. If you want to set any of the other settings available to a field group, you can pass an assocative array with those settings as the fifth argument. To find out what settings are available, check out the code in the constructor of plugins/fewbricks/lib/acf/field-group.php .
     
@@ -153,15 +173,17 @@ Each brick has its own class placed in the folder named "bricks". Each class hav
     
     The location is an assocative array that may look something like this:
     
+    ```php
+    [
+      [
         [
-          [
-            [
-              'param' => 'post_type',
-              'operator' => '==',
-              'value' => 'page',
-            ],
-          ]
-        ]
+          'param' => 'post_type',
+          'operator' => '==',
+          'value' => 'page',
+        ],
+      ]
+    ]
+    ```
         
     Store that array in a variable named `$location` that you add to the field group file that you are working on and make sura that `$location` is set before the code in step 4 above.
         
@@ -173,9 +195,11 @@ Each brick has its own class placed in the folder named "bricks". Each class hav
     
 6. Now, add the following code where you want the content to show up (again, using the example code above, this would be in the standard page template):
 
-        <?php
-            echo (new fewbricks\bricks\text_and_content('text_and_content_test'))->get_html();
-        ?>
+    ```php
+    <?php
+        echo (new fewbricks\bricks\text_and_content('text_and_content_test'))->get_html();
+    ?>
+    ```
     
     Note that we are using the name (text_and_content_test) that we set when adding the brick to the field group in step 4.
     
@@ -187,16 +211,20 @@ Each brick has its own class placed in the folder named "bricks". Each class hav
  
     1. Build the HTML directly in the function and return it HTML. In our example, this could look something like the following code which you can simply paste to `get_brick_html()`.
 
-            $html = '<h1>' . $this->get_field('headline') . '</h1>';
-            $html .= 'The content: ' . $this->get_field('content');
-            return $html
+    ```php
+    $html = '<h1>' . $this->get_field('headline') . '</h1>';
+    $html .= 'The content: ' . $this->get_field('content');
+    return $html
+    ```
         
     2. Build the HTML in an external file named after the name of the brick class it belongs to. So for our example class `headline_and_content` we would create the file [themes]/fewbricks/bricks/headline-and-content.template.php and put the following lines in it:
     
-            <?php
-            echo '<h1>' . $this->get_field('headline') . '</h1>
-            The content: ' . $this->get_field('content');
-            ?>
+    ```php
+    <?php
+    echo '<h1>' . $this->get_field('headline') . '</h1>
+    The content: ' . $this->get_field('content');
+    ?>
+    ```
             
         We are using this approach in [theme]/fewbricks/bricks/demo-jumbotron.php. The template-file have access to the same data and variables that you have if you are building the HTML right in `get_brick_html()`.
                 
