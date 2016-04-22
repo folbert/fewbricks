@@ -542,15 +542,9 @@ class brick
 
         }
 
-        // Let's store them here for more flexibility
         $this->get_html_args = $args;
 
-        /** @noinspection PhpUndefinedMethodInspection */
-        $html = $this->get_brick_html();
-
-        $html = $this->get_brick_layouted_html($html);
-
-        return $html;
+        return $this->get_brick_layouted_html($this->get_brick_html());
 
     }
 
@@ -626,7 +620,6 @@ class brick
 
         }
 
-
     }
 
     /**
@@ -676,7 +669,6 @@ class brick
     {
 
         $this->key = $key;
-
         return $this;
 
     }
@@ -689,7 +681,6 @@ class brick
     {
 
         $this->name = $name;
-
         return $this;
 
     }
@@ -703,7 +694,6 @@ class brick
 
         /** @noinspection PhpUndefinedFieldInspection */
         $this->label = $label;
-
         return $this;
 
     }
@@ -716,7 +706,6 @@ class brick
     {
 
         $this->field_label_prefix = $prefix;
-
         return $this;
 
     }
@@ -729,7 +718,6 @@ class brick
     {
 
         $this->field_label_suffix = $suffix;
-
         return $this;
 
     }
@@ -744,7 +732,6 @@ class brick
     {
 
         $this->{$name} = $value;
-
         return $this;
 
 
