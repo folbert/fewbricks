@@ -6,6 +6,8 @@ Version number follows [Semantic Versioning](http://semver.org/)
 ## Git-Flow in Tower
 [https://www.git-tower.com/learn/git/ebook/en/mac/advanced-topics/git-flow](https://www.git-tower.com/learn/git/ebook/en/mac/advanced-topics/git-flow)
 
+Don't prefix tags with "v" since the repo was set up to auto prefix tags with "v".
+
 ## After release has been created on GitHub:
 
 These steps are to make sure that a notice about the new version is displayed when listing plugins in the WordPress admin system.
