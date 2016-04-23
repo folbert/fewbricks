@@ -2,8 +2,6 @@
 
 Please see [this issue](https://github.com/folbert/fewbricks/issues/2#issuecomment-208723764) on why Fewbricks is not in the WordPress Plugin Directory.
 
-Please note that Fewbricks is still in beta. E.t.a of stable version is April 2016.
-
 ## TOC
 + [Legal](#legal)
 + [Dictionary](#dictionary)
