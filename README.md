@@ -69,6 +69,7 @@ The system was created for the following reasons:
  
     * Install using Composer 
     > composer require folbert/fewbricks
+    
     I have set the repository type of the package to "wordpress-plugin" which may be good to know since you will want Fewbricks to end up in the plugins directory and not in the default vendor directory for Composer packages. If you want to get started using Composer with WordPress (and potentially stepping your WP game up in lots of other ways, I highly recommend using [Bedrock](https://roots.io/bedrock/) from the team behind Roots/[Sage](https://roots.io/sage/))
      
     * Install manually by downloading [the latest release](/releases).
