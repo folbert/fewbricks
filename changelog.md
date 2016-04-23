@@ -1,5 +1,8 @@
 # Fewbricks changelog
 
+## 1.1.0 - April 23, 2016
+* Added autoupdate functionality when viewing the plugin in plugins list.
+
 ## 1.0.1 - April 23, 2016
 * Fixed bug with incorrect path to custom field classes in template
 * Added the changelog
