@@ -106,7 +106,8 @@ $fewbricks_fg->register();
  * Footer.
  * Shows how to use fields directly in a field group without setting up a brick.
  * Normally you would put global data like this in an options page
- * (http://www.advancedcustomfields.com/resources/acf_add_options_page/).
+ * (http://www.advancedcustomfields.com/resources/acf_add_options_page/). To achieve this,
+ * create the options page as decribed by ACF and then set the location to match that options page.
  */
 $fewbricks_fg = (new fewacf\field_group('Fewbricks Demo - Footer', '1603242347a', $fewbricks_fg_location, 200));
 
