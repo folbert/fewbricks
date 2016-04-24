@@ -13,12 +13,10 @@ Don't prefix tags with "v" since the repo was set up to auto prefix tags with "v
 These steps are to make sure that a notice about the new version is displayed when listing plugins in the WordPress admin system.
 
 * Download Zip from [https://github.com/folbert/fewbricks/releases](https://github.com/folbert/fewbricks/releases)
-* Create directory "fewbricks"
-* Put zip in "fewbricks" directory
 * Unzip
-* Rename unzipped dir to "fewbricks"
 * Remove .gitignore from unzipped dir
-* Zip parent dir so you now have a Zip named "fewbricks" with a dir named "fewbricks"
+* Rename directory to "fewbricks" 
+* Re-Zip
 * Upload to fewbricks.folbert.com/update/zips/[version-nr]/
 * Edit update.php:
     *  Update $obj->new_version
