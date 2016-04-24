@@ -75,7 +75,7 @@ class fewbricks {
 
         if (!helpers\use_acf_json() || $fewbricks_save_json === true) {
 
-            $fewbricks_template_directory = get_template_directory() . '/';
+            $fewbricks_template_directory = get_stylesheet_directory() . '/';
 
             require($fewbricks_template_directory . 'fewbricks/common-fields/init.php');
             require($fewbricks_template_directory . 'fewbricks/field-groups/init.php');
@@ -122,7 +122,7 @@ class fewbricks {
     private static function autoload_brick($file_name)
     {
 
-        $path = get_template_directory() . '/fewbricks/bricks/' . $file_name;
+        $path = get_stylesheet_directory() . '/fewbricks/bricks/' . $file_name;
 
         if(is_file($path)) {
 
@@ -149,7 +149,7 @@ class fewbricks {
 
         // Lets first look at the custom lib directory in case custom fields were created
         // to overrule the one that came with Fewbricks.
-        $template_path = get_template_directory() . '/fewbricks/acf/fields/' . $file_name;
+        $template_path = get_stylesheet_directory() . '/fewbricks/acf/fields/' . $file_name;
 
         if (is_file($template_path)) {
 
@@ -285,7 +285,7 @@ class fewbricks {
     private static function fewbricks_template_dir_exists()
     {
 
-        $fewbricks_template_dir_exists = file_exists(get_template_directory() . '/fewbricks');
+        $fewbricks_template_dir_exists = file_exists(get_stylesheet_directory() . '/fewbricks');
 
         if(!$fewbricks_template_dir_exists) {
             // Make sure that the fewbricks/fewbricks-directory has been moved to the template directory.

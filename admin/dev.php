@@ -11,9 +11,9 @@ if(\fewbricks\helpers\is_fewbricks_in_developer_mode()) {
 
     if (isset($_POST['fewbricks_deletejson'])) {
 
-        if (file_exists(get_template_directory() . '/acf-json/')) {
+        if (file_exists(get_stylesheet_directory() . '/acf-json/')) {
 
-            $files = glob(get_template_directory() . '/acf-json/*');
+            $files = glob(get_stylesheet_directory() . '/acf-json/*');
 
             foreach ($files AS $file) {
                 unlink($file);
@@ -31,12 +31,12 @@ if(\fewbricks\helpers\is_fewbricks_in_developer_mode()) {
 
     if (isset($_POST['fewbricks_buildjson'])) {
 
-        if (file_exists(get_template_directory() . '/acf-json/')) {
+        if (file_exists(get_stylesheet_directory() . '/acf-json/')) {
 
             global $fewbricks_save_json;
             $fewbricks_save_json = true;
             /** @noinspection PhpIncludeInspection */
-            require(get_template_directory() . '/fewbricks/field-groups/init.php');
+            require(get_stylesheet_directory() . '/fewbricks/field-groups/init.php');
 
             $fewbricks_success_message = 'ACF JSON files have been saved.';
 
@@ -86,9 +86,9 @@ if(\fewbricks\helpers\is_fewbricks_in_developer_mode()) {
 
                 <?php
 
-                if (file_exists(get_template_directory() . '/acf-json/')) {
+                if (file_exists(get_stylesheet_directory() . '/acf-json/')) {
 
-                    $files = glob(get_template_directory() . '/acf-json/*');
+                    $files = glob(get_stylesheet_directory() . '/acf-json/*');
 
                     if (!empty($files)) {
 

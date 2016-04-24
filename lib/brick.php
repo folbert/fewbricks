@@ -555,7 +555,7 @@ class brick
     protected function get_brick_template_html()
     {
 
-        $template_path = get_template_directory() .
+        $template_path = get_stylesheet_directory() .
             '/fewbricks/bricks/' .
             str_replace('_', '-', \fewbricks\helpers\get_real_class_name($this)) .
             '.template.php';
@@ -578,7 +578,7 @@ class brick
 
         if (!empty($this->brick_layouts)) {
 
-            $theme_path = get_template_directory() . '/';
+            $theme_path = get_stylesheet_directory() . '/';
 
             foreach ($this->brick_layouts AS $brick_layout) {
 
