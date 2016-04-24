@@ -12,6 +12,8 @@ Version number follows [Semantic Versioning](http://semver.org/)
 
 Don't prefix tags with "v" since the repo was set up to auto prefix tags with "v".
 
+After master has been pushed, create release on GitHub.
+
 ## After release has been created on GitHub:
 
 These steps are to make sure that a notice about the new version is displayed when listing plugins in the WordPress admin system.
