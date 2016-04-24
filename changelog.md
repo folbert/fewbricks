@@ -1,5 +1,8 @@
 # Fewbricks changelog
 
+## 1.1.1 - April 23, 2016
+* Hotfix for Timber dependency in demo 
+
 ## 1.1.0 - April 23, 2016
 * Added autoupdate functionality when viewing the plugin in plugins list.
 
