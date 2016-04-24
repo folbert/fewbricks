@@ -435,11 +435,6 @@ class field_group
 
         acf_write_json_field_group($this->settings);
 
-        /*
-        file_put_contents(get_template_directory() . '/acf-json/' . $this->settings['key'] . '.json',
-            json_encode($this->settings));
-        */
-
     }
 
     /**
