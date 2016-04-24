@@ -1,6 +1,9 @@
 # Fewbricks changelog
 
-## 1.1.1 - April 23, 2016
+## 1.2.0 - April 23, 2016
+* Added support for placing fewbricks in child theme
+
+## 1.1.1 - April 24, 2016
 * Hotfix for Timber dependency in demo 
 
 ## 1.1.0 - April 23, 2016

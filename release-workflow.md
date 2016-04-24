@@ -3,6 +3,10 @@ These are notes to make sure that Fewbricks developers doesn't forget anything w
 
 Version number follows [Semantic Versioning](http://semver.org/)
 
+* Describe new version in changelog.md 
+* Change version nr in comment in fewbricks.php
+* Change version nr for $plugin_current_version in fewbricks.php
+
 ## Git-Flow in Tower
 [https://www.git-tower.com/learn/git/ebook/en/mac/advanced-topics/git-flow](https://www.git-tower.com/learn/git/ebook/en/mac/advanced-topics/git-flow)
 
