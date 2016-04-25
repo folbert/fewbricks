@@ -198,7 +198,7 @@ Each brick has its own class placed in the folder named "bricks". Each class hav
     
 5. When the location has been set, load something in the backend where the field group should show up (which will be any page if you have used the location example above). You should now see the field group on the page and the original content-wysiwyg should be gone.
     
-    Add some content in the headline and content field and load up the page in the frontend. Is your content not being displayed? That's expected since the get_html-function is empty. Let's fix that now.
+    Add some content in the headline and content field and load up the page in the frontend. Is your content not being displayed? That's expected since the get_brick__html-function of our new brick is empty. Let's fix that now.
     
 6. Now, add the following code where you want the content to show up (again, using the example code above, this would be in the standard page template):
 
@@ -207,6 +207,8 @@ Each brick has its own class placed in the folder named "bricks". Each class hav
         echo (new fewbricks\bricks\text_and_content('text_and_content_test'))->get_html();
     ?>
     ```
+    
+    We are calling `get_html()` and not `get_brick_html()` directly since `get_html()` is a function in the parent bricks class that will set some things up for us. `get_html()` will then call `get_brick_html()` and return whatever you return from that function.
     
     Note that we are using the name (text_and_content_test) that we set when adding the brick to the field group in step 4.
     
