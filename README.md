@@ -106,15 +106,15 @@ After having carried out the installation steps, you can set up the demo by foll
 
 3. Go to the admin area of WordPress, create a new page, select the template "Fewbricks Demo" and hit "Update"/"Publish".
 
-4. You should now, instead of the standard WYSIWYG area, see a bunch of fields and buttons that looks like the standard ACF GUI. That is actually what it is with the exception that they have been put there using Febwricks. Head on over to [theme]/fewbricks/field-groups/init.php to start tracking what is going on and how everything works.
+4. You should now, instead of the standard WYSIWYG area, see a bunch of fields and buttons that looks like the standard ACF GUI. That is actually what it is with the exception that they have been put there using Fewbricks. Head on over to [theme]/fewbricks/field-groups/init.php to start tracking what is going on and how everything works.
 
 5. Play around with adding some data to fields and adding flexible content etc.
 
 6. Hit "Update" and go to the frontend to see what you have created.
 
-7. If you have not already done so, have a look at the code of "template-fewbricks-demo.php" to see how to get Febwricks to display data.
+7. If you have not already done so, have a look at the code of "template-fewbricks-demo.php" to see how to get Fewbricks to display data.
 
-Hopefully you now have a better understanding of how Febricks works. Keep on reading this deocument to the end to understand even more.
+Hopefully you now have a better understanding of how Fewbricks works. Keep on reading this deocument to the end to understand even more.
  
 ## Usage
 
