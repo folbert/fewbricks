@@ -28,7 +28,7 @@ Please see [this issue](https://github.com/folbert/fewbricks/issues/2#issuecomme
 Fewbricks and its developers are in no way associated with Advanced Custom Fields. Fewbricks is released under GPLv3.
 
 ## Dictionary
-All the following words will be explained in detail later in this document,
+The following words will be explained in detail later in this document,
 
 + Field - Same as in ACF. For example text, textarea, select, true/false, flexible content etc.
 + Brick - A collection of fields.
@@ -37,7 +37,11 @@ All the following words will be explained in detail later in this document,
 ## About
 Fewbricks is a module system developed by [Björn Folbert](http://folbert.com) at [FEW Agency](http://fewagency.se). It is built on top of the awesome plugin [Advanced Custom Fields](http://www.advancedcustomfields.com/) (ACF) v5 PRO meaning that you must have that installed for this to work.
 
-Field groups, flexible content, repeaters and fields. All of those are names that you recognize from ACF and they are all available in Fewbricks as well. Just as in ACF, you create a field group and then you add some fields to it. If the field is a flexible content, you will add layouts to it. If you are creating a repeater, throw a couple of sub fields in there. All just as you would if you were creating field groups using ACFs GUI. But Fewbricks also gives you the ability to reuse bricks across multiple field groups and/or flexible contents and/or repeaters. 
+Instead of building field groups, repeaters, flexible content etc. using the GUI that comes with ACF, you build it all by writing code. So if you are looking for a way to create reusable fields within the GUI, Fewbricks is not what you are looking for.
+
+Field groups, flexible content, repeaters and fields. All of those are names that you recognize from ACF and they are all available in Fewbricks as well. Just as in ACF, you create a field group and then you add some fields to it. If the field is a flexible content, you will add layouts to it. If you are creating a repeater, throw a couple of sub fields in there. All just as you would if you were creating field groups using ACFs GUI. But Fewbricks also gives you the ability to reuse bricks across multiple field groups and/or flexible contents and/or repeaters.
+
+The code that you write using Fewbricks will in the end render the same arrays that are passed to `acf_add_local_field_group()` in the code that is generated when you use "Generate export code" on the ACF Tools screen.
 
 The system was created for the following reasons:
  
