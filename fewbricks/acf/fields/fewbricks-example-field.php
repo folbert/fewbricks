@@ -28,8 +28,9 @@ class fewbricks_example_field extends field
 
         /**
          * The only required item in this array is "type" whose value should be the same as the name of this class.
-         * The other items only exists here to make it easier for a developer to check out the class and be remembered
-         * of which options a field type has. The easiest way to get these items and values is by using the GUI for ACF
+         * The other items (which differs for each field type) only exists here to make it easier for a developer
+         * to check out the class and be remembered of which options a field type has.
+         * The easiest way to get these items and values is by using the GUI for ACF
          * to create a field group with an instance of the field type without setting any values on it and then, under
          * Custom Fields - >Tools, generate export code for the field group. From the output of that, you can copy the
          * array and paste it here.

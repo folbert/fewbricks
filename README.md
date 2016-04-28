@@ -22,6 +22,7 @@ Please see [this issue](https://github.com/folbert/fewbricks/issues/2#issuecomme
         + [Field info](#field-info)
     + [ACF Local JSON](#acf-local-json)
         + [Important about local JSON](#important-about-local-json)
+    + [Available fields](#available-fields)
         
         
 ## Legal
@@ -125,7 +126,7 @@ Hopefully you now have a better understanding of how Fewbricks works. Keep on re
 We recommend that you create at least one test field group using ACFs GUI and set it's location settings to "post type is equal to post" _and_ "post type is equal to page". That way the field group will never show up anywhere in the administration system and you can use it as a playground.
 
 ### Fields
-The field types that are available for creating bricks are exactly the same field types that can be used in ACF. The settings for each field are also the same and have the same name as in ACF. This means that if you want to find out what you can do with a field you can either look in the class for that field, located in [plugins]/fewbricks/lib/acf/fields, or you can create a field in ACFs GUI and then use ACFs export-to-code-functionality to see the available options for a field and how they should be set. If ACF is updated with new field options, it doesn't matter if those options are available in the field classes in [plugins]/fewbricks/lib/acf/fields or not since they will be merged with ACFs original field classes anyways. The only reason for having the array `$base_settings` in each class in [plugins]/fewbricks/lib/acf/fields is to make it easier for developers to fins out what settings are available to a field.
+The field types that are available for creating bricks are exactly the same field types that can be used in ACF. The settings for each field are also the same and have the same name as in ACF. This means that if you want to find out what you can do with a field you can either look in the class for that field, located in [plugins]/fewbricks/lib/acf/fields, or you can create a field in ACFs GUI and then use ACFs export-to-code-functionality to see the available options for a field and how they should be set. If ACF is updated with new field options, it doesn't matter if those options are available in the field classes in [plugins]/fewbricks/lib/acf/fields or not since they will be merged with ACFs original field classes anyways. The only reason for having the array `$base_settings` in each class in [plugins]/fewbricks/lib/acf/fields is to make it easier for developers to find out what settings are available to a field.
 
 The settings that all fields have in common are:
 
@@ -308,3 +309,40 @@ If you still want to use Local JSON, follow these steps to activate it:
 
 #### Important about local JSON 
 Every time you edit any fields in a field group or brick, you will need to rebuild the local JSON by taking the action outlined in step 2 above. One suggested workflow is that you always have Local JSON activated in all environments including development. Then when you edit a modules' fields and don't see the changes in the editing area of a page/post/options etc., you will be reminded of that you need to rebuild the JSON. When you are ready to push to production, the JSON will be up to date.
+
+# Available fields
+These are the fields that are available in Fewbricks out of the box. If you add an ACF plugin that att it's own field, you need to create a new class in fewbricks/acf/fields based on [fewbricks/acf/fields/fewbricks-example-field.php](fewbricks/acf/fields/fewbricks-example-field.php). Make sure to read the comments in that file.
+
+## Standard ACF fields
+The goal is to have all the fields available in ACF also available in Fewbricks. Documentation on these standars ACF fields are available in the [ACF Documentation](https://www.advancedcustomfields.com/resources/).
+
++ Checkbox
++ Color picker
++ Date picker
++ E-mail
++ File
++ Flexible content
++ Gallery
++ Google map
++ Image
++ Message
++ Number
++ oEmbed
++ Page link
++ Password
++ Post object
++ Radio button
++ Relationship
++ Repeater
++ Select
++ Tab
++ Taxonomy
++ Text
++ Textarea
++ True/false
++ URL
++ User
++ WYSIWYG
+
+## Extra fields
++ Fewbricks hidden - Used for base functionality in Fewbricks. 
