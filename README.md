@@ -177,9 +177,9 @@ Each brick has its own class placed in the folder named "bricks". Each class hav
     $fg->register();
     ```
         
-    Here we create a new field group with a name, a site-wide-unique key, a location (more about that in a minute) and an order. The order indicates where the field group should be positioned in relation to other field groups when editing the content of the page. A field group with order 1 is positioned before a field group with order set to 2, 2 before 3 and s on. If you want to set any of the other settings available to a field group, you can pass an assocative array with those settings as the fifth argument. To find out what settings are available, check out the code in the constructor of plugins/fewbricks/lib/acf/field-group.php .
+    Here we create a new field group with a label, a site-wide-unique key, a location (more about that in a minute) and an order. The order indicates where the field group should be positioned in relation to other field groups when editing the content of the page. A field group with order 1 is positioned before a field group with order set to 2, 2 before 3 and so on. If you want to set any of the other settings available to a field group, you can pass an associative array with those settings as the fifth argument. To find out what settings are available, check out the code in the constructor of [lib/acf/field-group.php](lib/acf/field-group.php) .
     
-    We then add a brick to the field group. The brick gets instantiated with a name (text_and_content_test) that should be unique for all bricks and fields added to field groups.
+    We then add a brick to the field group. The brick gets instantiated with a name (text_and_content_test) that must be unique for all bricks and fields on the top level of all field groups for this page.
     
     We also pass a site-wide-unique key for the brick.
     
