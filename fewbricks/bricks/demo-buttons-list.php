@@ -45,6 +45,11 @@ class demo_buttons_list extends project_brick
     protected function get_brick_html()
     {
 
+        // Some stuff just to show off features
+        $this->set_data_item('demo_data_item', 'I am some test data set on the fly by the brick.');
+        $this->set_data_item('demo_data_item', 'I am some test data set on the fly by the brick in a group.', true, 'demo_group');
+        $this->set_data_item('demo_data_item_2', 'I am some _more_ test data set on the fly by the brick in a group.', true, 'demo_group');
+
         $bg_img = $this->get_field('bg_img');
         if(!empty($bg_img)) {
             $this->set_inline_css('padding-top', '50px');

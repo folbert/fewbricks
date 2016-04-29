@@ -763,6 +763,61 @@ class brick
     }
 
     /**
+     * Get the value of a data item
+     * @param $item_name string The name of the item that we want to get.
+     * @param bool $prepend_this_name If the name of the brick should be prepended on the item name. See set_data_item
+     * for more info on this.
+     * @param bool $group_name The name of the group that the data is in.
+     * @param bool $default_value If the data item does not exist, this is what will be returned.
+     * @return bool|mixed
+     */
+    public function get_data_item($item_name, $prepend_this_name = true, $group_name = false, $default_value = false)
+    {
+
+        $value = $default_value;
+
+        if($prepend_this_name) {
+
+            $item_name = $this->name . '_' . $item_name;
+
+            if($group_name !== false) {
+                $group_name = $this->name . '_' . $group_name;
+            }
+
+        }
+
+        if ($group_name === false && isset($this->data[$item_name])) {
+
+            $value = $this->data[$item_name];
+
+        } else if(
+            $group_name !== false &&
+            isset($this->data[$group_name]) &&
+            is_array($this->data[$group_name]) &&
+            isset($this->data[$group_name][$item_name])
+        ) {
+
+            $value = $this->data[$group_name][$item_name];
+
+        }
+
+        return $value;
+
+    }
+
+    /**
+     * Use this to get an entire group of data.
+     * @param $group_name string The name of the group.
+     * @param bool $default_value If the group could not be found, this value will be returned.
+     * @param bool $prepend_this_name If the name of the brick should be prepended on the group name.
+     * @return bool|mixed
+     */
+    public function get_data_group($group_name, $default_value = false, $prepend_this_name = true)
+    {
+
+        return $this->get_data_item($group_name, $prepend_this_name, false, $default_value);
+
+    }
 
     /**
      * @param bool $group_name
@@ -893,18 +948,36 @@ class brick
 
     /**
      * Use this to set custom data for the brick.
-     * @param $name
-     * @param $value
-     * @param $prepend_this_name
+     * @param $item_name string The name of the item.
+     * @param $value mixed The value of the item.
+     * @param bool $prepend_this_name If the item name should be prepended with the name of the brick. This is an
+     * unfortunate left over from an early version. But it would cause a lot of trouble to remove it now so we leave it be.
+     * @param bool $group_name Use this if you want to create groups of data.
      */
-    public function set_data_item($name, $value, $prepend_this_name = true)
+    public function set_data_item($item_name, $value, $prepend_this_name = true, $group_name = false)
     {
 
         if ($prepend_this_name) {
-            $name = $this->name . '_' . $name;
+
+            $item_name = $this->name . '_' . $item_name;
+
+            if($group_name !== false) {
+                $group_name = $this->name . '_' . $group_name;
+            }
+
         }
 
-        $this->data[$name] = $value;
+        if($group_name === false) {
+
+            $this->data[$item_name] = $value;
+
+        } else {
+
+            $this->data[$group_name][$item_name] = $value;
+
+        }
+
+    }
 
     /**
      * @param $attribute
