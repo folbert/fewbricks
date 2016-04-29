@@ -97,6 +97,16 @@ class brick
     private $brick_layouts;
 
     /**
+     * @var string
+     */
+    private $inline_css;
+
+    /**
+     * @var array
+     */
+    private $inline_css_groups;
+
+    /**
      * @param string $name Name to use when fetching data for the brick
      * @param string $key This value must be unique system wide. See the readme-file for tips on how to achieve this.
      *  Note that it only needs to be set when registering the brick to a field group, layout etc. No need to pass it
@@ -120,7 +130,11 @@ class brick
         $this->fields_to_remove = [];
         $this->is_sub_brick = false;
         $this->brick_layouts = [];
+        $this->inline_css = '';
+        $this->inline_css_groups = [];
 
+        // Old code that could cause trouble if removed now since people may be using it.
+        // Use set_data_item / get_data_item instead.
         $this->args['brick_css_class'] = [];
 
     }
@@ -749,6 +763,30 @@ class brick
     }
 
     /**
+
+    /**
+     * @param bool $group_name
+     * @return bool|mixed|string
+     */
+    public function get_inline_css($group_name = false) {
+
+        $value = false;
+
+        if($group_name !== false && isset($this->inline_css_groups[$group_name])) {
+
+            $value = $this->inline_css_groups[$group_name];
+
+        } else if(!empty($this->inline_css)){
+
+            $value = $this->inline_css;
+
+        }
+
+        return $value;
+
+    }
+
+    /**
      * @return bool
      */
     public function get_is_option()
@@ -868,6 +906,27 @@ class brick
 
         $this->data[$name] = $value;
 
+    /**
+     * @param $attribute
+     * @param $value
+     * @param bool $group_name
+     */
+    public function set_inline_css($attribute, $value, $group_name = false) {
+
+        if($group_name !== false) {
+
+            if(!isset($this->inline_css_groups[$group_name])) {
+                $this->inline_css_groups[$group_name] = '';
+            }
+
+            $this->inline_css_groups[$group_name] .= $attribute . ': ' . $value . ';';
+
+        } else {
+
+            $this->inline_css .= $attribute . ':' . $value . ';';
+
+        }
+
     }
 
     /**
@@ -894,6 +953,8 @@ class brick
     }
 
     /**
+     * Old code that could cause trouble if removed now since people may be using it.
+     * Use set_data_item / get_data_item instead.
      * @param $class_name
      */
     public function add_css_class($class_name)

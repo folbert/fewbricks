@@ -15,6 +15,7 @@
 
 ?>
 
-<div style="border:solid 2px red;<?php echo $fewbricks_bg_css; ?>">
-    <?php echo $html; ?>
+<div style="<?php echo $this->get_inline_css(); ?>border:solid 2px red;<?php echo $fewbricks_bg_css; ?>">
+  <div style="<?php echo $this->get_inline_css('inner'); ?>">
+  <?php echo $html; ?>
 </div>
