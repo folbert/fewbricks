@@ -788,6 +788,16 @@ class brick
     }
 
     /**
+     * @return string
+     */
+    public function get_key()
+    {
+
+        return $this->key;
+
+    }
+
+    /**
      * This function makes sure that we have means to get essential settings in the same way as for fields etc.
      * @param string $name
      * @param string $default_value
