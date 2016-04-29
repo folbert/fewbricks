@@ -272,6 +272,8 @@ If a string or array is passed, the file(s) with the name(s) is then included af
 * `$html` - the html of the brick
 * `$this` - an instance of the current brick class. This can be used to find out for example what background color should be set on the wrapping row using something like `$this->get_data_value('bg')`.
 
+If you want to create data on the fly in a brick that can be used in a layout, use `set_data_item()` / `get_data_item()` in [the master brick class](lib/brick.php). These functions even allows you to group data for keeping a better structure. See [demo_buttons_list](fewbricks/bricks/demo-button-list.php) and [demo-layout-1.php](fewbricks/brick-layouts/demo-layout-1.php) for example on how to utilize this.
+
 ### Fewbricks specific settings for fields and bricks
 There are some settings that we have added to make using Fewbricks easier.
 
@@ -281,6 +283,8 @@ There are some settings that we have added to make using Fewbricks easier.
 
 ### CSS
 There are no restrictions on how you organize your CSS related to fewbricks. One idea is that you create a css/less/sass/what-have-you file for each module and place it alongside the PHP-file in the bricks-fodler and giving it the same name as the PHP-file. So for example the brick "image-and-text.php" would have a style file names "image-and-text.[css|scss|less]". But you caould just as well place the CSS in regular CSS files in your assets directory or any other way you want to.
+
+The brick-class also have a function called `set_inline_css` that you can use to set inline css attributes on the fly in a brick. That CSS can then be used for example in a layout. See [demo_buttons_list](fewbricks/bricks/demo-button-list.php) and [demo-layout-1.php](fewbricks/brick-layouts/demo-layout-1.php) for example on how to utilize this. Don't miss the fact that you can store inline css in groups which can come in handy if youwant to create inline CSS for multiple elements.
 
 ### Developer mode
 By setting Fewbricks in developer mode, some extra debugging related to Fewbricks and ACF will become available. Also, every time a field group is registered, a check for duplicate keys will be executed. You enable developer mode by setting a constant, preferrably in wp-config.php, named FEWBRICKS_DEV_MODE to true:

@@ -92,9 +92,19 @@ class brick
     protected $is_sub_brick;
 
     /**
-     * @var array Any brick layouts that should be used when ouputting the brick.
+     * @var array Any brick layouts that should be used when outputting the brick.
      */
     private $brick_layouts;
+
+    /**
+     * @var string
+     */
+    private $inline_css;
+
+    /**
+     * @var array
+     */
+    private $inline_css_groups;
 
     /**
      * @param string $name Name to use when fetching data for the brick
@@ -120,7 +130,11 @@ class brick
         $this->fields_to_remove = [];
         $this->is_sub_brick = false;
         $this->brick_layouts = [];
+        $this->inline_css = '';
+        $this->inline_css_groups = [];
 
+        // Old code that could cause trouble if removed now since people may be using it.
+        // Use set_data_item / get_data_item instead.
         $this->args['brick_css_class'] = [];
 
     }
@@ -232,7 +246,7 @@ class brick
      * Add a common field to the brick.
      * @param string $common_field_array_key A key corresponding to an item in the fewbricks_common_fields array
      * @param string $key A site wide unique key for the field
-     * @param array $settings Anye extra settings to set on the field. Can be used to override existing settings as well.
+     * @param array $settings Any extra settings to set on the field. Can be used to override existing settings as well.
      */
     protected function add_common_field($common_field_array_key, $key, $settings = [])
     {
@@ -281,6 +295,7 @@ class brick
         }
 
         return $value;
+
     }
 
     /**
@@ -467,7 +482,7 @@ class brick
     }
 
     /**
-     * Wrapper function for ACFs the_row to avoid confucsion on when to use $this or not for ACF functions.
+     * Wrapper function for ACFs the_row to avoid confusion on when to use $this or not for ACF functions.
      */
     protected function the_row()
     {
@@ -748,6 +763,85 @@ class brick
     }
 
     /**
+     * Get the value of a data item
+     * @param $item_name string The name of the item that we want to get.
+     * @param bool $prepend_this_name If the name of the brick should be prepended on the item name. See set_data_item
+     * for more info on this.
+     * @param bool $group_name The name of the group that the data is in.
+     * @param bool $default_value If the data item does not exist, this is what will be returned.
+     * @return bool|mixed
+     */
+    public function get_data_item($item_name, $prepend_this_name = true, $group_name = false, $default_value = false)
+    {
+
+        $value = $default_value;
+
+        if($prepend_this_name) {
+
+            $item_name = $this->name . '_' . $item_name;
+
+            if($group_name !== false) {
+                $group_name = $this->name . '_' . $group_name;
+            }
+
+        }
+
+        if ($group_name === false && isset($this->data[$item_name])) {
+
+            $value = $this->data[$item_name];
+
+        } else if(
+            $group_name !== false &&
+            isset($this->data[$group_name]) &&
+            is_array($this->data[$group_name]) &&
+            isset($this->data[$group_name][$item_name])
+        ) {
+
+            $value = $this->data[$group_name][$item_name];
+
+        }
+
+        return $value;
+
+    }
+
+    /**
+     * Use this to get an entire group of data.
+     * @param $group_name string The name of the group.
+     * @param bool $default_value If the group could not be found, this value will be returned.
+     * @param bool $prepend_this_name If the name of the brick should be prepended on the group name.
+     * @return bool|mixed
+     */
+    public function get_data_group($group_name, $default_value = false, $prepend_this_name = true)
+    {
+
+        return $this->get_data_item($group_name, $prepend_this_name, false, $default_value);
+
+    }
+
+    /**
+     * @param bool $group_name
+     * @return bool|mixed|string
+     */
+    public function get_inline_css($group_name = false) {
+
+        $value = false;
+
+        if($group_name !== false && isset($this->inline_css_groups[$group_name])) {
+
+            $value = $this->inline_css_groups[$group_name];
+
+        } else if(!empty($this->inline_css)){
+
+            $value = $this->inline_css;
+
+        }
+
+        return $value;
+
+    }
+
+    /**
      * @return bool
      */
     public function get_is_option()
@@ -854,18 +948,57 @@ class brick
 
     /**
      * Use this to set custom data for the brick.
-     * @param $name
-     * @param $value
-     * @param $prepend_this_name
+     * @param $item_name string The name of the item.
+     * @param $value mixed The value of the item.
+     * @param bool $prepend_this_name If the item name should be prepended with the name of the brick. This is an
+     * unfortunate left over from an early version. But it would cause a lot of trouble to remove it now so we leave it be.
+     * @param bool $group_name Use this if you want to create groups of data.
      */
-    public function set_data_item($name, $value, $prepend_this_name = true)
+    public function set_data_item($item_name, $value, $prepend_this_name = true, $group_name = false)
     {
 
         if ($prepend_this_name) {
-            $name = $this->name . '_' . $name;
+
+            $item_name = $this->name . '_' . $item_name;
+
+            if($group_name !== false) {
+                $group_name = $this->name . '_' . $group_name;
+            }
+
         }
 
-        $this->data[$name] = $value;
+        if($group_name === false) {
+
+            $this->data[$item_name] = $value;
+
+        } else {
+
+            $this->data[$group_name][$item_name] = $value;
+
+        }
+
+    }
+
+    /**
+     * @param $attribute
+     * @param $value
+     * @param bool $group_name
+     */
+    public function set_inline_css($attribute, $value, $group_name = false) {
+
+        if($group_name !== false) {
+
+            if(!isset($this->inline_css_groups[$group_name])) {
+                $this->inline_css_groups[$group_name] = '';
+            }
+
+            $this->inline_css_groups[$group_name] .= $attribute . ': ' . $value . ';';
+
+        } else {
+
+            $this->inline_css .= $attribute . ':' . $value . ';';
+
+        }
 
     }
 
@@ -893,6 +1026,8 @@ class brick
     }
 
     /**
+     * Old code that could cause trouble if removed now since people may be using it.
+     * Use set_data_item / get_data_item instead.
      * @param $class_name
      */
     public function add_css_class($class_name)
