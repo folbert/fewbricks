@@ -35,6 +35,8 @@ class demo_buttons_list extends project_brick
             $this->add_common_field('demo_background_color', '1509112010i');
         }
 
+        $this->add_field(new acf_fields\image('Background image', 'bg_img', '1604292314a'));
+
     }
 
     /**
@@ -42,6 +44,19 @@ class demo_buttons_list extends project_brick
      */
     protected function get_brick_html()
     {
+
+        // Some stuff just to show off features
+        $this->set_data_item('demo_data_item', 'I am some test data set on the fly by the brick.');
+        $this->set_data_item('demo_data_item', 'I am some test data set on the fly by the brick in a group.', true, 'demo_group');
+        $this->set_data_item('demo_data_item_2', 'I am some _more_ test data set on the fly by the brick in a group.', true, 'demo_group');
+
+        $bg_img = $this->get_field('bg_img');
+        if(!empty($bg_img)) {
+            $this->set_inline_css('padding-top', '50px');
+            $this->set_inline_css('background-image', 'url(' . wp_get_attachment_image_url($bg_img, 'full') . ')', 'inner');
+        }
+
+        $this->set_inline_css('border', 'solid 2px #000', 'inner');
 
         $html = '
           <div class="row">
@@ -68,7 +83,7 @@ class demo_buttons_list extends project_brick
         $html .= '
               </ul>
             </div>
-          </div> <!-- /.row -->
+          </div>
         ';
 
         return $html;
