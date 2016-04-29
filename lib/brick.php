@@ -92,7 +92,7 @@ class brick
     protected $is_sub_brick;
 
     /**
-     * @var array Any brick layouts that should be used when ouputting the brick.
+     * @var array Any brick layouts that should be used when outputting the brick.
      */
     private $brick_layouts;
 
@@ -232,7 +232,7 @@ class brick
      * Add a common field to the brick.
      * @param string $common_field_array_key A key corresponding to an item in the fewbricks_common_fields array
      * @param string $key A site wide unique key for the field
-     * @param array $settings Anye extra settings to set on the field. Can be used to override existing settings as well.
+     * @param array $settings Any extra settings to set on the field. Can be used to override existing settings as well.
      */
     protected function add_common_field($common_field_array_key, $key, $settings = [])
     {
@@ -281,6 +281,7 @@ class brick
         }
 
         return $value;
+
     }
 
     /**
@@ -467,7 +468,7 @@ class brick
     }
 
     /**
-     * Wrapper function for ACFs the_row to avoid confucsion on when to use $this or not for ACF functions.
+     * Wrapper function for ACFs the_row to avoid confusion on when to use $this or not for ACF functions.
      */
     protected function the_row()
     {
