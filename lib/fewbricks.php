@@ -346,7 +346,7 @@ class fewbricks {
 
         self::$messages['fewbricks_template_dir_missing'] = '
             <div class="error notice">
-              <p>You have activated the plugin "Fewbricks". In order to use it, please make sure that you have copied the directory "fewbricks" in plugins/fewbricks/ to your theme directory. Read more under in the <a href="https://github.com/folbert/fewbricks/blob/master/README.md">README</a>.</p>
+              <p>You have activated the plugin "Fewbricks". In order to use it, please make sure that you have copied the directory "fewbricks" in plugins/fewbricks/ to your theme directory. Read more in the <a href="https://github.com/folbert/fewbricks/blob/master/README.md">README</a> (search for "hidden").</p>
           </div>
         ';
 
