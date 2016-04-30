@@ -53,6 +53,9 @@ function acf_exists()
 function hide_acf_info()
 {
 
-    return defined('FEWBRICKS_HIDE_ACF_INFO') && FEWBRICKS_HIDE_ACF_INFO === true;
+    $dev_mode = is_fewbricks_in_developer_mode();
+
+    return  !$dev_mode ||
+        (defined('FEWBRICKS_HIDE_ACF_INFO') && FEWBRICKS_HIDE_ACF_INFO === true);
     
 }

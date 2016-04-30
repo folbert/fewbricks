@@ -83,7 +83,6 @@ class fewbricks {
         }
 
         self::do_developer_mode();
-        self::do_acf_info();
 
     }
 
@@ -188,9 +187,7 @@ class fewbricks {
     {
 
         //FEWBRICKS_HIDE_ACF_INFO Gives us a way to hide info event if dev mode is activated
-        if ((!helpers\hide_acf_info()) ||
-            (!defined('FEWBRICKS_HIDE_ACF_INFO') && helpers\is_fewbricks_in_developer_mode())
-        ) {
+        if (!helpers\hide_acf_info()) {
 
             require_once(__DIR__ . '/../extras/acf-field-snitch/activate.php');
 
@@ -223,6 +220,8 @@ class fewbricks {
                 });
 
             }
+
+            self::do_acf_info();
 
         }
 
