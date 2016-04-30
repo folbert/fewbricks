@@ -105,13 +105,13 @@ The system was created for the following reasons:
 ## Demo
 After having carried out the installation steps, you can set up the demo by following these steps:
   
-1. Create a file named "template-fewbricks-demo.php".
+1. Move [theme]/fewbricks/demo/template-fewbricks-demo.php to the root of your theme folder. Please note that this template is completely standalone and does not include any WP head or your themes stylesheets. This is only because it is a demo and we want to make sure we have a clean Bootstrap page to work with.
 
-2. Copy the content of [theme]/fewbricks/demo/template-fewbricks-demo.php and paste it into the file created in step 1. Please note that this template is completely standalone and does not include any WP head or your themes stylesheets. This is only because it is a demo and we want to make sure we have a clean Bootstrap page to work with.
+2. Go to the admin area of WordPress, create a new page and select the template "Fewbricks Demo".
 
-3. Go to the admin area of WordPress, create a new page, select the template "Fewbricks Demo" and hit "Update"/"Publish".
+3. You should now, instead of the standard WYSIWYG area, see a bunch of fields and buttons that looks like the standard ACF GUI. If you don't, hit "Update"/"Publish".
 
-4. You should now, instead of the standard WYSIWYG area, see a bunch of fields and buttons that looks like the standard ACF GUI. That is actually what it is with the exception that they have been put there using Fewbricks. Head on over to [theme]/fewbricks/field-groups/init.php to start tracking what is going on and how everything works.
+4. What you see is standard ACF fields that have been put there using Fewbricks. Head on over to [theme]/fewbricks/field-groups/init.php to start tracking what is going on and how everything works.
 
 5. Play around with adding some data to fields and adding flexible content etc.
 
