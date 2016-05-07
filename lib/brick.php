@@ -536,26 +536,14 @@ class brick
 
     /**
      * @param array $args Any arguments that you need to pass to the brick on runtime. Available as $this->get_html_args
-     * @param mixed $brick_layouts Any layouts that you want to wrap the brick in. Array or string with the name
-     * of the layout (without .php). Layouts must be placed in [theme]/fewbricks/brick-layouts/
+     * @param mixed $brick_layouts Array or string with the file name(s) (without .php) of any layouts that you want to
+     * wrap the brick in. Layout files must be placed in [theme]/fewbricks/brick-layouts/.
      * @return string
      */
     public function get_html($args = [], $brick_layouts = false)
     {
 
-        if (is_string($brick_layouts)) {
-
-            $this->add_brick_layout($brick_layouts);
-
-        } elseif (is_array($brick_layouts)) {
-
-            foreach ($brick_layouts AS $brick_layout) {
-
-                $this->add_brick_layout($brick_layout);
-
-            }
-
-        }
+        $this->set_brick_layouts($brick_layouts);
 
         $this->get_html_args = $args;
 
@@ -932,6 +920,32 @@ class brick
     {
 
         return $this->post_id_to_get_field_from;
+
+    }
+
+    /**
+     * Set brick layouts.
+     * @param string|array $brick_layouts Array or string with the name of the layout(s) (without .php).
+     * Layout files must be placed in [theme]/fewbricks/brick-layouts/ .
+     */
+    public function set_brick_layouts($brick_layouts)
+    {
+
+        if (is_string($brick_layouts)) {
+
+            $brick_layouts = [$brick_layouts];
+
+        }
+
+        if (is_array($brick_layouts)) {
+
+            foreach ($brick_layouts AS $brick_layout) {
+
+                $this->add_brick_layout($brick_layout);
+
+            }
+
+        }
 
     }
 
