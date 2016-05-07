@@ -926,7 +926,7 @@ class brick
     /**
      * Set brick layouts.
      * @param string|array $brick_layouts Array or string with the name of the layout(s) (without .php).
-     * Layout files must be placed in [theme]/fewbricks/brick-layouts/ .
+     * Layout files must be placed in [theme]/fewbricks/brick-layouts/.
      */
     public function set_brick_layouts($brick_layouts)
     {
@@ -950,13 +950,40 @@ class brick
     }
 
     /**
-     * @param $brick_layout
+     * Add a single layout to the brick. String with the name of the layout (without .php).
+     * Layout files must be placed in [theme]/fewbricks/brick-layouts/.
+     * @param string $brick_layout
      */
     public function add_brick_layout($brick_layout)
     {
 
         // Avoid nesting brick layouts
         $this->brick_layouts[$brick_layout] = $brick_layout;
+
+    }
+
+    /**
+     * Returns the brick layouts set for the brick. These are the values previously passed to set_brick_layouts and/or
+     * add_brick_layout.
+     * @return array
+     */
+    public function get_brick_layouts()
+    {
+
+        return $this->brick_layouts;
+
+    }
+
+    /**
+     * Checks if the brick has a layout with the name that you pass to the function. Returns true if it does, false if
+     * not.
+     * @param $brick_layout_name
+     * @return boolean True if the brick has a layout with the passed name, false if not.
+     */
+    public function has_brick_layout($brick_layout_name)
+    {
+
+        return in_array($brick_layout_name, $this->brick_layouts);
 
     }
 
