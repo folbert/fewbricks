@@ -536,26 +536,14 @@ class brick
 
     /**
      * @param array $args Any arguments that you need to pass to the brick on runtime. Available as $this->get_html_args
-     * @param mixed $brick_layouts Any layouts that you want to wrap the brick in. Array or string with the name
-     * of the layout (without .php). Layouts must be placed in [theme]/fewbricks/brick-layouts/
+     * @param mixed $brick_layouts Array or string with the file name(s) (without .php) of any layouts that you want to
+     * wrap the brick in. Layout files must be placed in [theme]/fewbricks/brick-layouts/.
      * @return string
      */
     public function get_html($args = [], $brick_layouts = false)
     {
 
-        if (is_string($brick_layouts)) {
-
-            $this->add_brick_layout($brick_layouts);
-
-        } elseif (is_array($brick_layouts)) {
-
-            foreach ($brick_layouts AS $brick_layout) {
-
-                $this->add_brick_layout($brick_layout);
-
-            }
-
-        }
+        $this->set_brick_layouts($brick_layouts);
 
         $this->get_html_args = $args;
 
@@ -565,13 +553,25 @@ class brick
 
     /**
      * Executes a template file for the current class and returns the output.
+     * Implements filter fewbricks/brick/brick_template_base_path allowing you to override where the template file
+     * resides. Value returned by the hook should end with a slash. Note that the filter will only run if
+     * the first argument to this funciton is false.
+     * @param bool|string $template_base_path If you want to set a specific base path, pass it here. End with a slash.
      * @return string
      */
-    protected function get_brick_template_html()
+    protected function get_brick_template_html($template_base_path = false)
     {
 
-        $template_path = get_stylesheet_directory() .
-            '/fewbricks/bricks/' .
+        if($template_base_path === false) {
+
+            $template_base_path = apply_filters(
+                'fewbricks/brick/brick_template_base_path',
+                get_stylesheet_directory() . '/fewbricks/bricks/'
+            );
+
+        }
+
+        $template_path = $template_base_path .
             str_replace('_', '-', \fewbricks\helpers\get_real_class_name($this)) .
             '.template.php';
 
@@ -936,13 +936,66 @@ class brick
     }
 
     /**
-     * @param $brick_layout
+     * Set brick layouts.
+     * @param string|array $brick_layouts Array or string with the name of the layout(s) (without .php).
+     * Layout files must be placed in [theme]/fewbricks/brick-layouts/.
+     */
+    public function set_brick_layouts($brick_layouts)
+    {
+
+        if (is_string($brick_layouts)) {
+
+            $brick_layouts = [$brick_layouts];
+
+        }
+
+        if (is_array($brick_layouts)) {
+
+            foreach ($brick_layouts AS $brick_layout) {
+
+                $this->add_brick_layout($brick_layout);
+
+            }
+
+        }
+
+    }
+
+    /**
+     * Add a single layout to the brick. String with the name of the layout (without .php).
+     * Layout files must be placed in [theme]/fewbricks/brick-layouts/.
+     * @param string $brick_layout
      */
     public function add_brick_layout($brick_layout)
     {
 
         // Avoid nesting brick layouts
         $this->brick_layouts[$brick_layout] = $brick_layout;
+
+    }
+
+    /**
+     * Returns the brick layouts set for the brick. These are the values previously passed to set_brick_layouts and/or
+     * add_brick_layout.
+     * @return array
+     */
+    public function get_brick_layouts()
+    {
+
+        return $this->brick_layouts;
+
+    }
+
+    /**
+     * Checks if the brick has a layout with the name that you pass to the function. Returns true if it does, false if
+     * not.
+     * @param $brick_layout_name
+     * @return boolean True if the brick has a layout with the passed name, false if not.
+     */
+    public function has_brick_layout($brick_layout_name)
+    {
+
+        return in_array($brick_layout_name, $this->brick_layouts);
 
     }
 

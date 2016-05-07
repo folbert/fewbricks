@@ -105,13 +105,13 @@ The system was created for the following reasons:
 ## Demo
 After having carried out the installation steps, you can set up the demo by following these steps:
   
-1. Create a file named "template-fewbricks-demo.php".
+1. Move [theme]/fewbricks/demo/template-fewbricks-demo.php to the root of your theme folder. Please note that this template is completely standalone and does not include any WP head or your themes stylesheets. This is only because it is a demo and we want to make sure we have a clean Bootstrap page to work with.
 
-2. Copy the content of [theme]/fewbricks/demo/template-fewbricks-demo.php and paste it into the file created in step 1. Please note that this template is completely standalone and does not include any WP head or your themes stylesheets. This is only because it is a demo and we want to make sure we have a clean Bootstrap page to work with.
+2. Go to the admin area of WordPress, create a new page and select the template "Fewbricks Demo".
 
-3. Go to the admin area of WordPress, create a new page, select the template "Fewbricks Demo" and hit "Update"/"Publish".
+3. You should now, instead of the standard WYSIWYG area, see a bunch of fields and buttons that looks like the standard ACF GUI. If you don't, hit "Update"/"Publish".
 
-4. You should now, instead of the standard WYSIWYG area, see a bunch of fields and buttons that looks like the standard ACF GUI. That is actually what it is with the exception that they have been put there using Fewbricks. Head on over to [theme]/fewbricks/field-groups/init.php to start tracking what is going on and how everything works.
+4. What you see is standard ACF fields that have been put there using Fewbricks. Head on over to [theme]/fewbricks/field-groups/init.php to start tracking what is going on and how everything works.
 
 5. Play around with adding some data to fields and adding flexible content etc.
 
@@ -242,7 +242,7 @@ Each brick has its own class placed in the folder named "bricks". Each class hav
         
         The template-file have access to the same data and variables that you have if you are building the HTML right in `get_brick_html()`.
         
-        For your convenience, the main brick-class have a function named `get_brick_template_html()` for this. It will look for a template file with the name structure described above, include that file and return the outcome of it.
+        For your convenience, the main brick-class have a function named `get_brick_template_html()` for this. It will look for a template file with the name structure described above, include that file and return the outcome of it. This function also have a hook for the filter "fewbricks/brick/brick_template_base_path" allowing you to change the path to the directory where the file resides. Note that the file name will always be as described in step 2 above. You may also pass an argument to the function telling it where to look for a specific template file. Once again, you can pass the path, the filename is as described above. Passing the argument makes the function skip the hook.
             
         We are using this approach in [theme]/fewbricks/bricks/demo-jumbotron.php.
                 

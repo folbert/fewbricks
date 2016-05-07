@@ -25,7 +25,8 @@ These steps are to make sure that a notice about the new version is displayed wh
 * Re-Zip
 * Upload to fewbricks.folbert.com/update/zips/[version-nr]/
 * Edit update.php:
-    *  Update $obj->new_version
+    * Update $obj->new_version
+    * Update $obj->package
     * Update $obj->last_updated
     * Check $obj->tested
     * Check $obj->requires
