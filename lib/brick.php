@@ -536,26 +536,14 @@ class brick
 
     /**
      * @param array $args Any arguments that you need to pass to the brick on runtime. Available as $this->get_html_args
-     * @param mixed $brick_layouts Any layouts that you want to wrap the brick in. Array or string with the name
-     * of the layout (without .php). Layouts must be placed in [theme]/fewbricks/brick-layouts/
+     * @param mixed $brick_layouts Array or string with the file name(s) (without .php) of any layouts that you want to
+     * wrap the brick in. Layout files must be placed in [theme]/fewbricks/brick-layouts/.
      * @return string
      */
     public function get_html($args = [], $brick_layouts = false)
     {
 
-        if (is_string($brick_layouts)) {
-
-            $this->add_brick_layout($brick_layouts);
-
-        } elseif (is_array($brick_layouts)) {
-
-            foreach ($brick_layouts AS $brick_layout) {
-
-                $this->add_brick_layout($brick_layout);
-
-            }
-
-        }
+        $this->set_brick_layouts($brick_layouts);
 
         $this->get_html_args = $args;
 
@@ -936,13 +924,66 @@ class brick
     }
 
     /**
-     * @param $brick_layout
+     * Set brick layouts.
+     * @param string|array $brick_layouts Array or string with the name of the layout(s) (without .php).
+     * Layout files must be placed in [theme]/fewbricks/brick-layouts/.
+     */
+    public function set_brick_layouts($brick_layouts)
+    {
+
+        if (is_string($brick_layouts)) {
+
+            $brick_layouts = [$brick_layouts];
+
+        }
+
+        if (is_array($brick_layouts)) {
+
+            foreach ($brick_layouts AS $brick_layout) {
+
+                $this->add_brick_layout($brick_layout);
+
+            }
+
+        }
+
+    }
+
+    /**
+     * Add a single layout to the brick. String with the name of the layout (without .php).
+     * Layout files must be placed in [theme]/fewbricks/brick-layouts/.
+     * @param string $brick_layout
      */
     public function add_brick_layout($brick_layout)
     {
 
         // Avoid nesting brick layouts
         $this->brick_layouts[$brick_layout] = $brick_layout;
+
+    }
+
+    /**
+     * Returns the brick layouts set for the brick. These are the values previously passed to set_brick_layouts and/or
+     * add_brick_layout.
+     * @return array
+     */
+    public function get_brick_layouts()
+    {
+
+        return $this->brick_layouts;
+
+    }
+
+    /**
+     * Checks if the brick has a layout with the name that you pass to the function. Returns true if it does, false if
+     * not.
+     * @param $brick_layout_name
+     * @return boolean True if the brick has a layout with the passed name, false if not.
+     */
+    public function has_brick_layout($brick_layout_name)
+    {
+
+        return in_array($brick_layout_name, $this->brick_layouts);
 
     }
 

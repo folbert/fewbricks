@@ -81,7 +81,7 @@ echo (new \fewbricks\bricks\demo_jumbotron('jumbotron'))->get_html();
         the_row();
 
         /** @noinspection PhpUndefinedMethodInspection */
-        echo \fewbricks\acf\fields\flexible_content::get_sub_field_brick_instance()->get_html(false, ['demo-layout-2']);
+        echo \fewbricks\acf\fields\flexible_content::get_sub_field_brick_instance()->get_html(false, 'demo-layout-2');
 
       }
 
