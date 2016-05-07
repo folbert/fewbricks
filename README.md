@@ -242,7 +242,7 @@ Each brick has its own class placed in the folder named "bricks". Each class hav
         
         The template-file have access to the same data and variables that you have if you are building the HTML right in `get_brick_html()`.
         
-        For your convenience, the main brick-class have a function named `get_brick_template_html()` for this. It will look for a template file with the name structure described above, include that file and return the outcome of it.
+        For your convenience, the main brick-class have a function named `get_brick_template_html()` for this. It will look for a template file with the name structure described above, include that file and return the outcome of it. This function also have a hook for the filter "fewbricks/brick/brick_template_base_path" allowing you to change the path to the directory where the file resides. Note that the file name will always be as described in step 2 above. You may also pass an argument to the function telling it where to look for a specific template file. Once again, you can pass the path, the filename is as described above. Passing the argument makes the function skip the hook.
             
         We are using this approach in [theme]/fewbricks/bricks/demo-jumbotron.php.
                 

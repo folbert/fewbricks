@@ -553,13 +553,25 @@ class brick
 
     /**
      * Executes a template file for the current class and returns the output.
+     * Implements filter fewbricks/brick/brick_template_base_path allowing you to override where the template file
+     * resides. Value returned by the hook should end with a slash. Note that the filter will only run if
+     * the first argument to this funciton is false.
+     * @param bool|string $template_base_path If you want to set a specific base path, pass it here. End with a slash.
      * @return string
      */
-    protected function get_brick_template_html()
+    protected function get_brick_template_html($template_base_path = false)
     {
 
-        $template_path = get_stylesheet_directory() .
-            '/fewbricks/bricks/' .
+        if($template_base_path === false) {
+
+            $template_base_path = apply_filters(
+                'fewbricks/brick/brick_template_base_path',
+                get_stylesheet_directory() . '/fewbricks/bricks/'
+            );
+
+        }
+
+        $template_path = $template_base_path .
             str_replace('_', '-', \fewbricks\helpers\get_real_class_name($this)) .
             '.template.php';
 
