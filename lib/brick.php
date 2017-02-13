@@ -572,9 +572,14 @@ class brick
 
         }
 
+        $template_files_extension = apply_filters(
+            'fewbricks/brick/brick_template_file_extension',
+            '.template.php'
+        );
+
         $template_path = $template_base_path .
             str_replace('_', '-', \fewbricks\helpers\get_real_class_name($this)) .
-            '.template.php';
+            $template_files_extension;
 
         ob_start();
 
