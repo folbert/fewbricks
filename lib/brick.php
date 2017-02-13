@@ -599,13 +599,16 @@ class brick
 
         if (!empty($this->brick_layouts)) {
 
-            $theme_path = get_stylesheet_directory() . '/';
+            $template_base_path = apply_filters(
+                'fewbricks/brick/brick_layout_base_path',
+                get_stylesheet_directory() . '/fewbricks/brick-layouts'
+            );
 
             foreach ($this->brick_layouts AS $brick_layout) {
 
                 if(substr($brick_layout, -5) === '.twig') {
 
-                    $html = \Timber::compile($theme_path . 'fewbricks/brick-layouts/' . $brick_layout, [
+                    $html = \Timber::compile($template_base_path . '/' . $brick_layout, [
                         'html' => $html,
                         'this' => $this
                     ]);
@@ -615,7 +618,7 @@ class brick
                     ob_start();
 
                     /** @noinspection PhpIncludeInspection */
-                    include($theme_path . 'fewbricks/brick-layouts/' . $brick_layout . '.php');
+                    include($template_base_path . '/' . $brick_layout . '.php');
 
                     $html = ob_get_clean();
 
