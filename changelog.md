@@ -1,5 +1,8 @@
 # Fewbricks changelog
 
+## 1.5.1 - February 13, 2017
+* Changed name on filter for project files base path
+
 ## 1.5.0 - February 13, 2017
 * Added ability to pass data to a brick template
 * Added filter for brick template file extension
