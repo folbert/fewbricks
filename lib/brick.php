@@ -557,9 +557,10 @@ class brick
      * resides. Value returned by the hook should end with a slash. Note that the filter will only run if
      * the first argument to this funciton is false.
      * @param bool|string $template_base_path If you want to set a specific base path, pass it here. End with a slash.
+     * @param array $data Array of data to pass to the template file
      * @return string
      */
-    protected function get_brick_template_html($template_base_path = false)
+    protected function get_brick_template_html($template_base_path = false, $data = [])
     {
 
         if($template_base_path === false) {
