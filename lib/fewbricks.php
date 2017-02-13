@@ -75,10 +75,13 @@ class fewbricks {
 
         if (!helpers\use_acf_json() || $fewbricks_save_json === true) {
 
-            $fewbricks_template_directory = get_stylesheet_directory() . '/';
+            $project_files_base_path = apply_filters(
+                'fewbricks/brick/project_files_base_path',
+                get_stylesheet_directory() . '/fewbricks'
+            );
 
-            require($fewbricks_template_directory . 'fewbricks/common-fields/init.php');
-            require($fewbricks_template_directory . 'fewbricks/field-groups/init.php');
+            require($project_files_base_path . '/common-fields/init.php');
+            require($project_files_base_path . '/field-groups/init.php');
 
         }
 
