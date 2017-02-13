@@ -1,5 +1,12 @@
 # Fewbricks changelog
 
+## 1.5.0 - February 13, 2017
+* Added ability to pass data to a brick template
+* Added filter for brick template file extension
+* Added filter for brick template base path
+* Added filter for project files base path
+* Added section about filters in the readme
+
 ## 1.4.0 - May 7, 2016
 * Added functions get_brick_layouts() and has_brick_layout() for brick class.
 * Added hook for filter fewbricks/brick/brick_template_base_path in brick->get_brick_template_html(). More info in the readme file.
