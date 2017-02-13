@@ -121,7 +121,12 @@ class fewbricks {
     private static function autoload_brick($file_name)
     {
 
-        $path = get_stylesheet_directory() . '/fewbricks/bricks/' . $file_name;
+        $project_files_base_path = apply_filters(
+            'fewbricks/brick/project_files_base_path',
+            get_stylesheet_directory() . '/fewbricks'
+        );
+
+        $path = $project_files_base_path . '/bricks/' . $file_name;
 
         if(is_file($path)) {
 
