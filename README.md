@@ -356,7 +356,7 @@ The goal is to have all the fields available in ACF also available in Fewbricks.
 
 The following filters are available in Fewbricks:
 
-* `fewbricks/brick/project_files_base_path` - allows you to change the path of the project Fewbricks folder.
+* `fewbricks/project_files_base_path` - allows you to change the path of the project Fewbricks folder.
 * `fewbricks/brick/brick_template_file_extension` - allows you to change the file extension of template files used in [brick.php -> get_brick_template_html()](lib/brick.php). Your filter should return for example ".view.php" or ".php". Note the dot at the beginning. 
 * `fewbricks/brick/brick_template_base_path` - allows you to change the standard path of brick templates in [lib/brick.php -> get_brick_template_html()](lib/brick.php). If you pass a `$template_base_path` to `get_brick_template_html()` this filter will be ignored. Your filter should return the path without a trailing slash.
 * `fewbricks/brick/brick_layout_base_path` - allows you to change the base path of layout files used in [lib/brick.php -> get_brick_layouted_html()]. Your filter should return return the path without a trailing slash.
