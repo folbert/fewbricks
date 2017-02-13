@@ -10,8 +10,6 @@ Version number follows [Semantic Versioning](http://semver.org/)
 ## Git-Flow in Tower
 [https://www.git-tower.com/learn/git/ebook/en/mac/advanced-topics/git-flow](https://www.git-tower.com/learn/git/ebook/en/mac/advanced-topics/git-flow)
 
-Don't prefix tags with "v" since the repo was set up to auto prefix tags with "v".
-
 After master has been pushed, create release on GitHub.
 
 ## After release has been created on GitHub:

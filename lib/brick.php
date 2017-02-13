@@ -557,9 +557,10 @@ class brick
      * resides. Value returned by the hook should end with a slash. Note that the filter will only run if
      * the first argument to this funciton is false.
      * @param bool|string $template_base_path If you want to set a specific base path, pass it here. End with a slash.
+     * @param array $data Array of data to pass to the template file
      * @return string
      */
-    protected function get_brick_template_html($template_base_path = false)
+    protected function get_brick_template_html($template_base_path = false, $data = [])
     {
 
         if($template_base_path === false) {
@@ -571,9 +572,14 @@ class brick
 
         }
 
+        $template_files_extension = apply_filters(
+            'fewbricks/brick/brick_template_file_extension',
+            '.template.php'
+        );
+
         $template_path = $template_base_path .
             str_replace('_', '-', \fewbricks\helpers\get_real_class_name($this)) .
-            '.template.php';
+            $template_files_extension;
 
         ob_start();
 
@@ -593,13 +599,16 @@ class brick
 
         if (!empty($this->brick_layouts)) {
 
-            $theme_path = get_stylesheet_directory() . '/';
+            $template_base_path = apply_filters(
+                'fewbricks/brick/brick_layout_base_path',
+                get_stylesheet_directory() . '/fewbricks/brick-layouts'
+            );
 
             foreach ($this->brick_layouts AS $brick_layout) {
 
                 if(substr($brick_layout, -5) === '.twig') {
 
-                    $html = \Timber::compile($theme_path . 'fewbricks/brick-layouts/' . $brick_layout, [
+                    $html = \Timber::compile($template_base_path . '/' . $brick_layout, [
                         'html' => $html,
                         'this' => $this
                     ]);
@@ -609,7 +618,7 @@ class brick
                     ob_start();
 
                     /** @noinspection PhpIncludeInspection */
-                    include($theme_path . 'fewbricks/brick-layouts/' . $brick_layout . '.php');
+                    include($template_base_path . '/' . $brick_layout . '.php');
 
                     $html = ob_get_clean();
 
