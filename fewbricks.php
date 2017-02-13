@@ -19,7 +19,9 @@ $fewbricks_lib_path = plugin_dir_path(__FILE__) . 'lib/';
 
 require_once($fewbricks_lib_path . 'fewbricks.php');
 
-fewbricks\fewbricks::construct();
+add_action('after_setup_theme', function() {
+    fewbricks\fewbricks::construct();
+});
 
 /**
  * Update related stuff
