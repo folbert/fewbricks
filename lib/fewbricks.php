@@ -76,7 +76,7 @@ class fewbricks {
         if (!helpers\use_acf_json() || $fewbricks_save_json === true) {
 
             $project_files_base_path = apply_filters(
-                'fewbricks/brick/project_files_base_path',
+                'fewbricks/project_files_base_path',
                 get_stylesheet_directory() . '/fewbricks'
             );
 
@@ -125,7 +125,7 @@ class fewbricks {
     {
 
         $project_files_base_path = apply_filters(
-            'fewbricks/brick/project_files_base_path',
+            'fewbricks/project_files_base_path',
             get_stylesheet_directory() . '/fewbricks'
         );
 
