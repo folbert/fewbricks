@@ -7,9 +7,6 @@ Version number follows [Semantic Versioning](http://semver.org/)
 * Change version nr in comment in fewbricks.php
 * Change version nr for $plugin_current_version in fewbricks.php
 
-## Git-Flow in Tower
-[https://www.git-tower.com/learn/git/ebook/en/mac/advanced-topics/git-flow](https://www.git-tower.com/learn/git/ebook/en/mac/advanced-topics/git-flow)
-
 After master has been pushed, create release on GitHub.
 
 ## After release has been created on GitHub:

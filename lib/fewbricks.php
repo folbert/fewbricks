@@ -76,7 +76,7 @@ class fewbricks {
         if (!helpers\use_acf_json() || $fewbricks_save_json === true) {
 
             $project_files_base_path = apply_filters(
-                'fewbricks/brick/project_files_base_path',
+                'fewbricks/project_files_base_path',
                 get_stylesheet_directory() . '/fewbricks'
             );
 
@@ -125,7 +125,7 @@ class fewbricks {
     {
 
         $project_files_base_path = apply_filters(
-            'fewbricks/brick/project_files_base_path',
+            'fewbricks/project_files_base_path',
             get_stylesheet_directory() . '/fewbricks'
         );
 
@@ -292,7 +292,12 @@ class fewbricks {
     private static function fewbricks_template_dir_exists()
     {
 
-        $fewbricks_template_dir_exists = file_exists(get_stylesheet_directory() . '/fewbricks');
+        $project_files_base_path = apply_filters(
+            'fewbricks/project_files_base_path',
+            get_stylesheet_directory() . '/fewbricks'
+        );
+
+        $fewbricks_template_dir_exists = file_exists($project_files_base_path);
 
         if(!$fewbricks_template_dir_exists) {
             // Make sure that the fewbricks/fewbricks-directory has been moved to the template directory.
@@ -353,7 +358,7 @@ class fewbricks {
 
         self::$messages['fewbricks_template_dir_missing'] = '
             <div class="error notice">
-              <p>You have activated the plugin "Fewbricks". In order to use it, please make sure that you have copied the directory "fewbricks" in plugins/fewbricks/ to your theme directory. Read more in the <a href="https://github.com/folbert/fewbricks/blob/master/README.md">README</a> (search for "hidden").</p>
+              <p>You have activated the plugin "Fewbricks". In order to use it, please make sure that you have copied the directory "fewbricks" in plugins/fewbricks/ to your theme directory or placed it at the path that you have specified using the filter fewbricks/project_files_base_path. Read more in the <a href="https://github.com/folbert/fewbricks/blob/master/README.md">README</a> (search for "hidden").</p>
           </div>
         ';
 
