@@ -81,7 +81,7 @@ The system was created for the following reasons:
     * Install manually by downloading [the latest release](/releases).
     If you are installing Fewbricks this way, you must also install [Fewbricks Hidden field for ACF](https://github.com/folbert/acf-fewbricks-hidden) and make sure that its folder is named "acf-fewbricks-hidden".
  
- 3. In the main folder named "fewbricks", there is a folder also named "fewbricks". Move that folder to your theme folder and do __not__ rename it or any of its child directories. All your custom code will reside in this folder. If you want it to reside somewhere else with a different name, check out the [filters-section](#filters) of this readme.
+ 3. In the main folder named "fewbricks", there is a folder also named "fewbricks". Move that folder to either the plugins folder or your theme folder. If you place it in the theme fodler and keep the name "fewbricks", you don't have to do anything. If you place the directory anywhere else and/or rename it, check the filter `fewbricks/project_files_base_path` to let Fewbricks know your custom path. All your custom code will reside in this folder. When starting writing Febwricks, i thought that keeping the it in the theme directory was the best thing to do, but have since come to change my mind and now prefer to keep it the plugins directory. For the sake of backwards compatibility, the default location is still themes/[theme-name]/fewbricks. 
  
  4. Activate Fewbricks and "Advanced Custom Fields: Hidden Field for Fewbricks" as you would any other plugins.
  
@@ -356,7 +356,25 @@ The goal is to have all the fields available in ACF also available in Fewbricks.
 
 The following filters are available in Fewbricks:
 
-* `fewbricks/project_files_base_path` - allows you to change the path of the project Fewbricks folder.
-* `fewbricks/brick/brick_template_file_extension` - allows you to change the file extension of template files used in [brick.php -> get_brick_template_html()](lib/brick.php). Your filter should return for example ".view.php" or ".php". Note the dot at the beginning. 
-* `fewbricks/brick/brick_template_base_path` - allows you to change the standard path of brick templates in [lib/brick.php -> get_brick_template_html()](lib/brick.php). If you pass a `$template_base_path` to `get_brick_template_html()` this filter will be ignored. Your filter should return the path without a trailing slash.
-* `fewbricks/brick/brick_layout_base_path` - allows you to change the base path of layout files used in [lib/brick.php -> get_brick_layouted_html()]. Your filter should return return the path without a trailing slash.
+### `fewbricks/project_files_base_path`
+Allows you to change the path of the project Fewbricks folder.
+
+Simple example (namespaces, OOP-plugins etc. are waaaay outside the scope of this readme):
+```php
+add_filter('fewbricks/project_files_base_path', 'get_project_files_base_path');
+function fewbricks_project_files_base_path() {
+    // Path to where you placed the fewbricks-directory that originally resided
+    // in the main fewbricks directory.
+    // Include directory name, exclude trailing slash
+    return [PATH];
+}
+```
+
+### `fewbricks/brick/brick_template_file_extension`
+Allows you to change the file extension of template files used in [brick.php -> get_brick_template_html()](lib/brick.php). Your filter should return for example ".view.php" or ".php". Note the dot at the beginning. 
+
+### `fewbricks/brick/brick_template_base_path`
+Allows you to change the standard path of brick templates in [lib/brick.php -> get_brick_template_html()](lib/brick.php). If you pass a `$template_base_path` to `get_brick_template_html()` this filter will be ignored. Your filter should return the path without a trailing slash.
+
+### `fewbricks/brick/brick_layout_base_path`
+Allows you to change the base path of layout files used in [lib/brick.php -> get_brick_layouted_html()]. Your filter should return return the path without a trailing slash.
