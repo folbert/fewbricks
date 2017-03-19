@@ -1136,4 +1136,31 @@ class brick
 
     }
 
+    /**
+     * Get multiple field values in one function call. Pass an array where each item can be either:
+     * - a field name
+     * - an array where the index is the field name and the calue is the name you want to store the value
+     * in in the returned array: ['field_name_1', 'field_name_2', ['field_name_3' => 'name_to_save_as']]
+     * @param array $field_names
+     * @return array
+     */
+    protected function get_field_values($field_names)
+    {
+
+        $values = [];
+
+        foreach($field_names AS $field_name) {
+
+            if(is_array($field_name)) {
+                $key = key($field_name);
+                $values[$field_name[$key]] = $this->get_field($key);
+            } else {
+                $values[$field_name] = $this->get_field($field_name);
+            }
+        }
+
+        return $values;
+
+    }
+
 }
