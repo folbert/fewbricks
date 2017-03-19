@@ -1139,12 +1139,12 @@ class brick
     /**
      * Get multiple field values in one function call. Pass an array where each item can be either:
      * - a field name
-     * - an array where the index is the field name and the calue is the name you want to store the value
+     * - an array where the index is the field name and the value is the name you want to store the value
      * in in the returned array: ['field_name_1', 'field_name_2', ['field_name_3' => 'name_to_save_as']]
      * @param array $field_names
      * @return array
      */
-    protected function get_field_values($field_names)
+    public function get_field_values($field_names)
     {
 
         $values = [];
@@ -1160,6 +1160,28 @@ class brick
         }
 
         return $values;
+
+    }
+
+    /**
+     * Get value of html_arg.
+     * @param $name
+     * @param bool $default_value Value to return if the arg has not been set
+     * @return bool
+     */
+    public function get_get_html_arg($name, $default_value = false) {
+
+        if(isset($this->get_html_args[$name])) {
+
+            $outcome = $this->get_html_args[$name];
+
+        } else {
+
+            $outcome = $default_value;
+
+        }
+
+        return $outcome;
 
     }
 
