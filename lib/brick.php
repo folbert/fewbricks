@@ -466,12 +466,17 @@ class brick
     /**
      * Wrapper function for ACFs have_rows()
      * @param $name
+     * @param bool $post_id Specific post ID where your value was entered.
+     * Defaults to current post ID (not required). This can also be options / taxonomies / users / etc
+     * See https://www.advancedcustomfields.com/resources/have_rows/
      * @return bool
      */
-    protected function have_rows($name)
+    protected function have_rows($name, $post_id = false)
     {
 
-        if ($this->is_option) {
+        if($post_id !== false) {
+            $outcome = have_rows($this->name . '_' . $name, $post_id);
+        } elseif ($this->is_option) {
             $outcome = have_rows($this->get_data_name('_' . $name), 'option');
         } else {
             $outcome = have_rows($this->name . '_' . $name);
