@@ -1,5 +1,10 @@
 # Fewbricks changelog
 
+## 1.6 - March 19, 2017
+* Added function `get_field_values()`to `brick`
+* Added function `get_get_html_arg()` to `brick`
+* Added ability to pass $post_id to `have_rows()` in `brick` 
+
 ## 1.5.1 - February 13, 2017
 * Changed name on filter for project files base path
 
