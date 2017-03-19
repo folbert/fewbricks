@@ -466,12 +466,17 @@ class brick
     /**
      * Wrapper function for ACFs have_rows()
      * @param $name
+     * @param bool $post_id Specific post ID where your value was entered.
+     * Defaults to current post ID (not required). This can also be options / taxonomies / users / etc
+     * See https://www.advancedcustomfields.com/resources/have_rows/
      * @return bool
      */
-    protected function have_rows($name)
+    protected function have_rows($name, $post_id = false)
     {
 
-        if ($this->is_option) {
+        if($post_id !== false) {
+            $outcome = have_rows($this->name . '_' . $name, $post_id);
+        } elseif ($this->is_option) {
             $outcome = have_rows($this->get_data_name('_' . $name), 'option');
         } else {
             $outcome = have_rows($this->name . '_' . $name);
@@ -1128,6 +1133,55 @@ class brick
         $object->set_is_option($this->is_option);
 
         return $object;
+
+    }
+
+    /**
+     * Get multiple field values in one function call. Pass an array where each item can be either:
+     * - a field name
+     * - an array where the index is the field name and the value is the name you want to store the value
+     * in in the returned array: ['field_name_1', 'field_name_2', ['field_name_3' => 'name_to_save_as']]
+     * @param array $field_names
+     * @return array
+     */
+    public function get_field_values($field_names)
+    {
+
+        $values = [];
+
+        foreach($field_names AS $field_name) {
+
+            if(is_array($field_name)) {
+                $key = key($field_name);
+                $values[$field_name[$key]] = $this->get_field($key);
+            } else {
+                $values[$field_name] = $this->get_field($field_name);
+            }
+        }
+
+        return $values;
+
+    }
+
+    /**
+     * Get value of html_arg.
+     * @param $name
+     * @param bool $default_value Value to return if the arg has not been set
+     * @return bool
+     */
+    public function get_get_html_arg($name, $default_value = false) {
+
+        if(isset($this->get_html_args[$name])) {
+
+            $outcome = $this->get_html_args[$name];
+
+        } else {
+
+            $outcome = $default_value;
+
+        }
+
+        return $outcome;
 
     }
 

@@ -252,6 +252,8 @@ Each brick has its own class placed in the folder named "bricks". Each class hav
     Including external files like in i and ii will have some minor impact on performance but if you feel that having the HTML in an external file is the way to go, go ahead. 
         
     The `get_field()`-function being used is a wrapper function for ACFs own `get_field()` which takes care of adding any needed prefixes to get the value. Note that we are using the name values that we set when adding fields under step 3 above.
+    
+    We have also added the function `get_field_values()` to the main brick class. It enables you to pass an array of field names and get an array with the values back in return.
    
 #### Is that all Fewbricks can do?
 Nope. Like we said, you can create flexible content, repeaters, bricks incorporating other bricks and also create field groups on the fly. For more on how to do this, check the files in the directories "field-groups", "demo", "bricks" and "brick-layouts". Don't miss the brick named "demo-flexible-brick"!
