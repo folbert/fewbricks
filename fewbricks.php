@@ -2,11 +2,11 @@
 
 /*
 Plugin Name: Fewbricks
-Plugin URI: https://github.com/fewagency/fewbricks
+Plugin URI: https://github.com/folbert/fewbricks
 Description: A module extension to Advanced Custom Fields
 Author: Björn Folbert
-Version: 1.6
-Author URI: http://folbert.com
+Version: 2.0-alpha1
+Author URI: https://folbert.com
 License: GPLv3
 */
 
@@ -15,20 +15,26 @@ if (!defined('ABSPATH')) {
     exit;
 }
 
-$fewbricks_lib_path = plugin_dir_path(__FILE__) . 'lib/';
+require __DIR__ . '/vendor/autoload.php';
+
+add_action('after_setup_theme', function() {
+    \Fewbricks\Fewbricks::run();
+});
+
+/*$fewbricks_lib_path = plugin_dir_path(__FILE__) . 'lib/';
 
 require_once($fewbricks_lib_path . 'fewbricks.php');
 
 add_action('after_setup_theme', function() {
     fewbricks\fewbricks::construct();
-});
+});*/
 
 /**
  * Update related stuff
  */
-require_once($fewbricks_lib_path . 'wp-autoupdate.php');
+//require_once($fewbricks_lib_path . 'wp-autoupdate.php');
 
-add_action('init', function() {
+/*add_action('init', function() {
 
     // set auto-update params
     $plugin_current_version = '1.6';
@@ -42,4 +48,4 @@ add_action('init', function() {
         new wp_autoupdate ($plugin_current_version, $plugin_remote_path, $plugin_slug, $license_user, $license_key);
     }
 
-});
+});*/

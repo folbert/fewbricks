@@ -1,20 +1,31 @@
 {
-  "name": "folbert/fewbricks",
-  "type": "wordpress-plugin",
-  "description": "Modular system for Advanced Custom Fields",
-  "keywords": ["acf","advanced custom fields", "wordpress", "modules", "reusable"],
-  "homepage": "https://github.com/folbert/fewbricks",
-  "license": "GPLv3",
-  "authors": [
-    {
-      "name": "Björn Folbert",
-      "email": "b@folbert.com",
-      "homepage": "http://folbert.com",
-      "role": "Developer"
+    "name": "folbert/fewbricks",
+    "type": "wordpress-plugin",
+    "description": "Modular system for Advanced Custom Fields",
+    "keywords": [
+        "acf",
+        "advanced custom fields",
+        "wordpress",
+        "modules",
+        "reusable"
+    ],
+    "homepage": "https://github.com/folbert/fewbricks",
+    "license": "GPLv3",
+    "authors": [
+        {
+            "name": "Björn Folbert",
+            "email": "b@folbert.com",
+            "homepage": "https://folbert.com",
+            "role": "Developer"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Fewbricks\\": "src/"
+        }
+    },
+    "require": {
+        "php": ">=5.6.0",
+        "folbert/acf-fewbricks-hidden": ">=1.2"
     }
-  ],
-  "require": {
-    "php": ">=5.4.0",
-    "folbert/acf-fewbricks-hidden": ">=1.0"
-  }
 }

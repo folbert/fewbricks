@@ -1,3 +1,15 @@
+# Fewbricks 2
+
+Please see [this issue](https://github.com/folbert/fewbricks/issues/2#issuecomment-208723764) on why Fewbricks is not in the WordPress Plugin Directory.
+
+Fewbricks 2 is a complete rewrite of Fewbricks and introduces an insane amount of breaking changes so I am strongly advising against installing it in a setup that is already implemented using Fewbricks 1.x. 
+
+
+---
+Fewbricks 1 info below kept for now
+---
+
+
 # Fewbricks
 
 Please see [this issue](https://github.com/folbert/fewbricks/issues/2#issuecomment-208723764) on why Fewbricks is not in the WordPress Plugin Directory.

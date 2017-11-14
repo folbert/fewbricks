@@ -1,0 +1,60 @@
+{
+    "_readme": [
+        "This file locks the dependencies of your project to a known state",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
+        "This file is @generated automatically"
+    ],
+    "content-hash": "7b3e850c8e87198b006566eaf5eeb89b",
+    "packages": [
+        {
+            "name": "folbert/acf-fewbricks-hidden",
+            "version": "v1.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/folbert/acf-fewbricks-hidden.git",
+                "reference": "2fef9b40238c63a3c28d4ea932136b2c811e54b3"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/folbert/acf-fewbricks-hidden/zipball/2fef9b40238c63a3c28d4ea932136b2c811e54b3",
+                "reference": "2fef9b40238c63a3c28d4ea932136b2c811e54b3",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.4.0"
+            },
+            "type": "wordpress-plugin",
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "GPLv3"
+            ],
+            "authors": [
+                {
+                    "name": "Björn Folbert",
+                    "email": "b@folbert.com",
+                    "homepage": "http://folbert.com",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Hidden field for Advanced Custom Fields. Written especially for Fewbricks.",
+            "homepage": "https://github.com/folbert/acf-fewbricks-hidden",
+            "keywords": [
+                "acf",
+                "advanced custom fields",
+                "fewbricks",
+                "hidden"
+            ],
+            "time": "2017-02-18T21:41:51+00:00"
+        }
+    ],
+    "packages-dev": [],
+    "aliases": [],
+    "minimum-stability": "stable",
+    "stability-flags": [],
+    "prefer-stable": false,
+    "prefer-lowest": false,
+    "platform": {
+        "php": ">=5.6.0"
+    },
+    "platform-dev": []
+}
