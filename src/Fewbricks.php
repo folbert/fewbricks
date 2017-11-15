@@ -28,12 +28,13 @@ class Fewbricks
     }
 
     /**
-     * 
+     *
      */
     private static function init()
     {
 
-
+        $project_files_base_path = Helpers::get_project_files_base_path();
+        require($project_files_base_path . '/init.php');
 
     }
 
@@ -53,16 +54,16 @@ class Fewbricks
         if (!Helpers::acf_is_activated()) {
 
             $message
-                = sprintf(__('You have activated the plugin "Fewbricks". In order to use it, please make sure that <a href="%s">Advanced Custom Fields 5 Pro</a> is installed and activated.',
+                = sprintf(__('You have activated the plugin "Fewbricks". In order to use it, please make sure that <a href="%1$s">Advanced Custom Fields 5 Pro</a> is installed and activated.',
                 'fewbricks'), 'http://www.advancedcustomfields.com/');
 
         } elseif (!Helpers::fewbricks_hidden_is_activated()) {
 
-            $message = sprintf(__('You have activated the plugin "Fewbricks". In order to use it, please make sure that %s is installed and activated.', 'fewbricks'), '<a href="https://github.com/folbert/acf-fewbricks-hidden">Fewbricks Hidden Field</a> for Advanced Custom Fields');
+            $message = sprintf(__('You have activated the plugin "Fewbricks". In order to use it, please make sure that %1$s is installed and activated.', 'fewbricks'), '<a href="https://github.com/folbert/acf-fewbricks-hidden">Fewbricks Hidden Field</a> for Advanced Custom Fields');
 
-        } elseif(!Helpers::project_base_path_exists()) {
+        } elseif(!Helpers::project_init_file_exists()) {
 
-            $message = sprintf(__('You have activated the plugin "Fewbricks". In order to use it, please make sure that you have copied the directory "fewbricks" in plugins/fewbricks/ to your theme directory or placed it at the path that you have specified using the filter fewbricks/project_files_base_path (currently ' . Helpers::get_project_files_base_path() . '). Read more in the %s (search for "hidden").', 'fewbricks'), '<a href="https://github.com/folbert/fewbricks/blob/master/README.md" target="_blank">README</a>');
+            $message = sprintf(__('You have activated the plugin "Fewbricks". In order to use it, please make sure that you have copied the directory "fewbricks" in plugins/fewbricks/ to your theme directory or placed it at the path that you have specified using the filter fewbricks/project_files_base_path (currently <code>%1$s</code>). Also make sure that there is a file in that directory named "init.php"'), Helpers::get_project_files_base_path());
 
         }
 
