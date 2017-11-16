@@ -4,6 +4,8 @@
  * This is the file that should start your custom implementation of Fewbricks
  */
 
+require_once __DIR__ . 'lib/ProjectBrick.php';
+
 /**
  * Autoloader specific for Fewbricks in your project.
  * The idea to support subfolders comes from
@@ -41,7 +43,7 @@ spl_autoload_register(function ($class) {
 
         // Yes, by not checking of the file exists, we do get ugly error messages.
         // But we save some execution time by not checking if the file exists first.
-        include($path);
+        include $path;
 
     }
 

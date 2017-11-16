@@ -2,7 +2,9 @@
 
 namespace App\Fewbricks\Bricks;
 
-class Test {
+use App\Fewbricks\ProjectBrick;
+
+class Wysiwyg extends ProjectBrick {
 
 
 
