@@ -4,7 +4,7 @@
  * This is the file that should start your custom implementation of Fewbricks
  */
 
-require_once __DIR__ . 'lib/ProjectBrick.php';
+//require_once __DIR__ . 'lib/ProjectBrick.php';
 
 /**
  * Autoloader specific for Fewbricks in your project.
@@ -48,4 +48,7 @@ spl_autoload_register(function ($class) {
     }
 
 });
+
+new App\Fewbricks\EditScreens\Post();
+//new (App\Fewbricks\EditScreens\OptionsCookieAlert())->build();
 
