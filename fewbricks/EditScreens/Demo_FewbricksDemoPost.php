@@ -13,7 +13,7 @@ use Fewbricks\EditScreen;
  *
  * @package App\Fewbricks\EditScreens
  */
-class FewbricksDemoPost extends EditScreen
+class Demo_FewbricksDemoPost extends EditScreen
 {
 
     protected $location
@@ -35,7 +35,7 @@ class FewbricksDemoPost extends EditScreen
 
         $this->create_field_group_on_the_fly();
 
-        $kitchen_sink_fg = new FewbricksFieldGroups\DemoKitchenSink('Fewbricks Demo - Kitchen Sink', '1711172225a');
+        $kitchen_sink_fg = new FewbricksFieldGroups\Demo_FieldsKitchenSink('Fewbricks Demo - Kitchen Sink', '1711172225a');
         $kitchen_sink_fg->build();
         $this->addFieldGroup($kitchen_sink_fg);
 

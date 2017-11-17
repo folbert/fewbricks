@@ -49,6 +49,9 @@ spl_autoload_register(function ($class) {
 
 });
 
-new App\Fewbricks\EditScreens\Post();
+// Remove this to remove all demo related stuff
+require_once __DIR__ . '/demo.php';
+
+new App\Fewbricks\EditScreens\Demo_FewbricksDemoPost();
 //new (App\Fewbricks\EditScreens\OptionsCookieAlert())->build();
 
