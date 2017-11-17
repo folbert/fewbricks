@@ -1,5 +1,7 @@
 <?php
 
+namespace Fewbricks\Demo;
+
 /**
  * Created using https://generatewp.com/post-type/
  */
@@ -65,6 +67,6 @@ if (!function_exists('register_fewbricks_custom_post_type')) {
 
     }
 
-    add_action('init', 'register_fewbricks_custom_post_type', 0);
+    add_action('init', __NAMESPACE__ . '\\register_fewbricks_custom_post_type', 0);
 
 }

@@ -33,11 +33,13 @@ class Demo_FewbricksDemoPost extends EditScreen
     public function build()
     {
 
-        $this->create_field_group_on_the_fly();
-
+        // Adding a pre defined field group
         $kitchen_sink_fg = new FewbricksFieldGroups\Demo_FieldsKitchenSink('Fewbricks Demo - Kitchen Sink', '1711172225a');
+        $kitchen_sink_fg->setSetting('menu_order', 100);
         $kitchen_sink_fg->build();
         $this->addFieldGroup($kitchen_sink_fg);
+
+        $this->create_field_group_on_the_fly();
 
     }
 
@@ -48,6 +50,7 @@ class Demo_FewbricksDemoPost extends EditScreen
     {
 
         $contentFg = new FieldGroup('Fewbricks Demo - Main content', '1711162216a');
+        $contentFg->setSetting('menu_order', 50);
 
         $contentFg->addField(new Field('text', 'Text', 'sometext',
             '1711162243a'));
