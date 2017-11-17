@@ -5,8 +5,8 @@ namespace Fewbricks\ACF\Fields;
 use Fewbricks\ACF\Field;
 
 /**
- * Class Textarea
- * Corresponds to the textarea field type in ACF.
+ * Class Number
+ * Corresponds to the number field type in ACF.
  * This class is more or less completely stupid and only exists
  * to accommodate quicker creation especially if you are using
  * a real IDE with auto completion. All the magic takes place in the
@@ -14,10 +14,12 @@ use Fewbricks\ACF\Field;
  *
  * @package Fewbricks\ACF\Fields
  */
-class Textarea extends Field
+class Number extends Field
 {
 
     /**
+     * Textarea constructor.
+     *
      * @param string $label The label of the field
      * @param string $name  The name of the field
      * @param string $key   The key of the field. Must be unique across the entire app
@@ -33,7 +35,7 @@ class Textarea extends Field
         $void = null
     ) {
 
-        parent::__construct('textarea', $label, $name, $key, $settings);
+        parent::__construct('number', $label, $name, $key, $settings);
 
     }
 

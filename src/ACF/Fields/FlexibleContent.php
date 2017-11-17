@@ -5,16 +5,12 @@ namespace Fewbricks\ACF\Fields;
 use Fewbricks\ACF\Field;
 
 /**
- * Class Textarea
- * Corresponds to the textarea field type in ACF.
- * This class is more or less completely stupid and only exists
- * to accommodate quicker creation especially if you are using
- * a real IDE with auto completion. All the magic takes place in the
- * Field class.
+ * Class FlexibleContent
+ * Corresponds to the flexible content field type in ACF.
  *
  * @package Fewbricks\ACF\Fields
  */
-class Textarea extends Field
+class FlexibleContent extends Field
 {
 
     /**
@@ -33,7 +29,7 @@ class Textarea extends Field
         $void = null
     ) {
 
-        parent::__construct('textarea', $label, $name, $key, $settings);
+        parent::__construct('flexible_content', $label, $name, $key, $settings);
 
     }
 

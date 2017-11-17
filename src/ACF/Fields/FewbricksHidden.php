@@ -5,8 +5,8 @@ namespace Fewbricks\ACF\Fields;
 use Fewbricks\ACF\Field;
 
 /**
- * Class Textarea
- * Corresponds to the textarea field type in ACF.
+ * Class FewbricksHidden
+ * Corresponds to the ACF extension Fewbricks hidden field type.
  * This class is more or less completely stupid and only exists
  * to accommodate quicker creation especially if you are using
  * a real IDE with auto completion. All the magic takes place in the
@@ -14,7 +14,7 @@ use Fewbricks\ACF\Field;
  *
  * @package Fewbricks\ACF\Fields
  */
-class Textarea extends Field
+class FewbricksHidden extends Field
 {
 
     /**
@@ -33,7 +33,7 @@ class Textarea extends Field
         $void = null
     ) {
 
-        parent::__construct('textarea', $label, $name, $key, $settings);
+        parent::__construct('fewbricks_hidden', $label, $name, $key, $settings);
 
     }
 
