@@ -2,6 +2,8 @@
 
 namespace Fewbricks;
 
+use Fewbricks\AcfFieldSnitch\AcfFieldSnitch;
+
 /**
  * Class Fewbricks
  *

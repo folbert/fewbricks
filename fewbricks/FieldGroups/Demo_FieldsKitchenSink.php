@@ -15,10 +15,25 @@ class Demo_FieldsKitchenSink extends FieldGroup
 {
 
     /**
-     *
+     * Each field group child class must have a build function
+     * which is automatically called when the field group is registered.
      */
     public function build()
     {
+
+        $this->add_basic_fields();
+
+    }
+
+    /**
+     *
+     */
+    private function add_basic_fields()
+    {
+
+        // The other fields are in alphabetical oder but lets start with a tab
+        $this->addField(new FAFields\Tab('Basic fields', 'tab1',
+            '1711192019a'));
 
         // Showing how to set field settings after the field has been created
         $button_group         = new FAFields\ButtonGroup('Button Group',
@@ -64,6 +79,8 @@ class Demo_FieldsKitchenSink extends FieldGroup
         // Commented out because this will require a valid Google Maps api key to function
         //$this->addField(new FAFields\GoogleMap('Google Map', 'google_map', '1711172321r'));
 
+        $this->addField(new FAFields\PublicAddOns\FewbricksHidden('Fewbricks Hidden', 'fewbricks_hidden', '1711172043u'));
+
         $this->addField(new FAFields\Image('Image', 'image', '1711172323u'));
 
         $this->addField(new FAFields\Link('Link', 'link', '1711172323g'));
@@ -77,16 +94,29 @@ class Demo_FieldsKitchenSink extends FieldGroup
 
         $this->addField(new FAFields\Oembed('Oembed', 'oembed', '1711172325i'));
 
-        $this->addField(new FAFields\PageLink('Page Link', 'page_link', '1711172326c'));
+        $this->addField(new FAFields\PageLink('Page Link', 'page_link',
+            '1711172326c'));
 
-        $this->addField(new FAFields\Password('Password', 'password', '1711172326x'));
+        $this->addField(new FAFields\Password('Password', 'password',
+            '1711172326x'));
 
-        $this->addField(new FAFields\PostObject('Post Object', 'post_object', '1711172327o'));
+        $this->addField(new FAFields\PostObject('Post Object', 'post_object',
+            '1711172327o'));
 
         $this->addField(new FAFields\Text('Text', 'text', '1711172249a'));
 
         $this->addField(new FAFields\Textarea('Textarea', 'textarea',
             '1711172249b'));
+
+        $this->addField(new FAFields\TimePicker('Time Picker', 'time_picker', '1711192022a'));
+
+        $this->addField(new FAFields\TrueFalse('True/False', 'true_false', '1711192022y', [
+            'message' => 'To be or not to be?'
+        ]));
+
+        $this->addField(new FAFields\Url('URL', 'url', '1711192031i'));
+
+        $this->addField(new FAFields\User('User', 'user', '1711192032u'));
 
         // Here we pass settings directrly as the fourth parameter
         $this->addField(new FAFields\Wysiwyg('Wysiwyg', 'wysiwyg',

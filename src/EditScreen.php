@@ -7,6 +7,8 @@ use Fewbricks\ACF\FieldGroup;
 class EditScreen
 {
 
+    protected $args;
+
     /**
      * @var array The field groups.
      */
@@ -19,11 +21,19 @@ class EditScreen
 
     /**
      * EditScreen constructor.
+     *
+     * @param array $args
      */
-    public function __construct()
+    public function __construct($args = [])
     {
 
         $this->fieldGroups = [];
+
+        if(isset($args['location'])) {
+            $this->location = $args['location'];
+        }
+
+        $this->args = $args;
 
         $this->build();
 
@@ -32,11 +42,42 @@ class EditScreen
     /**
      * @param FieldGroup  $fieldGroup
      */
-    protected function addFieldGroup($fieldGroup)
+    public function addFieldGroup($fieldGroup)
     {
 
         $fieldGroup->setSetting('location', $this->location);
         $fieldGroup->register();
+
+    }
+
+    /**
+     * @param $name
+     * @param $value
+     */
+    public function set_arg($name, $value)
+    {
+
+        $this->args[$name] = $value;
+
+    }
+
+    /**
+     * @param $args
+     */
+    public function set_args($args)
+    {
+
+        $this->args = $args;
+
+    }
+
+    /**
+     * @return array
+     */
+    public function get_args()
+    {
+
+        return $this->args;
 
     }
 

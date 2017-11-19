@@ -14,6 +14,17 @@ class Field
     private $settings;
 
     /**
+     * @var A place to store the original key before we merge it with parent
+     *        field groups, bricks etc.
+     */
+    private $originalKey;
+
+    /**
+     * @var If the key has been prepared by Fewbricks or not
+     */
+    private $keyPrepared;
+
+    /**
      * Field constructor.
      *
      * @param string $type     A name corresponding to the name of an ACF field
@@ -36,6 +47,26 @@ class Field
         $settings['key'] = (substr(0, 6) !== 'field_' ? 'field_' . $key : $key);
 
         $this->settings = $settings;
+
+        $this->originalKey = $key;
+        $this->keyPrepared = false;
+
+    }
+
+    /**
+     * @return bool|If
+     */
+    public function getKeyPrepared()
+    {
+
+        return $this->keyPrepared;
+
+    }
+
+    public function getOriginalKey()
+    {
+
+        return $this->originalKey;
 
     }
 
@@ -72,6 +103,26 @@ class Field
         }
 
         return $value;
+
+    }
+
+    /**
+     * @param string $key
+     */
+    public function setKey($key)
+    {
+
+        $this->settings['key'] = $key;
+
+    }
+
+    /**
+     * @param bool $value
+     */
+    public function setKeyPrepared($value)
+    {
+
+        $this->keyPrepared = $value;
 
     }
 
