@@ -84,6 +84,27 @@ Allows you to change the standard path of brick templates in [lib/brick.php -> g
 ### `fewbricks/brick/brick_layout_base_path`
 Allows you to change the base path of layout files used in [lib/brick.php -> get_brick_layouted_html()]. Your filter should return return the path without a trailing slash.
 
+### `fewbricks/show_fields_info`
+Set to true to display field name and key for every field in the backend. Default value is `false`.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
