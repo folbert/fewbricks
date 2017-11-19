@@ -16,11 +16,15 @@ class Field
     /**
      * Field constructor.
      *
-     * @param       $type
-     * @param       $label
-     * @param       $name
-     * @param       $key
-     * @param array $settings
+     * @param string $type     A name corresponding to the name of an ACF field
+     *                         or a public add-on.
+     * @param string $label    The label of the field
+     * @param string $name     The name of the field
+     * @param string $key      The key of the field. Must be unique across the
+     *                         entire app
+     * @param array  $settings Array where you can pass all the possible
+     *                         settings for the field.
+     *                         https://www.advancedcustomfields.com/resources/register-fields-via-php/#field-type%20settings
      */
     public function __construct($type, $label, $name, $key, $settings = [])
     {

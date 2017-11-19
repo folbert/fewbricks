@@ -18,12 +18,15 @@ class PostObject extends Field
 {
 
     /**
-     * @param string $label The label of the field
-     * @param string $name  The name of the field
-     * @param string $key   The key of the field. Must be unique across the entire app
-     * @param array  $settings Array where you can pass all the possible settings for the field.
-     *                         See https://www.advancedcustomfields.com/resources/register-fields-via-php/#field-type%20settings
-     * @param array  $void Exists only to match the nr of args of parent constructor
+     * @param string $label    The label of the field
+     * @param string $name     The name of the field
+     * @param string $key      The key of the field. Must be unique across the
+     *                         entire app
+     * @param array  $settings Array where you can pass all the possible
+     *                         settings for the field.
+     *                         https://www.advancedcustomfields.com/resources/register-fields-via-php/#field-type%20settings
+     * @param array  $void     Not used. Exists only to match the nr of args of parent
+     *                         constructor.
      */
     public function __construct(
         $label,
