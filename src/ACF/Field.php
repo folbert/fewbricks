@@ -6,6 +6,11 @@ class Field
 {
 
     /**
+     * @var
+     */
+    private $key;
+
+    /**
      * The array that makes up the field.
      * https://www.advancedcustomfields.com/resources/register-fields-via-php/#field-settings
      *
@@ -25,6 +30,21 @@ class Field
     private $keyPrepared;
 
     /**
+     * @var string
+     */
+    private $type;
+
+    /**
+     * @var string
+     */
+    private $label;
+
+    /**
+     * @var string
+     */
+    private $name;
+
+    /**
      * Field constructor.
      *
      * @param string $type     A name corresponding to the name of an ACF field
@@ -40,16 +60,31 @@ class Field
     public function __construct($type, $label, $name, $key, $settings = [])
     {
 
-        $settings['type']  = $type;
-        $settings['label'] = $label;
-        $settings['name']  = $name;
-        // Make sure that key starts with "field_" as required by ACF.
-        $settings['key'] = (substr(0, 6) !== 'field_' ? 'field_' . $key : $key);
+        // Lets keep these crucial settings as class vars to make them easier
+        // and nicer to access.
+        $this->type = $type;
+        $this->label = $label;
+        $this->name = $name;
+        $this->key = $key;
+
+        // ACF states that keys must start with field_ but let's wait with
+        // ensuring that until the key has been prepended with keys of
+        // field groups, bricks etc.
 
         $this->settings = $settings;
 
         $this->originalKey = $key;
         $this->keyPrepared = false;
+
+    }
+
+    /**
+     * @return string The key of the field
+     */
+    public function getKey()
+    {
+
+        return $this->key;
 
     }
 
@@ -76,7 +111,14 @@ class Field
     public function getSettings()
     {
 
-        return $this->settings;
+        // Put the crucial settings into the settings array
+        $tmp_settings = $this->settings;
+        $tmp_settings['key'] = $this->key;
+        $tmp_settings['label'] = $this->label;
+        $tmp_settings['name'] = $this->name;
+        $tmp_settings['type'] = $this->type;
+
+        return $tmp_settings;
 
     }
 
@@ -112,7 +154,7 @@ class Field
     public function setKey($key)
     {
 
-        $this->settings['key'] = $key;
+        $this->key = $key;
 
     }
 
@@ -134,6 +176,26 @@ class Field
     {
 
         $this->settings[$name] = $value;
+
+    }
+
+    public function prepareKey($append)
+    {
+
+        /**
+         *
+         */
+        if(!$this->keyPrepared) {
+
+            // @todo Below should only be done when registering to field group
+            // Make sure that key starts with field_
+            if(substr($append, 0,6) !== 'field_') {
+                $append = 'field_' . $append;
+            }
+
+            $this->key = $append . '_' . $this->key;
+
+        }
 
     }
 

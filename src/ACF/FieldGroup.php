@@ -21,12 +21,22 @@ class FieldGroup
     private $fieldObjects;
 
     /**
+     * @var
+     */
+    private $key;
+
+    /**
      * The array that actually makes up the field group since it holds all the
      * settings for the group
      *
      * @var array
      */
     private $settings;
+
+    /**
+     * @var
+     */
+    private $title;
 
     /**
      * FieldGroup constructor.
@@ -51,11 +61,14 @@ class FieldGroup
             $settings = [];
         }
 
-        // These are the minimum set of settings that ACF requires.
-        $settings['title']    = $title;
-        $settings['key']      = $key;
+        // Let's keep these crucial settings as class vars to enable nicer
+        // and more OOP-oriented access
+        $this->title = $title;
+        $this->key   = $key;
+
+        // Except key and title,
+        // these are the minimum set of settings that ACF requires.
         $settings['location'] = $location;
-        $settings['fields']   = [];
 
         $this->settings = $settings;
 
@@ -102,6 +115,13 @@ class FieldGroup
 
     }
 
+    public function getKey()
+    {
+
+        return $this->key;
+
+    }
+
     /**
      * Get the value of a specific setting.
      *
@@ -144,6 +164,10 @@ class FieldGroup
         $this->prepareKeys();
         $this->createAcfFieldArrays();
 
+        // Add the crucial values
+        $this->settings['key']   = $this->key;
+        $this->settings['title'] = $this->title;
+
         // No use in having a potentially large collection of objects anymore
         unset($this->fieldObjects);
 
@@ -163,6 +187,7 @@ class FieldGroup
 
             if ($fieldObject->getKeyPrepared() === false) {
 
+                $fieldObject->prepareKey($this->getKey());
 
             }
 
