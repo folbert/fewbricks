@@ -16,7 +16,7 @@ class FieldGroup
     private $args;
 
     /**
-     * @var array
+     * @var Field[]
      */
     private $fieldObjects;
 
@@ -161,11 +161,11 @@ class FieldGroup
 
         $this->build();
 
-        $this->prepareKeys();
+        $this->prepareFields();
         $this->createAcfFieldArrays();
 
-        // Add the crucial values
-        $this->settings['key']   = $this->key;
+        // Add the crucial settings
+        $this->settings['key'] = $this->key;
         $this->settings['title'] = $this->title;
 
         // No use in having a potentially large collection of objects anymore
@@ -176,20 +176,110 @@ class FieldGroup
     }
 
     /**
-     * We must modify the field keys to make sure that they are unique across
-     * the site. We do this at this level by pre-pending the field groups key.
+     *
      */
-    private function prepareKeys()
+    private function prepareFields()
+    {
+
+        // @todo Create a dedicated class, FieldSettingFinalizer, to handle this on an array of field objects
+
+        $this->prepareFieldKeys();
+        $this->prepareFieldsConditionalLogic();
+
+    }
+
+    /**
+     *
+     */
+    private function prepareFieldKeys()
     {
 
         /** @var Field $fieldObject */
         foreach ($this->fieldObjects AS &$fieldObject) {
+            $this->prepareFieldKey($fieldObject);
+        }
+        unset($fieldObject);
 
-            if ($fieldObject->getKeyPrepared() === false) {
+    }
 
-                $fieldObject->prepareKey($this->getKey());
+    /**
+     * We must modify the field keys to make sure that they are unique across
+     * the site. We do this at this level by pre-pending the field groups key.
+     *
+     * @param Field $fieldObject
+     */
+    private function prepareFieldKey(&$fieldObject)
+    {
+
+        $prepend = 'field_' . $this->key;
+
+        if (false !== ($brickKey = $fieldObject->getBrickKey())) {
+            $prepend .= '_' . $brickKey;
+        }
+
+        $prepend .= '_';
+
+        $fieldObject->prependKey($prepend);
+
+    }
+
+    /**
+     *
+     */
+    private function prepareFieldsConditionalLogic()
+    {
+
+        /** @var Field $fieldObject */
+        foreach ($this->fieldObjects AS &$fieldObject) {
+            $this->prepareFieldConditionalLogic($fieldObject);
+        }
+        unset($fieldObject);
+
+    }
+
+    /**
+     * @param Field $fieldObject
+     */
+    private function prepareFieldConditionalLogic(&$fieldObject)
+    {
+
+        $fieldObjectSettings = $fieldObject->getSettings();
+
+        // Do the field have conditional logic
+        if (isset($fieldObjectSettings['conditional_logic'])
+            && is_array($fieldObjectSettings['conditional_logic'])
+        ) {
+
+            $conditionalLogic = $fieldObjectSettings['conditional_logic'];
+
+            // Traverse down the conditional logic array
+            foreach ($conditionalLogic AS $lvl1Key => $lvl1Value) {
+
+                foreach ($conditionalLogic[$lvl1Key] AS $lvl2Key => $lvl2Value)
+                {
+
+                    $targetFieldKey
+                        = $conditionalLogic[$lvl1Key][$lvl2Key]['field'];
+
+                    foreach ($this->fieldObjects AS $otherFieldObject) {
+
+                        if ($otherFieldObject->getOriginalKey()
+                            === $targetFieldKey
+                        ) {
+
+                            $conditionalLogic[$lvl1Key][$lvl2Key]['field']
+                                = $otherFieldObject->getKey();
+
+                        }
+
+                    }
+
+
+                }
 
             }
+
+            $fieldObject->setSetting('conditional_logic', $conditionalLogic);
 
         }
 

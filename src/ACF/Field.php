@@ -6,33 +6,20 @@ class Field
 {
 
     /**
-     * @var
+     * @var The key of the brick, if any, that this field is part of.
+     */
+    private $brickKey;
+
+    /**
+     * @var The key required by ACF. Must be unique across the site.
      */
     private $key;
 
     /**
-     * The array that makes up the field.
-     * https://www.advancedcustomfields.com/resources/register-fields-via-php/#field-settings
-     *
-     * @var array
+     * @var If the key has been prepared for a field group or not.
+     *         Once it has been, it should not be changed.
      */
-    private $settings;
-
-    /**
-     * @var A place to store the original key before we merge it with parent
-     *        field groups, bricks etc.
-     */
-    private $originalKey;
-
-    /**
-     * @var If the key has been prepared by Fewbricks or not
-     */
-    private $keyPrepared;
-
-    /**
-     * @var string
-     */
-    private $type;
+    private $keyPreparedForFieldGroup;
 
     /**
      * @var string
@@ -43,6 +30,25 @@ class Field
      * @var string
      */
     private $name;
+
+    /**
+     * @var A place to store the original key before we merge it with parent
+     *        field groups, bricks etc.
+     */
+    private $originalKey;
+
+    /**
+     * The array that makes up the field.
+     * https://www.advancedcustomfields.com/resources/register-fields-via-php/#field-settings
+     *
+     * @var array
+     */
+    private $settings;
+
+    /**
+     * @var string
+     */
+    private $type;
 
     /**
      * Field constructor.
@@ -62,10 +68,10 @@ class Field
 
         // Lets keep these crucial settings as class vars to make them easier
         // and nicer to access.
-        $this->type = $type;
+        $this->type  = $type;
         $this->label = $label;
-        $this->name = $name;
-        $this->key = $key;
+        $this->name  = $name;
+        $this->key   = $key;
 
         // ACF states that keys must start with field_ but let's wait with
         // ensuring that until the key has been prepended with keys of
@@ -73,8 +79,20 @@ class Field
 
         $this->settings = $settings;
 
-        $this->originalKey = $key;
-        $this->keyPrepared = false;
+        $this->originalKey              = $key;
+        $this->keyPreparedForFieldGroup = false;
+
+        $this->brickKey = false;
+
+    }
+
+    /**
+     * @return string|boolean
+     */
+    public function getBrickKey()
+    {
+
+        return $this->brickKey;
 
     }
 
@@ -91,12 +109,12 @@ class Field
     /**
      * @return bool|If
      */
-    public function getKeyPrepared()
+    /*public function getKeyPreparedForFieldGroup()
     {
 
-        return $this->keyPrepared;
+        return $this->keyPreparedForFieldGroup;
 
-    }
+    }*/
 
     public function getOriginalKey()
     {
@@ -112,11 +130,11 @@ class Field
     {
 
         // Put the crucial settings into the settings array
-        $tmp_settings = $this->settings;
-        $tmp_settings['key'] = $this->key;
+        $tmp_settings          = $this->settings;
+        $tmp_settings['key']   = $this->key;
         $tmp_settings['label'] = $this->label;
-        $tmp_settings['name'] = $this->name;
-        $tmp_settings['type'] = $this->type;
+        $tmp_settings['name']  = $this->name;
+        $tmp_settings['type']  = $this->type;
 
         return $tmp_settings;
 
@@ -225,10 +243,10 @@ class Field
     /**
      * @param bool $value
      */
-    public function setKeyPrepared($value)
+    public function setKeyPreparedForFieldGroup($value)
     {
 
-        $this->keyPrepared = $value;
+        $this->keyPreparedForFieldGroup = $value;
 
     }
 
@@ -243,24 +261,47 @@ class Field
 
     }
 
-    public function prepareKey($append)
+    /**
+     * @param $prepend
+     */
+    public function prependKey($prepend)
     {
 
-        /**
-         *
-         */
-        if(!$this->keyPrepared) {
+        $this->key = $prepend . $this->key;
 
-            // @todo Below should only be done when registering to field group
-            // Make sure that key starts with field_
-            if(substr($append, 0,6) !== 'field_') {
-                $append = 'field_' . $append;
+    }
+
+    /**
+     * @param string $prepend    Value to prepend
+     * @param object $prepareFor The object that the key should be prepared for.
+     *
+     */
+    /*public function prepareKey($prepend, $prepareFor)
+    {
+
+        // When a key has been prepared for a field group,
+        // we can consider it finalized
+        if (!$this->keyPreparedForFieldGroup) {
+
+            // If we are preparing for a field group which is at the top
+            // of the hierarchy and the last type to call prepare keys,
+            // we need to make sure that we start with "_field" as defined
+            // by ACF.
+            // https://www.advancedcustomfields.com/resources/register-fields-via-php/#field-settings
+            if ($prepareFor instanceof FieldGroup) {
+
+                if (substr($prepend, 0, 6) !== 'field_') {
+                    $prepend = 'field_' . $prepend;
+                }
+
+                $this->keyPreparedForFieldGroup = true;
+
             }
 
-            $this->key = $append . '_' . $this->key;
+            $this->key = $prepend . '_' . $this->key;
 
         }
 
-    }
+    }*/
 
 }

@@ -79,7 +79,8 @@ class Demo_FieldsKitchenSink extends FieldGroup
         // Commented out because this will require a valid Google Maps api key to function
         //$this->addField(new FAFields\GoogleMap('Google Map', 'google_map', '1711172321r'));
 
-        $this->addField(new FAFields\PublicAddOns\FewbricksHidden('Fewbricks Hidden', 'fewbricks_hidden', '1711172043u'));
+        $this->addField(new FAFields\PublicAddOns\FewbricksHidden('Fewbricks Hidden',
+            'fewbricks_hidden', '1711172043u'));
 
         $this->addField(new FAFields\Image('Image', 'image', '1711172323u'));
 
@@ -117,11 +118,28 @@ class Demo_FieldsKitchenSink extends FieldGroup
         $this->addField(new FAFields\Textarea('Textarea', 'textarea',
             '1711172249b'));
 
-        $this->addField(new FAFields\TimePicker('Time Picker', 'time_picker', '1711192022a'));
+        $this->addField(new FAFields\TimePicker('Time Picker', 'time_picker',
+            '1711192022a'));
 
-        $this->addField(new FAFields\TrueFalse('True/False', 'true_false', '1711192022y', [
-            'message' => 'To be or not to be?'
-        ]));
+        $this->addField(new FAFields\TrueFalse('True/False', 'true_false',
+            '1711192022y', [
+                'message' => 'To be or not to be?',
+            ]));
+
+        $this->addField(new FAFields\Message('Testing conditional statement',
+            'testing_conditional_statement', '1711202201a', [
+                'message' => 'This should only be shown if the checkbox above
+                is checked',
+                'conditional_logic' => [
+                    [
+                        [
+                            'field' => '1711192022y',
+                            'operator' => '==',
+                            'value' => '1',
+                        ]
+                    ]
+                ]
+            ]));
 
         $this->addField(new FAFields\Url('URL', 'url', '1711192031i'));
 
