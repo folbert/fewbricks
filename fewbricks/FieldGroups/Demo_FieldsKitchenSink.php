@@ -103,6 +103,15 @@ class Demo_FieldsKitchenSink extends FieldGroup
         $this->addField(new FAFields\PostObject('Post Object', 'post_object',
             '1711172327o'));
 
+        $this->addField(new FAFields\Select('Select', 'select', '1711210919a', [
+            'choices' => [
+                'one' => 'One',
+                'two' => 'Two',
+                'three' => 'Three',
+            ],
+            'default_value' => 'two',
+        ]));
+
         $this->addField(new FAFields\Text('Text', 'text', '1711172249a'));
 
         $this->addField(new FAFields\Textarea('Textarea', 'textarea',
