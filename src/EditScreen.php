@@ -45,7 +45,6 @@ class EditScreen
     public function addFieldGroup($fieldGroup)
     {
 
-        $fieldGroup->setSetting('location', $this->location);
         $fieldGroup->register();
 
     }

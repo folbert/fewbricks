@@ -16,7 +16,7 @@ class FieldGroup
     private $args;
 
     /**
-     * @var Field[]
+     * @var FieldCollection
      */
     private $fieldObjects;
 
@@ -24,6 +24,11 @@ class FieldGroup
      * @var
      */
     private $key;
+
+    /**
+     * @var array
+     */
+    private $location;
 
     /**
      * The array that actually makes up the field group since it holds all the
@@ -52,7 +57,7 @@ class FieldGroup
     public function __construct(
         $title,
         $key,
-        $location = [],
+        $location,
         $settings = [],
         $args = []
     ) {
@@ -63,12 +68,9 @@ class FieldGroup
 
         // Let's keep these crucial settings as class vars to enable nicer
         // and more OOP-oriented access
-        $this->title = $title;
-        $this->key   = $key;
-
-        // Except key and title,
-        // these are the minimum set of settings that ACF requires.
-        $settings['location'] = $location;
+        $this->title    = $title;
+        $this->key      = $key;
+        $this->location = $location;
 
         $this->settings = $settings;
 
@@ -76,45 +78,138 @@ class FieldGroup
             $args = [];
         }
 
+        // @todo Are these ever used?
         $this->args = $args;
 
-        $this->fieldObjects = [];
-
-        //@todo Deal with hide_on_screen
+        $this->fieldObjects = new FieldCollection();
 
     }
 
     /**
-     * @param Field $field
+     * ACF setting. An array of elements to hide on the screen
+     *
+     * @param array $hideOnScreen
      */
-    public function addField($field)
+    public function setHideOnScreen($hideOnScreen)
     {
 
-        $this->fieldObjects[] = $field;
+        //@todo Use this value for something
+        $this->setSetting('hide_on_screen', $hideOnScreen);
 
     }
 
     /**
+     * ACF Setting. Determines where field instructions are places in relation
+     * to fields.
+     *
+     * @param string $instruction_placement 'label' (Below labels) or 'field'
+     *                                      (Below fields)
+     */
+    public function setInstructionPlacement($instruction_placement)
+    {
+
+        $this->setSetting('instruction_placement', $instruction_placement);
+
+    }
+
+    /**
+     * ACF Setting. Determines where field labels
+     *                               are placed in relation to fields.
+     *                               Defaults to 'top'.
+     *
+     * @param string $labelPlacement 'top' (Above fields) or 'left'
+     *                               (Beside fields)
+     */
+    public function setLabelPlacement($labelPlacement)
+    {
+
+        $this->setSetting('label_placement', $labelPlacement);
+
+
+    }
+
+    /**
+     * @param $location
+     */
+    public function setLocation($location)
+    {
+
+        $this->setSetting('location', $location);
+
+    }
+
+    /**
+     * ACF setting. Field groups are shown in order from lowest to highest.
+     *
+     * @param int $menuOrder
+     */
+    public function setMenuOrder($menuOrder)
+    {
+
+        $this->setSetting('menu_order', $menuOrder);
+
+    }
+
+    /**
+     * ACF setting. Determines the position on the edit screen. Defaults to
+     * normal.
+     *
+     * @param string $position 'acf_after_title', 'normal' or 'side'
+     */
+    public function setPosition($position)
+    {
+
+        $this->setSetting('position', $position);
+
+    }
+
+    /**
+     * Enables you to add values to the settings directly. So if ACF adds new
+     * settings, you don't have to wait for Fewbricks to add functions for you
+     * to be able to set them.
+     *
      * @param $name
      * @param $value
      */
     public function setSetting($name, $value)
     {
 
+        $crucialSettings = ['location', 'key', 'title'];
+
+        // Make sure to keep any crucial setting class vars up to date
+        if(in_array($name, $crucialSettings)) {
+            $this->{$name} = $value;
+        }
+
         $this->settings[$name] = $value;
+
+    }
+
+    /**
+     * Determines the metabox style. Choices of 'default' or 'seamless'
+     *
+     * @param string $style 'default' or 'seamless'
+     */
+    public function setStyle($style)
+    {
+
+        $this->setSetting('style', $style);
+
+    }
+
+    /**
+     * @return FieldCollection
+     */
+    public function getFieldObjects()
+    {
+
+        return $this->fieldObjects;
 
     }
 
     /**
      * @return string
      */
-    public function getFields()
-    {
-
-        return $this->getSetting('fields');
-
-    }
-
     public function getKey()
     {
 
@@ -126,7 +221,8 @@ class FieldGroup
      * Get the value of a specific setting.
      *
      * @param      $name         The name of the setting
-     * @param bool $defaultValue The value to return if the setting does not exist
+     * @param bool $defaultValue The value to return if the setting does not
+     *                           exist
      *
      * @return bool|mixed
      */
@@ -159,158 +255,44 @@ class FieldGroup
     public function register()
     {
 
+        // Cal teh build function
         $this->build();
 
-        $this->prepareFields();
-        $this->createAcfFieldArrays();
-
-        // Add the crucial settings
-        $this->settings['key'] = $this->key;
+        // Add the crucial settings to the field group
+        $this->settings['key']   = $this->key;
         $this->settings['title'] = $this->title;
+
+        $this->fieldObjects->finalizeSettings($this->key);
+
+        acf_add_local_field_group($this->getAcfSettingsArray());
 
         // No use in having a potentially large collection of objects anymore
         unset($this->fieldObjects);
 
-        acf_add_local_field_group($this->settings);
-
     }
 
     /**
-     *
+     * @param Field $field
      */
-    private function prepareFields()
+    public function addField($field)
     {
 
-        // @todo Create a dedicated class, FieldSettingFinalizer, to handle this on an array of field objects
-
-        $this->prepareFieldKeys();
-        $this->prepareFieldsConditionalLogic();
-
-    }
-
-    /**
-     *
-     */
-    private function prepareFieldKeys()
-    {
-
-        /** @var Field $fieldObject */
-        foreach ($this->fieldObjects AS &$fieldObject) {
-            $this->prepareFieldKey($fieldObject);
-        }
-        unset($fieldObject);
-
-    }
-
-    /**
-     * We must modify the field keys to make sure that they are unique across
-     * the site. We do this at this level by pre-pending the field groups key.
-     *
-     * @param Field $fieldObject
-     */
-    private function prepareFieldKey(&$fieldObject)
-    {
-
-        $prepend = 'field_' . $this->key;
-
-        if (false !== ($brickKey = $fieldObject->getBrickKey())) {
-            $prepend .= '_' . $brickKey;
-        }
-
-        $prepend .= '_';
-
-        $fieldObject->prependKey($prepend);
-
-    }
-
-    /**
-     *
-     */
-    private function prepareFieldsConditionalLogic()
-    {
-
-        /** @var Field $fieldObject */
-        foreach ($this->fieldObjects AS &$fieldObject) {
-            $this->prepareFieldConditionalLogic($fieldObject);
-        }
-        unset($fieldObject);
-
-    }
-
-    /**
-     * @param Field $fieldObject
-     */
-    private function prepareFieldConditionalLogic(&$fieldObject)
-    {
-
-        $fieldObjectSettings = $fieldObject->getSettings();
-
-        // Do the field have conditional logic
-        if (isset($fieldObjectSettings['conditional_logic'])
-            && is_array($fieldObjectSettings['conditional_logic'])
-        ) {
-
-            $conditionalLogic = $fieldObjectSettings['conditional_logic'];
-
-            // Traverse down the conditional logic array
-            foreach ($conditionalLogic AS $lvl1Key => $lvl1Value) {
-
-                foreach ($conditionalLogic[$lvl1Key] AS $lvl2Key => $lvl2Value)
-                {
-
-                    $targetFieldKey
-                        = $conditionalLogic[$lvl1Key][$lvl2Key]['field'];
-
-                    foreach ($this->fieldObjects AS $otherFieldObject) {
-
-                        if ($otherFieldObject->getOriginalKey()
-                            === $targetFieldKey
-                        ) {
-
-                            $conditionalLogic[$lvl1Key][$lvl2Key]['field']
-                                = $otherFieldObject->getKey();
-
-                        }
-
-                    }
-
-
-                }
-
-            }
-
-            $fieldObject->setSetting('conditional_logic', $conditionalLogic);
-
-        }
-
-    }
-
-    /**
-     *
-     */
-    private function createAcfFieldArrays()
-    {
-
-        $fieldsArray = [];
-
-        /** @var Field $fieldObject */
-        foreach ($this->fieldObjects AS $fieldObject) {
-
-            $fieldsArray[] = $fieldObject->getSettings();
-
-        }
-
-        $this->settings['fields'] = $fieldsArray;
+        $this->fieldObjects->addItem($field);
 
     }
 
     /**
      * @return array
      */
-    private function getFieldObjects()
+    public function getAcfSettingsArray()
     {
 
-        return $this->fieldObjects;
+        return array_merge($this->settings, [
+            'key'      => $this->key,
+            'title'    => $this->title,
+            'fields'   => $this->fieldObjects->getAcfSettingsArray(),
+            'location' => $this->location,
+        ]);
 
     }
 

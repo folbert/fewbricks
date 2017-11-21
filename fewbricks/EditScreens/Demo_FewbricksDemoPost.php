@@ -20,9 +20,9 @@ class Demo_FewbricksDemoPost extends EditScreen
         = [
             [
                 [
-                    'param'    => 'post_type',
+                    'param' => 'post_type',
                     'operator' => '==',
-                    'value'    => 'fewbricks_demo_post',
+                    'value' => 'fewbricks_demo_post',
                 ],
             ],
         ];
@@ -34,7 +34,9 @@ class Demo_FewbricksDemoPost extends EditScreen
     {
 
         // Adding a predefined field group
-        $kitchen_sink_fg = new FewbricksFieldGroups\Demo_FieldsKitchenSink('Fewbricks Demo - Kitchen Sink', '1711172225a');
+        $kitchen_sink_fg
+            = new FewbricksFieldGroups\Demo_FieldsKitchenSink('Fewbricks Demo - Kitchen Sink',
+            '1711172225a', $this->location);
         $kitchen_sink_fg->setSetting('menu_order', 100);
         $this->addFieldGroup($kitchen_sink_fg);
 
@@ -48,7 +50,8 @@ class Demo_FewbricksDemoPost extends EditScreen
     private function create_field_group_on_the_fly()
     {
 
-        $contentFg = new FieldGroup('Fewbricks Demo - Main content', '1711162216a');
+        $contentFg = new FieldGroup('Fewbricks Demo - Main content',
+            '1711162216a', $this->location);
         $contentFg->setSetting('menu_order', 50);
 
         $contentFg->addField(new Field('text', 'Text', 'sometext',
