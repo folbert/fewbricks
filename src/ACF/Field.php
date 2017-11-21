@@ -149,6 +149,70 @@ class Field
     }
 
     /**
+     * @param mixed $defaultValue ACF setting. A default value used by ACF if no
+     *                            value has yet been saved.
+     */
+    public function setDefaultValue($defaultValue)
+    {
+
+        $this->setSetting('default_value', $defaultValue);
+
+    }
+
+    /**
+     * @param array $conditionalLogic ACF setting. Conditionally hide or show
+     *                                this field based on other field's values.
+     *                                Best to use the ACF UI and export to
+     *                                understand the array structure.
+     */
+    public function setConditionalLogic($conditionalLogic)
+    {
+
+        $this->setSetting('conditional_logic', $conditionalLogic);
+
+    }
+
+    /**
+     * @param string $instructions ACF setting. Instructions for authors.
+     *                             Shown when submitting data
+     */
+    public function setInstructions($instructions)
+    {
+
+        $this->setSetting('instructions', $instructions);
+
+    }
+
+    /**
+     * @param boolean $required     ACF setting. Whether or not the field value
+     *                              is required. If not set, false is used.
+     */
+    public function setRequired($required)
+    {
+
+        $this->setSetting('required', $required);
+
+    }
+
+    /**
+     * @param boolean $wrapper ACF setting. An array of attributes given to the
+     *                         field element in the backend.
+     */
+    public function setWrapper($wrapper)
+    {
+
+        // Make sure all indexes are set.
+        $wrapper = array_merge([
+            'width' => '',
+            'class' => '',
+            'id'    => '',
+        ], $wrapper);
+
+        $this->setSetting('wrapper', $wrapper);
+
+    }
+
+    /**
      * @param string $key
      */
     public function setKey($key)
