@@ -10,7 +10,7 @@ class Helpers
     /**
      * @return string The base path to the project files.
      */
-    public static function get_project_files_base_path()
+    public static function getProjectFilesBasePath()
     {
 
         return apply_filters(
@@ -23,12 +23,12 @@ class Helpers
     /**
      * @return mixed|void
      */
-    public static function get_project_init_file_path()
+    public static function getProjectInitFilePath()
     {
 
         return apply_filters(
             'fewbricks/project_init_file_path',
-            self::get_project_files_base_path() . '/init.php'
+            self::getProjectFilesBasePath() . '/init.php'
         );
 
     }
@@ -65,7 +65,7 @@ class Helpers
     /**
      * @return bool
      */
-    public static function acf_is_activated()
+    public static function acfIsActivated()
     {
 
         // We must include this file here since we are calling is_plugin_active in an unusual place.
@@ -79,27 +79,27 @@ class Helpers
     /**
      * @return bool
      */
-    public static function project_base_path_exists()
+    public static function projectBasePathExists()
     {
 
-        return file_exists(Helpers::get_project_files_base_path());
+        return file_exists(Helpers::getProjectFilesBasePath());
 
     }
 
     /**
      * @return bool
      */
-    public static function project_init_file_exists()
+    public static function projectInitFileExists()
     {
 
-        return file_exists(self::get_project_init_file_path());
+        return file_exists(self::getProjectInitFilePath());
 
     }
 
     /**
-     *
+     * @return bool
      */
-    public static function fewbricks_hidden_is_activated()
+    public static function fewbricksHiddenIsActivated()
     {
 
         // We must include this file here since we are calling is_plugin_active in an unusual place.

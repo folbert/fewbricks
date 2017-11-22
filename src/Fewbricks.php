@@ -35,7 +35,7 @@ class Fewbricks
     private static function init()
     {
 
-        $project_files_base_path = Helpers::get_project_files_base_path();
+        $project_files_base_path = Helpers::getProjectFilesBasePath();
         require($project_files_base_path . '/init.php');
 
         Helpers::initDebug();
@@ -55,19 +55,19 @@ class Fewbricks
 
         $message = false;
 
-        if (!Helpers::acf_is_activated()) {
+        if (!Helpers::acfIsActivated()) {
 
             $message
                 = sprintf(__('You have activated the plugin "Fewbricks". In order to use it, please make sure that <a href="%1$s">Advanced Custom Fields 5 Pro</a> is installed and activated.',
                 'fewbricks'), 'http://www.advancedcustomfields.com/');
 
-        } elseif (!Helpers::fewbricks_hidden_is_activated()) {
+        } elseif (!Helpers::fewbricksHiddenIsActivated()) {
 
             $message = sprintf(__('You have activated the plugin "Fewbricks". In order to use it, please make sure that %1$s is installed and activated.', 'fewbricks'), '<a href="https://github.com/folbert/acf-fewbricks-hidden">Fewbricks Hidden Field</a> for Advanced Custom Fields');
 
-        } elseif(!Helpers::project_init_file_exists()) {
+        } elseif(!Helpers::projectInitFileExists()) {
 
-            $message = sprintf(__('You have activated the plugin "Fewbricks". In order to use it, please make sure that you have copied the directory "fewbricks" in plugins/fewbricks/ to your theme directory or placed it at the path that you have specified using the filter fewbricks/project_files_base_path (currently <code>%1$s</code>). Also make sure that there is a file in that directory named "init.php"'), Helpers::get_project_files_base_path());
+            $message = sprintf(__('You have activated the plugin "Fewbricks". In order to use it, please make sure that you have copied the directory "fewbricks" in plugins/fewbricks/ to your theme directory or placed it at the path that you have specified using the filter fewbricks/project_files_base_path (currently <code>%1$s</code>). Also make sure that there is a file in that directory named "init.php"'), Helpers::getProjectFilesBasePath());
 
         }
 

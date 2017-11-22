@@ -19,7 +19,7 @@ class FieldCollection extends Collection
 
         // Lets make sure that the key is ok for ACF
         // https://www.advancedcustomfields.com/resources/register-fields-via-php/#field-settings
-        if(substr($base_key, 0,6) !== 'field_') {
+        if (substr($base_key, 0, 6) !== 'field_') {
             $base_key = 'field_' . $base_key;
         }
 
@@ -54,29 +54,67 @@ class FieldCollection extends Collection
 
             $fieldObject->prependKey($keyPrepend);
 
-            // @todo Handle sub fields
-
-            // @todo Conditional logic
-
             $settings[] = $fieldObject->getSettings();
 
         }
+
+        $this->prepareFieldsConditionalLogic($fieldObjects);
 
         return $settings;
 
     }
 
     /**
-     *
+     * @param $fieldObjects
      */
-    private function prepareFieldsConditionalLogic()
+    private function prepareFieldsConditionalLogic($fieldObjects)
     {
 
-        /** @var Field $fieldObject */
-        foreach ($this->fieldObjects AS &$fieldObject) {
-            $this->prepareFieldConditionalLogic($fieldObject);
+        foreach ($fieldObjects AS $fieldObject) {
+
+            $fieldObjectSettings = $fieldObject->getSettings();
+
+            // Do the field have conditional logic
+            if (isset($fieldObjectSettings['conditional_logic'])
+                && is_array($fieldObjectSettings['conditional_logic'])
+            ) {
+
+                $conditionalLogic = $fieldObjectSettings['conditional_logic'];
+
+                // Traverse down the conditional logic array
+                foreach ($conditionalLogic AS $lvl1Key => $lvl1Value) {
+
+                    foreach (
+                        $conditionalLogic[$lvl1Key] AS $lvl2Key => $lvl2Value
+                    ) {
+
+                        $targetFieldKey
+                            = $conditionalLogic[$lvl1Key][$lvl2Key]['field'];
+
+                        foreach ($this->items AS $otherFieldObject) {
+
+                            if ($otherFieldObject->getOriginalKey()
+                                === $targetFieldKey
+                            ) {
+
+                                $conditionalLogic[$lvl1Key][$lvl2Key]['field']
+                                    = $otherFieldObject->getKey();
+
+                            }
+
+                        }
+
+
+                    }
+
+                }
+
+                $fieldObject->setSetting('conditional_logic',
+                    $conditionalLogic);
+
+            }
+
         }
-        unset($fieldObject);
 
     }
 
@@ -86,45 +124,6 @@ class FieldCollection extends Collection
     private function prepareFieldConditionalLogic(&$fieldObject)
     {
 
-        $fieldObjectSettings = $fieldObject->getSettings();
-
-        // Do the field have conditional logic
-        if (isset($fieldObjectSettings['conditional_logic'])
-            && is_array($fieldObjectSettings['conditional_logic'])
-        ) {
-
-            $conditionalLogic = $fieldObjectSettings['conditional_logic'];
-
-            // Traverse down the conditional logic array
-            foreach ($conditionalLogic AS $lvl1Key => $lvl1Value) {
-
-                foreach ($conditionalLogic[$lvl1Key] AS $lvl2Key => $lvl2Value)
-                {
-
-                    $targetFieldKey
-                        = $conditionalLogic[$lvl1Key][$lvl2Key]['field'];
-
-                    foreach ($this->fieldObjects AS $otherFieldObject) {
-
-                        if ($otherFieldObject->getOriginalKey()
-                            === $targetFieldKey
-                        ) {
-
-                            $conditionalLogic[$lvl1Key][$lvl2Key]['field']
-                                = $otherFieldObject->getKey();
-
-                        }
-
-                    }
-
-
-                }
-
-            }
-
-            $fieldObject->setSetting('conditional_logic', $conditionalLogic);
-
-        }
 
     }
 

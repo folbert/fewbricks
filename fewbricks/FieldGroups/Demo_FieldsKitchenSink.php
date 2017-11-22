@@ -21,15 +21,34 @@ class Demo_FieldsKitchenSink extends FieldGroup
     public function build()
     {
 
-        $this->add_basic_fields();
+        $this->addBasicFields();
 
     }
 
     /**
      *
      */
-    private function add_basic_fields()
+    private function addBasicFields()
     {
+
+        // Repeater
+        // --------
+        $repeater = new FAFields\Repeater('Repeater', 'repeater',
+            '1711222156a');
+
+        $repeater->setButtonLabel('Fewbricks says: add row');
+        $repeater->setLayout('table');
+
+        // Passing settings as fourth parameter
+        $repeater->addSubField(new FAFields\Text('Repeater - Text',
+            'repeater_text', '1711222221a', ['required' => true]));
+
+        $repeater->addSubField(new FAFields\Image('Repeater - Image',
+            'repeater_image', '1711222221b'));
+
+        $this->addField($repeater);
+        // E.o. repeater
+        // -------------
 
         // The other fields are in alphabetical oder but lets start with a tab
         $this->addField(new FAFields\Tab('Basic fields', 'tab1',
@@ -105,9 +124,9 @@ class Demo_FieldsKitchenSink extends FieldGroup
             '1711172327o'));
 
         $this->addField(new FAFields\Select('Select', 'select', '1711210919a', [
-            'choices' => [
-                'one' => 'One',
-                'two' => 'Two',
+            'choices'       => [
+                'one'   => 'One',
+                'two'   => 'Two',
                 'three' => 'Three',
             ],
             'default_value' => 'two',
@@ -121,31 +140,47 @@ class Demo_FieldsKitchenSink extends FieldGroup
         $this->addField(new FAFields\TimePicker('Time Picker', 'time_picker',
             '1711192022a'));
 
-        $this->addField(new FAFields\TrueFalse('True/False', 'true_false',
-            '1711192022y', [
-                'message' => 'To be or not to be?',
-            ]));
-
         $this->addField(new FAFields\Message('Testing conditional statement',
-            'testing_conditional_statement', '1711202201a', [
-                'message' => 'This should only be shown if the checkbox above
+            'testing_conditional_statement', '1711202201x', [
+                'message'           => 'This should only be shown if the checkbox _below_
                 is checked',
                 'conditional_logic' => [
                     [
                         [
-                            'field' => '1711192022y',
+                            'field'    => '1711192022y',
                             'operator' => '==',
-                            'value' => '1',
-                        ]
-                    ]
-                ]
+                            'value'    => '1',
+                        ],
+                    ],
+                ],
+            ]));
+
+        $this->addField(new FAFields\TrueFalse('True/False', 'true_false',
+            '1711192022y', [
+                'message' => 'To be or not to be? Checking this field should
+                trigger a conditional statement displaying a message field
+                above and below',
+            ]));
+
+        $this->addField(new FAFields\Message('Testing conditional statement',
+            'testing_conditional_statement', '1711202201a', [
+                'message'           => 'This should only be shown if the checkbox _above_
+                is checked',
+                'conditional_logic' => [
+                    [
+                        [
+                            'field'    => '1711192022y',
+                            'operator' => '==',
+                            'value'    => '1',
+                        ],
+                    ],
+                ],
             ]));
 
         $this->addField(new FAFields\Url('URL', 'url', '1711192031i'));
 
         $this->addField(new FAFields\User('User', 'user', '1711192032u'));
 
-        // Here we pass settings directrly as the fourth parameter
         $this->addField(new FAFields\Wysiwyg('Wysiwyg', 'wysiwyg',
             '1711172249i', ['media_upload' => false, 'delay' => true]));
 

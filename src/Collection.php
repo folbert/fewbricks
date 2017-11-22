@@ -2,6 +2,8 @@
 
 namespace Fewbricks;
 
+use Fewbricks\ACF\Field;
+
 class Collection
 {
 
@@ -23,7 +25,7 @@ class Collection
     }
 
     /**
-     * @param      $item
+     * @param Field $item
      * @param null $key
      */
     public function addItem($item, $key = null)

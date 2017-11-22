@@ -2,42 +2,13 @@
 
 namespace Fewbricks\ACF;
 
-class Field
+/**
+ * Class Field
+ *
+ * @package Fewbricks\ACF
+ */
+class Field extends Item
 {
-
-    /**
-     * @var The key of the brick, if any, that this field is part of.
-     */
-    private $brickKey;
-
-    /**
-     * @var The key required by ACF. Must be unique across the site.
-     */
-    private $key;
-
-    /**
-     * @var string
-     */
-    private $label;
-
-    /**
-     * @var string
-     */
-    private $name;
-
-    /**
-     * @var string|boolean A place to store the original key before we merge it
-     * with parent field groups, bricks etc.
-     */
-    private $originalKey;
-
-    /**
-     * The array that makes up the field.
-     * https://www.advancedcustomfields.com/resources/register-fields-via-php/#field-settings
-     *
-     * @var array
-     */
-    private $settings;
 
     /**
      * @var string
@@ -60,22 +31,9 @@ class Field
     public function __construct($type, $label, $name, $key, $settings = [])
     {
 
-        // Lets keep these crucial settings as class vars to make them easier
-        // and nicer to access.
+        parent::__construct($label, $name, $key, $settings);
+
         $this->type  = $type;
-        $this->label = $label;
-        $this->name  = $name;
-        $this->key   = $key;
-
-        // ACF states that keys must start with field_ but let's wait with
-        // ensuring that until the key has been prepended with keys of
-        // field groups, bricks etc.
-
-        $this->settings = $settings;
-
-        $this->originalKey = $key;
-
-        $this->brickKey = false;
 
     }
 
@@ -115,16 +73,6 @@ class Field
     }
 
     /**
-     * @param string $key
-     */
-    public function setKey($key)
-    {
-
-        $this->key = $key;
-
-    }
-
-    /**
      * @param boolean $required     ACF setting. Whether or not the field value
      *                              is required. If not set, false is used.
      */
@@ -132,24 +80,6 @@ class Field
     {
 
         $this->setSetting('required', $required);
-
-    }
-
-    /**
-     * @param $name
-     * @param $value
-     */
-    public function setSetting($name, $value)
-    {
-
-        $crucialSettings = ['key', 'label', 'name', 'type'];
-
-        // Make sure to keep any crucial setting class vars up to date
-        if(in_array($name, $crucialSettings)) {
-            $this->{$name} = $value;
-        }
-
-        $this->settings[$name] = $value;
 
     }
 
@@ -168,16 +98,6 @@ class Field
         ], $wrapper);
 
         $this->setSetting('wrapper', $wrapper);
-
-    }
-
-    /**
-     * @return string|boolean
-     */
-    public function getBrickKey()
-    {
-
-        return $this->brickKey;
 
     }
 
@@ -212,75 +132,12 @@ class Field
     }
 
     /**
-     * @return string The key of the field
-     */
-    public function getKey()
-    {
-
-        return $this->key;
-
-    }
-
-    /**
-     * @return string
-     */
-    public function getOriginalKey()
-    {
-
-        return $this->originalKey;
-
-    }
-
-    /**
      * @return boolean
      */
     public function getRequired()
     {
 
         return $this->getSetting('required');
-
-    }
-
-    /**
-     * Get the value of a specific setting. Please note that you can only
-     * get the settings that you have set when creating the instance.
-     * Any default values that are set by ACF and that has not been overridden
-     * in this instance will return the $defaultValue
-     *
-     * @param string $name         The name of the setting to get
-     * @param bool   $defaultValue Value to return if setting is not set
-     *
-     * @return mixed $defaultValue if value was not found, otherwise the value
-     */
-    public function getSetting($name, $defaultValue = false)
-    {
-
-        $value = $defaultValue;
-
-        if (isset($this->settings[$name])) {
-
-            $value = $this->settings[$name];
-
-        }
-
-        return $value;
-
-    }
-
-    /**
-     * @return array
-     */
-    public function getSettings()
-    {
-
-        // Put the crucial settings into the settings array
-        $tmp_settings          = $this->settings;
-        $tmp_settings['key']   = $this->key;
-        $tmp_settings['label'] = $this->label;
-        $tmp_settings['name']  = $this->name;
-        $tmp_settings['type']  = $this->type;
-
-        return $tmp_settings;
 
     }
 
@@ -295,12 +152,15 @@ class Field
     }
 
     /**
-     * @param $prepend
+     * @return array
      */
-    public function prependKey($prepend)
+    public function getSettings()
     {
 
-        $this->key = $prepend . $this->key;
+        $settings = parent::getSettings();
+        $settings['type'] = $this->type;
+
+        return $settings;
 
     }
 

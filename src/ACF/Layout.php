@@ -7,9 +7,8 @@ namespace Fewbricks\ACF;
  *
  * @package Fewbricks\ACF
  */
-class Layout
+class Layout extends Item
 {
-
 
 
 }
