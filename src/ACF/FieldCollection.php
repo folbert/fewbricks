@@ -65,7 +65,7 @@ class FieldCollection extends Collection
         return $settings;
 
     }
-    
+
     /**
      *
      */

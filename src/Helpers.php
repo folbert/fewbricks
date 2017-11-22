@@ -2,6 +2,8 @@
 
 namespace Fewbricks;
 
+use Fewbricks\AcfFieldSnitch\AcfFieldSnitch;
+
 class Helpers
 {
 
@@ -28,6 +30,35 @@ class Helpers
             'fewbricks/project_init_file_path',
             self::get_project_files_base_path() . '/init.php'
         );
+
+    }
+
+    /**
+     * @param bool $force Set to true to ignore the filter
+     */
+    public static function initDebug($force = false)
+    {
+
+        self::initFieldSnitch($force);
+
+    }
+
+    /**
+     * @param bool $force Set to true to ignore the filter
+     */
+    public static function initFieldSnitch($force = false)
+    {
+
+        if ($force
+            || apply_filters(
+                'fewbricks/activate_field_snitch',
+                false
+            )
+        ) {
+
+            AcfFieldSnitch::init();
+
+        }
 
     }
 

@@ -38,7 +38,7 @@ class Fewbricks
         $project_files_base_path = Helpers::get_project_files_base_path();
         require($project_files_base_path . '/init.php');
 
-        AcfFieldSnitch::init();
+        Helpers::initDebug();
 
     }
 
