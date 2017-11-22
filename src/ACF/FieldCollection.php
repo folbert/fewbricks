@@ -8,9 +8,13 @@ class FieldCollection extends Collection
 {
 
     /**
+     * @param string $base_key
      *
+     * @return array Associative array with field settings ready to be used for
+     * "fields" in an array to be sent to ACFs functions for
+     * registering fields using code.
      */
-    public function finalizeSettings($base_key = '')
+    public function getFinalizedSettings($base_key = '')
     {
 
         // Lets make sure that the key is ok for ACF
@@ -19,48 +23,49 @@ class FieldCollection extends Collection
             $base_key = 'field_' . $base_key;
         }
 
-        foreach ($this->items AS &$fieldObject) {
+        return $this->finalizeSettings($this->items, $base_key);
 
-            $key_prepend = $base_key;
+    }
+
+    /**
+     * @param Field[] $fieldObjects
+     * @param string  $base_key
+     *
+     * @return array Associative array with field settings ready to be used for
+     * "fields" in an array to be sent to ACFs functions for
+     * registering fields using code.
+     * @link https://www.advancedcustomfields.com/resources/register-fields-via-php/#example
+     */
+    private function finalizeSettings($fieldObjects, $base_key)
+    {
+
+        $settings = [];
+
+        foreach ($fieldObjects AS $fieldObject) {
+
+            $keyPrepend = $base_key;
 
             // If the field belongs to a brick
             if (false !== ($brickKey = $fieldObject->getBrickKey())) {
-                $key_prepend .= '_' . $brickKey;
+                $keyPrepend .= '_' . $brickKey;
             }
 
-            $key_prepend .= '_';
+            $keyPrepend .= '_';
 
-            $fieldObject->prependKey($key_prepend);
+            $fieldObject->prependKey($keyPrepend);
 
             // @todo Handle sub fields
 
             // @todo Conditional logic
 
+            $settings[] = $fieldObject->getSettings();
+
         }
 
-    }
-
-    public function getSettings()
-    {
-
-
+        return $settings;
 
     }
-
-    /**
-     *
-     */
-    private function prepareFieldKeys()
-    {
-
-        /** @var Field $fieldObject */
-        foreach ($this->fieldObjects AS &$fieldObject) {
-            $this->prepareFieldKey($fieldObject);
-        }
-        unset($fieldObject);
-
-    }
-
+    
     /**
      *
      */
@@ -123,7 +128,7 @@ class FieldCollection extends Collection
 
     }
 
-    public function getAcfSettingsArray()
+    /*public function getAcfSettingsArray()
     {
 
         // We dont want to mess with the original data
@@ -137,6 +142,6 @@ class FieldCollection extends Collection
 
         return $items;
 
-    }
+    }*/
 
 }

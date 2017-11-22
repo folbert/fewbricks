@@ -262,8 +262,6 @@ class FieldGroup
         $this->settings['key']   = $this->key;
         $this->settings['title'] = $this->title;
 
-        $this->fieldObjects->finalizeSettings($this->key);
-
         acf_add_local_field_group($this->getAcfSettingsArray());
 
         // No use in having a potentially large collection of objects anymore
@@ -290,7 +288,7 @@ class FieldGroup
         return array_merge($this->settings, [
             'key'      => $this->key,
             'title'    => $this->title,
-            'fields'   => $this->fieldObjects->getAcfSettingsArray(),
+            'fields'   => $this->fieldObjects->getFinalizedSettings($this->key),
             'location' => $this->location,
         ]);
 
