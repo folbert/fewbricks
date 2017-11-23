@@ -2,8 +2,6 @@
 
 namespace Fewbricks\ACF\Fields;
 
-use Fewbricks\ACF\Field;
-
 /**
  * Class Message
  * Corresponds to the message field type in ACF.

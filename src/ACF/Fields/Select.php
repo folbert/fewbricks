@@ -2,8 +2,6 @@
 
 namespace Fewbricks\ACF\Fields;
 
-use Fewbricks\ACF\Field;
-
 /**
  * Class Select
  * Corresponds to the select field type in ACF.
@@ -14,7 +12,7 @@ use Fewbricks\ACF\Field;
  *
  * @package Fewbricks\ACF\Fields
  */
-class Select extends Field
+class Select extends FieldWithChoices
 {
 
     /**

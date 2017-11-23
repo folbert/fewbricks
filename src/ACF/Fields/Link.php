@@ -2,8 +2,6 @@
 
 namespace Fewbricks\ACF\Fields;
 
-use Fewbricks\ACF\Field;
-
 /**
  * Class Link
  * Corresponds to the link field type in ACF.

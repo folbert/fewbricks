@@ -2,8 +2,6 @@
 
 namespace Fewbricks\ACF\Fields;
 
-use Fewbricks\ACF\Field;
-
 /**
  * Class Relationship
  * Corresponds to the relationship field type in ACF.

@@ -4,6 +4,7 @@ namespace App\Fewbricks\FieldGroups;
 
 use Fewbricks\ACF\FieldGroup;
 use Fewbricks\ACF\Fields as FAFields;
+use Fewbricks\ACF\Layout;
 
 /**
  * Class Demo_FieldsKitchenSink
@@ -31,37 +32,17 @@ class Demo_FieldsKitchenSink extends FieldGroup
     private function addBasicFields()
     {
 
-        // Repeater
-        // --------
-        $repeater = new FAFields\Repeater('Repeater', 'repeater',
-            '1711222156a');
-
-        $repeater->setButtonLabel('Fewbricks says: add row');
-        $repeater->setLayout('table');
-
-        // Passing settings as fourth parameter
-        $repeater->addSubField(new FAFields\Text('Repeater - Text',
-            'repeater_text', '1711222221a', ['required' => true]));
-
-        $repeater->addSubField(new FAFields\Image('Repeater - Image',
-            'repeater_image', '1711222221b'));
-
-        $this->addField($repeater);
-        // E.o. repeater
-        // -------------
-
         // The other fields are in alphabetical oder but lets start with a tab
         $this->addField(new FAFields\Tab('Basic fields', 'tab1',
             '1711192019a'));
 
         // Showing how to set field settings after the field has been created
-        $button_group         = new FAFields\ButtonGroup('Button Group',
+        $button_group = new FAFields\ButtonGroup('Button Group',
             'button_group', '1711172249u');
-        $button_group_choices = [
+        $button_group->setChoices([
             'red'   => 'Red',
             'black' => 'Black',
-        ];
-        $button_group->setSetting('choices', $button_group_choices);
+        ]);
         $button_group->setSetting('required', true);
         $this->addField($button_group);
 
@@ -92,6 +73,33 @@ class Demo_FieldsKitchenSink extends FieldGroup
         $this->addField(new FAFields\File('File', 'file', '1711172319o'));
         $this->addField(new FAFields\File('File 2', 'file_2', '1711172319p'));
 
+        // ----------------
+        // Flexible content
+        $fc = new FAFields\FlexibleContent('Flexible content', 'flexible_content', '1711231849a');
+        $fc->setButtonLabel('Fewbricks says: add layout');
+
+        $l = new FAFields\Layout('Text and image', 'text_and_image', '1711231901a');
+        $l->addSubField(new FAFields\Text('Text', 'text', '1711231901b'));
+        $l->addSubField(
+            (new FAFields\Image('Image', 'image', '1711231901c'))
+            ->setPreviewSize('large')
+        );
+        $fc->addLayout($l);
+
+        $l = new FAFields\Layout('Text and select', 'text_and_select', '1711231907a');
+        $l->addSubField(new FAFields\Text('Text', 'text', '1711231907b'));
+        $l->addSubField(new FAFields\Select('Select', 'select', '1711231907c', [
+            'choices' => [
+                'option1' => 'Option 1',
+                'option2' => 'Option 2',
+            ],
+        ]));
+        $fc->addLayout($l);
+
+        $this->addField($fc);
+        // E.o. flexible content
+        // ---------------------
+
         $this->addField(new FAFields\Gallery('Gallery', 'gallery',
             '1711172320y'));
 
@@ -100,6 +108,25 @@ class Demo_FieldsKitchenSink extends FieldGroup
 
         $this->addField(new FAFields\PublicAddOns\FewbricksHidden('Fewbricks Hidden',
             'fewbricks_hidden', '1711172043u'));
+
+        // -----
+        // Group
+        $group = new FAFields\Group('Group', 'group', '1711232310a');
+
+        $group->addSubField(new FAFields\Text('Text', 'text', '1711232310b'));
+        $group->addSubField(
+            (new FAFields\Select('Select', 'select', '1711232310c'))
+            ->setChoices([
+                'one' => 'One',
+                'two' => 'Two',
+                'three' => 'Three',
+            ])
+        );
+
+        $this->addField($group);
+
+        // E.o. group
+        // ----------
 
         $this->addField(new FAFields\Image('Image', 'image', '1711172323u'));
 
@@ -122,6 +149,25 @@ class Demo_FieldsKitchenSink extends FieldGroup
 
         $this->addField(new FAFields\PostObject('Post Object', 'post_object',
             '1711172327o'));
+
+        // --------
+        // Repeater
+        $repeater = new FAFields\Repeater('Repeater', 'repeater',
+            '1711222156a');
+
+        $repeater->setButtonLabel('Fewbricks says: add row');
+        $repeater->setLayout('table');
+
+        // Passing settings as fourth parameter
+        $repeater->addSubField(new FAFields\Text('Repeater - Text',
+            'repeater_text', '1711222221a', ['required' => true]));
+
+        $repeater->addSubField(new FAFields\Image('Repeater - Image',
+            'repeater_image', '1711222221b'));
+
+        $this->addField($repeater);
+        // E.o. repeater
+        // -------------
 
         $this->addField(new FAFields\Select('Select', 'select', '1711210919a', [
             'choices'       => [

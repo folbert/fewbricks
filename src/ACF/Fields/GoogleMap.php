@@ -2,8 +2,6 @@
 
 namespace Fewbricks\ACF\Fields;
 
-use Fewbricks\ACF\Field;
-
 /**
  * Class GoogleMap
  * Corresponds to the Google Map field type in ACF.
@@ -37,6 +35,56 @@ class GoogleMap extends Field
     ) {
 
         parent::__construct('google_map', $label, $name, $key, $settings);
+
+    }
+
+    /**
+     * ACF setting. Where to center the initial map.
+     *
+     * @param int $lat
+     * @param int $lng
+     *
+     * @return $this
+     */
+    public function setCenter($lat, $lng)
+    {
+
+        $this->setSetting('center_lat', $lat);
+        $this->setSetting('center_lng', $lng);
+
+        return $this;
+
+    }
+
+    /**
+     * ACF setting. Customize teh map height.
+     *
+     * @param int $height Height in px (without "px")
+     *
+     * @return $this
+     */
+    public function setHeight($height)
+    {
+
+        $this->setSetting('height', $height);
+
+        return $this;
+
+    }
+
+    /**
+     * ACF setting. The initial zoom level.
+     *
+     * @param int $zoom
+     *
+     * @return $this
+     */
+    public function setZoom($zoom)
+    {
+
+        $this->setSetting('zoom', $zoom);
+
+        return $this;
 
     }
 

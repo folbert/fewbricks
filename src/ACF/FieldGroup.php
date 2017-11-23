@@ -89,11 +89,15 @@ class FieldGroup
      * ACF setting. If the ficle group should be registered or not.
      *
      * @param $active
+     *
+     * @return $this
      */
     public function setActive($active)
     {
 
         $this->setSetting('active', $active);
+
+        return $this;
 
     }
 
@@ -103,11 +107,15 @@ class FieldGroup
      * users. But lets add this function anyways just to be nice :)
      *
      * @param string $description The description
+     *
+     * @return $this
      */
     public function setDescription($description)
     {
 
         $this->setSetting('decsription', $description);
+
+        return $this;
 
     }
 
@@ -130,6 +138,8 @@ class FieldGroup
      *                            items in $showOnScreen. Passing a non-empty
      *                            value here will make the function ignore the
      *                            $hideOnScreen variable completely
+     *
+     * @return $this
      */
     public function setHideOnScreen($hideOnScreen, $showOnScreen = [])
     {
@@ -159,6 +169,8 @@ class FieldGroup
 
         $this->setSetting('hide_on_screen', $hideOnScreen);
 
+        return $this;
+
     }
 
     /**
@@ -167,11 +179,15 @@ class FieldGroup
      *
      * @param string $instruction_placement 'label' (Below labels) or 'field'
      *                                      (Below fields)
+     *
+     * @return $this
      */
     public function setInstructionPlacement($instruction_placement)
     {
 
         $this->setSetting('instruction_placement', $instruction_placement);
+
+        return $this;
 
     }
 
@@ -182,22 +198,30 @@ class FieldGroup
      *
      * @param string $labelPlacement 'top' (Above fields) or 'left'
      *                               (Beside fields)
+     *
+     * @return $this
      */
     public function setLabelPlacement($labelPlacement)
     {
 
         $this->setSetting('label_placement', $labelPlacement);
 
+        return $this;
+
 
     }
 
     /**
      * @param $location
+     *
+     * @return $this
      */
     public function setLocation($location)
     {
 
         $this->setSetting('location', $location);
+
+        return $this;
 
     }
 
@@ -205,11 +229,15 @@ class FieldGroup
      * ACF setting. Field groups are shown in order from lowest to highest.
      *
      * @param int $menuOrder
+     *
+     * @return $this
      */
     public function setMenuOrder($menuOrder)
     {
 
         $this->setSetting('menu_order', $menuOrder);
+
+        return $this;
 
     }
 
@@ -218,11 +246,15 @@ class FieldGroup
      * normal.
      *
      * @param string $position 'acf_after_title', 'normal' or 'side'
+     *
+     * @return $this
      */
     public function setPosition($position)
     {
 
         $this->setSetting('position', $position);
+
+        return $this;
 
     }
 
@@ -233,6 +265,8 @@ class FieldGroup
      *
      * @param $name
      * @param $value
+     *
+     * @return $this
      */
     public function setSetting($name, $value)
     {
@@ -246,17 +280,23 @@ class FieldGroup
 
         $this->settings[$name] = $value;
 
+        return $this;
+
     }
 
     /**
      * Determines the metabox style. Choices of 'default' or 'seamless'
      *
      * @param string $style 'default' or 'seamless'
+     *
+     * @return $this
      */
     public function setStyle($style)
     {
 
         $this->setSetting('style', $style);
+
+        return $this;
 
     }
 
@@ -322,6 +362,8 @@ class FieldGroup
         $this->build();
 
         $acfSettingsArray = $this->getAcfSettingsArray();
+
+        //dump($acfSettingsArray);
 
         acf_add_local_field_group($acfSettingsArray);
 

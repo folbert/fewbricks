@@ -2,8 +2,6 @@
 
 namespace Fewbricks\ACF\Fields;
 
-use Fewbricks\ACF\Field;
-
 /**
  * Class DateTimePicker
  * Corresponds to the date time picker field type in ACF.
@@ -14,7 +12,7 @@ use Fewbricks\ACF\Field;
  *
  * @package Fewbricks\ACF\Fields
  */
-class DateTimePicker extends Field
+class DateTimePicker extends DateField
 {
 
     /**

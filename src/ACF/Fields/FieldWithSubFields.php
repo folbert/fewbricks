@@ -1,6 +1,8 @@
 <?php
 
-namespace Fewbricks\ACF;
+namespace Fewbricks\ACF\Fields;
+
+use Fewbricks\ACF\FieldCollection;
 
 /**
  * Class ItemWithSubFields
@@ -40,22 +42,30 @@ class FieldWithSubFields extends Field
 
     /**
      * @param Field $field
-     * @param null $key
+     * @param null  $key
+     *
+     * @return $this
      */
     public function addSubField($field, $key = null)
     {
 
         $this->subFields->addItem($field, $key);
 
+        return $this;
+
     }
 
     /**
      * @param int $key
+     *
+     * @return $this
      */
     public function deleteSubField($key)
     {
 
         $this->subFields->deleteItem($key);
+
+        return $this;
 
     }
 

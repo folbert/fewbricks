@@ -59,7 +59,8 @@ class Demo_FewbricksDemoPost extends EditScreen
         $contentFg->setSetting('menu_order', 110);
         //$contentFg->setHideOnScreen(['permalink']);
 
-        $contentFg->addField(new Field('text', 'Text', 'sometext',
+        // Create a field directly
+        $contentFg->addField(new \Fewbricks\ACF\Fields\Field('text', 'Text', 'sometext',
             '1711162243a'));
         $contentFg->addField(new Textarea('Text2', 'someothertext',
             '1711162243b'));

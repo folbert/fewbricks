@@ -2,8 +2,6 @@
 
 namespace Fewbricks\ACF\Fields;
 
-use Fewbricks\ACF\Field;
-
 /**
  * Class Gallery
  * Corresponds to the gallery field type in ACF.
@@ -14,7 +12,7 @@ use Fewbricks\ACF\Field;
  *
  * @package Fewbricks\ACF\Fields
  */
-class Gallery extends Field
+class Gallery extends FieldWithImages
 {
 
     /**
@@ -37,6 +35,54 @@ class Gallery extends Field
     ) {
 
         parent::__construct('gallery', $label, $name, $key, $settings);
+
+    }
+
+    /**
+     * ACF setting. Specify where new attachments are added
+     *
+     * @param $insert append or prepend
+     *
+     * @return Gallery $this
+     */
+    public function setInsert($insert)
+    {
+
+        $this->setSetting('insert', $insert);
+
+        return $this;
+
+    }
+
+    /**
+     * ACF setting.
+     *
+     * @param int $maximumSelection
+     *
+     * @return Gallery $this
+     */
+    public function setMaximumSelection($maximumSelection)
+    {
+
+        $this->setSetting('max', $maximumSelection);
+
+        return $this;
+
+    }
+
+    /**
+     * ACF setting.
+     *
+     * @param int $minimumSelection
+     *
+     * @return Gallery $this
+     */
+    public function setMinimumSelection($minimumSelection)
+    {
+
+        $this->setSetting('min', $minimumSelection);
+
+        return $this;
 
     }
 

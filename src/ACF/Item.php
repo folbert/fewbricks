@@ -80,27 +80,37 @@ class Item
 
     /**
      * @param $key
+     *
+     * @return $this
      */
     public function setBrickKey($key)
     {
 
         $this->brickKey = $key;
 
+        return $this;
+
     }
 
     /**
      * @param string $key
+     *
+     * @return $this
      */
     public function setKey($key)
     {
 
         $this->key = $key;
 
+        return $this;
+
     }
 
     /**
      * @param $name
      * @param $value
+     *
+     * @return $this
      */
     public function setSetting($name, $value)
     {
@@ -114,12 +124,17 @@ class Item
 
         $this->settings[$name] = $value;
 
+        return $this;
+
     }
 
     /**
      * Enables you to set a bunch of ACF settings at once.
+     *
      * @param array $settings Associative array with settings name as key and
      *                        value as value.
+     *
+     * @return $this
      */
     public function addSettings($settings)
     {
@@ -130,6 +145,8 @@ class Item
             $this->setSetting($name, $value);
 
         }
+
+        return $this;
 
     }
 

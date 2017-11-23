@@ -2,8 +2,6 @@
 
 namespace Fewbricks\ACF\Fields;
 
-use Fewbricks\ACF\Field;
-
 /**
  * Class ButtonGroup
  * Corresponds to the button group field type in ACF.
@@ -14,7 +12,7 @@ use Fewbricks\ACF\Field;
  *
  * @package Fewbricks\ACF\Fields
  */
-class ButtonGroup extends Field
+class ButtonGroup extends FieldWithChoices
 {
 
     /**
@@ -37,6 +35,22 @@ class ButtonGroup extends Field
     ) {
 
         parent::__construct('button_group', $label, $name, $key, $settings);
+
+    }
+
+    /**
+     * ACF setting.
+     *
+     * @param string $layout horizontal or vertical
+     *
+     * @return ButtonGroup $this
+     */
+    public function setLayout($layout)
+    {
+
+        $this->setSetting('layout', $layout);
+
+        return $this;
 
     }
 

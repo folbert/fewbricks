@@ -1,6 +1,8 @@
 <?php
 
-namespace Fewbricks\ACF;
+namespace Fewbricks\ACF\Fields;
+
+use Fewbricks\ACF\Item;
 
 /**
  * Class Field
@@ -42,50 +44,68 @@ class Field extends Item
      *                                this field based on other field's values.
      *                                Best to use the ACF UI and export to
      *                                understand the array structure.
+     *
+     * @return $this
      */
     public function setConditionalLogic($conditionalLogic)
     {
 
         $this->setSetting('conditional_logic', $conditionalLogic);
 
+        return $this;
+
     }
 
     /**
      * @param mixed $defaultValue ACF setting. A default value used by ACF if no
      *                            value has yet been saved.
+     *
+     * @return $this
      */
     public function setDefaultValue($defaultValue)
     {
 
         $this->setSetting('default_value', $defaultValue);
 
+        return $this;
+
     }
 
     /**
      * @param string $instructions ACF setting. Instructions for authors.
      *                             Shown when submitting data
+     *
+     * @return $this
      */
     public function setInstructions($instructions)
     {
 
         $this->setSetting('instructions', $instructions);
 
+        return $this;
+
     }
 
     /**
      * @param boolean $required     ACF setting. Whether or not the field value
      *                              is required. If not set, false is used.
+     *
+     * @return $this
      */
     public function setRequired($required)
     {
 
         $this->setSetting('required', $required);
 
+        return $this;
+
     }
 
     /**
      * @param boolean $wrapper ACF setting. An array of attributes given to the
      *                         field element in the backend.
+     *
+     * @return $this
      */
     public function setWrapper($wrapper)
     {
@@ -98,6 +118,8 @@ class Field extends Item
         ], $wrapper);
 
         $this->setSetting('wrapper', $wrapper);
+
+        return $this;
 
     }
 

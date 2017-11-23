@@ -2,8 +2,6 @@
 
 namespace Fewbricks\ACF\Fields;
 
-use Fewbricks\ACF\Field;
-
 /**
  * Class Checkbox
  * Corresponds to the checkbox group field type in ACF.
@@ -14,7 +12,7 @@ use Fewbricks\ACF\Field;
  *
  * @package Fewbricks\ACF\Fields
  */
-class Checkbox extends Field
+class Checkbox extends FieldWithChoices
 {
 
     /**
@@ -37,6 +35,70 @@ class Checkbox extends Field
     ) {
 
         parent::__construct('checkbox', $label, $name, $key, $settings);
+
+    }
+
+    /**
+     * ACF setting.
+     *
+     * @param boolean $allowCustom
+     *
+     * @return Checkbox $this
+     */
+    public function setAllowCustom($allowCustom)
+    {
+
+        $this->setSetting('allow_custom', $allowCustom);
+
+        return $this;
+
+    }
+
+    /**
+     * ACF setting
+     *
+     * @param string $layout vertical or horizontal
+     *
+     * @return Checkbox $this
+     */
+    public function setLayout($layout)
+    {
+
+        $this->setSetting('layout', $layout);
+
+        return $this;
+
+    }
+
+    /**
+     * ACF setting.
+     *
+     * @param boolean $saveCustom
+     *
+     * @return Checkbox $this
+     */
+    public function setSaveCustom($saveCustom)
+    {
+
+        $this->setSetting('allow_custom', $saveCustom);
+
+        return $this;
+
+    }
+
+    /**
+     * ACF setting. Prepend an extra checkbox to toggle all choices.
+     *
+     * @param boolean $toggle
+     *
+     * @return Checkbox $this
+     */
+    public function setToggle($toggle)
+    {
+
+        $this->setSetting('toggle', $toggle);
+
+        return $this;
 
     }
 

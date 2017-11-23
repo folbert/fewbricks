@@ -2,8 +2,6 @@
 
 namespace Fewbricks\ACF\Fields;
 
-use Fewbricks\ACF\Field;
-
 /**
  * Class ButtonGroup
  * Corresponds to the image field type in ACF.
@@ -14,7 +12,7 @@ use Fewbricks\ACF\Field;
  *
  * @package Fewbricks\ACF\Fields
  */
-class Image extends Field
+class Image extends FieldWithImages
 {
 
     /**
@@ -37,6 +35,49 @@ class Image extends Field
     ) {
 
         parent::__construct('image', $label, $name, $key, $settings);
+
+    }
+
+    /**
+     * ACF setting. Limit the media library choice.
+     *
+     * @param string $library "all" or "uploadedTo"
+     *
+     * @return $this
+     */
+    public function setLibrary($library)
+    {
+
+        return $this->setSetting('library', $library);
+
+    }
+
+    /**
+     * ACF setting. Specify the returned value on front end.
+     *
+     * @param string $returnValue "array", "url" or "id"
+     *
+     * @return $this
+     */
+    public function setReturnValue($returnValue)
+    {
+
+        return $this->setSetting('return_format', $returnValue);
+
+    }
+
+    /**
+     * ACF setting. Shown when entering data
+     *
+     * @param string $previewSize The name of a defined image size. For example "thumbnail", "medium", "large" or any
+     *                            custom image size.
+     *
+     * @return $this
+     */
+    public function setPreviewSize($previewSize)
+    {
+
+        return $this->setSetting('preview_size', $previewSize);
 
     }
 

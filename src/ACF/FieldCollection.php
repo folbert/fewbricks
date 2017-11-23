@@ -118,29 +118,4 @@ class FieldCollection extends Collection
 
     }
 
-    /**
-     * @param Field $fieldObject
-     */
-    private function prepareFieldConditionalLogic(&$fieldObject)
-    {
-
-
-    }
-
-    /*public function getAcfSettingsArray()
-    {
-
-        // We dont want to mess with the original data
-        $items = $this->items;
-
-        array_walk_recursive($items, function(&$value, $key) {
-
-            $value = $value->getSettings();
-
-        });
-
-        return $items;
-
-    }*/
-
 }

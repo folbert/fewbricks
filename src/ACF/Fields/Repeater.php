@@ -2,9 +2,7 @@
 
 namespace Fewbricks\ACF\Fields;
 
-use Fewbricks\ACF\Field;
 use Fewbricks\ACF\FieldCollection;
-use Fewbricks\ACF\FieldWithSubFields;
 
 /**
  * Class Repeater
@@ -42,17 +40,24 @@ class Repeater extends FieldWithSubFields
 
     /**
      * @param string $buttonLabel
+     *
+     * @return $this
      */
     public function setButtonLabel($buttonLabel)
     {
 
         $this->setSetting('button_label', $buttonLabel);
 
+        return $this;
+
     }
 
     /**
      * Set a sub field to show when row is collapsed
+     *
      * @param string $fieldKey
+     *
+     * @return $this
      */
     public function setCollapsed($fieldKey)
     {
@@ -60,37 +65,53 @@ class Repeater extends FieldWithSubFields
         // @todo Implement this and dont forget to deal with it when finalizing
         $this->setSetting('collapsed', $fieldKey);
 
+        return $this;
+
     }
 
     /**
      * @param string $layout table, block or row
+     *
+     * @return $this
      */
     public function setLayout($layout)
     {
 
         $this->setSetting('layout', $layout);
 
+        return $this;
+
     }
 
     /**
      * Set maximum nr of rows
+     *
      * @param int $max
+     *
+     * @return $this
      */
     public function setMax($max)
     {
 
         $this->setSetting('max', $max);
 
+        return $this;
+
     }
 
     /**
      * Set minimum nr of rows
+     *
      * @param int $min
+     *
+     * @return $this
      */
     public function setMin($min)
     {
 
         $this->setSetting('min', $min);
+
+        return $this;
 
     }
 

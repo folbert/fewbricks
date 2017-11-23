@@ -2,15 +2,13 @@
 
 namespace Fewbricks\ACF\Fields;
 
-use Fewbricks\ACF\Field;
-
 /**
  * Class Group
  * Corresponds to the group field type in ACF.
  *
  * @package Fewbricks\ACF\Fields
  */
-class Group extends Field
+class Group extends FieldWithSubFields
 {
 
     /**
