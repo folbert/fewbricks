@@ -47,8 +47,9 @@ if (!function_exists('register_fewbricks_custom_post_type')) {
             'description'         => __('A post type for demoing Fewbricks',
                 'fewbricks'),
             'labels'              => $labels,
-            'supports'            => ['title', 'custom-fields',],
-            'taxonomies'          => ['category', 'post_tag'],
+            // Support some stuff to test hiding it for field groups
+            'supports'            => ['title', 'custom-fields', 'editor',],
+            'taxonomies'          => ['category', 'post_tag',],
             'hierarchical'        => true,
             'public'              => true,
             'show_ui'             => true,
@@ -67,6 +68,7 @@ if (!function_exists('register_fewbricks_custom_post_type')) {
 
     }
 
-    add_action('init', __NAMESPACE__ . '\\register_fewbricks_custom_post_type', 0);
+    add_action('init', __NAMESPACE__ . '\\register_fewbricks_custom_post_type',
+        0);
 
 }

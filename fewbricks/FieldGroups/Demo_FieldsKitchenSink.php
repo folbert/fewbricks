@@ -16,7 +16,7 @@ class Demo_FieldsKitchenSink extends FieldGroup
 
     /**
      * Each field group child class must have a build function
-     * which is automatically called when the field group is registered.
+     * which is automatically called right before the field group is registered.
      */
     public function build()
     {

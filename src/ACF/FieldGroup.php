@@ -86,20 +86,83 @@ class FieldGroup
     }
 
     /**
-     * ACF setting. An array of elements to hide on the screen
+     * ACF setting. If the ficle group should be registered or not.
      *
-     * @param array $hideOnScreen
+     * @param $active
      */
-    public function setHideOnScreen($hideOnScreen)
+    public function setActive($active)
     {
 
-        //@todo Use this value for something
+        $this->setSetting('active', $active);
+
+    }
+
+    /**
+     * ACF setting. Shown in field group list. Since this is a setting
+     * that only affects the ACF GUI, it will probably never be used by Fewbricks
+     * users. But lets add this function anyways just to be nice :)
+     *
+     * @param string $description The description
+     */
+    public function setDescription($description)
+    {
+
+        $this->setSetting('decsription', $description);
+
+    }
+
+    /**
+     * ACF setting. An array of elements to hide on the screen.
+     * Important: If multiple field groups appear on an edit screen, the first
+     * field group's options will be used (the one with the lowest
+     * order number).
+     *
+     * Possible values in the array: 'permalink', 'the_content', 'excerpt',
+     * 'custom_fields', 'discussion', 'comments', 'revisions', 'slug',
+     * 'author', 'format', 'page_attributes', 'featured_image', 'categories',
+     * 'tags', 'send-trackbacks'
+     *
+     * @param array $hideOnScreen Array with items to hide on the screen.
+     * @param array $showOnScreen Fewbricks addition. Enables you to define
+     *                            which fields should be visible on screen. This
+     *                            will create an array with all the items that
+     *                            ACF supports hiding of and then remove the
+     *                            items in $showOnScreen. Passing a non-empty
+     *                            value here will make the function ignore the
+     *                            $hideOnScreen variable completely
+     */
+    public function setHideOnScreen($hideOnScreen, $showOnScreen = [])
+    {
+
+        if (!empty($showOnScreen)) {
+
+            // These are the items that ACF supports hiding as of v5.6.5
+            $hideOnScreen = array_diff([
+                'permalink',
+                'the_content',
+                'excerpt',
+                'custom_fields',
+                'discussion',
+                'comments',
+                'revisions',
+                'slug',
+                'author',
+                'format',
+                'page_attributes',
+                'featured_image',
+                'categories',
+                'tags',
+                'send-trackbacks',
+            ], $showOnScreen);
+
+        }
+
         $this->setSetting('hide_on_screen', $hideOnScreen);
 
     }
 
     /**
-     * ACF Setting. Determines where field instructions are places in relation
+     * ACF Setting. Determines where field instructions are placed in relation
      * to fields.
      *
      * @param string $instruction_placement 'label' (Below labels) or 'field'
@@ -177,7 +240,7 @@ class FieldGroup
         $crucialSettings = ['location', 'key', 'title'];
 
         // Make sure to keep any crucial setting class vars up to date
-        if(in_array($name, $crucialSettings)) {
+        if (in_array($name, $crucialSettings)) {
             $this->{$name} = $value;
         }
 
@@ -255,14 +318,12 @@ class FieldGroup
     public function register()
     {
 
-        // Cal teh build function
+        // Cal the build function
         $this->build();
 
-        // Add the crucial settings to the field group
-        $this->settings['key']   = $this->key;
-        $this->settings['title'] = $this->title;
+        $acfSettingsArray = $this->getAcfSettingsArray();
 
-        acf_add_local_field_group($this->getAcfSettingsArray());
+        acf_add_local_field_group($acfSettingsArray);
 
         // No use in having a potentially large collection of objects anymore
         unset($this->fieldObjects);
