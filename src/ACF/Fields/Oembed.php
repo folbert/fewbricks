@@ -38,4 +38,19 @@ class Oembed extends Field
 
     }
 
+    /**
+     * ACF setting.
+     *
+     * @param int $width  Width in px (without "px")
+     * @param int $height Hieght in px (without "px")
+     *
+     * @return $this
+     */
+    public function setEmbedSize($width, $height)
+    {
+
+        return $this->setSettings(['width' => $width, 'height' => $height]);
+
+    }
+
 }

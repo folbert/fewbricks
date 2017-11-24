@@ -70,7 +70,7 @@ class Item
         // ensuring that until the key has been prepended with keys of
         // field groups, bricks etc.
 
-        $this->settings = $settings;
+        $this->setSettings($settings);
 
         $this->originalKey = $key;
 
@@ -118,11 +118,31 @@ class Item
         $crucialSettings = ['key', 'label', 'name', 'type'];
 
         // Make sure to keep any crucial setting class vars up to date
-        if(in_array($name, $crucialSettings)) {
+        if (in_array($name, $crucialSettings)) {
             $this->{$name} = $value;
         }
 
         $this->settings[$name] = $value;
+
+        return $this;
+
+    }
+
+    /**
+     * Allows you to set multiple settings at once.
+     *
+     * @param $settings
+     *
+     * @return $this
+     */
+    public function setSettings($settings)
+    {
+
+        foreach ($settings AS $name => $value) {
+
+            $this->setSetting($name, $value);
+
+        }
 
         return $this;
 
@@ -139,8 +159,7 @@ class Item
     public function addSettings($settings)
     {
 
-        foreach($settings as $name => $value)
-        {
+        foreach ($settings as $name => $value) {
 
             $this->setSetting($name, $value);
 
