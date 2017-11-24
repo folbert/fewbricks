@@ -20,9 +20,7 @@ class FieldWithChoices extends Field
     public function setAllowNull($allowNull)
     {
 
-        $this->setSetting('allow_null', $allowNull);
-
-        return $this;
+        return $this->setSetting('allow_null', $allowNull);
 
 
     }
@@ -37,9 +35,7 @@ class FieldWithChoices extends Field
     public function setChoices($choices)
     {
 
-        $this->setSetting('choices', $choices);
-
-        return $this;
+        return $this->setSetting('choices', $choices);
 
     }
 
@@ -53,9 +49,7 @@ class FieldWithChoices extends Field
     public function setReturnValue($returnValue)
     {
 
-        $this->setSetting('return_value', $returnValue);
-
-        return $this;
+        return $this->setSetting('return_value', $returnValue);
 
     }
 

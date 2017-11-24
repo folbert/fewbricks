@@ -21,9 +21,7 @@ class DateField extends Field
     public function setDisplayFormat($displayFormat)
     {
 
-        $this->setSetting('display_format', $displayFormat);
-
-        return $this;
+        return $this->setSetting('display_format', $displayFormat);
 
     }
 
@@ -38,9 +36,7 @@ class DateField extends Field
     public function setReturnFormat($returnFormat)
     {
 
-        $this->setSetting('return_format', $returnFormat);
-
-        return $this;
+        return $this->setSetting('return_format', $returnFormat);
 
     }
 
@@ -54,9 +50,7 @@ class DateField extends Field
     public function setWeekStartsOn($weekStartsOn)
     {
 
-        $this->setSetting('week_starts_on', $weekStartsOn);
-
-        return $this;
+        return $this->setSetting('week_starts_on', $weekStartsOn);
 
     }
 

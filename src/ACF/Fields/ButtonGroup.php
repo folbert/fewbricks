@@ -43,14 +43,12 @@ class ButtonGroup extends FieldWithChoices
      *
      * @param string $layout horizontal or vertical
      *
-     * @return ButtonGroup $this
+     * @return $this
      */
     public function setLayout($layout)
     {
 
-        $this->setSetting('layout', $layout);
-
-        return $this;
+        return $this->setSetting('layout', $layout);
 
     }
 

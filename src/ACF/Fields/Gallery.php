@@ -43,14 +43,12 @@ class Gallery extends FieldWithImages
      *
      * @param $insert append or prepend
      *
-     * @return Gallery $this
+     * @return $this
      */
     public function setInsert($insert)
     {
 
-        $this->setSetting('insert', $insert);
-
-        return $this;
+        return $this->setSetting('insert', $insert);
 
     }
 
@@ -59,14 +57,12 @@ class Gallery extends FieldWithImages
      *
      * @param int $maximumSelection
      *
-     * @return Gallery $this
+     * @return $this
      */
     public function setMaximumSelection($maximumSelection)
     {
 
-        $this->setSetting('max', $maximumSelection);
-
-        return $this;
+        return $this->setSetting('max', $maximumSelection);
 
     }
 
@@ -75,14 +71,12 @@ class Gallery extends FieldWithImages
      *
      * @param int $minimumSelection
      *
-     * @return Gallery $this
+     * @return $this
      */
     public function setMinimumSelection($minimumSelection)
     {
 
-        $this->setSetting('min', $minimumSelection);
-
-        return $this;
+        return $this->setSetting('min', $minimumSelection);
 
     }
 

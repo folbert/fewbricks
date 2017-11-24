@@ -43,14 +43,12 @@ class Checkbox extends FieldWithChoices
      *
      * @param boolean $allowCustom
      *
-     * @return Checkbox $this
+     * @return $this
      */
     public function setAllowCustom($allowCustom)
     {
 
-        $this->setSetting('allow_custom', $allowCustom);
-
-        return $this;
+        return $this->setSetting('allow_custom', $allowCustom);
 
     }
 
@@ -59,14 +57,12 @@ class Checkbox extends FieldWithChoices
      *
      * @param string $layout vertical or horizontal
      *
-     * @return Checkbox $this
+     * @return $this
      */
     public function setLayout($layout)
     {
 
-        $this->setSetting('layout', $layout);
-
-        return $this;
+        return $this->setSetting('layout', $layout);
 
     }
 
@@ -80,9 +76,7 @@ class Checkbox extends FieldWithChoices
     public function setSaveCustom($saveCustom)
     {
 
-        $this->setSetting('allow_custom', $saveCustom);
-
-        return $this;
+        return $this->setSetting('allow_custom', $saveCustom);
 
     }
 
@@ -96,9 +90,7 @@ class Checkbox extends FieldWithChoices
     public function setToggle($toggle)
     {
 
-        $this->setSetting('toggle', $toggle);
-
-        return $this;
+        return $this->setSetting('toggle', $toggle);
 
     }
 

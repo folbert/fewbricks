@@ -40,14 +40,12 @@ class FlexibleContent extends FieldWithLayouts
      * @param int|string $max An empty string to disable this setting which is only needed if you have previously set it
      *                        to an int and wants to unset it.
      *
-     * @return FlexibleContent $this
+     * @return $this
      */
     public function setMax($max)
     {
 
-        $this->setSetting('max', $max);
-
-        return $this;
+        return $this->setSetting('max', $max);
 
     }
 
@@ -57,14 +55,12 @@ class FlexibleContent extends FieldWithLayouts
      * @param int|string $min An empty string to disable this setting which is only needed if you have previously set it
      *                        to an int and wants to unset it.
      *
-     * @return FlexibleContent $this
+     * @return $this
      */
     public function setMin($min)
     {
 
-        $this->setSetting('min', $min);
-
-        return $this;
+        return $this->setSetting('min', $min);
 
     }
 

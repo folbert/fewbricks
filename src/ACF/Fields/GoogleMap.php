@@ -66,9 +66,7 @@ class GoogleMap extends Field
     public function setHeight($height)
     {
 
-        $this->setSetting('height', $height);
-
-        return $this;
+        return $this->setSetting('height', $height);
 
     }
 
@@ -82,9 +80,7 @@ class GoogleMap extends Field
     public function setZoom($zoom)
     {
 
-        $this->setSetting('zoom', $zoom);
-
-        return $this;
+        return $this->setSetting('zoom', $zoom);
 
     }
 

@@ -50,9 +50,7 @@ class Field extends Item
     public function setConditionalLogic($conditionalLogic)
     {
 
-        $this->setSetting('conditional_logic', $conditionalLogic);
-
-        return $this;
+        return $this->setSetting('conditional_logic', $conditionalLogic);
 
     }
 
@@ -65,9 +63,7 @@ class Field extends Item
     public function setDefaultValue($defaultValue)
     {
 
-        $this->setSetting('default_value', $defaultValue);
-
-        return $this;
+        return $this->setSetting('default_value', $defaultValue);
 
     }
 
@@ -80,9 +76,7 @@ class Field extends Item
     public function setInstructions($instructions)
     {
 
-        $this->setSetting('instructions', $instructions);
-
-        return $this;
+        return $this->setSetting('instructions', $instructions);
 
     }
 
@@ -95,9 +89,7 @@ class Field extends Item
     public function setRequired($required)
     {
 
-        $this->setSetting('required', $required);
-
-        return $this;
+        return $this->setSetting('required', $required);
 
     }
 
@@ -117,9 +109,7 @@ class Field extends Item
             'id'    => '',
         ], $wrapper);
 
-        $this->setSetting('wrapper', $wrapper);
-
-        return $this;
+        return $this->setSetting('wrapper', $wrapper);
 
     }
 
