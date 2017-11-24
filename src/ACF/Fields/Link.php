@@ -38,4 +38,18 @@ class Link extends Field
 
     }
 
+    /**
+     * ACF setting.
+     *
+     * @param string $returnValue "array" or "url"
+     *
+     * @return $this
+     */
+    public function setReturnValue($returnValue)
+    {
+
+        return $this->setSetting('return_value', $returnValue);
+
+    }
+
 }

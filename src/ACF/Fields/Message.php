@@ -38,4 +38,33 @@ class Message extends Field
 
     }
 
+    /**
+     * ACF setting. Allow HTML markup to display as visible text instead of rendering.
+     *
+     * @param boolean $escapeHtml
+     *
+     * @return $this
+     */
+    public function setEscapeHtml($escapeHtml)
+    {
+
+        return $this->setSetting('esc_html', $escapeHtml);
+
+    }
+
+    /**
+     * ACF setting. Controls how new lines are rendered.
+     *
+     * @param string $newLines "wpautop" (automaticaly add paragraphs), "br" (automatically add <br>) or "" (no
+     *                         formatting)
+     *
+     * @return $this
+     */
+    public function setNewLines($newLines)
+    {
+
+        return $this->setSetting('new_lined', $newLines);
+
+    }
+
 }
