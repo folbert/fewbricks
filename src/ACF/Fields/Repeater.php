@@ -3,6 +3,7 @@
 namespace Fewbricks\ACF\Fields;
 
 use Fewbricks\ACF\FieldCollection;
+use Fewbricks\ACF\FieldWithSubFields;
 
 /**
  * Class Repeater

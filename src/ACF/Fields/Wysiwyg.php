@@ -2,6 +2,8 @@
 
 namespace Fewbricks\ACF\Fields;
 
+use Fewbricks\ACF\Field;
+
 /**
  * Class Wysiwyg
  * Corresponds to the WYSIWYG field type in ACF.

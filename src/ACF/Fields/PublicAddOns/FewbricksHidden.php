@@ -2,7 +2,7 @@
 
 namespace Fewbricks\ACF\Fields\PublicAddOns;
 
-use Fewbricks\ACF\Fields\Field;
+use Fewbricks\ACF\Field;
 
 /**
  * Class FewbricksHidden

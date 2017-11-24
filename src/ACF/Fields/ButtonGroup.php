@@ -2,6 +2,8 @@
 
 namespace Fewbricks\ACF\Fields;
 
+use Fewbricks\ACF\FieldWithChoices;
+
 /**
  * Class ButtonGroup
  * Corresponds to the button group field type in ACF.

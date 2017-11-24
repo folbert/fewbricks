@@ -82,7 +82,7 @@ class Demo_FieldsKitchenSink extends FieldGroup
         $l->addSubField(new FAFields\Text('Text', 'text', '1711231901b'));
         $l->addSubField(
             (new FAFields\Image('Image', 'image', '1711231901c'))
-            ->setPreviewSize('large')
+                ->setPreviewSize('large')
         );
         $fc->addLayout($l);
 
@@ -116,11 +116,11 @@ class Demo_FieldsKitchenSink extends FieldGroup
         $group->addSubField(new FAFields\Text('Text', 'text', '1711232310b'));
         $group->addSubField(
             (new FAFields\Select('Select', 'select', '1711232310c'))
-            ->setChoices([
-                'one' => 'One',
-                'two' => 'Two',
-                'three' => 'Three',
-            ])
+                ->setChoices([
+                    'one'   => 'One',
+                    'two'   => 'Two',
+                    'three' => 'Three',
+                ])
         );
 
         $this->addField($group);
@@ -168,6 +168,10 @@ class Demo_FieldsKitchenSink extends FieldGroup
         $this->addField($repeater);
         // E.o. repeater
         // -------------
+
+        $this->addField((new FAFields\Relationship('Relationship', 'relationship', '1711242111a'))
+            ->setPostTypes('fewbricks_demo_post')
+        );
 
         $this->addField(new FAFields\Select('Select', 'select', '1711210919a', [
             'choices'       => [

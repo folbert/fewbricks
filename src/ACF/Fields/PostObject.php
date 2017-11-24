@@ -2,6 +2,8 @@
 
 namespace Fewbricks\ACF\Fields;
 
+use Fewbricks\ACF\Field;
+
 /**
  * Class PostObject
  * Corresponds to the post object field type in ACF.
@@ -35,6 +37,77 @@ class PostObject extends Field
     ) {
 
         parent::__construct('post_object', $label, $name, $key, $settings);
+
+    }
+
+    /**
+     * ACF setting.
+     *
+     * @param boolean $allowNull
+     *
+     * @return $this
+     */
+    public function setAllowNull($allowNull)
+    {
+
+        return $this->setSetting('null', $allowNull);
+
+    }
+
+    /**
+     * ACF setting.
+     *
+     * @param boolean $allowMultipleValues
+     *
+     * @return $this
+     */
+    public function setAllowMultipleValues($allowMultipleValues)
+    {
+
+        return $this->setSetting('multiple', $allowMultipleValues);
+
+    }
+
+    /**
+     * ACF setting. Set which post types to display in drop down.
+     *
+     * @param array $postType Array with post type names.
+     *
+     * @return $this
+     */
+    public function setPostTypes($postType)
+    {
+
+        return $this->setSetting('post_type', $postType);
+
+    }
+
+    /**
+     * ACF setting.
+     *
+     * @param $returnFormat "object" for post object or "id" for post id.
+     *
+     * @return $this
+     */
+    public function setReturnFormat($returnFormat)
+    {
+
+        return $this->setSetting('return_format', $returnFormat);
+
+    }
+
+    /**
+     * ACF setting. Set which terms post objects available in teh drop down must belong to.
+     *
+     * @param array $taxonomyFilter An array where each item is made up of "taxonomy:term". For example
+     *                               ["category:uncategorized"]
+     *
+     * @return $this
+     */
+    public function setTaxonomyFilter($taxonomyFilter)
+    {
+
+        return $this->setSetting('taxonomy', $taxonomyFilter);
 
     }
 

@@ -2,6 +2,8 @@
 
 namespace Fewbricks\ACF\Fields;
 
+use Fewbricks\ACF\Field;
+
 /**
  * Class GoogleMap
  * Corresponds to the Google Map field type in ACF.

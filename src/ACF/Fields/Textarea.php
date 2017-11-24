@@ -2,6 +2,8 @@
 
 namespace Fewbricks\ACF\Fields;
 
+use Fewbricks\ACF\Field;
+
 /**
  * Class Textarea
  * Corresponds to the textarea field type in ACF.
@@ -35,6 +37,62 @@ class Textarea extends Field
     ) {
 
         parent::__construct('textarea', $label, $name, $key, $settings);
+
+    }
+
+    /**
+     * ACF setting.
+     *
+     * @param int $characterLimit
+     *
+     * @return $this
+     */
+    public function setCharacterLimit($characterLimit)
+    {
+
+        return $this->setSetting('maxlength', $characterLimit);
+
+    }
+
+    /**
+     * ACF setting. Controls how new lines are rendered.
+     *
+     * @param string $newLines "wpautop", "br" or ""
+     *
+     * @return $this
+     */
+    public function setNewLines($newLines)
+    {
+
+        return $this->setSetting('new_lines', $newLines);
+
+    }
+
+    /**
+     * ACF setting.
+     *
+     * @param string $placeholder
+     *
+     * @return $this
+     */
+    public function setPlaceholder($placeholder)
+    {
+
+        return $this->setSetting('placeholder', $placeholder);
+
+    }
+
+    /**
+     * ACF settin.
+     *
+     * @param int $rows
+     *
+     * @return $this
+     */
+    public function setRows($rows)
+    {
+
+        return $this->setSetting('rows', $rows);
 
     }
 

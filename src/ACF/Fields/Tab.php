@@ -2,6 +2,8 @@
 
 namespace Fewbricks\ACF\Fields;
 
+use Fewbricks\ACF\Field;
+
 /**
  * Class Tab
  * Corresponds to the button group field type in ACF.
@@ -35,6 +37,34 @@ class Tab extends Field
     ) {
 
         parent::__construct('tab', $label, $name, $key, $settings);
+
+    }
+
+    /**
+     * ACF setting. Set if this field should be used as an end-point and start a new group of tabs
+     *
+     * @param boolean $endPoint
+     *
+     * @return $this
+     */
+    public function setEndPoint($endPoint)
+    {
+
+        return $this->setSetting('endpoint', $endPoint);
+
+    }
+
+    /**
+     * ACF setting.
+     *
+     * @param string $placement "top" or "left"
+     *
+     * @return $this
+     */
+    public function setPlacement($placement)
+    {
+
+        return $this->setSetting('placement', $placement);
 
     }
 

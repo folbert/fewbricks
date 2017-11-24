@@ -2,6 +2,8 @@
 
 namespace Fewbricks\ACF\Fields;
 
+use Fewbricks\ACF\FieldWithLayouts;
+
 /**
  * Class FlexibleContent
  * Corresponds to the flexible content field type in ACF.

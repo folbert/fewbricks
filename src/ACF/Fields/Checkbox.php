@@ -2,6 +2,8 @@
 
 namespace Fewbricks\ACF\Fields;
 
+use Fewbricks\ACF\FieldWithChoices;
+
 /**
  * Class Checkbox
  * Corresponds to the checkbox group field type in ACF.

@@ -2,6 +2,8 @@
 
 namespace Fewbricks\ACF\Fields;
 
+use Fewbricks\ACF\FieldWithChoices;
+
 /**
  * Class Select
  * Corresponds to the select field type in ACF.
@@ -35,6 +37,34 @@ class Select extends FieldWithChoices
     ) {
 
         parent::__construct('select', $label, $name, $key, $settings);
+
+    }
+
+    /**
+     * ACF setting. If AJAX should be used to lazy load the choices.
+     *
+     * @param boolean $lazyLoad
+     *
+     * @return $this
+     */
+    public function setLazyLoad($lazyLoad)
+    {
+
+        return $this->setSetting('ajax', $lazyLoad);
+
+    }
+
+    /**
+     * ACF settings. Whether or not to use the stylised UI:
+     *
+     * @param boolean $stylisedUi
+     *
+     * @return $this
+     */
+    public function setStylisedUi($stylisedUi)
+    {
+
+        return $this->setSetting('ui', $stylisedUi);
 
     }
 

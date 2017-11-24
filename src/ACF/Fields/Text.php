@@ -2,6 +2,8 @@
 
 namespace Fewbricks\ACF\Fields;
 
+use Fewbricks\ACF\Field;
+
 /**
  * Class Text
  * Corresponds to the text field type in ACF.
@@ -35,6 +37,62 @@ class Text extends Field
     ) {
 
         parent::__construct('text', $label, $name, $key, $settings);
+
+    }
+
+    /**
+     * ACF setting. Set text to appear after the input.
+     *
+     * @param string $append Text to appear after the input.
+     *
+     * @return $this
+     */
+    public function setAppend($append)
+    {
+
+        return $this->setSetting('append', $append);
+
+    }
+
+    /**
+     * ACF setting.
+     *
+     * @param int $characterLimit
+     *
+     * @return $this
+     */
+    public function setCharacterLimit($characterLimit)
+    {
+
+        return $this->setSetting('maxlength', $characterLimit);
+
+    }
+
+    /**
+     * ACF setting.
+     *
+     * @param string $placeholder
+     *
+     * @return $this
+     */
+    public function setPlaceholder($placeholder)
+    {
+
+        return $this->setSetting('placeholder', $placeholder);
+
+    }
+
+    /**
+     * ACF setting. Set text to appear before the input.
+     *
+     * @param string $prepend Text to appear before the input.
+     *
+     * @return $this
+     */
+    public function setPrepend($prepend)
+    {
+
+        return $this->setSetting('prepend', $prepend);
 
     }
 

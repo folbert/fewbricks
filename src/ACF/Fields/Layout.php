@@ -2,6 +2,8 @@
 
 namespace Fewbricks\ACF\Fields;
 
+use Fewbricks\ACF\FieldWithSubFields;
+
 /**
  * Class Layout
  * It extends FieldWithSubFields even though a layout technically speaking is not a field.

@@ -1,13 +1,13 @@
 <?php
 
-namespace Fewbricks\ACF\Fields;
+namespace Fewbricks\ACF;
 
 /**
  * Class DateField
  *
  * @package Fewbricks\ACF
  */
-class DateField extends Field
+class DateTimeField extends Field
 {
 
     /**

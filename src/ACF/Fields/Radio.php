@@ -2,6 +2,8 @@
 
 namespace Fewbricks\ACF\Fields;
 
+use Fewbricks\ACF\FieldWithChoices;
+
 /**
  * Class Radio
  * Corresponds to the radio field type in ACF.
@@ -12,7 +14,7 @@ namespace Fewbricks\ACF\Fields;
  *
  * @package Fewbricks\ACF\Fields
  */
-class Radio extends Field
+class Radio extends FieldWithChoices
 {
 
     /**
@@ -35,6 +37,20 @@ class Radio extends Field
     ) {
 
         parent::__construct('radio', $label, $name, $key, $settings);
+
+    }
+
+    /**
+     * ACF setting.
+     *
+     * @param string $layout "vertical" or "horizontal".
+     *
+     * @return $this
+     */
+    public function setLayout($layout)
+    {
+
+        return $this->setSetting('layout', $layout);
 
     }
 

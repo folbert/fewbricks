@@ -1,6 +1,6 @@
 <?php
 
-namespace Fewbricks\ACF\Fields;
+namespace Fewbricks\ACF;
 
 use Fewbricks\ACF\LayoutCollection;
 

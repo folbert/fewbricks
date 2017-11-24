@@ -2,6 +2,8 @@
 
 namespace Fewbricks\ACF\Fields;
 
+use Fewbricks\ACF\FieldWithImages;
+
 /**
  * Class Gallery
  * Corresponds to the gallery field type in ACF.

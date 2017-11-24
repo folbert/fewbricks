@@ -1,6 +1,6 @@
 <?php
 
-namespace Fewbricks\ACF\Fields;
+namespace Fewbricks\ACF;
 
 /**
  * Class FieldWithChoices
@@ -28,7 +28,7 @@ class FieldWithChoices extends Field
     /**
      * ACF setting.
      *
-     * @param array $choices
+     * @param array $choices Associative array with options. Key will be name and value will be value.
      *
      * @return $this
      */
@@ -42,7 +42,7 @@ class FieldWithChoices extends Field
     /**
      * ACF setting. Specify the returned value on front end.
      *
-     * @param $returnValue value, label or array
+     * @param $returnValue "value", "label" or "array"
      *
      * @return $this
      */

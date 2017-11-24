@@ -63,6 +63,9 @@ if (!function_exists('register_fewbricks_custom_post_type')) {
             'publicly_queryable'  => true,
             'capability_type'     => 'page',
             'show_in_rest'        => false,
+            'rewrite'   => [
+                'slug' => __('fewbricks-demo-post', 'fewbricks'),
+            ]
         ];
         register_post_type('fewbricks_demo_post', $args);
 

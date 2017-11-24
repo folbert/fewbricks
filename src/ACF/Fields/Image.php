@@ -2,6 +2,8 @@
 
 namespace Fewbricks\ACF\Fields;
 
+use Fewbricks\ACF\FieldWithImages;
+
 /**
  * Class ButtonGroup
  * Corresponds to the image field type in ACF.

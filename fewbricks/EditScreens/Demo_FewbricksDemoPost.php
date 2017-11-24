@@ -59,8 +59,9 @@ class Demo_FewbricksDemoPost extends EditScreen
         $contentFg->setSetting('menu_order', 110);
         //$contentFg->setHideOnScreen(['permalink']);
 
-        // Create a field directly
-        $contentFg->addField(new \Fewbricks\ACF\Fields\Field('text', 'Text', 'sometext',
+        // Create a field directly. This can come in handy if ACF releases new field types and you are running a
+        // version of Fewbricks where the new field types has not ye been implemented.
+        $contentFg->addField(new \Fewbricks\ACF\Field('text', 'Text', 'sometext',
             '1711162243a'));
         $contentFg->addField(new Textarea('Text2', 'someothertext',
             '1711162243b'));
