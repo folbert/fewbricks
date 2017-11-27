@@ -43,16 +43,14 @@ class User extends Field
     /**
      * ACF setting.
      *
-     * @param array $userRoles Array with names of the user roles that the editor should be able to choose from.
-     *                         For example: ['editor', 'author']. Send an empty array (or don't call the function at
-     *                         all) to be able to choose from al roles.
+     * @param boolean $allowMutipleValues
      *
      * @return $this
      */
-    public function setUserRoles($userRoles)
+    public function setAllowMultipleValues($allowMutipleValues)
     {
 
-        return $this->setSetting('role', $userRoles);
+        return $this->setSetting('multiple', $allowMutipleValues);
 
     }
 
@@ -73,14 +71,16 @@ class User extends Field
     /**
      * ACF setting.
      *
-     * @param boolean $allowMutipleValues
+     * @param array $userRoles Array with names of the user roles that the editor should be able to choose from.
+     *                         For example: ['editor', 'author']. Send an empty array (or don't call the function at
+     *                         all) to be able to choose from al roles.
      *
      * @return $this
      */
-    public function setAllowMultipleValues($allowMutipleValues)
+    public function setUserRoles($userRoles)
     {
 
-        return $this->setSetting('multiple', $allowMutipleValues);
+        return $this->setSetting('role', $userRoles);
 
     }
 
