@@ -40,4 +40,48 @@ class User extends Field
 
     }
 
+    /**
+     * ACF setting.
+     *
+     * @param array $userRoles Array with names of the user roles that the editor should be able to choose from.
+     *                         For example: ['editor', 'author']. Send an empty array (or don't call the function at
+     *                         all) to be able to choose from al roles.
+     *
+     * @return $this
+     */
+    public function setUserRoles($userRoles)
+    {
+
+        return $this->setSetting('role', $userRoles);
+
+    }
+
+    /**
+     * ACF setting.
+     *
+     * @param boolean $allowNull
+     *
+     * @return $this
+     */
+    public function setAllowNull($allowNull)
+    {
+
+        return $this->setSetting('allow_null', $allowNull);
+
+    }
+
+    /**
+     * ACF setting.
+     *
+     * @param boolean $allowMutipleValues
+     *
+     * @return $this
+     */
+    public function setAllowMultipleValues($allowMutipleValues)
+    {
+
+        return $this->setSetting('multiple', $allowMutipleValues);
+
+    }
+
 }

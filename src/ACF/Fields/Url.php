@@ -40,4 +40,18 @@ class Url extends Field
 
     }
 
+    /**
+     * ACF setting. Text that appears within the input.
+     *
+     * @param string $placeholder
+     *
+     * @return $this
+     */
+    public function setPlaceholder($placeholder)
+    {
+
+        return $this->setSetting('placeholder', $placeholder);
+
+    }
+
 }

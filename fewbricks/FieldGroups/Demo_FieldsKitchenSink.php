@@ -229,7 +229,8 @@ class Demo_FieldsKitchenSink extends FieldGroup
 
         $this->addField(new FAFields\Url('URL', 'url', '1711192031i'));
 
-        $this->addField(new FAFields\User('User', 'user', '1711192032u'));
+        $this->addField((new FAFields\User('User', 'user', '1711192032u'))
+        ->setUserRoles(['administrator', 'contributor']));
 
         $this->addField(new FAFields\Wysiwyg('Wysiwyg', 'wysiwyg',
             '1711172249i', ['media_upload' => false, 'delay' => true]));
