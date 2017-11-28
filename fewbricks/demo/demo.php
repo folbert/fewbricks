@@ -3,6 +3,7 @@
 namespace Fewbricks\Demo;
 
 /**
+ * Register a custom post type for Fewbricks demo purposes.
  * Created using https://generatewp.com/post-type/
  */
 if (!function_exists('register_fewbricks_custom_post_type')) {
@@ -12,12 +13,12 @@ if (!function_exists('register_fewbricks_custom_post_type')) {
     {
 
         $labels = [
-            'name'                  => _x('Fewbricks Demo Post',
+            'name'                  => _x('Fewbricks Demo Page',
                 'Post Type General Name', 'fewbricks'),
-            'singular_name'         => _x('Fewbricks Demo Posts',
+            'singular_name'         => _x('Fewbricks Demo Pages',
                 'Post Type Singular Name', 'fewbricks'),
-            'menu_name'             => __('Fewbricks Demo Posts', 'fewbricks'),
-            'name_admin_bar'        => __('Fewbricks Demo Post', 'fewbricks'),
+            'menu_name'             => __('Fewbricks Demo Pages', 'fewbricks'),
+            'name_admin_bar'        => __('Fewbricks Demo Page', 'fewbricks'),
             'archives'              => __('Item Archives', 'fewbricks'),
             'attributes'            => __('Item Attributes', 'fewbricks'),
             'parent_item_colon'     => __('Parent Item:', 'fewbricks'),
@@ -63,11 +64,11 @@ if (!function_exists('register_fewbricks_custom_post_type')) {
             'publicly_queryable'  => true,
             'capability_type'     => 'page',
             'show_in_rest'        => false,
-            'rewrite'   => [
-                'slug' => __('fewbricks-demo-post', 'fewbricks'),
-            ]
+            'rewrite'             => [
+                'slug' => __('fewbricks-demo-page', 'fewbricks'),
+            ],
         ];
-        register_post_type('fewbricks_demo_post', $args);
+        register_post_type('fewbricks_demo_page', $args);
 
     }
 
@@ -75,3 +76,23 @@ if (!function_exists('register_fewbricks_custom_post_type')) {
         0);
 
 }
+
+// Force demo pages to use our demo template
+function templateInclude($template)
+{
+
+    if (get_post_type() === 'fewbricks_demo_page') {
+
+        dump(__DIR__);
+
+        return __DIR__ . '/demo-page-template.php';
+
+        /*$new_template = ;//locate_template(['portfolio-page-template.php']);
+        if ('' != $new_template) {
+            return $new_template;
+        }*/
+    }
+
+    //return $template;
+}
+add_filter('template_include', __NAMESPACE__ . '\\templateInclude', 99);

@@ -13,7 +13,7 @@ use Fewbricks\EditScreen;
  *
  * @package App\Fewbricks\EditScreens
  */
-class Demo_FewbricksDemoPost extends EditScreen
+class Demo_FewbricksDemoPage extends EditScreen
 {
 
     protected $location
@@ -22,7 +22,7 @@ class Demo_FewbricksDemoPost extends EditScreen
                 [
                     'param' => 'post_type',
                     'operator' => '==',
-                    'value' => 'fewbricks_demo_post',
+                    'value' => 'fewbricks_demo_page',
                 ],
             ],
         ];

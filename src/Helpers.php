@@ -13,10 +13,12 @@ class Helpers
     public static function getProjectFilesBasePath()
     {
 
-        return apply_filters(
+        $basePath = apply_filters(
             'fewbricks/project_files_base_path',
-            get_stylesheet_directory() . '/fewbricks'
+            self::getDefaultProjectFilesBasePath()
         );
+
+        return $basePath;
 
     }
 
@@ -106,6 +108,26 @@ class Helpers
         include_once(ABSPATH . 'wp-admin/includes/plugin.php');
 
         return is_plugin_active('acf-fewbricks-hidden/acf-fewbricks-hidden.php');
+
+    }
+
+    /**
+     * @return string
+     */
+    public static function getDefaultProjectFilesBasePath()
+    {
+
+        return __DIR__ . '/../fewbricks/';
+
+    }
+
+    /**
+     * @return bool
+     */
+    public static function projectBasePathIsDefault()
+    {
+
+        return self::getProjectFilesBasePath() === self::getDefaultProjectFilesBasePath();
 
     }
 

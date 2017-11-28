@@ -56,6 +56,6 @@ add_filter('fewbricks/activate_field_snitch', '__return_true');
 // Remove this to remove all demo related stuff
 require_once __DIR__ . '/demo/demo.php';
 
-new App\Fewbricks\EditScreens\Demo_FewbricksDemoPost();
+new App\Fewbricks\EditScreens\Demo_FewbricksDemoPage();
 //new (App\Fewbricks\EditScreens\OptionsCookieAlert())->build();
 
