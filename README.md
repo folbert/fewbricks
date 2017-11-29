@@ -72,8 +72,8 @@ function fewbricks_project_files_base_path() {
 }
 ```
 
-### `fewbricks/project_init_file_path`
-Allows you to change the location of the file that intializes your custom implementation of Fewbricks. Defaults to init.php in the directory that the filter `fewbricks/project_files_base_path` returns.
+### `fewbricks/project_init_file_name`
+Allows you to change the name of the file that intializes your custom implementation of Fewbricks. Defaults to fewbricks-init.php. Should always be located in the directory that the filter `fewbricks/project_files_base_path` returns.
 
 ### `fewbricks/brick/brick_template_file_extension`
 Allows you to change the file extension of template files used in [brick.php -> get_brick_template_html()](lib/brick.php). Your filter should return for example ".view.php" or ".php". Note the dot at the beginning. 
@@ -279,7 +279,7 @@ Each brick has its own class placed in the folder named "bricks". Each class hav
  
 1. In the folder "[theme]/fewbricks/bricks", create a file named headline-and-content.php.
  
-2. Copy the code from the file [_brick-boilerplate.php](fewbricks/bricks/_brick-boilerplate.php) and paste it into your newly created file.
+2. Copy the code from the file [_brick-boilerplate.php](fewbricks-demo/bricks/_brick-boilerplate.php) and paste it into your newly created file.
  
 3. Now, lets add the fields to the brick. In the set_fields-function, add this code:
 
@@ -395,7 +395,7 @@ If a string or array is passed, the file(s) with the name(s) is then included af
 * `$html` - the html of the brick
 * `$this` - an instance of the current brick class. This can be used to find out for example what background color should be set on the wrapping row using something like `$this->get_data_value('bg')`.
 
-If you want to create data on the fly in a brick that can be used in a layout, use `set_data_item()` / `get_data_item()` in [the master brick class](lib/brick.php). These functions even allows you to group data for keeping a better structure. See [demo_buttons_list](fewbricks/bricks/demo-button-list.php) and [demo-layout-1.php](fewbricks/brick-layouts/demo-layout-1.php) for example on how to utilize this.
+If you want to create data on the fly in a brick that can be used in a layout, use `set_data_item()` / `get_data_item()` in [the master brick class](lib/brick.php). These functions even allows you to group data for keeping a better structure. See [demo_buttons_list](fewbricks-demo/bricks/demo-button-list.php) and [demo-layout-1.php](fewbricks-demo/brick-layouts/demo-layout-1.php) for example on how to utilize this.
 
 ### Fewbricks specific settings for fields and bricks
 There are some settings that we have added to make using Fewbricks easier.
@@ -407,7 +407,7 @@ There are some settings that we have added to make using Fewbricks easier.
 ### CSS
 There are no restrictions on how you organize your CSS related to fewbricks. One idea is that you create a css/less/sass/what-have-you file for each module and place it alongside the PHP-file in the bricks-fodler and giving it the same name as the PHP-file. So for example the brick "image-and-text.php" would have a style file names "image-and-text.[css|scss|less]". But you caould just as well place the CSS in regular CSS files in your assets directory or any other way you want to.
 
-The brick-class also have a function called `set_inline_css` that you can use to set inline css attributes on the fly in a brick. That CSS can then be used for example in a layout. See [demo_buttons_list](fewbricks/bricks/demo-button-list.php) and [demo-layout-1.php](fewbricks/brick-layouts/demo-layout-1.php) for example on how to utilize this. Don't miss the fact that you can store inline css in groups which can come in handy if youwant to create inline CSS for multiple elements.
+The brick-class also have a function called `set_inline_css` that you can use to set inline css attributes on the fly in a brick. That CSS can then be used for example in a layout. See [demo_buttons_list](fewbricks-demo/bricks/demo-button-list.php) and [demo-layout-1.php](fewbricks-demo/brick-layouts/demo-layout-1.php) for example on how to utilize this. Don't miss the fact that you can store inline css in groups which can come in handy if youwant to create inline CSS for multiple elements.
 
 ### Developer mode
 By setting Fewbricks in developer mode, some extra debugging related to Fewbricks and ACF will become available. Also, every time a field group is registered, a check for duplicate keys will be executed. You enable developer mode by setting a constant, preferrably in wp-config.php, named FEWBRICKS_DEV_MODE to true:
@@ -438,7 +438,7 @@ If you still want to use Local JSON, follow these steps to activate it:
 Every time you edit any fields in a field group or brick, you will need to rebuild the local JSON by taking the action outlined in step 2 above. One suggested workflow is that you always have Local JSON activated in all environments including development. Then when you edit a modules' fields and don't see the changes in the editing area of a page/post/options etc., you will be reminded of that you need to rebuild the JSON. When you are ready to push to production, the JSON will be up to date.
 
 # Available fields
-These are the fields that are available in Fewbricks out of the box. If you add an ACF plugin that att it's own field, you need to create a new class in fewbricks/acf/fields based on [fewbricks/acf/fields/fewbricks-example-field.php](fewbricks/acf/fields/fewbricks-example-field.php). Make sure to read the comments in that file.
+These are the fields that are available in Fewbricks out of the box. If you add an ACF plugin that att it's own field, you need to create a new class in fewbricks/acf/fields based on [fewbricks/acf/fields/fewbricks-example-field.php](fewbricks-demo/acf/fields/fewbricks-example-field.php). Make sure to read the comments in that file.
 
 ## Standard ACF fields
 The goal is to have all the fields available in ACF also available in Fewbricks. Documentation on these standars ACF fields are available in the [ACF Documentation](https://www.advancedcustomfields.com/resources/).

@@ -25,13 +25,23 @@ class Helpers
     /**
      * @return mixed|void
      */
-    public static function getProjectInitFilePath()
+    public static function getProjectInitFileName()
     {
 
         return apply_filters(
-            'fewbricks/project_init_file_path',
-            self::getProjectFilesBasePath() . '/init.php'
+            'fewbricks/project_init_file_name',
+            'fewbricks-init.php'
         );
+
+    }
+
+    /**
+     * @return string
+     */
+    public static function getProjectInitFilePath()
+    {
+
+        return self::getProjectFilesBasePath() . '/' . self::getProjectInitFileName();
 
     }
 
@@ -94,7 +104,7 @@ class Helpers
     public static function projectInitFileExists()
     {
 
-        return file_exists(self::getProjectInitFilePath());
+        return file_exists(self::getProjectFilesBasePath() . '/' . self::getProjectInitFileName());
 
     }
 
@@ -117,7 +127,7 @@ class Helpers
     public static function getDefaultProjectFilesBasePath()
     {
 
-        return __DIR__ . '/../fewbricks/';
+        return __DIR__ . '/../fewbricks-demo';
 
     }
 

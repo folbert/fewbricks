@@ -83,16 +83,9 @@ function templateInclude($template)
 
     if (get_post_type() === 'fewbricks_demo_page') {
 
-        dump(__DIR__);
-
-        return __DIR__ . '/demo-page-template.php';
-
-        /*$new_template = ;//locate_template(['portfolio-page-template.php']);
-        if ('' != $new_template) {
-            return $new_template;
-        }*/
+        $template = __DIR__ . '/demo-page-template.php';
     }
 
-    //return $template;
+    return $template;
 }
 add_filter('template_include', __NAMESPACE__ . '\\templateInclude', 99);

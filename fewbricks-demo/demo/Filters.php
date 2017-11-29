@@ -3,6 +3,11 @@
 //namespace App\Fewbricks;
 namespace Fewbricks\Demo;
 
+/**
+ * Class Filters
+ *
+ * @package Fewbricks\Demo
+ */
 class Filters
 {
 
@@ -34,7 +39,7 @@ class Filters
     /**
      * @return string
      */
-    public static function getBrickTemplateBasePath()
+    public static function getBrickTemplatesBasePath()
     {
 
         return get_stylesheet_directory() . '/fewbricks/bricks/';
