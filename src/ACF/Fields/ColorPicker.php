@@ -3,6 +3,7 @@
 namespace Fewbricks\ACF\Fields;
 
 use Fewbricks\ACF\Field;
+use Fewbricks\ACF\FieldInterface;
 
 /**
  * Class ColorPicker
@@ -14,9 +15,17 @@ use Fewbricks\ACF\Field;
  *
  * @package Fewbricks\ACF\Fields
  */
-class ColorPicker extends Field
+class ColorPicker extends Field implements FieldInterface
 {
 
-    protected $type = 'color_picker';
+    /**
+     * @return string The ACF type
+     */
+    public function getType()
+    {
+
+        return 'color_picker';
+
+    }
 
 }

@@ -60,8 +60,14 @@ class DemoPage extends EditScreen
         //$contentFg->setHideOnScreen(['permalink']);
 
         // Create a field directly. This can come in handy if ACF releases new field types and you are running a
-        // version of Fewbricks where the new field types has not ye been implemented.
-        $contentFg->addField((new Field('Text', 'sometext', '1711162243a'))->setType('text'));
+        // version of Fewbricks where the new field types has not yet been implemented.
+        // Also showing that settings can be dynamically set
+        $contentFg->addField(
+            (new Field('Text', 'sometext', '1711162243a'))
+                ->setType('text')
+                ->setSetting('append', 'Appendix')
+        );
+
         $contentFg->addField(new Textarea('Text2', 'someothertext',
             '1711162243b'));
 

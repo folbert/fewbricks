@@ -3,6 +3,7 @@
 namespace Fewbricks\ACF\Fields;
 
 use Fewbricks\ACF\Field;
+use Fewbricks\ACF\FieldInterface;
 
 /**
  * Class PageLink
@@ -14,12 +15,17 @@ use Fewbricks\ACF\Field;
  *
  * @package Fewbricks\ACF\Fields
  */
-class PageLink extends Field
+class PageLink extends Field implements FieldInterface
 {
 
     /**
-     * @var string The ACF field type
+     * @return string The ACF type
      */
-    protected $type = 'page_link';
+    public function getType()
+    {
+
+        return 'page_link';
+
+    }
 
 }

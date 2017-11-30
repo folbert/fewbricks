@@ -3,6 +3,7 @@
 namespace Fewbricks\ACF\Fields;
 
 use Fewbricks\ACF\Field;
+use Fewbricks\ACF\FieldInterface;
 
 /**
  * Class PostObject
@@ -14,13 +15,8 @@ use Fewbricks\ACF\Field;
  *
  * @package Fewbricks\ACF\Fields
  */
-class PostObject extends Field
+class PostObject extends Field implements FieldInterface
 {
-
-    /**
-     * @var string The ACF field type
-     */
-    protected $type = 'post_object';
 
     /**
      * ACF setting.
@@ -90,6 +86,16 @@ class PostObject extends Field
     {
 
         return $this->setSetting('taxonomy', $taxonomyFilter);
+
+    }
+
+    /**
+     * @return string The ACF type
+     */
+    public function getType()
+    {
+
+        return 'post_object';
 
     }
 

@@ -3,6 +3,7 @@
 namespace Fewbricks\ACF\Fields;
 
 use Fewbricks\ACF\Field;
+use Fewbricks\ACF\FieldInterface;
 
 /**
  * Class Relationship
@@ -14,13 +15,8 @@ use Fewbricks\ACF\Field;
  *
  * @package Fewbricks\ACF\Fields
  */
-class Relationship extends Field
+class Relationship extends Field implements FieldInterface
 {
-
-    /**
-     * @var string The ACF field type
-     */
-    protected $type = 'relationship';
 
     /**
      * ACF setting.
@@ -119,6 +115,16 @@ class Relationship extends Field
     {
 
         return $this->setSetting('taxonomy', $taxonomyFilter);
+
+    }
+
+    /**
+     * @return string The ACF type
+     */
+    public function getType()
+    {
+
+        return 'relationship';
 
     }
 

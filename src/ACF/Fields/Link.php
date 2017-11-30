@@ -3,6 +3,7 @@
 namespace Fewbricks\ACF\Fields;
 
 use Fewbricks\ACF\Field;
+use Fewbricks\ACF\FieldInterface;
 
 /**
  * Class Link
@@ -14,13 +15,8 @@ use Fewbricks\ACF\Field;
  *
  * @package Fewbricks\ACF\Fields
  */
-class Link extends Field
+class Link extends Field implements FieldInterface
 {
-
-    /**
-     * @var string The ACF field type
-     */
-    protected $type = 'link';
 
     /**
      * ACF setting.
@@ -33,6 +29,16 @@ class Link extends Field
     {
 
         return $this->setSetting('return_value', $returnValue);
+
+    }
+
+    /**
+     * @return string The ACF type
+     */
+    public function getType()
+    {
+
+        return 'link';
 
     }
 

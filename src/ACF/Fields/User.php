@@ -3,6 +3,7 @@
 namespace Fewbricks\ACF\Fields;
 
 use Fewbricks\ACF\Field;
+use Fewbricks\ACF\FieldInterface;
 
 /**
  * Class User
@@ -14,13 +15,8 @@ use Fewbricks\ACF\Field;
  *
  * @package Fewbricks\ACF\Fields
  */
-class User extends Field
+class User extends Field implements FieldInterface
 {
-
-    /**
-     * @var string The ACF field type
-     */
-    protected $type = 'user';
 
     /**
      * ACF setting.
@@ -63,6 +59,16 @@ class User extends Field
     {
 
         return $this->setSetting('role', $userRoles);
+
+    }
+
+    /**
+     * @return string The ACF type
+     */
+    public function getType()
+    {
+
+        return 'user';
 
     }
 

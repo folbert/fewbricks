@@ -2,6 +2,7 @@
 
 namespace Fewbricks\ACF\Fields;
 
+use Fewbricks\ACF\FieldInterface;
 use Fewbricks\ACF\FieldWithChoices;
 
 /**
@@ -14,13 +15,8 @@ use Fewbricks\ACF\FieldWithChoices;
  *
  * @package Fewbricks\ACF\Fields
  */
-class Select extends FieldWithChoices
+class Select extends FieldWithChoices implements FieldInterface
 {
-
-    /**
-     * @var string The ACF field type
-     */
-    protected $type = 'select';
 
     /**
      * ACF setting. If AJAX should be used to lazy load the choices.
@@ -47,6 +43,16 @@ class Select extends FieldWithChoices
     {
 
         return $this->setSetting('ui', $stylisedUi);
+
+    }
+
+    /**
+     * @return string The ACF type
+     */
+    public function getType()
+    {
+
+        return 'select';
 
     }
 

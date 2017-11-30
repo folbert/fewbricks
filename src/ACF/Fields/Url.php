@@ -3,6 +3,7 @@
 namespace Fewbricks\ACF\Fields;
 
 use Fewbricks\ACF\Field;
+use Fewbricks\ACF\FieldInterface;
 
 /**
  * Class Url
@@ -14,13 +15,8 @@ use Fewbricks\ACF\Field;
  *
  * @package Fewbricks\ACF\Fields
  */
-class Url extends Field
+class Url extends Field implements FieldInterface
 {
-
-    /**
-     * @var string The ACF field type
-     */
-    protected $type = 'url';
 
     /**
      * ACF setting. Text that appears within the input.
@@ -35,5 +31,16 @@ class Url extends Field
         return $this->setSetting('placeholder', $placeholder);
 
     }
+
+    /**
+     * @return string The ACF type
+     */
+    public function getType()
+    {
+
+        return 'url';
+
+    }
+
 
 }

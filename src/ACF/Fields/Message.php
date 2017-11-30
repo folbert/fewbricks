@@ -3,6 +3,7 @@
 namespace Fewbricks\ACF\Fields;
 
 use Fewbricks\ACF\Field;
+use Fewbricks\ACF\FieldInterface;
 
 /**
  * Class Message
@@ -14,13 +15,8 @@ use Fewbricks\ACF\Field;
  *
  * @package Fewbricks\ACF\Fields
  */
-class Message extends Field
+class Message extends Field implements FieldInterface
 {
-
-    /**
-     * @var string The ACF field type
-     */
-    protected $type = 'message';
 
     /**
      * ACF setting. Allow HTML markup to display as visible text instead of rendering.
@@ -48,6 +44,16 @@ class Message extends Field
     {
 
         return $this->setSetting('new_lined', $newLines);
+
+    }
+
+    /**
+     * @return string The ACF type
+     */
+    public function getType()
+    {
+
+        return 'message';
 
     }
 

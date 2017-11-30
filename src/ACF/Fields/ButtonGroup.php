@@ -2,6 +2,7 @@
 
 namespace Fewbricks\ACF\Fields;
 
+use Fewbricks\ACF\FieldInterface;
 use Fewbricks\ACF\FieldWithChoices;
 
 /**
@@ -14,10 +15,8 @@ use Fewbricks\ACF\FieldWithChoices;
  *
  * @package Fewbricks\ACF\Fields
  */
-class ButtonGroup extends FieldWithChoices
+class ButtonGroup extends FieldWithChoices implements FieldInterface
 {
-
-    protected $type = 'button_group';
 
     /**
      * ACF setting.
@@ -30,6 +29,16 @@ class ButtonGroup extends FieldWithChoices
     {
 
         return $this->setSetting('layout', $layout);
+
+    }
+
+    /**
+     * @return string
+     */
+    public function getType()
+    {
+
+        return 'button_group';
 
     }
 

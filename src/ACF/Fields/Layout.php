@@ -2,6 +2,7 @@
 
 namespace Fewbricks\ACF\Fields;
 
+use Fewbricks\ACF\FieldInterface;
 use Fewbricks\ACF\FieldWithSubFields;
 
 /**
@@ -11,12 +12,8 @@ use Fewbricks\ACF\FieldWithSubFields;
  *
  * @package Fewbricks\ACF
  */
-class Layout extends FieldWithSubFields
+class Layout extends FieldWithSubFields implements FieldInterface
 {
-    /**
-     * @var string The ACF field type
-     */
-    protected $type = 'layout';
 
     /**
      * ACF setting. Sets the value which is set using the select box labelled "Layput" in the GUI
@@ -65,6 +62,16 @@ class Layout extends FieldWithSubFields
         $this->setSetting('min', $min);
 
         return $this;
+
+    }
+
+    /**
+     * @return string The ACF type
+     */
+    public function getType()
+    {
+
+        return 'layout';
 
     }
 

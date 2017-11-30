@@ -3,6 +3,7 @@
 namespace Fewbricks\ACF\Fields;
 
 use Fewbricks\ACF\Field;
+use Fewbricks\ACF\FieldInterface;
 
 /**
  * Class Email
@@ -14,9 +15,17 @@ use Fewbricks\ACF\Field;
  *
  * @package Fewbricks\ACF\Fields
  */
-class Email extends Field
+class Email extends Field implements FieldInterface
 {
 
-    protected $type = 'email';
+    /**
+     * @return string The ACF type
+     */
+    public function getType()
+    {
+
+        return 'email';
+
+    }
 
 }

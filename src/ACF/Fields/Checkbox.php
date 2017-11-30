@@ -2,6 +2,7 @@
 
 namespace Fewbricks\ACF\Fields;
 
+use Fewbricks\ACF\FieldInterface;
 use Fewbricks\ACF\FieldWithChoices;
 
 /**
@@ -14,10 +15,8 @@ use Fewbricks\ACF\FieldWithChoices;
  *
  * @package Fewbricks\ACF\Fields
  */
-class Checkbox extends FieldWithChoices
+class Checkbox extends FieldWithChoices implements FieldInterface
 {
-
-    protected $type = 'checkbox';
 
     /**
      * ACF setting.
@@ -72,6 +71,16 @@ class Checkbox extends FieldWithChoices
     {
 
         return $this->setSetting('toggle', $toggle);
+
+    }
+
+    /**
+     * @return string
+     */
+    public function getType()
+    {
+
+        return 'checkbox';
 
     }
 

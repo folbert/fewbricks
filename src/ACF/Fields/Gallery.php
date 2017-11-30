@@ -2,6 +2,7 @@
 
 namespace Fewbricks\ACF\Fields;
 
+use Fewbricks\ACF\FieldInterface;
 use Fewbricks\ACF\FieldWithImages;
 
 /**
@@ -14,13 +15,8 @@ use Fewbricks\ACF\FieldWithImages;
  *
  * @package Fewbricks\ACF\Fields
  */
-class Gallery extends FieldWithImages
+class Gallery extends FieldWithImages implements FieldInterface
 {
-
-    /**
-     * @var string The ACF field type
-     */
-    protected $type = 'gallery';
 
     /**
      * ACF setting. Specify where new attachments are added
@@ -61,6 +57,16 @@ class Gallery extends FieldWithImages
     {
 
         return $this->setSetting('min', $minimumSelection);
+
+    }
+
+    /**
+     * @return string The ACF type
+     */
+    public function getType()
+    {
+
+        return 'gallery';
 
     }
 

@@ -3,6 +3,7 @@
 namespace Fewbricks\ACF\Fields;
 
 use Fewbricks\ACF\Field;
+use Fewbricks\ACF\FieldInterface;
 
 /**
  * Class Range
@@ -14,13 +15,8 @@ use Fewbricks\ACF\Field;
  *
  * @package Fewbricks\ACF\Fields
  */
-class Range extends Field
+class Range extends Field implements FieldInterface
 {
-
-    /**
-     * @var string The ACF field type
-     */
-    protected $type = 'range';
 
     /**
      * ACF setting.
@@ -91,5 +87,16 @@ class Range extends Field
         return $this->setSetting('step', $stepSize);
 
     }
+
+    /**
+     * @return string The ACF type
+     */
+    public function getType()
+    {
+
+        return 'range';
+
+    }
+
 
 }

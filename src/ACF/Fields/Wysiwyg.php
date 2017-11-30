@@ -3,6 +3,7 @@
 namespace Fewbricks\ACF\Fields;
 
 use Fewbricks\ACF\Field;
+use Fewbricks\ACF\FieldInterface;
 
 /**
  * Class Wysiwyg
@@ -14,13 +15,8 @@ use Fewbricks\ACF\Field;
  *
  * @package Fewbricks\ACF\Fields
  */
-class Wysiwyg extends Field
+class Wysiwyg extends Field implements FieldInterface
 {
-
-    /**
-     * @var string The ACF field type
-     */
-    protected $type = 'wysiwyg';
 
     /**
      * ACF setting. Set whether TinyMCE should be initialized until field is clicked
@@ -77,6 +73,16 @@ class Wysiwyg extends Field
     {
 
         return $this->setSetting('media_upload', $showMediaUploadButtons);
+
+    }
+
+    /**
+     * @return string The ACF type
+     */
+    public function getType()
+    {
+
+        return 'wysiwyg';
 
     }
 

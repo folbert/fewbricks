@@ -3,6 +3,7 @@
 namespace Fewbricks\ACF\Fields;
 
 use Fewbricks\ACF\DateTimeField;
+use Fewbricks\ACF\FieldInterface;
 
 /**
  * Class DateTimePicker
@@ -14,9 +15,17 @@ use Fewbricks\ACF\DateTimeField;
  *
  * @package Fewbricks\ACF\Fields
  */
-class DateTimePicker extends DateTimeField
+class DateTimePicker extends DateTimeField implements FieldInterface
 {
 
-    protected $type = 'date_time_picker';
+    /**
+     * @return string The ACF type
+     */
+    public function getType()
+    {
+
+        return 'date_time_picker';
+
+    }
 
 }

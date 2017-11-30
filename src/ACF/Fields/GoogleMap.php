@@ -3,6 +3,7 @@
 namespace Fewbricks\ACF\Fields;
 
 use Fewbricks\ACF\Field;
+use Fewbricks\ACF\FieldInterface;
 
 /**
  * Class GoogleMap
@@ -14,13 +15,8 @@ use Fewbricks\ACF\Field;
  *
  * @package Fewbricks\ACF\Fields
  */
-class GoogleMap extends Field
+class GoogleMap extends Field implements FieldInterface
 {
-
-    /**
-     * @var string The ACF field type
-     */
-    protected $type = 'google_map';
 
     /**
      * ACF setting. Where to center the initial map.
@@ -65,6 +61,16 @@ class GoogleMap extends Field
     {
 
         return $this->setSetting('zoom', $zoom);
+
+    }
+
+    /**
+     * @return string The ACF type
+     */
+    public function getType()
+    {
+
+        return 'google_map';
 
     }
 

@@ -2,6 +2,7 @@
 
 namespace Fewbricks\ACF\Fields;
 
+use Fewbricks\ACF\FieldInterface;
 use Fewbricks\ACF\FieldWithSubFields;
 
 /**
@@ -10,12 +11,17 @@ use Fewbricks\ACF\FieldWithSubFields;
  *
  * @package Fewbricks\ACF\Fields
  */
-class Group extends FieldWithSubFields
+class Group extends FieldWithSubFields implements FieldInterface
 {
 
     /**
-     * @var string The ACF field type
+     * @return string The ACF type
      */
-    protected $type = 'group';
+    public function getType()
+    {
+
+        return 'group';
+
+    }
 
 }

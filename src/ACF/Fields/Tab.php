@@ -3,6 +3,7 @@
 namespace Fewbricks\ACF\Fields;
 
 use Fewbricks\ACF\Field;
+use Fewbricks\ACF\FieldInterface;
 
 /**
  * Class Tab
@@ -14,13 +15,8 @@ use Fewbricks\ACF\Field;
  *
  * @package Fewbricks\ACF\Fields
  */
-class Tab extends Field
+class Tab extends Field implements FieldInterface
 {
-
-    /**
-     * @var string The ACF field type
-     */
-    protected $type = 'tab';
 
     /**
      * ACF setting. Set if this field should be used as an end-point and start a new group of tabs
@@ -47,6 +43,16 @@ class Tab extends Field
     {
 
         return $this->setSetting('placement', $placement);
+
+    }
+
+    /**
+     * @return string The ACF type
+     */
+    public function getType()
+    {
+
+        return 'tab';
 
     }
 

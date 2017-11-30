@@ -3,6 +3,7 @@
 namespace Fewbricks\ACF\Fields;
 
 use Fewbricks\ACF\Field;
+use Fewbricks\ACF\FieldInterface;
 
 /**
  * Class File
@@ -14,9 +15,17 @@ use Fewbricks\ACF\Field;
  *
  * @package Fewbricks\ACF\Fields
  */
-class File extends Field
+class File extends Field implements FieldInterface
 {
 
-    protected $type = 'file';
+    /**
+     * @return string The ACF type
+     */
+    public function getType()
+    {
+
+        return 'file';
+
+    }
 
 }

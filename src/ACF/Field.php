@@ -13,6 +13,11 @@ class Field extends Item
 {
 
     /**
+     * @var
+     */
+    protected $type;
+
+    /**
      * Field constructor.
      *
      * @param string $label    The label of the field
@@ -192,7 +197,7 @@ class Field extends Item
     {
 
         $settings         = parent::getSettings();
-        $settings['type'] = $this->type;
+        $settings['type'] = $this->getType();
 
         return $settings;
 

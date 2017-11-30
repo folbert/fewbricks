@@ -3,6 +3,7 @@
 namespace Fewbricks\ACF\Fields;
 
 use Fewbricks\ACF\FieldCollection;
+use Fewbricks\ACF\FieldInterface;
 use Fewbricks\ACF\FieldWithSubFields;
 
 /**
@@ -11,13 +12,8 @@ use Fewbricks\ACF\FieldWithSubFields;
  *
  * @package Fewbricks\ACF\Fields
  */
-class Repeater extends FieldWithSubFields
+class Repeater extends FieldWithSubFields implements FieldInterface
 {
-
-    /**
-     * @var string The ACF field type
-     */
-    protected $type = 'repeater';
 
     /**
      * @param string $label    The label of the field
@@ -117,6 +113,16 @@ class Repeater extends FieldWithSubFields
         $this->setSetting('min', $min);
 
         return $this;
+
+    }
+
+    /**
+     * @return string The ACF type
+     */
+    public function getType()
+    {
+
+        return 'repeater';
 
     }
 

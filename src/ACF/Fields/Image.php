@@ -2,6 +2,7 @@
 
 namespace Fewbricks\ACF\Fields;
 
+use Fewbricks\ACF\FieldInterface;
 use Fewbricks\ACF\FieldWithImages;
 
 /**
@@ -14,13 +15,8 @@ use Fewbricks\ACF\FieldWithImages;
  *
  * @package Fewbricks\ACF\Fields
  */
-class Image extends FieldWithImages
+class Image extends FieldWithImages implements FieldInterface
 {
-
-    /**
-     * @var string The ACF field type
-     */
-    protected $type = 'image';
 
     /**
      * ACF setting. Limit the media library choice.
@@ -62,6 +58,16 @@ class Image extends FieldWithImages
     {
 
         return $this->setSetting('preview_size', $previewSize);
+
+    }
+
+    /**
+     * @return string The ACF type
+     */
+    public function getType()
+    {
+
+        return 'image';
 
     }
 

@@ -2,6 +2,7 @@
 
 namespace Fewbricks\ACF\Fields;
 
+use Fewbricks\ACF\FieldInterface;
 use Fewbricks\ACF\FieldWithChoices;
 
 /**
@@ -14,13 +15,8 @@ use Fewbricks\ACF\FieldWithChoices;
  *
  * @package Fewbricks\ACF\Fields
  */
-class Radio extends FieldWithChoices
+class Radio extends FieldWithChoices implements FieldInterface
 {
-
-    /**
-     * @var string The ACF field type
-     */
-    protected $type = 'radio';
 
     /**
      * ACF setting.
@@ -33,6 +29,16 @@ class Radio extends FieldWithChoices
     {
 
         return $this->setSetting('layout', $layout);
+
+    }
+
+    /**
+     * @return string The ACF type
+     */
+    public function getType()
+    {
+
+        return 'radio';
 
     }
 

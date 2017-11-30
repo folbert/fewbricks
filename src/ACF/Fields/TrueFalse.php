@@ -3,6 +3,7 @@
 namespace Fewbricks\ACF\Fields;
 
 use Fewbricks\ACF\Field;
+use Fewbricks\ACF\FieldInterface;
 
 /**
  * Class TrueFalse
@@ -14,12 +15,17 @@ use Fewbricks\ACF\Field;
  *
  * @package Fewbricks\ACF\Fields
  */
-class TrueFalse extends Field
+class TrueFalse extends Field implements FieldInterface
 {
 
     /**
-     * @var string The ACF field type
+     * @return string The ACF type
      */
-    protected $type = 'true_false';
+    public function getType()
+    {
+
+        return 'true_false';
+
+    }
 
 }

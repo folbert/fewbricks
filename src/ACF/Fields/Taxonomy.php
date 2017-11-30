@@ -3,6 +3,7 @@
 namespace Fewbricks\ACF\Fields;
 
 use Fewbricks\ACF\Field;
+use Fewbricks\ACF\FieldInterface;
 
 /**
  * Class Taxonomy
@@ -14,13 +15,8 @@ use Fewbricks\ACF\Field;
  *
  * @package Fewbricks\ACF\Fields
  */
-class Taxonomy extends Field
+class Taxonomy extends Field implements FieldInterface
 {
-
-    /**
-     * @var string The ACF field type
-     */
-    protected $type = 'taxonomy';
 
     /**
      * ACF settings.
@@ -118,6 +114,16 @@ class Taxonomy extends Field
     {
 
         return $this->setSetting('taxonomy', $taxonomy);
+
+    }
+
+    /**
+     * @return string The ACF type
+     */
+    public function getType()
+    {
+
+        return 'taxonomy';
 
     }
 

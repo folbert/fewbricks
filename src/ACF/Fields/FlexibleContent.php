@@ -2,6 +2,7 @@
 
 namespace Fewbricks\ACF\Fields;
 
+use Fewbricks\ACF\FieldInterface;
 use Fewbricks\ACF\FieldWithLayouts;
 
 /**
@@ -10,10 +11,8 @@ use Fewbricks\ACF\FieldWithLayouts;
  *
  * @package Fewbricks\ACF\Fields
  */
-class FlexibleContent extends FieldWithLayouts
+class FlexibleContent extends FieldWithLayouts implements FieldInterface
 {
-
-    protected $type = 'flexible_content';
 
     /**
      * ACF setting. The max nr of layouts the user should be able to ise in this flexible content.
@@ -42,6 +41,16 @@ class FlexibleContent extends FieldWithLayouts
     {
 
         return $this->setSetting('min', $min);
+
+    }
+
+    /**
+     * @return string The ACF type
+     */
+    public function getType()
+    {
+
+        return 'flexible_content';
 
     }
 

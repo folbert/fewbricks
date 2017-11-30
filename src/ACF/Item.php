@@ -115,10 +115,10 @@ class Item
     public function setSetting($name, $value)
     {
 
-        $crucialSettings = ['key', 'label', 'name', 'type'];
+        $classVars = ['key', 'label', 'name', 'type'];
 
         // Make sure to keep any crucial setting class vars up to date
-        if (in_array($name, $crucialSettings)) {
+        if (in_array($name, $classVars)) {
             $this->{$name} = $value;
         }
 
