@@ -63,6 +63,9 @@ class DemoPage extends EditScreen
         $kitchenSinkFg->setHideOnScreen(false, ['permalink']);
         $kitchenSinkFg->setMenuOrder(100);
 
+        $kitchenSinkFg->showOnScreen('the_content');
+        $kitchenSinkFg->hideOnScreen('the_content');
+
         $this->addFieldGroup($kitchenSinkFg);
 
     }

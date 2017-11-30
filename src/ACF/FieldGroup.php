@@ -66,8 +66,8 @@ class FieldGroup
 
         // Let's keep these crucial settings as class vars to enable nicer
         // and more OOP-oriented access
-        $this->title    = $title;
-        $this->key      = $key;
+        $this->title = $title;
+        $this->key   = $key;
 
         $this->settings = $settings;
 
@@ -92,7 +92,7 @@ class FieldGroup
     public function addLocationRuleGroups($ruleGroups)
     {
 
-        foreach($ruleGroups AS $ruleGroup) {
+        foreach ($ruleGroups AS $ruleGroup) {
 
             $this->addLocationRuleGroup($ruleGroup);
 
@@ -133,6 +133,32 @@ class FieldGroup
     }
 
     /**
+     * Enables you to add values to the settings directly. So if ACF adds new
+     * settings, you don't have to wait for Fewbricks to add functions for you
+     * to be able to set them.
+     *
+     * @param $name
+     * @param $value
+     *
+     * @return $this
+     */
+    public function setSetting($name, $value)
+    {
+
+        $crucialSettings = ['key', 'title'];
+
+        // Make sure to keep any crucial setting class vars up to date
+        if (in_array($name, $crucialSettings)) {
+            $this->{$name} = $value;
+        }
+
+        $this->settings[$name] = $value;
+
+        return $this;
+
+    }
+
+    /**
      * ACF setting. Shown in field group list. Since this is a setting
      * that only affects the ACF GUI, it will probably never be used by Fewbricks
      * users. But lets add this function anyways just to be nice :)
@@ -145,60 +171,6 @@ class FieldGroup
     {
 
         $this->setSetting('description', $description);
-
-        return $this;
-
-    }
-
-    /**
-     * ACF setting. An array of elements to hide on the screen.
-     * Important: If multiple field groups appear on an edit screen, the first
-     * field group's options will be used (the one with the lowest
-     * order number).
-     *
-     * Possible values in the array: 'permalink', 'the_content', 'excerpt',
-     * 'custom_fields', 'discussion', 'comments', 'revisions', 'slug',
-     * 'author', 'format', 'page_attributes', 'featured_image', 'categories',
-     * 'tags', 'send-trackbacks'
-     *
-     * @param array $hideOnScreen Array with items to hide on the screen.
-     * @param array $showOnScreen Fewbricks addition. Enables you to define
-     *                            which fields should be visible on screen. This
-     *                            will create an array with all the items that
-     *                            ACF supports hiding of and then remove the
-     *                            items in $showOnScreen. Passing a non-empty
-     *                            value here will make the function ignore the
-     *                            $hideOnScreen variable completely
-     *
-     * @return $this
-     */
-    public function setHideOnScreen($hideOnScreen, $showOnScreen = [])
-    {
-
-        if (!empty($showOnScreen)) {
-
-            // These are the items that ACF supports hiding as of v5.6.5
-            $hideOnScreen = array_diff([
-                'permalink',
-                'the_content',
-                'excerpt',
-                'custom_fields',
-                'discussion',
-                'comments',
-                'revisions',
-                'slug',
-                'author',
-                'format',
-                'page_attributes',
-                'featured_image',
-                'categories',
-                'tags',
-                'send-trackbacks',
-            ], $showOnScreen);
-
-        }
-
-        $this->setSetting('hide_on_screen', $hideOnScreen);
 
         return $this;
 
@@ -276,32 +248,6 @@ class FieldGroup
     }
 
     /**
-     * Enables you to add values to the settings directly. So if ACF adds new
-     * settings, you don't have to wait for Fewbricks to add functions for you
-     * to be able to set them.
-     *
-     * @param $name
-     * @param $value
-     *
-     * @return $this
-     */
-    public function setSetting($name, $value)
-    {
-
-        $crucialSettings = ['key', 'title'];
-
-        // Make sure to keep any crucial setting class vars up to date
-        if (in_array($name, $crucialSettings)) {
-            $this->{$name} = $value;
-        }
-
-        $this->settings[$name] = $value;
-
-        return $this;
-
-    }
-
-    /**
      * Determines the metabox style. Choices of 'default' or 'seamless'
      *
      * @param string $style 'default' or 'seamless'
@@ -338,6 +284,100 @@ class FieldGroup
     }
 
     /**
+     * Allow you to set single elements that should be hidden on screen.
+     *
+     * @see FieldGroup::setHideOnScreen()
+     *
+     * @param $elementName
+     *
+     * @return $this
+     */
+    public function hideOnScreen($elementName)
+    {
+
+        $this->setHideOnScreen([$elementName]);
+
+        return $this;
+
+    }
+
+    /**
+     * ACF setting. An array of elements to hide on the screen.
+     * Important: If multiple field groups appear on an edit screen, the first
+     * field group's options will be used (the one with the lowest
+     * order number).
+     *
+     * Possible values in the array: 'permalink', 'the_content', 'excerpt',
+     * 'custom_fields', 'discussion', 'comments', 'revisions', 'slug',
+     * 'author', 'format', 'page_attributes', 'featured_image', 'categories',
+     * 'tags', 'send-trackbacks'
+     *
+     * @param array $hideOnScreen Array with items to hide on the screen.
+     * @param array $showOnScreen Fewbricks addition. Enables you to define
+     *                            which fields should be visible on screen. This
+     *                            will create an array with all the items that
+     *                            ACF supports hiding of and then remove the
+     *                            items in $showOnScreen. Passing a non-empty
+     *                            value here will make the function ignore the
+     *                            $hideOnScreen variable completely
+     *
+     * @return $this
+     */
+    public function setHideOnScreen($hideOnScreen, $showOnScreen = [])
+    {
+
+        if (is_array($this->getSetting('hide_on_screen'))) {
+
+            $currentValues = $this->getSetting('hide_on_screen');
+
+        } else {
+
+            // These are the items that ACF supports hiding as of v5.6.5
+            $currentValues = [
+                'permalink',
+                'the_content',
+                'excerpt',
+                'custom_fields',
+                'discussion',
+                'comments',
+                'revisions',
+                'slug',
+                'author',
+                'format',
+                'page_attributes',
+                'featured_image',
+                'categories',
+                'tags',
+                'send-trackbacks',
+            ];
+
+        }
+
+        if (!empty($showOnScreen)) {
+
+            if (!is_array($showOnScreen)) {
+                $showOnScreen = [$showOnScreen];
+            }
+
+            $hideOnScreen = array_diff($currentValues, $showOnScreen);
+
+        } else {
+
+            if (!is_array($hideOnScreen)) {
+                $hideOnScreen = [$hideOnScreen];
+            }
+
+            $hideOnScreen = array_merge($currentValues, $hideOnScreen);
+
+        }
+
+        $this->setSetting('hide_on_screen', $hideOnScreen);
+
+        return $this;
+
+    }
+
+    /**
      * Get the value of a specific setting.
      *
      * @param      $name         The name of the setting
@@ -370,6 +410,24 @@ class FieldGroup
     }
 
     /**
+     * Removes the element from the ones that should be hidden on screen.
+     *
+     * @see FieldGroup::setHideOnScreen()
+     *
+     * @param string $elementName
+     *
+     * @return $this
+     */
+    public function showOnScreen($elementName)
+    {
+
+        $this->setHideOnScreen([], $elementName);
+
+        return $this;
+
+    }
+
+    /**
      * Tell ACF that this field group exists
      */
     public function register()
@@ -388,12 +446,11 @@ class FieldGroup
     }
 
     /**
-     * @param Field $field
+     * Empty function to be called when field groups are created on the fly.
+     * Any class extending this class should always have a build function.
      */
-    public function addField($field)
+    public function build()
     {
-
-        $this->fieldObjects->addItem($field);
 
     }
 
@@ -413,11 +470,12 @@ class FieldGroup
     }
 
     /**
-     * Empty function to be called when field groups are created on the fly.
-     * Any class extending this class should always have a build function.
+     * @param Field $field
      */
-    public function build()
+    public function addField($field)
     {
+
+        $this->fieldObjects->addItem($field);
 
     }
 
