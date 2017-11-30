@@ -4,6 +4,11 @@ namespace Fewbricks\ACF;
 
 use Fewbricks\Collection;
 
+/**
+ * Class FieldCollection
+ *
+ * @package Fewbricks\ACF
+ */
 class FieldCollection extends Collection
 {
 
@@ -14,7 +19,7 @@ class FieldCollection extends Collection
      * "fields" in an array to be sent to ACFs functions for
      * registering fields using code.
      */
-    public function getFinalizedSettings($base_key = '')
+    public function toArray($base_key = '')
     {
 
         // Lets make sure that the key is ok for ACF

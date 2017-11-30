@@ -2,8 +2,6 @@
 
 namespace Fewbricks\ACF;
 
-use Fewbricks\ACF\FieldCollection;
-
 /**
  * Class ItemWithSubFields
  *
@@ -75,7 +73,7 @@ class FieldWithSubFields extends Field
 
         $settings = parent::getSettings();
 
-        $settings['sub_fields'] = $this->subFields->getFinalizedSettings($this->key);
+        $settings['sub_fields'] = $this->subFields->toArray($this->key);
 
         return $settings;
 

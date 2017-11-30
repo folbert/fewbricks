@@ -51,6 +51,34 @@ The system was created for the following reasons:
  *  [Fewbricks Hidden Field for Advanced Custom Fields](https://github.com/folbert/acf-fewbricks-hidden) This allows us to store settings in a brick. For example how many columns a multi column brick should have.
  
  *  Some experience with ACF and knowledge about what a field, field group etc. is is recommended. Please see [the documentation for ACF](http://www.advancedcustomfields.com/resources).
+ 
+
+## Field Groups
+
+### Location rules
+Just as the ACF GUI allows you to define the edit screens which post types, users, taxonomies etc. that a field group should show up, Fewbricks allows you to do the same. The code can look some thing like this:
+
+````php
+$fieldGroup = new FieldGroup();
+
+$fieldGroup->addLocationRuleGroup(
+    (new FieldGroupLocationRuleGroup())
+    ->addRule(new Rule('post_type', '==', 'fewbricks_demo_page'))
+);
+
+$fieldGroup->addLocationRuleGroup(
+    (new FieldGroupLocationRuleGroup())
+        ->addRule(new Rule('user_form', '==', 'edit'))
+        ->addRule(new Rule('user_role', '!=', 'subscriber'))
+);
+````
+
+The above code would generate a rule that would have the field group be displayed on edit screens for
+- all posts that is of the type "fewbricks_demo_page"
+- _or_
+- for all edit screens where you can edit a user
+    - _and_
+- the user to edit is not a subscriber 
 
 ## Filters
 

@@ -2,8 +2,6 @@
 
 namespace Fewbricks\ACF;
 
-use Fewbricks\ACF\LayoutCollection;
-
 /**
  * Class ItemWithLayouts
  *

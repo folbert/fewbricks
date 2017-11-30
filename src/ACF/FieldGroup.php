@@ -26,14 +26,9 @@ class FieldGroup
     private $key;
 
     /**
-     * @var array
-     */
-    private $location;
-
-    /**
      * @var RuleGroupCollection
      */
-    private $ruleGroups;
+    private $locationRuleGroups;
 
     /**
      * The array that actually makes up the field group since it holds all the
@@ -53,7 +48,6 @@ class FieldGroup
      *
      * @param string $title
      * @param string $key
-     * @param array  $location
      * @param array  $settings Any other settings that will affect ACF.
      *                         https://www.advancedcustomfields.com/resources/register-fields-via-php/#group-settings
      * @param array  $args     An array enabling you to pass any argument that
@@ -62,7 +56,6 @@ class FieldGroup
     public function __construct(
         $title,
         $key,
-        $location,
         $settings = [],
         $args = []
     ) {
@@ -75,7 +68,6 @@ class FieldGroup
         // and more OOP-oriented access
         $this->title    = $title;
         $this->key      = $key;
-        $this->location = $location;
 
         $this->settings = $settings;
 
@@ -87,17 +79,40 @@ class FieldGroup
         $this->args = $args;
 
         $this->fieldObjects = new FieldCollection();
-        $this->ruleGroups = new RuleGroupCollection();
+
+        $this->locationRuleGroups = new RuleGroupCollection();
 
     }
 
     /**
-     * @param $ruleGroup
+     * @param FieldGroupLocationRuleGroup[] $ruleGroups
+     *
+     * @return $this
      */
-    public function addRuleGroup($ruleGroup)
+    public function addLocationRuleGroups($ruleGroups)
     {
 
-        $this->ruleGroups->addItem($ruleGroup);
+        foreach($ruleGroups AS $ruleGroup) {
+
+            $this->addLocationRuleGroup($ruleGroup);
+
+        }
+
+        return $this;
+
+    }
+
+    /**
+     * @param FieldGroupLocationRuleGroup $ruleGroup
+     *
+     * @return $this
+     */
+    public function addLocationRuleGroup($ruleGroup)
+    {
+
+        $this->locationRuleGroups->addItem($ruleGroup);
+
+        return $this;
 
     }
 
@@ -129,7 +144,7 @@ class FieldGroup
     public function setDescription($description)
     {
 
-        $this->setSetting('decsription', $description);
+        $this->setSetting('description', $description);
 
         return $this;
 
@@ -228,20 +243,6 @@ class FieldGroup
     }
 
     /**
-     * @param $location
-     *
-     * @return $this
-     */
-    public function setLocation($location)
-    {
-
-        $this->setSetting('location', $location);
-
-        return $this;
-
-    }
-
-    /**
      * ACF setting. Field groups are shown in order from lowest to highest.
      *
      * @param int $menuOrder
@@ -287,7 +288,7 @@ class FieldGroup
     public function setSetting($name, $value)
     {
 
-        $crucialSettings = ['location', 'key', 'title'];
+        $crucialSettings = ['key', 'title'];
 
         // Make sure to keep any crucial setting class vars up to date
         if (in_array($name, $crucialSettings)) {
@@ -377,9 +378,7 @@ class FieldGroup
         // Cal the build function
         $this->build();
 
-        $acfSettingsArray = $this->getAcfSettingsArray();
-
-        //dump($acfSettingsArray);
+        $acfSettingsArray = $this->toAcfArray();
 
         acf_add_local_field_group($acfSettingsArray);
 
@@ -401,14 +400,14 @@ class FieldGroup
     /**
      * @return array
      */
-    public function getAcfSettingsArray()
+    public function toAcfArray()
     {
 
         return array_merge($this->settings, [
             'key'      => $this->key,
             'title'    => $this->title,
-            'fields'   => $this->fieldObjects->getFinalizedSettings($this->key),
-            'location' => $this->location,
+            'location' => $this->locationRuleGroups->toArray(),
+            'fields'   => $this->fieldObjects->toArray($this->key),
         ]);
 
     }

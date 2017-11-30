@@ -5,7 +5,9 @@ namespace App\Fewbricks\EditScreens;
 use \App\Fewbricks\FieldGroups as FewbricksFieldGroups;
 use Fewbricks\ACF\Field;
 use Fewbricks\ACF\FieldGroup;
+use Fewbricks\ACF\FieldGroupLocationRuleGroup;
 use Fewbricks\ACF\Fields\Textarea;
+use Fewbricks\ACF\Rule;
 use Fewbricks\EditScreen;
 
 /**
@@ -16,48 +18,67 @@ use Fewbricks\EditScreen;
 class DemoPage extends EditScreen
 {
 
-    protected $location
-        = [
-            [
-                [
-                    'param'    => 'post_type',
-                    'operator' => '==',
-                    'value'    => 'fewbricks_demo_page',
-                ],
-            ],
-        ];
-
     /**
      * This function is automatically called when the edit screen instance is created
      */
     public function build()
     {
 
+        $this->addKitchenSinkFieldGroup();
+        $this->createAndAddFieldGroupOnTheFly();
+
+    }
+
+    /**
+     * @return array
+     */
+    private function getFieldGroupLocationFieldGroups()
+    {
+
+        // The relation between each Rule within a RuleGroup is considered "and"
+        // The relation between each RuleGroup is considered "or"
+        return [
+            (new FieldGroupLocationRuleGroup())
+                ->addRule(new Rule('post_type', '==', 'fewbricks_demo_page')),
+            (new FieldGroupLocationRuleGroup())
+                ->addRule(new Rule('post_type', '==', 'fewbricks_demo_page2'))
+                ->addRule(new Rule('post_type', '!=', 'fewbricks_demo_page3'))
+        ];
+
+    }
+
+    /**
+     *
+     */
+    private function addKitchenSinkFieldGroup()
+    {
+
         // Adding a predefined field group
         $kitchenSinkFg
             = new FewbricksFieldGroups\Demo_FieldsKitchenSink('Fewbricks Demo - Kitchen Sink',
-            '1711172225a', $this->location);
+            '1711172225a');
+
+        $kitchenSinkFg->addLocationRuleGroups($this->getFieldGroupLocationFieldGroups());
 
         $kitchenSinkFg->setHideOnScreen(false, ['permalink']);
         $kitchenSinkFg->setMenuOrder(100);
 
         $this->addFieldGroup($kitchenSinkFg);
 
-        $this->create_field_group_on_the_fly();
-
     }
 
     /**
      * Showing how to create field groups on the fly
      */
-    private function create_field_group_on_the_fly()
+    private function createAndAddFieldGroupOnTheFly()
     {
 
         $contentFg = new FieldGroup('Fewbricks Demo - Main content',
-            '1711162216a', $this->location);
+            '1711162216a');
+
+        $contentFg->addLocationRuleGroups($this->getFieldGroupLocationFieldGroups());
 
         $contentFg->setSetting('menu_order', 110);
-        //$contentFg->setHideOnScreen(['permalink']);
 
         // Create a field directly. This can come in handy if ACF releases new field types and you are running a
         // version of Fewbricks where the new field types has not yet been implemented.
