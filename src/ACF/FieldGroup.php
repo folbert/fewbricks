@@ -31,6 +31,11 @@ class FieldGroup
     private $location;
 
     /**
+     * @var RuleGroupCollection
+     */
+    private $ruleGroups;
+
+    /**
      * The array that actually makes up the field group since it holds all the
      * settings for the group
      *
@@ -82,6 +87,17 @@ class FieldGroup
         $this->args = $args;
 
         $this->fieldObjects = new FieldCollection();
+        $this->ruleGroups = new RuleGroupCollection();
+
+    }
+
+    /**
+     * @param $ruleGroup
+     */
+    public function addRuleGroup($ruleGroup)
+    {
+
+        $this->ruleGroups->addItem($ruleGroup);
 
     }
 

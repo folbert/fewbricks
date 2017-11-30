@@ -13,16 +13,16 @@ use Fewbricks\EditScreen;
  *
  * @package App\Fewbricks\EditScreens
  */
-class Demo_FewbricksDemoPage extends EditScreen
+class DemoPage extends EditScreen
 {
 
     protected $location
         = [
             [
                 [
-                    'param' => 'post_type',
+                    'param'    => 'post_type',
                     'operator' => '==',
-                    'value' => 'fewbricks_demo_page',
+                    'value'    => 'fewbricks_demo_page',
                 ],
             ],
         ];
@@ -61,8 +61,7 @@ class Demo_FewbricksDemoPage extends EditScreen
 
         // Create a field directly. This can come in handy if ACF releases new field types and you are running a
         // version of Fewbricks where the new field types has not ye been implemented.
-        $contentFg->addField(new \Fewbricks\ACF\Field('text', 'Text', 'sometext',
-            '1711162243a'));
+        $contentFg->addField((new Field('Text', 'sometext', '1711162243a'))->setType('text'));
         $contentFg->addField(new Textarea('Text2', 'someothertext',
             '1711162243b'));
 

@@ -13,15 +13,8 @@ class Field extends Item
 {
 
     /**
-     * @var string
-     */
-    private $type;
-
-    /**
      * Field constructor.
      *
-     * @param string $type     A name corresponding to the name of an ACF field
-     *                         or a public add-on.
      * @param string $label    The label of the field
      * @param string $name     The name of the field
      * @param string $key      The key of the field. Must be unique across the
@@ -29,13 +22,18 @@ class Field extends Item
      * @param array  $settings Array where you can pass all the possible
      *                         settings for the field.
      *                         https://www.advancedcustomfields.com/resources/register-fields-via-php/#field-type%20settings
+     * @param string $type     Name of a valid ACF field type
      */
-    public function __construct($type, $label, $name, $key, $settings = [])
+    public function __construct($label, $name, $key, $settings = [], $type = '')
     {
 
         parent::__construct($label, $name, $key, $settings);
 
-        $this->type  = $type;
+        // @todo Make sure that $type is declared
+        if(!empty($type))
+        {
+            $this->setType($type);
+        }
 
     }
 
@@ -90,6 +88,20 @@ class Field extends Item
     {
 
         return $this->setSetting('required', $required);
+
+    }
+
+    /**
+     * @param $type
+     *
+     * @return Field
+     */
+    public function setType($type)
+    {
+
+        $this->type = $type;
+
+        return $this;
 
     }
 
@@ -154,6 +166,16 @@ class Field extends Item
     }
 
     /**
+     * @return mixed
+     */
+    public function getType()
+    {
+
+        return $this->type;
+
+    }
+
+    /**
      * @return array|boolean
      */
     public function getWrapper()
@@ -169,7 +191,7 @@ class Field extends Item
     public function getSettings()
     {
 
-        $settings = parent::getSettings();
+        $settings         = parent::getSettings();
         $settings['type'] = $this->type;
 
         return $settings;

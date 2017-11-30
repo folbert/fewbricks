@@ -15,6 +15,11 @@ class Repeater extends FieldWithSubFields
 {
 
     /**
+     * @var string The ACF field type
+     */
+    protected $type = 'repeater';
+
+    /**
      * @param string $label    The label of the field
      * @param string $name     The name of the field
      * @param string $key      The key of the field. Must be unique across the
@@ -29,11 +34,10 @@ class Repeater extends FieldWithSubFields
         $label,
         $name,
         $key,
-        $settings = [],
-        $void = null
+        $settings = []
     ) {
 
-        parent::__construct('repeater', $label, $name, $key, $settings);
+        parent::__construct($label, $name, $key, $settings);
 
         $this->subFields = new FieldCollection();
 

@@ -14,19 +14,9 @@ use Fewbricks\ACF\FieldWithSubFields;
 class Layout extends FieldWithSubFields
 {
     /**
-     * Layout constructor.
-     *
-     * @param string $label
-     * @param string $name
-     * @param string $key
-     * @param array  $settings
-     * @param null   $void
+     * @var string The ACF field type
      */
-    public function __construct($label, $name, $key, array $settings = [], $void = null)
-    {
-        parent::__construct('layout', $label, $name, $key, $settings);
-
-    }
+    protected $type = 'layout';
 
     /**
      * ACF setting. Sets the value which is set using the select box labelled "Layput" in the GUI

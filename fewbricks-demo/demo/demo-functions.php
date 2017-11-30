@@ -1,11 +1,17 @@
 <?php
 
+/**
+ * This file
+ */
+
 namespace Fewbricks\Demo;
 
 /**
  * Register a custom post type for Fewbricks demo purposes.
  * Created using https://generatewp.com/post-type/
  */
+use App\Fewbricks\EditScreens\DemoPage;
+
 if (!function_exists('register_fewbricks_custom_post_type')) {
 
 // Register Custom Post Type
@@ -89,3 +95,5 @@ function templateInclude($template)
     return $template;
 }
 add_filter('template_include', __NAMESPACE__ . '\\templateInclude', 99);
+
+new DemoPage();

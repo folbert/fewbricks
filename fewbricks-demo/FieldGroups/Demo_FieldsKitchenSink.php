@@ -33,8 +33,7 @@ class Demo_FieldsKitchenSink extends FieldGroup
     {
 
         // The other fields are in alphabetical oder but lets start with a tab
-        $this->addField(new FAFields\Tab('Basic fields', 'tab1',
-            '1711192019a'));
+        $this->addField(new FAFields\Tab('Basic fields', 'tab1', '1711192019a'));
 
         // Showing how to set field settings after the field has been created
         $button_group = new FAFields\ButtonGroup('Button Group',
@@ -230,7 +229,7 @@ class Demo_FieldsKitchenSink extends FieldGroup
         $this->addField(new FAFields\Url('URL', 'url', '1711192031i'));
 
         $this->addField((new FAFields\User('User', 'user', '1711192032u'))
-        ->setUserRoles(['administrator', 'contributor']));
+            ->setUserRoles(['administrator', 'contributor']));
 
         $this->addField(new FAFields\Wysiwyg('Wysiwyg', 'wysiwyg',
             '1711172249i', ['media_upload' => false, 'delay' => true]));

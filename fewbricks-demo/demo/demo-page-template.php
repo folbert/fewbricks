@@ -1,26 +1,23 @@
+<html>
+<head>
+    <title>Fewbricks Demo Page</title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css"
+          integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+
+</head>
+
+
+<body class="fewbricks-demo">
+
 <?php
+while (have_posts()) {
 
-get_header(); ?>
+    the_post();
 
-    <div class="wrap">
-        <div id="primary" class="content-area">
-            <main id="main" class="site-main" role="main">
+}
 
-                <?php
-                while ( have_posts() ) : the_post();
+?>
 
-                    get_template_part( 'template-parts/page/content', 'page' );
-
-                    // If comments are open or we have at least one comment, load up the comment template.
-                    if ( comments_open() || get_comments_number() ) :
-                        comments_template();
-                    endif;
-
-                endwhile; // End of the loop.
-                ?>
-
-            </main><!-- #main -->
-        </div><!-- #primary -->
-    </div><!-- .wrap -->
-
-<?php get_footer();
+</body>
+</html>

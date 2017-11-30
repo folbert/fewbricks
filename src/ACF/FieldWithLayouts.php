@@ -20,21 +20,19 @@ class FieldWithLayouts extends Field
     /**
      * FieldWithLayouts constructor.
      *
-     * @param string $type
      * @param string $label
      * @param string $name
      * @param string $key
      * @param array  $settings
      */
     public function __construct(
-        $type,
         $label,
         $name,
         $key,
         array $settings = []
     ) {
 
-        parent::__construct($type, $label, $name, $key, $settings);
+        parent::__construct($label, $name, $key, $settings);
 
         $this->layouts = new LayoutCollection();
 

@@ -18,27 +18,9 @@ class Password extends Field
 {
 
     /**
-     * @param string $label    The label of the field
-     * @param string $name     The name of the field
-     * @param string $key      The key of the field. Must be unique across the
-     *                         entire app
-     * @param array  $settings Array where you can pass all the possible
-     *                         settings for the field.
-     *                         https://www.advancedcustomfields.com/resources/register-fields-via-php/#field-type%20settings
-     * @param array  $void     Not used. Exists only to match the nr of args of parent
-     *                         constructor.
+     * @var string The ACF field type
      */
-    public function __construct(
-        $label,
-        $name,
-        $key,
-        $settings = [],
-        $void = null
-    ) {
-
-        parent::__construct('password', $label, $name, $key, $settings);
-
-    }
+    protected $type = 'password';
 
     /**
      * ACF setting. Set text to appear after the input.
