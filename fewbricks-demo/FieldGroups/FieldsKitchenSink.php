@@ -12,7 +12,7 @@ use Fewbricks\ACF\Layout;
  *
  * @package App\Fewbricks\FieldGroups
  */
-class Demo_FieldsKitchenSink extends FieldGroup
+class FieldsKitchenSink extends FieldGroup
 {
 
     /**

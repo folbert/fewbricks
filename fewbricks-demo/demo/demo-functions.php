@@ -55,7 +55,7 @@ if (!function_exists('register_fewbricks_custom_post_type')) {
                 'fewbricks'),
             'labels'              => $labels,
             // Support some stuff to test hiding it for field groups
-            'supports'            => ['title', 'custom-fields', 'editor',],
+            'supports'            => ['title', 'custom-fields', 'editor', 'thumbnail'],
             'taxonomies'          => ['category', 'post_tag',],
             'hierarchical'        => true,
             'public'              => true,
@@ -94,6 +94,7 @@ function templateInclude($template)
 
     return $template;
 }
+
 add_filter('template_include', __NAMESPACE__ . '\\templateInclude', 99);
 
 new DemoPage();

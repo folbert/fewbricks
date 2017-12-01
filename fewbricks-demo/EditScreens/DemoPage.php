@@ -55,16 +55,23 @@ class DemoPage extends EditScreen
 
         // Adding a predefined field group
         $kitchenSinkFg
-            = new FewbricksFieldGroups\Demo_FieldsKitchenSink('Fewbricks Demo - Kitchen Sink',
+            = new FewbricksFieldGroups\FieldsKitchenSink('Fewbricks Demo - Kitchen Sink',
             '1711172225a');
 
         $kitchenSinkFg->addLocationRuleGroups($this->getFieldGroupLocationFieldGroups());
 
-        $kitchenSinkFg->setHideOnScreen(false, ['permalink']);
+        $kitchenSinkFg->hideOnScreen(false, ['permalink']);
         $kitchenSinkFg->setMenuOrder(100);
 
+        // Testing different ways to show/hide elements
         $kitchenSinkFg->showOnScreen('the_content');
         $kitchenSinkFg->hideOnScreen('the_content');
+        $kitchenSinkFg->showOnScreen('the_content');
+        $kitchenSinkFg->hideOnScreen('all');
+        $kitchenSinkFg->showOnScreen('all');
+        $kitchenSinkFg->hideOnScreen('all');
+        $kitchenSinkFg->showOnScreen(['permalink', 'featured_image']);
+        $kitchenSinkFg->hideOnScreen(['featured_image']);
 
         $this->addFieldGroup($kitchenSinkFg);
 
