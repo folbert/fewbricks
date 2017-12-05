@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Fewbricks\EditScreens;
+namespace App\FewbricksDemo\FieldGroupGroups;
 
 use \App\Fewbricks\FieldGroups as FewbricksFieldGroups;
 use Fewbricks\ACF\Field;
@@ -8,14 +8,14 @@ use Fewbricks\ACF\FieldGroup;
 use Fewbricks\ACF\FieldGroupLocationRuleGroup;
 use Fewbricks\ACF\Fields\Textarea;
 use Fewbricks\ACF\Rule;
-use Fewbricks\EditScreen;
+use Fewbricks\FieldGroupsCollection;
 
 /**
  * Class Post
  *
  * @package App\Fewbricks\EditScreens
  */
-class DemoPage extends EditScreen
+class DemoPage extends FieldGroupsCollection
 {
 
     /**
@@ -32,7 +32,7 @@ class DemoPage extends EditScreen
     /**
      * @return array
      */
-    private function getFieldGroupLocationFieldGroups()
+    private function getFieldGroupLocationRuleGroups()
     {
 
         // The relation between each Rule within a RuleGroup is considered "and"
@@ -58,7 +58,7 @@ class DemoPage extends EditScreen
             = new FewbricksFieldGroups\FieldsKitchenSink('Fewbricks Demo - Kitchen Sink',
             '1711172225a');
 
-        $kitchenSinkFg->addLocationRuleGroups($this->getFieldGroupLocationFieldGroups());
+        $kitchenSinkFg->addLocationRuleGroups($this->getFieldGroupLocationRuleGroups());
 
         $kitchenSinkFg->hideOnScreen(false, ['permalink']);
         $kitchenSinkFg->setMenuOrder(100);
@@ -86,7 +86,7 @@ class DemoPage extends EditScreen
         $contentFg = new FieldGroup('Fewbricks Demo - Main content',
             '1711162216a');
 
-        $contentFg->addLocationRuleGroups($this->getFieldGroupLocationFieldGroups());
+        $contentFg->addLocationRuleGroups($this->getFieldGroupLocationRuleGroups());
 
         $contentFg->setSetting('menu_order', 110);
 

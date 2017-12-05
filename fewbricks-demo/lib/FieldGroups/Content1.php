@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Fewbricks\FieldGroups;
+namespace App\FewbricksDemo\FieldGroups;
 
 use Fewbricks\ACF\FieldGroup;
 

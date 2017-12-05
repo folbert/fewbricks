@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Fewbricks;
+namespace App\FewbricksDemo;
 
 use Fewbricks\Brick;
 

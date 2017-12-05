@@ -1,10 +1,13 @@
 <?php
 
-namespace App\Fewbricks\FieldGroups;
+namespace App\FewbricksDemo\FieldGroups;
 
 use Fewbricks\ACF\FieldGroup;
+use Fewbricks\ACF\FieldGroupInterface;
+use Fewbricks\ACF\FieldGroupLocationRuleGroup;
 use Fewbricks\ACF\Fields as FAFields;
 use Fewbricks\ACF\Layout;
+use Fewbricks\ACF\Rule;
 
 /**
  * Class Demo_FieldsKitchenSink
@@ -12,24 +15,48 @@ use Fewbricks\ACF\Layout;
  *
  * @package App\Fewbricks\FieldGroups
  */
-class FieldsKitchenSink extends FieldGroup
+class FieldsKitchenSink extends FieldGroup implements FieldGroupInterface
 {
 
     /**
-     * Each field group child class must have a build function
-     * which is automatically called right before the field group is registered.
+     * FieldsKitchenSink constructor.
+     *
+     * @param       $key
+     * @param array $settings
+     * @param array $args
+     */
+    public function __construct($key, $settings = [], $args = [])
+    {
+
+        parent::__construct('Kitchen Sink', $key, $settings, $args);
+    }
+
+    /**
+     * Any class extending FieldGroup can have a function named build. This function will be called
+     * right before the field group is registered to ACF. Inside this function you can do whatever you want.
+     * This basically enables you to have a field group that can be reused and by utilizong the $args that you can pass
+     * when instantiating an object, you can affect which fields should be included etc.
+     * @return void
      */
     public function build()
     {
 
-        $this->addBasicFields();
+        $this->addMyFields();
+
+        $this->addLocationRuleGroups([
+            (new FieldGroupLocationRuleGroup())
+                ->addRule(new Rule('post_type', '==', 'fewbricks_demo_pg')),
+            (new FieldGroupLocationRuleGroup())
+                ->addRule(new Rule('post_type', '==', 'fewbricks_demo_page2'))
+                ->addRule(new Rule('post_type', '!=', 'fewbricks_demo_page3')),
+        ]);
 
     }
 
     /**
      *
      */
-    private function addBasicFields()
+    private function addMyFields()
     {
 
         // The other fields are in alphabetical oder but lets start with a tab

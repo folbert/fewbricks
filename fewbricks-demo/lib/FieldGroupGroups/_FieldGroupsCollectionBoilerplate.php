@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Fewbricks\EditScreens;
+namespace App\FewbricksDemo\FieldGroupGroups;
 
-use Fewbricks\EditScreen;
+use Fewbricks\FieldGroupsCollection;
 
-class _EditScreenBoilerplate extends EditScreen
+class _FieldGroupsCollectionBoilerplate extends FieldGroupsCollection
 {
 
     /**

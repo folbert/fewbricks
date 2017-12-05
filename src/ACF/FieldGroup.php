@@ -7,7 +7,7 @@ namespace Fewbricks\ACF;
  *
  * @package Fewbricks\ACF
  */
-class FieldGroup
+class FieldGroup implements FieldGroupInterface
 {
 
     /**
@@ -330,13 +330,31 @@ class FieldGroup
     }
 
     /**
-     * Tell ACF that this field group exists
+     * In order to keep in sync with ACFs namings, we have this function to call publicly. And then use doRegister()
+     * to actually register.
      */
     public function register()
     {
 
-        // Cal the build function
         $this->build();
+
+        $this->doRegister();
+
+    }
+
+    /**
+     * @return mixed|void
+     */
+    public function build()
+    {
+
+    }
+
+    /**
+     *
+     */
+    protected function doRegister()
+    {
 
         $acfSettingsArray = $this->toAcfArray();
 
@@ -344,15 +362,6 @@ class FieldGroup
 
         // No use in having a potentially large collection of objects anymore
         unset($this->fieldObjects);
-
-    }
-
-    /**
-     * Empty function to be called when field groups are created on the fly.
-     * Any class extending this class should always have a build function.
-     */
-    public function build()
-    {
 
     }
 
@@ -482,6 +491,16 @@ class FieldGroup
         $this->setSetting('style', $style);
 
         return $this;
+
+    }
+
+    /**
+     * @param $title
+     */
+    public function setTitle($title)
+    {
+
+        $this->title = $title;
 
     }
 

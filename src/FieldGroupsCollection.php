@@ -4,20 +4,23 @@ namespace Fewbricks;
 
 use Fewbricks\ACF\FieldGroup;
 
-class EditScreen
+/**
+ * Class EditScreen
+ *
+ * @package Fewbricks
+ */
+class FieldGroupsCollection
 {
 
+    /**
+     * @var array
+     */
     protected $args;
 
     /**
      * @var array The field groups.
      */
     private $fieldGroups;
-
-    /**
-     * @var array ACFs location rules. Must be set in the child classes.
-     */
-    protected $location;
 
     /**
      * EditScreen constructor.
@@ -28,10 +31,6 @@ class EditScreen
     {
 
         $this->fieldGroups = [];
-
-        if(isset($args['location'])) {
-            $this->location = $args['location'];
-        }
 
         $this->args = $args;
 

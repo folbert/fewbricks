@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Fewbricks\PredefinedFields;
+namespace App\FewbricksDemo\PredefinedFields;
 
 use Fewbricks\ACF\Fields\Select;
 use Fewbricks\PredefinedField;

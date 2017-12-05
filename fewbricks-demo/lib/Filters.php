@@ -1,12 +1,15 @@
 <?php
 
-//namespace App\Fewbricks;
-namespace Fewbricks\Demo;
+/**
+ * Demoing available filters
+ */
+
+namespace App\FewbricksDemo;
 
 /**
  * Class Filters
  *
- * @package Fewbricks\Demo
+ * @package App\FewbricksDemo
  */
 class Filters
 {
@@ -14,23 +17,27 @@ class Filters
     /**
      *
      */
-    public static function define_hooks()
+    public static function defineHooks()
     {
 
-        add_filter('fewbricks/project_files_base_path',
-            [__NAMESPACE__ . '\\Fewbricks', 'getProjectFilesBasePath']);
+        $me = get_class();
+
+        // In a real project, this particular filter would have to be added outside the Fewbricks folder.
+        // Like for example in functions.php
+        /*add_filter('fewbricks/project_files_base_path',
+            [$me . '\\Fewbricks', 'getProjectFilesBasePath']);*/
 
         add_filter('fewbricks/brick/brick_layout_base_path',
-            [__NAMESPACE__ . '\\Fewbricks', 'getLayoutBasePath']);
+            [$me, 'getLayoutBasePath']);
 
-        add_filter('fewbricks/brick/brick_template_base_path',
-            [__NAMESPACE__ . '\\Fewbricks', 'getBrickTemplateBasePath']);
+        /*add_filter('fewbricks/brick/brick_template_base_path',
+            [$me, 'getBrickTemplateBasePath']);*/
 
         add_filter('fewbricks/brick/brick_template_file_extension',
-            [__NAMESPACE__ . '\\Fewbricks', 'getTemplateFileExtension']);
+            [$me, 'getTemplateFileExtension']);
 
         add_action('admin_notices',
-            [__NAMESPACE__ . '\\Fewbricks', 'editFieldGroupInfo']);
+            [$me, 'editFieldGroupInfo']);
 
         add_filter('fewbricks/show_fields_info', '__return_true');
 
@@ -62,7 +69,7 @@ class Filters
     public static function getProjectFilesBasePath()
     {
 
-        //return get_template_directory() . '/fewbrick2';
+        //return get_template_directory() . '/fewbricks2';
         return WP_PLUGIN_DIR . '/fewbricks/fewbricks';
 
     }
@@ -70,7 +77,7 @@ class Filters
     /**
      * @return string
      */
-    public static function get_template_file_extension()
+    public static function getTemplateFileExtension()
     {
 
         return '.view.php';
