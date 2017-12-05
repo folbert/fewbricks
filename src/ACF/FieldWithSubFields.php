@@ -68,10 +68,10 @@ class FieldWithSubFields extends Field
     /**
      * @return array
      */
-    public function getSettings()
+    public function toAcfArray()
     {
 
-        $settings = parent::getSettings();
+        $settings = parent::toAcfArray();
 
         $settings['sub_fields'] = $this->subFields->toArray($this->key);
 

@@ -3,7 +3,6 @@
 /**
  * Demoing available filters
  */
-
 namespace App\FewbricksDemo;
 
 /**

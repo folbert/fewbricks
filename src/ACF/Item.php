@@ -192,6 +192,26 @@ class Item
     /**
      * @return string
      */
+    public function getName()
+    {
+
+        return $this->name;
+
+    }
+
+    /**
+     * @param string $prefix
+     */
+    public function prefixName($prefix)
+    {
+
+        $this->name = $prefix . $this->name;
+
+    }
+
+    /**
+     * @return string
+     */
     public function getOriginalKey()
     {
 
@@ -228,7 +248,7 @@ class Item
     /**
      * @return array
      */
-    public function getSettings()
+    public function toAcfArray()
     {
 
         // Put the crucial settings into the settings array

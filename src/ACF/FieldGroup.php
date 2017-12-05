@@ -52,6 +52,11 @@ class FieldGroup implements FieldGroupInterface
     private $locationRuleGroups;
 
     /**
+     * @var
+     */
+    private $fieldNamesPrefix;
+
+    /**
      * The array that actually makes up the field group since it holds all the
      * settings for the group
      *
@@ -99,7 +104,21 @@ class FieldGroup implements FieldGroupInterface
 
         $this->fieldObjects = new FieldCollection();
 
+        $this->clearLocationRuleGroups();
+
+        $this->fieldNamesPrefix = '';
+
+    }
+
+    /**
+     * @return $this
+     */
+    public function clearLocationRuleGroups()
+    {
+
         $this->locationRuleGroups = new RuleGroupCollection();
+
+        return $this;
 
     }
 
@@ -108,6 +127,8 @@ class FieldGroup implements FieldGroupInterface
      */
     public function addField($field)
     {
+
+        $field->prefixName($this->fieldNamesPrefix);
 
         $this->fieldObjects->addItem($field);
 
@@ -146,22 +167,26 @@ class FieldGroup implements FieldGroupInterface
     }
 
     /**
+     * @param string $prefix
+     *
+     * @return $this
+     */
+    public function setFieldNamesPrefix($prefix)
+    {
+
+        $this->fieldNamesPrefix = $prefix;
+
+        return $this;
+
+    }
+
+    /**
      * @return FieldCollection
      */
     public function getFieldObjects()
     {
 
         return $this->fieldObjects;
-
-    }
-
-    /**
-     * @return string
-     */
-    public function getKey()
-    {
-
-        return $this->key;
 
     }
 
@@ -330,6 +355,16 @@ class FieldGroup implements FieldGroupInterface
     }
 
     /**
+     * @return RuleGroupCollection
+     */
+    public function getLocationRuleGroups()
+    {
+
+        return $this->locationRuleGroups;
+
+    }
+
+    /**
      * In order to keep in sync with ACFs namings, we have this function to call publicly. And then use doRegister()
      * to actually register.
      */
@@ -372,8 +407,8 @@ class FieldGroup implements FieldGroupInterface
     {
 
         return array_merge($this->settings, [
-            'key'      => $this->key,
-            'title'    => $this->title,
+            'key'      => $this->getKey(),
+            'title'    => $this->getTitle(),
             'location' => $this->locationRuleGroups->toArray(),
             'fields'   => $this->fieldObjects->toArray($this->key),
         ]);
@@ -381,7 +416,41 @@ class FieldGroup implements FieldGroupInterface
     }
 
     /**
-     * ACF setting. If the ficle group should be registered or not.
+     * @return string
+     */
+    public function getKey()
+    {
+
+        return $this->key;
+
+    }
+
+    /**
+     * @return string
+     */
+    public function getTitle()
+    {
+
+        return $this->title;
+
+    }
+
+    /**
+     * @param $title
+     *
+     * @return FieldGroup
+     */
+    public function setTitle($title)
+    {
+
+        $this->title = $title;
+
+        return $this;
+
+    }
+
+    /**
+     * ACF setting. If the field group should be registered or not.
      *
      * @param $active
      *
@@ -393,6 +462,18 @@ class FieldGroup implements FieldGroupInterface
         $this->setSetting('active', $active);
 
         return $this;
+
+    }
+
+    /**
+     * @param null $defaultValue
+     *
+     * @return bool|mixed
+     */
+    public function getActive($defaultValue = null)
+    {
+
+        return $this->getSetting('active', $defaultValue);
 
     }
 
@@ -414,6 +495,18 @@ class FieldGroup implements FieldGroupInterface
     }
 
     /**
+     * @param string $defaultValue
+     *
+     * @return bool|mixed
+     */
+    public function getDescription($defaultValue = '')
+    {
+
+        return $this->getSetting('description', $defaultValue);
+
+    }
+
+    /**
      * ACF Setting. Determines where field instructions are placed in relation to fields.
      *
      * @param string $instruction_placement 'label' (Below labels) or 'field' (Below fields)
@@ -426,6 +519,18 @@ class FieldGroup implements FieldGroupInterface
         $this->setSetting('instruction_placement', $instruction_placement);
 
         return $this;
+
+    }
+
+    /**
+     * @param bool $defaultValue
+     *
+     * @return bool|mixed
+     */
+    public function getInstructionPlacement($defaultValue = false)
+    {
+
+        return $this->getSetting('instruction_placement', $defaultValue);
 
     }
 
@@ -447,6 +552,18 @@ class FieldGroup implements FieldGroupInterface
     }
 
     /**
+     * @param $defaultVale
+     *
+     * @return bool|mixed
+     */
+    public function getLabelPlacement($defaultVale)
+    {
+
+        return $this->getSetting('label_placement', $defaultVale);
+
+    }
+
+    /**
      * ACF setting. Field groups are shown in order from lowest to highest.
      *
      * @param int $menuOrder
@@ -459,6 +576,18 @@ class FieldGroup implements FieldGroupInterface
         $this->setSetting('menu_order', $menuOrder);
 
         return $this;
+
+    }
+
+    /**
+     * @param $defaultValue
+     *
+     * @return bool|mixed
+     */
+    public function getMenuOrder($defaultValue)
+    {
+
+        return $this->getSetting('menu_order', $defaultValue);
 
     }
 
@@ -479,6 +608,18 @@ class FieldGroup implements FieldGroupInterface
     }
 
     /**
+     * @param $defaultValue
+     *
+     * @return bool|mixed
+     */
+    public function getPosition($defaultValue)
+    {
+
+        return $this->getSetting('position', $defaultValue);
+
+    }
+
+    /**
      * Determines the metabox style. Choices of 'default' or 'seamless'
      *
      * @param string $style 'default' or 'seamless'
@@ -495,12 +636,14 @@ class FieldGroup implements FieldGroupInterface
     }
 
     /**
-     * @param $title
+     * @param bool $defaultValue
+     *
+     * @return bool|mixed
      */
-    public function setTitle($title)
+    public function getStyle($defaultValue = false)
     {
 
-        $this->title = $title;
+        return $this->getSetting('style', $defaultValue);
 
     }
 

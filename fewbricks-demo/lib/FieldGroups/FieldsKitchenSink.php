@@ -43,18 +43,22 @@ class FieldsKitchenSink extends FieldGroup implements FieldGroupInterface
 
         $this->addMyFields();
 
-        $this->addLocationRuleGroups([
-            (new FieldGroupLocationRuleGroup())
-                ->addRule(new Rule('post_type', '==', 'fewbricks_demo_pg')),
-            (new FieldGroupLocationRuleGroup())
-                ->addRule(new Rule('post_type', '==', 'fewbricks_demo_page2'))
-                ->addRule(new Rule('post_type', '!=', 'fewbricks_demo_page3')),
-        ]);
+        if($this->getLocationRuleGroups()->isEmpty()) {
+
+            $this->addLocationRuleGroups([
+                (new FieldGroupLocationRuleGroup())
+                    ->addRule(new Rule('post_type', '==', 'fewbricks_demo_pg')),
+                (new FieldGroupLocationRuleGroup())
+                    ->addRule(new Rule('post_type', '==', 'fewbricks_demo_page2'))
+                    ->addRule(new Rule('post_type', '!=', 'fewbricks_demo_page3')),
+            ]);
+
+        }
 
     }
 
     /**
-     *
+     * A large function adding all available fields and then some.
      */
     private function addMyFields()
     {

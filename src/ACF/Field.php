@@ -193,10 +193,10 @@ class Field extends Item
     /**
      * @return array
      */
-    public function getSettings()
+    public function toAcfArray()
     {
 
-        $settings         = parent::getSettings();
+        $settings         = parent::toAcfArray();
         $settings['type'] = $this->getType();
 
         return $settings;

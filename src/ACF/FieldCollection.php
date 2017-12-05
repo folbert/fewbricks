@@ -59,7 +59,7 @@ class FieldCollection extends Collection
 
             $fieldObject->prependKey($keyPrepend);
 
-            $settings[] = $fieldObject->getSettings();
+            $settings[] = $fieldObject->toAcfArray();
 
         }
 
@@ -75,9 +75,10 @@ class FieldCollection extends Collection
     private function prepareFieldsConditionalLogic($fieldObjects)
     {
 
+        /** @var Field $fieldObject */
         foreach ($fieldObjects AS $fieldObject) {
 
-            $fieldObjectSettings = $fieldObject->getSettings();
+            $fieldObjectSettings = $fieldObject->toAcfArray();
 
             // Do the field have conditional logic
             if (isset($fieldObjectSettings['conditional_logic'])

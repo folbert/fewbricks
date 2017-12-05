@@ -59,7 +59,7 @@ class LayoutCollection extends Collection
 
             $layoutObject->prependKey($keyPrepend);
 
-            $layoutSettings = $layoutObject->getSettings();
+            $layoutSettings = $layoutObject->toAcfArray();
 
             $settings[$layoutObject->getKey()] = $layoutSettings;
 

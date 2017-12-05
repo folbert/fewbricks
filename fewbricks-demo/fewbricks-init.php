@@ -1,7 +1,8 @@
 <?php
 
 /**
- * This is the file that should start your custom implementation of Fewbricks
+ * This is the file that should start your custom implementation of Fewbricks. Theres abslutely no need for you to
+ * follow the same structure that this file has.
  */
 
 // Have this filter return false or remove the line completely to deactivate

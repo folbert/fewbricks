@@ -26,7 +26,7 @@ class Collection
 
     /**
      * @param Field $item
-     * @param null $key
+     * @param null  $key
      */
     public function addItem($item, $key = null)
     {
@@ -79,14 +79,21 @@ class Collection
     /**
      * @return array
      */
-    public function getKeys() {
+    public function getKeys()
+    {
         return array_keys($this->items);
+    }
+
+    public function isEmpty()
+    {
+        return $this->getLength() === 0;
     }
 
     /**
      * @return int
      */
-    public function getLength() {
+    public function getLength()
+    {
         return count($this->items);
     }
 
@@ -107,7 +114,8 @@ class Collection
      *
      * @return bool
      */
-    public function keyExists($key) {
+    public function keyExists($key)
+    {
         return isset($this->items[$key]);
     }
 

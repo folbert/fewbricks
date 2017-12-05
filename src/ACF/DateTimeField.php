@@ -54,4 +54,46 @@ class DateTimeField extends Field
 
     }
 
+    /**
+     * ACF setting. The format displayed when editing a post.
+     *
+     * @param mixed $defaultValue
+     *
+     * @return mixed
+     */
+    public function getDisplayFormat($defaultValue = false)
+    {
+
+        return $this->getSetting('display_format', $defaultValue);
+
+    }
+
+    /**
+     * ACF setting. The format returned via template functions.
+     *
+     * @param mixed $defaultValue
+     *
+     * @return mixed
+     */
+    public function getReturnFormat($defaultValue)
+    {
+
+        return $this->getSetting('return_format', $defaultValue);
+
+    }
+
+    /**
+     * ACF setting.
+     *
+     * @param mixed $defaultValue
+     *
+     * @return mixed
+     */
+    public function getWeekStartsOn($defaultValue)
+    {
+
+        return $this->getSetting('week_starts_on', $defaultValue);
+
+    }
+
 }
