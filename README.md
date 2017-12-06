@@ -1,8 +1,10 @@
 # Fewbricks 2
 
-Please see [this issue](https://github.com/folbert/fewbricks/issues/2#issuecomment-208723764) on why Fewbricks is not in the WordPress Plugin Directory.
+Please see [this issue](https://github.com/folbert/fewbricks/issues/2#issuecomment-208723764) on why Fewbricks is not in
+the WordPress Plugin Directory.
 
-Fewbricks 2 is a complete rewrite of Fewbricks and introduces an insane amount of breaking changes so I am strongly advising against installing it in a setup that is already implemented using Fewbricks 1.x.
+Fewbricks 2 is a complete rewrite of Fewbricks and introduces an insane amount of breaking changes so I am strongly
+advising against installing it in a setup that is already implemented using Fewbricks 1.x.
 
 + [Legal](#legal) 
 + [Dictionary](#dictionary)
@@ -17,46 +19,81 @@ Fewbricks and its developers are in no way associated with Advanced Custom Field
 ## Dictionary
 The following words will be explained in detail later in this document,
 
-+ Field - Same as in ACF. For example text, textarea, select, true/false, flexible content etc.
-+ Brick - A collection of fields.
-+ Brick Layout - Not to be confused with ACFs layouts. Brick layouts are like layouts in the [Blade templating system](https://laravel.com/docs/5.2/blade#defining-a-layout).
+* Field - Same as in ACF. For example text, textarea, select, true/false, flexible content etc.
+* Brick - A collection of fields.
+* Brick Layout - Not to be confused with ACFs layouts. Brick layouts are like layouts in the
+[Blade templating system](https://laravel.com/docs/5.2/blade#defining-a-layout).
 
 ## About
-Fewbricks is a module system developed by [Björn Folbert](http://folbert.com) at [KAN](http://kan.se). It is built on top of the awesome plugin [Advanced Custom Fields](http://www.advancedcustomfields.com/) (ACF) v5 PRO meaning that you must have that installed for this to work.
+Fewbricks is a module system developed by [Björn Folbert](http://folbert.com) at [KAN](http://kan.se). It is built on
+top of the awesome plugin [Advanced Custom Fields](http://www.advancedcustomfields.com/) (ACF) v5 PRO meaning that you
+must have that installed for this to work.
 
-Instead of building field groups, repeaters, flexible content etc. using the GUI that comes with ACF, you build it all by writing code. So if you are looking for a way to create reusable fields within the GUI, Fewbricks is not what you are looking for.
+Instead of building field groups, repeaters, flexible content etc. using the GUI that comes with ACF, you build it all
+by writing code. So if you are looking for a way to create reusable fields within the GUI, Fewbricks is not what you are
+ looking for.
 
-Field groups, flexible content, repeaters and fields. All of those are names that you recognize from ACF and they are all available in Fewbricks as well. Just as in ACF, you create a field group and then you add some fields to it. If the field is a flexible content, you will add layouts to it. If you are creating a repeater, throw a couple of sub fields in there. All just as you would if you were creating field groups using ACFs GUI. But Fewbricks also gives you the ability to reuse bricks across multiple field groups and/or flexible contents and/or repeaters.
+Field groups, flexible content, repeaters and fields. All of those are names that you recognize from ACF and they are
+all available in Fewbricks as well. Just as in ACF, you create a field group and then you add some fields to it. If the
+field is a flexible content, you will add layouts to it. If you are creating a repeater, throw a couple of sub fields in
+there. All just as you would if you were creating field groups using ACFs GUI. But Fewbricks also gives you the ability
+to reuse bricks across multiple field groups and/or flexible contents and/or repeaters.
 
-The code that you write using Fewbricks will in the end render the same arrays that are passed to `acf_add_local_field_group()` in the code that is generated when you use "Generate export code" on the ACF Tools screen.
+The code that you write using Fewbricks will in the end render the same arrays that are passed to
+`acf_add_local_field_group()` in the code that is generated when you use "Generate export code" on the ACF Tools screen.
 
 The system was created for the following reasons:
  
- * Portability and reusability. Almost all web sites have a couple of building blocks (bricks or modules) in common. This can, for example, be "plain text", "image with text to the right", "image with text to the left", "image", "YouTube-video" and so on. Using a module system which is completely built using code (instead of storing settings in the database as ACF does out of the box) we can reuse such bricks without setting them up every time we set up a new site. Yes, ACF does come with the export functionality but it is still cumbersome to cherrypick bricks for each project.
+ * Portability and reusability. Almost all web sites have a couple of building blocks (bricks or modules) in common.
+ This can, for example, be "plain text", "image with text to the right", "image with text to the left", "image",
+ "YouTube-video" and so on. Using a module system which is completely built using code (instead of storing settings in
+ the database as ACF does out of the box) we can reuse such bricks without setting them up every time we set up a new
+ site. And yes, ACF does come with the export functionality but it is still cumbersome to cherrypick bricks for each 
+ project. @todo Add note on clone field
  
- * Flexible ACF. This is probably the most important, and also the original, reason as to why this system was created. Since, in Fewbricks, all ACF-fields are set up using code, we can reuse fields and even other bricks across multiple bricks. This means that if we need to have, for example, a button in multiple bricks and places, we can create that brick once and then reuse that code all over the place. Now, imagine that the button have multiple settings and must give the administrator the ability to select a style and a functionality (internal link, external link, mail, download etc.) every time a button is used. Having to set that up in multiple times in ACFs visual editor would be a lot of work and you know that the client will want to add new functionality to the button all of a sudden :)
+ * Flexible ACF. This is probably the most important, and also the original, reason as to why this system was created.
+ Since, in Fewbricks, all ACF-fields are set up using code, we can reuse fields and even other bricks across multiple
+ bricks. This means that if we need to have, for example, a button in multiple bricks and places, we can create that
+ brick once and then reuse that code all over the place. Now, imagine that the button have multiple settings and must
+ give the administrator the ability to select a style and a functionality (internal link, external link, mail, download
+ etc.) every time a button is used. Having to set that up in multiple times in ACFs visual editor would be a lot of work
+ and you know that the client will want to add new functionality to the button all of a sudden :)
  
- * Cleaner way to output HTML. By having each brick outout its own HTML, figuring out where to make changes in a brick becomes a breeze. Even if the brick is used in multiple places and loops, the HTML is edited in one place.
+ * Cleaner way to output HTML. By having each brick outout its own HTML, figuring out where to make changes in a brick
+ becomes a breeze. Even if the brick is used in multiple places and loops, the HTML is edited in one place.
  
- * Easier to see what fields belong to a brick. Instead of having to switch between WP Admin and code to see what you named a specific field, you have it all in one brick class file.
+ * Easier to see what fields belong to a brick. Instead of having to switch between WP Admin and code to see what you
+ named a specific field, you have it all in one brick class file.
  
- * Extensibility. Since each brick is a class, we can easily create a new brick which adds new fields and/or its own output. 
+ * Extensibility. Since each brick is a class, we can easily create a new brick which adds new fields and/or its own
+ output.
 
 ## Requirements
 
-*  PHP 5.6+
- 
- *  [Advanced Custom Fields](http://www.advancedcustomfields.com/) 5+ PRO
- 
- *  [Fewbricks Hidden Field for Advanced Custom Fields](https://github.com/folbert/acf-fewbricks-hidden) This allows us to store settings in a brick. For example how many columns a multi column brick should have.
- 
- *  Some experience with ACF and knowledge about what a field, field group etc. is is recommended. Please see [the documentation for ACF](http://www.advancedcustomfields.com/resources).
+* The main development takes place in an environment running PHP 7.1 but should work down to PHP 5.6
+* [Advanced Custom Fields](http://www.advancedcustomfields.com/) 5+ PRO
+* [Fewbricks Hidden Field for Advanced Custom Fields](https://github.com/folbert/acf-fewbricks-hidden) This allows us to
+ store settings in a brick. For example how many columns a multi column brick should have. 
+*  Some experience with ACF and knowledge about what a field, field group etc. is is recommended. Please see
+[the documentation for ACF](http://www.advancedcustomfields.com/resources).
+
+## Notes on the code
+You may notice that there are multiple ways to for example set settings for a field. If you want to set teh default 
+value of a field, you can either use the function `setDefaultValue($value)` or the "master function" `setSetting
+('default_value', $value)`. OOP purists may have an issue with this and would want the setSetting function to be 
+`protected`. The reason for it being the way it is is to ensure that any new settings added by ACF can be used 
+before we've had a chance to update Fewbricks with new set-functions. For example if ACF were to add a setting 
+`custom_attributes` that could be applied to all fields. Instead of you having to wait for us to add the function 
+`setCustomAttributes($attributes)`, you can use `setSetting('custom_attributes', $value)`. And the reason for the set
+ functions existing is that if your IDE autocompletes, you will get suggestions on which settings are available for a
+  field instead of having to check the ACF code or websiet for which settings are available on a field. 
  
 
 ## Field Groups
 
 ### Location rules
-Just as the ACF GUI allows you to define the edit screens which post types, users, taxonomies etc. that a field group should show up, Fewbricks allows you to do the same. The code can look some thing like this:
+Just as the ACF GUI allows you to define the edit screens which post types, users, taxonomies etc. that a field group
+should show up, Fewbricks allows you to do the same. The code can look some thing like this:
 
 ````php
 $fieldGroup = new FieldGroup();
@@ -101,16 +138,22 @@ function fewbricks_project_files_base_path() {
 ```
 
 ### `fewbricks/project_init_file_name`
-Allows you to change the name of the file that intializes your custom implementation of Fewbricks. Defaults to fewbricks-init.php. Should always be located in the directory that the filter `fewbricks/project_files_base_path` returns.
+Allows you to change the name of the file that intializes your custom implementation of Fewbricks. Defaults to
+fewbricks-init.php. Should always be located in the directory that the filter `fewbricks/project_files_base_path` returns.
 
 ### `fewbricks/brick/brick_template_file_extension`
-Allows you to change the file extension of template files used in [brick.php -> get_brick_template_html()](lib/brick.php). Your filter should return for example ".view.php" or ".php". Note the dot at the beginning. 
+Allows you to change the file extension of template files used in
+[brick.php -> get_brick_template_html()](lib/brick.php). Your filter should return for example ".view.php" or ".php".
+Note the dot at the beginning. 
 
 ### `fewbricks/brick/brick_template_base_path`
-Allows you to change the standard path of brick templates in [lib/brick.php -> get_brick_template_html()](lib/brick.php). If you pass a `$template_base_path` to `get_brick_template_html()` this filter will be ignored. Your filter should return the path without a trailing slash.
+Allows you to change the standard path of brick templates in
+[lib/brick.php -> get_brick_template_html()](lib/brick.php). If you pass a `$template_base_path` to
+`get_brick_template_html()` this filter will be ignored. Your filter should return the path without a trailing slash.
 
 ### `fewbricks/brick/brick_layout_base_path`
-Allows you to change the base path of layout files used in [lib/brick.php -> get_brick_layouted_html()]. Your filter should return return the path without a trailing slash.
+Allows you to change the base path of layout files used in [lib/brick.php -> get_brick_layouted_html()]. Your filter
+should return return the path without a trailing slash.
 
 ### `fewbricks/show_fields_info`
 Set to true to display field name and key for every field in the backend. Default value is `false`.

@@ -36,4 +36,5 @@ Filters::defineHooks();
     ->setTitle('Secondary content')
     ->hideOnScreen('the_content')
     ->setFieldNamesPrefix('secondary_content_')
+    ->setFieldLabelsPrefix('Secondary content - ')
     ->register();

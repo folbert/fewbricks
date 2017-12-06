@@ -33,6 +33,20 @@ class Wysiwyg extends Field implements FieldInterface
     }
 
     /**
+     * ACF setting.
+     *
+     * @param boolean $showMediaUploadButtons Boolean indicating whether buttons should be shown or not.
+     *
+     * @return $this
+     */
+    public function setMediaUpload($showMediaUploadButtons)
+    {
+
+        return $this->setSetting('media_upload', $showMediaUploadButtons);
+
+    }
+
+    /**
      * ACF settings. Which tabs should be visible.
      *
      * @param string $tabs "visual", "text" or "all" (for both visual and text)
@@ -63,16 +77,46 @@ class Wysiwyg extends Field implements FieldInterface
     }
 
     /**
-     * ACF setting.
-     *
-     * @param boolean $showMediaUploadButtons Boolean indicating whether buttons should be shown or not.
-     *
-     * @return $this
+     * @return mixed The value of the ACF setting "delay". Returns the default ACF value "0" if none has been set
+     * using Fewbricks.
      */
-    public function showMediaUploadButtons($showMediaUploadButtons)
+    public function getDelay()
     {
 
-        return $this->setSetting('media_upload', $showMediaUploadButtons);
+        return $this->getSetting('delay', 0);
+
+    }
+
+    /**
+     * @return mixed The value of the ACF setting "media_upload". Returns the default ACF value "1" if none has been set
+     * using Fewbricks.
+     */
+    public function getMediaUpload()
+    {
+
+        return $this->getSetting('media_upload', 1);
+
+    }
+
+    /**
+     * @return mixed The value of the ACF setting "tabs". Returns the default ACF value "all" if none has been set using
+     * Fewbricks.
+     */
+    public function getTabs()
+    {
+
+        return $this->getSetting('tabs', 'all');
+
+    }
+
+    /**
+     * @return mixed The value of the ACF setting "toolbar". Returns the default ACF value "full" if none has been set
+     * using Fewbricks.
+     */
+    public function getToolbar()
+    {
+
+        return $this->getSetting('toolbar', 'full');
 
     }
 

@@ -131,47 +131,52 @@ class Field extends Item
     }
 
     /**
-     * @return array|boolean
+     * @return mixed
      */
     public function getConditionalLogic()
     {
 
-        return $this->getSetting('conditional_logic');
+        return $this->getSetting('conditional_logic', 0);
 
     }
 
     /**
-     * @return string|boolean
+     * @return mixed The value of the ACF setting "default_value". Returns the default ACF value if none has been set
+     * using
+     * Fewbricks.
      */
     public function getDefaultValue()
     {
 
-        return $this->getSetting('default_value');
+        return $this->getSetting('default_value', '');
 
     }
 
     /**
-     * @return string|boolean
+     * @return mixed The value of the ACF setting "instructions". Returns the default ACF value if none has been set
+     * using
+     * Fewbricks.
      */
     public function getInstructions()
     {
 
-        return $this->getSetting('instructions');
+        return $this->getSetting('instructions', '');
 
     }
 
     /**
-     * @return boolean
+     * @return mixed The value of the ACF setting "required". Returns the default ACF value if none has been set using
+     * Fewbricks.
      */
     public function getRequired()
     {
 
-        return $this->getSetting('required');
+        return $this->getSetting('required', 0);
 
     }
 
     /**
-     * @return mixed
+     * @return string The ACF field type that this field is
      */
     public function getType()
     {
@@ -181,12 +186,13 @@ class Field extends Item
     }
 
     /**
-     * @return array|boolean
+     * @return mixed The value of the ACF setting "wrapper". Returns the default ACF value if none has been set using
+     * Fewbricks.
      */
     public function getWrapper()
     {
 
-        return $this->getSetting('wrapper');
+        return $this->getSetting('wrapper', []);
 
     }
 

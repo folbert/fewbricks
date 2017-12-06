@@ -38,6 +38,16 @@ class FieldGroup implements FieldGroupInterface
     protected $args;
 
     /**
+     * @var
+     */
+    private $fieldLabelsPrefix;
+
+    /**
+     * @var
+     */
+    private $fieldNamesPrefix;
+
+    /**
      * @var FieldCollection
      */
     private $fieldObjects;
@@ -50,11 +60,6 @@ class FieldGroup implements FieldGroupInterface
      * @var RuleGroupCollection
      */
     private $locationRuleGroups;
-
-    /**
-     * @var
-     */
-    private $fieldNamesPrefix;
 
     /**
      * The array that actually makes up the field group since it holds all the
@@ -107,6 +112,7 @@ class FieldGroup implements FieldGroupInterface
         $this->clearLocationRuleGroups();
 
         $this->fieldNamesPrefix = '';
+        $this->fieldLabelsPrefix = '';
 
     }
 
@@ -129,6 +135,7 @@ class FieldGroup implements FieldGroupInterface
     {
 
         $field->prefixName($this->fieldNamesPrefix);
+        $field->prefixLabel($this->fieldLabelsPrefix);
 
         $this->fieldObjects->addItem($field);
 
@@ -167,6 +174,24 @@ class FieldGroup implements FieldGroupInterface
     }
 
     /**
+     * Set a string that will be prefixed to the labels of the fields that are added to this field group.
+     *
+     * @param $prefix
+     *
+     * @return $this
+     */
+    public function setFieldLabelsPrefix($prefix)
+    {
+
+        $this->fieldLabelsPrefix = $prefix;
+
+        return $this;
+
+    }
+
+    /**
+     * Set a string that will be prefixed to the names of the fields that are added to this field group.
+     *
      * @param string $prefix
      *
      * @return $this

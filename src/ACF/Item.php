@@ -79,28 +79,20 @@ class Item
     }
 
     /**
-     * @param $key
+     * Allows you to set multiple settings at once.
+     *
+     * @param $settings
      *
      * @return $this
      */
-    public function setBrickKey($key)
+    public function setSettings($settings)
     {
 
-        $this->brickKey = $key;
+        foreach ($settings AS $name => $value) {
 
-        return $this;
+            $this->setSetting($name, $value);
 
-    }
-
-    /**
-     * @param string $key
-     *
-     * @return $this
-     */
-    public function setKey($key)
-    {
-
-        $this->key = $key;
+        }
 
         return $this;
 
@@ -123,26 +115,6 @@ class Item
         }
 
         $this->settings[$name] = $value;
-
-        return $this;
-
-    }
-
-    /**
-     * Allows you to set multiple settings at once.
-     *
-     * @param $settings
-     *
-     * @return $this
-     */
-    public function setSettings($settings)
-    {
-
-        foreach ($settings AS $name => $value) {
-
-            $this->setSetting($name, $value);
-
-        }
 
         return $this;
 
@@ -180,6 +152,20 @@ class Item
     }
 
     /**
+     * @param $key
+     *
+     * @return $this
+     */
+    public function setBrickKey($key)
+    {
+
+        $this->brickKey = $key;
+
+        return $this;
+
+    }
+
+    /**
      * @return string The key of the field
      */
     public function getKey()
@@ -190,12 +176,36 @@ class Item
     }
 
     /**
+     * @param string $key
+     *
+     * @return $this
+     */
+    public function setKey($key)
+    {
+
+        $this->key = $key;
+
+        return $this;
+
+    }
+
+    /**
      * @return string
      */
     public function getName()
     {
 
         return $this->name;
+
+    }
+
+    /**
+     * @param string $prefix
+     */
+    public function prefixLabel($prefix)
+    {
+
+        $this->label = $prefix . $this->label;
 
     }
 

@@ -49,11 +49,12 @@ class FieldsKitchenSink extends FieldGroup implements FieldGroupInterface
                 (new FieldGroupLocationRuleGroup())
                     ->addRule(new Rule('post_type', '==', 'fewbricks_demo_pg')),
                 (new FieldGroupLocationRuleGroup())
-                    ->addRule(new Rule('post_type', '==', 'fewbricks_demo_page2'))
-                    ->addRule(new Rule('post_type', '!=', 'fewbricks_demo_page3')),
+                    ->addRule(new Rule('post_type', '==', 'fewbricks_demo_pg2'))
             ]);
 
         }
+
+        $this->hideOnScreen('the_content');
 
     }
 
