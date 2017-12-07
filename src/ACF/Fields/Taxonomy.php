@@ -10,7 +10,7 @@ use Fewbricks\ACF\FieldInterface;
  * Corresponds to the taxonomy field type in ACF.
  * This class is more or less completely stupid and only exists
  * to accommodate quicker creation especially if you are using
- * a real IDE with auto completion. All the magic takes place in the
+ * a real IDE with auto completion. Most of the magic takes place in the
  * Field class.
  *
  * @package Fewbricks\ACF\Fields
@@ -77,14 +77,14 @@ class Taxonomy extends Field implements FieldInterface
     /**
      * ACF setting.
      *
-     * @param string $returnValue "object" or "id"
+     * @param string $returnFormat "object" or "id"
      *
      * @return $this
      */
-    public function setReturnValue($returnValue)
+    public function setReturFormat($returnFormat)
     {
 
-        return $this->setSetting('return_format', $returnValue);
+        return $this->setSetting('return_format', $returnFormat);
 
     }
 
@@ -118,7 +118,7 @@ class Taxonomy extends Field implements FieldInterface
     }
 
     /**
-     * @return string The ACF type
+     * @return string The ACF type that ultimately decides what kind of field instances of this class is.
      */
     public function getType()
     {

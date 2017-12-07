@@ -117,6 +117,10 @@ The above code would generate a rule that would have the field group be displaye
     - _and_
 - the user to edit is not a subscriber 
 
+## Fields
+
+The functions for setting field settings corresponds to the name of the setting and not to the label of the setting the gui. For example the value set under "Return value" in the gui is actually named "return_format" in the code. So the function for setting that value is named `setReturnFormat()`
+
 ## Filters
 
 The following filters are available in Fewbricks:
