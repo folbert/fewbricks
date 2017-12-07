@@ -33,30 +33,63 @@ class Gallery extends FieldWithImages implements FieldInterface
     }
 
     /**
-     * ACF setting.
+     * ACF setting maximum selection.
      *
-     * @param int $maximumSelection
+     * @param int $max
      *
      * @return $this
      */
-    public function setMaximumSelection($maximumSelection)
+    public function setMax($max)
     {
 
-        return $this->setSetting('max', $maximumSelection);
+        return $this->setSetting('max', $max);
 
     }
 
     /**
-     * ACF setting.
+     * ACF setting minimum selection.
      *
-     * @param int $minimumSelection
+     * @param int $min
      *
      * @return $this
      */
-    public function setMinimumSelection($minimumSelection)
+    public function setMin($min)
     {
 
-        return $this->setSetting('min', $minimumSelection);
+        return $this->setSetting('min', $min);
+
+    }
+
+    /**
+     * @return mixed The value of the ACF setting "insert". Returns the default ACF value "append" if none has been
+     * set using Fewbricks.
+     */
+    public function getInsert()
+    {
+
+        return $this->getSetting('insert', 'append');
+
+    }
+
+    /**
+     * @return mixed The value of the ACF setting "max". Returns the default ACF value "0" if none has been
+     * set using Fewbricks.
+     */
+    public function getMax()
+    {
+
+        return $this->getSetting('max', 0);
+
+    }
+
+    /**
+     * @return mixed The value of the ACF setting "insertmin". Returns the default ACF value "0" if none has been
+     * set using Fewbricks.
+     */
+    public function getMin()
+    {
+
+        return $this->getSetting('min', 0);
 
     }
 

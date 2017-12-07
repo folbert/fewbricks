@@ -26,6 +26,20 @@ class DateTimeField extends Field
     }
 
     /**
+     * ACF setting. Set the weekday that the week should start on.
+     *
+     * @param int $firstDay Integer representing a day. 0 = Sunday, 1 = Monday etc.
+     *
+     * @return $this
+     */
+    public function setFirstDay($firstDay)
+    {
+
+        return $this->setSetting('first_day', $firstDay);
+
+    }
+
+    /**
      * ACF setting. The format returned via template functions.
      * Use formats from http://php.net/manual/en/function.date.php
      *
@@ -41,58 +55,35 @@ class DateTimeField extends Field
     }
 
     /**
-     * ACF setting.
-     *
-     * @param int $weekStartsOn Integer representing a day. 0 = Sunday, 1 = Monday etc.
-     *
-     * @return $this
+     * @return mixed The value of the ACF setting "display_format". Returns the default ACF value "d/m/Y" if none has been
+     * set using Fewbricks.
      */
-    public function setWeekStartsOn($weekStartsOn)
+    public function getDisplayFormat()
     {
 
-        return $this->setSetting('week_starts_on', $weekStartsOn);
+        return $this->getSetting('display_format', 'd/m/Y');
 
     }
 
     /**
-     * ACF setting. The format displayed when editing a post.
-     *
-     * @param mixed $defaultValue
-     *
-     * @return mixed
+     * @return mixed The value of the ACF setting "first_day" (Week Starts On). Returns the default ACF value "1" if none has been
+     * set using Fewbricks.
      */
-    public function getDisplayFormat($defaultValue = false)
+    public function getFirstDay()
     {
 
-        return $this->getSetting('display_format', $defaultValue);
+        return $this->getSetting('first_day', 1);
 
     }
 
     /**
-     * ACF setting. The format returned via template functions.
-     *
-     * @param mixed $defaultValue
-     *
-     * @return mixed
+     * @return mixed The value of the ACF setting "return_format". Returns the default ACF value "d/m/Y" if none has been
+     * set using Fewbricks.
      */
-    public function getReturnFormat($defaultValue)
+    public function getReturnFormat()
     {
 
-        return $this->getSetting('return_format', $defaultValue);
-
-    }
-
-    /**
-     * ACF setting.
-     *
-     * @param mixed $defaultValue
-     *
-     * @return mixed
-     */
-    public function getWeekStartsOn($defaultValue)
-    {
-
-        return $this->getSetting('week_starts_on', $defaultValue);
+        return $this->getSetting('return_format', 'd/m/Y');
 
     }
 

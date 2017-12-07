@@ -19,20 +19,30 @@ class GoogleMap extends Field implements FieldInterface
 {
 
     /**
-     * ACF setting. Where to center the initial map.
+     * ACF setting. Where to center the initial map on the latitude axis.
      *
      * @param int $lat
+     *
+     * @return $this
+     */
+    public function setCenterLat($lat)
+    {
+
+        return $this->setSetting('center_lat', $lat);
+
+    }
+
+    /**
+     * ACF setting. Where to center the initial map on the latitude axis.
+     *
      * @param int $lng
      *
      * @return $this
      */
-    public function setCenter($lat, $lng)
+    public function setCenterLng($lng)
     {
 
-        $this->setSetting('center_lat', $lat);
-        $this->setSetting('center_lng', $lng);
-
-        return $this;
+        return $this->setSetting('center_lng', $lng);
 
     }
 
@@ -50,6 +60,8 @@ class GoogleMap extends Field implements FieldInterface
 
     }
 
+
+
     /**
      * ACF setting. The initial zoom level.
      *
@@ -61,6 +73,50 @@ class GoogleMap extends Field implements FieldInterface
     {
 
         return $this->setSetting('zoom', $zoom);
+
+    }
+
+    /**
+     * @return mixed The value of the ACF setting "center_lat". Returns the default ACF value "-37.81411" if none has
+     * been set using Fewbricks.
+     */
+    public function getCenterLat()
+    {
+
+        return $this->getSetting('center_lat', '-37.81411');
+
+    }
+
+    /**
+     * @return mixed The value of the ACF setting "center_lng". Returns the default ACF value "144.96328'" if none has
+     * been set using Fewbricks.
+     */
+    public function getCenterLng()
+    {
+
+        return $this->getSetting('center_lng', '144.96328');
+
+    }
+
+    /**
+     * @return mixed The value of the ACF setting "height". Returns the default ACF value "14004" if none has
+     * been set using Fewbricks.
+     */
+    public function getHeight()
+    {
+
+        return $this->getSetting('height', '400');
+
+    }
+
+    /**
+     * @return mixed The value of the ACF setting "zoom". Returns the default ACF value "14" if none has
+     * been set using Fewbricks.
+     */
+    public function getZoom()
+    {
+
+        return $this->getSetting('zoom', '14');
 
     }
 

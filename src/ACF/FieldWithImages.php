@@ -11,16 +11,20 @@ class FieldWithImages extends Field
 {
 
     /**
-     * ACF setting.
+     * ACF setting. Don't use or pass an empty value for all types.
      *
-     * @param string $allowedFileTypes . Comma separated list of file endings. Leave blank for all types.
+     * @param array $mime_types Max file size in MB
      *
      * @return $this
      */
-    public function setAllowedFileTypes($allowedFileTypes)
+    public function setMimeTypes($mime_types)
     {
 
-        return $this->setting('mime_types', $allowedFileTypes);
+        if (is_array($mime_types)) {
+            $mime_types = implode(', ', $mime_types);
+        }
+
+        return $this->setSetting('maxmime_types_size', $mime_types);
 
     }
 
@@ -49,6 +53,17 @@ class FieldWithImages extends Field
     {
 
         return $this->setSetting('max_height', $maxHeight);
+
+    }
+
+    /**
+     * @return mixed The value of the ACF setting "max_height". Returns the default ACF value "0" if none has been
+     * set using Fewbricks.
+     */
+    public function getMaxHeight()
+    {
+
+        return $this->getSetting('max_height', 0);
 
     }
 
@@ -119,6 +134,83 @@ class FieldWithImages extends Field
     {
 
         return $this->setSetting('min_width', $minWidth);
+
+    }
+
+    /**
+     * @return mixed The value of the ACF setting "library". Returns the default ACF value "all" if none has been
+     * set using Fewbricks.
+     */
+    public function getLibrary()
+    {
+
+        return $this->getSetting('library', 'all');
+
+    }
+
+    /**
+     * @return mixed The value of the ACF setting "max_size". Returns the default ACF value "0" if none has been
+     * set using Fewbricks.
+     */
+    public function getMaxSize()
+    {
+
+        return $this->getSetting('max_size', 0);
+
+    }
+
+    /**
+     * @return mixed The value of the ACF setting "max_width". Returns the default ACF value "0" if none has been
+     * set using Fewbricks.
+     */
+    public function getMaxWidth()
+    {
+
+        return $this->getSetting('max_width', 0);
+
+    }
+
+    /**
+     * @return mixed The value of the ACF setting "mime_types". Returns the default ACF value "" if none has been
+     * set using Fewbricks.
+     */
+    public function getMimeTypes()
+    {
+
+        return $this->getSetting('mime_types', '');
+
+    }
+
+    /**
+     * @return mixed The value of the ACF setting "min_height". Returns the default ACF value "0" if none has been
+     * set using Fewbricks.
+     */
+    public function getMinHeight()
+    {
+
+        return $this->getSetting('min_height', 0);
+
+    }
+
+    /**
+     * @return mixed The value of the ACF setting "min_size". Returns the default ACF value "0" if none has been
+     * set using Fewbricks.
+     */
+    public function getMinSize()
+    {
+
+        return $this->getSetting('min_size', 0);
+
+    }
+
+    /**
+     * @return mixed The value of the ACF setting "min_width". Returns the default ACF value "0" if none has been
+     * set using Fewbricks.
+     */
+    public function getMinWidth()
+    {
+
+        return $this->getSetting('min_width', 0);
 
     }
 

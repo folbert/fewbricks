@@ -74,16 +74,13 @@ class FieldWithLayouts extends Field
     }
 
     /**
-     * @return array
+     * @return mixed The value of the ACF setting "button_label". Returns the default ACF value "Add row" (or
+     * translation thereof) if none has been set using Fewbricks.
      */
-    public function toAcfArray()
+    public function getButtonLabel()
     {
 
-        $settings = parent::toAcfArray();
-
-        $settings['layouts'] = $this->layouts->getFinalizedSettings($this->key);
-
-        return $settings;
+        return $this->getSetting('max', __('Add Row', 'acf'));
 
     }
 
@@ -106,6 +103,20 @@ class FieldWithLayouts extends Field
     {
 
         return $this->layouts;
+
+    }
+
+    /**
+     * @return array
+     */
+    public function toAcfArray()
+    {
+
+        $settings = parent::toAcfArray();
+
+        $settings['layouts'] = $this->layouts->getFinalizedSettings($this->key);
+
+        return $settings;
 
     }
 

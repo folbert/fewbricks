@@ -131,7 +131,8 @@ class Field extends Item
     }
 
     /**
-     * @return mixed
+     * @return mixed The value of the ACF setting "conditional_logic". Returns the default ACF value "false" if none has been set
+     * using Fewbricks.
      */
     public function getConditionalLogic()
     {
@@ -141,9 +142,8 @@ class Field extends Item
     }
 
     /**
-     * @return mixed The value of the ACF setting "default_value". Returns the default ACF value if none has been set
-     * using
-     * Fewbricks.
+     * @return mixed The value of the ACF setting "default_value". Returns the default ACF value "" if none has been set
+     * using Fewbricks.
      */
     public function getDefaultValue()
     {

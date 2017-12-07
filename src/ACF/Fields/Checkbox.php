@@ -56,12 +56,13 @@ class Checkbox extends FieldWithChoices implements FieldInterface
     public function setSaveCustom($saveCustom)
     {
 
-        return $this->setSetting('allow_custom', $saveCustom);
+        return $this->setSetting('save_custom', $saveCustom);
 
     }
 
+
     /**
-     * ACF setting. Prepend an extra checkbox to toggle all choices.
+     * ACF setting. Send true to prepend an extra checkbox to toggle all choices.
      *
      * @param boolean $toggle
      *
@@ -71,6 +72,39 @@ class Checkbox extends FieldWithChoices implements FieldInterface
     {
 
         return $this->setSetting('toggle', $toggle);
+
+    }
+
+    /**
+     * @return mixed The value of the ACF setting "allow_custom". Returns the default ACF value "0" if none has been
+     * set using Fewbricks.
+     */
+    public function getAllowCustom()
+    {
+
+        return $this->getSetting('allow_custom', 0);
+
+    }
+
+    /**
+     * @return mixed The value of the ACF setting "save_custom". Returns the default ACF value "0" if none has been
+     * set using Fewbricks.
+     */
+    public function getSaveCustom()
+    {
+
+        return $this->getSetting('save_custom', 0);
+
+    }
+
+    /**
+     * @return mixed The value of the ACF setting "layout". Returns the default ACF value "false" if none has been
+     * set using Fewbricks.
+     */
+    public function getToggle()
+    {
+
+        return $this->getSetting('toggle', false);
 
     }
 
