@@ -99,7 +99,7 @@ class GoogleMap extends Field implements FieldInterface
     }
 
     /**
-     * @return mixed The value of the ACF setting "height". Returns the default ACF value "14004" if none has
+     * @return mixed The value of the ACF setting "height". Returns the default ACF value "400" if none has
      * been set using Fewbricks.
      */
     public function getHeight()

@@ -28,7 +28,23 @@ class Message extends Field implements FieldInterface
     public function setEscapeHtml($escapeHtml)
     {
 
-        return $this->setSetting('esc_html', $escapeHtml);
+        $this->setSetting('esc_html', $escapeHtml);
+
+        return $this;
+
+    }
+
+    /**
+     * @param $message
+     *
+     * @return $this
+     */
+    public function setMessage($message)
+    {
+
+        $this->setSetting('message', $message);
+
+        return $this;
 
     }
 
@@ -43,7 +59,39 @@ class Message extends Field implements FieldInterface
     public function setNewLines($newLines)
     {
 
-        return $this->setSetting('new_lined', $newLines);
+        $this->setSetting('new_lines', $newLines);
+
+        return $this;
+
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getEscHtml()
+    {
+
+        return $this->getSetting('esc_html', 0);
+
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getMessage()
+    {
+
+        return $this->getSetting('message', '');
+
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getNewLines()
+    {
+
+        return $this->getSetting('new_lines', 'wpautop');
 
     }
 

@@ -91,14 +91,74 @@ class Number extends Field implements FieldInterface
     /**
      * ACF setting.
      *
-     * @param int $stepSize
+     * @param int $step
      *
      * @return $this
      */
-    public function setStepSize($stepSize)
+    public function setStep($step)
     {
 
-        return $this->setSetting('step', $stepSize);
+        return $this->setSetting('step', $step);
+
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getAppend()
+    {
+
+        return $this->getSetting('append', '');
+
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getMaximumValue()
+    {
+
+        return $this->getSetting('maximum_value', '');
+
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getMinimumValue()
+    {
+
+        return $this->getSetting('minimum_value', '');
+
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getPlaceholder()
+    {
+
+        return $this->getSetting('placeholder', '');
+
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getPrepend()
+    {
+
+        return $this->getSetting('prepend', '');
+
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getStep()
+    {
+
+        return $this->getSetting('step', '');
 
     }
 

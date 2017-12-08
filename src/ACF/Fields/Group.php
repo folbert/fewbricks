@@ -24,4 +24,30 @@ class Group extends FieldWithSubFields implements FieldInterface
 
     }
 
+    /**
+     * ACF setting to specify the style used to render the selected fields.
+     *
+     * @param string $layout "block", "table" or "row"
+     *
+     * @return $this
+     */
+    public function setLayout($layout)
+    {
+
+        $this->setSetting('layout', $layout);
+
+        return $this;
+
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getLayout()
+    {
+
+        return $this->getSetting('layout', 'block');
+
+    }
+
 }

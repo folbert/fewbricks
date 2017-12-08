@@ -28,7 +28,17 @@ class Link extends Field implements FieldInterface
     public function setReturnFormat($returnFormat)
     {
 
-        return $this->setSetting('return_value', $returnFormat);
+        return $this->setSetting('return_format', $returnFormat);
+
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getReturnFormat()
+    {
+
+        return $this->getSetting('return_format', 'array');
 
     }
 

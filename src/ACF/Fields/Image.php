@@ -19,16 +19,17 @@ class Image extends FieldWithImages implements FieldInterface
 {
 
     /**
-     * ACF setting. Limit the media library choice.
+     * ACF setting. Shown when entering data
      *
-     * @param string $library "all" or "uploadedTo"
+     * @param string $previewSize The name of a defined image size. For example "thumbnail", "medium", "large" or any
+     *                            custom image size.
      *
      * @return $this
      */
-    public function setLibrary($library)
+    public function setPreviewSize($previewSize)
     {
 
-        return $this->setSetting('library', $library);
+        return $this->setSetting('preview_size', $previewSize);
 
     }
 
@@ -47,17 +48,22 @@ class Image extends FieldWithImages implements FieldInterface
     }
 
     /**
-     * ACF setting. Shown when entering data
-     *
-     * @param string $previewSize The name of a defined image size. For example "thumbnail", "medium", "large" or any
-     *                            custom image size.
-     *
-     * @return $this
+     * @return mixed
      */
-    public function setPreviewSize($previewSize)
+    public function getPreviewSize()
     {
 
-        return $this->setSetting('preview_size', $previewSize);
+        return $this->getSetting('preview_size', 'thumbnail');
+
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getReturnFormat()
+    {
+
+        return $this->getSetting('return_format', 'array');
 
     }
 
