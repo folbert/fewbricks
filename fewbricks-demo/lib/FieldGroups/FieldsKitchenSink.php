@@ -2,6 +2,8 @@
 
 namespace App\FewbricksDemo\FieldGroups;
 
+use Fewbricks\ACF\ConditionalLogicRule;
+use Fewbricks\ACF\ConditionalLogicRuleGroup;
 use Fewbricks\ACF\FieldGroup;
 use Fewbricks\ACF\FieldGroupInterface;
 use Fewbricks\ACF\FieldGroupLocationRuleGroup;
@@ -36,6 +38,7 @@ class FieldsKitchenSink extends FieldGroup implements FieldGroupInterface
      * right before the field group is registered to ACF. Inside this function you can do whatever you want.
      * This basically enables you to have a field group that can be reused and by utilizong the $args that you can pass
      * when instantiating an object, you can affect which fields should be included etc.
+     *
      * @return void
      */
     public function build()
@@ -43,13 +46,13 @@ class FieldsKitchenSink extends FieldGroup implements FieldGroupInterface
 
         $this->addMyFields();
 
-        if($this->getLocationRuleGroups()->isEmpty()) {
+        if ($this->getLocationRuleGroups()->isEmpty()) {
 
             $this->addLocationRuleGroups([
                 (new FieldGroupLocationRuleGroup())
                     ->addRule(new Rule('post_type', '==', 'fewbricks_demo_pg')),
                 (new FieldGroupLocationRuleGroup())
-                    ->addRule(new Rule('post_type', '==', 'fewbricks_demo_pg2'))
+                    ->addRule(new Rule('post_type', '==', 'fewbricks_demo_pg2')),
             ]);
 
         }
@@ -221,42 +224,36 @@ class FieldsKitchenSink extends FieldGroup implements FieldGroupInterface
         $this->addField(new FAFields\TimePicker('Time Picker', 'time_picker',
             '1711192022a'));
 
-        $this->addField(new FAFields\Message('Testing conditional statement',
-            'testing_conditional_logic', '1711202201x', [
-                'message'           => 'This should only be shown if the checkbox _below_
-                is checked',
-                'conditional_logic' => [
-                    [
-                        [
-                            'field'    => '1711192022y',
-                            'operator' => '==',
-                            'value'    => '1',
-                        ],
-                    ],
-                ],
-            ]));
+        $this->addField(
+            (new FAFields\Message('Testing conditional logic', 'testing_conditional_logic',
+                '1711202201x'))
+                ->setMessage('This should only be shown if the checkbox _below_is checked or if the button group is set
+                to "Black"')
+                ->addConditionalLogicRuleGroup(
+                    (new ConditionalLogicRuleGroup())
+                        ->addRule(new ConditionalLogicRule('1711192022y', '==', '1'))
+                )
+                ->addConditionalLogicRuleGroup(
+                    (new ConditionalLogicRuleGroup())
+                        ->addRule(new ConditionalLogicRule('1711172249u', '==', 'black'))
+                )
+        );
 
-        $this->addField(new FAFields\TrueFalse('True/False', 'true_false',
-            '1711192022y', [
-                'message' => 'To be or not to be? Checking this field should
-                trigger a conditional statement displaying a message field
-                above and below',
-            ]));
+        $this->addField(
+            (new FAFields\TrueFalse('True/False', 'true_false', '1711192022y'))
+                ->setMessage('To be or not to be? Checking this field should trigger conditional logic displaying message fields above and below')
+        );
 
-        $this->addField(new FAFields\Message('Testing conditional statement',
-            'testing_conditional_statement', '1711202201a', [
-                'message'           => 'This should only be shown if the checkbox _above_
-                is checked',
-                'conditional_logic' => [
-                    [
-                        [
-                            'field'    => '1711192022y',
-                            'operator' => '==',
-                            'value'    => '1',
-                        ],
-                    ],
-                ],
-            ]));
+        $this->addField(
+            (new FAFields\Message('Testing conditional logic', 'testing_conditional_statement', '1711202201a'))
+                ->setMessage('This should only be shown if the checkbox _above_ is checked and the button group isset to
+                 "Red"')
+                ->addConditionalLogicRuleGroup(
+                    (new ConditionalLogicRuleGroup())
+                        ->addRule(new ConditionalLogicRule('1711192022y', '==', '1'))
+                        ->addRule(new ConditionalLogicRule('1711172249u', '==', 'red'))
+                )
+        );
 
         $this->addField(new FAFields\Url('URL', 'url', '1711192031i'));
 

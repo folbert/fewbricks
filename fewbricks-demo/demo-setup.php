@@ -47,7 +47,6 @@ spl_autoload_register(function ($class) {
         if (file_exists($path)) {
             include $path;
         } else {
-            die($path);
             wp_die('Fewbricks could not locate the class ' . $class);
         }
 

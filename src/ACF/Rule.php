@@ -42,6 +42,66 @@ class Rule
     }
 
     /**
+     * @param $operator
+     */
+    public function setOperator($operator)
+    {
+
+        $this->operator = $operator;
+
+    }
+
+    /**
+     * @param $param
+     */
+    public function setParam($param)
+    {
+
+        $this->param = $param;
+
+    }
+
+    /**
+     * @param $value
+     */
+    public function setValue($value)
+    {
+
+        $this->value = $value;
+
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getOperator()
+    {
+
+        return $this->operator;
+
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getParam()
+    {
+
+        return $this->param;
+
+    }
+
+    /**
+     * @param $value
+     */
+    public function getValue()
+    {
+
+        return $this->value;
+
+    }
+
+    /**
      * @return array An array that ACF can work with.
      */
     public function toArray()

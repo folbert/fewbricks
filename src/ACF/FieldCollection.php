@@ -61,64 +61,57 @@ class FieldCollection extends Collection
 
         }
 
-        $this->prepareFieldsConditionalLogic($fieldObjects);
+        $settings = $this->prepareFieldsConditionalLogic($settings);
 
         return $settings;
 
     }
 
     /**
-     * @param $fieldObjects
+     * @param array $fieldsSettings
+     *
+     * @return mixed
      */
-    private function prepareFieldsConditionalLogic($fieldObjects)
+    private function prepareFieldsConditionalLogic($fieldsSettings)
     {
 
-        /** @var Field $fieldObject */
-        foreach ($fieldObjects AS $fieldObject) {
-
-            $fieldObjectSettings = $fieldObject->toAcfArray();
+        foreach ($fieldsSettings AS $fieldSettingsKey => $fieldSettings) {
 
             // Do the field have conditional logic
-            if (isset($fieldObjectSettings['conditional_logic'])
-                && is_array($fieldObjectSettings['conditional_logic'])
+            if (isset($fieldSettings['conditional_logic'])
+                && is_array($fieldSettings['conditional_logic'])
             ) {
 
-                $conditionalLogic = $fieldObjectSettings['conditional_logic'];
+                $conditionalLogic = $fieldSettings['conditional_logic'];
 
                 // Traverse down the conditional logic array
                 foreach ($conditionalLogic AS $lvl1Key => $lvl1Value) {
 
-                    foreach (
-                        $conditionalLogic[$lvl1Key] AS $lvl2Key => $lvl2Value
-                    ) {
+                    foreach ($conditionalLogic[$lvl1Key] AS $lvl2Key => $lvl2Value) {
 
-                        $targetFieldKey
-                            = $conditionalLogic[$lvl1Key][$lvl2Key]['field'];
+                        $targetFieldKey = $conditionalLogic[$lvl1Key][$lvl2Key]['field'];
 
                         foreach ($this->items AS $otherFieldObject) {
 
-                            if ($otherFieldObject->getOriginalKey()
-                                === $targetFieldKey
-                            ) {
+                            if ($otherFieldObject->getOriginalKey() === $targetFieldKey) {
 
-                                $conditionalLogic[$lvl1Key][$lvl2Key]['field']
-                                    = $otherFieldObject->getKey();
+                                $conditionalLogic[$lvl1Key][$lvl2Key]['field'] = $otherFieldObject->getKey();
 
                             }
 
                         }
 
-
                     }
 
                 }
 
-                $fieldObject->setSetting('conditional_logic',
-                    $conditionalLogic);
+                $fieldsSettings[$fieldSettingsKey]['conditional_logic'] = $conditionalLogic;
 
             }
 
         }
+
+        return $fieldsSettings;
 
     }
 

@@ -2,8 +2,6 @@
 
 namespace Fewbricks\ACF;
 
-use Fewbricks\ACF\Item;
-
 /**
  * Class Field
  *
@@ -11,6 +9,11 @@ use Fewbricks\ACF\Item;
  */
 class Field extends Item
 {
+
+    /**
+     * @var RuleGroupCollection
+     */
+    private $conditionalLogicRuleGroups;
 
     /**
      * @var
@@ -22,38 +25,64 @@ class Field extends Item
      *
      * @param string $label    The label of the field
      * @param string $name     The name of the field
-     * @param string $key      The key of the field. Must be unique across the
-     *                         entire app
-     * @param array  $settings Array where you can pass all the possible
-     *                         settings for the field.
+     * @param string $key      The key of the field. Must be unique across the entire app
+     * @param array  $settings Array where you can pass all/any of the possible settings for the field.
      *                         https://www.advancedcustomfields.com/resources/register-fields-via-php/#field-type%20settings
-     * @param string $type     Name of a valid ACF field type
+     * @param string $type     Name of a valid ACF field type. Makes it possible to create custom field types.
      */
     public function __construct($label, $name, $key, $settings = [], $type = '')
     {
 
         parent::__construct($label, $name, $key, $settings);
 
-        // @todo Make sure that $type is declared
         if(!empty($type))
         {
             $this->setType($type);
         }
 
+        $this->clearConditionalLogic();
+
     }
 
     /**
-     * @param array $conditionalLogic ACF setting. Conditionally hide or show
-     *                                this field based on other field's values.
-     *                                Best to use the ACF UI and export to
-     *                                understand the array structure.
+     * @param ConditionalLogicRuleGroup[] $ruleGroups
      *
      * @return $this
      */
-    public function setConditionalLogic($conditionalLogic)
+    public function addConditionalLogicRuleGroups($ruleGroups)
     {
 
-        $this->setSetting('conditional_logic', $conditionalLogic);
+        foreach ($ruleGroups AS $ruleGroup) {
+
+            $this->addConditionalLogicRuleGroup($ruleGroup);
+
+        }
+
+        return $this;
+
+    }
+
+    /**
+     * @param ConditionalLogicRuleGroup $ruleGroup
+     *
+     * @return $this
+     */
+    public function addConditionalLogicRuleGroup($ruleGroup)
+    {
+
+        $this->conditionalLogicRuleGroups->addItem($ruleGroup);
+
+        return $this;
+
+    }
+
+    /**
+     * @return $this
+     */
+    public function clearConditionalLogic()
+    {
+
+        $this->conditionalLogicRuleGroups = new RuleGroupCollection();
 
         return $this;
 
@@ -154,6 +183,16 @@ class Field extends Item
     }
 
     /**
+     * @return RuleGroupCollection
+     */
+    public function getConditionalLogicRuleGroups()
+    {
+
+        return $this->conditionalLogicRuleGroups;
+
+    }
+
+    /**
      * @return mixed The value of the ACF setting "default_value". Returns the default ACF value "" if none has been set
      * using Fewbricks.
      */
@@ -217,6 +256,12 @@ class Field extends Item
 
         $settings         = parent::toAcfArray();
         $settings['type'] = $this->getType();
+
+        if(!$this->conditionalLogicRuleGroups->isEmpty()) {
+
+            $settings['conditional_logic'] = $this->conditionalLogicRuleGroups->toArray();
+
+        }
 
         return $settings;
 
