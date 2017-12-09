@@ -53,7 +53,9 @@ class Field extends Item
     public function setConditionalLogic($conditionalLogic)
     {
 
-        return $this->setSetting('conditional_logic', $conditionalLogic);
+        $this->setSetting('conditional_logic', $conditionalLogic);
+
+        return $this;
 
     }
 
@@ -66,7 +68,9 @@ class Field extends Item
     public function setDefaultValue($defaultValue)
     {
 
-        return $this->setSetting('default_value', $defaultValue);
+        $this->setSetting('default_value', $defaultValue);
+
+        return $this;
 
     }
 
@@ -79,7 +83,9 @@ class Field extends Item
     public function setInstructions($instructions)
     {
 
-        return $this->setSetting('instructions', $instructions);
+        $this->setSetting('instructions', $instructions);
+
+        return $this;
 
     }
 
@@ -92,7 +98,9 @@ class Field extends Item
     public function setRequired($required)
     {
 
-        return $this->setSetting('required', $required);
+        $this->setSetting('required', $required);
+
+        return $this;
 
     }
 
@@ -126,7 +134,9 @@ class Field extends Item
             'id'    => '',
         ], $wrapper);
 
-        return $this->setSetting('wrapper', $wrapper);
+        $this->setSetting('wrapper', $wrapper);
+
+        return $this;
 
     }
 
@@ -137,7 +147,9 @@ class Field extends Item
     public function getConditionalLogic()
     {
 
-        return $this->getSetting('conditional_logic', 0);
+        $this->getSetting('conditional_logic', 0);
+
+        return $this;
 
     }
 
@@ -165,13 +177,14 @@ class Field extends Item
     }
 
     /**
-     * @return mixed The value of the ACF setting "required". Returns the default ACF value if none has been set using
+     * @return mixed The value of the ACF setting "required". Returns the default ACF value false if none has been set
+     * using
      * Fewbricks.
      */
     public function getRequired()
     {
 
-        return $this->getSetting('required', 0);
+        return $this->getSetting('required', false);
 
     }
 

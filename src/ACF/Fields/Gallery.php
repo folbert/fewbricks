@@ -28,7 +28,9 @@ class Gallery extends FieldWithImages implements FieldInterface
     public function setInsert($insert)
     {
 
-        return $this->setSetting('insert', $insert);
+        $this->setSetting('insert', $insert);
+
+        return $this;
 
     }
 
@@ -42,7 +44,9 @@ class Gallery extends FieldWithImages implements FieldInterface
     public function setMax($max)
     {
 
-        return $this->setSetting('max', $max);
+        $this->setSetting('max', $max);
+
+        return $this;
 
     }
 
@@ -56,7 +60,9 @@ class Gallery extends FieldWithImages implements FieldInterface
     public function setMin($min)
     {
 
-        return $this->setSetting('min', $min);
+        $this->setSetting('min', $min);
+
+        return $this;
 
     }
 
@@ -83,7 +89,7 @@ class Gallery extends FieldWithImages implements FieldInterface
     }
 
     /**
-     * @return mixed The value of the ACF setting "insertmin". Returns the default ACF value "0" if none has been
+     * @return mixed The value of the ACF setting "min". Returns the default ACF value "0" if none has been
      * set using Fewbricks.
      */
     public function getMin()

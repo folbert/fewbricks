@@ -15,8 +15,7 @@ class RuleGroupCollection extends Collection
 {
 
     /**
-     * Get an
-     * @return array
+     * @return array An array that ACF can work with.
      */
     public function toArray()
     {

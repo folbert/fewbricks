@@ -43,14 +43,15 @@ class Filters
     }
 
     /**
+     * This does not affect anything since the function is not called. Only here to show it should be done.
      * @return string
      */
-    public static function getBrickTemplatesBasePath()
+    /*public static function getBrickTemplatesBasePath()
     {
 
         return get_stylesheet_directory() . '/fewbricks/bricks/';
 
-    }
+    }*/
 
     /**
      * @return string

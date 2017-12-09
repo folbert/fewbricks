@@ -28,35 +28,41 @@ class Taxonomy extends Field implements FieldInterface
     public function setAllowNull($allowNull)
     {
 
-        return $this->setSetting('allow_null', $allowNull);
+        $this->setSetting('allow_null', $allowNull);
 
-    }
-
-    /**
-     * ACF setting.
-     *
-     * @param string $appearance "checkbox", "radio", "multi_select" or "select"
-     *
-     * @return $this
-     */
-    public function setAppearance($appearance)
-    {
-
-        return $this->setSetting('field_type', $appearance);
+        return $this;
 
     }
 
     /**
      * ACF setting. Set if new terms can be added whilst editing.
      *
-     * @param boolean $createTerms
+     * @param boolean $add_term
      *
      * @return $this
      */
-    public function setCreateTerms($createTerms)
+    public function setAddTerm($add_term)
     {
 
-        return $this->setSetting('add_term', $createTerms);
+        $this->setSetting('add_term', $add_term);
+
+        return $this;
+
+    }
+
+    /**
+     * ACF setting. NOt what kind of field this is but what kind of field to use when displaying the terms
+     *
+     * @param string $field_type "checkbox", "radio", "multi_select" or "select"
+     *
+     * @return $this
+     */
+    public function setFieldType($field_type)
+    {
+
+        $this->setSetting('field_type', $field_type);
+
+        return $this;
 
     }
 
@@ -70,7 +76,9 @@ class Taxonomy extends Field implements FieldInterface
     public function setLoadTerms($loadTerms)
     {
 
-        return $this->setSetting('load_terms', $loadTerms);
+        $this->setSetting('load_terms', $loadTerms);
+
+        return $this;
 
     }
 
@@ -81,10 +89,12 @@ class Taxonomy extends Field implements FieldInterface
      *
      * @return $this
      */
-    public function setReturFormat($returnFormat)
+    public function setReturnFormat($returnFormat)
     {
 
-        return $this->setSetting('return_format', $returnFormat);
+        $this->setSetting('return_format', $returnFormat);
+
+        return $this;
 
     }
 
@@ -98,7 +108,9 @@ class Taxonomy extends Field implements FieldInterface
     public function setSaveTerms($saveTerms)
     {
 
-        return $this->setSetting('save_terms', $saveTerms);
+        $this->setSetting('save_terms', $saveTerms);
+
+        return $this;
 
     }
 
@@ -113,7 +125,86 @@ class Taxonomy extends Field implements FieldInterface
     public function setTaxonomy($taxonomy)
     {
 
-        return $this->setSetting('taxonomy', $taxonomy);
+        $this->setSetting('taxonomy', $taxonomy);
+
+        return $this;
+
+    }
+
+    /**
+     * @return mixed The value of the ACF setting "allow_null". Returns the default ACF value false if none has been
+     * set using Fewbricks.
+     */
+    public function getAllowNull()
+    {
+
+        return $this->getSetting('allow_null', false);
+
+    }
+
+    /**
+     * @return mixed The value of the ACF setting "add_term". Returns the default ACF value true if none has been
+     * set using Fewbricks.
+     */
+    public function getAddTerm()
+    {
+
+        return $this->getSetting('add_term', true);
+
+    }
+
+    /**
+     * @return mixed The value of the ACF setting "field_type". Returns the default ACF value "checkbox" if none has
+     * been
+     * set using Fewbricks.
+     */
+    public function getFieldType()
+    {
+
+        return $this->getSetting('field_type', 'checkbox');
+    }
+
+    /**
+     * @return mixed The value of the ACF setting "load_terms". Returns the default ACF value false if none has been
+     * set using Fewbricks.
+     */
+    public function getLoadTerms()
+    {
+
+        return $this->getSetting('load_terms', false);
+
+    }
+
+    /**
+     * @return mixed The value of the ACF setting "return_format". Returns the default ACF value "id" if none has been
+     * set using Fewbricks.
+     */
+    public function getReturnFormat()
+    {
+
+        return $this->getSetting('return_format', 'id');
+
+    }
+
+    /**
+     * @return mixed The value of the ACF setting "save_terms". Returns the default ACF value falsse if none has been
+     * set using Fewbricks.
+     */
+    public function getSaveTerms()
+    {
+
+        return $this->getSetting('save_terms', false);
+
+    }
+
+    /**
+     * @return mixed The value of the ACF setting "taxonomy". Returns the default ACF value "category" if none has been
+     * set using Fewbricks.
+     */
+    public function getTaxonomy()
+    {
+
+        return $this->getSetting('taxonomy', 'category');
 
     }
 

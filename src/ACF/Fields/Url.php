@@ -28,7 +28,20 @@ class Url extends Field implements FieldInterface
     public function setPlaceholder($placeholder)
     {
 
-        return $this->setSetting('placeholder', $placeholder);
+        $this->setSetting('placeholder', $placeholder);
+
+        return $this;
+
+    }
+
+    /**
+     * @return mixed The value of the ACF setting "placeholder". Returns the default ACF value "" if none has been
+     * set using Fewbricks.
+     */
+    public function getPlaceholder()
+    {
+
+        return $this->getSetting('placeholder', '');
 
     }
 
@@ -41,6 +54,5 @@ class Url extends Field implements FieldInterface
         return 'url';
 
     }
-
 
 }

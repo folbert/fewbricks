@@ -42,7 +42,7 @@ class Rule
     }
 
     /**
-     * @return array
+     * @return array An array that ACF can work with.
      */
     public function toArray()
     {

@@ -19,6 +19,98 @@ class PageLink extends Field implements FieldInterface
 {
 
     /**
+     * ACF setting.
+     *
+     * @param boolean $allowArchives
+     *
+     * @return PageLink
+     */
+    public function setAllowArchives($allowArchives)
+    {
+
+        $this->setSetting('allow_archives', $allowArchives);
+
+        return $this;
+
+    }
+
+    /**
+     * ACF setting.
+     *
+     * @param boolean $multiple
+     *
+     * @return PageLink
+     */
+    public function setMultiple($multiple)
+    {
+
+        $this->setSetting('multiple', $multiple);
+
+        return $this;
+
+    }
+
+    /**
+     * ACF setting.
+     *
+     * @param array $postType Array with post type names
+     *
+     * @return PageLink
+     */
+    public function setPostType($postType)
+    {
+
+        $this->setSetting('post_type', $postType);
+
+        return $this;
+
+    }
+
+    /**
+     * @return mixed The value of the ACF setting "allow_archives". Returns the default ACF value true if none has been
+     * set using Fewbricks.
+     */
+    public function getAllowArchives()
+    {
+
+        return $this->getSetting('allow_archives', true);
+
+    }
+
+    /**
+     * @return mixed The value of the ACF setting "multiple". Returns the default ACF value 0 if none has been
+     * set using Fewbricks.
+     */
+    public function getMultiple()
+    {
+
+        return $this->getSetting('multiple', 0);
+
+    }
+
+    /**
+     * @return mixed The value of the ACF setting "". Returns the default ACF value "" if none has been
+     * set using Fewbricks.
+     */
+    public function getPostType()
+    {
+
+        return $this->getSetting('post_type', []);
+
+    }
+
+    /**
+     * @return mixed The value of the ACF setting "post_type". Returns the default ACF value of an empty array if none
+     * has been set using Fewbricks.
+     */
+    public function getTaxonomy()
+    {
+
+        return $this->getSetting('taxonomy', []);
+
+    }
+
+    /**
      * @return string The ACF type that ultimately decides what kind of field instances of this class is.
      */
     public function getType()

@@ -28,7 +28,9 @@ class Checkbox extends FieldWithChoices implements FieldInterface
     public function setAllowCustom($allowCustom)
     {
 
-        return $this->setSetting('allow_custom', $allowCustom);
+        $this->setSetting('allow_custom', $allowCustom);
+
+        return $this;
 
     }
 
@@ -42,7 +44,9 @@ class Checkbox extends FieldWithChoices implements FieldInterface
     public function setLayout($layout)
     {
 
-        return $this->setSetting('layout', $layout);
+        $this->setSetting('layout', $layout);
+
+        return $this;
 
     }
 
@@ -56,7 +60,9 @@ class Checkbox extends FieldWithChoices implements FieldInterface
     public function setSaveCustom($saveCustom)
     {
 
-        return $this->setSetting('save_custom', $saveCustom);
+        $this->setSetting('save_custom', $saveCustom);
+
+        return $this;
 
     }
 
@@ -71,7 +77,9 @@ class Checkbox extends FieldWithChoices implements FieldInterface
     public function setToggle($toggle)
     {
 
-        return $this->setSetting('toggle', $toggle);
+        $this->setSetting('toggle', $toggle);
+
+        return $this;
 
     }
 
@@ -82,7 +90,7 @@ class Checkbox extends FieldWithChoices implements FieldInterface
     public function getAllowCustom()
     {
 
-        return $this->getSetting('allow_custom', 0);
+        return $this->getSetting('allow_custom', false);
 
     }
 
@@ -93,12 +101,12 @@ class Checkbox extends FieldWithChoices implements FieldInterface
     public function getSaveCustom()
     {
 
-        return $this->getSetting('save_custom', 0);
+        return $this->getSetting('save_custom', false);
 
     }
 
     /**
-     * @return mixed The value of the ACF setting "layout". Returns the default ACF value "false" if none has been
+     * @return mixed The value of the ACF setting "toggle". Returns the default ACF value "false" if none has been
      * set using Fewbricks.
      */
     public function getToggle()

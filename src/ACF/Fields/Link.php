@@ -28,12 +28,15 @@ class Link extends Field implements FieldInterface
     public function setReturnFormat($returnFormat)
     {
 
-        return $this->setSetting('return_format', $returnFormat);
+        $this->setSetting('return_format', $returnFormat);
+
+        return $this;
 
     }
 
     /**
-     * @return mixed
+     * @return mixed The value of the ACF setting "return_format". Returns the default ACF value "array" if none has
+     * been set using Fewbricks.
      */
     public function getReturnFormat()
     {

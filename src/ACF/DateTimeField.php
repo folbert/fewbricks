@@ -21,7 +21,9 @@ class DateTimeField extends Field
     public function setDisplayFormat($displayFormat)
     {
 
-        return $this->setSetting('display_format', $displayFormat);
+        $this->setSetting('display_format', $displayFormat);
+
+        return $this;
 
     }
 
@@ -35,7 +37,9 @@ class DateTimeField extends Field
     public function setFirstDay($firstDay)
     {
 
-        return $this->setSetting('first_day', $firstDay);
+        $this->setSetting('first_day', $firstDay);
+
+        return $this;
 
     }
 
@@ -50,18 +54,9 @@ class DateTimeField extends Field
     public function setReturnFormat($returnFormat)
     {
 
-        return $this->setSetting('return_format', $returnFormat);
+        $this->setSetting('return_format', $returnFormat);
 
-    }
-
-    /**
-     * @return mixed The value of the ACF setting "display_format". Returns the default ACF value "d/m/Y" if none has been
-     * set using Fewbricks.
-     */
-    public function getDisplayFormat()
-    {
-
-        return $this->getSetting('display_format', 'd/m/Y');
+        return $this;
 
     }
 
@@ -73,17 +68,6 @@ class DateTimeField extends Field
     {
 
         return $this->getSetting('first_day', 1);
-
-    }
-
-    /**
-     * @return mixed The value of the ACF setting "return_format". Returns the default ACF value "d/m/Y" if none has been
-     * set using Fewbricks.
-     */
-    public function getReturnFormat()
-    {
-
-        return $this->getSetting('return_format', 'd/m/Y');
 
     }
 

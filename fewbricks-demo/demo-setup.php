@@ -8,18 +8,14 @@ namespace App\FewbricksDemo;
 
 /**
  * Autoloader specific for Fewbricks in your project.
- * The idea to support subfolders comes from
- * https://github.com/macherjek1/mj-fewbricks/commit/913be9ea17
- * This function is defined here and not in the Fewbricks core files for you to be able to
- * edit it to match it to your preferred way of naming classes and for you to be able to
- * change the location of files and namespaces. Or remove it completely and require files as you see fit
- * or use Composer or...
+ * The idea to support subfolders comes from https://github.com/macherjek1/mj-fewbricks/commit/913be9ea17
+ * This function is defined here and not in the Fewbricks core files for you to be able to edit it to match it to your
+ * preferred way of naming classes and for you to be able to change the location of files and namespaces. Or remove i
+ * completely and require files as you see fit or use Composer or...
  * Feel free to modify or delete the function as you see fit.
  * The function assumes that you are using the namespace App\FewbricksDemo.
  */
 spl_autoload_register(function ($class) {
-
-    //$fileFound = false;
 
     $namespaceParts = explode('\\', $class);
 
@@ -47,8 +43,8 @@ spl_autoload_register(function ($class) {
         $path .= $fileName;
 
         // In a real environment i would probably go without this check to speed things up a bit
-        // but since this is a test/dev environment...
-        if(file_exists($path)) {
+        // but since this is a test/dev environment, lets do it like this.
+        if (file_exists($path)) {
             include $path;
         } else {
             die($path);
@@ -206,5 +202,4 @@ function templateInclude($template)
     return $template;
 }
 
-// Demo function
 add_filter('template_include', __NAMESPACE__ . '\\templateInclude', 99);

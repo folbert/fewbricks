@@ -117,6 +117,61 @@ class Repeater extends FieldWithSubFields implements FieldInterface
     }
 
     /**
+     * @return mixed The value of the ACF setting "button_label". Returns the default ACF value of the translated
+     * string of"Addrow" if none has been set using Fewbricks.
+     */
+    public function getButtonLabel()
+    {
+
+        return $this->getSetting('button_label', '');
+
+    }
+
+    /**
+     * @return mixed The value of the ACF setting "collapsed". Returns the default ACF value "" if none has been
+     * set using Fewbricks.
+     */
+    public function getCollapsed()
+    {
+
+        return $this->getSetting('collapsed', '');
+
+    }
+
+    /**
+     * @return mixed The value of the ACF setting "layout". Returns the default ACF value "table" if none has been
+     * set using Fewbricks.
+     */
+    public function getLayout()
+    {
+
+        return $this->getSetting('layout', 'table');
+
+    }
+
+    /**
+     * @return mixed The value of the ACF setting "m0". Returns the default ACF value "" if none has been
+     * set using Fewbricks.
+     */
+    public function getMax()
+    {
+
+        return $this->getSetting('max', 0);
+
+    }
+
+    /**
+     * @return mixed The value of the ACF setting "min". Returns the default ACF value 0 if none has been
+     * set using Fewbricks.
+     */
+    public function getMin()
+    {
+
+        return $this->getSetting('min', 0);
+
+    }
+
+    /**
      * @return string The ACF type that ultimately decides what kind of field instances of this class is.
      */
     public function getType()

@@ -28,7 +28,9 @@ class GoogleMap extends Field implements FieldInterface
     public function setCenterLat($lat)
     {
 
-        return $this->setSetting('center_lat', $lat);
+        $this->setSetting('center_lat', $lat);
+
+        return $this;
 
     }
 
@@ -42,7 +44,9 @@ class GoogleMap extends Field implements FieldInterface
     public function setCenterLng($lng)
     {
 
-        return $this->setSetting('center_lng', $lng);
+        $this->setSetting('center_lng', $lng);
+
+        return $this;
 
     }
 
@@ -56,7 +60,9 @@ class GoogleMap extends Field implements FieldInterface
     public function setHeight($height)
     {
 
-        return $this->setSetting('height', $height);
+        $this->setSetting('height', $height);
+
+        return $this;
 
     }
 
@@ -72,7 +78,9 @@ class GoogleMap extends Field implements FieldInterface
     public function setZoom($zoom)
     {
 
-        return $this->setSetting('zoom', $zoom);
+        $this->setSetting('zoom', $zoom);
+
+        return $this;
 
     }
 

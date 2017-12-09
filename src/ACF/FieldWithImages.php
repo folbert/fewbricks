@@ -24,7 +24,9 @@ class FieldWithImages extends Field
             $mime_types = implode(', ', $mime_types);
         }
 
-        return $this->setSetting('maxmime_types_size', $mime_types);
+        $this->setSetting('mime_types', $mime_types);
+
+        return $this;
 
     }
 
@@ -38,7 +40,9 @@ class FieldWithImages extends Field
     public function setLibrary($library)
     {
 
-        return $this->setSetting('library', $library);
+        $this->setSetting('library', $library);
+
+        return $this;
 
     }
 
@@ -52,7 +56,9 @@ class FieldWithImages extends Field
     public function setMaxHeight($maxHeight)
     {
 
-        return $this->setSetting('max_height', $maxHeight);
+        $this->setSetting('max_height', $maxHeight);
+
+        return $this;
 
     }
 
@@ -63,7 +69,9 @@ class FieldWithImages extends Field
     public function getMaxHeight()
     {
 
-        return $this->getSetting('max_height', 0);
+        $this->getSetting('max_height', 0);
+
+        return $this;
 
     }
 
@@ -77,7 +85,9 @@ class FieldWithImages extends Field
     public function setMaxSize($maxSize)
     {
 
-        return $this->setSetting('max_size', $maxSize);
+        $this->setSetting('max_size', $maxSize);
+
+        return $this;
 
     }
 
@@ -91,7 +101,9 @@ class FieldWithImages extends Field
     public function setMaxWidth($maxWidth)
     {
 
-        return $this->setSetting('max_width', $maxWidth);
+        $this->setSetting('max_width', $maxWidth);
+
+        return $this;
 
     }
 
@@ -105,7 +117,9 @@ class FieldWithImages extends Field
     public function setMinHeight($minHeight)
     {
 
-        return $this->setSetting('min_height', $minHeight);
+        $this->setSetting('min_height', $minHeight);
+
+        return $this;
 
     }
 
@@ -119,7 +133,9 @@ class FieldWithImages extends Field
     public function setMinSize($minSize)
     {
 
-        return $this->setSetting('min_size', $minSize);
+        $this->setSetting('min_size', $minSize);
+
+        return $this;
 
     }
 
@@ -133,7 +149,9 @@ class FieldWithImages extends Field
     public function setMinWidth($minWidth)
     {
 
-        return $this->setSetting('min_width', $minWidth);
+        $this->setSetting('min_width', $minWidth);
+
+        return $this;
 
     }
 

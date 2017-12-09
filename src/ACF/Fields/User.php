@@ -21,20 +21,6 @@ class User extends Field implements FieldInterface
     /**
      * ACF setting.
      *
-     * @param boolean $allowMutipleValues
-     *
-     * @return $this
-     */
-    public function setAllowMultipleValues($allowMutipleValues)
-    {
-
-        return $this->setSetting('multiple', $allowMutipleValues);
-
-    }
-
-    /**
-     * ACF setting.
-     *
      * @param boolean $allowNull
      *
      * @return $this
@@ -42,23 +28,76 @@ class User extends Field implements FieldInterface
     public function setAllowNull($allowNull)
     {
 
-        return $this->setSetting('allow_null', $allowNull);
+        $this->setSetting('allow_null', $allowNull);
+
+        return $this;
 
     }
 
     /**
      * ACF setting.
      *
-     * @param array $userRoles Array with names of the user roles that the editor should be able to choose from.
+     * @param boolean $multiple
+     *
+     * @return $this
+     */
+    public function setMultiple($multiple)
+    {
+
+        $this->setSetting('multiple', $multiple);
+
+        return $this;
+
+    }
+
+    /**
+     * ACF setting.
+     *
+     * @param array $role      Array with names of the user roles that the editor should be able to choose from.
      *                         For example: ['editor', 'author']. Send an empty array (or don't call the function at
      *                         all) to be able to choose from al roles.
      *
      * @return $this
      */
-    public function setUserRoles($userRoles)
+    public function setRole($role)
     {
 
-        return $this->setSetting('role', $userRoles);
+        $this->setSetting('role', $role);
+
+        return $this;
+
+    }
+
+    /**
+     * @return mixed The value of the ACF setting "allow_null". Returns the default ACF value false if none has been
+     * set using Fewbricks.
+     */
+    public function getAllowNull()
+    {
+
+        return $this->getSetting('allow_null', false);
+
+    }
+
+    /**
+     * @return mixed The value of the ACF setting "multiple". Returns the default ACF value false if none has been
+     * set using Fewbricks.
+     */
+    public function getMultiple()
+    {
+
+        return $this->getSetting('multiple', false);
+
+    }
+
+    /**
+     * @return mixed The value of the ACF setting "role". Returns the default ACF value "" if none has been
+     * set using Fewbricks.
+     */
+    public function getRole()
+    {
+
+        return $this->getSetting('role', '');
 
     }
 

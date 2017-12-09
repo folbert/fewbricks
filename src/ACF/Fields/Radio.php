@@ -28,7 +28,20 @@ class Radio extends FieldWithChoices implements FieldInterface
     public function setLayout($layout)
     {
 
-        return $this->setSetting('layout', $layout);
+        $this->setSetting('layout', $layout);
+
+        return $this;
+
+    }
+
+    /**
+     * @return mixed The value of the ACF setting "layout". Returns the default ACF value "vertical" if none has been
+     * set using Fewbricks.
+     */
+    public function getLayout()
+    {
+
+        return $this->getSetting('layout', 'vertical');
 
     }
 

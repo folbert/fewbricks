@@ -28,7 +28,9 @@ class Password extends Field implements FieldInterface
     public function setAppend($append)
     {
 
-        return $this->setSetting('append', $append);
+        $this->setSetting('append', $append);
+
+        return $this;
 
     }
 
@@ -42,7 +44,9 @@ class Password extends Field implements FieldInterface
     public function setPlaceholder($placeholder)
     {
 
-        return $this->setSetting('placeholder', $placeholder);
+        $this->setSetting('placeholder', $placeholder);
+
+        return $this;
 
     }
 
@@ -56,7 +60,42 @@ class Password extends Field implements FieldInterface
     public function setPrepend($prepend)
     {
 
-        return $this->setSetting('prepend', $prepend);
+        $this->setSetting('prepend', $prepend);
+
+        return $this;
+
+    }
+
+    /**
+     * @return mixed The value of the ACF setting "append". Returns the default ACF value "" if none has been
+     * set using Fewbricks.
+     */
+    public function getAppend()
+    {
+
+        return $this->setSetting('append', '');
+
+    }
+
+    /**
+     * @return mixed The value of the ACF setting "placeholder". Returns the default ACF value "" if none has been
+     * set using Fewbricks.
+     */
+    public function getPlaceholder()
+    {
+
+        return $this->getSetting('placeholder', '');
+
+    }
+
+    /**
+     * @return mixed The value of the ACF setting "prepend". Returns the default ACF value "" if none has been
+     * set using Fewbricks.
+     */
+    public function getPrepend()
+    {
+
+        return $this->getSetting('prepend', '');
 
     }
 

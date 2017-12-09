@@ -26,17 +26,6 @@ class FieldWithChoices extends Field
     }
 
     /**
-     * @return mixed The value of the ACF setting "allow_null". Returns the default ACF value of an empty array if none has
-     * been set using Fewbricks.
-     */
-    public function getAllowNull()
-    {
-
-        return $this->getSetting('allow_null', false);
-
-    }
-
-    /**
      * ACF setting.
      *
      * @param array $choices Associative array with options. Key will be name and value will be value.
@@ -61,6 +50,17 @@ class FieldWithChoices extends Field
     {
 
         return $this->setSetting('return_format', $returnFormat);
+
+    }
+
+    /**
+     * @return mixed The value of the ACF setting "allow_null". Returns the default ACF value of an empty array if none has
+     * been set using Fewbricks.
+     */
+    public function getAllowNull()
+    {
+
+        return $this->getSetting('allow_null', false);
 
     }
 

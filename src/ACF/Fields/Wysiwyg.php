@@ -28,7 +28,9 @@ class Wysiwyg extends Field implements FieldInterface
     public function setDelay($delay)
     {
 
-        return $this->setSetting('delay', $delay);
+        $this->setSetting('delay', $delay);
+
+        return $this;
 
     }
 
@@ -42,7 +44,9 @@ class Wysiwyg extends Field implements FieldInterface
     public function setMediaUpload($showMediaUploadButtons)
     {
 
-        return $this->setSetting('media_upload', $showMediaUploadButtons);
+        $this->setSetting('media_upload', $showMediaUploadButtons);
+
+        return $this;
 
     }
 
@@ -56,7 +60,9 @@ class Wysiwyg extends Field implements FieldInterface
     public function setTabs($tabs)
     {
 
-        return $this->setSetting('tabs', $tabs);
+        $this->setSetting('tabs', $tabs);
+
+        return $this;
 
     }
 
@@ -72,7 +78,9 @@ class Wysiwyg extends Field implements FieldInterface
     public function setToolbar($toolbar)
     {
 
-        return $this->setSetting('toolbar', $toolbar);
+        $this->setSetting('toolbar', $toolbar);
+
+        return $this;
 
     }
 

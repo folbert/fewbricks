@@ -15,9 +15,7 @@ class FieldCollection extends Collection
     /**
      * @param string $base_key
      *
-     * @return array Associative array with field settings ready to be used for
-     * "fields" in an array to be sent to ACFs functions for
-     * registering fields using code.
+     * @return array An array that ACF can work with.
      */
     public function toArray($base_key = '')
     {

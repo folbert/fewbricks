@@ -121,27 +121,6 @@ class Item
     }
 
     /**
-     * Enables you to set a bunch of ACF settings at once.
-     *
-     * @param array $settings Associative array with settings name as key and
-     *                        value as value.
-     *
-     * @return $this
-     */
-    public function addSettings($settings)
-    {
-
-        foreach ($settings as $name => $value) {
-
-            $this->setSetting($name, $value);
-
-        }
-
-        return $this;
-
-    }
-
-    /**
      * @return string|boolean
      */
     public function getBrickKey()

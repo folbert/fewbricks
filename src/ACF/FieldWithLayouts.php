@@ -44,7 +44,9 @@ class FieldWithLayouts extends Field
     public function setButtonLabel($buttonLabel)
     {
 
-        return $this->setSetting('button_label', $buttonLabel);
+        $this->setSetting('button_label', $buttonLabel);
+
+        return $this;
 
     }
 
@@ -57,7 +59,9 @@ class FieldWithLayouts extends Field
     public function addLayout($layout, $key = null)
     {
 
-        return $this->layouts->addItem($layout, $key);
+        $this->layouts->addItem($layout, $key);
+
+        return $this;
 
     }
 
@@ -69,7 +73,9 @@ class FieldWithLayouts extends Field
     public function deleteLayout($key)
     {
 
-        return $this->layouts->deleteItem($key);
+        $this->layouts->deleteItem($key);
+
+        return $this;
 
     }
 

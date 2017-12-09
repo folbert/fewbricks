@@ -28,21 +28,25 @@ class PostObject extends Field implements FieldInterface
     public function setAllowNull($allowNull)
     {
 
-        return $this->setSetting('null', $allowNull);
+        $this->setSetting('null', $allowNull);
+
+        return $this;
 
     }
 
     /**
      * ACF setting.
      *
-     * @param boolean $allowMultipleValues
+     * @param boolean $multiple
      *
      * @return $this
      */
-    public function setAllowMultipleValues($allowMultipleValues)
+    public function setMultiple($multiple)
     {
 
-        return $this->setSetting('multiple', $allowMultipleValues);
+        $this->setSetting('multiple', $multiple);
+
+        return $this;
 
     }
 
@@ -53,10 +57,12 @@ class PostObject extends Field implements FieldInterface
      *
      * @return $this
      */
-    public function setPostTypes($postType)
+    public function setPostType($postType)
     {
 
-        return $this->setSetting('post_type', $postType);
+        $this->setSetting('post_type', $postType);
+
+        return $this;
 
     }
 
@@ -70,22 +76,81 @@ class PostObject extends Field implements FieldInterface
     public function setReturnFormat($returnFormat)
     {
 
-        return $this->setSetting('return_format', $returnFormat);
+        $this->setSetting('return_format', $returnFormat);
+
+        return $this;
 
     }
 
     /**
      * ACF setting. Set which terms post objects available in teh drop down must belong to.
      *
-     * @param array $taxonomyFilter An array where each item is made up of "taxonomy:term". For example
+     * @param array $taxonomy        An array where each item is made up of "taxonomy:term". For example
      *                               ["category:uncategorized"]
      *
      * @return $this
      */
-    public function setTaxonomyFilter($taxonomyFilter)
+    public function setTaxonomy($taxonomy)
     {
 
-        return $this->setSetting('taxonomy', $taxonomyFilter);
+        $this->setSetting('taxonomy', $taxonomy);
+
+        return $this;
+
+    }
+
+    /**
+     * @return mixed The value of the ACF setting "allow_null". Returns the default ACF value false if none has been
+     * set using Fewbricks.
+     */
+    public function getAllowNull()
+    {
+
+        return $this->getSetting('allow_null', false);
+
+    }
+
+    /**
+     * @return mixed The value of the ACF setting multiple. Returns the default ACF value false if none has been
+     * set using Fewbricks.
+     */
+    public function getMultiple()
+    {
+
+        return $this->getSetting('multiple', false);
+
+    }
+
+    /**
+     * @return mixed The value of the ACF setting "post_type". Returns the default ACF value of an empty array if none
+     * has been set using Fewbricks.
+     */
+    public function getPostType()
+    {
+
+        return $this->getSetting('post_type', []);
+
+    }
+
+    /**
+     * @return mixed The value of the ACF setting "return_formt". Returns the default ACF value "object" if none has
+     * been set using Fewbricks.
+     */
+    public function getReturnFormat()
+    {
+
+        return $this->getSetting('return_format', 'object');
+
+    }
+
+    /**
+     * @return mixed The value of the ACF setting "taxonomy". Returns the default ACF value of an empty array if none
+     * has been set using Fewbricks.
+     */
+    public function getTaxonomy()
+    {
+
+        return $this->getSetting('taxonomy', []);
 
     }
 

@@ -21,14 +21,16 @@ class Textarea extends Field implements FieldInterface
     /**
      * ACF setting.
      *
-     * @param int $characterLimit
+     * @param int $maxlength [sic]
      *
      * @return $this
      */
-    public function setCharacterLimit($characterLimit)
+    public function setMaxlength($maxlength)
     {
 
-        return $this->setSetting('maxlength', $characterLimit);
+        $this->setSetting('maxlength', $maxlength);
+
+        return $this;
 
     }
 
@@ -42,7 +44,9 @@ class Textarea extends Field implements FieldInterface
     public function setNewLines($newLines)
     {
 
-        return $this->setSetting('new_lines', $newLines);
+        $this->setSetting('new_lines', $newLines);
+
+        return $this;
 
     }
 
@@ -56,12 +60,14 @@ class Textarea extends Field implements FieldInterface
     public function setPlaceholder($placeholder)
     {
 
-        return $this->setSetting('placeholder', $placeholder);
+        $this->setSetting('placeholder', $placeholder);
+
+        return $this;
 
     }
 
     /**
-     * ACF settin.
+     * ACF setting.
      *
      * @param int $rows
      *
@@ -70,7 +76,53 @@ class Textarea extends Field implements FieldInterface
     public function setRows($rows)
     {
 
-        return $this->setSetting('rows', $rows);
+        $this->setSetting('rows', $rows);
+
+        return $this;
+
+    }
+
+    /**
+     * @return mixed The value of the ACF setting "maxlength". Returns the default ACF value "" if none has been
+     * set using Fewbricks.
+     */
+    public function getMaxlength()
+    {
+
+        return $this->getSetting('maxlength', '');
+
+    }
+
+    /**
+     * @return mixed The value of the ACF setting "new_lines". Returns the default ACF value "" if none has been
+     * set using Fewbricks.
+     */
+    public function getNewLines()
+    {
+
+        return $this->getSetting('new_lines', '');
+
+    }
+
+    /**
+     * @return mixed The value of the ACF setting "placeholder". Returns the default ACF value "" if none has been
+     * set using Fewbricks.
+     */
+    public function getPlaceholder()
+    {
+
+        return $this->getSetting('placeholder', '');
+
+    }
+
+    /**
+     * @return mixed The value of the ACF setting "rows". Returns the default ACF value 8 if none has been
+     * set using Fewbricks.
+     */
+    public function getRows()
+    {
+
+        return $this->getSetting('rows', 8);
 
     }
 

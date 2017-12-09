@@ -66,7 +66,8 @@ class Message extends Field implements FieldInterface
     }
 
     /**
-     * @return mixed
+     * @return mixed The value of the ACF setting "esc_html". Returns the default ACF value "false" if none has been
+     * set using Fewbricks.
      */
     public function getEscHtml()
     {
@@ -76,7 +77,8 @@ class Message extends Field implements FieldInterface
     }
 
     /**
-     * @return mixed
+     * @return mixed The value of the ACF setting "message". Returns the default ACF value "" if none has been
+     * set using Fewbricks.
      */
     public function getMessage()
     {
@@ -86,7 +88,8 @@ class Message extends Field implements FieldInterface
     }
 
     /**
-     * @return mixed
+     * @return mixed The value of the ACF setting "new_lines". Returns the default ACF value "wpautop" if none has been
+     * set using Fewbricks.
      */
     public function getNewLines()
     {

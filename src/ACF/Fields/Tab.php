@@ -28,7 +28,9 @@ class Tab extends Field implements FieldInterface
     public function setEndPoint($endPoint)
     {
 
-        return $this->setSetting('endpoint', $endPoint);
+        $this->setSetting('endpoint', $endPoint);
+
+        return $this;
 
     }
 
@@ -42,7 +44,31 @@ class Tab extends Field implements FieldInterface
     public function setPlacement($placement)
     {
 
-        return $this->setSetting('placement', $placement);
+        $this->setSetting('placement', $placement);
+
+        return $this;
+
+    }
+
+    /**
+     * @return mixed The value of the ACF setting "". Returns the default ACF value "" if none has been
+     * set using Fewbricks.
+     */
+    public function getEndPoint()
+    {
+
+        return $this->getSetting('endpoint', false);
+
+    }
+
+    /**
+     * @return mixed The value of the ACF setting "". Returns the default ACF value "" if none has been
+     * set using Fewbricks.
+     */
+    public function getPlacement()
+    {
+
+        return $this->getSetting('placement', 'top');
 
     }
 

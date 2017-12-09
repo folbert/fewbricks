@@ -21,28 +21,79 @@ class Select extends FieldWithChoices implements FieldInterface
     /**
      * ACF setting. If AJAX should be used to lazy load the choices.
      *
-     * @param boolean $lazyLoad
+     * @param boolean $ajax
      *
      * @return $this
      */
-    public function setLazyLoad($lazyLoad)
+    public function setAjax($ajax)
     {
 
-        return $this->setSetting('ajax', $lazyLoad);
+        $this->setSetting('ajax', $ajax);
+
+        return $this;
+
+    }
+
+    /**
+     * @param $multiple
+     *
+     * @return mixed
+     */
+    public function setMultiple($multiple)
+    {
+
+        $this->getSetting('multiple', $multiple);
+
+        return $this;
 
     }
 
     /**
      * ACF settings. Whether or not to use the stylised UI:
      *
-     * @param boolean $stylisedUi
+     * @param boolean $ui
      *
      * @return $this
      */
-    public function setStylisedUi($stylisedUi)
+    public function setUi($ui)
     {
 
-        return $this->setSetting('ui', $stylisedUi);
+        $this->setSetting('ui', $ui);
+
+        return $this;
+
+    }
+
+    /**
+     * @return mixed The value of the ACF setting "ajax". Returns the default ACF value false if none has been
+     * set using Fewbricks.
+     */
+    public function getAjax()
+    {
+
+        return $this->getSetting('ajax', false);
+
+    }
+
+    /**
+     * @return mixed The value of the ACF setting "multiple". Returns the default ACF value false if none has been
+     * set using Fewbricks.
+     */
+    public function getMultiple()
+    {
+
+        return $this->getSetting('multiple', false);
+
+    }
+
+    /**
+     * @return mixed The value of the ACF setting "ui". Returns the default ACF value false if none has been
+     * set using Fewbricks.
+     */
+    public function getUi()
+    {
+
+        return $this->getSetting('ui', false);
 
     }
 

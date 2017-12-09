@@ -19,6 +19,28 @@ class DateTimePicker extends DateTimeField implements FieldInterface
 {
 
     /**
+     * @return mixed The value of the ACF setting "display_format". Returns the default ACF value "d/m/Y g:i a" if none
+     * has been set using Fewbricks.
+     */
+    public function getDisplayFormat()
+    {
+
+        return $this->getSetting('display_format', 'd/m/Y g:i a');
+
+    }
+
+    /**
+     * @return mixed The value of the ACF setting "return_format". Returns the default ACF value "d/m/Y g:i a" if none
+     * has been set using Fewbricks.
+     */
+    public function getReturnFormat()
+    {
+
+        return $this->getSetting('return_format', 'd/m/Y g:i a');
+
+    }
+
+    /**
      * @return string The ACF type that ultimately decides what kind of field instances of this class is.
      */
     public function getType()

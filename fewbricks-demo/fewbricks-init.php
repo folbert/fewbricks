@@ -10,5 +10,5 @@
 add_filter('fewbricks/activate_field_snitch', '__return_true');
 
 // Remove this to remove all demo related stuff
-require_once __DIR__ . '/demo/demo-functions.php';
+require_once __DIR__ . '/demo-functions.php';
 

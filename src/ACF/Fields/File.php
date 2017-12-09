@@ -19,16 +19,6 @@ class File extends Field implements FieldInterface
 {
 
     /**
-     * @return string The ACF type that ultimately decides what kind of field instances of this class is.
-     */
-    public function getType()
-    {
-
-        return 'file';
-
-    }
-
-    /**
      * ACF setting. Limit the media library choice.
      *
      * @param string $library "all" or "uploadedTo"
@@ -38,7 +28,9 @@ class File extends Field implements FieldInterface
     public function setLibrary($library)
     {
 
-        return $this->setSetting('library', $library);
+        $this->setSetting('library', $library);
+
+        return $this;
 
     }
 
@@ -52,14 +44,16 @@ class File extends Field implements FieldInterface
     public function setMaxSize($max_size)
     {
 
-        return $this->setSetting('max_size', $max_size);
+        $this->setSetting('max_size', $max_size);
+
+        return $this;
 
     }
 
     /**
      * ACF setting. Don't use or pass an empty value for all types.
      *
-     * @param array $mime_types Max file size in MB
+     * @param string|array $mime_types Comma separated string or array
      *
      * @return $this
      */
@@ -70,7 +64,9 @@ class File extends Field implements FieldInterface
             $mime_types = implode(', ', $mime_types);
         }
 
-        return $this->setSetting('mime_types', $mime_types);
+        $this->setSetting('mime_types', $mime_types);
+
+        return $this;
 
     }
 
@@ -84,7 +80,9 @@ class File extends Field implements FieldInterface
     public function setMinSize($min_size)
     {
 
-        return $this->setSetting('min_size', $min_size);
+        $this->setSetting('min_size', $min_size);
+
+        return $this;
 
     }
 
@@ -98,7 +96,9 @@ class File extends Field implements FieldInterface
     public function setReturnFormat($returnFormat)
     {
 
-        return $this->setSetting('return_format', $returnFormat);
+        $this->setSetting('return_format', $returnFormat);
+
+        return $this;
 
     }
 
@@ -147,13 +147,24 @@ class File extends Field implements FieldInterface
     }
 
     /**
-     * @return mixed The value of the ACF setting "return_format". Returns the default ACF value "d/m/Y" if none has been
+     * @return mixed The value of the ACF setting "return_format". Returns the default ACF value "array" if none has
+     * been
      * set using Fewbricks.
      */
     public function getReturnFormat()
     {
 
-        return $this->getSetting('return_format', 'd/m/Y');
+        return $this->getSetting('return_format', 'array');
+
+    }
+
+    /**
+     * @return string The ACF type that ultimately decides what kind of field instances of this class is.
+     */
+    public function getType()
+    {
+
+        return 'file';
 
     }
 

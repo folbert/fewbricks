@@ -201,7 +201,7 @@ class FieldsKitchenSink extends FieldGroup implements FieldGroupInterface
         // -------------
 
         $this->addField((new FAFields\Relationship('Relationship', 'relationship', '1711242111a'))
-            ->setPostTypes('fewbricks_demo_post')
+            ->setPostType('fewbricks_demo_post')
         );
 
         $this->addField(new FAFields\Select('Select', 'select', '1711210919a', [
@@ -222,7 +222,7 @@ class FieldsKitchenSink extends FieldGroup implements FieldGroupInterface
             '1711192022a'));
 
         $this->addField(new FAFields\Message('Testing conditional statement',
-            'testing_conditional_statement', '1711202201x', [
+            'testing_conditional_logic', '1711202201x', [
                 'message'           => 'This should only be shown if the checkbox _below_
                 is checked',
                 'conditional_logic' => [
@@ -261,7 +261,7 @@ class FieldsKitchenSink extends FieldGroup implements FieldGroupInterface
         $this->addField(new FAFields\Url('URL', 'url', '1711192031i'));
 
         $this->addField((new FAFields\User('User', 'user', '1711192032u'))
-            ->setUserRoles(['administrator', 'contributor']));
+            ->setRole(['administrator', 'contributor']));
 
         $this->addField(new FAFields\Wysiwyg('Wysiwyg', 'wysiwyg',
             '1711172249i', ['media_upload' => false, 'delay' => true]));

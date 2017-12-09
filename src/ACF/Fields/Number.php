@@ -28,7 +28,9 @@ class Number extends Field implements FieldInterface
     public function setAppend($append)
     {
 
-        return $this->setSetting('append', $append);
+        $this->setSetting('append', $append);
+
+        return $this;
 
     }
 
@@ -42,7 +44,9 @@ class Number extends Field implements FieldInterface
     public function setMaximumValue($maximumValue)
     {
 
-        return $this->setSetting('maximum_value', $maximumValue);
+        $this->setSetting('max', $maximumValue);
+
+        return $this;
 
     }
 
@@ -56,7 +60,9 @@ class Number extends Field implements FieldInterface
     public function setMinimumValue($minimumValue)
     {
 
-        return $this->setSetting('minimum_value', $minimumValue);
+        $this->setSetting('min', $minimumValue);
+
+        return $this;
 
     }
 
@@ -70,7 +76,9 @@ class Number extends Field implements FieldInterface
     public function setPlaceholder($placeholder)
     {
 
-        return $this->setSetting('placeholder', $placeholder);
+        $this->setSetting('placeholder', $placeholder);
+
+        return $this;
 
     }
 
@@ -84,7 +92,9 @@ class Number extends Field implements FieldInterface
     public function setPrepend($prepend)
     {
 
-        return $this->setSetting('prepend', $prepend);
+        $this->setSetting('prepend', $prepend);
+
+        return $this;
 
     }
 
@@ -98,12 +108,15 @@ class Number extends Field implements FieldInterface
     public function setStep($step)
     {
 
-        return $this->setSetting('step', $step);
+        $this->setSetting('step', $step);
+
+        return $this;
 
     }
 
     /**
-     * @return mixed
+     * @return mixed The value of the ACF setting "append". Returns the default ACF value "" if none has been
+     * set using Fewbricks.
      */
     public function getAppend()
     {
@@ -113,7 +126,8 @@ class Number extends Field implements FieldInterface
     }
 
     /**
-     * @return mixed
+     * @return mixed The value of the ACF setting "maximum_value". Returns the default ACF value "" if none has been
+     * set using Fewbricks.
      */
     public function getMaximumValue()
     {
@@ -123,7 +137,8 @@ class Number extends Field implements FieldInterface
     }
 
     /**
-     * @return mixed
+     * @return mixed The value of the ACF setting "minimum_value". Returns the default ACF value "" if none has been
+     * set using Fewbricks.
      */
     public function getMinimumValue()
     {
@@ -133,7 +148,8 @@ class Number extends Field implements FieldInterface
     }
 
     /**
-     * @return mixed
+     * @return mixed The value of the ACF setting "placeholder". Returns the default ACF value "" if none has been
+     * set using Fewbricks.
      */
     public function getPlaceholder()
     {
@@ -143,7 +159,8 @@ class Number extends Field implements FieldInterface
     }
 
     /**
-     * @return mixed
+     * @return mixed The value of the ACF setting "prepend". Returns the default ACF value "" if none has been
+     * set using Fewbricks.
      */
     public function getPrepend()
     {
@@ -153,7 +170,8 @@ class Number extends Field implements FieldInterface
     }
 
     /**
-     * @return mixed
+     * @return mixed The value of the ACF setting "step". Returns the default ACF value "" if none has been
+     * set using Fewbricks.
      */
     public function getStep()
     {

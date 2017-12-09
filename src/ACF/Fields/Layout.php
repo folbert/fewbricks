@@ -66,6 +66,39 @@ class Layout extends FieldWithSubFields implements FieldInterface
     }
 
     /**
+     * @return mixed The value of the ACF setting "display". Returns the default ACF value "block" if none has been
+     * set using Fewbricks.
+     */
+    public function getDisplay()
+    {
+
+        return $this->getSetting('display', 'block');
+
+    }
+
+    /**
+     * @return mixed The value of the ACF setting "max". Returns the default ACF value "" if none has been
+     * set using Fewbricks.
+     */
+    public function getMax()
+    {
+
+        return $this->getSetting('max', '');
+
+    }
+
+    /**
+     * @return mixed The value of the ACF setting "min". Returns the default ACF value "" if none has been
+     * set using Fewbricks.
+     */
+    public function getMin()
+    {
+
+        return $this->getSetting('min', '');
+
+    }
+
+    /**
      * @return string The ACF type that ultimately decides what kind of field instances of this class is.
      */
     public function getType()

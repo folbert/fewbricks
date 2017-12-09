@@ -21,15 +21,54 @@ class Oembed extends Field implements FieldInterface
     /**
      * ACF setting.
      *
-     * @param int $width  Width in px (without "px")
-     * @param int $height Hieght in px (without "px")
+     * @param int $height  Width in px (without "px")
      *
      * @return $this
      */
-    public function setEmbedSize($width, $height)
+    public function setHeight($height)
     {
 
-        return $this->setSettings(['width' => $width, 'height' => $height]);
+        $this->setSetting('height', $height);
+
+        return $this;
+
+    }
+
+    /**
+     * ACF setting.
+     *
+     * @param int $width  Width in px (without "px")
+     *
+     * @return $this
+     */
+    public function setWidth($width)
+    {
+
+        $this->setSetting('width', $width);
+
+        return $this;
+
+    }
+
+    /**
+     * @return mixed The value of the ACF setting "height". Returns the default ACF value "" if none has been
+     * set using Fewbricks.
+     */
+    public function getHeight()
+    {
+
+        return $this->getSetting('height', '');
+
+    }
+
+    /**
+     * @return mixed The value of the ACF setting "width". Returns the default ACF value "" if none has been
+     * set using Fewbricks.
+     */
+    public function getWidth()
+    {
+
+        return $this->getSetting('width', '');
 
     }
 
