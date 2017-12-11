@@ -2,6 +2,9 @@
 
 namespace Fewbricks\ACF;
 
+use Fewbricks\ACF\Fields\Layout;
+use Fewbricks\KeyInUseException;
+
 /**
  * Class ItemWithLayouts
  *
@@ -52,14 +55,21 @@ class FieldWithLayouts extends Field
 
     /**
      * @param Layout $layout
-     * @param null   $key
      *
      * @return $this
      */
-    public function addLayout($layout, $key = null)
+    public function addLayout($layout)
     {
 
-        $this->layouts->addItem($layout, $key);
+        try {
+
+            $this->layouts->addItem($layout, $layout->getKey());
+
+        } catch (KeyInUseException $keyInUseException) {
+
+            $keyInUseException->wpDie();
+
+        }
 
         return $this;
 
@@ -70,10 +80,10 @@ class FieldWithLayouts extends Field
      *
      * @return $this
      */
-    public function deleteLayout($key)
+    public function removeLayout($key)
     {
 
-        $this->layouts->deleteItem($key);
+        $this->layouts->removeItem($key);
 
         return $this;
 

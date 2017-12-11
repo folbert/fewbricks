@@ -2,6 +2,8 @@
 
 namespace Fewbricks\ACF;
 
+use Fewbricks\KeyInUseException;
+
 /**
  * Class FieldGroup
  *
@@ -137,7 +139,26 @@ class FieldGroup implements FieldGroupInterface
         $field->prefixName($this->fieldNamesPrefix);
         $field->prefixLabel($this->fieldLabelsPrefix);
 
-        $this->fieldObjects->addItem($field);
+        try {
+
+            $this->fieldObjects->addItem($field, $field->getKey());
+
+        } catch (KeyInUseException $keyInUseException) {
+
+            $keyInUseException->wpDie();
+
+        }
+
+
+    }
+
+    /**
+     * @param $fieldKey
+     */
+    public function removeField($fieldKey)
+    {
+
+        $this->fieldObjects->removeItem($fieldKey);
 
     }
 

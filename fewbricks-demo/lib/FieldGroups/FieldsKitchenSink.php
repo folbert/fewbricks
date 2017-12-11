@@ -99,7 +99,7 @@ class FieldsKitchenSink extends FieldGroup implements FieldGroupInterface
         $this->addField(new FAFields\DateTimePicker('Date Time Picker',
             'date_time_picker', '1711172314u'));
 
-        $this->addField(new FAFields\Email('E-mail', 'email', '1711172314y', [
+        $this->addField(new FAFields\Email('E-mail', 'email', '17', [
             'wrapper' => ['class' => 'fewbricks_demo_wrapper'],
         ]));
 
@@ -116,6 +116,15 @@ class FieldsKitchenSink extends FieldGroup implements FieldGroupInterface
         $l->addSubField(new FAFields\Text('Text', 'text', '1711231901b'));
         $l->addSubField(
             (new FAFields\Image('Image', 'image', '1711231901c'))
+                ->setPreviewSize('large')
+        );
+        $fc->addLayout($l);
+
+        // Testing duplicate keys
+        $l = new FAFields\Layout('Text and image', 'text_and_image', '1711231901i');
+        $l->addSubField(new FAFields\Text('Text', 'text', '1711231901b'));
+        $l->addSubField(
+            (new FAFields\Image('Image', 'image', '1711231901b'))
                 ->setPreviewSize('large')
         );
         $fc->addLayout($l);

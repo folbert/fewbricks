@@ -2,8 +2,11 @@
 
 namespace Fewbricks;
 
-use Fewbricks\ACF\Field;
-
+/**
+ * Class Collection
+ *
+ * @package Fewbricks
+ */
 class Collection
 {
 
@@ -25,23 +28,30 @@ class Collection
     }
 
     /**
-     * @param Field $item
+     * @param mixed $item
      * @param null  $key
+     *
+     * @throws KeyInUseException
      */
     public function addItem($item, $key = null)
     {
 
         if (is_null($key)) {
 
-            $this->items[] = $item;
+            array_push($this->items, $item);
 
         } else {
 
             if (isset($this->items[$key])) {
-                throw new KeyHasUseException('Key ' . $key
-                                             . ' already in use.');
+
+                throw new KeyInUseException('Key <code>' . $key . '</code> already in use. Keys must be 
+unique.<br><br>Pro-tip: create your keys manually 
+by using the current date and time. So if you are creating a field at 09:59 on December 11 2017, the key might be "1712110959a". Note the addition of an extra character to ensure that ACF can use the key but also to make sure that if you create another key within the same minute, you can simply append some other "random" letter to that key like "1712110989x".');
+
             } else {
-                $this->items[$key] = $obj;
+
+                $this->items[$key] = $item;
+
             }
 
         }
@@ -100,7 +110,7 @@ class Collection
     /**
      * @param $key
      */
-    public function deleteItem($key)
+    public function removeItem($key)
     {
 
         if (isset($this->items[$key])) {

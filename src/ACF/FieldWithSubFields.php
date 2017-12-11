@@ -2,6 +2,8 @@
 
 namespace Fewbricks\ACF;
 
+use Fewbricks\KeyInUseException;
+
 /**
  * Class ItemWithSubFields
  *
@@ -38,14 +40,21 @@ class FieldWithSubFields extends Field
 
     /**
      * @param Field $field
-     * @param null  $key
      *
      * @return $this
      */
-    public function addSubField($field, $key = null)
+    public function addSubField($field)
     {
 
-        $this->subFields->addItem($field, $key);
+        try {
+
+            $this->subFields->addItem($field, $field->getKey());
+
+        } catch(KeyInUseException $keyInUseException) {
+
+            $keyInUseException->wpDie();
+
+        }
 
         return $this;
 
@@ -59,7 +68,7 @@ class FieldWithSubFields extends Field
     public function deleteSubField($key)
     {
 
-        $this->subFields->deleteItem($key);
+        $this->subFields->removeItem($key);
 
         return $this;
 
