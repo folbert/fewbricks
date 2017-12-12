@@ -1,5 +1,10 @@
 # Fewbricks changelog
 
+## 1.7 - December 12, 2017
+* Added support for field "date_picker"
+* Added support for field "date_time_picker"
+* Thanks to https://github.com/mariemanandise for both of the above 
+
 ## 1.6 - March 19, 2017
 * Added function `get_field_values()`to `brick`
 * Added function `get_get_html_arg()` to `brick`
