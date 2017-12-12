@@ -113,4 +113,8 @@ $fewbricks_fg = (new fewacf\field_group('Fewbricks Demo - Footer', '1603242347a'
 
 $fewbricks_fg->add_field(new acf_fields\text('Footer text', 'footer_text', '1603242348a'));
 
+$fewbricks_fg->add_field(new acf_fields\date_picker('Date picker', 'date_picker', '1712122240a'));
+
+$fewbricks_fg->add_field(new acf_fields\date_time_picker('Date time picker', 'date_time_picker', '1712122240b'));
+
 $fewbricks_fg->register();
