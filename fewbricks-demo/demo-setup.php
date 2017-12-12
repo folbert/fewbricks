@@ -29,7 +29,7 @@ spl_autoload_register(function ($class) {
 
         // Start with our base path. Using the helper function will take into account
         // any filters used to modify the base path.
-        $path = \Fewbricks\Helpers::getProjectFilesBasePath() . '/lib/';
+        $path = \Fewbricks\Helper::getProjectFilesBasePath() . '/lib/';
 
         // If there is more than App\Fewbricks\Bricks\BrickName.php...
         if (count($namespaceParts) > 3) {

@@ -23,8 +23,6 @@ class Repeater extends FieldWithSubFields implements FieldInterface
      * @param array  $settings Array where you can pass all the possible
      *                         settings for the field.
      *                         https://www.advancedcustomfields.com/resources/register-fields-via-php/#field-type%20settings
-     * @param array  $void     Not used. Exists only to match the nr of args of parent
-     *                         constructor.
      */
     public function __construct(
         $label,

@@ -13,6 +13,24 @@ class FieldCollection extends Collection
 {
 
     /**
+     * @param $item
+     * @param $nameToAddAfter
+     */
+    public function addItemAfterByName($item, $nameToAddAfter)
+    {
+
+        /** @var Field $itemToAddAfter */
+        $itemToAddAfter = $this->getItemByName($nameToAddAfter);
+
+        if($itemToAddAfter !== false) {
+
+            $this->addItemAfter($item, $itemToAddAfter->getKey());
+
+        }
+
+    }
+
+    /**
      * @param string $base_key
      *
      * @return array An array that ACF can work with.
@@ -112,6 +130,53 @@ class FieldCollection extends Collection
         }
 
         return $fieldsSettings;
+
+    }
+
+    /**
+     * @param $name
+     */
+    public function removeItemByName($name)
+    {
+
+        /** @var Field $field */
+        foreach ($this->items AS $item_key => $field) {
+
+            if ($field->getName() === $name) {
+
+                parent::removeItem($item_key);
+
+            }
+
+        }
+
+    }
+
+    /**
+     * @param $name
+     *
+     * @return bool|mixed
+     */
+    public function getItemByName($name)
+    {
+
+        $item = false;
+
+        /**
+         * @var string $item_key
+         * @var Field $field
+         */
+        foreach($this->items AS $item_key => $field) {
+
+            if($field->getName() === $name) {
+
+                $item = parent::getItem($item_key);
+
+            }
+
+        }
+
+        return $item;
 
     }
 

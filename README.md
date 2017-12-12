@@ -125,6 +125,28 @@ The functions for setting field settings corresponds to the name of the setting 
 
 The following filters are available in Fewbricks:
 
+### `fewbricks/activate_field_snitch`
+Set to true to display info about each field in the backend. I have separated this from the debug-mode filter 
+(described further down) because while you may want to debug, you may not necessarily want to clutter the backend with field info. 
+
+### `fewbricks/brick/brick_template_base_path`
+Allows you to change the standard path of brick templates in
+[lib/brick.php -> get_brick_template_html()](lib/brick.php). If you pass a `$template_base_path` to
+`get_brick_template_html()` this filter will be ignored. Your filter should return the path without a trailing slash.
+
+### `fewbricks/brick/brick_template_file_extension`
+Allows you to change the file extension of template files used in
+[brick.php -> get_brick_template_html()](lib/brick.php). Your filter should return for example ".view.php" or ".php".
+Note the dot at the beginning. 
+
+### `fewbricks/brick/brick_layout_base_path`
+Allows you to change the base path of layout files used in [lib/brick.php -> get_brick_layouted_html()]. Your filter
+should return return the path without a trailing slash.
+
+### `fewbricks/debug_mode`
+Set to true to enable debug mode and have Fewbricks check for duplicate key names and keys. Adds some overhead when 
+registering fields etc. so should only be used in dev environments where duplicate keys etc. should be caught.
+
 ### `fewbricks/project_files_base_path`
 Allows you to change the path of the project Fewbricks folder where your field groups, bricks etc. are defined.
 
@@ -144,20 +166,6 @@ function fewbricks_project_files_base_path() {
 ### `fewbricks/project_init_file_name`
 Allows you to change the name of the file that intializes your custom implementation of Fewbricks. Defaults to
 fewbricks-init.php. Should always be located in the directory that the filter `fewbricks/project_files_base_path` returns.
-
-### `fewbricks/brick/brick_template_file_extension`
-Allows you to change the file extension of template files used in
-[brick.php -> get_brick_template_html()](lib/brick.php). Your filter should return for example ".view.php" or ".php".
-Note the dot at the beginning. 
-
-### `fewbricks/brick/brick_template_base_path`
-Allows you to change the standard path of brick templates in
-[lib/brick.php -> get_brick_template_html()](lib/brick.php). If you pass a `$template_base_path` to
-`get_brick_template_html()` this filter will be ignored. Your filter should return the path without a trailing slash.
-
-### `fewbricks/brick/brick_layout_base_path`
-Allows you to change the base path of layout files used in [lib/brick.php -> get_brick_layouted_html()]. Your filter
-should return return the path without a trailing slash.
 
 ### `fewbricks/show_fields_info`
 Set to true to display field name and key for every field in the backend. Default value is `false`.

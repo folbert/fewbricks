@@ -2,6 +2,8 @@
 
 namespace Fewbricks\ACF;
 
+use Fewbricks\KeyInUseException;
+
 /**
  * Class RuleGroup
  *
@@ -35,7 +37,15 @@ class RuleGroup
     public function addRule($rule)
     {
 
-        $this->rules->addItem($rule);
+        try {
+
+            $this->rules->addItem($rule);
+
+        } catch(KeyInUseException $keyInUseException) {
+
+            $keyInUseException->wpDie();
+
+        }
 
         return $this;
 
@@ -44,7 +54,8 @@ class RuleGroup
     /**
      * @return array An array that ACF can work with.
      */
-    public function toArray() {
+    public function toArray()
+    {
 
         return $this->rules->toArray();
 

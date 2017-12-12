@@ -40,6 +40,10 @@ class Filters
 
         add_filter('fewbricks/show_fields_info', '__return_true');
 
+        add_filter('fewbricks/debug_mode', '__return_true');
+
+        add_filter('fewbricks/activate_field_snitch', '__return_true');
+
     }
 
     /**

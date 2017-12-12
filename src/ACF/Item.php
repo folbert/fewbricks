@@ -171,6 +171,16 @@ class Item
     /**
      * @return string
      */
+    public function getLabel()
+    {
+
+        return $this->label;
+
+    }
+
+    /**
+     * @return string
+     */
     public function getName()
     {
 
