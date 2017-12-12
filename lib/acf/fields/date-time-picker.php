@@ -3,7 +3,7 @@
 namespace fewbricks\acf\fields;
 
 /**
- * Class date_picker
+ * Class date_time_picker
  * @package fewbricks\acf\fields
  */
 class date_time_picker extends field
