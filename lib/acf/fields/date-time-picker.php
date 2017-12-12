@@ -32,8 +32,8 @@ class date_time_picker extends field
                 'class' => '',
                 'id' => '',
             ],
-            'display_format' => 'd m Y H:i:s',
-            'return_format' => 'Ymd H:i:s',
+            'display_format' => 'd/m/Y g:i a',
+            'return_format' => 'd/m/Y g:i a',
             'first_day' => 1,
         ];
 

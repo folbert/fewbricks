@@ -32,8 +32,8 @@ class date_picker extends field
                 'class' => '',
                 'id' => '',
             ],
-            'display_format' => 'F j, Y',
-            'return_format' => 'Ymd',
+            'display_format' => 'd/m/Y',
+            'return_format' => 'd/m/Y',
             'first_day' => 1,
         ];
 
