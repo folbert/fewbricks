@@ -37,7 +37,7 @@ The following words will be explained in detail later in this document,
 + Brick Layout - Not to be confused with ACFs layouts. Brick layouts are like layouts in the [Blade templating system](https://laravel.com/docs/5.2/blade#defining-a-layout).
 
 ## About
-Fewbricks is a module system developed by [Björn Folbert](http://folbert.com) at [KAN](http://kan.se). It is built on top of the awesome plugin [Advanced Custom Fields](http://www.advancedcustomfields.com/) (ACF) v5 PRO meaning that you must have that installed for this to work.
+Fewbricks is a module system developed by [Björn Folbert](https://folbert.com) at [KAN Malmö](http://kan.se). It is built on top of the awesome plugin [Advanced Custom Fields](http://www.advancedcustomfields.com/) (ACF) v5 PRO meaning that you must have that installed for this to work.
 
 Instead of building field groups, repeaters, flexible content etc. using the GUI that comes with ACF, you build it all by writing code. So if you are looking for a way to create reusable fields within the GUI, Fewbricks is not what you are looking for.
 
