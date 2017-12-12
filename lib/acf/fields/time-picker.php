@@ -6,7 +6,7 @@ namespace fewbricks\acf\fields;
  * Class date_picker
  * @package fewbricks\acf\fields
  */
-class date_picker extends field
+class time_picker extends field
 {
 
     /**
@@ -23,7 +23,7 @@ class date_picker extends field
 
         $base_settings = [
             'prefix' => '',
-            'type' => 'date_picker',
+            'type' => 'time_picker',
             'instructions' => '',
             'required' => 0,
             'conditional_logic' => 0,
@@ -32,9 +32,8 @@ class date_picker extends field
                 'class' => '',
                 'id' => '',
             ],
-            'display_format' => 'd/m/Y',
-            'return_format' => 'd/m/Y',
-            'first_day' => 1,
+            'display_format' => 'H:i:s',
+            'return_format' => 'H:i:s'
         ];
 
         parent::__construct($label, $name, $key, $base_settings, $custom_settings);
