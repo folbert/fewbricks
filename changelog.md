@@ -1,5 +1,8 @@
 # Fewbricks changelog
 
+### 1.7.1 - December 14, 2017
+* Made add_common_field() public. https://github.com/folbert/fewbricks/pull/51
+
 ## 1.7 - December 12, 2017
 * Added support for field "date_picker"
 * Added support for field "date_time_picker"
