@@ -5,7 +5,7 @@ Plugin Name: Fewbricks
 Plugin URI: https://github.com/fewagency/fewbricks
 Description: A module extension to Advanced Custom Fields
 Author: Björn Folbert
-Version: 1.7
+Version: 1.7.1
 Author URI: http://folbert.com
 License: GPLv3
 */
@@ -31,7 +31,7 @@ require_once($fewbricks_lib_path . 'wp-autoupdate.php');
 add_action('init', function() {
 
     // set auto-update params
-    $plugin_current_version = '1.7';
+    $plugin_current_version = '1.7.1';
     $plugin_remote_path = 'http://fewbricks.folbert.com/update/update.php';
     $plugin_slug = plugin_basename(__FILE__);
     $license_user = 'null';

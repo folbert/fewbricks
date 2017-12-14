@@ -108,7 +108,7 @@ class layout
      * @param string $key A site wide unique key for the field
      * @param array $settings Anye extra settings to set on the field. Can be used to override existing settings as well.
      */
-    protected function add_common_field($common_field_array_key, $key, $settings = []) {
+    public function add_common_field($common_field_array_key, $key, $settings = []) {
 
         global $fewbricks_common_fields;
 
