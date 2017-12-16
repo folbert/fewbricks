@@ -47,7 +47,16 @@ class fewbricks {
 
             }
 
-        } else {
+          } else if ( defined( 'WP_CLI' ) && WP_CLI ) {
+              //added in case something goes wrong and we need to deactivate the plugin from WP CLI!
+              if( self::acf_exists() &&
+                self::fewbricks_hidden_exists() &&
+                self::fewbricks_template_dir_exists())
+              {
+                  self::add_fewbricks_hidden_activated_check();
+                  self::init();
+              }
+          } else {
             // Not in admin system, so assume that all is good.
 
             self::init();
