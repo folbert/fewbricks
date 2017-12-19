@@ -589,7 +589,15 @@ class FieldGroup implements FieldGroupInterface
     public function getKey()
     {
 
-        return $this->key;
+        $key = $this->key;
+
+        // Lets make sure that the key is ok for ACF
+        // https://www.advancedcustomfields.com/resources/register-fields-via-php/#field-settings
+        if (substr($key, 0, 6) !== 'group_') {
+            $key = 'group_' . $key;
+        }
+
+        return $key;
 
     }
 

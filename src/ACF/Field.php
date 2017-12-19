@@ -66,6 +66,7 @@ class Field extends Item
      * @param ConditionalLogicRuleGroup $ruleGroup
      *
      * @return $this
+     * @throws \Fewbricks\KeyInUseException
      */
     public function addConditionalLogicRuleGroup($ruleGroup)
     {
@@ -212,6 +213,24 @@ class Field extends Item
     {
 
         return $this->getSetting('instructions', '');
+
+    }
+
+    /**
+     * @return The|string
+     */
+    public function getKey()
+    {
+
+        $key = $this->key;
+
+        // Lets make sure that the key is ok for ACF
+        // https://www.advancedcustomfields.com/resources/register-fields-via-php/#field-settings
+        if (substr($key, 0, 6) !== 'field_') {
+            $key = 'field_' . $key;
+        }
+
+        return $key;
 
     }
 
