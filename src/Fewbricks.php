@@ -105,7 +105,7 @@ class Fewbricks
             $message
                 = sprintf(__('You have activated the plugin "Fewbricks". At the moment it is looking for project-specific files in (<code>'
                              . Helper::getProjectFilesBasePath()
-                             . '</code>). Since this folder will be overwritten on plugin updates, you should create your own project/app/theme/whatchamacallit specific Fewbricks directory somewhere safe like in a functionality plugin or in your theme. Whatever you choose, feel free to make a copy of the fewbricks-demo directory and base your code on that. After you have copied the folder, you must use the filter <code>fewbricks/project_files_base_path</code> to set the path where your project specific files resides. See the readme for more info on available filters.'));
+                             . '</code>). Since this folder will be overwritten on plugin updates, you should create your own project/app/theme/whatchamacallit specific Fewbricks directory somewhere safe like in a functionality plugin or in your theme. Whatever you choose, feel free to make a copy of the fewbricks-demo directory and base your code on that. After you have copied the folder, you must use the filter <code>fewbricks/project_files_base_path</code> to set the path where your project specific files resides. See <a href="https://fewbricksdocs.readme.io" target="_blank">the documentation</a> for more info on available filters.'));
 
         }
 
