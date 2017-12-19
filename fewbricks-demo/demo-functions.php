@@ -24,6 +24,10 @@ Filters::defineHooks();
 // Demoing a class
 (new FieldsKitchenSink('1712042021a'))
     ->setTitle('Main content')
+    // This will be prefixed to all field names i the field group.
+    // Since we are re-using the same field group multiple times on the same page,
+    // this is necessary to avoid clashes
+    ->setFieldNamesPrefix('main_content_')
     ->register();
 
 // Demoing the same class but but changing it on the fly

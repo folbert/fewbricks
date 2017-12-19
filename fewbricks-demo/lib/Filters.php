@@ -94,7 +94,7 @@ class Filters
     public static function editFieldGroupInfo()
     {
 
-        if (get_current_screen()->post_type === 'acf-field-group') {
+        if (get_current_screen()->post_type === 'edit-acf-field-group') {
 
             $message_html
                 = '
