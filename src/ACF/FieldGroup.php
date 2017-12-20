@@ -535,6 +535,7 @@ class FieldGroup implements FieldGroupInterface
         $acfSettingsArray = $this->toAcfArray();
 
         Helper::maybeStoreSimpleFieldGroupData($acfSettingsArray['title'], $acfSettingsArray['key']);
+        Helper::maybeStoreFieldGroupAcfSettings($acfSettingsArray);
 
         acf_add_local_field_group($acfSettingsArray);
 

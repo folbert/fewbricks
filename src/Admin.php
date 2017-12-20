@@ -56,24 +56,4 @@ class Admin
 
     }
 
-    /**
-     * @return bool|string
-     */
-    public static function getPhpCode()
-    {
-
-        $code = false;
-
-        if (isset($_GET['fewbricks_generate_php'])
-            && wp_verify_nonce($_GET['_wpnonce'], 'fewbricks_generate_php_rg8392god')
-        ) {
-
-            $code = 'banan';
-
-        }
-
-        return $code;
-
-    }
-
 }

@@ -4,6 +4,11 @@ namespace Fewbricks;
 
 use Fewbricks\AcfFieldSnitch\AcfFieldSnitch;
 
+/**
+ * Class Helper
+ *
+ * @package Fewbricks
+ */
 class Helper
 {
 
@@ -22,12 +27,12 @@ class Helper
     }
 
     /**
-     * @return bool
+     *
      */
-    public static function environmentIsFewbricksDev()
+    public static function cleanUpAfterAdminPage()
     {
 
-        return defined('FEWBRICKS_DEV') && FEWBRICKS_DEV == 'true';
+        delete_transient('fewbricks_field_groups_simple_data');
 
     }
 
@@ -45,7 +50,7 @@ class Helper
     }
 
     /**
-     * @return mixed|void
+     * @return boolean
      */
     public static function fewbricksIsInDebugMode()
     {
@@ -55,15 +60,74 @@ class Helper
     }
 
     /**
-     * @return mixed|void
+     * @param $fieldGroupKeys
+     *
+     * @return array
      */
-    public static function getVersion()
+    public static function getFieldGroupsPhpCodes($fieldGroupKeys)
     {
 
-        return get_option('fewbricks-version', -1);
+        $codes = [];
+
+        $storedSettings = self::getStoredFieldGroupsAcfSettings();
+
+        // Taken from class-acf-admin-tool-export.php
+        $str_replace  = [
+            "  "         => "\t",
+            "'!!__(!!\'" => "__('",
+            "!!\', !!\'" => "', '",
+            "!!\')!!'"   => "')",
+            "array ("    => "array(",
+        ];
+        $preg_replace = [
+            '/([\t\r\n]+?)array/' => 'array',
+            '/[0-9]+ => array/'   => 'array',
+        ];
+
+        // Loop the keys the caller has requested
+        foreach ($fieldGroupKeys AS $fieldGroupKey) {
+
+            if (isset($storedSettings[$fieldGroupKey])) {
+
+                $settingsCode = var_export($storedSettings[$fieldGroupKey], true);
+
+                // From ACF
+                $settingsCode = str_replace(array_keys($str_replace), array_values($str_replace), $settingsCode);
+
+                // From ACF
+                $settingsCode = preg_replace(array_keys($preg_replace), array_values($preg_replace), $settingsCode);
+
+                $settingsCode = esc_textarea($settingsCode);
+
+                $code = "if( function_exists('acf_add_local_field_group') ) {\r\n";
+                $code .= "  acf_add_local_field_group(\r\n";
+                $code .= "\t" . $settingsCode;
+                $code .= "  )\r\n";
+                $code .= '}';
+
+            } else {
+
+                $code = 'Could not find the code for this field group.';
+
+            }
+
+            $codes[$fieldGroupKey] = [$storedSettings[$fieldGroupKey]['title'], $code];
+
+        }
+
+        return $codes;
 
     }
 
+    /**
+     * @return mixed
+     */
+    public static function getStoredFieldGroupsAcfSettings()
+    {
+
+        return get_transient('fewbricks_field_groups_acf_settings');
+
+    }
 
     /**
      * Returns a timestamp if we are in dev environment. Use for example when developing css and js.
@@ -75,12 +139,32 @@ class Helper
 
         $outcome = time();
 
-        if(!self::environmentIsFewbricksDev()) {
+        if (!self::environmentIsFewbricksDev()) {
             $outcome = self::getVersion();
         }
 
         return $outcome;
 
+
+    }
+
+    /**
+     * @return bool
+     */
+    public static function environmentIsFewbricksDev()
+    {
+
+        return defined('FEWBRICKS_DEV') && FEWBRICKS_DEV == 'true';
+
+    }
+
+    /**
+     * @return int
+     */
+    public static function getVersion()
+    {
+
+        return get_option('fewbricks-version', -1);
 
     }
 
@@ -124,25 +208,19 @@ class Helper
     public static function getProjectFilesBasePath()
     {
 
-        $basePath = apply_filters(
-            'fewbricks/project_files_base_path',
-            self::getDefaultProjectFilesBasePath()
-        );
+        $basePath = apply_filters('fewbricks/project_files_base_path', self::getDefaultProjectFilesBasePath());
 
         return $basePath;
 
     }
 
     /**
-     * @return mixed|void
+     * @return string
      */
     public static function getProjectInitFileName()
     {
 
-        return apply_filters(
-            'fewbricks/project_init_file_name',
-            'fewbricks-init.php'
-        );
+        return apply_filters('fewbricks/project_init_file_name', 'fewbricks-init.php');
 
     }
 
@@ -187,19 +265,22 @@ class Helper
     }
 
     /**
-     * @param $fieldGroupTitle
-     * @param $fieldGroupId
+     * @param $fieldGroupAcfSettings
      */
-    public static function maybeStoreSimpleFieldGroupData($fieldGroupTitle, $fieldGroupId)
+    public static function maybeStoreFieldGroupAcfSettings($fieldGroupAcfSettings)
     {
 
-        if (self::pageIsFewbricksAdminPage()) {
+        if (
+            self::pageIsFewbricksAdminPage()
+            && isset($_GET['fewbricks_field_to_php'])
+            && in_array($fieldGroupAcfSettings['key'], $_GET['fewbricks_field_to_php'])
+        ) {
 
-            $fieldGroupsData = self::getStoredSimpleFieldGroupData();
+            $settings = self::getStoredFieldGroupsAcfSettings();
 
-            $fieldGroupsData[$fieldGroupId] = $fieldGroupTitle;
+            $settings[$fieldGroupAcfSettings['key']] = $fieldGroupAcfSettings;
 
-            update_option('fewbricks_field_groups', $fieldGroupsData);
+            set_transient('fewbricks_field_groups_acf_settings', $settings);
 
         }
 
@@ -229,12 +310,37 @@ class Helper
     }
 
     /**
-     * @return mixed|void
+     * @param $fieldGroupTitle
+     * @param $fieldGroupId
+     */
+    public static function maybeStoreSimpleFieldGroupData($fieldGroupTitle, $fieldGroupId)
+    {
+
+        if (self::pageIsFewbricksAdminPage()) {
+
+            $fieldGroupsData = self::getStoredSimpleFieldGroupData();
+
+            $fieldGroupsData[$fieldGroupId] = $fieldGroupTitle;
+
+            set_transient('fewbricks_field_groups_simple_data', $fieldGroupsData);
+
+        }
+
+    }
+
+    /**
+     * @return array
      */
     public static function getStoredSimpleFieldGroupData()
     {
 
-        return get_option('fewbricks_field_groups', []);
+        $data = get_transient('fewbricks_field_groups_simple_data');
+
+        if ($data === false) {
+            $data = [];
+        }
+
+        return $data;
 
     }
 
