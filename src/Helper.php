@@ -24,6 +24,16 @@ class Helper
     /**
      * @return bool
      */
+    public static function environmentIsFewbricksDev()
+    {
+
+        return defined('FEWBRICKS_DEV') && FEWBRICKS_DEV == 'true';
+
+    }
+
+    /**
+     * @return bool
+     */
     public static function fewbricksHiddenIsActivated()
     {
 
@@ -41,6 +51,36 @@ class Helper
     {
 
         return apply_filters('fewbricks/debug_mode', false);
+
+    }
+
+    /**
+     * @return mixed|void
+     */
+    public static function getVersion()
+    {
+
+        return get_option('fewbricks-version', -1);
+
+    }
+
+
+    /**
+     * Returns a timestamp if we are in dev environment. Use for example when developing css and js.
+     *
+     * @return int
+     */
+    public static function getVersionOrTimestamp()
+    {
+
+        $outcome = time();
+
+        if(!self::environmentIsFewbricksDev()) {
+            $outcome = self::getVersion();
+        }
+
+        return $outcome;
+
 
     }
 
@@ -143,6 +183,58 @@ class Helper
     {
 
         return self::getProjectFilesBasePath() === self::getDefaultProjectFilesBasePath();
+
+    }
+
+    /**
+     * @param $fieldGroupTitle
+     * @param $fieldGroupId
+     */
+    public static function maybeStoreSimpleFieldGroupData($fieldGroupTitle, $fieldGroupId)
+    {
+
+        if (self::pageIsFewbricksAdminPage()) {
+
+            $fieldGroupsData = self::getStoredSimpleFieldGroupData();
+
+            $fieldGroupsData[$fieldGroupId] = $fieldGroupTitle;
+
+            update_option('fewbricks_field_groups', $fieldGroupsData);
+
+        }
+
+    }
+
+    /**
+     * @return bool
+     */
+    public static function pageIsFewbricksAdminPage()
+    {
+
+        $outcome = false;
+
+        if (is_admin()
+            && isset($_GET['post_type'])
+            && isset($_GET['page'])
+            && $_GET['post_type'] === 'acf-field-group'
+            && $_GET['page'] === 'fewbricksdev'
+        ) {
+
+            $outcome = true;
+
+        }
+
+        return $outcome;
+
+    }
+
+    /**
+     * @return mixed|void
+     */
+    public static function getStoredSimpleFieldGroupData()
+    {
+
+        return get_option('fewbricks_field_groups', []);
 
     }
 

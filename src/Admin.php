@@ -27,9 +27,16 @@ class Admin
     public static function applyStyles($hook)
     {
 
-        if($hook === 'custom-fields_page_fewbricksdev') {
+        if (Helper::pageIsFewbricksAdminPage()) {
 
-            wp_enqueue_style( 'custom_wp_admin_css', plugins_url('../admin/assets/styles/styles.css', __FILE__));
+            wp_enqueue_style('fewbricks-admin', plugins_url('../admin/assets/styles/styles.css', __FILE__), [],
+                Helper::getVersionOrTimestamp());
+
+            wp_enqueue_style('acf-input', acf_get_dir('assets/css/acf-input.css'), ['acf-global'],
+                acf_get_setting('version'));
+
+            wp_enqueue_script('fewbricks-admin-js', plugins_url('../admin/assets/js/js.js', __FILE__), ['jquery'],
+                Helper::getVersionOrTimestamp(), true);
 
         }
 

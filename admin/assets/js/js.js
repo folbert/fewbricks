@@ -1,0 +1,1 @@
+alert('Implement toggle all');

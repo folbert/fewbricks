@@ -2,6 +2,7 @@
 
 namespace Fewbricks\ACF;
 
+use Fewbricks\Helper;
 use Fewbricks\KeyInUseException;
 
 /**
@@ -532,6 +533,8 @@ class FieldGroup implements FieldGroupInterface
         $this->doAddFieldsAfter();
 
         $acfSettingsArray = $this->toAcfArray();
+
+        Helper::maybeStoreSimpleFieldGroupData($acfSettingsArray['title'], $acfSettingsArray['key']);
 
         acf_add_local_field_group($acfSettingsArray);
 
