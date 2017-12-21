@@ -17,17 +17,45 @@
             <div class="acf-meta-box-wrap">
                 <div class="postbox">
 
-                    <h2 class="hndle">PHP export</h2>
+                    <h2 class="hndle"><?php _e('Export Field Groups', 'fewbricks'); ?></h2>
 
                     <div class="inside">
 
                         <?php
-                        foreach ($fieldGroupCodes AS $fieldGroupTitle => $data) {
-                            ?>
-                            <p><label for="fewbricks-php-export-"<?php  ?>><b>PHP Code for field group "<?php echo $data[0] . '"  with key <i>' . $fieldGroupTitle . '</i>'; ?></b></label></p>
-                            <textarea readonly class="fewbricks__export-textarea"><?php echo $data[1]; ?></textarea>
+                        if ($_GET['fewbricks_generate_php_split'] === 'one_per_field_group') {
 
-                            <?php
+                            foreach ($fieldGroupCodes AS $fieldGroupKey => $data) {
+                                ?>
+                                <p><label for="fewbricks-php-export-"<?php echo $fieldGroupKey; ?>><b>PHP Code for
+                                            field group
+                                            "<?php echo $data[0] . '"  with key <i>' . $fieldGroupKey
+                                                        . '</i>'; ?></b></label></p>
+                                <textarea readonly class="fewbricks__export-textarea"><?php echo $data[1]; ?></textarea>
+
+                                <?php
+                            }
+
+                        } else {
+
+                            $textarea_content = '';
+
+                            foreach ($fieldGroupCodes AS $fieldGroupKey => $data) {
+
+                                $textarea_content .= "//-------------\r";
+                                $textarea_content .= "// Start of field group \"" . $data[0] . "\"\r";
+                                $textarea_content .= "//-------------\r\r";
+
+                                $textarea_content .= $data[1];
+
+                                $textarea_content .= "\r//-------------\r";
+                                $textarea_content .= "// End of field group \"" . $data[0] . "\"\r";
+                                $textarea_content .= "//-------------\r\r";
+
+                            }
+
+                            echo '<textarea readonly class="fewbricks__export-textarea">' . $textarea_content
+                                 . '</textarea>';
+
                         }
                         ?>
 
@@ -73,7 +101,7 @@
                                     $checkboxesHtml .= '<li><label><input type="checkbox" class="acf-checkbox-toggle" data-fewbricks-toggle-all-siblings><i> '
                                                        . __('Toggle all', 'fewbricks') . '</i></li>';
 
-                                    foreach ($fieldGroupData AS $fieldGroupKey => $fieldGroupTitle) {
+                                    foreach ($fieldGroupData AS $fieldGroupKey => $fieldGroupKey) {
 
                                         $checkboxesHtml .= '<li>';
                                         $checkboxesHtml .= '<label>';
@@ -81,13 +109,14 @@
                                         $checkboxesHtml .= 'name="fewbricks_field_to_php[]" ';
                                         $checkboxesHtml .= 'value="' . $fieldGroupKey . '" ';
 
-                                        if(isset($_GET['fewbricks_field_to_php'])
-                                           && in_array($fieldGroupKey, $_GET['fewbricks_field_to_php'])) {
+                                        if (isset($_GET['fewbricks_field_to_php'])
+                                            && in_array($fieldGroupKey, $_GET['fewbricks_field_to_php'])
+                                        ) {
                                             $checkboxesHtml .= 'checked="checked" ';
                                         }
 
                                         $checkboxesHtml .= '> ';
-                                        $checkboxesHtml .= $fieldGroupTitle;
+                                        $checkboxesHtml .= $fieldGroupKey;
                                         $checkboxesHtml .= '</label>';
                                         $checkboxesHtml .= '</li>';
 
@@ -98,6 +127,16 @@
                                     echo $checkboxesHtml;
 
                                     ?>
+
+                                    <hr>
+
+                                    <div class="acf-label">
+                                        <label for="fewbricks_generate_php_split">Generate:</label>
+                                    </div>
+                                    <select name="fewbricks_generate_php_split" id="fewbricks_generate_php_split">
+                                        <option value="one_per_field_group">One textearea per field group</option>
+                                        <option value="no_split">One textarea with all field groups in it</option>
+                                    </select>
 
                                     <?php submit_button('Generate PHP', 'primary', 'fewbricks_generate_php'); ?>
                                     <?php wp_nonce_field('fewbricks_generate_php_rg8392god', '_wpnonce', false); ?>

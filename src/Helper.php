@@ -60,11 +60,12 @@ class Helper
     }
 
     /**
-     * @param $fieldGroupKeys
+     * @param mixed|boolean $fieldGroupKeys An array with the keys of the field groups you want to get. Pass false to
+     *                                      retrieve all stored field groups.
      *
      * @return array
      */
-    public static function getFieldGroupsPhpCodes($fieldGroupKeys)
+    public static function getFieldGroupsPhpCodes($fieldGroupKeys = false)
     {
 
         $codes = [];
