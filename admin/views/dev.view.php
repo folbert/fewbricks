@@ -2,14 +2,10 @@
     <h1>Fewbricks</h1>
 
     <?php
-    if (
-        isset($_GET['fewbricks_generate_php'])
-        && isset($_GET['fewbricks_field_to_php'])
-        && !empty($_GET['fewbricks_field_to_php'])
-        && wp_verify_nonce($_GET['_wpnonce'], 'fewbricks_generate_php_rg8392god')
-    ) {
+    if (\Fewbricks\Helper::generatePhpCodeTriggered()) {
 
-        $fieldGroupCodes = \Fewbricks\Helper::getFieldGroupsPhpCodes($_GET['fewbricks_field_to_php']);
+        $fieldGroupCodes
+            = \Fewbricks\Helper::getFieldGroupsPhpCodes($_GET['fewbricks_selected_field_groups_for_export']);
 
         if (!empty($fieldGroupCodes)) {
             ?>
@@ -17,7 +13,7 @@
             <div class="acf-meta-box-wrap">
                 <div class="postbox">
 
-                    <h2 class="hndle"><?php _e('Export Field Groups', 'fewbricks'); ?></h2>
+                    <h2 class="hndle"><?php _e('Export Field Groups', 'acf'); ?></h2>
 
                     <div class="inside">
 
@@ -41,15 +37,7 @@
 
                             foreach ($fieldGroupCodes AS $fieldGroupKey => $data) {
 
-                                $textarea_content .= "//-------------\r";
-                                $textarea_content .= "// Start of field group \"" . $data[0] . "\"\r";
-                                $textarea_content .= "//-------------\r\r";
-
                                 $textarea_content .= $data[1];
-
-                                $textarea_content .= "\r//-------------\r";
-                                $textarea_content .= "// End of field group \"" . $data[0] . "\"\r";
-                                $textarea_content .= "//-------------\r\r";
 
                             }
 
@@ -76,11 +64,13 @@
     <div class="acf-meta-box-wrap -grid">
         <div class="postbox">
 
-            <h2 class="hndle">Export Fewbricks field groups and fields</h2>
+            <h2 class="hndle"><?php _e('Export Fewbricks field groups and fields', 'fewbricks'); ?></h2>
 
             <div class="inside">
 
-                <p>Here you can export all the field groups and fields that are registered using Fewbricks</p>
+                <p><?php _e('Here you can export all the field groups and fields that are registered using 
+                Fewbricks', 'fewbricks'); ?></p>
+
                 <form action="<?php echo admin_url('edit.php'); ?>" method="get">
 
                     <div class="acf-fields">
@@ -101,22 +91,23 @@
                                     $checkboxesHtml .= '<li><label><input type="checkbox" class="acf-checkbox-toggle" data-fewbricks-toggle-all-siblings><i> '
                                                        . __('Toggle all', 'fewbricks') . '</i></li>';
 
-                                    foreach ($fieldGroupData AS $fieldGroupKey => $fieldGroupKey) {
+                                    foreach ($fieldGroupData AS $fieldGroupKey => $fieldGroupTitle) {
 
                                         $checkboxesHtml .= '<li>';
                                         $checkboxesHtml .= '<label>';
                                         $checkboxesHtml .= '<input type="checkbox" ';
-                                        $checkboxesHtml .= 'name="fewbricks_field_to_php[]" ';
+                                        $checkboxesHtml .= 'name="fewbricks_selected_field_groups_for_export[]" ';
                                         $checkboxesHtml .= 'value="' . $fieldGroupKey . '" ';
 
-                                        if (isset($_GET['fewbricks_field_to_php'])
-                                            && in_array($fieldGroupKey, $_GET['fewbricks_field_to_php'])
+                                        if (isset($_GET['fewbricks_selected_field_groups_for_export'])
+                                            && in_array($fieldGroupKey,
+                                                $_GET['fewbricks_selected_field_groups_for_export'])
                                         ) {
                                             $checkboxesHtml .= 'checked="checked" ';
                                         }
 
                                         $checkboxesHtml .= '> ';
-                                        $checkboxesHtml .= $fieldGroupKey;
+                                        $checkboxesHtml .= $fieldGroupTitle;
                                         $checkboxesHtml .= '</label>';
                                         $checkboxesHtml .= '</li>';
 
@@ -131,16 +122,26 @@
                                     <hr>
 
                                     <div class="acf-label">
-                                        <label for="fewbricks_generate_php_split">Generate:</label>
+                                        <label for="fewbricks_generate_php_split"><?php _e('Generate (only used when 
+                                        generating PHP):', 'fewbricks'); ?></label>
                                     </div>
                                     <select name="fewbricks_generate_php_split" id="fewbricks_generate_php_split">
-                                        <option value="one_per_field_group">One textearea per field group</option>
-                                        <option value="no_split">One textarea with all field groups in it</option>
+                                        <option value="one_per_field_group"><?php _e('One textarea per field 
+                                        group', 'fewbricks'); ?></option>
+                                        <option value="no_split"><?php _e('One textarea with all field groups in 
+                                        it', 'fewbricks'); ?></option>
                                     </select>
 
-                                    <?php submit_button('Generate PHP', 'primary', 'fewbricks_generate_php'); ?>
-                                    <?php wp_nonce_field('fewbricks_generate_php_rg8392god', '_wpnonce', false); ?>
-                                    <input type="hidden" name="action" value="fewbricks_generate_php" value="1"/>
+                                    <p class="acf-submit">
+                                        <button type="submit" name="action" class="button button-primary"
+                                                value="fewbricks_export_json"><?php _e('Export JSON-file',
+                                                'fewbricks'); ?></button>
+                                        <button type="submit" name="action" class="button"
+                                                value="fewbricks_generate_php"><?php _e('Generate PHP',
+                                                'acf'); ?></button>
+                                    </p>
+
+                                    <?php wp_nonce_field('fewbricks_export_d89dtygodl', '_wpnonce', false); ?>
                                     <input type="hidden" name="post_type" value="acf-field-group"/>
                                     <input type="hidden" name="page" value="fewbricksdev"/>
 
@@ -149,7 +150,9 @@
                                 } else {
                                     ?>
 
-                                    There are no fields registered by Fewbricks.
+                                    <p>
+                                        <?php _e('There are no fields registered by Fewbricks.', 'fewbricks'); ?>
+                                    </p>
 
                                     <?php
 
@@ -169,8 +172,18 @@
 
     </div>
 
+    <div class="acf-meta-box-wrap -grid">
+        <div class="postbox">
+
+            <h2 class="hndle">Export Fewbricks field groups and fields</h2>
+
+            <div class="inside">
+
+                dhjkhdkjhdkjhkjhjk
+
+            </div>
+
+        </div>
+    </div>
+
 </div>
-
-<?php
-
-\Fewbricks\Helper::cleanUpAfterAdminPage();

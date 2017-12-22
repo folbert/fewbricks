@@ -27,16 +27,6 @@ class Helper
     }
 
     /**
-     *
-     */
-    public static function cleanUpAfterAdminPage()
-    {
-
-        delete_transient('fewbricks_field_groups_simple_data');
-
-    }
-
-    /**
      * @return bool
      */
     public static function fewbricksHiddenIsActivated()
@@ -100,15 +90,23 @@ class Helper
 
                 $settingsCode = esc_textarea($settingsCode);
 
-                $code = "if( function_exists('acf_add_local_field_group') ) {\r\n";
+                $code = "//-------------\r";
+                $code .= "// Start of field group \"" . $storedSettings[$fieldGroupKey]['title'] . "\"\r";
+                $code .= "//-------------\r\r";
+
+                $code .= "if( function_exists('acf_add_local_field_group') ) {\r\n";
                 $code .= "  acf_add_local_field_group(\r\n";
                 $code .= "\t" . $settingsCode;
                 $code .= "  )\r\n";
                 $code .= '}';
 
+                $code .= "\r//-------------\r";
+                $code .= "// End of field group \"" . $storedSettings[$fieldGroupKey]['title'] . "\"\r";
+                $code .= "//-------------\r\r";
+
             } else {
 
-                $code = 'Could not find the code for this field group.';
+                $code = __('Could not find any code for this field group.', 'fewbricks');
 
             }
 
@@ -126,7 +124,9 @@ class Helper
     public static function getStoredFieldGroupsAcfSettings()
     {
 
-        return get_transient('fewbricks_field_groups_acf_settings');
+        global $fieldGroupsAcfSettings;
+
+        return $fieldGroupsAcfSettings;
 
     }
 
@@ -145,7 +145,6 @@ class Helper
         }
 
         return $outcome;
-
 
     }
 
@@ -272,18 +271,57 @@ class Helper
     {
 
         if (
-            self::pageIsFewbricksAdminPage()
-            && isset($_GET['fewbricks_field_to_php'])
-            && in_array($fieldGroupAcfSettings['key'], $_GET['fewbricks_field_to_php'])
+            (self::generatePhpCodeTriggered() || self::exportToJsonTriggered())
+            && isset($_GET['fewbricks_selected_field_groups_for_export'])
+            && is_array($_GET['fewbricks_selected_field_groups_for_export'])
+            && in_array($fieldGroupAcfSettings['key'], $_GET['fewbricks_selected_field_groups_for_export'])
         ) {
 
-            $settings = self::getStoredFieldGroupsAcfSettings();
-
-            $settings[$fieldGroupAcfSettings['key']] = $fieldGroupAcfSettings;
-
-            set_transient('fewbricks_field_groups_acf_settings', $settings);
+            self::storeFieldGroupAcfSettings($fieldGroupAcfSettings);
 
         }
+
+    }
+
+    /**
+     * @return bool
+     */
+    public static function generatePhpCodeTriggered()
+    {
+
+        return self::pageIsFewbricksAdminPage()
+               && isset($_GET['action'])
+               && $_GET['action'] === 'fewbricks_generate_php'
+               && wp_verify_nonce($_GET['_wpnonce'], 'fewbricks_export_d89dtygodl');
+
+    }
+
+    /**
+     * @return bool
+     */
+    public static function exportToJsonTriggered()
+    {
+
+        return self::pageIsFewbricksAdminPage()
+               && isset($_GET['action'])
+               && $_GET['action'] === 'fewbricks_export_json'
+               && wp_verify_nonce($_GET['_wpnonce'], 'fewbricks_export_d89dtygodl');
+
+    }
+
+    /**
+     * @param array $fieldGroupAcfSettings
+     */
+    public static function storeFieldGroupAcfSettings($fieldGroupAcfSettings)
+    {
+
+        global $fieldGroupsAcfSettings;
+
+        if(!is_array($fieldGroupsAcfSettings)) {
+            $fieldGroupsAcfSettings = [];
+        }
+
+        $fieldGroupsAcfSettings[$fieldGroupAcfSettings['key']] = $fieldGroupAcfSettings;
 
     }
 
@@ -319,11 +357,13 @@ class Helper
 
         if (self::pageIsFewbricksAdminPage()) {
 
-            $fieldGroupsData = self::getStoredSimpleFieldGroupData();
+            global $simpleFieldGroupsData;
 
-            $fieldGroupsData[$fieldGroupId] = $fieldGroupTitle;
+            if(!is_array($simpleFieldGroupsData)) {
+                $simpleFieldGroupsData = [];
+            }
 
-            set_transient('fewbricks_field_groups_simple_data', $fieldGroupsData);
+            $simpleFieldGroupsData[$fieldGroupId] = $fieldGroupTitle;
 
         }
 
@@ -335,13 +375,13 @@ class Helper
     public static function getStoredSimpleFieldGroupData()
     {
 
-        $data = get_transient('fewbricks_field_groups_simple_data');
+        global $simpleFieldGroupsData;
 
-        if ($data === false) {
-            $data = [];
+        if (!is_array($simpleFieldGroupsData)) {
+            $simpleFieldGroupsData = [];
         }
 
-        return $data;
+        return $simpleFieldGroupsData;
 
     }
 

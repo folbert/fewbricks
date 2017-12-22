@@ -18,6 +18,7 @@ class Admin
 
         add_action('admin_enqueue_scripts', __NAMESPACE__ . '\\Admin::applyStyles');
         add_action('admin_menu', __NAMESPACE__ . '\\Admin::editMenu');
+        add_action('admin_menu', __NAMESPACE__ . '\\Admin::maybeExportJson');
 
     }
 
@@ -53,6 +54,41 @@ class Admin
             function () {
                 require_once(__DIR__ . '/../admin/views/dev.view.php');
             });
+
+    }
+
+    /**
+     *
+     */
+    public static function maybeExportJson()
+    {
+
+        $data = [];
+
+        if (Helper::exportToJsonTriggered()) {
+
+            $fieldGroups = Helper::getStoredFieldGroupsAcfSettings();
+
+            // construct JSON
+            foreach ($fieldGroups as $fieldGroup) {
+
+                // prepare for export
+                $fieldGroup = acf_prepare_field_group_for_export($fieldGroup);
+
+                // add to json array
+                $data[] = $fieldGroup;
+
+            }
+
+            $file_name = 'fewbricks-acf-export-' . date('Y-m-d') . '.json';
+            header("Content-Description: File Transfer");
+            header("Content-Disposition: attachment; filename={$file_name}");
+            header("Content-Type: application/json; charset=utf-8");
+
+            echo acf_json_encode($data);
+            die();
+
+        }
 
     }
 
