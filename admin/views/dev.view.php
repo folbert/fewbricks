@@ -37,7 +37,7 @@
 
                             foreach ($fieldGroupCodes AS $fieldGroupKey => $data) {
 
-                                $textarea_content .= $data[1];
+                                $textarea_content .= esc_textarea($data[1]);
 
                             }
 
@@ -62,6 +62,7 @@
 
 
     <div class="acf-meta-box-wrap -grid">
+
         <div class="postbox">
 
             <h2 class="hndle"><?php _e('Export Fewbricks field groups and fields', 'fewbricks'); ?></h2>
@@ -69,7 +70,7 @@
             <div class="inside">
 
                 <p><?php _e('Here you can export all the field groups and fields that are registered using 
-                Fewbricks', 'fewbricks'); ?></p>
+                Fewbricks. Use the download button to export to a .json file which you can then import to another ACF installation. Use the generate button to export to PHP code which you can place in your theme.', 'fewbricks'); ?></p>
 
                 <form action="<?php echo admin_url('edit.php'); ?>" method="get">
 
@@ -122,7 +123,7 @@
                                     <hr>
 
                                     <div class="acf-label">
-                                        <label for="fewbricks_generate_php_split"><?php _e('Generate (only used when 
+                                        <label for="fewbricks_generate_php_split"><?php _e('Generate (only applied when 
                                         generating PHP):', 'fewbricks'); ?></label>
                                     </div>
                                     <select name="fewbricks_generate_php_split" id="fewbricks_generate_php_split">
@@ -170,20 +171,19 @@
 
         </div>
 
-    </div>
-
-    <div class="acf-meta-box-wrap -grid">
         <div class="postbox">
 
-            <h2 class="hndle">Export Fewbricks field groups and fields</h2>
+            <h2 class="hndle">Automatically create and use PHP code</h2>
 
             <div class="inside">
 
-                dhjkhdkjhdkjhkjhjk
-
+                Use the filter <a href="https://fewbricksdocs.readme.io/v2.0/docs/auto_write_php_code_file"
+                                  target="_blank">auto_write_php_code_file</a> to automatically render PHP code and
+                write it to a file on each page load.
             </div>
 
         </div>
+
     </div>
 
 </div>

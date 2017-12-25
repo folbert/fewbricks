@@ -19,50 +19,62 @@ use Fewbricks\Helper;
 // Fewbricks as possible.
 require_once 'demo-setup.php';
 
+// Define the filters for the demo
 Filters::defineHooks();
 
-// Demoing a class
-(new FieldsKitchenSink('1712042021a'))
-    ->setTitle('Main content')
-    // This will be prefixed to all field names i the field group.
-    // Since we are re-using the same field group multiple times on the same page,
-    // this is necessary to avoid clashes
-    ->setFieldNamesPrefix('main_content_')
-    ->register();
+// Demoing how to use "caching" functionality using PHP code files
+if (Helper::getAutoWritePhpCodeFile() !== false) {
 
-// Demoing the same class but but changing it on the fly
-(new FieldsKitchenSink('17120529561a'))
-    ->clearLocationRuleGroups()
-    ->addLocationRuleGroups([
-        (new FieldGroupLocationRuleGroup())->addRule(
-            new Rule('post_type', '=', 'fewbricks_demo_pg2')
-        ),
-        (new FieldGroupLocationRuleGroup())->addRule(
-            new Rule('post_type', '=', 'fewbricks_demo_pg')
-        ),
-    ])
-    ->setTitle('Secondary content')
-    ->hideOnScreen('the_content')
-    ->setFieldNamesPrefix('secondary_content_')
-    ->setFieldLabelsPrefix('Secondary content - ')
-    ->register();
+    require_once Helper::getAutoWritePhpCodeFile();
 
-(new FieldsKitchenSink('1712111413a'))
-    ->removeField('fd_tab1')
-    ->removeFields(['fd_color_picker', 'fd_file'])
-    ->removeField('fd_checkbox')
-    ->unRemoveField('fd_tab1')
-    ->addFieldAfter(
-        new Text('Text - added after Button Group', 'fd_text_after_button_group', '1712121051a'),
-        'fd_button_group'
-    )
-    ->addFieldAfter(
-        (new Text('Another text added after the button group', 'fd_text_after_new_text', '17121206a'))
-            ->addConditionalLogicRuleGroup(
-                (new ConditionalLogicRuleGroup())
-                    ->addRule(new ConditionalLogicRule('17120529561a', '==', 'black')
-                    )
+} else {
+
+    // Demoing a class
+    (new FieldsKitchenSink('1712042021a'))
+        ->setTitle('Main content')
+        // This will be prefixed to all field names i the field group.
+        // Since we are re-using the same field group multiple times on the same page,
+        // this is necessary to avoid clashes
+        ->setFieldNamesPrefix('main_content_')
+        ->register();
+
+    // Demoing the same class but but changing it on the fly
+    (new FieldsKitchenSink('17120529561a'))
+        ->clearLocationRuleGroups()
+        ->addLocationRuleGroups([
+            (new FieldGroupLocationRuleGroup())->addRule(
+                new Rule('post_type', '=', 'fewbricks_demo_pg2')
             ),
-        'fd_button_group'
-    )
-    ->register();
+            (new FieldGroupLocationRuleGroup())->addRule(
+                new Rule('post_type', '=', 'fewbricks_demo_pg')
+            ),
+        ])
+        ->setTitle('Secondary content')
+        ->hideOnScreen('the_content')
+        ->setFieldNamesPrefix('secondary_content_')
+        ->setFieldLabelsPrefix('Secondary content - ')
+        ->register();
+
+    (new FieldsKitchenSink('1712111413a'))
+        ->removeField('fd_tab1')
+        ->removeFields(['fd_color_picker', 'fd_file'])
+        ->removeField('fd_checkbox')
+        ->unRemoveField('fd_tab1')
+        ->addFieldAfter(
+            new Text('Text - added after Button Group', 'fd_text_after_button_group', '1712121051a'),
+            'fd_button_group'
+        )
+        ->addFieldAfter(
+            (new Text('Another text added after the button group', 'fd_text_after_new_text', '17121206a'))
+                ->addConditionalLogicRuleGroup(
+                    (new ConditionalLogicRuleGroup())
+                        ->addRule(new ConditionalLogicRule('17120529561a', '==', 'black')
+                        )
+                ),
+            'fd_button_group'
+        )
+        ->register();
+
+}
+
+

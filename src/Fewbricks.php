@@ -29,6 +29,18 @@ class Fewbricks
             Admin::applyHooks();
         }
 
+        self::applyHooks();
+
+    }
+
+    /**
+     *
+     */
+    public static function applyHooks()
+    {
+
+        add_action('wp_loaded', __NAMESPACE__ . '\\Helper::maybeWriteToPhpCodeFile');
+
     }
 
     /**

@@ -3,6 +3,7 @@
 /**
  * Demoing available filters
  */
+
 namespace App\FewbricksDemo;
 
 /**
@@ -38,16 +39,21 @@ class Filters
         add_action('admin_notices',
             [$me, 'editFieldGroupInfo']);
 
+        add_filter('fewbricks/auto_write_php_code_file', [$me, 'setPhpCodeFilePath']);
+
         add_filter('fewbricks/show_fields_info', '__return_true');
 
         add_filter('fewbricks/debug_mode', '__return_true');
 
         add_filter('fewbricks/activate_field_snitch', '__return_true');
 
+        //add_filter('fewbricks/display_php_file_written_message', '__return_false');
+
     }
 
     /**
      * This does not affect anything since the function is not called. Only here to show it should be done.
+     *
      * @return string
      */
     /*public static function getBrickTemplatesBasePath()
@@ -74,7 +80,7 @@ class Filters
     {
 
         //return get_template_directory() . '/fewbricks2';
-        return WP_PLUGIN_DIR . '/fewbricks/fewbricks';
+        return WP_PLUGIN_DIR . '/fewbricks/fewbricks-demo';
 
     }
 
@@ -105,6 +111,16 @@ class Filters
             echo $message_html;
 
         }
+
+    }
+
+    /**
+     * @return string
+     */
+    public static function setPhpCodeFilePath()
+    {
+
+        return WP_PLUGIN_DIR . '/fewbricks/fewbricks-demo/gitignored/fewbricks-php.php';
 
     }
 
