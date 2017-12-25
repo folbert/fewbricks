@@ -67,6 +67,17 @@ class FieldsKitchenSink extends FieldGroup implements FieldGroupInterface
     private function addMyFields()
     {
 
+        $this->addField(new FAFields\Accordion('Accordion', 'accordion', '1712252132a'));
+
+        $this->addField(new FAFields\Text('Text in accordion', 'text_in_accordion', '1712252132o'));
+
+        $this->addField(new FAFields\Text('Another text in accordion', 'another_text_in_accordion', '1712252132y'));
+
+        $this->addField(
+            (new FAFields\Accordion('Close accordion', 'close_accordion', '1712252133a'))
+            ->setEndpoint(true)
+        );
+
         // The other fields are in alphabetical oder but lets start with a tab
         $this->addField(new FAFields\Tab('Basic fields', 'fd_tab1', '1711192019a'));
 
