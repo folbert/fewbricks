@@ -120,7 +120,7 @@ class Filters
     public static function setPhpCodeFilePath()
     {
 
-        return WP_PLUGIN_DIR . '/fewbricks/fewbricks-demo/gitignored/fewbricks-php.php';
+        return WP_PLUGIN_DIR . '/fewbricks/gitignored/fewbricks-php.php';
 
     }
 
