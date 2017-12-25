@@ -34,7 +34,7 @@ class LayoutCollection extends Collection
 
     /**
      * @param Layout[] $layoutObjects
-     * @param string  $base_key
+     * @param string   $base_key
      *
      * @return array Associative array with field settings ready to be used for
      * "fields" in an array to be sent to ACFs functions for
@@ -66,6 +66,24 @@ class LayoutCollection extends Collection
         }
 
         return $settings;
+
+    }
+
+    /**
+     * @param $name
+     */
+    public function removeItemByName($name)
+    {
+
+        foreach ($this->items AS $key => $item) {
+
+            if ($item->getName() === $name) {
+
+                $this->removeItem($key);
+
+            }
+
+        }
 
     }
 

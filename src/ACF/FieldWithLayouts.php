@@ -76,14 +76,14 @@ class FieldWithLayouts extends Field
     }
 
     /**
-     * @param int $key
+     * @param int $name
      *
      * @return $this
      */
-    public function removeLayout($key)
+    public function removeLayout($name)
     {
 
-        $this->layouts->removeItem($key);
+        $this->layouts->removeItemByName($name);
 
         return $this;
 

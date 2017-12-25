@@ -150,6 +150,22 @@ class FieldsKitchenSink extends FieldGroup implements FieldGroupInterface
         ]));
         $fc->addLayout($l);
 
+        $l = new FAFields\Layout('Single image', 'fd_single_image', '1712252217a');
+        $l->addSubField(new FAFields\Image('Image', 'fd_image', '1712252218i'));
+        $fc->addLayout($l);
+
+        // This is of course a somewhat stupid usage of the functionality since we could simply
+        // not add the sub field to start with. But for demo purposes...
+        $layoutsToRemove = $this->getArg('remove_layouts', false);
+        if($layoutsToRemove !== false) {
+            foreach($layoutsToRemove AS $layoutToRemove) {
+                $fc->removeLayout($layoutToRemove);
+            }
+
+            $fc->setInstructions('This flexible content have had some layouts removed.');
+
+        }
+
         $this->addField($fc);
         // E.o. flexible content
         // ---------------------
@@ -211,6 +227,17 @@ class FieldsKitchenSink extends FieldGroup implements FieldGroupInterface
             ['required' => true]));
 
         $repeater->addSubField(new FAFields\Image('Repeater - Image', 'fd_repeater_image', '1711222221b'));
+
+        $repeater->addSubField(new FAFields\Text('Repeater - Text 2', 'fd_repeater_text_2', '1712252216a'));
+
+        // This is of course a somewhat stupid usage of the functionality since we could simply
+        // not add the sub field to start with. But for demo purposes...
+        $subFieldsToRemove = $this->getArg('remove_sub_fields', false);
+        if($subFieldsToRemove !== false) {
+            foreach($subFieldsToRemove AS $subFieldToRemove) {
+                $repeater->removeSubField($subFieldToRemove);
+            }
+        }
 
         $this->addField($repeater);
         // E.o. repeater

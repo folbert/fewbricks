@@ -23,11 +23,14 @@ require_once 'demo-setup.php';
 Filters::defineHooks();
 
 // Demoing how to use "caching" functionality using PHP code files
-if (Helper::getAutoWritePhpCodeFile() !== false) {
+if (defined('FEWBRICKS_ENV') && FEWBRICKS_ENV === 'production') {
 
+    //dump('Using file');
     require_once Helper::getAutoWritePhpCodeFile();
 
 } else {
+
+    //dump('Loading all code');
 
     // Demoing a class
     (new FieldsKitchenSink('1712042021a'))
@@ -36,6 +39,8 @@ if (Helper::getAutoWritePhpCodeFile() !== false) {
         // Since we are re-using the same field group multiple times on the same page,
         // this is necessary to avoid clashes
         ->setFieldNamesPrefix('main_content_')
+        ->setArg('remove_layouts', ['fd_text_and_select', 'fd_single_image'])
+        ->setArg('remove_sub_fields', ['fd_repeater_image', 'fd_repeater_text_2'])
         ->register();
 
     // Demoing the same class but but changing it on the fly
@@ -74,6 +79,33 @@ if (Helper::getAutoWritePhpCodeFile() !== false) {
             'fd_button_group'
         )
         ->register();
+
+
+    // Lots of field groups fo perf tests
+    /*(new FieldsKitchenSink('1712252102a'))
+        ->setTitle('Main content')
+        ->setFieldNamesPrefix('main_contenta_')
+        ->register();
+    (new FieldsKitchenSink('1712252102b'))
+        ->setTitle('Main content')
+        ->setFieldNamesPrefix('main_contentb_')
+        ->register();
+    (new FieldsKitchenSink('1712252102c'))
+        ->setTitle('Main content')
+        ->setFieldNamesPrefix('main_contentc_')
+        ->register();
+    (new FieldsKitchenSink('1712252102d'))
+        ->setTitle('Main content')
+        ->setFieldNamesPrefix('main_contentd_')
+        ->register();
+    (new FieldsKitchenSink('1712252102e'))
+        ->setTitle('Main content')
+        ->setFieldNamesPrefix('main_contente_')
+        ->register();
+    (new FieldsKitchenSink('1712252102f'))
+        ->setTitle('Main content')
+        ->setFieldNamesPrefix('main_contentf_')
+        ->register();*/
 
 }
 

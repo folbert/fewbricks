@@ -109,13 +109,13 @@ class FieldGroup implements FieldGroupInterface
 
         // Let's keep these crucial settings as class vars to enable nicer
         // and more OOP-oriented access
-        $this->title             = $title;
-        $this->key               = $key;
-        $this->settings          = $settings;
-        $this->fieldObjects      = new FieldCollection();
-        $this->fieldNamesPrefix  = '';
-        $this->fieldLabelsPrefix = '';
-        $this->fieldsToRemove    = [];
+        $this->title                         = $title;
+        $this->key                           = $key;
+        $this->settings                      = $settings;
+        $this->fieldObjects                  = new FieldCollection();
+        $this->fieldNamesPrefix              = '';
+        $this->fieldLabelsPrefix             = '';
+        $this->fieldsToRemove                = [];
         $this->fieldsToAddAfterFieldsOnBuild = [];
         $this->clearLocationRuleGroups();
 
@@ -158,6 +158,19 @@ class FieldGroup implements FieldGroupInterface
 
         }
 
+
+    }
+
+    /**
+     * @param string $name
+     * @param null   $defaultValue Value to return if arg is not set
+     *
+     * @return mixed|null
+     */
+    public function getArg($name, $defaultValue = null)
+    {
+
+        return (isset($this->args[$name]) ? $this->args[$name] : $defaultValue);
 
     }
 
@@ -547,12 +560,12 @@ class FieldGroup implements FieldGroupInterface
     /**
      *
      */
-    protected function doAddFieldsAfter()
+    protected function doRemoveFields()
     {
 
-        foreach($this->fieldsToAddAfterFieldsOnBuild AS $data) {
+        foreach ($this->fieldsToRemove AS $fieldToRemove) {
 
-            $this->fieldObjects->addItemAfterByName($data[0], $data[1]);
+            $this->fieldObjects->removeItemByName($fieldToRemove);
 
         }
 
@@ -561,12 +574,12 @@ class FieldGroup implements FieldGroupInterface
     /**
      *
      */
-    protected function doRemoveFields()
+    protected function doAddFieldsAfter()
     {
 
-        foreach ($this->fieldsToRemove AS $fieldToRemove) {
+        foreach ($this->fieldsToAddAfterFieldsOnBuild AS $data) {
 
-            $this->fieldObjects->removeItemByName($fieldToRemove);
+            $this->fieldObjects->addItemAfterByName($data[0], $data[1]);
 
         }
 
@@ -768,6 +781,21 @@ class FieldGroup implements FieldGroupInterface
     {
 
         return $this->getSetting('menu_order', $defaultValue);
+
+    }
+
+    /**
+     * @param string $name
+     * @param mixed  $value
+     *
+     * @return $this
+     */
+    public function setArg($name, $value)
+    {
+
+        $this->args[$name] = $value;
+
+        return $this;
 
     }
 

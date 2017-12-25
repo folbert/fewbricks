@@ -61,14 +61,14 @@ class FieldWithSubFields extends Field
     }
 
     /**
-     * @param int $key
+     * @param string $name
      *
      * @return $this
      */
-    public function deleteSubField($key)
+    public function removeSubField($name)
     {
 
-        $this->subFields->removeItem($key);
+        $this->subFields->removeItemByName($name);
 
         return $this;
 
