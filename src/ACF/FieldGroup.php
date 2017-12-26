@@ -7,10 +7,11 @@ use Fewbricks\KeyInUseException;
 
 /**
  * Class FieldGroup
+ * This is a glorified FieldCollection
  *
  * @package Fewbricks\ACF
  */
-class FieldGroup implements FieldGroupInterface
+class FieldGroup extends FieldCollection implements FieldGroupInterface
 {
 
     /**
@@ -36,34 +37,9 @@ class FieldGroup implements FieldGroupInterface
         ];
 
     /**
-     * @var array An array enabling you to pass any argument that you need.
-     */
-    protected $args;
-
-    /**
-     * @var
-     */
-    private $fieldLabelsPrefix;
-
-    /**
      * @var string
      */
-    private $fieldNamesPrefix;
-
-    /**
-     * @var FieldCollection
-     */
-    private $fieldObjects;
-
-    /**
-     * @var array
-     */
-    private $fieldsToRemove;
-
-    /**
-     * @var array
-     */
-    private $fieldsToAddAfterFieldsOnBuild;
+    protected $title = 'Field Group';
 
     /**
      * @var string
@@ -82,11 +58,6 @@ class FieldGroup implements FieldGroupInterface
      * @var array
      */
     private $settings;
-
-    /**
-     * @var string
-     */
-    protected $title = 'Field Group';
 
     /**
      * FieldGroup constructor.
@@ -108,20 +79,11 @@ class FieldGroup implements FieldGroupInterface
 
         // Let's keep these crucial settings as class vars to enable nicer
         // and more OOP-oriented access
-        $this->key                           = $key;
-        $this->settings                      = $settings;
-        $this->fieldObjects                  = new FieldCollection();
-        $this->fieldNamesPrefix              = '';
-        $this->fieldLabelsPrefix             = '';
-        $this->fieldsToRemove                = [];
-        $this->fieldsToAddAfterFieldsOnBuild = [];
+        $this->key      = $key;
+        $this->settings = $settings;
         $this->clearLocationRuleGroups();
 
-        if (!is_array($args)) {
-            $args = [];
-        }
-
-        $this->args = $args;
+        parent::__construct($args);
 
     }
 
@@ -132,109 +94,6 @@ class FieldGroup implements FieldGroupInterface
     {
 
         $this->locationRuleGroups = new RuleGroupCollection();
-
-        return $this;
-
-    }
-
-    /**
-     * @param Field $field
-     */
-    public function addField($field)
-    {
-
-        $field->prefixName($this->fieldNamesPrefix);
-        $field->prefixLabel($this->fieldLabelsPrefix);
-
-        try {
-
-            $this->fieldObjects->addItem($field, $field->getKey());
-
-        } catch (KeyInUseException $keyInUseException) {
-
-            $keyInUseException->wpDie();
-
-        }
-
-    }
-
-    /**
-     * @param string $name
-     * @param null   $defaultValue Value to return if arg is not set
-     *
-     * @return mixed|null
-     */
-    public function getArg($name, $defaultValue = null)
-    {
-
-        return (isset($this->args[$name]) ? $this->args[$name] : $defaultValue);
-
-    }
-
-    /**
-     * @param $fieldNames
-     *
-     * @return FieldGroup
-     */
-    public function removeFields($fieldNames)
-    {
-
-        foreach ($fieldNames AS $fieldName) {
-
-            $this->removeField($fieldName);
-
-        }
-
-        return $this;
-
-    }
-
-    /**
-     * @param string $fieldName The name of a field. Not the key, not the label, the name.
-     *
-     * @return FieldGroup
-     */
-    public function removeField($fieldName)
-    {
-
-        // Use the field name as index to allow us to use isset() later on which is faster than in_array
-        // https://stackoverflow.com/questions/13483219/what-is-faster-in-array-or-isset
-        $this->fieldsToRemove[$fieldName] = $fieldName;
-
-        return $this;
-
-    }
-
-    /**
-     * @param $fieldNames
-     *
-     * @return $this
-     */
-    public function unRemoveFields($fieldNames)
-    {
-
-        foreach ($fieldNames AS $fieldName) {
-
-            $this->unRemoveField($fieldName);
-
-        }
-
-        return $this;
-
-    }
-
-    /**
-     * If you change your mind about removing a field, use this function to un-remove it. Since we are not actually
-     * adding a field, we are un-removing it.
-     *
-     * @param string $fieldName
-     *
-     * @return FieldGroup
-     */
-    public function unRemoveField($fieldName)
-    {
-
-        unset($this->fieldsToRemove[$fieldName]);
 
         return $this;
 
@@ -281,46 +140,14 @@ class FieldGroup implements FieldGroupInterface
     }
 
     /**
-     * Set a string that will be prefixed to the labels of the fields that are added to this field group.
-     *
-     * @param $prefix
-     *
-     * @return $this
-     */
-    public function setFieldLabelsPrefix($prefix)
-    {
-
-        $this->fieldLabelsPrefix = $prefix;
-
-        return $this;
-
-    }
-
-    /**
-     * Set a string that will be prefixed to the names of the fields that are added to this field group.
-     *
-     * @param string $prefix
-     *
-     * @return $this
-     */
-    public function setFieldNamesPrefix($prefix)
-    {
-
-        $this->fieldNamesPrefix = $prefix;
-
-        return $this;
-
-    }
-
-    /**
      * @return FieldCollection
      */
-    public function getFieldObjects()
+    /*public function getFieldObjects()
     {
 
         return $this->fieldObjects;
 
-    }
+    }*/
 
     /**
      * @return array
@@ -497,21 +324,6 @@ class FieldGroup implements FieldGroupInterface
     }
 
     /**
-     * @param Field  $field
-     * @param string $fieldNameToAddAfter
-     *
-     * @return FieldGroup
-     */
-    public function addFieldAfter($field, $fieldNameToAddAfter)
-    {
-
-        $this->fieldsToAddAfterFieldsOnBuild[] = [$field, $fieldNameToAddAfter];
-
-        return $this;
-
-    }
-
-    /**
      * In order to keep in sync with ACFs namings, we have this function to call publicly. And then use doRegister()
      * to actually register.
      */
@@ -550,49 +362,23 @@ class FieldGroup implements FieldGroupInterface
         acf_add_local_field_group($acfSettingsArray);
 
         // No use in having a potentially large collection of objects anymore
-        unset($this->fieldObjects);
+        unset($this->items);
 
     }
 
     /**
+     * @param null $void Exists only for the function to be compatible with parents function with same name.
      *
-     */
-    protected function doRemoveFields()
-    {
-
-        foreach ($this->fieldsToRemove AS $fieldToRemove) {
-
-            $this->fieldObjects->removeItemByName($fieldToRemove);
-
-        }
-
-    }
-
-    /**
-     *
-     */
-    protected function doAddFieldsAfter()
-    {
-
-        foreach ($this->fieldsToAddAfterFieldsOnBuild AS $data) {
-
-            $this->fieldObjects->addItemAfterByName($data[0], $data[1]);
-
-        }
-
-    }
-
-    /**
      * @return array
      */
-    public function toAcfArray()
+    public function toAcfArray($void = null)
     {
 
         return array_merge($this->settings, [
             'key'      => $this->getKey(),
             'title'    => $this->getTitle(),
             'location' => $this->locationRuleGroups->toArray(),
-            'fields'   => $this->fieldObjects->toArray($this->key),
+            'fields'   => parent::toAcfArray($this->getKey()),
         ]);
 
     }
@@ -778,21 +564,6 @@ class FieldGroup implements FieldGroupInterface
     {
 
         return $this->getSetting('menu_order', $defaultValue);
-
-    }
-
-    /**
-     * @param string $name
-     * @param        $value
-     *
-     * @return $this
-     */
-    public function setArg($name, $value)
-    {
-
-        $this->args[$name] = $value;
-
-        return $this;
 
     }
 

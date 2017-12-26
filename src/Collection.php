@@ -20,10 +20,10 @@ class Collection
      *
      * @param array $items
      */
-    public function __construct($items = [])
+    public function __construct()
     {
 
-        $this->items = $items;
+        $this->items = [];
 
     }
 
