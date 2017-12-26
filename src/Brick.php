@@ -2,7 +2,9 @@
 
 namespace Fewbricks;
 
-class Brick
+use Fewbricks\ACF\FieldCollection;
+
+class Brick extends FieldCollection
 {
 
 }

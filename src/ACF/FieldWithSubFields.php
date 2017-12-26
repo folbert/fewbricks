@@ -50,11 +50,27 @@ class FieldWithSubFields extends Field
 
             $this->subFields->addItem($field, $field->getKey());
 
-        } catch(KeyInUseException $keyInUseException) {
+        } catch (KeyInUseException $keyInUseException) {
 
             $keyInUseException->wpDie();
 
         }
+
+        return $this;
+
+    }
+
+    /**
+     * @param array|FieldCollection $fields
+     *
+     * @return FieldWithSubFields
+     * @throws KeyInUseException
+     */
+    public function addSubFields($fields)
+    {
+
+
+        $this->subFields->addFields($fields);
 
         return $this;
 

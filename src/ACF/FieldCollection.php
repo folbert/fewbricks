@@ -3,6 +3,7 @@
 namespace Fewbricks\ACF;
 
 use Fewbricks\Collection;
+use Fewbricks\SharedFields;
 
 /**
  * Class FieldCollection
@@ -15,23 +16,19 @@ class FieldCollection extends Collection
     /**
      * @var
      */
+    protected $args;
+    /**
+     * @var
+     */
     private $fieldLabelsPrefix;
-
     /**
      * @var string
      */
     private $fieldNamesPrefix;
-
     /**
      * @var array
      */
     private $fieldsToRemove;
-
-    /**
-     * @var
-     */
-    protected $args;
-
     /**
      * @var array
      */
@@ -62,7 +59,31 @@ class FieldCollection extends Collection
     }
 
     /**
+     * @param array|FieldCollection $fields
+     *
+     * @throws \Fewbricks\KeyInUseException
+     */
+    public function addFields($fields)
+    {
+
+        if(is_array($fields)) {
+
+            foreach ($fields AS $field) {
+                $this->addField($field);
+            }
+
+        } else {
+
+            $this->addFields($fields->getItems());
+
+        }
+
+    }
+
+    /**
      * @param Field $field
+     *
+     * @throws \Fewbricks\KeyInUseException
      */
     public function addField($field)
     {
@@ -226,6 +247,25 @@ class FieldCollection extends Collection
     }
 
     /**
+     * @param $name
+     */
+    public function removeItemByName($name)
+    {
+
+        /** @var Field $field */
+        foreach ($this->items AS $item_key => $field) {
+
+            if ($field->getName() === $name) {
+
+                parent::removeItem($item_key);
+
+            }
+
+        }
+
+    }
+
+    /**
      *
      */
     protected function doAddFieldsAfter()
@@ -236,21 +276,6 @@ class FieldCollection extends Collection
             $this->addItemAfterByName($data[0], $data[1]);
 
         }
-
-    }
-
-    /**
-     * @param string $name
-     * @param        $value
-     *
-     * @return $this
-     */
-    public function setArg($name, $value)
-    {
-
-        $this->args[$name] = $value;
-
-        return $this;
 
     }
 
@@ -297,6 +322,21 @@ class FieldCollection extends Collection
         }
 
         return $item;
+
+    }
+
+    /**
+     * @param string $name
+     * @param        $value
+     *
+     * @return $this
+     */
+    public function setArg($name, $value)
+    {
+
+        $this->args[$name] = $value;
+
+        return $this;
 
     }
 
@@ -400,25 +440,6 @@ class FieldCollection extends Collection
         }
 
         return $fieldsSettings;
-
-    }
-
-    /**
-     * @param $name
-     */
-    public function removeItemByName($name)
-    {
-
-        /** @var Field $field */
-        foreach ($this->items AS $item_key => $field) {
-
-            if ($field->getName() === $name) {
-
-                parent::removeItem($item_key);
-
-            }
-
-        }
 
     }
 

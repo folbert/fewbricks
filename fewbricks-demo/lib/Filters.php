@@ -41,7 +41,7 @@ class Filters
 
         add_filter('fewbricks/auto_write_php_code_file', [$me, 'setPhpCodeFilePath']);
 
-        add_filter('fewbricks/show_fields_info', '__return_true');
+        add_filter('fewbricks/show_fields_info', '__return_false');
 
         add_filter('fewbricks/debug_mode', '__return_true');
 

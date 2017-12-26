@@ -8,6 +8,7 @@
 namespace App\FewbricksDemo;
 
 use App\FewbricksDemo\FieldGroups\FieldsKitchenSink;
+use App\FewbricksDemo\FieldGroups\Heroes;
 use Fewbricks\ACF\ConditionalLogicRule;
 use Fewbricks\ACF\ConditionalLogicRuleGroup;
 use Fewbricks\ACF\FieldGroupLocationRuleGroup;
@@ -31,6 +32,14 @@ if (defined('FEWBRICKS_ENV') && FEWBRICKS_ENV === 'production') {
 } else {
 
     //dump('Loading all code');
+
+    (new Heroes('1712262204a'))
+        ->addLocationRuleGroup(
+            (new FieldGroupLocationRuleGroup())
+                ->addRule(new Rule('post_type', '==', 'fewbricks_demo_pg'))
+        )
+        ->hideOnScreen('content')
+        ->register();
 
     // Demoing a class
     (new FieldsKitchenSink('1712042021a'))

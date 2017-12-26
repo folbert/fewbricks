@@ -1,19 +1,29 @@
 <?php
 
-namespace App\FewbricksDemo\PredefinedFields;
+namespace App\FewbricksDemo\SharedFields;
 
 use Fewbricks\ACF\Fields\Select;
-use Fewbricks\PredefinedField;
+use Fewbricks\SharedFieldCollection;
+use Fewbricks\SharedFields;
 
-class BackgroundColors extends PredefinedField {
+class BackgroundColors extends SharedFields
+{
 
     /**
-     * @return Select
+     * @throws \Fewbricks\KeyInUseException
      */
-    public function get()
+    protected function applyFields()
     {
 
-        return new Select('Background colors', 'background_colors', $this->acf_settings['key'], $this->acf_settings);
+        $this->addField(
+            (new Select('Background color', 'background_color', '1712262153a'))
+                ->setChoices([
+                    'blue'  => 'Blue',
+                    'green' => 'Green',
+                    'red'   => 'Red',
+                ])
+                ->setDefaultValue('green')
+        );
 
     }
 
