@@ -21,22 +21,14 @@ class FieldsKitchenSink extends FieldGroup implements FieldGroupInterface
 {
 
     /**
-     * FieldsKitchenSink constructor.
-     *
-     * @param       $key
-     * @param array $settings
-     * @param array $args
+     * @var string
      */
-    public function __construct($key, $settings = [], $args = [])
-    {
-
-        parent::__construct('Kitchen Sink', $key, $settings, $args);
-    }
+    protected $title = 'Kitchen Sink';
 
     /**
      * Any class extending FieldGroup can have a function named build. This function will be called
      * right before the field group is registered to ACF. Inside this function you can do whatever you want.
-     * This basically enables you to have a field group that can be reused and by utilizong the $args that you can pass
+     * This basically enables you to have a field group that can be reused and by utilizing the $args that you can pass
      * when instantiating an object, you can affect which fields should be included etc.
      *
      * @return void
@@ -69,7 +61,7 @@ class FieldsKitchenSink extends FieldGroup implements FieldGroupInterface
 
         $this->addField(
             (new FAFields\Accordion('Accordion', 'accordion', '1712252132a'))
-            ->setOpen(true)
+                ->setOpen(true)
         );
 
         $this->addField(new FAFields\Text('Text in accordion', 'text_in_accordion', '1712252132o'));
@@ -78,7 +70,7 @@ class FieldsKitchenSink extends FieldGroup implements FieldGroupInterface
 
         $this->addField(
             (new FAFields\Accordion('Close accordion', 'close_accordion', '1712252133a'))
-            ->setEndpoint(true)
+                ->setEndpoint(true)
         );
 
         // The other fields are in alphabetical oder but lets start with a tab
@@ -160,8 +152,8 @@ class FieldsKitchenSink extends FieldGroup implements FieldGroupInterface
         // This is of course a somewhat stupid usage of the functionality since we could simply
         // not add the sub field to start with. But for demo purposes...
         $layoutsToRemove = $this->getArg('remove_layouts', false);
-        if($layoutsToRemove !== false) {
-            foreach($layoutsToRemove AS $layoutToRemove) {
+        if ($layoutsToRemove !== false) {
+            foreach ($layoutsToRemove AS $layoutToRemove) {
                 $fc->removeLayout($layoutToRemove);
             }
 
@@ -236,8 +228,8 @@ class FieldsKitchenSink extends FieldGroup implements FieldGroupInterface
         // This is of course a somewhat stupid usage of the functionality since we could simply
         // not add the sub field to start with. But for demo purposes...
         $subFieldsToRemove = $this->getArg('remove_sub_fields', false);
-        if($subFieldsToRemove !== false) {
-            foreach($subFieldsToRemove AS $subFieldToRemove) {
+        if ($subFieldsToRemove !== false) {
+            foreach ($subFieldsToRemove AS $subFieldToRemove) {
                 $repeater->removeSubField($subFieldToRemove);
             }
         }

@@ -46,7 +46,7 @@ class FieldGroup implements FieldGroupInterface
     private $fieldLabelsPrefix;
 
     /**
-     * @var
+     * @var string
      */
     private $fieldNamesPrefix;
 
@@ -56,7 +56,7 @@ class FieldGroup implements FieldGroupInterface
     private $fieldObjects;
 
     /**
-     * @var
+     * @var array
      */
     private $fieldsToRemove;
 
@@ -64,8 +64,9 @@ class FieldGroup implements FieldGroupInterface
      * @var array
      */
     private $fieldsToAddAfterFieldsOnBuild;
+
     /**
-     * @var
+     * @var string
      */
     private $key;
 
@@ -83,21 +84,19 @@ class FieldGroup implements FieldGroupInterface
     private $settings;
 
     /**
-     * @var
+     * @var string
      */
-    private $title;
+    protected $title = 'Field Group';
 
     /**
      * FieldGroup constructor.
      *
-     * @param string $title
      * @param string $key
      * @param array  $settings Any other settings that will affect ACF.
      *                         https://www.advancedcustomfields.com/resources/register-fields-via-php/#group-settings
      * @param array  $args     An array enabling you to pass any argument that you need.
      */
     public function __construct(
-        $title,
         $key,
         $settings = [],
         $args = []
@@ -109,7 +108,6 @@ class FieldGroup implements FieldGroupInterface
 
         // Let's keep these crucial settings as class vars to enable nicer
         // and more OOP-oriented access
-        $this->title                         = $title;
         $this->key                           = $key;
         $this->settings                      = $settings;
         $this->fieldObjects                  = new FieldCollection();
@@ -157,7 +155,6 @@ class FieldGroup implements FieldGroupInterface
             $keyInUseException->wpDie();
 
         }
-
 
     }
 
@@ -344,7 +341,7 @@ class FieldGroup implements FieldGroupInterface
      *                                   'excerpt', 'custom_fields', 'discussion', 'comments', 'revisions', 'slug',
      *                                   'author', 'format', 'page_attributes', 'featured_image', 'categories', 'tags',
      *                                   'send-trackbacks', 'all'. Note 'all' which will show all elements that
-     *                                   ar possible to hide.
+     *                                   are possible to hide.
      *
      * @return $this
      */
@@ -786,7 +783,7 @@ class FieldGroup implements FieldGroupInterface
 
     /**
      * @param string $name
-     * @param mixed  $value
+     * @param        $value
      *
      * @return $this
      */
