@@ -35,9 +35,19 @@ class Rule
     public function __construct($param, $operator, $value)
     {
 
-        $this->param = $param;
+        $this->param    = $param;
         $this->operator = $operator;
-        $this->value = $value;
+        $this->value    = $value;
+
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getOperator()
+    {
+
+        return $this->operator;
 
     }
 
@@ -48,6 +58,16 @@ class Rule
     {
 
         $this->operator = $operator;
+
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getParam()
+    {
+
+        return $this->param;
 
     }
 
@@ -64,40 +84,20 @@ class Rule
     /**
      * @param $value
      */
-    public function setValue($value)
+    public function getValue()
     {
 
-        $this->value = $value;
-
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getOperator()
-    {
-
-        return $this->operator;
-
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getParam()
-    {
-
-        return $this->param;
+        return $this->value;
 
     }
 
     /**
      * @param $value
      */
-    public function getValue()
+    public function setValue($value)
     {
 
-        return $this->value;
+        $this->value = $value;
 
     }
 

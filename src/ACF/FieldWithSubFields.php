@@ -106,20 +106,6 @@ class FieldWithSubFields extends Field
     }
 
     /**
-     * @param string $name
-     *
-     * @return $this
-     */
-    public function removeField($name)
-    {
-
-        $this->fields->removeItemByName($name);
-
-        return $this;
-
-    }
-
-    /**
      * @return array
      */
     public function getAcfArray()
@@ -152,6 +138,20 @@ class FieldWithSubFields extends Field
     {
 
         return $this->fields;
+
+    }
+
+    /**
+     * @param string $name
+     *
+     * @return $this
+     */
+    public function removeField($name)
+    {
+
+        $this->fields->removeItemByName($name);
+
+        return $this;
 
     }
 

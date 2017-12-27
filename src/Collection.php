@@ -57,37 +57,6 @@ class Collection
     }
 
     /**
-     * @return string
-     */
-    public function getKeyInUseExceptionMessage($itemAttemptedToAdd, $keyAttemptedToAdd)
-    {
-
-        $message = '';
-
-        if (method_exists($itemAttemptedToAdd, 'getLabel')) {
-
-            $message .= 'Error when attempting to register the item with the key <code>'
-                        . $keyAttemptedToAdd . '</code> and label "' . $itemAttemptedToAdd->getLabel() . '". The key is already
-                                            used by an item named "' . $this->items[$keyAttemptedToAdd]->getLabel() . '" and keys must
-                                             be unique.';
-
-        } else {
-
-            $message .= 'Error when attempting to register the item with the key ' . $keyAttemptedToAdd;
-
-        }
-
-        $message
-            .= '<br><br>Pro-tip: create your keys manually by using the current date and time . So if you
-are creating a field at 09:59 on December 11 2017, the key might be "1712110959a" . Note the addition of an extra
-character to ensure that ACF can use the key but also to make sure that if you create another key within the same
-minute, you can simply append some other "random" letter to that key like "1712110989x"';
-
-        return $message;
-
-    }
-
-    /**
      * @param Field  $item
      * @param string $keyToAddAfter
      */
@@ -126,6 +95,26 @@ minute, you can simply append some other "random" letter to that key like "17121
     }
 
     /**
+     * @param $key
+     *
+     * @return mixed
+     */
+    public function getItem($key)
+    {
+
+        $item = false;
+
+        if (isset($this->items[$key])) {
+
+            $item = $this->items[$key];
+
+        }
+
+        return $item;
+
+    }
+
+    /**
      * @param string $keyToSearchFor
      *
      * @return bool|int
@@ -155,32 +144,43 @@ minute, you can simply append some other "random" letter to that key like "17121
     }
 
     /**
-     * @param $key
-     *
-     * @return mixed
-     */
-    public function getItem($key)
-    {
-
-        $item = false;
-
-        if (isset($this->items[$key])) {
-
-            $item = $this->items[$key];
-
-        }
-
-        return $item;
-
-    }
-
-    /**
      * @return mixed
      */
     public function getItems()
     {
 
         return $this->items;
+
+    }
+
+    /**
+     * @return string
+     */
+    public function getKeyInUseExceptionMessage($itemAttemptedToAdd, $keyAttemptedToAdd)
+    {
+
+        $message = '';
+
+        if (method_exists($itemAttemptedToAdd, 'getLabel')) {
+
+            $message .= 'Error when attempting to register the item with the key <code>'
+                        . $keyAttemptedToAdd . '</code> and label "' . $itemAttemptedToAdd->getLabel() . '". The key is already
+                                            used by an item named "' . $this->items[$keyAttemptedToAdd]->getLabel() . '" and keys must
+                                             be unique.';
+
+        } else {
+
+            $message .= 'Error when attempting to register the item with the key ' . $keyAttemptedToAdd;
+
+        }
+
+        $message
+            .= '<br><br>Pro-tip: create your keys manually by using the current date and time . So if you
+are creating a field at 09:59 on December 11 2017, the key might be "1712110959a" . Note the addition of an extra
+character to ensure that ACF can use the key but also to make sure that if you create another key within the same
+minute, you can simply append some other "random" letter to that key like "1712110989x"';
+
+        return $message;
 
     }
 
@@ -192,17 +192,27 @@ minute, you can simply append some other "random" letter to that key like "17121
         return array_keys($this->items);
     }
 
-    public function isEmpty()
-    {
-        return $this->getLength() === 0;
-    }
-
     /**
      * @return int
      */
     public function getLength()
     {
         return count($this->items);
+    }
+
+    public function isEmpty()
+    {
+        return $this->getLength() === 0;
+    }
+
+    /**
+     * @param $key
+     *
+     * @return bool
+     */
+    public function keyExists($key)
+    {
+        return isset($this->items[$key]);
     }
 
     /**
@@ -215,16 +225,6 @@ minute, you can simply append some other "random" letter to that key like "17121
             unset($this->items[$key]);
         }
 
-    }
-
-    /**
-     * @param $key
-     *
-     * @return bool
-     */
-    public function keyExists($key)
-    {
-        return isset($this->items[$key]);
     }
 
 }

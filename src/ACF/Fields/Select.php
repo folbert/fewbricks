@@ -19,6 +19,49 @@ class Select extends FieldWithChoices implements FieldInterface
 {
 
     /**
+     * @return mixed The value of the ACF setting "ajax". Returns the default ACF value false if none has been
+     * set using Fewbricks.
+     */
+    public function getAjax()
+    {
+
+        return $this->getSetting('ajax', false);
+
+    }
+
+    /**
+     * @return mixed The value of the ACF setting "multiple". Returns the default ACF value false if none has been
+     * set using Fewbricks.
+     */
+    public function getMultiple()
+    {
+
+        return $this->getSetting('multiple', false);
+
+    }
+
+    /**
+     * @return string The ACF type that ultimately decides what kind of field instances of this class is.
+     */
+    public function getType()
+    {
+
+        return 'select';
+
+    }
+
+    /**
+     * @return mixed The value of the ACF setting "ui". Returns the default ACF value false if none has been
+     * set using Fewbricks.
+     */
+    public function getUi()
+    {
+
+        return $this->getSetting('ui', false);
+
+    }
+
+    /**
      * ACF setting. If AJAX should be used to lazy load the choices.
      *
      * @param boolean $ajax
@@ -61,49 +104,6 @@ class Select extends FieldWithChoices implements FieldInterface
         $this->setSetting('ui', $ui);
 
         return $this;
-
-    }
-
-    /**
-     * @return mixed The value of the ACF setting "ajax". Returns the default ACF value false if none has been
-     * set using Fewbricks.
-     */
-    public function getAjax()
-    {
-
-        return $this->getSetting('ajax', false);
-
-    }
-
-    /**
-     * @return mixed The value of the ACF setting "multiple". Returns the default ACF value false if none has been
-     * set using Fewbricks.
-     */
-    public function getMultiple()
-    {
-
-        return $this->getSetting('multiple', false);
-
-    }
-
-    /**
-     * @return mixed The value of the ACF setting "ui". Returns the default ACF value false if none has been
-     * set using Fewbricks.
-     */
-    public function getUi()
-    {
-
-        return $this->getSetting('ui', false);
-
-    }
-
-    /**
-     * @return string The ACF type that ultimately decides what kind of field instances of this class is.
-     */
-    public function getType()
-    {
-
-        return 'select';
 
     }
 

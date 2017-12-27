@@ -69,28 +69,6 @@ class FieldCollection extends Collection
     }
 
     /**
-     * @param array|FieldCollection $fields
-     *
-     * @throws \Fewbricks\KeyInUseException
-     */
-    public function addFields($fields)
-    {
-
-        if (is_array($fields)) {
-
-            foreach ($fields AS $field) {
-                $this->addField($field);
-            }
-
-        } else {
-
-            $this->addFields($fields->getItems());
-
-        }
-
-    }
-
-    /**
      * @param Field $field
      *
      * @throws \Fewbricks\KeyInUseException
@@ -110,120 +88,6 @@ class FieldCollection extends Collection
             $keyInUseException->wpDie();
 
         }
-
-    }
-
-    /**
-     * @param string $name
-     * @param null   $defaultValue Value to return if arg is not set
-     *
-     * @return mixed|null
-     */
-    public function getArg($name, $defaultValue = null)
-    {
-
-        return (isset($this->args[$name]) ? $this->args[$name] : $defaultValue);
-
-    }
-
-    /**
-     * @param $fieldNames
-     *
-     * @return FieldGroup
-     */
-    public function removeFields($fieldNames)
-    {
-
-        foreach ($fieldNames AS $fieldName) {
-
-            $this->removeField($fieldName);
-
-        }
-
-        return $this;
-
-    }
-
-    /**
-     * @param string $fieldName The name of a field. Not the key, not the label, the name.
-     *
-     * @return FieldGroup
-     */
-    public function removeField($fieldName)
-    {
-
-        // Use the field name as index to allow us to use isset() later on which is faster than in_array
-        // https://stackoverflow.com/questions/13483219/what-is-faster-in-array-or-isset
-        $this->fieldsToRemove[$fieldName] = $fieldName;
-
-        return $this;
-
-    }
-
-    /**
-     * @param $fieldNames
-     *
-     * @return $this
-     */
-    public function unRemoveFields($fieldNames)
-    {
-
-        foreach ($fieldNames AS $fieldName) {
-
-            $this->unRemoveField($fieldName);
-
-        }
-
-        return $this;
-
-    }
-
-    /**
-     * If you change your mind about removing a field, use this function to un-remove it. Since we are not actually
-     * adding a field, we are un-removing it.
-     *
-     * @param string $fieldName
-     *
-     * @return FieldGroup
-     */
-    public function unRemoveField($fieldName)
-    {
-
-        unset($this->fieldsToRemove[$fieldName]);
-
-        return $this;
-
-    }
-
-    /**
-     * Set a string that will be prefixed to the labels of the fields that are added to this field group.
-     *
-     * @param $prefix
-     *
-     * @return $this
-     */
-    public function setFieldLabelsPrefix($prefix)
-    {
-
-        $this->fieldLabelsPrefix = $prefix;
-
-        return $this;
-
-    }
-
-    /**
-     * Set a string that will be prefixed to the names of the fields that are added to this field group.
-     *
-     * @param string $prefix
-     *
-     * @return $this
-     */
-    public function setFieldNamesPrefix($prefix)
-    {
-
-        $this->fieldNamesPrefix = $prefix;
-
-        return $this;
 
     }
 
@@ -258,61 +122,22 @@ class FieldCollection extends Collection
     }
 
     /**
+     * @param array|FieldCollection $fields
      *
+     * @throws \Fewbricks\KeyInUseException
      */
-    protected function doRemoveFields()
+    public function addFields($fields)
     {
 
-        foreach ($this->fieldsToRemove AS $fieldToRemove) {
+        if (is_array($fields)) {
 
-            $this->removeItemByName($fieldToRemove);
-
-        }
-
-    }
-
-    /**
-     * @param $name
-     */
-    public function removeItemByName($name)
-    {
-
-        /** @var Field $field */
-        foreach ($this->items AS $item_key => $field) {
-
-            if ($field->getName() === $name) {
-
-                parent::removeItem($item_key);
-
+            foreach ($fields AS $field) {
+                $this->addField($field);
             }
 
-        }
+        } else {
 
-    }
-
-    /**
-     *
-     */
-    protected function doAddFieldsAfter()
-    {
-
-        foreach ($this->fieldsToAddAfterFieldsOnBuild AS $data) {
-
-            $this->addItemAfterByName($data[0], $data[1]);
-
-        }
-
-    }
-
-    /**
-     *
-     */
-    protected function doAddFieldsBefore()
-    {
-
-        foreach ($this->fieldsToAddBeforeFieldsOnBuild AS $data) {
-
-            $this->addItemBeforeByName($data[0], $data[1]);
+            $this->addFields($fields->getItems());
 
         }
 
@@ -355,67 +180,44 @@ class FieldCollection extends Collection
     }
 
     /**
-     * @param $name
      *
-     * @return bool|mixed
      */
-    public function getItemByName($name)
+    protected function doAddFieldsAfter()
     {
 
-        $item = false;
+        foreach ($this->fieldsToAddAfterFieldsOnBuild AS $data) {
 
-        /**
-         * @var string $item_key
-         * @var Field  $field
-         */
-        foreach ($this->items AS $item_key => $field) {
-
-            if ($field->getName() === $name) {
-
-                $item = parent::getItem($item_key);
-
-            }
+            $this->addItemAfterByName($data[0], $data[1]);
 
         }
-
-        return $item;
 
     }
 
     /**
-     * @param string $name
-     * @param        $value
      *
-     * @return $this
      */
-    public function setArg($name, $value)
+    protected function doAddFieldsBefore()
     {
 
-        $this->args[$name] = $value;
+        foreach ($this->fieldsToAddBeforeFieldsOnBuild AS $data) {
 
-        return $this;
+            $this->addItemBeforeByName($data[0], $data[1]);
+
+        }
 
     }
 
     /**
-     * @param string $baseKey
      *
-     * @return array An array that ACF can work with.
      */
-    public function getAcfArray($baseKey)
+    protected function doRemoveFields()
     {
 
-        $this->doRemoveFields();
-        $this->doAddFieldsAfter();
-        $this->doAddFieldsBefore();
+        foreach ($this->fieldsToRemove AS $fieldToRemove) {
 
-        // Lets make sure that the key is ok for ACF
-        // https://www.advancedcustomfields.com/resources/register-fields-via-php/#field-settings
-        if (substr($baseKey, 0, 6) !== 'field_') {
-            $baseKey = 'field_' . $baseKey;
+            $this->removeItemByName($fieldToRemove);
+
         }
-
-        return $this->finalizeSettings($this->items, $baseKey);
 
     }
 
@@ -453,6 +255,69 @@ class FieldCollection extends Collection
         $settings = $this->prepareFieldsConditionalLogic($settings);
 
         return $settings;
+
+    }
+
+    /**
+     * @param string $baseKey
+     *
+     * @return array An array that ACF can work with.
+     */
+    public function getAcfArray($baseKey)
+    {
+
+        $this->doRemoveFields();
+        $this->doAddFieldsAfter();
+        $this->doAddFieldsBefore();
+
+        // Lets make sure that the key is ok for ACF
+        // https://www.advancedcustomfields.com/resources/register-fields-via-php/#field-settings
+        if (substr($baseKey, 0, 6) !== 'field_') {
+            $baseKey = 'field_' . $baseKey;
+        }
+
+        return $this->finalizeSettings($this->items, $baseKey);
+
+    }
+
+    /**
+     * @param string $name
+     * @param null   $defaultValue Value to return if arg is not set
+     *
+     * @return mixed|null
+     */
+    public function getArg($name, $defaultValue = null)
+    {
+
+        return (isset($this->args[$name]) ? $this->args[$name] : $defaultValue);
+
+    }
+
+    /**
+     * @param $name
+     *
+     * @return bool|mixed
+     */
+    public function getItemByName($name)
+    {
+
+        $item = false;
+
+        /**
+         * @var string $item_key
+         * @var Field  $field
+         */
+        foreach ($this->items AS $item_key => $field) {
+
+            if ($field->getName() === $name) {
+
+                $item = parent::getItem($item_key);
+
+            }
+
+        }
+
+        return $item;
 
     }
 
@@ -501,6 +366,141 @@ class FieldCollection extends Collection
         }
 
         return $fieldsSettings;
+
+    }
+
+    /**
+     * @param string $fieldName The name of a field. Not the key, not the label, the name.
+     *
+     * @return FieldGroup
+     */
+    public function removeField($fieldName)
+    {
+
+        // Use the field name as index to allow us to use isset() later on which is faster than in_array
+        // https://stackoverflow.com/questions/13483219/what-is-faster-in-array-or-isset
+        $this->fieldsToRemove[$fieldName] = $fieldName;
+
+        return $this;
+
+    }
+
+    /**
+     * @param $fieldNames
+     *
+     * @return FieldGroup
+     */
+    public function removeFields($fieldNames)
+    {
+
+        foreach ($fieldNames AS $fieldName) {
+
+            $this->removeField($fieldName);
+
+        }
+
+        return $this;
+
+    }
+
+    /**
+     * @param $name
+     */
+    public function removeItemByName($name)
+    {
+
+        /** @var Field $field */
+        foreach ($this->items AS $item_key => $field) {
+
+            if ($field->getName() === $name) {
+
+                parent::removeItem($item_key);
+
+            }
+
+        }
+
+    }
+
+    /**
+     * @param string $name
+     * @param        $value
+     *
+     * @return $this
+     */
+    public function setArg($name, $value)
+    {
+
+        $this->args[$name] = $value;
+
+        return $this;
+
+    }
+
+    /**
+     * Set a string that will be prefixed to the labels of the fields that are added to this field group.
+     *
+     * @param $prefix
+     *
+     * @return $this
+     */
+    public function setFieldLabelsPrefix($prefix)
+    {
+
+        $this->fieldLabelsPrefix = $prefix;
+
+        return $this;
+
+    }
+
+    /**
+     * Set a string that will be prefixed to the names of the fields that are added to this field group.
+     *
+     * @param string $prefix
+     *
+     * @return $this
+     */
+    public function setFieldNamesPrefix($prefix)
+    {
+
+        $this->fieldNamesPrefix = $prefix;
+
+        return $this;
+
+    }
+
+    /**
+     * If you change your mind about removing a field, use this function to un-remove it. Since we are not actually
+     * adding a field, we are un-removing it.
+     *
+     * @param string $fieldName
+     *
+     * @return FieldGroup
+     */
+    public function unRemoveField($fieldName)
+    {
+
+        unset($this->fieldsToRemove[$fieldName]);
+
+        return $this;
+
+    }
+
+    /**
+     * @param $fieldNames
+     *
+     * @return $this
+     */
+    public function unRemoveFields($fieldNames)
+    {
+
+        foreach ($fieldNames AS $fieldName) {
+
+            $this->unRemoveField($fieldName);
+
+        }
+
+        return $this;
 
     }
 

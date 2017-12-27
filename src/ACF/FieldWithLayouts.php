@@ -40,20 +40,6 @@ class FieldWithLayouts extends Field
     }
 
     /**
-     * @param $buttonLabel
-     *
-     * @return $this
-     */
-    public function setButtonLabel($buttonLabel)
-    {
-
-        $this->setSetting('button_label', $buttonLabel);
-
-        return $this;
-
-    }
-
-    /**
      * @param Layout $layout
      *
      * @return $this
@@ -76,16 +62,16 @@ class FieldWithLayouts extends Field
     }
 
     /**
-     * @param int $name
-     *
-     * @return $this
+     * @return array
      */
-    public function removeLayout($name)
+    public function getAcfArray()
     {
 
-        $this->layouts->removeItemByName($name);
+        $settings = parent::getAcfArray();
 
-        return $this;
+        $settings['layouts'] = $this->layouts->getFinalizedSettings($this->key);
+
+        return $settings;
 
     }
 
@@ -123,16 +109,30 @@ class FieldWithLayouts extends Field
     }
 
     /**
-     * @return array
+     * @param int $name
+     *
+     * @return $this
      */
-    public function getAcfArray()
+    public function removeLayout($name)
     {
 
-        $settings = parent::getAcfArray();
+        $this->layouts->removeItemByName($name);
 
-        $settings['layouts'] = $this->layouts->getFinalizedSettings($this->key);
+        return $this;
 
-        return $settings;
+    }
+
+    /**
+     * @param $buttonLabel
+     *
+     * @return $this
+     */
+    public function setButtonLabel($buttonLabel)
+    {
+
+        $this->setSetting('button_label', $buttonLabel);
+
+        return $this;
 
     }
 

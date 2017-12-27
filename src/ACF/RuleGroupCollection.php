@@ -23,7 +23,7 @@ class RuleGroupCollection extends Collection
         $array = [];
 
         /** @var FieldGroupLocationRuleGroup $ruleGroup */
-        foreach($this->items AS $ruleGroup) {
+        foreach ($this->items AS $ruleGroup) {
 
             $array[] = $ruleGroup->toArray();
 

@@ -19,6 +19,49 @@ class Message extends Field implements FieldInterface
 {
 
     /**
+     * @return mixed The value of the ACF setting "esc_html". Returns the default ACF value "false" if none has been
+     * set using Fewbricks.
+     */
+    public function getEscHtml()
+    {
+
+        return $this->getSetting('esc_html', 0);
+
+    }
+
+    /**
+     * @return mixed The value of the ACF setting "message". Returns the default ACF value "" if none has been
+     * set using Fewbricks.
+     */
+    public function getMessage()
+    {
+
+        return $this->getSetting('message', '');
+
+    }
+
+    /**
+     * @return mixed The value of the ACF setting "new_lines". Returns the default ACF value "wpautop" if none has been
+     * set using Fewbricks.
+     */
+    public function getNewLines()
+    {
+
+        return $this->getSetting('new_lines', 'wpautop');
+
+    }
+
+    /**
+     * @return string The ACF type that ultimately decides what kind of field instances of this class is.
+     */
+    public function getType()
+    {
+
+        return 'message';
+
+    }
+
+    /**
      * ACF setting. Allow HTML markup to display as visible text instead of rendering.
      *
      * @param boolean $escapeHtml
@@ -62,49 +105,6 @@ class Message extends Field implements FieldInterface
         $this->setSetting('new_lines', $newLines);
 
         return $this;
-
-    }
-
-    /**
-     * @return mixed The value of the ACF setting "esc_html". Returns the default ACF value "false" if none has been
-     * set using Fewbricks.
-     */
-    public function getEscHtml()
-    {
-
-        return $this->getSetting('esc_html', 0);
-
-    }
-
-    /**
-     * @return mixed The value of the ACF setting "message". Returns the default ACF value "" if none has been
-     * set using Fewbricks.
-     */
-    public function getMessage()
-    {
-
-        return $this->getSetting('message', '');
-
-    }
-
-    /**
-     * @return mixed The value of the ACF setting "new_lines". Returns the default ACF value "wpautop" if none has been
-     * set using Fewbricks.
-     */
-    public function getNewLines()
-    {
-
-        return $this->getSetting('new_lines', 'wpautop');
-
-    }
-
-    /**
-     * @return string The ACF type that ultimately decides what kind of field instances of this class is.
-     */
-    public function getType()
-    {
-
-        return 'message';
 
     }
 

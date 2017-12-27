@@ -18,7 +18,7 @@ class ConditionalLogicRuleGroup extends RuleGroup
     public function addRule($rule)
     {
 
-        if(!($rule instanceof ConditionalLogicRule)) {
+        if (!($rule instanceof ConditionalLogicRule)) {
             wp_die('You can only add instances of ConditionalLogicRule to instances of ConditionalLogicRuleGroup');
         }
 

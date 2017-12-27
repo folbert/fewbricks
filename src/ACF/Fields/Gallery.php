@@ -19,6 +19,49 @@ class Gallery extends FieldWithImages implements FieldInterface
 {
 
     /**
+     * @return mixed The value of the ACF setting "insert". Returns the default ACF value "append" if none has been
+     * set using Fewbricks.
+     */
+    public function getInsert()
+    {
+
+        return $this->getSetting('insert', 'append');
+
+    }
+
+    /**
+     * @return mixed The value of the ACF setting "max". Returns the default ACF value "0" if none has been
+     * set using Fewbricks.
+     */
+    public function getMax()
+    {
+
+        return $this->getSetting('max', 0);
+
+    }
+
+    /**
+     * @return mixed The value of the ACF setting "min". Returns the default ACF value "0" if none has been
+     * set using Fewbricks.
+     */
+    public function getMin()
+    {
+
+        return $this->getSetting('min', 0);
+
+    }
+
+    /**
+     * @return string The ACF type that ultimately decides what kind of field instances of this class is.
+     */
+    public function getType()
+    {
+
+        return 'gallery';
+
+    }
+
+    /**
      * ACF setting. Specify where new attachments are added
      *
      * @param $insert append or prepend
@@ -63,49 +106,6 @@ class Gallery extends FieldWithImages implements FieldInterface
         $this->setSetting('min', $min);
 
         return $this;
-
-    }
-
-    /**
-     * @return mixed The value of the ACF setting "insert". Returns the default ACF value "append" if none has been
-     * set using Fewbricks.
-     */
-    public function getInsert()
-    {
-
-        return $this->getSetting('insert', 'append');
-
-    }
-
-    /**
-     * @return mixed The value of the ACF setting "max". Returns the default ACF value "0" if none has been
-     * set using Fewbricks.
-     */
-    public function getMax()
-    {
-
-        return $this->getSetting('max', 0);
-
-    }
-
-    /**
-     * @return mixed The value of the ACF setting "min". Returns the default ACF value "0" if none has been
-     * set using Fewbricks.
-     */
-    public function getMin()
-    {
-
-        return $this->getSetting('min', 0);
-
-    }
-
-    /**
-     * @return string The ACF type that ultimately decides what kind of field instances of this class is.
-     */
-    public function getType()
-    {
-
-        return 'gallery';
 
     }
 

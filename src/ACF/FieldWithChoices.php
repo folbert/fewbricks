@@ -11,6 +11,39 @@ class FieldWithChoices extends Field
 {
 
     /**
+     * @return mixed The value of the ACF setting "allow_null". Returns the default ACF value of an empty array if none has
+     * been set using Fewbricks.
+     */
+    public function getAllowNull()
+    {
+
+        return $this->getSetting('allow_null', false);
+
+    }
+
+    /**
+     * @return mixed The value of the ACF setting "choices". Returns the default ACF value of an empty array if none has
+     * been set using Fewbricks.
+     */
+    public function getChoices()
+    {
+
+        return $this->getSetting('choices', []);
+
+    }
+
+    /**
+     * @return mixed The value of the ACF setting "return_format". Returns the default ACF value "value" if none has
+     * been set using Fewbricks.
+     */
+    public function getReturnFormat()
+    {
+
+        return $this->getSetting('return_format', 'value');
+
+    }
+
+    /**
      * ACF setting.
      *
      * @param $allowNull
@@ -50,39 +83,6 @@ class FieldWithChoices extends Field
     {
 
         return $this->setSetting('return_format', $returnFormat);
-
-    }
-
-    /**
-     * @return mixed The value of the ACF setting "allow_null". Returns the default ACF value of an empty array if none has
-     * been set using Fewbricks.
-     */
-    public function getAllowNull()
-    {
-
-        return $this->getSetting('allow_null', false);
-
-    }
-
-    /**
-     * @return mixed The value of the ACF setting "choices". Returns the default ACF value of an empty array if none has
-     * been set using Fewbricks.
-     */
-    public function getChoices()
-    {
-
-        return $this->getSetting('choices', []);
-
-    }
-
-    /**
-     * @return mixed The value of the ACF setting "return_format". Returns the default ACF value "value" if none has
-     * been set using Fewbricks.
-     */
-    public function getReturnFormat()
-    {
-
-        return $this->getSetting('return_format', 'value');
 
     }
 

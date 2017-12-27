@@ -7,7 +7,8 @@ namespace Fewbricks;
  *
  * @package Fewbricks\Exception
  */
-class Exception extends \Exception {
+class Exception extends \Exception
+{
 
     /**
      * @return string|void

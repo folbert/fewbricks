@@ -11,7 +11,6 @@ class OptionsCookieAlert extends FieldGroupsCollection
     {
 
 
-
     }
 
 }

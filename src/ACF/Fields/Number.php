@@ -19,6 +19,82 @@ class Number extends Field implements FieldInterface
 {
 
     /**
+     * @return mixed The value of the ACF setting "append". Returns the default ACF value "" if none has been
+     * set using Fewbricks.
+     */
+    public function getAppend()
+    {
+
+        return $this->getSetting('append', '');
+
+    }
+
+    /**
+     * @return mixed The value of the ACF setting "maximum_value". Returns the default ACF value "" if none has been
+     * set using Fewbricks.
+     */
+    public function getMaximumValue()
+    {
+
+        return $this->getSetting('maximum_value', '');
+
+    }
+
+    /**
+     * @return mixed The value of the ACF setting "minimum_value". Returns the default ACF value "" if none has been
+     * set using Fewbricks.
+     */
+    public function getMinimumValue()
+    {
+
+        return $this->getSetting('minimum_value', '');
+
+    }
+
+    /**
+     * @return mixed The value of the ACF setting "placeholder". Returns the default ACF value "" if none has been
+     * set using Fewbricks.
+     */
+    public function getPlaceholder()
+    {
+
+        return $this->getSetting('placeholder', '');
+
+    }
+
+    /**
+     * @return mixed The value of the ACF setting "prepend". Returns the default ACF value "" if none has been
+     * set using Fewbricks.
+     */
+    public function getPrepend()
+    {
+
+        return $this->getSetting('prepend', '');
+
+    }
+
+    /**
+     * @return mixed The value of the ACF setting "step". Returns the default ACF value "" if none has been
+     * set using Fewbricks.
+     */
+    public function getStep()
+    {
+
+        return $this->getSetting('step', '');
+
+    }
+
+    /**
+     * @return string The ACF type that ultimately decides what kind of field instances of this class is.
+     */
+    public function getType()
+    {
+
+        return 'number';
+
+    }
+
+    /**
      * ACF setting. Appears after the input.
      *
      * @param string $append
@@ -111,82 +187,6 @@ class Number extends Field implements FieldInterface
         $this->setSetting('step', $step);
 
         return $this;
-
-    }
-
-    /**
-     * @return mixed The value of the ACF setting "append". Returns the default ACF value "" if none has been
-     * set using Fewbricks.
-     */
-    public function getAppend()
-    {
-
-        return $this->getSetting('append', '');
-
-    }
-
-    /**
-     * @return mixed The value of the ACF setting "maximum_value". Returns the default ACF value "" if none has been
-     * set using Fewbricks.
-     */
-    public function getMaximumValue()
-    {
-
-        return $this->getSetting('maximum_value', '');
-
-    }
-
-    /**
-     * @return mixed The value of the ACF setting "minimum_value". Returns the default ACF value "" if none has been
-     * set using Fewbricks.
-     */
-    public function getMinimumValue()
-    {
-
-        return $this->getSetting('minimum_value', '');
-
-    }
-
-    /**
-     * @return mixed The value of the ACF setting "placeholder". Returns the default ACF value "" if none has been
-     * set using Fewbricks.
-     */
-    public function getPlaceholder()
-    {
-
-        return $this->getSetting('placeholder', '');
-
-    }
-
-    /**
-     * @return mixed The value of the ACF setting "prepend". Returns the default ACF value "" if none has been
-     * set using Fewbricks.
-     */
-    public function getPrepend()
-    {
-
-        return $this->getSetting('prepend', '');
-
-    }
-
-    /**
-     * @return mixed The value of the ACF setting "step". Returns the default ACF value "" if none has been
-     * set using Fewbricks.
-     */
-    public function getStep()
-    {
-
-        return $this->getSetting('step', '');
-
-    }
-
-    /**
-     * @return string The ACF type that ultimately decides what kind of field instances of this class is.
-     */
-    public function getType()
-    {
-
-        return 'number';
 
     }
 

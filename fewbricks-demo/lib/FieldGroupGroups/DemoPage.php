@@ -19,35 +19,6 @@ class DemoPage extends FieldGroupsCollection
 {
 
     /**
-     * This function is automatically called when the edit screen instance is created
-     */
-    public function build()
-    {
-
-        $this->addKitchenSinkFieldGroup();
-        $this->createAndAddFieldGroupOnTheFly();
-
-    }
-
-    /**
-     * @return array
-     */
-    private function getFieldGroupLocationRuleGroups()
-    {
-
-        // The relation between each Rule within a RuleGroup is considered "and"
-        // The relation between each RuleGroup is considered "or"
-        return [
-            (new FieldGroupLocationRuleGroup())
-                ->addRule(new Rule('post_type', '==', 'fewbricks_demo_page')),
-            (new FieldGroupLocationRuleGroup())
-                ->addRule(new Rule('post_type', '==', 'fewbricks_demo_page2'))
-                ->addRule(new Rule('post_type', '!=', 'fewbricks_demo_page3'))
-        ];
-
-    }
-
-    /**
      *
      */
     private function addKitchenSinkFieldGroup()
@@ -78,6 +49,17 @@ class DemoPage extends FieldGroupsCollection
     }
 
     /**
+     * This function is automatically called when the edit screen instance is created
+     */
+    public function build()
+    {
+
+        $this->addKitchenSinkFieldGroup();
+        $this->createAndAddFieldGroupOnTheFly();
+
+    }
+
+    /**
      * Showing how to create field groups on the fly
      */
     private function createAndAddFieldGroupOnTheFly()
@@ -103,6 +85,24 @@ class DemoPage extends FieldGroupsCollection
             '1711162243b'));
 
         $this->addFieldGroup($contentFg);
+
+    }
+
+    /**
+     * @return array
+     */
+    private function getFieldGroupLocationRuleGroups()
+    {
+
+        // The relation between each Rule within a RuleGroup is considered "and"
+        // The relation between each RuleGroup is considered "or"
+        return [
+            (new FieldGroupLocationRuleGroup())
+                ->addRule(new Rule('post_type', '==', 'fewbricks_demo_page')),
+            (new FieldGroupLocationRuleGroup())
+                ->addRule(new Rule('post_type', '==', 'fewbricks_demo_page2'))
+                ->addRule(new Rule('post_type', '!=', 'fewbricks_demo_page3')),
+        ];
 
     }
 

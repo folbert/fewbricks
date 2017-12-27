@@ -79,44 +79,18 @@ class Item
     }
 
     /**
-     * Allows you to set multiple settings at once.
-     *
-     * @param $settings
-     *
-     * @return $this
+     * @return array
      */
-    public function setSettings($settings)
+    public function getAcfArray()
     {
 
-        foreach ($settings AS $name => $value) {
+        // Put the crucial settings into the settings array
+        $tmp_settings          = $this->settings;
+        $tmp_settings['key']   = $this->key;
+        $tmp_settings['label'] = $this->label;
+        $tmp_settings['name']  = $this->name;
 
-            $this->setSetting($name, $value);
-
-        }
-
-        return $this;
-
-    }
-
-    /**
-     * @param $name
-     * @param $value
-     *
-     * @return $this
-     */
-    public function setSetting($name, $value)
-    {
-
-        $classVars = ['key', 'label', 'name', 'type'];
-
-        // Make sure to keep any crucial setting class vars up to date
-        if (in_array($name, $classVars)) {
-            $this->{$name} = $value;
-        }
-
-        $this->settings[$name] = $value;
-
-        return $this;
+        return $tmp_settings;
 
     }
 
@@ -189,26 +163,6 @@ class Item
     }
 
     /**
-     * @param string $prefix
-     */
-    public function prefixLabel($prefix)
-    {
-
-        $this->label = $prefix . $this->label;
-
-    }
-
-    /**
-     * @param string $prefix
-     */
-    public function prefixName($prefix)
-    {
-
-        $this->name = $prefix . $this->name;
-
-    }
-
-    /**
      * @return string
      */
     public function getOriginalKey()
@@ -245,18 +199,22 @@ class Item
     }
 
     /**
-     * @return array
+     * @param string $prefix
      */
-    public function getAcfArray()
+    public function prefixLabel($prefix)
     {
 
-        // Put the crucial settings into the settings array
-        $tmp_settings          = $this->settings;
-        $tmp_settings['key']   = $this->key;
-        $tmp_settings['label'] = $this->label;
-        $tmp_settings['name']  = $this->name;
+        $this->label = $prefix . $this->label;
 
-        return $tmp_settings;
+    }
+
+    /**
+     * @param string $prefix
+     */
+    public function prefixName($prefix)
+    {
+
+        $this->name = $prefix . $this->name;
 
     }
 
@@ -267,6 +225,48 @@ class Item
     {
 
         $this->key = $prepend . $this->key;
+
+    }
+
+    /**
+     * @param $name
+     * @param $value
+     *
+     * @return $this
+     */
+    public function setSetting($name, $value)
+    {
+
+        $classVars = ['key', 'label', 'name', 'type'];
+
+        // Make sure to keep any crucial setting class vars up to date
+        if (in_array($name, $classVars)) {
+            $this->{$name} = $value;
+        }
+
+        $this->settings[$name] = $value;
+
+        return $this;
+
+    }
+
+    /**
+     * Allows you to set multiple settings at once.
+     *
+     * @param $settings
+     *
+     * @return $this
+     */
+    public function setSettings($settings)
+    {
+
+        foreach ($settings AS $name => $value) {
+
+            $this->setSetting($name, $value);
+
+        }
+
+        return $this;
 
     }
 

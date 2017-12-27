@@ -39,7 +39,7 @@ class FieldGroupsCollection
     }
 
     /**
-     * @param FieldGroup  $fieldGroup
+     * @param FieldGroup $fieldGroup
      */
     public function addFieldGroup($fieldGroup)
     {
@@ -49,13 +49,12 @@ class FieldGroupsCollection
     }
 
     /**
-     * @param $name
-     * @param $value
+     * @return array
      */
-    public function set_arg($name, $value)
+    public function get_args()
     {
 
-        $this->args[$name] = $value;
+        return $this->args;
 
     }
 
@@ -70,12 +69,13 @@ class FieldGroupsCollection
     }
 
     /**
-     * @return array
+     * @param $name
+     * @param $value
      */
-    public function get_args()
+    public function set_arg($name, $value)
     {
 
-        return $this->args;
+        $this->args[$name] = $value;
 
     }
 

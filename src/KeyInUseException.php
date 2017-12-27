@@ -33,7 +33,7 @@ class KeyInUseException extends Exception
 
         wp_die('<b>' . __('A message from Fewbricks', 'fewbricks') . '</b><br><br>' . $this->getMessage(),
             $this->getTitle
-        ());
+            ());
 
     }
 

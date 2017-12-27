@@ -8,6 +8,5 @@ class CookieAlert extends FieldGroup
 {
 
 
-
 }
 

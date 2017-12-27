@@ -27,6 +27,26 @@ class Helper
     }
 
     /**
+     * @return mixed|void
+     */
+    public static function displayPhpFileWrittenMessage()
+    {
+
+        return apply_filters('fewbricks/display_php_file_written_message', '__return_true');
+
+    }
+
+    /**
+     * @return bool
+     */
+    public static function environmentIsFewbricksDev()
+    {
+
+        return defined('FEWBRICKS_DEV') && FEWBRICKS_DEV == 'true';
+
+    }
+
+    /**
      * @return bool
      */
     public static function exportToJsonTriggered()
@@ -63,188 +83,6 @@ class Helper
     }
 
     /**
-     * @param string $originalKey
-     * @param array  $acfArrayItems
-     *
-     * @return bool|string
-     */
-    public static function getNewKeyByOriginalKeyInAcfArray($originalKey, $acfArrayItems)
-    {
-
-        $outcome = false;
-
-        foreach($acfArrayItems AS $acfArrayItem) {
-
-            if($acfArrayItem['fewbricks_original_key'] === $originalKey) {
-
-                $outcome = $acfArrayItem['key'];
-                break;
-
-            }
-
-        }
-
-        return $outcome;
-
-    }
-
-    /**
-     * Returns a timestamp if we are in dev environment. Use for example when developing css and js.
-     *
-     * @return int
-     */
-    public static function getVersionOrTimestamp()
-    {
-
-        $outcome = time();
-
-        if (!self::environmentIsFewbricksDev()) {
-            $outcome = self::getVersion();
-        }
-
-        return $outcome;
-
-    }
-
-    /**
-     * @return bool
-     */
-    public static function environmentIsFewbricksDev()
-    {
-
-        return defined('FEWBRICKS_DEV') && FEWBRICKS_DEV == 'true';
-
-    }
-
-    /**
-     * @return int
-     */
-    public static function getVersion()
-    {
-
-        return get_option('fewbricks-version', -1);
-
-    }
-
-    /**
-     *
-     */
-    public static function initDebug()
-    {
-
-        self::initFieldSnitch();
-
-    }
-
-    /**
-     *
-     */
-    public static function initFieldSnitch()
-    {
-
-        if (apply_filters('fewbricks/activate_field_snitch', false)) {
-
-            AcfFieldSnitch::init();
-
-        }
-
-    }
-
-    /**
-     * @return string
-     */
-    public static function getProjectInitFilePath()
-    {
-
-        return self::getProjectFilesBasePath() . '/' . self::getProjectInitFileName();
-
-    }
-
-    /**
-     * @return string The base path to the project files.
-     */
-    public static function getProjectFilesBasePath()
-    {
-
-        $basePath = apply_filters('fewbricks/project_files_base_path', self::getDefaultProjectFilesBasePath());
-
-        return $basePath;
-
-    }
-
-    /**
-     * @return string
-     */
-    public static function getProjectInitFileName()
-    {
-
-        return apply_filters('fewbricks/project_init_file_name', 'fewbricks-init.php');
-
-    }
-
-    /**
-     * @return string
-     */
-    public static function getDefaultProjectFilesBasePath()
-    {
-
-        return __DIR__ . '/../fewbricks-demo';
-
-    }
-
-    /**
-     * @return bool
-     */
-    public static function projectBasePathExists()
-    {
-
-        return file_exists(Helper::getProjectFilesBasePath());
-
-    }
-
-    /**
-     * @return bool
-     */
-    public static function projectInitFileExists()
-    {
-
-        return file_exists(self::getProjectFilesBasePath() . '/' . self::getProjectInitFileName());
-
-    }
-
-    /**
-     * @return bool
-     */
-    public static function projectBasePathIsDefault()
-    {
-
-        return self::getProjectFilesBasePath() === self::getDefaultProjectFilesBasePath();
-
-    }
-
-    /**
-     * @param $fieldGroupAcfSettings
-     */
-    public static function maybeStoreFieldGroupAcfSettings($fieldGroupAcfSettings)
-    {
-
-        if (
-            (
-                (self::generatePhpCodeTriggered() || self::exportToJsonTriggered())
-                && isset($_GET['fewbricks_selected_field_groups_for_export'])
-                && is_array($_GET['fewbricks_selected_field_groups_for_export'])
-                && in_array($fieldGroupAcfSettings['key'], $_GET['fewbricks_selected_field_groups_for_export'])
-            )
-            || self::getAutoWritePhpCodeFile() !== false
-        ) {
-
-            self::storeFieldGroupAcfSettings($fieldGroupAcfSettings);
-
-        }
-
-    }
-
-    /**
      * @return bool
      */
     public static function generatePhpCodeTriggered()
@@ -270,172 +108,12 @@ class Helper
     }
 
     /**
-     * @param array $fieldGroupAcfSettings
+     * @return string
      */
-    public static function storeFieldGroupAcfSettings($fieldGroupAcfSettings)
+    public static function getDefaultProjectFilesBasePath()
     {
 
-        global $fieldGroupsAcfSettings;
-
-        if (!is_array($fieldGroupsAcfSettings)) {
-            $fieldGroupsAcfSettings = [];
-        }
-
-        $fieldGroupsAcfSettings[$fieldGroupAcfSettings['key']] = $fieldGroupAcfSettings;
-
-    }
-
-    /**
-     * @return bool
-     */
-    public static function pageIsFewbricksAdminPage()
-    {
-
-        $outcome = false;
-
-        if (is_admin()
-            && isset($_GET['post_type'])
-            && isset($_GET['page'])
-            && $_GET['post_type'] === 'acf-field-group'
-            && $_GET['page'] === 'fewbricksdev'
-        ) {
-
-            $outcome = true;
-
-        }
-
-        return $outcome;
-
-    }
-
-    /**
-     *
-     */
-    public static function maybeExportJson()
-    {
-
-        $data = [];
-
-        if (Helper::exportToJsonTriggered()) {
-
-            $fieldGroups = Helper::getStoredFieldGroupsAcfSettings();
-
-            if (!empty($fieldGroups)) {
-
-                // construct JSON
-                foreach ($fieldGroups as $fieldGroup) {
-
-                    // prepare for export
-                    $fieldGroup = acf_prepare_field_group_for_export($fieldGroup);
-
-                    // add to json array
-                    $data[] = $fieldGroup;
-
-                }
-
-                $file_name = 'fewbricks-acf-export-' . date('Y-m-d') . '.json';
-                header("Content-Description: File Transfer");
-                header("Content-Disposition: attachment; filename={$file_name}");
-                header("Content-Type: application/json; charset=utf-8");
-
-                echo acf_json_encode($data);
-                die();
-
-            }
-
-        }
-
-    }
-
-    /**
-     * @return mixed
-     */
-    public static function getStoredFieldGroupsAcfSettings()
-    {
-
-        global $fieldGroupsAcfSettings;
-
-        return $fieldGroupsAcfSettings;
-
-    }
-
-    /**
-     * @param $fieldGroupTitle
-     * @param $fieldGroupId
-     */
-    public static function maybeStoreSimpleFieldGroupData($fieldGroupTitle, $fieldGroupId)
-    {
-
-        if (self::pageIsFewbricksAdminPage()) {
-
-            global $simpleFieldGroupsData;
-
-            if (!is_array($simpleFieldGroupsData)) {
-                $simpleFieldGroupsData = [];
-            }
-
-            $simpleFieldGroupsData[$fieldGroupId] = $fieldGroupTitle;
-
-        }
-
-    }
-
-    /**
-     *
-     */
-    public static function maybeWriteToPhpCodeFile()
-    {
-
-        $codeToWrite = '';
-
-        $targetFile = self::getAutoWritePhpCodeFile();
-
-        if ($targetFile !== false) {
-
-            $codes = self::getFieldGroupsPhpCodes();
-
-            if (is_array($codes)) {
-
-                foreach ($codes AS $code) {
-
-                    $codeToWrite .= $code[1];
-
-                }
-
-            }
-
-            if (!empty($codeToWrite)) {
-
-                file_put_contents($targetFile, "<?php\r\r" . $codeToWrite);
-
-                if (self::displayPhpFileWrittenMessage()) {
-
-                    add_action('admin_notices', function () {
-
-                        $message = '<div class="notice notice-info">';
-                        $message .= '<p>' . sprintf(__('PHP code written to <code>%s</code>', 'fewbricks'),
-                                Helper::getAutoWritePhpCodeFile()) . '</p>';
-                        $message .= '</div>';
-
-                        echo $message;
-
-                    });
-
-                }
-
-            }
-
-        }
-
-    }
-
-    /**
-     * @return mixed|void
-     */
-    public static function displayPhpFileWrittenMessage()
-    {
-
-        return apply_filters('fewbricks/display_php_file_written_message', '__return_true');
+        return __DIR__ . '/../fewbricks-demo';
 
     }
 
@@ -515,6 +193,76 @@ class Helper
     }
 
     /**
+     * @param string $originalKey
+     * @param array  $acfArrayItems
+     *
+     * @return bool|string
+     */
+    public static function getNewKeyByOriginalKeyInAcfArray($originalKey, $acfArrayItems)
+    {
+
+        $outcome = false;
+
+        foreach ($acfArrayItems AS $acfArrayItem) {
+
+            if ($acfArrayItem['fewbricks_original_key'] === $originalKey) {
+
+                $outcome = $acfArrayItem['key'];
+                break;
+
+            }
+
+        }
+
+        return $outcome;
+
+    }
+
+    /**
+     * @return string The base path to the project files.
+     */
+    public static function getProjectFilesBasePath()
+    {
+
+        $basePath = apply_filters('fewbricks/project_files_base_path', self::getDefaultProjectFilesBasePath());
+
+        return $basePath;
+
+    }
+
+    /**
+     * @return string
+     */
+    public static function getProjectInitFileName()
+    {
+
+        return apply_filters('fewbricks/project_init_file_name', 'fewbricks-init.php');
+
+    }
+
+    /**
+     * @return string
+     */
+    public static function getProjectInitFilePath()
+    {
+
+        return self::getProjectFilesBasePath() . '/' . self::getProjectInitFileName();
+
+    }
+
+    /**
+     * @return mixed
+     */
+    public static function getStoredFieldGroupsAcfSettings()
+    {
+
+        global $fieldGroupsAcfSettings;
+
+        return $fieldGroupsAcfSettings;
+
+    }
+
+    /**
      * @return array
      */
     public static function getStoredSimpleFieldGroupData()
@@ -527,6 +275,258 @@ class Helper
         }
 
         return $simpleFieldGroupsData;
+
+    }
+
+    /**
+     * @return int
+     */
+    public static function getVersion()
+    {
+
+        return get_option('fewbricks-version', -1);
+
+    }
+
+    /**
+     * Returns a timestamp if we are in dev environment. Use for example when developing css and js.
+     *
+     * @return int
+     */
+    public static function getVersionOrTimestamp()
+    {
+
+        $outcome = time();
+
+        if (!self::environmentIsFewbricksDev()) {
+            $outcome = self::getVersion();
+        }
+
+        return $outcome;
+
+    }
+
+    /**
+     *
+     */
+    public static function initDebug()
+    {
+
+        self::initFieldSnitch();
+
+    }
+
+    /**
+     *
+     */
+    public static function initFieldSnitch()
+    {
+
+        if (apply_filters('fewbricks/activate_field_snitch', false)) {
+
+            AcfFieldSnitch::init();
+
+        }
+
+    }
+
+    /**
+     *
+     */
+    public static function maybeExportJson()
+    {
+
+        $data = [];
+
+        if (Helper::exportToJsonTriggered()) {
+
+            $fieldGroups = Helper::getStoredFieldGroupsAcfSettings();
+
+            if (!empty($fieldGroups)) {
+
+                // construct JSON
+                foreach ($fieldGroups as $fieldGroup) {
+
+                    // prepare for export
+                    $fieldGroup = acf_prepare_field_group_for_export($fieldGroup);
+
+                    // add to json array
+                    $data[] = $fieldGroup;
+
+                }
+
+                $file_name = 'fewbricks-acf-export-' . date('Y-m-d') . '.json';
+                header("Content-Description: File Transfer");
+                header("Content-Disposition: attachment; filename={$file_name}");
+                header("Content-Type: application/json; charset=utf-8");
+
+                echo acf_json_encode($data);
+                die();
+
+            }
+
+        }
+
+    }
+
+    /**
+     * @param $fieldGroupAcfSettings
+     */
+    public static function maybeStoreFieldGroupAcfSettings($fieldGroupAcfSettings)
+    {
+
+        if (
+            (
+                (self::generatePhpCodeTriggered() || self::exportToJsonTriggered())
+                && isset($_GET['fewbricks_selected_field_groups_for_export'])
+                && is_array($_GET['fewbricks_selected_field_groups_for_export'])
+                && in_array($fieldGroupAcfSettings['key'], $_GET['fewbricks_selected_field_groups_for_export'])
+            )
+            || self::getAutoWritePhpCodeFile() !== false
+        ) {
+
+            self::storeFieldGroupAcfSettings($fieldGroupAcfSettings);
+
+        }
+
+    }
+
+    /**
+     * @param $fieldGroupTitle
+     * @param $fieldGroupId
+     */
+    public static function maybeStoreSimpleFieldGroupData($fieldGroupTitle, $fieldGroupId)
+    {
+
+        if (self::pageIsFewbricksAdminPage()) {
+
+            global $simpleFieldGroupsData;
+
+            if (!is_array($simpleFieldGroupsData)) {
+                $simpleFieldGroupsData = [];
+            }
+
+            $simpleFieldGroupsData[$fieldGroupId] = $fieldGroupTitle;
+
+        }
+
+    }
+
+    /**
+     *
+     */
+    public static function maybeWriteToPhpCodeFile()
+    {
+
+        $codeToWrite = '';
+
+        $targetFile = self::getAutoWritePhpCodeFile();
+
+        if ($targetFile !== false) {
+
+            $codes = self::getFieldGroupsPhpCodes();
+
+            if (is_array($codes)) {
+
+                foreach ($codes AS $code) {
+
+                    $codeToWrite .= $code[1];
+
+                }
+
+            }
+
+            if (!empty($codeToWrite)) {
+
+                file_put_contents($targetFile, "<?php\r\r" . $codeToWrite);
+
+                if (self::displayPhpFileWrittenMessage()) {
+
+                    add_action('admin_notices', function () {
+
+                        $message = '<div class="notice notice-info">';
+                        $message .= '<p>' . sprintf(__('PHP code written to <code>%s</code>', 'fewbricks'),
+                                Helper::getAutoWritePhpCodeFile()) . '</p>';
+                        $message .= '</div>';
+
+                        echo $message;
+
+                    });
+
+                }
+
+            }
+
+        }
+
+    }
+
+    /**
+     * @return bool
+     */
+    public static function pageIsFewbricksAdminPage()
+    {
+
+        $outcome = false;
+
+        if (is_admin()
+            && isset($_GET['post_type'])
+            && isset($_GET['page'])
+            && $_GET['post_type'] === 'acf-field-group'
+            && $_GET['page'] === 'fewbricksdev'
+        ) {
+
+            $outcome = true;
+
+        }
+
+        return $outcome;
+
+    }
+
+    /**
+     * @return bool
+     */
+    public static function projectBasePathExists()
+    {
+
+        return file_exists(Helper::getProjectFilesBasePath());
+
+    }
+
+    /**
+     * @return bool
+     */
+    public static function projectBasePathIsDefault()
+    {
+
+        return self::getProjectFilesBasePath() === self::getDefaultProjectFilesBasePath();
+
+    }
+
+    /**
+     * @return bool
+     */
+    public static function projectInitFileExists()
+    {
+
+        return file_exists(self::getProjectFilesBasePath() . '/' . self::getProjectInitFileName());
+
+    }
+
+    /**
+     * @param array $fieldGroupAcfSettings
+     */
+    public static function storeFieldGroupAcfSettings($fieldGroupAcfSettings)
+    {
+
+        global $fieldGroupsAcfSettings;
+
+        if (!is_array($fieldGroupsAcfSettings)) {
+            $fieldGroupsAcfSettings = [];
+        }
+
+        $fieldGroupsAcfSettings[$fieldGroupAcfSettings['key']] = $fieldGroupAcfSettings;
 
     }
 

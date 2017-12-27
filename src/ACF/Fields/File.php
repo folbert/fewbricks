@@ -19,90 +19,6 @@ class File extends Field implements FieldInterface
 {
 
     /**
-     * ACF setting. Limit the media library choice.
-     *
-     * @param string $library "all" or "uploadedTo"
-     *
-     * @return $this
-     */
-    public function setLibrary($library)
-    {
-
-        $this->setSetting('library', $library);
-
-        return $this;
-
-    }
-
-    /**
-     * ACF setting. Restrict which files can be uploaded.
-     *
-     * @param int $max_size Max file size in MB
-     *
-     * @return $this
-     */
-    public function setMaxSize($max_size)
-    {
-
-        $this->setSetting('max_size', $max_size);
-
-        return $this;
-
-    }
-
-    /**
-     * ACF setting. Don't use or pass an empty value for all types.
-     *
-     * @param string|array $mime_types Comma separated string or array
-     *
-     * @return $this
-     */
-    public function setMimeTypes($mime_types)
-    {
-
-        if(is_array($mime_types)) {
-            $mime_types = implode(', ', $mime_types);
-        }
-
-        $this->setSetting('mime_types', $mime_types);
-
-        return $this;
-
-    }
-
-    /**
-     * ACF setting. Restrict which files can be uploaded.
-     *
-     * @param int $min_size Minimum file size in MB
-     *
-     * @return $this
-     */
-    public function setMinSize($min_size)
-    {
-
-        $this->setSetting('min_size', $min_size);
-
-        return $this;
-
-    }
-
-    /**
-     * ACF setting. Specify the returned value on front end.
-     *
-     * @param string $returnFormat "array", "url" or "id"
-     *
-     * @return $this
-     */
-    public function setReturnFormat($returnFormat)
-    {
-
-        $this->setSetting('return_format', $returnFormat);
-
-        return $this;
-
-    }
-
-    /**
      * @return mixed The value of the ACF setting "library". Returns the default ACF value "all" if none has been
      * set using Fewbricks.
      */
@@ -165,6 +81,90 @@ class File extends Field implements FieldInterface
     {
 
         return 'file';
+
+    }
+
+    /**
+     * ACF setting. Limit the media library choice.
+     *
+     * @param string $library "all" or "uploadedTo"
+     *
+     * @return $this
+     */
+    public function setLibrary($library)
+    {
+
+        $this->setSetting('library', $library);
+
+        return $this;
+
+    }
+
+    /**
+     * ACF setting. Restrict which files can be uploaded.
+     *
+     * @param int $max_size Max file size in MB
+     *
+     * @return $this
+     */
+    public function setMaxSize($max_size)
+    {
+
+        $this->setSetting('max_size', $max_size);
+
+        return $this;
+
+    }
+
+    /**
+     * ACF setting. Don't use or pass an empty value for all types.
+     *
+     * @param string|array $mime_types Comma separated string or array
+     *
+     * @return $this
+     */
+    public function setMimeTypes($mime_types)
+    {
+
+        if (is_array($mime_types)) {
+            $mime_types = implode(', ', $mime_types);
+        }
+
+        $this->setSetting('mime_types', $mime_types);
+
+        return $this;
+
+    }
+
+    /**
+     * ACF setting. Restrict which files can be uploaded.
+     *
+     * @param int $min_size Minimum file size in MB
+     *
+     * @return $this
+     */
+    public function setMinSize($min_size)
+    {
+
+        $this->setSetting('min_size', $min_size);
+
+        return $this;
+
+    }
+
+    /**
+     * ACF setting. Specify the returned value on front end.
+     *
+     * @param string $returnFormat "array", "url" or "id"
+     *
+     * @return $this
+     */
+    public function setReturnFormat($returnFormat)
+    {
+
+        $this->setSetting('return_format', $returnFormat);
+
+        return $this;
 
     }
 

@@ -64,6 +64,26 @@ class Filters
     }*/
 
     /**
+     *
+     */
+    public static function editFieldGroupInfo()
+    {
+
+        if (get_current_screen()->post_type === 'edit-acf-field-group') {
+
+            $message_html
+                = '
+                <div class="notice notice-info">
+                    <p>If you are looking for field groups that you know should be here, please note that we are using <a href="https://github.com/folbert/fewbricks" target="_blank">Fewbricks</a> to create ACF-fields.</p>
+                </div>';
+
+            echo $message_html;
+
+        }
+
+    }
+
+    /**
      * @return string
      */
     public static function getLayoutBasePath()
@@ -91,26 +111,6 @@ class Filters
     {
 
         return '.view.php';
-
-    }
-
-    /**
-     *
-     */
-    public static function editFieldGroupInfo()
-    {
-
-        if (get_current_screen()->post_type === 'edit-acf-field-group') {
-
-            $message_html
-                = '
-                <div class="notice notice-info">
-                    <p>If you are looking for field groups that you know should be here, please note that we are using <a href="https://github.com/folbert/fewbricks" target="_blank">Fewbricks</a> to create ACF-fields.</p>
-                </div>';
-
-            echo $message_html;
-
-        }
 
     }
 

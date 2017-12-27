@@ -41,7 +41,7 @@ class RuleGroup
 
             $this->rules->addItem($rule);
 
-        } catch(KeyInUseException $keyInUseException) {
+        } catch (KeyInUseException $keyInUseException) {
 
             $keyInUseException->wpDie();
 

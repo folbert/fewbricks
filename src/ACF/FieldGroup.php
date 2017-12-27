@@ -88,12 +88,22 @@ class FieldGroup extends FieldCollection implements FieldGroupInterface
     }
 
     /**
+     * @param FieldGroupLocationRuleGroup $ruleGroup
+     *
      * @return $this
      */
-    public function clearLocationRuleGroups()
+    public function addLocationRuleGroup($ruleGroup)
     {
 
-        $this->locationRuleGroups = new RuleGroupCollection();
+        try {
+
+            $this->locationRuleGroups->addItem($ruleGroup);
+
+        } catch (KeyInUseException $keyInUseException) {
+
+            $keyInUseException->wpDie();
+
+        }
 
         return $this;
 
@@ -118,24 +128,10 @@ class FieldGroup extends FieldCollection implements FieldGroupInterface
     }
 
     /**
-     * @param FieldGroupLocationRuleGroup $ruleGroup
-     *
-     * @return $this
+     * @return mixed|void
      */
-    public function addLocationRuleGroup($ruleGroup)
+    public function build()
     {
-
-        try {
-
-            $this->locationRuleGroups->addItem($ruleGroup);
-
-        } catch (KeyInUseException $keyInUseException) {
-
-            $keyInUseException->wpDie();
-
-        }
-
-        return $this;
 
     }
 
@@ -150,12 +146,236 @@ class FieldGroup extends FieldCollection implements FieldGroupInterface
     }*/
 
     /**
+     * @return $this
+     */
+    public function clearLocationRuleGroups()
+    {
+
+        $this->locationRuleGroups = new RuleGroupCollection();
+
+        return $this;
+
+    }
+
+    /**
+     *
+     */
+    protected function doRegister()
+    {
+
+        $acfSettingsArray = $this->getAcfArray();
+
+        Helper::maybeStoreSimpleFieldGroupData($acfSettingsArray['title'], $acfSettingsArray['key']);
+        Helper::maybeStoreFieldGroupAcfSettings($acfSettingsArray);
+
+        acf_add_local_field_group($acfSettingsArray);
+
+        // No use in having a potentially large collection of objects anymore
+        unset($this->items);
+
+    }
+
+    /**
+     * @param null $void Exists only for the function to be compatible with parents function with same name.
+     *
+     * @return array
+     */
+    public function getAcfArray($void = null)
+    {
+
+        return array_merge($this->settings, [
+            'key'      => $this->getKey(),
+            'title'    => $this->getTitle(),
+            'location' => $this->locationRuleGroups->toArray(),
+            'fields'   => parent::getAcfArray($this->getKey()),
+        ]);
+
+    }
+
+    /**
+     * @param null $defaultValue
+     *
+     * @return bool|mixed
+     */
+    public function getActive($defaultValue = null)
+    {
+
+        return $this->getSetting('active', $defaultValue);
+
+    }
+
+    /**
+     * @param string $defaultValue
+     *
+     * @return bool|mixed
+     */
+    public function getDescription($defaultValue = '')
+    {
+
+        return $this->getSetting('description', $defaultValue);
+
+    }
+
+    /**
+     * @return array|bool|mixed
+     */
+    public function getHideOnScreenSetting()
+    {
+
+        // These are the items that ACF supports hiding as of v5.6.5
+        $currentValues = $this->getSetting('hide_on_screen');
+
+        // If the setting has not been set
+        if ($currentValues === false) {
+
+            $currentValues = self::HIDE_ON_SCREEN_ITEMS;
+
+        }
+
+        return $currentValues;
+
+    }
+
+    /**
+     * @param bool $defaultValue
+     *
+     * @return bool|mixed
+     */
+    public function getInstructionPlacement($defaultValue = false)
+    {
+
+        return $this->getSetting('instruction_placement', $defaultValue);
+
+    }
+
+    /**
+     * @return string
+     */
+    public function getKey()
+    {
+
+        $key = $this->key;
+
+        // Lets make sure that the key is ok for ACF
+        // https://www.advancedcustomfields.com/resources/register-fields-via-php/#field-settings
+        if (substr($key, 0, 6) !== 'group_') {
+            $key = 'group_' . $key;
+        }
+
+        return $key;
+
+    }
+
+    /**
+     * @param $defaultVale
+     *
+     * @return bool|mixed
+     */
+    public function getLabelPlacement($defaultVale)
+    {
+
+        return $this->getSetting('label_placement', $defaultVale);
+
+    }
+
+    /**
+     * @return RuleGroupCollection
+     */
+    public function getLocationRuleGroups()
+    {
+
+        return $this->locationRuleGroups;
+
+    }
+
+    /**
+     * @param $defaultValue
+     *
+     * @return bool|mixed
+     */
+    public function getMenuOrder($defaultValue)
+    {
+
+        return $this->getSetting('menu_order', $defaultValue);
+
+    }
+
+    /**
+     * @param $defaultValue
+     *
+     * @return bool|mixed
+     */
+    public function getPosition($defaultValue)
+    {
+
+        return $this->getSetting('position', $defaultValue);
+
+    }
+
+    /**
+     * Get the value of a specific setting.
+     *
+     * @param      $name         The name of the setting
+     * @param bool $defaultValue The value to return if the setting does not exist
+     *
+     * @return bool|mixed
+     */
+    public function getSetting($name, $defaultValue = false)
+    {
+
+        $value = $defaultValue;
+
+        if (isset($this->settings[$name])) {
+            $value = $this->settings[$name];
+        }
+
+        return $value;
+
+    }
+
+    /**
      * @return array
      */
     public function getSettings()
     {
 
         return $this->settings;
+
+    }
+
+    /**
+     * @param bool $defaultValue
+     *
+     * @return bool|mixed
+     */
+    public function getStyle($defaultValue = false)
+    {
+
+        return $this->getSetting('style', $defaultValue);
+
+    }
+
+    /**
+     * @return string
+     */
+    public function getTitle()
+    {
+
+        return $this->title;
+
+    }
+
+    /**
+     * @param $title
+     *
+     * @return FieldGroup
+     */
+    public function setTitle($title)
+    {
+
+        $this->title = $title;
+
+        return $this;
 
     }
 
@@ -176,6 +396,52 @@ class FieldGroup extends FieldCollection implements FieldGroupInterface
     {
 
         $this->setHideOnScreen($elementNames);
+
+        return $this;
+
+    }
+
+    /**
+     * In order to keep in sync with ACFs namings, we have this function to call publicly. And then use doRegister()
+     * to actually register.
+     */
+    public function register()
+    {
+
+        $this->build();
+
+        $this->doRegister();
+
+    }
+
+    /**
+     * ACF setting. If the field group should be registered or not.
+     *
+     * @param $active
+     *
+     * @return $this
+     */
+    public function setActive($active)
+    {
+
+        $this->setSetting('active', $active);
+
+        return $this;
+
+    }
+
+    /**
+     * ACF setting. Shown in field group list. Since this is a setting that only affects the ACF GUI, it will probably
+     * never be used by Fewbricks users. But lets add this function anyways just to be nice :)
+     *
+     * @param string $description The description
+     *
+     * @return $this
+     */
+    public function setDescription($description)
+    {
+
+        $this->setSetting('description', $description);
 
         return $this;
 
@@ -248,22 +514,67 @@ class FieldGroup extends FieldCollection implements FieldGroupInterface
     }
 
     /**
-     * @return array|bool|mixed
+     * ACF Setting. Determines where field instructions are placed in relation to fields.
+     *
+     * @param string $instruction_placement 'label' (Below labels) or 'field' (Below fields)
+     *
+     * @return $this
      */
-    public function getHideOnScreenSetting()
+    public function setInstructionPlacement($instruction_placement)
     {
 
-        // These are the items that ACF supports hiding as of v5.6.5
-        $currentValues = $this->getSetting('hide_on_screen');
+        $this->setSetting('instruction_placement', $instruction_placement);
 
-        // If the setting has not been set
-        if ($currentValues === false) {
+        return $this;
 
-            $currentValues = self::HIDE_ON_SCREEN_ITEMS;
+    }
 
-        }
+    /**
+     * ACF Setting. Determines where field labels are placed in relation to fields. Defaults to 'top'.
+     *
+     * @param string $labelPlacement 'top' (Above fields) or 'left' (Beside fields)
+     *
+     * @return $this
+     */
+    public function setLabelPlacement($labelPlacement)
+    {
 
-        return $currentValues;
+        $this->setSetting('label_placement', $labelPlacement);
+
+        return $this;
+
+
+    }
+
+    /**
+     * ACF setting. Field groups are shown in order from lowest to highest.
+     *
+     * @param int $menuOrder
+     *
+     * @return $this
+     */
+    public function setMenuOrder($menuOrder)
+    {
+
+        $this->setSetting('menu_order', $menuOrder);
+
+        return $this;
+
+    }
+
+    /**
+     * ACF setting. Determines the position on the edit screen. Defaults to 'normal'.
+     *
+     * @param string $position 'acf_after_title', 'normal' or 'side'
+     *
+     * @return $this
+     */
+    public function setPosition($position)
+    {
+
+        $this->setSetting('position', $position);
+
+        return $this;
 
     }
 
@@ -293,305 +604,6 @@ class FieldGroup extends FieldCollection implements FieldGroupInterface
     }
 
     /**
-     * Get the value of a specific setting.
-     *
-     * @param      $name         The name of the setting
-     * @param bool $defaultValue The value to return if the setting does not exist
-     *
-     * @return bool|mixed
-     */
-    public function getSetting($name, $defaultValue = false)
-    {
-
-        $value = $defaultValue;
-
-        if (isset($this->settings[$name])) {
-            $value = $this->settings[$name];
-        }
-
-        return $value;
-
-    }
-
-    /**
-     * @return RuleGroupCollection
-     */
-    public function getLocationRuleGroups()
-    {
-
-        return $this->locationRuleGroups;
-
-    }
-
-    /**
-     * In order to keep in sync with ACFs namings, we have this function to call publicly. And then use doRegister()
-     * to actually register.
-     */
-    public function register()
-    {
-
-        $this->build();
-
-        $this->doRegister();
-
-    }
-
-    /**
-     * @return mixed|void
-     */
-    public function build()
-    {
-
-    }
-
-    /**
-     *
-     */
-    protected function doRegister()
-    {
-
-        $acfSettingsArray = $this->getAcfArray();
-
-        Helper::maybeStoreSimpleFieldGroupData($acfSettingsArray['title'], $acfSettingsArray['key']);
-        Helper::maybeStoreFieldGroupAcfSettings($acfSettingsArray);
-
-        acf_add_local_field_group($acfSettingsArray);
-
-        // No use in having a potentially large collection of objects anymore
-        unset($this->items);
-
-    }
-
-    /**
-     * @param null $void Exists only for the function to be compatible with parents function with same name.
-     *
-     * @return array
-     */
-    public function getAcfArray($void = null)
-    {
-
-        return array_merge($this->settings, [
-            'key'      => $this->getKey(),
-            'title'    => $this->getTitle(),
-            'location' => $this->locationRuleGroups->toArray(),
-            'fields'   => parent::getAcfArray($this->getKey()),
-        ]);
-
-    }
-
-    /**
-     * @return string
-     */
-    public function getKey()
-    {
-
-        $key = $this->key;
-
-        // Lets make sure that the key is ok for ACF
-        // https://www.advancedcustomfields.com/resources/register-fields-via-php/#field-settings
-        if (substr($key, 0, 6) !== 'group_') {
-            $key = 'group_' . $key;
-        }
-
-        return $key;
-
-    }
-
-    /**
-     * @return string
-     */
-    public function getTitle()
-    {
-
-        return $this->title;
-
-    }
-
-    /**
-     * @param $title
-     *
-     * @return FieldGroup
-     */
-    public function setTitle($title)
-    {
-
-        $this->title = $title;
-
-        return $this;
-
-    }
-
-    /**
-     * ACF setting. If the field group should be registered or not.
-     *
-     * @param $active
-     *
-     * @return $this
-     */
-    public function setActive($active)
-    {
-
-        $this->setSetting('active', $active);
-
-        return $this;
-
-    }
-
-    /**
-     * @param null $defaultValue
-     *
-     * @return bool|mixed
-     */
-    public function getActive($defaultValue = null)
-    {
-
-        return $this->getSetting('active', $defaultValue);
-
-    }
-
-    /**
-     * ACF setting. Shown in field group list. Since this is a setting that only affects the ACF GUI, it will probably
-     * never be used by Fewbricks users. But lets add this function anyways just to be nice :)
-     *
-     * @param string $description The description
-     *
-     * @return $this
-     */
-    public function setDescription($description)
-    {
-
-        $this->setSetting('description', $description);
-
-        return $this;
-
-    }
-
-    /**
-     * @param string $defaultValue
-     *
-     * @return bool|mixed
-     */
-    public function getDescription($defaultValue = '')
-    {
-
-        return $this->getSetting('description', $defaultValue);
-
-    }
-
-    /**
-     * ACF Setting. Determines where field instructions are placed in relation to fields.
-     *
-     * @param string $instruction_placement 'label' (Below labels) or 'field' (Below fields)
-     *
-     * @return $this
-     */
-    public function setInstructionPlacement($instruction_placement)
-    {
-
-        $this->setSetting('instruction_placement', $instruction_placement);
-
-        return $this;
-
-    }
-
-    /**
-     * @param bool $defaultValue
-     *
-     * @return bool|mixed
-     */
-    public function getInstructionPlacement($defaultValue = false)
-    {
-
-        return $this->getSetting('instruction_placement', $defaultValue);
-
-    }
-
-    /**
-     * ACF Setting. Determines where field labels are placed in relation to fields. Defaults to 'top'.
-     *
-     * @param string $labelPlacement 'top' (Above fields) or 'left' (Beside fields)
-     *
-     * @return $this
-     */
-    public function setLabelPlacement($labelPlacement)
-    {
-
-        $this->setSetting('label_placement', $labelPlacement);
-
-        return $this;
-
-
-    }
-
-    /**
-     * @param $defaultVale
-     *
-     * @return bool|mixed
-     */
-    public function getLabelPlacement($defaultVale)
-    {
-
-        return $this->getSetting('label_placement', $defaultVale);
-
-    }
-
-    /**
-     * ACF setting. Field groups are shown in order from lowest to highest.
-     *
-     * @param int $menuOrder
-     *
-     * @return $this
-     */
-    public function setMenuOrder($menuOrder)
-    {
-
-        $this->setSetting('menu_order', $menuOrder);
-
-        return $this;
-
-    }
-
-    /**
-     * @param $defaultValue
-     *
-     * @return bool|mixed
-     */
-    public function getMenuOrder($defaultValue)
-    {
-
-        return $this->getSetting('menu_order', $defaultValue);
-
-    }
-
-    /**
-     * ACF setting. Determines the position on the edit screen. Defaults to 'normal'.
-     *
-     * @param string $position 'acf_after_title', 'normal' or 'side'
-     *
-     * @return $this
-     */
-    public function setPosition($position)
-    {
-
-        $this->setSetting('position', $position);
-
-        return $this;
-
-    }
-
-    /**
-     * @param $defaultValue
-     *
-     * @return bool|mixed
-     */
-    public function getPosition($defaultValue)
-    {
-
-        return $this->getSetting('position', $defaultValue);
-
-    }
-
-    /**
      * Determines the metabox style. Choices of 'default' or 'seamless'
      *
      * @param string $style 'default' or 'seamless'
@@ -604,18 +616,6 @@ class FieldGroup extends FieldCollection implements FieldGroupInterface
         $this->setSetting('style', $style);
 
         return $this;
-
-    }
-
-    /**
-     * @param bool $defaultValue
-     *
-     * @return bool|mixed
-     */
-    public function getStyle($defaultValue = false)
-    {
-
-        return $this->getSetting('style', $defaultValue);
 
     }
 

@@ -19,6 +19,60 @@ class Textarea extends Field implements FieldInterface
 {
 
     /**
+     * @return mixed The value of the ACF setting "maxlength". Returns the default ACF value "" if none has been
+     * set using Fewbricks.
+     */
+    public function getMaxlength()
+    {
+
+        return $this->getSetting('maxlength', '');
+
+    }
+
+    /**
+     * @return mixed The value of the ACF setting "new_lines". Returns the default ACF value "" if none has been
+     * set using Fewbricks.
+     */
+    public function getNewLines()
+    {
+
+        return $this->getSetting('new_lines', '');
+
+    }
+
+    /**
+     * @return mixed The value of the ACF setting "placeholder". Returns the default ACF value "" if none has been
+     * set using Fewbricks.
+     */
+    public function getPlaceholder()
+    {
+
+        return $this->getSetting('placeholder', '');
+
+    }
+
+    /**
+     * @return mixed The value of the ACF setting "rows". Returns the default ACF value 8 if none has been
+     * set using Fewbricks.
+     */
+    public function getRows()
+    {
+
+        return $this->getSetting('rows', 8);
+
+    }
+
+    /**
+     * @return string The ACF type that ultimately decides what kind of field instances of this class is.
+     */
+    public function getType()
+    {
+
+        return 'textarea';
+
+    }
+
+    /**
      * ACF setting.
      *
      * @param int $maxlength [sic]
@@ -79,60 +133,6 @@ class Textarea extends Field implements FieldInterface
         $this->setSetting('rows', $rows);
 
         return $this;
-
-    }
-
-    /**
-     * @return mixed The value of the ACF setting "maxlength". Returns the default ACF value "" if none has been
-     * set using Fewbricks.
-     */
-    public function getMaxlength()
-    {
-
-        return $this->getSetting('maxlength', '');
-
-    }
-
-    /**
-     * @return mixed The value of the ACF setting "new_lines". Returns the default ACF value "" if none has been
-     * set using Fewbricks.
-     */
-    public function getNewLines()
-    {
-
-        return $this->getSetting('new_lines', '');
-
-    }
-
-    /**
-     * @return mixed The value of the ACF setting "placeholder". Returns the default ACF value "" if none has been
-     * set using Fewbricks.
-     */
-    public function getPlaceholder()
-    {
-
-        return $this->getSetting('placeholder', '');
-
-    }
-
-    /**
-     * @return mixed The value of the ACF setting "rows". Returns the default ACF value 8 if none has been
-     * set using Fewbricks.
-     */
-    public function getRows()
-    {
-
-        return $this->getSetting('rows', 8);
-
-    }
-
-    /**
-     * @return string The ACF type that ultimately decides what kind of field instances of this class is.
-     */
-    public function getType()
-    {
-
-        return 'textarea';
 
     }
 

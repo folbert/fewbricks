@@ -19,6 +19,71 @@ class Range extends Field implements FieldInterface
 {
 
     /**
+     * @return mixed The value of the ACF setting "append". Returns the default ACF value "" if none has been
+     * set using Fewbricks.
+     */
+    public function getAppend()
+    {
+
+        return $this->getSetting('append', '');
+
+    }
+
+    /**
+     * @return mixed The value of the ACF setting "max". Returns the default ACF value "" if none has been
+     * set using Fewbricks.
+     */
+    public function getMax()
+    {
+
+        return $this->getSetting('max', '');
+
+    }
+
+    /**
+     * @return mixed The value of the ACF setting "min". Returns the default ACF value "" if none has been
+     * set using Fewbricks.
+     */
+    public function getMin()
+    {
+
+        return $this->setSetting('min', '');
+
+    }
+
+    /**
+     * @return mixed The value of the ACF setting "prepend". Returns the default ACF value "" if none has been
+     * set using Fewbricks.
+     */
+    public function getPrepend()
+    {
+
+        return $this->setSetting('prepend', '');
+
+    }
+
+    /**
+     * @return mixed The value of the ACF setting "step". Returns the default ACF value "" if none has been
+     * set using Fewbricks.
+     */
+    public function getStep()
+    {
+
+        return $this->setSetting('step', '');
+
+    }
+
+    /**
+     * @return string The ACF type that ultimately decides what kind of field instances of this class is.
+     */
+    public function getType()
+    {
+
+        return 'range';
+
+    }
+
+    /**
      * ACF setting.
      *
      * @param string $append
@@ -95,71 +160,6 @@ class Range extends Field implements FieldInterface
         $this->setSetting('step', $step);
 
         return $this;
-
-    }
-
-    /**
-     * @return mixed The value of the ACF setting "append". Returns the default ACF value "" if none has been
-     * set using Fewbricks.
-     */
-    public function getAppend()
-    {
-
-        return $this->getSetting('append', '');
-
-    }
-
-    /**
-     * @return mixed The value of the ACF setting "max". Returns the default ACF value "" if none has been
-     * set using Fewbricks.
-     */
-    public function getMax()
-    {
-
-        return $this->getSetting('max', '');
-
-    }
-
-    /**
-     * @return mixed The value of the ACF setting "min". Returns the default ACF value "" if none has been
-     * set using Fewbricks.
-     */
-    public function getMin()
-    {
-
-        return $this->setSetting('min', '');
-
-    }
-
-    /**
-     * @return mixed The value of the ACF setting "prepend". Returns the default ACF value "" if none has been
-     * set using Fewbricks.
-     */
-    public function getPrepend()
-    {
-
-        return $this->setSetting('prepend', '');
-
-    }
-
-    /**
-     * @return mixed The value of the ACF setting "step". Returns the default ACF value "" if none has been
-     * set using Fewbricks.
-     */
-    public function getStep()
-    {
-
-        return $this->setSetting('step', '');
-
-    }
-
-    /**
-     * @return string The ACF type that ultimately decides what kind of field instances of this class is.
-     */
-    public function getType()
-    {
-
-        return 'range';
 
     }
 

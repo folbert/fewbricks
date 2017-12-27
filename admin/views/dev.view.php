@@ -70,7 +70,8 @@
             <div class="inside">
 
                 <p><?php _e('Here you can export all the field groups and fields that are registered using 
-                Fewbricks. Use the download button to export to a .json file which you can then import to another ACF installation. Use the generate button to export to PHP code which you can place in your theme.', 'fewbricks'); ?></p>
+                Fewbricks. Use the download button to export to a .json file which you can then import to another ACF installation. Use the generate button to export to PHP code which you can place in your theme.',
+                        'fewbricks'); ?></p>
 
                 <form action="<?php echo admin_url('edit.php'); ?>" method="get">
 

@@ -19,54 +19,6 @@ class PageLink extends Field implements FieldInterface
 {
 
     /**
-     * ACF setting.
-     *
-     * @param boolean $allowArchives
-     *
-     * @return PageLink
-     */
-    public function setAllowArchives($allowArchives)
-    {
-
-        $this->setSetting('allow_archives', $allowArchives);
-
-        return $this;
-
-    }
-
-    /**
-     * ACF setting.
-     *
-     * @param boolean $multiple
-     *
-     * @return PageLink
-     */
-    public function setMultiple($multiple)
-    {
-
-        $this->setSetting('multiple', $multiple);
-
-        return $this;
-
-    }
-
-    /**
-     * ACF setting.
-     *
-     * @param array $postType Array with post type names
-     *
-     * @return PageLink
-     */
-    public function setPostType($postType)
-    {
-
-        $this->setSetting('post_type', $postType);
-
-        return $this;
-
-    }
-
-    /**
      * @return mixed The value of the ACF setting "allow_archives". Returns the default ACF value true if none has been
      * set using Fewbricks.
      */
@@ -117,6 +69,54 @@ class PageLink extends Field implements FieldInterface
     {
 
         return 'page_link';
+
+    }
+
+    /**
+     * ACF setting.
+     *
+     * @param boolean $allowArchives
+     *
+     * @return PageLink
+     */
+    public function setAllowArchives($allowArchives)
+    {
+
+        $this->setSetting('allow_archives', $allowArchives);
+
+        return $this;
+
+    }
+
+    /**
+     * ACF setting.
+     *
+     * @param boolean $multiple
+     *
+     * @return PageLink
+     */
+    public function setMultiple($multiple)
+    {
+
+        $this->setSetting('multiple', $multiple);
+
+        return $this;
+
+    }
+
+    /**
+     * ACF setting.
+     *
+     * @param array $postType Array with post type names
+     *
+     * @return PageLink
+     */
+    public function setPostType($postType)
+    {
+
+        $this->setSetting('post_type', $postType);
+
+        return $this;
 
     }
 

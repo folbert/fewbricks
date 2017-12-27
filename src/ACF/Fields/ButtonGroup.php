@@ -19,22 +19,6 @@ class ButtonGroup extends FieldWithChoices implements FieldInterface
 {
 
     /**
-     * ACF setting.
-     *
-     * @param string $layout "horizontal" or "vertical"
-     *
-     * @return $this
-     */
-    public function setLayout($layout)
-    {
-
-        $this->setSetting('layout', $layout);
-
-        return $this;
-
-    }
-
-    /**
      * @return mixed The value of the ACF setting "layout". Returns the default ACF value "horizontal" if none has been
      * set using Fewbricks.
      */
@@ -54,6 +38,22 @@ class ButtonGroup extends FieldWithChoices implements FieldInterface
     {
 
         return 'button_group';
+
+    }
+
+    /**
+     * ACF setting.
+     *
+     * @param string $layout "horizontal" or "vertical"
+     *
+     * @return $this
+     */
+    public function setLayout($layout)
+    {
+
+        $this->setSetting('layout', $layout);
+
+        return $this;
 
     }
 

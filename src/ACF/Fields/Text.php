@@ -19,6 +19,60 @@ class Text extends Field implements FieldInterface
 {
 
     /**
+     * @return mixed The value of the ACF setting "append". Returns the default ACF value "" if none has been
+     * set using Fewbricks.
+     */
+    public function getAppend()
+    {
+
+        return $this->getSetting('append', '');
+
+    }
+
+    /**
+     * @return mixed The value of the ACF setting "maxlength". Returns the default ACF value "" if none has been
+     * set using Fewbricks.
+     */
+    public function getMaxlength()
+    {
+
+        return $this->getSetting('maxlength', '');
+
+    }
+
+    /**
+     * @return mixed The value of the ACF setting "placeholder". Returns the default ACF value "" if none has been
+     * set using Fewbricks.
+     */
+    public function getPlaceholder()
+    {
+
+        return $this->getSetting('placeholder', '');
+
+    }
+
+    /**
+     * @return mixed The value of the ACF setting "prepend". Returns the default ACF value "" if none has been
+     * set using Fewbricks.
+     */
+    public function getPrepend()
+    {
+
+        return $this->getSetting('prepend', '');
+
+    }
+
+    /**
+     * @return string The ACF type that ultimately decides what kind of field instances of this class is.
+     */
+    public function getType()
+    {
+
+        return 'text';
+
+    }
+
+    /**
      * ACF setting. Set text to appear after the input.
      *
      * @param string $append Text to appear after the input.
@@ -79,60 +133,6 @@ class Text extends Field implements FieldInterface
         $this->setSetting('prepend', $prepend);
 
         return $this;
-
-    }
-
-    /**
-     * @return mixed The value of the ACF setting "append". Returns the default ACF value "" if none has been
-     * set using Fewbricks.
-     */
-    public function getAppend()
-    {
-
-        return $this->getSetting('append', '');
-
-    }
-
-    /**
-     * @return mixed The value of the ACF setting "maxlength". Returns the default ACF value "" if none has been
-     * set using Fewbricks.
-     */
-    public function getMaxlength()
-    {
-
-        return $this->getSetting('maxlength', '');
-
-    }
-
-    /**
-     * @return mixed The value of the ACF setting "placeholder". Returns the default ACF value "" if none has been
-     * set using Fewbricks.
-     */
-    public function getPlaceholder()
-    {
-
-        return $this->getSetting('placeholder', '');
-
-    }
-
-    /**
-     * @return mixed The value of the ACF setting "prepend". Returns the default ACF value "" if none has been
-     * set using Fewbricks.
-     */
-    public function getPrepend()
-    {
-
-        return $this->getSetting('prepend', '');
-
-    }
-
-    /**
-     * @return string The ACF type that ultimately decides what kind of field instances of this class is.
-     */
-    public function getType()
-    {
-
-        return 'text';
 
     }
 

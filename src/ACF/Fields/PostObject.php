@@ -19,6 +19,71 @@ class PostObject extends Field implements FieldInterface
 {
 
     /**
+     * @return mixed The value of the ACF setting "allow_null". Returns the default ACF value false if none has been
+     * set using Fewbricks.
+     */
+    public function getAllowNull()
+    {
+
+        return $this->getSetting('allow_null', false);
+
+    }
+
+    /**
+     * @return mixed The value of the ACF setting multiple. Returns the default ACF value false if none has been
+     * set using Fewbricks.
+     */
+    public function getMultiple()
+    {
+
+        return $this->getSetting('multiple', false);
+
+    }
+
+    /**
+     * @return mixed The value of the ACF setting "post_type". Returns the default ACF value of an empty array if none
+     * has been set using Fewbricks.
+     */
+    public function getPostType()
+    {
+
+        return $this->getSetting('post_type', []);
+
+    }
+
+    /**
+     * @return mixed The value of the ACF setting "return_formt". Returns the default ACF value "object" if none has
+     * been set using Fewbricks.
+     */
+    public function getReturnFormat()
+    {
+
+        return $this->getSetting('return_format', 'object');
+
+    }
+
+    /**
+     * @return mixed The value of the ACF setting "taxonomy". Returns the default ACF value of an empty array if none
+     * has been set using Fewbricks.
+     */
+    public function getTaxonomy()
+    {
+
+        return $this->getSetting('taxonomy', []);
+
+    }
+
+    /**
+     * @return string The ACF type that ultimately decides what kind of field instances of this class is.
+     */
+    public function getType()
+    {
+
+        return 'post_object';
+
+    }
+
+    /**
      * ACF setting.
      *
      * @param boolean $allowNull
@@ -96,71 +161,6 @@ class PostObject extends Field implements FieldInterface
         $this->setSetting('taxonomy', $taxonomy);
 
         return $this;
-
-    }
-
-    /**
-     * @return mixed The value of the ACF setting "allow_null". Returns the default ACF value false if none has been
-     * set using Fewbricks.
-     */
-    public function getAllowNull()
-    {
-
-        return $this->getSetting('allow_null', false);
-
-    }
-
-    /**
-     * @return mixed The value of the ACF setting multiple. Returns the default ACF value false if none has been
-     * set using Fewbricks.
-     */
-    public function getMultiple()
-    {
-
-        return $this->getSetting('multiple', false);
-
-    }
-
-    /**
-     * @return mixed The value of the ACF setting "post_type". Returns the default ACF value of an empty array if none
-     * has been set using Fewbricks.
-     */
-    public function getPostType()
-    {
-
-        return $this->getSetting('post_type', []);
-
-    }
-
-    /**
-     * @return mixed The value of the ACF setting "return_formt". Returns the default ACF value "object" if none has
-     * been set using Fewbricks.
-     */
-    public function getReturnFormat()
-    {
-
-        return $this->getSetting('return_format', 'object');
-
-    }
-
-    /**
-     * @return mixed The value of the ACF setting "taxonomy". Returns the default ACF value of an empty array if none
-     * has been set using Fewbricks.
-     */
-    public function getTaxonomy()
-    {
-
-        return $this->getSetting('taxonomy', []);
-
-    }
-
-    /**
-     * @return string The ACF type that ultimately decides what kind of field instances of this class is.
-     */
-    public function getType()
-    {
-
-        return 'post_object';
 
     }
 

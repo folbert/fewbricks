@@ -19,38 +19,6 @@ class Tab extends Field implements FieldInterface
 {
 
     /**
-     * ACF setting. Set if this field should be used as an end-point and start a new group of tabs
-     *
-     * @param boolean $endPoint
-     *
-     * @return $this
-     */
-    public function setEndpoint($endPoint)
-    {
-
-        $this->setSetting('endpoint', $endPoint);
-
-        return $this;
-
-    }
-
-    /**
-     * ACF setting.
-     *
-     * @param string $placement "top" or "left"
-     *
-     * @return $this
-     */
-    public function setPlacement($placement)
-    {
-
-        $this->setSetting('placement', $placement);
-
-        return $this;
-
-    }
-
-    /**
      * @return mixed The value of the ACF setting "". Returns the default ACF value "" if none has been
      * set using Fewbricks.
      */
@@ -79,6 +47,38 @@ class Tab extends Field implements FieldInterface
     {
 
         return 'tab';
+
+    }
+
+    /**
+     * ACF setting. Set if this field should be used as an end-point and start a new group of tabs
+     *
+     * @param boolean $endPoint
+     *
+     * @return $this
+     */
+    public function setEndpoint($endPoint)
+    {
+
+        $this->setSetting('endpoint', $endPoint);
+
+        return $this;
+
+    }
+
+    /**
+     * ACF setting.
+     *
+     * @param string $placement "top" or "left"
+     *
+     * @return $this
+     */
+    public function setPlacement($placement)
+    {
+
+        $this->setSetting('placement', $placement);
+
+        return $this;
 
     }
 

@@ -19,6 +19,49 @@ class User extends Field implements FieldInterface
 {
 
     /**
+     * @return mixed The value of the ACF setting "allow_null". Returns the default ACF value false if none has been
+     * set using Fewbricks.
+     */
+    public function getAllowNull()
+    {
+
+        return $this->getSetting('allow_null', false);
+
+    }
+
+    /**
+     * @return mixed The value of the ACF setting "multiple". Returns the default ACF value false if none has been
+     * set using Fewbricks.
+     */
+    public function getMultiple()
+    {
+
+        return $this->getSetting('multiple', false);
+
+    }
+
+    /**
+     * @return mixed The value of the ACF setting "role". Returns the default ACF value "" if none has been
+     * set using Fewbricks.
+     */
+    public function getRole()
+    {
+
+        return $this->getSetting('role', '');
+
+    }
+
+    /**
+     * @return string The ACF type that ultimately decides what kind of field instances of this class is.
+     */
+    public function getType()
+    {
+
+        return 'user';
+
+    }
+
+    /**
      * ACF setting.
      *
      * @param boolean $allowNull
@@ -65,49 +108,6 @@ class User extends Field implements FieldInterface
         $this->setSetting('role', $role);
 
         return $this;
-
-    }
-
-    /**
-     * @return mixed The value of the ACF setting "allow_null". Returns the default ACF value false if none has been
-     * set using Fewbricks.
-     */
-    public function getAllowNull()
-    {
-
-        return $this->getSetting('allow_null', false);
-
-    }
-
-    /**
-     * @return mixed The value of the ACF setting "multiple". Returns the default ACF value false if none has been
-     * set using Fewbricks.
-     */
-    public function getMultiple()
-    {
-
-        return $this->getSetting('multiple', false);
-
-    }
-
-    /**
-     * @return mixed The value of the ACF setting "role". Returns the default ACF value "" if none has been
-     * set using Fewbricks.
-     */
-    public function getRole()
-    {
-
-        return $this->getSetting('role', '');
-
-    }
-
-    /**
-     * @return string The ACF type that ultimately decides what kind of field instances of this class is.
-     */
-    public function getType()
-    {
-
-        return 'user';
 
     }
 

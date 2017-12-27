@@ -26,34 +26,6 @@ class FieldsKitchenSink extends FieldGroup implements FieldGroupInterface
     protected $title = 'Kitchen Sink';
 
     /**
-     * Any class extending FieldGroup can have a function named build. This function will be called
-     * right before the field group is registered to ACF. Inside this function you can do whatever you want.
-     * This basically enables you to have a field group that can be reused and by utilizing the $args that you can pass
-     * when instantiating an object, you can affect which fields should be included etc.
-     *
-     * @return void
-     */
-    public function build()
-    {
-
-        $this->addMyFields();
-
-        if ($this->getLocationRuleGroups()->isEmpty()) {
-
-            $this->addLocationRuleGroups([
-                (new FieldGroupLocationRuleGroup())
-                    ->addRule(new Rule('post_type', '==', 'fewbricks_demo_pg')),
-                (new FieldGroupLocationRuleGroup())
-                    ->addRule(new Rule('post_type', '==', 'fewbricks_demo_pg2')),
-            ]);
-
-        }
-
-        $this->hideOnScreen('the_content');
-
-    }
-
-    /**
      * A large function adding all available fields and then some.
      */
     private function addMyFields()
@@ -295,6 +267,34 @@ class FieldsKitchenSink extends FieldGroup implements FieldGroupInterface
 
         $this->addField(new FAFields\Wysiwyg('Wysiwyg', 'fd_wysiwyg', '1711172249i',
             ['media_upload' => false, 'delay' => true]));
+
+    }
+
+    /**
+     * Any class extending FieldGroup can have a function named build. This function will be called
+     * right before the field group is registered to ACF. Inside this function you can do whatever you want.
+     * This basically enables you to have a field group that can be reused and by utilizing the $args that you can pass
+     * when instantiating an object, you can affect which fields should be included etc.
+     *
+     * @return void
+     */
+    public function build()
+    {
+
+        $this->addMyFields();
+
+        if ($this->getLocationRuleGroups()->isEmpty()) {
+
+            $this->addLocationRuleGroups([
+                (new FieldGroupLocationRuleGroup())
+                    ->addRule(new Rule('post_type', '==', 'fewbricks_demo_pg')),
+                (new FieldGroupLocationRuleGroup())
+                    ->addRule(new Rule('post_type', '==', 'fewbricks_demo_pg2')),
+            ]);
+
+        }
+
+        $this->hideOnScreen('the_content');
 
     }
 

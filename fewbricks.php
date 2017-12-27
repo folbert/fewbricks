@@ -47,7 +47,7 @@ spl_autoload_register(function ($class) {
 
 });
 
-add_action('after_setup_theme', function() {
+add_action('after_setup_theme', function () {
     \Fewbricks\Fewbricks::run();
 });
 

@@ -44,6 +44,21 @@ class Field extends Item
     }
 
     /**
+     * @param ConditionalLogicRuleGroup $ruleGroup
+     *
+     * @return $this
+     * @throws \Fewbricks\KeyInUseException
+     */
+    public function addConditionalLogicRuleGroup($ruleGroup)
+    {
+
+        $this->conditionalLogicRuleGroups->addItem($ruleGroup);
+
+        return $this;
+
+    }
+
+    /**
      * @param ConditionalLogicRuleGroup[] $ruleGroups
      *
      * @return $this
@@ -63,21 +78,6 @@ class Field extends Item
     }
 
     /**
-     * @param ConditionalLogicRuleGroup $ruleGroup
-     *
-     * @return $this
-     * @throws \Fewbricks\KeyInUseException
-     */
-    public function addConditionalLogicRuleGroup($ruleGroup)
-    {
-
-        $this->conditionalLogicRuleGroups->addItem($ruleGroup);
-
-        return $this;
-
-    }
-
-    /**
      * @return $this
      */
     public function clearConditionalLogic()
@@ -90,69 +90,23 @@ class Field extends Item
     }
 
     /**
-     * @param mixed $defaultValue ACF setting. A default value used by ACF if no
-     *                            value has yet been saved.
-     *
-     * @return $this
+     * @return array
      */
-    public function setDefaultValue($defaultValue)
+    public function getAcfArray()
     {
 
-        $this->setSetting('default_value', $defaultValue);
+        $settings = array_merge(parent::getAcfArray(), [
+            'fewbricks_original_key' => $this->getOriginalKey(),
+            'type'                   => $this->getType(),
+        ]);
 
-        return $this;
+        if (!$this->conditionalLogicRuleGroups->isEmpty()) {
 
-    }
+            $settings['conditional_logic'] = $this->conditionalLogicRuleGroups->toArray();
 
-    /**
-     * @param string $instructions ACF setting. Instructions for authors.
-     *                             Shown when submitting data
-     *
-     * @return $this
-     */
-    public function setInstructions($instructions)
-    {
+        }
 
-        $this->setSetting('instructions', $instructions);
-
-        return $this;
-
-    }
-
-    /**
-     * @param boolean $required     ACF setting. Whether or not the field value
-     *                              is required. If not set, false is used.
-     *
-     * @return $this
-     */
-    public function setRequired($required)
-    {
-
-        $this->setSetting('required', $required);
-
-        return $this;
-
-    }
-
-    /**
-     * @param boolean $wrapper ACF setting. An array of attributes given to the
-     *                         field element in the backend.
-     *
-     * @return $this
-     */
-    public function setWrapper($wrapper)
-    {
-
-        // Make sure all indexes are set.
-        $wrapper = array_merge([
-            'width' => '',
-            'class' => '',
-            'id'    => '',
-        ], $wrapper);
-
-        $this->setSetting('wrapper', $wrapper);
-
-        return $this;
+        return $settings;
 
     }
 
@@ -268,23 +222,69 @@ class Field extends Item
     }
 
     /**
-     * @return array
+     * @param mixed $defaultValue ACF setting. A default value used by ACF if no
+     *                            value has yet been saved.
+     *
+     * @return $this
      */
-    public function getAcfArray()
+    public function setDefaultValue($defaultValue)
     {
 
-        $settings = array_merge(parent::getAcfArray(), [
-            'fewbricks_original_key' => $this->getOriginalKey(),
-            'type'                   => $this->getType(),
-        ]);
+        $this->setSetting('default_value', $defaultValue);
 
-        if (!$this->conditionalLogicRuleGroups->isEmpty()) {
+        return $this;
 
-            $settings['conditional_logic'] = $this->conditionalLogicRuleGroups->toArray();
+    }
 
-        }
+    /**
+     * @param string $instructions ACF setting. Instructions for authors.
+     *                             Shown when submitting data
+     *
+     * @return $this
+     */
+    public function setInstructions($instructions)
+    {
 
-        return $settings;
+        $this->setSetting('instructions', $instructions);
+
+        return $this;
+
+    }
+
+    /**
+     * @param boolean $required     ACF setting. Whether or not the field value
+     *                              is required. If not set, false is used.
+     *
+     * @return $this
+     */
+    public function setRequired($required)
+    {
+
+        $this->setSetting('required', $required);
+
+        return $this;
+
+    }
+
+    /**
+     * @param boolean $wrapper ACF setting. An array of attributes given to the
+     *                         field element in the backend.
+     *
+     * @return $this
+     */
+    public function setWrapper($wrapper)
+    {
+
+        // Make sure all indexes are set.
+        $wrapper = array_merge([
+            'width' => '',
+            'class' => '',
+            'id'    => '',
+        ], $wrapper);
+
+        $this->setSetting('wrapper', $wrapper);
+
+        return $this;
 
     }
 

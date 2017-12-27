@@ -21,7 +21,7 @@ class RuleCollection extends Collection
         $array = [];
 
         /** @var Rule $rule */
-        foreach($this->items AS $rule) {
+        foreach ($this->items AS $rule) {
 
             $array[] = $rule->toArray();
 

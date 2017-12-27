@@ -19,22 +19,6 @@ class Link extends Field implements FieldInterface
 {
 
     /**
-     * ACF setting.
-     *
-     * @param string $returnFormat "array" or "url"
-     *
-     * @return $this
-     */
-    public function setReturnFormat($returnFormat)
-    {
-
-        $this->setSetting('return_format', $returnFormat);
-
-        return $this;
-
-    }
-
-    /**
      * @return mixed The value of the ACF setting "return_format". Returns the default ACF value "array" if none has
      * been set using Fewbricks.
      */
@@ -52,6 +36,22 @@ class Link extends Field implements FieldInterface
     {
 
         return 'link';
+
+    }
+
+    /**
+     * ACF setting.
+     *
+     * @param string $returnFormat "array" or "url"
+     *
+     * @return $this
+     */
+    public function setReturnFormat($returnFormat)
+    {
+
+        $this->setSetting('return_format', $returnFormat);
+
+        return $this;
 
     }
 

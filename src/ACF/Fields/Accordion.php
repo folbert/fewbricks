@@ -17,6 +17,49 @@ class Accordion extends Field implements FieldInterface
 {
 
     /**
+     * @return mixed The value of the ACF setting "endpoint". Returns the default ACF value "false" if none has been
+     * set using Fewbricks.
+     */
+    public function getEndpoint()
+    {
+
+        return $this->getSetting('endpoint', false);
+
+    }
+
+    /**
+     * @return mixed The value of the ACF setting "multi_expand". Returns the default ACF value "false" if none has been
+     * set using Fewbricks.
+     */
+    public function getMultiExpand()
+    {
+
+        return $this->getSetting('multi_expand', false);
+
+    }
+
+    /**
+     * @return mixed The value of the ACF setting "open". Returns the default ACF value "" if none has been
+     * set using Fewbricks.
+     */
+    public function getOpen()
+    {
+
+        return $this->getSetting('open', false);
+
+    }
+
+    /**
+     * @return string The ACF type that ultimately decides what kind of field instances of this class is.
+     */
+    public function getType()
+    {
+
+        return 'accordion';
+
+    }
+
+    /**
      * ACF setting. Set if this field should be used as an end-point and start a new group of tabs
      *
      * @param boolean $endPoint
@@ -61,50 +104,6 @@ class Accordion extends Field implements FieldInterface
         $this->setSetting('open', $open);
 
         return $this;
-
-    }
-
-
-    /**
-     * @return mixed The value of the ACF setting "endpoint". Returns the default ACF value "false" if none has been
-     * set using Fewbricks.
-     */
-    public function getEndpoint()
-    {
-
-        return $this->getSetting('endpoint', false);
-
-    }
-
-    /**
-     * @return mixed The value of the ACF setting "multi_expand". Returns the default ACF value "false" if none has been
-     * set using Fewbricks.
-     */
-    public function getMultiExpand()
-    {
-
-        return $this->getSetting('multi_expand', false);
-
-    }
-
-    /**
-     * @return mixed The value of the ACF setting "open". Returns the default ACF value "" if none has been
-     * set using Fewbricks.
-     */
-    public function getOpen()
-    {
-
-        return $this->getSetting('open', false);
-
-    }
-
-    /**
-     * @return string The ACF type that ultimately decides what kind of field instances of this class is.
-     */
-    public function getType()
-    {
-
-        return 'accordion';
 
     }
 

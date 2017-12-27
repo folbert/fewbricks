@@ -15,22 +15,6 @@ class Group extends FieldWithSubFields implements FieldInterface
 {
 
     /**
-     * ACF setting to specify the style used to render the selected fields.
-     *
-     * @param string $layout "block", "table" or "row"
-     *
-     * @return $this
-     */
-    public function setLayout($layout)
-    {
-
-        $this->setSetting('layout', $layout);
-
-        return $this;
-
-    }
-
-    /**
      * @return mixed The value of the ACF setting "layout". Returns the default ACF value "block" if none has been
      * set using Fewbricks.
      */
@@ -48,6 +32,22 @@ class Group extends FieldWithSubFields implements FieldInterface
     {
 
         return 'group';
+
+    }
+
+    /**
+     * ACF setting to specify the style used to render the selected fields.
+     *
+     * @param string $layout "block", "table" or "row"
+     *
+     * @return $this
+     */
+    public function setLayout($layout)
+    {
+
+        $this->setSetting('layout', $layout);
+
+        return $this;
 
     }
 
