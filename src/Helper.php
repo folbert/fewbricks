@@ -29,6 +29,19 @@ class Helper
     /**
      * @return bool
      */
+    public static function exportToJsonTriggered()
+    {
+
+        return self::pageIsFewbricksAdminPage()
+               && isset($_GET['action'])
+               && $_GET['action'] === 'fewbricks_export_json'
+               && wp_verify_nonce($_GET['_wpnonce'], 'fewbricks_export_d89dtygodl');
+
+    }
+
+    /**
+     * @return bool
+     */
     public static function fewbricksHiddenIsActivated()
     {
 
@@ -46,6 +59,32 @@ class Helper
     {
 
         return apply_filters('fewbricks/debug_mode', false);
+
+    }
+
+    /**
+     * @param string $originalKey
+     * @param array  $acfArrayItems
+     *
+     * @return bool|string
+     */
+    public static function getNewKeyByOriginalKeyInAcfArray($originalKey, $acfArrayItems)
+    {
+
+        $outcome = false;
+
+        foreach($acfArrayItems AS $acfArrayItem) {
+
+            if($acfArrayItem['fewbricks_original_key'] === $originalKey) {
+
+                $outcome = $acfArrayItem['key'];
+                break;
+
+            }
+
+        }
+
+        return $outcome;
 
     }
 
@@ -221,19 +260,6 @@ class Helper
     }
 
     /**
-     * @return bool
-     */
-    public static function exportToJsonTriggered()
-    {
-
-        return self::pageIsFewbricksAdminPage()
-               && isset($_GET['action'])
-               && $_GET['action'] === 'fewbricks_export_json'
-               && wp_verify_nonce($_GET['_wpnonce'], 'fewbricks_export_d89dtygodl');
-
-    }
-
-    /**
      * @return string|boolean False if no file should be used.
      */
     public static function getAutoWritePhpCodeFile()
@@ -368,9 +394,9 @@ class Helper
 
             $codes = self::getFieldGroupsPhpCodes();
 
-            if(is_array($codes)) {
+            if (is_array($codes)) {
 
-                foreach($codes AS $code) {
+                foreach ($codes AS $code) {
 
                     $codeToWrite .= $code[1];
 
@@ -378,16 +404,17 @@ class Helper
 
             }
 
-            if(!empty($codeToWrite)) {
+            if (!empty($codeToWrite)) {
 
                 file_put_contents($targetFile, "<?php\r\r" . $codeToWrite);
 
-                if(self::displayPhpFileWrittenMessage()) {
+                if (self::displayPhpFileWrittenMessage()) {
 
-                    add_action('admin_notices', function() {
+                    add_action('admin_notices', function () {
 
                         $message = '<div class="notice notice-info">';
-                        $message .= '<p>' . sprintf(__('PHP code written to <code>%s</code>', 'fewbricks'), Helper::getAutoWritePhpCodeFile()) . '</p>';
+                        $message .= '<p>' . sprintf(__('PHP code written to <code>%s</code>', 'fewbricks'),
+                                Helper::getAutoWritePhpCodeFile()) . '</p>';
                         $message .= '</div>';
 
                         echo $message;
@@ -425,7 +452,7 @@ class Helper
 
         $storedSettings = self::getStoredFieldGroupsAcfSettings();
 
-        if(!empty($storedSettings)) {
+        if (!empty($storedSettings)) {
 
             if ($fieldGroupKeys === false) {
                 $fieldGroupKeys = array_keys($storedSettings);

@@ -247,7 +247,7 @@ class Item
     /**
      * @return array
      */
-    public function toAcfArray()
+    public function getAcfArray()
     {
 
         // Put the crucial settings into the settings array

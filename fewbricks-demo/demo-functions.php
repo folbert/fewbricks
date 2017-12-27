@@ -82,7 +82,7 @@ if (defined('FEWBRICKS_ENV') && FEWBRICKS_ENV === 'production') {
             (new Text('Another text added after the button group', 'fd_text_after_new_text', '17121206a'))
                 ->addConditionalLogicRuleGroup(
                     (new ConditionalLogicRuleGroup())
-                        ->addRule(new ConditionalLogicRule('17120529561a', '==', 'black')
+                        ->addRule(new ConditionalLogicRule('1711172249u', '==', 'black')
                         )
                 ),
             'fd_button_group'

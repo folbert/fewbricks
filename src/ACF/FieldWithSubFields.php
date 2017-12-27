@@ -15,7 +15,7 @@ class FieldWithSubFields extends Field
     /**
      * @var FieldCollection
      */
-    protected $subFields;
+    protected $fields;
 
     /**
      * FieldWithSubFields constructor.
@@ -34,7 +34,7 @@ class FieldWithSubFields extends Field
 
         parent::__construct($label, $name, $key, $settings);
 
-        $this->subFields = new FieldCollection();
+        $this->fields = new FieldCollection();
 
     }
 
@@ -43,12 +43,12 @@ class FieldWithSubFields extends Field
      *
      * @return $this
      */
-    public function addSubField($field)
+    public function addField($field)
     {
 
         try {
 
-            $this->subFields->addItem($field, $field->getKey());
+            $this->fields->addItem($field, $field->getKey());
 
         } catch (KeyInUseException $keyInUseException) {
 
@@ -61,16 +61,45 @@ class FieldWithSubFields extends Field
     }
 
     /**
-     * @param array|FieldCollection $fields
+     * @param $field
+     * @param $fieldNameToAddAfter
+     *
+     * @return FieldWithSubFields
+     */
+    public function addFieldAfter($field, $fieldNameToAddAfter)
+    {
+
+        $this->fields->addFieldAfter($field, $fieldNameToAddAfter);
+
+        return $this;
+
+    }
+
+    /**
+     * @param $field
+     * @param $fieldNameToAddBefore
+     *
+     * @return FieldWithSubFields
+     */
+    public function addFieldBefore($field, $fieldNameToAddBefore)
+    {
+
+        $this->fields->addFieldBefore($field, $fieldNameToAddBefore);
+
+        return $this;
+
+    }
+
+    /**
+     * @param array|FieldCollection $fields An array or an instance of FieldCollection.
      *
      * @return FieldWithSubFields
      * @throws KeyInUseException
      */
-    public function addSubFields($fields)
+    public function addFields($fields)
     {
 
-
-        $this->subFields->addFields($fields);
+        $this->fields->addFields($fields);
 
         return $this;
 
@@ -81,10 +110,10 @@ class FieldWithSubFields extends Field
      *
      * @return $this
      */
-    public function removeSubField($name)
+    public function removeField($name)
     {
 
-        $this->subFields->removeItemByName($name);
+        $this->fields->removeItemByName($name);
 
         return $this;
 
@@ -93,12 +122,12 @@ class FieldWithSubFields extends Field
     /**
      * @return array
      */
-    public function toAcfArray()
+    public function getAcfArray()
     {
 
-        $settings = parent::toAcfArray();
+        $settings = parent::getAcfArray();
 
-        $settings['sub_fields'] = $this->subFields->toAcfArray($this->key);
+        $settings['sub_fields'] = $this->fields->getAcfArray($this->key);
 
         return $settings;
 
@@ -109,20 +138,20 @@ class FieldWithSubFields extends Field
      *
      * @return mixed
      */
-    public function getSubField($key)
+    public function getField($key)
     {
 
-        return $this->subFields->getItem($key);
+        return $this->fields->getItem($key);
 
     }
 
     /**
      * @return FieldCollection
      */
-    public function getSubFields()
+    public function getFields()
     {
 
-        return $this->subFields;
+        return $this->fields;
 
     }
 

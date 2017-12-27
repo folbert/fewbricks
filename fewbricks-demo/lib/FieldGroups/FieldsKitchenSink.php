@@ -119,8 +119,8 @@ class FieldsKitchenSink extends FieldGroup implements FieldGroupInterface
         $fc->setButtonLabel('Fewbricks says: add layout');
 
         $l = new FAFields\Layout('Text and image', 'fd_text_and_image', '1711231901a');
-        $l->addSubField(new FAFields\Text('Text', 'fd_text', '1711231901b'));
-        $l->addSubField(
+        $l->addField(new FAFields\Text('Text', 'fd_text', '1711231901b'));
+        $l->addField(
             (new FAFields\Image('Image', 'fd_image', '1711231901c'))
                 ->setPreviewSize('large')
         );
@@ -136,8 +136,8 @@ class FieldsKitchenSink extends FieldGroup implements FieldGroupInterface
         $fc->addLayout($l);*/
 
         $l = new FAFields\Layout('Text and select', 'fd_text_and_select', '1711231907a');
-        $l->addSubField(new FAFields\Text('Text', 'fd_text', '1711231907b'));
-        $l->addSubField(new FAFields\Select('Select', 'fd_select', '1711231907c', [
+        $l->addField(new FAFields\Text('Text', 'fd_text', '1711231907b'));
+        $l->addField(new FAFields\Select('Select', 'fd_select', '1711231907c', [
             'choices' => [
                 'option1' => 'Option 1',
                 'option2' => 'Option 2',
@@ -146,7 +146,7 @@ class FieldsKitchenSink extends FieldGroup implements FieldGroupInterface
         $fc->addLayout($l);
 
         $l = new FAFields\Layout('Single image', 'fd_single_image', '1712252217a');
-        $l->addSubField(new FAFields\Image('Image', 'fd_image', '1712252218i'));
+        $l->addField(new FAFields\Image('Image', 'fd_image', '1712252218i'));
         $fc->addLayout($l);
 
         // This is of course a somewhat stupid usage of the functionality since we could simply
@@ -177,8 +177,8 @@ class FieldsKitchenSink extends FieldGroup implements FieldGroupInterface
         // Group
         $group = new FAFields\Group('Group', 'fd_group', '1711232310a');
 
-        $group->addSubField(new FAFields\Text('Text', 'fd_text', '1711232310b'));
-        $group->addSubField(
+        $group->addField(new FAFields\Text('Text', 'fd_text', '1711232310b'));
+        $group->addField(
             (new FAFields\Select('Select', 'fd_select', '1711232310c'))
                 ->setChoices([
                     'one'   => 'One',
@@ -216,21 +216,22 @@ class FieldsKitchenSink extends FieldGroup implements FieldGroupInterface
 
         $repeater->setButtonLabel('Fewbricks says: add row');
         $repeater->setLayout('table');
+        $repeater->setCollapsed('1711222221a');
 
         // Passing settings as fourth parameter
-        $repeater->addSubField(new FAFields\Text('Repeater - Text', 'fd_repeater_text', '1711222221a',
+        $repeater->addField(new FAFields\Text('Repeater - Text', 'fd_repeater_text', '1711222221a',
             ['required' => true]));
 
-        $repeater->addSubField(new FAFields\Image('Repeater - Image', 'fd_repeater_image', '1711222221b'));
+        $repeater->addField(new FAFields\Image('Repeater - Image', 'fd_repeater_image', '1711222221b'));
 
-        $repeater->addSubField(new FAFields\Text('Repeater - Text 2', 'fd_repeater_text_2', '1712252216a'));
+        $repeater->addField(new FAFields\Text('Repeater - Text 2', 'fd_repeater_text_2', '1712252216a'));
 
         // This is of course a somewhat stupid usage of the functionality since we could simply
         // not add the sub field to start with. But for demo purposes...
         $subFieldsToRemove = $this->getArg('remove_sub_fields', false);
         if ($subFieldsToRemove !== false) {
             foreach ($subFieldsToRemove AS $subFieldToRemove) {
-                $repeater->removeSubField($subFieldToRemove);
+                $repeater->removeField($subFieldToRemove);
             }
         }
 

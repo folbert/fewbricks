@@ -11,14 +11,14 @@ class Field extends Item
 {
 
     /**
-     * @var RuleGroupCollection
-     */
-    private $conditionalLogicRuleGroups;
-
-    /**
      * @var
      */
     protected $type;
+
+    /**
+     * @var RuleGroupCollection
+     */
+    private $conditionalLogicRuleGroups;
 
     /**
      * Field constructor.
@@ -35,8 +35,7 @@ class Field extends Item
 
         parent::__construct($label, $name, $key, $settings);
 
-        if(!empty($type))
-        {
+        if (!empty($type)) {
             $this->setType($type);
         }
 
@@ -48,6 +47,7 @@ class Field extends Item
      * @param ConditionalLogicRuleGroup[] $ruleGroups
      *
      * @return $this
+     * @throws \Fewbricks\KeyInUseException
      */
     public function addConditionalLogicRuleGroups($ruleGroups)
     {
@@ -129,20 +129,6 @@ class Field extends Item
     {
 
         $this->setSetting('required', $required);
-
-        return $this;
-
-    }
-
-    /**
-     * @param $type
-     *
-     * @return Field
-     */
-    public function setType($type)
-    {
-
-        $this->type = $type;
 
         return $this;
 
@@ -257,6 +243,20 @@ class Field extends Item
     }
 
     /**
+     * @param $type
+     *
+     * @return Field
+     */
+    public function setType($type)
+    {
+
+        $this->type = $type;
+
+        return $this;
+
+    }
+
+    /**
      * @return mixed The value of the ACF setting "wrapper". Returns the default ACF value if none has been set using
      * Fewbricks.
      */
@@ -270,13 +270,15 @@ class Field extends Item
     /**
      * @return array
      */
-    public function toAcfArray()
+    public function getAcfArray()
     {
 
-        $settings         = parent::toAcfArray();
-        $settings['type'] = $this->getType();
+        $settings = array_merge(parent::getAcfArray(), [
+            'fewbricks_original_key' => $this->getOriginalKey(),
+            'type'                   => $this->getType(),
+        ]);
 
-        if(!$this->conditionalLogicRuleGroups->isEmpty()) {
+        if (!$this->conditionalLogicRuleGroups->isEmpty()) {
 
             $settings['conditional_logic'] = $this->conditionalLogicRuleGroups->toArray();
 

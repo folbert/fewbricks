@@ -17,22 +17,31 @@ class FieldCollection extends Collection
      * @var
      */
     protected $args;
+
     /**
      * @var
      */
     private $fieldLabelsPrefix;
+
     /**
      * @var string
      */
     private $fieldNamesPrefix;
+
     /**
      * @var array
      */
     private $fieldsToRemove;
+
     /**
      * @var array
      */
     private $fieldsToAddAfterFieldsOnBuild;
+
+    /**
+     * @var array
+     */
+    private $fieldsToAddBeforeFieldsOnBuild;
 
     /**
      * FieldCollection constructor.
@@ -49,10 +58,11 @@ class FieldCollection extends Collection
 
         $this->args = $args;
 
-        $this->fieldNamesPrefix              = '';
-        $this->fieldLabelsPrefix             = '';
-        $this->fieldsToRemove                = [];
-        $this->fieldsToAddAfterFieldsOnBuild = [];
+        $this->fieldNamesPrefix               = '';
+        $this->fieldLabelsPrefix              = '';
+        $this->fieldsToRemove                 = [];
+        $this->fieldsToAddAfterFieldsOnBuild  = [];
+        $this->fieldsToAddBeforeFieldsOnBuild = [];
 
         parent::__construct();
 
@@ -66,7 +76,7 @@ class FieldCollection extends Collection
     public function addFields($fields)
     {
 
-        if(is_array($fields)) {
+        if (is_array($fields)) {
 
             foreach ($fields AS $field) {
                 $this->addField($field);
@@ -233,6 +243,21 @@ class FieldCollection extends Collection
     }
 
     /**
+     * @param Field  $field
+     * @param string $fieldNameToAddBefore
+     *
+     * @return FieldGroup
+     */
+    public function addFieldBefore($field, $fieldNameToAddBefore)
+    {
+
+        $this->fieldsToAddBeforeFieldsOnBuild[] = [$field, $fieldNameToAddBefore];
+
+        return $this;
+
+    }
+
+    /**
      *
      */
     protected function doRemoveFields()
@@ -280,6 +305,20 @@ class FieldCollection extends Collection
     }
 
     /**
+     *
+     */
+    protected function doAddFieldsBefore()
+    {
+
+        foreach ($this->fieldsToAddBeforeFieldsOnBuild AS $data) {
+
+            $this->addItemBeforeByName($data[0], $data[1]);
+
+        }
+
+    }
+
+    /**
      * @param $item
      * @param $nameToAddAfter
      */
@@ -292,6 +331,24 @@ class FieldCollection extends Collection
         if ($itemToAddAfter !== false) {
 
             $this->addItemAfter($item, $itemToAddAfter->getKey());
+
+        }
+
+    }
+
+    /**
+     * @param $item
+     * @param $nameToAddBefore
+     */
+    public function addItemBeforeByName($item, $nameToAddBefore)
+    {
+
+        /** @var Field $itemToAddAfter */
+        $itemToAddBefore = $this->getItemByName($nameToAddBefore);
+
+        if ($itemToAddBefore !== false) {
+
+            $this->addItemBefore($item, $itemToAddBefore->getKey());
 
         }
 
@@ -345,8 +402,12 @@ class FieldCollection extends Collection
      *
      * @return array An array that ACF can work with.
      */
-    public function toAcfArray($baseKey)
+    public function getAcfArray($baseKey)
     {
+
+        $this->doRemoveFields();
+        $this->doAddFieldsAfter();
+        $this->doAddFieldsBefore();
 
         // Lets make sure that the key is ok for ACF
         // https://www.advancedcustomfields.com/resources/register-fields-via-php/#field-settings
@@ -385,7 +446,7 @@ class FieldCollection extends Collection
 
             $fieldObject->prependKey($keyPrepend);
 
-            $settings[] = $fieldObject->toAcfArray();
+            $settings[] = $fieldObject->getAcfArray();
 
         }
 

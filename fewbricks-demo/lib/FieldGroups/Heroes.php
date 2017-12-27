@@ -8,6 +8,7 @@ use Fewbricks\ACF\FieldGroup;
 use Fewbricks\ACF\Fields\FlexibleContent;
 use Fewbricks\ACF\Fields\Layout;
 use Fewbricks\ACF\Fields\Message;
+use Fewbricks\ACF\Fields\Text;
 
 class Heroes extends FieldGroup
 {
@@ -21,24 +22,25 @@ class Heroes extends FieldGroup
     public function build()
     {
 
-        $flexibleContent = new FlexibleContent('Heroes', 'heroes', '1712262158a');
+        $flexibleContent = (new FlexibleContent('Heroes', 'heroes', '1712262158a'))
+            ->setMin(1)
+            ->setMax(3)
+            ->setButtonLabel('Add hero');
 
         $flexibleContent->addLayout(
             (new Layout('Hero Type 1', 'hero_type_1', '1712262159i'))
-            ->addSubFields(new BackgroundColors())
+                ->addFields(new BackgroundColors())
         );
 
         $flexibleContent->addLayout(
             (new Layout('Hero Type 2', 'hero_type_2', '1712262159t'))
-                ->addSubField(
+                ->addField(
                     (new Message('Message', 'message', '1712262215r'))
-                    ->setMessage('Lorem ipsum dolor')
+                        ->setMessage('Lorem ipsum dolor')
                 )
-                ->addSubFields(new Background())
+                ->addFields(new Background())
+                ->addFieldBefore(new Text('Headline', 'headline', '1712272054a'), 'message')
         );
-
-        $flexibleContent->setMin(1);
-        $flexibleContent->setMax(3);
 
         $this->addField($flexibleContent);
 

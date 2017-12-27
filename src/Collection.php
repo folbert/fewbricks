@@ -2,6 +2,8 @@
 
 namespace Fewbricks;
 
+use Fewbricks\ACF\Field;
+
 /**
  * Class Collection
  *
@@ -17,8 +19,6 @@ class Collection
 
     /**
      * Collection constructor.
-     *
-     * @param array $items
      */
     public function __construct()
     {
@@ -88,18 +88,37 @@ minute, you can simply append some other "random" letter to that key like "17121
     }
 
     /**
-     * @param $item
-     * @param $keyToAddAfter
+     * @param Field  $item
+     * @param string $keyToAddAfter
      */
     public function addItemAfter($item, $keyToAddAfter)
     {
 
-        if (false !== ($positionToAddAfter = $this->getItemPosition($keyToAddAfter))) {
+        if (false !== ($positionToAddAfter = $this->getItemIndex($keyToAddAfter))) {
 
             $this->items = array_merge(
-                array_slice($this->items, 0, ($positionToAddAfter+1)),
+                array_slice($this->items, 0, ($positionToAddAfter + 1)),
                 [$item],
-                array_slice($this->items, ($positionToAddAfter+1))
+                array_slice($this->items, ($positionToAddAfter + 1))
+            );
+
+        }
+
+    }
+
+    /**
+     * @param Field  $item
+     * @param string $keyToAddBefore
+     */
+    public function addItemBefore($item, $keyToAddBefore)
+    {
+
+        if (false !== ($positionToAddBefore = $this->getItemIndex($keyToAddBefore))) {
+
+            $this->items = array_merge(
+                array_slice($this->items, 0, $positionToAddBefore),
+                [$item],
+                array_slice($this->items, $positionToAddBefore)
             );
 
         }
@@ -111,7 +130,7 @@ minute, you can simply append some other "random" letter to that key like "17121
      *
      * @return bool|int
      */
-    public function getItemPosition($keyToSearchFor)
+    public function getItemIndex($keyToSearchFor)
     {
 
         $position = false;

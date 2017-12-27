@@ -350,11 +350,7 @@ class FieldGroup extends FieldCollection implements FieldGroupInterface
     protected function doRegister()
     {
 
-        $this->doRemoveFields();
-
-        $this->doAddFieldsAfter();
-
-        $acfSettingsArray = $this->toAcfArray();
+        $acfSettingsArray = $this->getAcfArray();
 
         Helper::maybeStoreSimpleFieldGroupData($acfSettingsArray['title'], $acfSettingsArray['key']);
         Helper::maybeStoreFieldGroupAcfSettings($acfSettingsArray);
@@ -371,14 +367,14 @@ class FieldGroup extends FieldCollection implements FieldGroupInterface
      *
      * @return array
      */
-    public function toAcfArray($void = null)
+    public function getAcfArray($void = null)
     {
 
         return array_merge($this->settings, [
             'key'      => $this->getKey(),
             'title'    => $this->getTitle(),
             'location' => $this->locationRuleGroups->toArray(),
-            'fields'   => parent::toAcfArray($this->getKey()),
+            'fields'   => parent::getAcfArray($this->getKey()),
         ]);
 
     }
