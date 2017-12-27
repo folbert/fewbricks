@@ -339,17 +339,23 @@ class FieldCollection extends Collection
                 $conditionalLogic = $fieldSettings['conditional_logic'];
 
                 // Traverse down the conditional logic array
-                foreach ($conditionalLogic AS $lvl1Key => $lvl1Value) {
+                foreach ($conditionalLogic AS $conditionalLogicGroupKey => $conditionalLogicGroupValue) {
 
-                    foreach ($conditionalLogic[$lvl1Key] AS $lvl2Key => $lvl2Value) {
+                    foreach (
+                        $conditionalLogic[$conditionalLogicGroupKey] AS $conditionalLogicItemKey =>
+                        $conditionalLogicItemValue
+                    ) {
 
-                        $targetFieldKey = $conditionalLogic[$lvl1Key][$lvl2Key]['field'];
+                        $targetFieldKey
+                            = $conditionalLogic[$conditionalLogicGroupKey][$conditionalLogicItemKey]['field'];
 
+                        // Loop all other items in this collection
                         foreach ($this->items AS $otherFieldObject) {
 
                             if ($otherFieldObject->getOriginalKey() === $targetFieldKey) {
 
-                                $conditionalLogic[$lvl1Key][$lvl2Key]['field'] = $otherFieldObject->getKey();
+                                $conditionalLogic[$conditionalLogicGroupKey][$conditionalLogicItemKey]['field']
+                                    = $otherFieldObject->getKey();
 
                             }
 
