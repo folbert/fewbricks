@@ -5,6 +5,7 @@ namespace Fewbricks\ACF\Fields;
 use Fewbricks\ACF\FieldCollection;
 use Fewbricks\ACF\FieldInterface;
 use Fewbricks\ACF\FieldWithSubFields;
+use Fewbricks\Helper;
 
 /**
  * Class Repeater
@@ -33,8 +34,6 @@ class Repeater extends FieldWithSubFields implements FieldInterface
 
         parent::__construct($label, $name, $key, $settings);
 
-        $this->subFields = new FieldCollection();
-
     }
 
     /**
@@ -61,7 +60,6 @@ class Repeater extends FieldWithSubFields implements FieldInterface
     public function setCollapsed($fieldKey)
     {
 
-        // @todo Implement this and dont forget to deal with it when finalizing
         $this->setSetting('collapsed', $fieldKey);
 
         return $this;
@@ -111,6 +109,42 @@ class Repeater extends FieldWithSubFields implements FieldInterface
         $this->setSetting('min', $min);
 
         return $this;
+
+    }
+
+    /**
+     * @return array|void
+     */
+    public function getAcfArray()
+    {
+        $acfArray = parent::getAcfArray();
+
+        $acfArray = $this->applyCollapsed($acfArray);
+
+        return $acfArray;
+
+    }
+
+    /**
+     * @param $acfArray
+     *
+     * @return mixed
+     */
+    private function applyCollapsed($acfArray)
+    {
+
+        if ($this->getSetting('collapsed') !== false) {
+
+            $newKey = Helper::getNewKeyByOriginalKeyInAcfArray($this->getSetting('collapsed'),
+                $acfArray['sub_fields']);
+
+            if ($newKey !== false) {
+                $acfArray['collapsed'] = $newKey;
+            }
+
+        }
+
+        return $acfArray;
 
     }
 
