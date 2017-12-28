@@ -62,12 +62,14 @@ class FieldWithLayouts extends Field
     }
 
     /**
+     * @param array $extraSettings
+     *
      * @return array
      */
-    public function getAcfArray()
+    public function getAcfArray($extraSettings = [])
     {
 
-        $settings = parent::getAcfArray();
+        $settings = parent::getAcfArray($extraSettings);
 
         $settings['layouts'] = $this->layouts->getFinalizedSettings($this->key);
 

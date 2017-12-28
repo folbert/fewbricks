@@ -106,12 +106,14 @@ class FieldWithSubFields extends Field
     }
 
     /**
+     * @param array $extraSettings
+     *
      * @return array
      */
-    public function getAcfArray()
+    public function getAcfArray($extraSettings = [])
     {
 
-        $settings = parent::getAcfArray();
+        $settings = parent::getAcfArray($extraSettings);
 
         $settings['sub_fields'] = $this->fields->getAcfArray($this->key);
 

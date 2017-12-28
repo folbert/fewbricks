@@ -2,6 +2,7 @@
 
 namespace Fewbricks\ACF;
 
+use Fewbricks\Brick;
 use Fewbricks\Collection;
 use Fewbricks\SharedFields;
 
@@ -24,9 +25,19 @@ class FieldCollection extends Collection
     private $fieldLabelsPrefix;
 
     /**
+     * @var
+     */
+    private $fieldLabelsSuffix;
+
+    /**
      * @var string
      */
     private $fieldNamesPrefix;
+
+    /**
+     * @var array
+     */
+    private $fieldsSettings;
 
     /**
      * @var array
@@ -60,17 +71,46 @@ class FieldCollection extends Collection
 
         $this->fieldNamesPrefix               = '';
         $this->fieldLabelsPrefix              = '';
+        $this->fieldLabelsSuffix              = '';
         $this->fieldsToRemove                 = [];
         $this->fieldsToAddAfterFieldsOnBuild  = [];
         $this->fieldsToAddBeforeFieldsOnBuild = [];
+        $this->fieldsSettings                 = [];
 
         parent::__construct();
 
     }
 
     /**
+     * @param Brick $brick
+     *
+     * @return $this
+     * @throws \Fewbricks\KeyInUseException
+     */
+    public function addBrick($brick)
+    {
+
+        $brick->setFields();
+
+        dump($brick->fieldsSettings);
+
+        /** @var Field $field */
+        foreach ($brick->getFields() AS $field) {
+
+            // Apply extra settings here? As an extra array on the field object?
+
+            $this->addField($field);
+
+        }
+
+        return $this;
+
+    }
+
+    /**
      * @param Field $field
      *
+     * @return $this
      * @throws \Fewbricks\KeyInUseException
      */
     public function addField($field)
@@ -78,6 +118,7 @@ class FieldCollection extends Collection
 
         $field->prefixName($this->fieldNamesPrefix);
         $field->prefixLabel($this->fieldLabelsPrefix);
+        $field->suffixLabel($this->fieldLabelsSuffix);
 
         try {
 
@@ -88,6 +129,8 @@ class FieldCollection extends Collection
             $keyInUseException->wpDie();
 
         }
+
+        return $this;
 
     }
 
@@ -116,6 +159,31 @@ class FieldCollection extends Collection
     {
 
         $this->fieldsToAddBeforeFieldsOnBuild[] = [$field, $fieldNameToAddBefore];
+
+        return $this;
+
+    }
+
+    /**
+     * Set ACF settings on fields in this collection. The values will be applied as they are so don't use this to set
+     * keys or conditional logic.
+     *
+     * @param array $fieldKey       The original key (the one set when a field was created) of a field in this collection..
+     * @param       $settingsName   Should correspond to teh name of an ACF setting
+     * @param       $settingsValue  A valid value for the setting
+     *
+     * @return FieldCollection
+     */
+    public function addFieldSetting($fieldKey, $settingsName, $settingsValue)
+    {
+
+        if (!isset($this->fieldsSettings[$fieldKey])) {
+
+            $this->fieldsSettings[$fieldKey] = [];
+
+        }
+
+        $this->fieldsSettings[$fieldKey][$settingsName] = $settingsValue;
 
         return $this;
 
@@ -246,9 +314,16 @@ class FieldCollection extends Collection
 
             $keyPrepend .= '_';
 
-            $fieldObject->prependKey($keyPrepend);
+            $fieldObject->prefixKey($keyPrepend);
 
-            $settings[] = $fieldObject->getAcfArray();
+            dump($this->fieldsSettings);
+
+            $extraSettings = (isset($this->fieldsSettings[$fieldObject->getOriginalKey()])
+                ? $this->fieldsSettings[$fieldObject->getOriginalKey()] : ['apa' => 'banan']);
+
+            $acfArray = $fieldObject->getAcfArray($extraSettings);
+
+            $settings[] = $acfArray;
 
         }
 
@@ -290,6 +365,16 @@ class FieldCollection extends Collection
     {
 
         return (isset($this->args[$name]) ? $this->args[$name] : $defaultValue);
+
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getFields()
+    {
+
+        return $this->getItems();
 
     }
 

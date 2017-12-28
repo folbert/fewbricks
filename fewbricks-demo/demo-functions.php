@@ -7,10 +7,12 @@
 
 namespace App\FewbricksDemo;
 
+use App\FewbricksDemo\Bricks\Wysiwyg;
 use App\FewbricksDemo\FieldGroups\FieldsKitchenSink;
 use App\FewbricksDemo\FieldGroups\Heroes;
 use Fewbricks\ACF\ConditionalLogicRule;
 use Fewbricks\ACF\ConditionalLogicRuleGroup;
+use Fewbricks\ACF\FieldGroup;
 use Fewbricks\ACF\FieldGroupLocationRuleGroup;
 use Fewbricks\ACF\Fields\Text;
 use Fewbricks\ACF\Rule;
@@ -34,6 +36,24 @@ if (defined('FEWBRICKS_ENV') && FEWBRICKS_ENV === 'production') {
     //dump('Loading all code');
 
     (new Heroes('1712262204a'))
+        ->addLocationRuleGroup(
+            (new FieldGroupLocationRuleGroup())
+                ->addRule(new Rule('post_type', '==', 'fewbricks_demo_pg'))
+        )
+        ->hideOnScreen('content')
+        ->register();
+
+    (new FieldGroup('1712282142a'))
+        ->setTitle('Field group with bricks')
+        ->addBrick(
+            (new Wysiwyg('wysiwyg_1', '1712282146a'))
+                ->setFieldLabelsPrefix('WYSIWYG 1 - ')
+        )
+        ->addBrick(
+            (new Wysiwyg('wysiwyg2', '1712282227u'))
+                ->setFieldLabelsPrefix('WYSIWYG 2 - ')
+                ->addFieldSetting('1712282148a', 'delay', true) // Setting ACf setting late in the process
+        )
         ->addLocationRuleGroup(
             (new FieldGroupLocationRuleGroup())
                 ->addRule(new Rule('post_type', '==', 'fewbricks_demo_pg'))

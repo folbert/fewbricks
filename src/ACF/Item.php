@@ -219,12 +219,12 @@ class Item
     }
 
     /**
-     * @param $prepend
+     * @param $prefix
      */
-    public function prependKey($prepend)
+    public function prefixKey($prefix)
     {
 
-        $this->key = $prepend . $this->key;
+        $this->key = $prefix . $this->key;
 
     }
 
@@ -267,6 +267,16 @@ class Item
         }
 
         return $this;
+
+    }
+
+    /**
+     * @param string $suffix
+     */
+    public function suffixLabel($suffix)
+    {
+
+        $this->label .= $suffix;
 
     }
 

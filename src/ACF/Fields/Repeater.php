@@ -60,11 +60,13 @@ class Repeater extends FieldWithSubFields implements FieldInterface
     }
 
     /**
-     * @return array|void
+     * @param array $extraSettings
+     *
+     * @return array|mixed
      */
-    public function getAcfArray()
+    public function getAcfArray($extraSettings = [])
     {
-        $acfArray = parent::getAcfArray();
+        $acfArray = parent::getAcfArray($extraSettings);
 
         $acfArray = $this->applyCollapsed($acfArray);
 

@@ -90,9 +90,11 @@ class Field extends Item
     }
 
     /**
+     * @param array $extraSettings
+     *
      * @return array
      */
-    public function getAcfArray()
+    public function getAcfArray($extraSettings = [])
     {
 
         $settings = array_merge(parent::getAcfArray(), [
@@ -105,6 +107,8 @@ class Field extends Item
             $settings['conditional_logic'] = $this->conditionalLogicRuleGroups->toArray();
 
         }
+
+        $settings = array_merge($settings, $extraSettings);
 
         return $settings;
 
