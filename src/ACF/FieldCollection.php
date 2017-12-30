@@ -125,7 +125,7 @@ class FieldCollection extends Collection
 
         try {
 
-            $this->addItem($field, $field->getKey());
+            parent::addItem($field, $field->getKey());
 
         } catch (KeyInUseException $keyInUseException) {
 
@@ -154,6 +154,24 @@ class FieldCollection extends Collection
 
     /**
      * @param Field  $field
+     * @param string $nameToAddAfter
+     */
+    public function addFieldAfterByName($field, $nameToAddAfter)
+    {
+
+        /** @var Field $fieldToAddAfter */
+        $fieldToAddAfter = $this->getFieldByName($nameToAddAfter);
+
+        if ($fieldToAddAfter !== false) {
+
+            parent::addItemAfter($field, $fieldToAddAfter->getKey());
+
+        }
+
+    }
+
+    /**
+     * @param Field  $field
      * @param string $fieldNameToAddBefore
      *
      * @return FieldGroup
@@ -164,6 +182,24 @@ class FieldCollection extends Collection
         $this->fieldsToAddBeforeFieldsOnBuild[] = [$field, $fieldNameToAddBefore];
 
         return $this;
+
+    }
+
+    /**
+     * @param Field  $field
+     * @param string $nameToAddBefore
+     */
+    public function addFieldBeforeByName($field, $nameToAddBefore)
+    {
+
+        /** @var Field $itemToAddAfter */
+        $fieldToAddBefore = $this->getFieldByName($nameToAddBefore);
+
+        if ($fieldToAddBefore !== false) {
+
+            parent::addItemBefore($field, $fieldToAddBefore->getKey());
+
+        }
 
     }
 
@@ -219,42 +255,6 @@ class FieldCollection extends Collection
     }
 
     /**
-     * @param Item   $item
-     * @param string $nameToAddAfter
-     */
-    public function addItemAfterByName($item, $nameToAddAfter)
-    {
-
-        /** @var Field $itemToAddAfter */
-        $itemToAddAfter = $this->getItemByFieldName($nameToAddAfter);
-
-        if ($itemToAddAfter !== false) {
-
-            $this->addItemAfter($item, $itemToAddAfter->getKey());
-
-        }
-
-    }
-
-    /**
-     * @param Item   $item
-     * @param string $nameToAddBefore
-     */
-    public function addItemBeforeByName($item, $nameToAddBefore)
-    {
-
-        /** @var Field $itemToAddAfter */
-        $itemToAddBefore = $this->getItemByFieldName($nameToAddBefore);
-
-        if ($itemToAddBefore !== false) {
-
-            $this->addItemBefore($item, $itemToAddBefore->getKey());
-
-        }
-
-    }
-
-    /**
      *
      */
     protected function doAddFieldsAfter()
@@ -262,7 +262,7 @@ class FieldCollection extends Collection
 
         foreach ($this->fieldsToAddAfterFieldsOnBuild AS $data) {
 
-            $this->addItemAfterByName($data[0], $data[1]);
+            $this->addFieldAfterByName($data[0], $data[1]);
 
         }
 
@@ -276,7 +276,7 @@ class FieldCollection extends Collection
 
         foreach ($this->fieldsToAddBeforeFieldsOnBuild AS $data) {
 
-            $this->addItemBeforeByName($data[0], $data[1]);
+            $this->addFieldBeforeByName($data[0], $data[1]);
 
         }
 
@@ -290,48 +290,36 @@ class FieldCollection extends Collection
 
         foreach ($this->fieldsToRemove AS $fieldToRemove) {
 
-            $this->removeItemByName($fieldToRemove);
+            $this->removeFieldByName($fieldToRemove);
 
         }
 
     }
 
     /**
-     *
+     * @return array An array that ACF can work with.
      */
-    protected function prepareForAcfArray()
+    public function getAcfArray()
     {
 
-        if (!$this->preparedForAcfArray) {
+        $this->prepareForAcfArray();
 
-            $this->doRemoveFields();
-            $this->doAddFieldsAfter();
-            $this->doAddFieldsBefore();
+        $acfArray = [];
 
-            /**
-             * @var string $fieldKey
-             * @var Field  $field
-             */
-            foreach ($this->items AS $fieldKey => &$field) {
+        /** @var Field $field */
+        foreach ($this->items AS $field) {
 
-                $field->prefixName($this->fieldNamesPrefix);
-                $field->prefixLabel($this->fieldLabelsPrefix);
-                $field->suffixLabel($this->fieldLabelsSuffix);
+            $keyPrepend = $this->getBaseKey() . '_';
 
-                $extraSettings = (isset($this->fieldsSettings[$field->getOriginalKey()])
-                    ? $this->fieldsSettings[$field->getOriginalKey()] : false);
+            $field->prefixKey($keyPrepend);
 
-                if ($extraSettings !== false) {
-
-                    $field->setSettings($extraSettings);
-
-                }
-
-            }
+            $acfArray[] = $field->getAcfArray();
 
         }
 
-        $this->preparedForAcfArray = true;
+        $acfArray = $this->prepareFieldsConditionalLogic($acfArray);
+
+        return $acfArray;
 
     }
 
@@ -375,35 +363,6 @@ class FieldCollection extends Collection
     }*/
 
     /**
-     * @return array An array that ACF can work with.
-     */
-    public function getAcfArray()
-    {
-
-        $this->prepareForAcfArray();
-
-        $acfArray = [];
-
-        /** @var Field $field */
-        foreach ($this->items AS $field) {
-
-            $keyPrepend = $this->getBaseKey() . '_';
-
-            $field->prefixKey($keyPrepend);
-
-            $acfArray[] = $field->getAcfArray();
-
-        }
-
-        $acfArray = $this->prepareFieldsConditionalLogic($acfArray);
-
-        //return $this->finalizeSettings($this->items, $baseKey);
-
-        return $acfArray;
-
-    }
-
-    /**
      * @param string $name
      * @param null   $defaultValue Value to return if arg is not set
      *
@@ -437,40 +396,40 @@ class FieldCollection extends Collection
     }
 
     /**
+     * @param $name
+     *
+     * @return bool|mixed
+     */
+    public function getFieldByName($name)
+    {
+
+        $field = false;
+
+        /**
+         * @var string $itemKey
+         * @var Field  $field
+         */
+        foreach ($this->items AS $itemKey => $field) {
+
+            if ($field->getName() === $name) {
+
+                $field = parent::getItem($itemKey);
+
+            }
+
+        }
+
+        return $field;
+
+    }
+
+    /**
      * @return mixed
      */
     public function getFields()
     {
 
         return $this->getItems();
-
-    }
-
-    /**
-     * @param $name
-     *
-     * @return bool|mixed
-     */
-    public function getItemByFieldName($name)
-    {
-
-        $item = false;
-
-        /**
-         * @var string $item_key
-         * @var Field  $field
-         */
-        foreach ($this->items AS $item_key => $field) {
-
-            if ($field->getName() === $name) {
-
-                $item = parent::getItem($item_key);
-
-            }
-
-        }
-
-        return $item;
 
     }
 
@@ -529,6 +488,42 @@ class FieldCollection extends Collection
     }
 
     /**
+     *
+     */
+    protected function prepareForAcfArray()
+    {
+
+        if (!$this->preparedForAcfArray) {
+
+            $this->doRemoveFields();
+            $this->doAddFieldsAfter();
+            $this->doAddFieldsBefore();
+
+            /** @var Field $field */
+            foreach ($this->items AS &$field) {
+
+                $field->prefixName($this->fieldNamesPrefix);
+                $field->prefixLabel($this->fieldLabelsPrefix);
+                $field->suffixLabel($this->fieldLabelsSuffix);
+
+                $extraSettings = (isset($this->fieldsSettings[$field->getOriginalKey()])
+                    ? $this->fieldsSettings[$field->getOriginalKey()] : false);
+
+                if ($extraSettings !== false) {
+
+                    $field->setSettings($extraSettings);
+
+                }
+
+            }
+
+        }
+
+        $this->preparedForAcfArray = true;
+
+    }
+
+    /**
      * @param string $fieldName The name of a field. Not the key, not the label, the name.
      *
      * @return FieldGroup
@@ -541,6 +536,25 @@ class FieldCollection extends Collection
         $this->fieldsToRemove[$fieldName] = $fieldName;
 
         return $this;
+
+    }
+
+    /**
+     * @param $name
+     */
+    public function removeFieldByName($name)
+    {
+
+        /** @var Field $field */
+        foreach ($this->items AS $itemKey => $field) {
+
+            if ($field->getName() === $name) {
+
+                parent::removeItem($itemKey);
+
+            }
+
+        }
 
     }
 
@@ -559,25 +573,6 @@ class FieldCollection extends Collection
         }
 
         return $this;
-
-    }
-
-    /**
-     * @param $name
-     */
-    public function removeItemByName($name)
-    {
-
-        /** @var Field $field */
-        foreach ($this->items AS $item_key => $field) {
-
-            if ($field->getName() === $name) {
-
-                parent::removeItem($item_key);
-
-            }
-
-        }
 
     }
 

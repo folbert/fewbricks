@@ -2,9 +2,6 @@
 
 namespace Fewbricks\ACF;
 
-use Fewbricks\ACF\Fields\Layout;
-use Fewbricks\Collection;
-
 /**
  * Class LayoutCollection
  *
@@ -12,100 +9,5 @@ use Fewbricks\Collection;
  */
 class LayoutCollection extends FieldCollection
 {
-
-    /**
-     * @return array
-     */
-    public function XgetAcfArray()
-    {
-
-        $acfArray = [];
-
-        /** @var Layout $layout */
-        foreach($this->items AS $layout) {
-
-            $layout->getAcfArray();
-
-        }
-
-        return $acfArray;
-
-    }
-
-    /**
-     * @param Layout[] $layoutObjects
-     * @param string   $base_key
-     *
-     * @return array Associative array with field settings ready to be used for
-     * "fields" in an array to be sent to ACFs functions for
-     * registering fields using code.
-     * @link https://www.advancedcustomfields.com/resources/register-fields-via-php/#example
-     */
-    private function XfinalizeSettings($layoutObjects, $base_key)
-    {
-
-        $settings = [];
-
-        foreach ($layoutObjects AS $key => $layoutObject) {
-
-            $keyPrepend = $base_key;
-
-            // If the field belongs to a brick
-            if (false !== ($brickKey = $layoutObject->getBrickKey())) {
-                $keyPrepend .= '_' . $brickKey;
-            }
-
-            $keyPrepend .= '_';
-
-            $layoutObject->prefixKey($keyPrepend);
-
-            $layoutSettings = $layoutObject->getAcfArray();
-
-            $settings[$layoutObject->getKey()] = $layoutSettings;
-
-        }
-
-        return $settings;
-
-    }
-
-    /**
-     * @param string $base_key
-     *
-     * @return array Associative array with field settings ready to be used for
-     * "fields" in an array to be sent to ACFs functions for
-     * registering fields using code.
-     */
-    public function XgetFinalizedSettings($base_key = '')
-    {
-
-        // Lets make sure that the key is ok for ACF
-        // https://www.advancedcustomfields.com/resources/register-fields-via-php/#field-settings
-        if (substr($base_key, 0, 6) !== 'field_') {
-            $base_key = 'field_' . $base_key;
-        }
-
-        return $this->finalizeSettings($this->items, $base_key);
-
-    }
-
-    /**
-     * @param $name
-     */
-    public function XremoveItemByName($name)
-    {
-
-        foreach ($this->items AS $key => $item) {
-
-            if ($item->getName() === $name) {
-
-                $this->removeItem($key);
-
-            }
-
-        }
-
-    }
-
 
 }

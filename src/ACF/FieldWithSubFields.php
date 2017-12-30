@@ -92,7 +92,23 @@ class FieldWithSubFields extends Field
     }
 
     /**
-     * @param array|FieldCollection $fields An array or an instance of FieldCollection.
+     * @param $fieldKey
+     * @param $settingsName
+     * @param $settingsValue
+     *
+     * @return FieldWithSubFields
+     */
+    public function addFieldSetting($fieldKey, $settingsName, $settingsValue)
+    {
+
+        $this->fields->addFieldSetting($fieldKey, $settingsName, $settingsValue);
+
+        return $this;
+
+    }
+
+    /**
+     * @param $fields
      *
      * @return FieldWithSubFields
      * @throws KeyInUseException
@@ -154,7 +170,7 @@ class FieldWithSubFields extends Field
     public function removeField($name)
     {
 
-        $this->fields->removeItemByName($name);
+        $this->fields->removeFieldByName($name);
 
         return $this;
 
