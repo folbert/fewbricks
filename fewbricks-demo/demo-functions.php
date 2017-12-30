@@ -43,14 +43,14 @@ if (defined('FEWBRICKS_ENV') && FEWBRICKS_ENV === 'production') {
         ->hideOnScreen('content')
         ->register();
 
-    (new FieldGroup('1712282142a'))
+    (new FieldGroup('fg1712282142a'))
         ->setTitle('Field group with bricks')
         ->addBrick(
-            (new Wysiwyg('wysiwyg_1', '1712282146a'))
+            (new Wysiwyg('wysiwyg_1', 'br1712282146a'))
                 ->setFieldLabelsPrefix('WYSIWYG 1 - ')
         )
         ->addBrick(
-            (new Wysiwyg('wysiwyg2', '1712282227u'))
+            (new Wysiwyg('wysiwyg2', 'br1712282227u'))
                 ->setFieldLabelsPrefix('WYSIWYG 2 - ')
                 ->addFieldSetting('1712282148a', 'delay', true) // Setting ACf setting late in the process
         )
@@ -62,7 +62,7 @@ if (defined('FEWBRICKS_ENV') && FEWBRICKS_ENV === 'production') {
         ->register();
 
     // Demoing a class
-    (new FieldsKitchenSink('1712042021a'))
+    (new FieldsKitchenSink('fg1712042021a'))
         ->setTitle('Main content')
         // This will be prefixed to all field names i the field group.
         // Since we are re-using the same field group multiple times on the same page,
@@ -73,7 +73,7 @@ if (defined('FEWBRICKS_ENV') && FEWBRICKS_ENV === 'production') {
         ->register();
 
     // Demoing the same class but but changing it on the fly
-    (new FieldsKitchenSink('17120529561a'))
+    (new FieldsKitchenSink('fg17120529561a'))
         ->clearLocationRuleGroups()
         ->addLocationRuleGroups([
             (new FieldGroupLocationRuleGroup())->addRule(
@@ -89,7 +89,7 @@ if (defined('FEWBRICKS_ENV') && FEWBRICKS_ENV === 'production') {
         ->setFieldLabelsPrefix('Secondary content - ')
         ->register();
 
-    (new FieldsKitchenSink('1712111413a'))
+    (new FieldsKitchenSink('fg1712111413a'))
         ->removeField('fd_tab1')
         ->removeFields(['fd_color_picker', 'fd_file'])
         ->removeField('fd_checkbox')
@@ -111,27 +111,27 @@ if (defined('FEWBRICKS_ENV') && FEWBRICKS_ENV === 'production') {
 
 
     // Lots of field groups fo perf tests
-    /*(new FieldsKitchenSink('1712252102a'))
+    /*(new FieldsKitchenSink('fg1712252102a'))
         ->setTitle('Main content')
         ->setFieldNamesPrefix('main_contenta_')
         ->register();
-    (new FieldsKitchenSink('1712252102b'))
+    (new FieldsKitchenSink('fg1712252102b'))
         ->setTitle('Main content')
         ->setFieldNamesPrefix('main_contentb_')
         ->register();
-    (new FieldsKitchenSink('1712252102c'))
+    (new FieldsKitchenSink('fg1712252102c'))
         ->setTitle('Main content')
         ->setFieldNamesPrefix('main_contentc_')
         ->register();
-    (new FieldsKitchenSink('1712252102d'))
+    (new FieldsKitchenSink('fg1712252102d'))
         ->setTitle('Main content')
         ->setFieldNamesPrefix('main_contentd_')
         ->register();
-    (new FieldsKitchenSink('1712252102e'))
+    (new FieldsKitchenSink('fg1712252102e'))
         ->setTitle('Main content')
         ->setFieldNamesPrefix('main_contente_')
         ->register();
-    (new FieldsKitchenSink('1712252102f'))
+    (new FieldsKitchenSink('fg1712252102f'))
         ->setTitle('Main content')
         ->setFieldNamesPrefix('main_contentf_')
         ->register();*/

@@ -6,7 +6,7 @@ use Fewbricks\ACF\Fields\Layout;
 use Fewbricks\KeyInUseException;
 
 /**
- * Class ItemWithLayouts
+ * Class FieldWithLayouts
  *
  * @package Fewbricks\ACF
  */
@@ -36,6 +36,7 @@ class FieldWithLayouts extends Field
         parent::__construct($label, $name, $key, $settings);
 
         $this->layouts = new LayoutCollection();
+        $this->layouts->setBaseKey($key);
 
     }
 
@@ -62,7 +63,9 @@ class FieldWithLayouts extends Field
     }
 
     /**
-     * @param array $extraSettings
+     * @param array $extraSettings Any extra settings that you want to apply at the last minute. Be careful not to set
+     *                             crucial settings like "key" and "conditional_logic" here. We will not remove any
+     *                             such items from the array in case you really want to set them,
      *
      * @return array
      */
@@ -71,7 +74,7 @@ class FieldWithLayouts extends Field
 
         $settings = parent::getAcfArray($extraSettings);
 
-        $settings['layouts'] = $this->layouts->getFinalizedSettings($this->key);
+        $settings['layouts'] = $this->layouts->getAcfArray();
 
         return $settings;
 

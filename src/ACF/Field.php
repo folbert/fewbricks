@@ -90,7 +90,9 @@ class Field extends Item
     }
 
     /**
-     * @param array $extraSettings
+     * @param array $extraSettings Any extra settings that you want to apply at the last minute. Be careful not to set
+     *                             crucial settings like "key" and "conditional_logic" here. We will not remove any
+     *                             such items from the array in case you really want to set them,
      *
      * @return array
      */

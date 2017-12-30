@@ -176,11 +176,9 @@ class FieldGroup extends FieldCollection implements FieldGroupInterface
     }
 
     /**
-     * @param null $void Exists only for the function to be compatible with parents function with same name.
-     *
      * @return array
      */
-    public function getAcfArray($void = null)
+    public function getAcfArray()
     {
 
         return array_merge($this->settings, [
@@ -201,6 +199,16 @@ class FieldGroup extends FieldCollection implements FieldGroupInterface
     {
 
         return $this->getSetting('active', $defaultValue);
+
+    }
+
+    /**
+     * @return string
+     */
+    public function getBaseKey()
+    {
+
+        return $this->getKey();
 
     }
 
@@ -256,8 +264,7 @@ class FieldGroup extends FieldCollection implements FieldGroupInterface
 
         $key = $this->key;
 
-        // Lets make sure that the key is ok for ACF
-        // https://www.advancedcustomfields.com/resources/register-fields-via-php/#field-settings
+        // Lets keep in order with how ACF gives keys to field groups and prepend with "group_"
         if (substr($key, 0, 6) !== 'group_') {
             $key = 'group_' . $key;
         }

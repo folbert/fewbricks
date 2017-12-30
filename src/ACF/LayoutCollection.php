@@ -2,6 +2,7 @@
 
 namespace Fewbricks\ACF;
 
+use Fewbricks\ACF\Fields\Layout;
 use Fewbricks\Collection;
 
 /**
@@ -9,8 +10,27 @@ use Fewbricks\Collection;
  *
  * @package Fewbricks\ACF
  */
-class LayoutCollection extends Collection
+class LayoutCollection extends FieldCollection
 {
+
+    /**
+     * @return array
+     */
+    public function XgetAcfArray()
+    {
+
+        $acfArray = [];
+
+        /** @var Layout $layout */
+        foreach($this->items AS $layout) {
+
+            $layout->getAcfArray();
+
+        }
+
+        return $acfArray;
+
+    }
 
     /**
      * @param Layout[] $layoutObjects
@@ -21,7 +41,7 @@ class LayoutCollection extends Collection
      * registering fields using code.
      * @link https://www.advancedcustomfields.com/resources/register-fields-via-php/#example
      */
-    private function finalizeSettings($layoutObjects, $base_key)
+    private function XfinalizeSettings($layoutObjects, $base_key)
     {
 
         $settings = [];
@@ -56,7 +76,7 @@ class LayoutCollection extends Collection
      * "fields" in an array to be sent to ACFs functions for
      * registering fields using code.
      */
-    public function getFinalizedSettings($base_key = '')
+    public function XgetFinalizedSettings($base_key = '')
     {
 
         // Lets make sure that the key is ok for ACF
@@ -72,7 +92,7 @@ class LayoutCollection extends Collection
     /**
      * @param $name
      */
-    public function removeItemByName($name)
+    public function XremoveItemByName($name)
     {
 
         foreach ($this->items AS $key => $item) {

@@ -51,19 +51,28 @@ class Brick extends FieldCollection implements BrickInterface
     {
 
         $field->prefixKey($this->getKey() . '_');
+        $field->prefixName($this->getName() . '_');
 
         parent::addField($field);
 
     }
 
     /**
-     * @param null $void Exists ony to have the same nr of params as the parents function
-     *
      * @return array
      */
-    public function getAcfArray($void = null)
+    public function getAcfArray()
     {
         return parent::getAcfArray($this->getKey());
+    }
+
+    /**
+     * @return string
+     */
+    public function getBaseKey()
+    {
+
+        return $this->getKey();
+
     }
 
     /**

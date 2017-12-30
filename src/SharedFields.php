@@ -20,5 +20,4 @@ class SharedFields extends FieldCollection
 
     }
 
-
 }

@@ -84,13 +84,12 @@ class Item
     public function getAcfArray()
     {
 
-        // Put the crucial settings into the settings array
-        $tmp_settings          = $this->settings;
-        $tmp_settings['key']   = $this->key;
-        $tmp_settings['label'] = $this->label;
-        $tmp_settings['name']  = $this->name;
+        $settings          = $this->settings;
+        $settings['key']   = $this->getKey();
+        $settings['label'] = $this->label;
+        $settings['name']  = $this->name;
 
-        return $tmp_settings;
+        return $settings;
 
     }
 

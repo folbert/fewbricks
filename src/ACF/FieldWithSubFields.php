@@ -35,6 +35,7 @@ class FieldWithSubFields extends Field
         parent::__construct($label, $name, $key, $settings);
 
         $this->fields = new FieldCollection();
+        $this->fields->setBaseKey($key);
 
     }
 
@@ -106,7 +107,9 @@ class FieldWithSubFields extends Field
     }
 
     /**
-     * @param array $extraSettings
+     * @param array $extraSettings Any extra settings that you want to apply at the last minute. Be careful not to set
+     *                             crucial settings like "key" and "conditional_logic" here. We will not remove any
+     *                             such items from the array in case you really want to set them,
      *
      * @return array
      */
@@ -115,7 +118,7 @@ class FieldWithSubFields extends Field
 
         $settings = parent::getAcfArray($extraSettings);
 
-        $settings['sub_fields'] = $this->fields->getAcfArray($this->key);
+        $settings['sub_fields'] = $this->fields->getAcfArray();
 
         return $settings;
 

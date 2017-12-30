@@ -4,7 +4,6 @@ namespace Fewbricks\ACF;
 
 use Fewbricks\Brick;
 use Fewbricks\Collection;
-use Fewbricks\SharedFields;
 
 /**
  * Class FieldCollection
@@ -15,17 +14,22 @@ class FieldCollection extends Collection
 {
 
     /**
-     * @var
+     * @var array
      */
     protected $args;
 
     /**
-     * @var
+     * @var string
+     */
+    protected $baseKey;
+
+    /**
+     * @var string
      */
     private $fieldLabelsPrefix;
 
     /**
-     * @var
+     * @var string
      */
     private $fieldLabelsSuffix;
 
@@ -55,13 +59,17 @@ class FieldCollection extends Collection
     private $fieldsToAddBeforeFieldsOnBuild;
 
     /**
+     * @var boolean
+     */
+    private $preparedForAcfArray;
+
+    /**
      * FieldCollection constructor.
      *
-     * @param $args
+     * @param array $args
      */
     public function __construct($args = [])
     {
-
 
         if (!is_array($args)) {
             $args = [];
@@ -77,6 +85,8 @@ class FieldCollection extends Collection
         $this->fieldsToAddBeforeFieldsOnBuild = [];
         $this->fieldsSettings                 = [];
 
+        $this->preparedForAcfArray = false;
+
         parent::__construct();
 
     }
@@ -91,13 +101,10 @@ class FieldCollection extends Collection
     {
 
         $brick->setFields();
-
-        dump($brick->fieldsSettings);
+        $brick->prepareForAcfArray();
 
         /** @var Field $field */
         foreach ($brick->getFields() AS $field) {
-
-            // Apply extra settings here? As an extra array on the field object?
 
             $this->addField($field);
 
@@ -115,10 +122,6 @@ class FieldCollection extends Collection
      */
     public function addField($field)
     {
-
-        $field->prefixName($this->fieldNamesPrefix);
-        $field->prefixLabel($this->fieldLabelsPrefix);
-        $field->suffixLabel($this->fieldLabelsSuffix);
 
         try {
 
@@ -168,9 +171,10 @@ class FieldCollection extends Collection
      * Set ACF settings on fields in this collection. The values will be applied as they are so don't use this to set
      * keys or conditional logic.
      *
-     * @param array $fieldKey       The original key (the one set when a field was created) of a field in this collection..
-     * @param       $settingsName   Should correspond to teh name of an ACF setting
-     * @param       $settingsValue  A valid value for the setting
+     * @param array  $fieldKey      The original key (the one set when a field was created) of a field in this
+     *                              collection..
+     * @param string $settingsName  Should correspond to the name of an ACF setting
+     * @param mixed  $settingsValue A valid value for the setting
      *
      * @return FieldCollection
      */
@@ -200,26 +204,29 @@ class FieldCollection extends Collection
         if (is_array($fields)) {
 
             foreach ($fields AS $field) {
+
                 $this->addField($field);
+
             }
 
         } else {
 
-            $this->addFields($fields->getItems());
+            // Call same function again but this time with the array representation of the collection
+            $this->addFields($fields->getFields());
 
         }
 
     }
 
     /**
-     * @param $item
-     * @param $nameToAddAfter
+     * @param Item   $item
+     * @param string $nameToAddAfter
      */
     public function addItemAfterByName($item, $nameToAddAfter)
     {
 
         /** @var Field $itemToAddAfter */
-        $itemToAddAfter = $this->getItemByName($nameToAddAfter);
+        $itemToAddAfter = $this->getItemByFieldName($nameToAddAfter);
 
         if ($itemToAddAfter !== false) {
 
@@ -230,14 +237,14 @@ class FieldCollection extends Collection
     }
 
     /**
-     * @param $item
-     * @param $nameToAddBefore
+     * @param Item   $item
+     * @param string $nameToAddBefore
      */
     public function addItemBeforeByName($item, $nameToAddBefore)
     {
 
         /** @var Field $itemToAddAfter */
-        $itemToAddBefore = $this->getItemByName($nameToAddBefore);
+        $itemToAddBefore = $this->getItemByFieldName($nameToAddBefore);
 
         if ($itemToAddBefore !== false) {
 
@@ -290,6 +297,45 @@ class FieldCollection extends Collection
     }
 
     /**
+     *
+     */
+    protected function prepareForAcfArray()
+    {
+
+        if (!$this->preparedForAcfArray) {
+
+            $this->doRemoveFields();
+            $this->doAddFieldsAfter();
+            $this->doAddFieldsBefore();
+
+            /**
+             * @var string $fieldKey
+             * @var Field  $field
+             */
+            foreach ($this->items AS $fieldKey => &$field) {
+
+                $field->prefixName($this->fieldNamesPrefix);
+                $field->prefixLabel($this->fieldLabelsPrefix);
+                $field->suffixLabel($this->fieldLabelsSuffix);
+
+                $extraSettings = (isset($this->fieldsSettings[$field->getOriginalKey()])
+                    ? $this->fieldsSettings[$field->getOriginalKey()] : false);
+
+                if ($extraSettings !== false) {
+
+                    $field->setSettings($extraSettings);
+
+                }
+
+            }
+
+        }
+
+        $this->preparedForAcfArray = true;
+
+    }
+
+    /**
      * @param Field[] $fieldObjects
      * @param string  $base_key
      *
@@ -298,7 +344,7 @@ class FieldCollection extends Collection
      * registering fields using code.
      * @link https://www.advancedcustomfields.com/resources/register-fields-via-php/#example
      */
-    private function finalizeSettings($fieldObjects, $base_key)
+    /*private function finalizeSettings($fieldObjects, $base_key)
     {
 
         $settings = [];
@@ -316,12 +362,7 @@ class FieldCollection extends Collection
 
             $fieldObject->prefixKey($keyPrepend);
 
-            dump($this->fieldsSettings);
-
-            $extraSettings = (isset($this->fieldsSettings[$fieldObject->getOriginalKey()])
-                ? $this->fieldsSettings[$fieldObject->getOriginalKey()] : ['apa' => 'banan']);
-
-            $acfArray = $fieldObject->getAcfArray($extraSettings);
+            $acfArray = $fieldObject->getAcfArray();
 
             $settings[] = $acfArray;
 
@@ -331,27 +372,34 @@ class FieldCollection extends Collection
 
         return $settings;
 
-    }
+    }*/
 
     /**
-     * @param string $baseKey
-     *
      * @return array An array that ACF can work with.
      */
-    public function getAcfArray($baseKey)
+    public function getAcfArray()
     {
 
-        $this->doRemoveFields();
-        $this->doAddFieldsAfter();
-        $this->doAddFieldsBefore();
+        $this->prepareForAcfArray();
 
-        // Lets make sure that the key is ok for ACF
-        // https://www.advancedcustomfields.com/resources/register-fields-via-php/#field-settings
-        if (substr($baseKey, 0, 6) !== 'field_') {
-            $baseKey = 'field_' . $baseKey;
+        $acfArray = [];
+
+        /** @var Field $field */
+        foreach ($this->items AS $field) {
+
+            $keyPrepend = $this->getBaseKey() . '_';
+
+            $field->prefixKey($keyPrepend);
+
+            $acfArray[] = $field->getAcfArray();
+
         }
 
-        return $this->finalizeSettings($this->items, $baseKey);
+        $acfArray = $this->prepareFieldsConditionalLogic($acfArray);
+
+        //return $this->finalizeSettings($this->items, $baseKey);
+
+        return $acfArray;
 
     }
 
@@ -371,6 +419,26 @@ class FieldCollection extends Collection
     /**
      * @return mixed
      */
+    public function getBaseKey()
+    {
+
+        return $this->baseKey;
+
+    }
+
+    /**
+     * @param string $baseKey
+     */
+    public function setBaseKey($baseKey)
+    {
+
+        $this->baseKey = $baseKey;
+
+    }
+
+    /**
+     * @return mixed
+     */
     public function getFields()
     {
 
@@ -383,7 +451,7 @@ class FieldCollection extends Collection
      *
      * @return bool|mixed
      */
-    public function getItemByName($name)
+    public function getItemByFieldName($name)
     {
 
         $item = false;

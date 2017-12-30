@@ -28,12 +28,12 @@ class Heroes extends FieldGroup
             ->setButtonLabel('Add hero');
 
         $flexibleContent->addLayout(
-            (new Layout('Hero Type 1', 'hero_type_1', '1712262159i'))
+            (new Layout('Hero Type 1', 'hero_type_1', 'l1712262159i'))
                 ->addFields(new BackgroundColors())
         );
 
         $flexibleContent->addLayout(
-            (new Layout('Hero Type 2', 'hero_type_2', '1712262159t'))
+            (new Layout('Hero Type 2', 'hero_type_2', 'l1712262159t'))
                 ->addField(
                     (new Message('Message', 'message', '1712262215r'))
                         ->setMessage('Lorem ipsum dolor')
