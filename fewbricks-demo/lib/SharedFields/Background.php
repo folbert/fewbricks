@@ -6,6 +6,11 @@ use Fewbricks\ACF\Fields\Image;
 use Fewbricks\SharedFieldCollection;
 use Fewbricks\SharedFields;
 
+/**
+ * Class Background
+ *
+ * @package App\FewbricksDemo\SharedFields
+ */
 class Background extends SharedFields
 {
 
@@ -17,9 +22,8 @@ class Background extends SharedFields
 
         $this->addField(new Image('Background Image', 'background_image', '1712262215a'));
 
-        $this->addFields(new BackgroundColors());
+        $this->addFieldCollection(new BackgroundColors());
 
     }
-
 
 }

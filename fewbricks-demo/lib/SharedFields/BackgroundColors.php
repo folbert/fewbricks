@@ -6,6 +6,11 @@ use Fewbricks\ACF\Fields\Select;
 use Fewbricks\SharedFieldCollection;
 use Fewbricks\SharedFields;
 
+/**
+ * Class BackgroundColors
+ *
+ * @package App\FewbricksDemo\SharedFields
+ */
 class BackgroundColors extends SharedFields
 {
 

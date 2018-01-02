@@ -29,7 +29,7 @@ class Heroes extends FieldGroup
 
         $flexibleContent->addLayout(
             (new Layout('Hero Type 1', 'hero_type_1', 'l1712262159i'))
-                ->addFields(new BackgroundColors())
+                ->addFieldCollection(new BackgroundColors())
         );
 
         $flexibleContent->addLayout(
@@ -38,7 +38,7 @@ class Heroes extends FieldGroup
                     (new Message('Message', 'message', '1712262215r'))
                         ->setMessage('Lorem ipsum dolor')
                 )
-                ->addFields(new Background())
+                ->addFieldCollection(new Background())
                 ->addFieldBefore(new Text('Headline', 'headline', '1712272054a'), 'message')
         );
 
