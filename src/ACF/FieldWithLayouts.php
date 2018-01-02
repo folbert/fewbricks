@@ -69,7 +69,7 @@ class FieldWithLayouts extends Field
      *
      * @return array
      */
-    public function toAcfArray($extraSettings = [])
+    public function toAcfArray(array $extraSettings = [])
     {
 
         $settings = parent::toAcfArray($extraSettings);
@@ -121,7 +121,7 @@ class FieldWithLayouts extends Field
     public function removeLayout($name)
     {
 
-        $this->layouts->removeFieldByName($name);
+        $this->layouts->removeField($name);
 
         return $this;
 

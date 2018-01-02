@@ -17,26 +17,6 @@ class Repeater extends FieldWithFields implements FieldInterface
 {
 
     /**
-     * @param string $label    The label of the field
-     * @param string $name     The name of the field
-     * @param string $key      The key of the field. Must be unique across the
-     *                         entire app
-     * @param array  $settings Array where you can pass all the possible
-     *                         settings for the field.
-     *                         https://www.advancedcustomfields.com/resources/register-fields-via-php/#field-type%20settings
-     */
-    public function __construct(
-        $label,
-        $name,
-        $key,
-        $settings = []
-    ) {
-
-        parent::__construct($label, $name, $key, $settings);
-
-    }
-
-    /**
      * @param $acfArray
      *
      * @return mixed
@@ -67,7 +47,7 @@ class Repeater extends FieldWithFields implements FieldInterface
      *
      * @return array|mixed
      */
-    public function toAcfArray($extraSettings = [])
+    public function toAcfArray(array $extraSettings = [])
     {
         $acfArray = parent::toAcfArray($extraSettings);
 

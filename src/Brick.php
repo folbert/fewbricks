@@ -2,6 +2,7 @@
 
 namespace Fewbricks;
 
+use Fewbricks\ACF\Field;
 use Fewbricks\ACF\FieldCollection;
 
 /**
@@ -43,11 +44,11 @@ class Brick extends FieldCollection implements BrickInterface
     }
 
     /**
-     * @param ACF\Field $field
+     * @param Field $field
      *
      * @throws KeyInUseException
      */
-    public function addField($field)
+    public function addField(Field $field)
     {
 
         $field->prefixKey($this->getKey() . '_');

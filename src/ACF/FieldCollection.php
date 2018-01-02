@@ -126,7 +126,7 @@ class FieldCollection extends Collection
      * @return $this
      * @throws \Fewbricks\KeyInUseException
      */
-    public function addField($field)
+    public function addField(Field $field)
     {
 
         try {
@@ -194,6 +194,8 @@ class FieldCollection extends Collection
     /**
      * @param Field  $field
      * @param string $nameToAddBefore
+     *
+     * @return FieldCollection
      */
     public function addFieldBeforeByName($field, $nameToAddBefore)
     {
@@ -206,6 +208,25 @@ class FieldCollection extends Collection
             parent::addItemBefore($field, $fieldToAddBefore->getKey());
 
         }
+
+        return $this;
+
+    }
+
+    /**
+     * @param FieldCollection $fieldCollection
+     *
+     * @return FieldCollection
+     * @throws \Fewbricks\KeyInUseException
+     */
+    public function addFieldCollection(FieldCollection $fieldCollection)
+    {
+
+        $fieldCollection->prepareForAcfArray();
+
+        $this->addFields($fieldCollection->getFields());
+
+        return $this;
 
     }
 
@@ -483,7 +504,8 @@ class FieldCollection extends Collection
     }
 
     /**
-     *
+     * Prepares all fields in the collection for being transformed to an array. This must be called before creating
+     * an ACF array and should be called just before doing so.
      */
     protected function prepareForAcfArray()
     {
@@ -624,6 +646,33 @@ class FieldCollection extends Collection
         $this->fieldNamesPrefix = $prefix;
 
         return $this;
+
+    }
+
+    /**
+     * @return array An array that ACF can work with.
+     */
+    public function toAcfArray()
+    {
+
+        $this->prepareForAcfArray();
+
+        $acfArray = [];
+
+        /** @var Field $field */
+        foreach ($this->items AS $field) {
+
+            $keyPrepend = $this->getBaseKey() . '_';
+
+            $field->prefixKey($keyPrepend);
+
+            $acfArray[] = $field->toAcfArray();
+
+        }
+
+        $acfArray = $this->prepareFieldsConditionalLogic($acfArray);
+
+        return $acfArray;
 
     }
 

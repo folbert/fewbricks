@@ -96,7 +96,7 @@ class Field extends Item
      *
      * @return array
      */
-    public function toAcfArray($extraSettings = [])
+    public function toAcfArray(array $extraSettings = [])
     {
 
         $settings = array_merge(parent::toAcfArray(), [
