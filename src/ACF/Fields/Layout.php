@@ -3,7 +3,7 @@
 namespace Fewbricks\ACF\Fields;
 
 use Fewbricks\ACF\FieldInterface;
-use Fewbricks\ACF\FieldWithSubFields;
+use Fewbricks\ACF\FieldWithFields;
 
 /**
  * Class Layout
@@ -12,7 +12,7 @@ use Fewbricks\ACF\FieldWithSubFields;
  *
  * @package Fewbricks\ACF
  */
-class Layout extends FieldWithSubFields implements FieldInterface
+class Layout extends FieldWithFields implements FieldInterface
 {
 
     /**

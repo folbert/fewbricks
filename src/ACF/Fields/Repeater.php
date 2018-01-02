@@ -4,7 +4,7 @@ namespace Fewbricks\ACF\Fields;
 
 use Fewbricks\ACF\FieldCollection;
 use Fewbricks\ACF\FieldInterface;
-use Fewbricks\ACF\FieldWithSubFields;
+use Fewbricks\ACF\FieldWithFields;
 use Fewbricks\Helper;
 
 /**
@@ -13,7 +13,7 @@ use Fewbricks\Helper;
  *
  * @package Fewbricks\ACF\Fields
  */
-class Repeater extends FieldWithSubFields implements FieldInterface
+class Repeater extends FieldWithFields implements FieldInterface
 {
 
     /**

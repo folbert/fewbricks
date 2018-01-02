@@ -9,7 +9,7 @@ use Fewbricks\KeyInUseException;
  *
  * @package Fewbricks\ACF
  */
-class FieldWithSubFields extends Field
+class FieldWithFields extends Field
 {
 
     /**
@@ -65,7 +65,7 @@ class FieldWithSubFields extends Field
      * @param $field
      * @param $fieldNameToAddAfter
      *
-     * @return FieldWithSubFields
+     * @return FieldWithFields
      */
     public function addFieldAfter($field, $fieldNameToAddAfter)
     {
@@ -80,7 +80,7 @@ class FieldWithSubFields extends Field
      * @param $field
      * @param $fieldNameToAddBefore
      *
-     * @return FieldWithSubFields
+     * @return FieldWithFields
      */
     public function addFieldBefore($field, $fieldNameToAddBefore)
     {
@@ -96,7 +96,7 @@ class FieldWithSubFields extends Field
      * @param $settingsName
      * @param $settingsValue
      *
-     * @return FieldWithSubFields
+     * @return FieldWithFields
      */
     public function addFieldSetting($fieldKey, $settingsName, $settingsValue)
     {
@@ -110,7 +110,7 @@ class FieldWithSubFields extends Field
     /**
      * @param $fields
      *
-     * @return FieldWithSubFields
+     * @return FieldWithFields
      * @throws KeyInUseException
      */
     public function addFields($fields)
