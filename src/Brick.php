@@ -60,9 +60,9 @@ class Brick extends FieldCollection implements BrickInterface
     /**
      * @return array
      */
-    public function getAcfArray()
+    public function toAcfArray()
     {
-        return parent::getAcfArray($this->getKey());
+        return parent::toAcfArray($this->getKey());
     }
 
     /**

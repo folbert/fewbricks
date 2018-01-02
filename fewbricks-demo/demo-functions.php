@@ -109,7 +109,6 @@ if (defined('FEWBRICKS_ENV') && FEWBRICKS_ENV === 'production') {
         )
         ->register();
 
-
     // Lots of field groups fo perf tests
     /*(new FieldsKitchenSink('fg1712252102a'))
         ->setTitle('Main content')

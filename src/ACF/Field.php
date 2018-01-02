@@ -96,10 +96,10 @@ class Field extends Item
      *
      * @return array
      */
-    public function getAcfArray($extraSettings = [])
+    public function toAcfArray($extraSettings = [])
     {
 
-        $settings = array_merge(parent::getAcfArray(), [
+        $settings = array_merge(parent::toAcfArray(), [
             'fewbricks_original_key' => $this->getOriginalKey(),
             'type'                   => $this->getType(),
         ]);

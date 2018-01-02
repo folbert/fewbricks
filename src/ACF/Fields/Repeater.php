@@ -67,9 +67,9 @@ class Repeater extends FieldWithFields implements FieldInterface
      *
      * @return array|mixed
      */
-    public function getAcfArray($extraSettings = [])
+    public function toAcfArray($extraSettings = [])
     {
-        $acfArray = parent::getAcfArray($extraSettings);
+        $acfArray = parent::toAcfArray($extraSettings);
 
         $acfArray = $this->applyCollapsed($acfArray);
 

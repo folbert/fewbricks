@@ -299,7 +299,7 @@ class FieldCollection extends Collection
     /**
      * @return array An array that ACF can work with.
      */
-    public function getAcfArray()
+    public function toAcfArray()
     {
 
         $this->prepareForAcfArray();
@@ -313,7 +313,7 @@ class FieldCollection extends Collection
 
             $field->prefixKey($keyPrepend);
 
-            $acfArray[] = $field->getAcfArray();
+            $acfArray[] = $field->toAcfArray();
 
         }
 
@@ -350,7 +350,7 @@ class FieldCollection extends Collection
 
             $fieldObject->prefixKey($keyPrepend);
 
-            $acfArray = $fieldObject->getAcfArray();
+            $acfArray = $fieldObject->toAcfArray();
 
             $settings[] = $acfArray;
 

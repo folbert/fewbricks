@@ -81,7 +81,7 @@ class Item
     /**
      * @return array
      */
-    public function getAcfArray()
+    public function toAcfArray()
     {
 
         $settings          = $this->settings;

@@ -129,12 +129,12 @@ class FieldWithFields extends Field
      *
      * @return array
      */
-    public function getAcfArray($extraSettings = [])
+    public function toAcfArray($extraSettings = [])
     {
 
-        $settings = parent::getAcfArray($extraSettings);
+        $settings = parent::toAcfArray($extraSettings);
 
-        $settings['sub_fields'] = $this->fields->getAcfArray();
+        $settings['sub_fields'] = $this->fields->toAcfArray();
 
         return $settings;
 
