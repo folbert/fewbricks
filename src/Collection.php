@@ -95,6 +95,26 @@ class Collection
     }
 
     /**
+     * @param $item
+     */
+    public function addItemToBeginning($item)
+    {
+
+        array_unshift($this->items, $item);
+
+    }
+
+    /**
+     * @param $items
+     */
+    public function addItemsToBeginning($items)
+    {
+
+        array_unshift($this->items, $items);
+
+    }
+
+    /**
      * @param $key
      *
      * @return mixed

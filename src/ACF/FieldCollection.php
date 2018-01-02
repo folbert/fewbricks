@@ -236,11 +236,26 @@ class FieldCollection extends Collection
     }
 
     /**
-     * @param array|FieldCollection $fields
+     * @param Field $field
      *
+     * @return FieldCollection
+     */
+    public function addFieldToBeginning(Field $field)
+    {
+
+        $this->addItemToBeginning($field);
+
+        return $this;
+
+    }
+
+    /**
+     * @param array $fields
+     *
+     * @return FieldCollection
      * @throws \Fewbricks\KeyInUseException
      */
-    public function addFields($fields)
+    public function addFields(array $fields)
     {
 
         if (is_array($fields)) {
@@ -251,12 +266,23 @@ class FieldCollection extends Collection
 
             }
 
-        } else {
-
-            // Call same function again but this time with the array representation of the collection
-            $this->addFields($fields->getFields());
-
         }
+
+        return $this;
+
+    }
+
+    /**
+     * @param array $fields
+     *
+     * @return FieldCollection
+     */
+    public function addFieldsToBeginning(array $fields)
+    {
+
+        $this->addItemsToBeginning($fields);
+
+        return $this;
 
     }
 
@@ -269,20 +295,6 @@ class FieldCollection extends Collection
         foreach ($this->fieldsToAddAfterFieldsOnBuild AS $data) {
 
             $this->addFieldAfterByName($data[0], $data[1]);
-
-        }
-
-    }
-
-    /**
-     *
-     */
-    protected function doAddFieldsBefore()
-    {
-
-        foreach ($this->fieldsToAddBeforeFieldsOnBuild AS $data) {
-
-            $this->addFieldBeforeByName($data[0], $data[1]);
 
         }
 
