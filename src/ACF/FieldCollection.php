@@ -51,6 +51,11 @@ class FieldCollection extends Collection
     /**
      * @var array
      */
+    private $fieldsToRemoveByKey;
+
+    /**
+     * @var array
+     */
     private $fieldsToAddAfterFieldsOnBuild;
 
     /**
@@ -81,6 +86,7 @@ class FieldCollection extends Collection
         $this->fieldLabelsPrefix              = '';
         $this->fieldLabelsSuffix              = '';
         $this->fieldsToRemove                 = [];
+        $this->fieldsToRemoveByKey            = [];
         $this->fieldsToAddAfterFieldsOnBuild  = [];
         $this->fieldsToAddBeforeFieldsOnBuild = [];
         $this->fieldsSettings                 = [];
@@ -285,82 +291,59 @@ class FieldCollection extends Collection
     /**
      *
      */
+    protected function doAddFieldsBefore()
+    {
+
+        foreach ($this->fieldsToAddBeforeFieldsOnBuild AS $data) {
+
+            $this->addFieldBeforeByName($data[0], $data[1]);
+
+        }
+
+    }
+
+    /**
+     * @param $name
+     */
+    private function doRemoveFieldByName($name)
+    {
+
+        /** @var Field $field */
+        foreach ($this->items AS $itemKey => $field) {
+
+            if ($field->getName() === $name) {
+
+                parent::removeItem($itemKey);
+
+            }
+
+        }
+
+    }
+
+    /**
+     *
+     */
     protected function doRemoveFields()
     {
 
         foreach ($this->fieldsToRemove AS $fieldToRemove) {
 
-            $this->removeFieldByName($fieldToRemove);
+            $this->doRemoveFieldByName($fieldToRemove);
 
         }
 
-    }
+        foreach ($this->fieldsToRemoveByKey AS $keyToRemove) {
 
-    /**
-     * @return array An array that ACF can work with.
-     */
-    public function toAcfArray()
-    {
-
-        $this->prepareForAcfArray();
-
-        $acfArray = [];
-
-        /** @var Field $field */
-        foreach ($this->items AS $field) {
-
-            $keyPrepend = $this->getBaseKey() . '_';
-
-            $field->prefixKey($keyPrepend);
-
-            $acfArray[] = $field->toAcfArray();
-
-        }
-
-        $acfArray = $this->prepareFieldsConditionalLogic($acfArray);
-
-        return $acfArray;
-
-    }
-
-    /**
-     * @param Field[] $fieldObjects
-     * @param string  $base_key
-     *
-     * @return array Associative array with field settings ready to be used for
-     * "fields" in an array to be sent to ACFs functions for
-     * registering fields using code.
-     * @link https://www.advancedcustomfields.com/resources/register-fields-via-php/#example
-     */
-    /*private function finalizeSettings($fieldObjects, $base_key)
-    {
-
-        $settings = [];
-
-        foreach ($fieldObjects AS $fieldObject) {
-
-            $keyPrepend = $base_key;
-
-            // If the field belongs to a brick
-            if (false !== ($brickKey = $fieldObject->getBrickKey())) {
-                $keyPrepend .= '_' . $brickKey;
+            if (substr($keyToRemove, 0, 6) !== 'field_') {
+                $keyToRemove = 'field_' . $keyToRemove;
             }
 
-            $keyPrepend .= '_';
-
-            $fieldObject->prefixKey($keyPrepend);
-
-            $acfArray = $fieldObject->toAcfArray();
-
-            $settings[] = $acfArray;
+            $this->removeItem($keyToRemove);
 
         }
 
-        $settings = $this->prepareFieldsConditionalLogic($settings);
-
-        return $settings;
-
-    }*/
+    }
 
     /**
      * @param string $name
@@ -524,6 +507,9 @@ class FieldCollection extends Collection
     }
 
     /**
+     * Removes a field from the collection. Note that the actual removal does not take place until the collection is
+     * finalized.
+     *
      * @param string $fieldName The name of a field. Not the key, not the label, the name.
      *
      * @return FieldGroup
@@ -531,35 +517,27 @@ class FieldCollection extends Collection
     public function removeField($fieldName)
     {
 
-        // Use the field name as index to allow us to use isset() later on which is faster than in_array
-        // https://stackoverflow.com/questions/13483219/what-is-faster-in-array-or-isset
-        $this->fieldsToRemove[$fieldName] = $fieldName;
+        $this->fieldsToRemove[] = $fieldName;
 
         return $this;
 
     }
 
     /**
-     * @param $name
+     * @param $key
      */
-    public function removeFieldByName($name)
+    public function removeFieldByKey($key)
     {
 
-        /** @var Field $field */
-        foreach ($this->items AS $itemKey => $field) {
-
-            if ($field->getName() === $name) {
-
-                parent::removeItem($itemKey);
-
-            }
-
-        }
+        $this->fieldsToRemoveByKey[] = $key;
 
     }
 
     /**
-     * @param $fieldNames
+     * Remove a bunch of fields in one function call. Utilizes the function removeField. Note that the actual removal
+     * of the field does not take place until the collection is finalized.
+     *
+     * @param array $fieldNames Array of names of fields to remove.
      *
      * @return FieldGroup
      */
@@ -573,6 +551,20 @@ class FieldCollection extends Collection
         }
 
         return $this;
+
+    }
+
+    /**
+     * @param array $keys
+     */
+    public function removeFieldsByKey($keys)
+    {
+
+        foreach($keys AS $key) {
+
+            $this->removeFieldByKey($key);
+
+        }
 
     }
 
@@ -641,6 +633,20 @@ class FieldCollection extends Collection
     }
 
     /**
+     * @param $key
+     *
+     * @return FieldCollection
+     */
+    public function unRemoveFieldByKey($key)
+    {
+
+        unset($this->fieldsToRemoveByKey[$key]);
+
+        return $this;
+
+    }
+
+    /**
      * @param $fieldNames
      *
      * @return $this
@@ -651,6 +657,24 @@ class FieldCollection extends Collection
         foreach ($fieldNames AS $fieldName) {
 
             $this->unRemoveField($fieldName);
+
+        }
+
+        return $this;
+
+    }
+
+    /**
+     * @param $keys
+     *
+     * @return $this
+     */
+    public function unRemoveFieldsByKey($keys)
+    {
+
+        foreach ($keys AS $key) {
+
+            $this->unRemoveFieldByKey($key);
 
         }
 
