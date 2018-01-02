@@ -42,13 +42,18 @@ class Collection
 
         } else {
 
-            if (Helper::fewbricksIsInDebugMode() && isset($this->items[$key])) {
+            try {
 
-                throw new KeyInUseException($this->getKeyInUseExceptionMessage($item, $key));
-
-            } else {
-
+                $this->validateKey($key);
                 $this->items[$key] = $item;
+
+            } catch(\Exception $exception) {
+
+                if (Helper::fewbricksIsInDebugMode()) {
+
+                    throw new KeyInUseException($this->getKeyInUseExceptionMessage($item, $key));
+
+                }
 
             }
 
@@ -174,6 +179,9 @@ class Collection
     }
 
     /**
+     * @param $itemAttemptedToAdd
+     * @param $keyAttemptedToAdd
+     *
      * @return string
      */
     public function getKeyInUseExceptionMessage($itemAttemptedToAdd, $keyAttemptedToAdd)
@@ -244,6 +252,25 @@ minute, you can simply append some other "random" letter to that key like "17121
         if (isset($this->items[$key])) {
             unset($this->items[$key]);
         }
+
+    }
+
+    /**
+     * @param string $key
+     *
+     * @return bool
+     * @throws KeyInUseException
+     */
+    public function validateKey($key)
+    {
+
+        if(isset($this->items[$key])) {
+
+            throw new KeyInUseException($this->getKeyInUseExceptionMessage($item, $key));
+
+        }
+
+        return true;
 
     }
 
