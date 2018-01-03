@@ -322,7 +322,7 @@ class Helper
     public static function initFieldSnitch()
     {
 
-        if (apply_filters('fewbricks/activate_field_snitch', false)) {
+        if (apply_filters('fewbricks/show_fields_info', false)) {
 
             AcfFieldSnitch::init();
 
