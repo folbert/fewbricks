@@ -113,7 +113,7 @@ class Relationship extends Field implements FieldInterface
      *
      * @return $this
      */
-    public function setElements($elements)
+    public function setElements(array $elements)
     {
 
         $this->setSetting('elements', $elements);
@@ -130,7 +130,7 @@ class Relationship extends Field implements FieldInterface
      *
      * @return $this
      */
-    public function setFilters($filters)
+    public function setFilters(array $filters)
     {
 
         $this->setSetting('filters', $filters);
@@ -211,7 +211,7 @@ class Relationship extends Field implements FieldInterface
      *
      * @return $this
      */
-    public function setTaxonomy($taxonomy)
+    public function setTaxonomy(array $taxonomy)
     {
 
         $this->setSetting('taxonomy', $taxonomy);

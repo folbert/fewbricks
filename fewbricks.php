@@ -22,7 +22,7 @@ spl_autoload_register(function ($class) {
 
     $namespace_parts = explode('\\', $class);
 
-    // Make sure that we are dealing with something in the Fewbricks namesoace
+    // Make sure that we are dealing with something in the Fewbricks namespace
     if (count($namespace_parts) > 1
         && $namespace_parts[0] === 'Fewbricks'
     ) {

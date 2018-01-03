@@ -29,7 +29,7 @@ class DemoPage extends FieldGroupsCollection
             '1711172225a');
 
         $kitchenSinkFg->addLocationRuleGroups($this->getFieldGroupLocationRuleGroups());
-        
+
         $kitchenSinkFg->setMenuOrder(100);
 
         // Testing different ways to show/hide elements

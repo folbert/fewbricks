@@ -102,7 +102,7 @@ class User extends Field implements FieldInterface
      *
      * @return $this
      */
-    public function setRole($role)
+    public function setRole(array $role)
     {
 
         $this->setSetting('role', $role);

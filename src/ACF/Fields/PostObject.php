@@ -122,7 +122,7 @@ class PostObject extends Field implements FieldInterface
      *
      * @return $this
      */
-    public function setPostType($postType)
+    public function setPostType(array $postType)
     {
 
         $this->setSetting('post_type', $postType);
@@ -155,7 +155,7 @@ class PostObject extends Field implements FieldInterface
      *
      * @return $this
      */
-    public function setTaxonomy($taxonomy)
+    public function setTaxonomy(array $taxonomy)
     {
 
         $this->setSetting('taxonomy', $taxonomy);
