@@ -2,8 +2,6 @@
 
 namespace Fewbricks\ACF;
 
-use Fewbricks\KeyInUseException;
-
 /**
  * Class RuleGroup
  *
@@ -37,15 +35,7 @@ class RuleGroup
     public function addRule($rule)
     {
 
-        try {
-
-            $this->rules->addItem($rule);
-
-        } catch (KeyInUseException $keyInUseException) {
-
-            $keyInUseException->wpDie();
-
-        }
+        $this->rules->addItem($rule);
 
         return $this;
 

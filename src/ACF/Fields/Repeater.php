@@ -2,7 +2,6 @@
 
 namespace Fewbricks\ACF\Fields;
 
-use Fewbricks\ACF\FieldCollection;
 use Fewbricks\ACF\FieldInterface;
 use Fewbricks\ACF\FieldWithFields;
 use Fewbricks\Helper;
@@ -59,7 +58,7 @@ class Repeater extends FieldWithFields implements FieldInterface
 
     /**
      * @return mixed The value of the ACF setting "button_label". Returns the default ACF value of the translated
-     * string of"Addrow" if none has been set using Fewbricks.
+     * string of "Add row" if none has been set using Fewbricks.
      */
     public function getButtonLabel()
     {

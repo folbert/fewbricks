@@ -52,7 +52,7 @@ class PostObject extends Field implements FieldInterface
     }
 
     /**
-     * @return mixed The value of the ACF setting "return_formt". Returns the default ACF value "object" if none has
+     * @return mixed The value of the ACF setting "return_format". Returns the default ACF value "object" if none has
      * been set using Fewbricks.
      */
     public function getReturnFormat()

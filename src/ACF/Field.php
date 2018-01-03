@@ -47,7 +47,6 @@ class Field extends Item
      * @param ConditionalLogicRuleGroup $ruleGroup
      *
      * @return $this
-     * @throws \Fewbricks\KeyInUseException
      */
     public function addConditionalLogicRuleGroup($ruleGroup)
     {
@@ -62,7 +61,6 @@ class Field extends Item
      * @param ConditionalLogicRuleGroup[] $ruleGroups
      *
      * @return $this
-     * @throws \Fewbricks\KeyInUseException
      */
     public function addConditionalLogicRuleGroups($ruleGroups)
     {
@@ -163,7 +161,7 @@ class Field extends Item
     }
 
     /**
-     * @return The|string
+     * @return string
      */
     public function getKey()
     {

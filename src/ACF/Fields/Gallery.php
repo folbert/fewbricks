@@ -64,7 +64,7 @@ class Gallery extends FieldWithImages implements FieldInterface
     /**
      * ACF setting. Specify where new attachments are added
      *
-     * @param $insert append or prepend
+     * @param string $insert "append" or "prepend"
      *
      * @return $this
      */

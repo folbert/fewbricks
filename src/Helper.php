@@ -27,7 +27,7 @@ class Helper
     }
 
     /**
-     * @return mixed|void
+     * @return mixed
      */
     public static function displayPhpFileWrittenMessage()
     {

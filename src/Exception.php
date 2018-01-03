@@ -11,7 +11,7 @@ class Exception extends \Exception
 {
 
     /**
-     * @return string|void
+     * @return string
      */
     public function getTitle()
     {

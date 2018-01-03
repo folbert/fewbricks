@@ -475,6 +475,9 @@ class FieldCollection extends Collection implements FieldCollectionInterface
     private function prepareFieldsConditionalLogic($fieldsSettings)
     {
 
+        // Conditional logic for ACF is made up of a three-levelled where the first level is the entire logic,
+        // the second level are groups (whose relations are OR) and the third level are items (whose relations are AND).
+
         foreach ($fieldsSettings AS $fieldSettingsKey => $fieldSettings) {
 
             // Do the field have conditional logic

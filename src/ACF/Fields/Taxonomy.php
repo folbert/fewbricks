@@ -74,7 +74,7 @@ class Taxonomy extends Field implements FieldInterface
     }
 
     /**
-     * @return mixed The value of the ACF setting "save_terms". Returns the default ACF value falsse if none has been
+     * @return mixed The value of the ACF setting "save_terms". Returns the default ACF value false if none has been
      * set using Fewbricks.
      */
     public function getSaveTerms()

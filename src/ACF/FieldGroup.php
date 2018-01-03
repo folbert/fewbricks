@@ -3,7 +3,6 @@
 namespace Fewbricks\ACF;
 
 use Fewbricks\Helper;
-use Fewbricks\KeyInUseException;
 
 /**
  * Class FieldGroup
@@ -95,15 +94,7 @@ class FieldGroup extends FieldCollection implements FieldGroupInterface
     public function addLocationRuleGroup($ruleGroup)
     {
 
-        try {
-
-            $this->locationRuleGroups->addItem($ruleGroup);
-
-        } catch (KeyInUseException $keyInUseException) {
-
-            $keyInUseException->wpDie();
-
-        }
+        $this->locationRuleGroups->addItem($ruleGroup);
 
         return $this;
 
@@ -172,21 +163,6 @@ class FieldGroup extends FieldCollection implements FieldGroupInterface
 
         // No use in having a potentially large collection of objects anymore
         unset($this->items);
-
-    }
-
-    /**
-     * @return array
-     */
-    public function toAcfArray()
-    {
-
-        return array_merge($this->settings, [
-            'key'      => $this->getKey(),
-            'title'    => $this->getTitle(),
-            'location' => $this->locationRuleGroups->toArray(),
-            'fields'   => parent::toAcfArray($this->getKey()),
-        ]);
 
     }
 
@@ -322,8 +298,8 @@ class FieldGroup extends FieldCollection implements FieldGroupInterface
     /**
      * Get the value of a specific setting.
      *
-     * @param      $name         The name of the setting
-     * @param bool $defaultValue The value to return if the setting does not exist
+     * @param string $name         The name of the setting
+     * @param bool   $defaultValue The value to return if the setting does not exist
      *
      * @return bool|mixed
      */
@@ -611,7 +587,7 @@ class FieldGroup extends FieldCollection implements FieldGroupInterface
     }
 
     /**
-     * Determines the metabox style. Choices of 'default' or 'seamless'
+     * Determines the meta box style. Choices of 'default' or 'seamless'
      *
      * @param string $style 'default' or 'seamless'
      *
@@ -645,6 +621,21 @@ class FieldGroup extends FieldCollection implements FieldGroupInterface
         $this->setHideOnScreen([], $elementNames);
 
         return $this;
+
+    }
+
+    /**
+     * @return array
+     */
+    public function toAcfArray()
+    {
+
+        return array_merge($this->settings, [
+            'key'      => $this->getKey(),
+            'title'    => $this->getTitle(),
+            'location' => $this->locationRuleGroups->toArray(),
+            'fields'   => parent::toAcfArray(),
+        ]);
 
     }
 

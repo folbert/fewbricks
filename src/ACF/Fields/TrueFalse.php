@@ -62,6 +62,8 @@ class TrueFalse extends Field implements FieldInterface
     }
 
     /**
+     * @param string $message
+     *
      * @return $this
      */
     public function setMessage($message)

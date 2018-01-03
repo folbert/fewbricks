@@ -13,12 +13,12 @@ class Item
 {
 
     /**
-     * @var The key of the brick, if any, that this item is part of.
+     * @var string The key of the brick, if any, that this item is part of.
      */
     protected $brickKey;
 
     /**
-     * @var The key required by ACF. Must be unique across the site.
+     * @var string The key required by ACF. Must be unique across the site.
      */
     protected $key;
 

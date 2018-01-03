@@ -59,7 +59,7 @@ class Layout extends FieldWithFields implements FieldInterface
     }
 
     /**
-     * ACF setting. Sets the value which is set using the select box labelled "Layput" in the GUI
+     * ACF setting. Sets the value which is set using the select box labelled "Layout" in the GUI
      *
      * @param string $display table, block or row
      *

@@ -82,7 +82,7 @@ class Rule
     }
 
     /**
-     * @param $value
+     * @return mixed
      */
     public function getValue()
     {

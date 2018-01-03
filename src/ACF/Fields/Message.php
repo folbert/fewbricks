@@ -94,7 +94,7 @@ class Message extends Field implements FieldInterface
     /**
      * ACF setting. Controls how new lines are rendered.
      *
-     * @param string $newLines "wpautop" (automaticaly add paragraphs), "br" (automatically add <br>) or "" (no
+     * @param string $newLines "wpautop" (automatically add paragraphs), "br" (automatically add <br>) or "" (no
      *                         formatting)
      *
      * @return $this
