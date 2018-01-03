@@ -48,8 +48,6 @@ class FieldsKitchenSink extends FieldGroup implements FieldGroupInterface
         // The other fields are in alphabetical oder but lets start with a tab
         $this->addField(new FAFields\Tab('Basic fields', 'fd_tab1', '1711192019a'));
 
-        $this->removeFieldsByKey(['1711192019a', '1711172249u']);
-
         // Showing how to set field settings after the field has been created
         $button_group = new FAFields\ButtonGroup('Button Group', 'fd_button_group', '1711172249u');
         $button_group->setChoices([

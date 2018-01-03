@@ -30,8 +30,6 @@ class Collection
     /**
      * @param mixed $item
      * @param null  $key
-     *
-     * @throws KeyInUseException
      */
     public function addItem($item, $key = null)
     {
@@ -44,16 +42,12 @@ class Collection
 
             try {
 
-                $this->validateKey($key);
+                $this->validateKey($item, $key);
                 $this->items[$key] = $item;
 
-            } catch(\Exception $exception) {
+            } catch (KeyInUseException $keyInUseException) {
 
-                if (Helper::fewbricksIsInDebugMode()) {
-
-                    throw new KeyInUseException($this->getKeyInUseExceptionMessage($item, $key));
-
-                }
+                $keyInUseException->wpDie();
 
             }
 
@@ -256,15 +250,16 @@ minute, you can simply append some other "random" letter to that key like "17121
     }
 
     /**
+     * @param mixed  $item
      * @param string $key
      *
      * @return bool
      * @throws KeyInUseException
      */
-    public function validateKey($key)
+    public function validateKey($item, $key)
     {
 
-        if(isset($this->items[$key])) {
+        if (isset($this->items[$key])) {
 
             throw new KeyInUseException($this->getKeyInUseExceptionMessage($item, $key));
 

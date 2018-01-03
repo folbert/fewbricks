@@ -45,8 +45,6 @@ class Brick extends FieldCollection implements BrickInterface
 
     /**
      * @param Field $field
-     *
-     * @throws KeyInUseException
      */
     public function addField(Field $field)
     {
@@ -56,14 +54,6 @@ class Brick extends FieldCollection implements BrickInterface
 
         parent::addField($field);
 
-    }
-
-    /**
-     * @return array
-     */
-    public function toAcfArray()
-    {
-        return parent::toAcfArray($this->getKey());
     }
 
     /**
@@ -112,6 +102,14 @@ class Brick extends FieldCollection implements BrickInterface
     public function setFields()
     {
 
+    }
+
+    /**
+     * @return array
+     */
+    public function toAcfArray()
+    {
+        return parent::toAcfArray($this->getKey());
     }
 
 }

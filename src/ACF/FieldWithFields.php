@@ -10,7 +10,7 @@ use Fewbricks\KeyInUseException;
  *
  * @package Fewbricks\ACF
  */
-class FieldWithFields extends Field
+class FieldWithFields extends Field implements FieldCollectionInterface
 {
 
     /**
@@ -43,12 +43,14 @@ class FieldWithFields extends Field
     /**
      * @param Brick $brick
      *
-     * @throws KeyInUseException
+     * @return FieldWithFields
      */
     public function addBrick(Brick $brick)
     {
 
         $this->fields->addBrick($brick);
+
+        return $this;
 
     }
 
@@ -60,15 +62,7 @@ class FieldWithFields extends Field
     public function addField(Field $field)
     {
 
-        try {
-
-            $this->fields->addItem($field, $field->getKey());
-
-        } catch (KeyInUseException $keyInUseException) {
-
-            $keyInUseException->wpDie();
-
-        }
+        $this->fields->addField($field);
 
         return $this;
 
@@ -91,6 +85,20 @@ class FieldWithFields extends Field
 
     /**
      * @param Field $field
+     * @param       $nameToAddAfter
+     *
+     * @return $this
+     */
+    public function addFieldAfterByName(Field $field, $nameToAddAfter) {
+
+        $this->fields->addFieldAfterByName($field, $nameToAddAfter);
+
+        return $this;
+
+    }
+
+    /**
+     * @param Field $field
      * @param       $fieldNameToAddBefore
      *
      * @return FieldWithFields
@@ -99,6 +107,20 @@ class FieldWithFields extends Field
     {
 
         $this->fields->addFieldBefore($field, $fieldNameToAddBefore);
+
+        return $this;
+
+    }
+
+    /**
+     * @param Field $field
+     * @param       $nameToAddBefore
+     *
+     * @return $this
+     */
+    public function addFieldBeforeByName(Field $field, $nameToAddBefore)
+    {
+        $this->fields->addFieldBeforeByName($field, $nameToAddBefore);
 
         return $this;
 
@@ -151,12 +173,12 @@ class FieldWithFields extends Field
     }
 
     /**
-     * @param array $fields
+     * @param FieldCollection|array $fields
      *
      * @return FieldWithFields
      * @throws KeyInUseException
      */
-    public function addFields(array $fields)
+    public function addFields($fields)
     {
 
         $this->fields->addFields($fields);
@@ -166,11 +188,11 @@ class FieldWithFields extends Field
     }
 
     /**
-     * @param array $fields
+     * @param FieldCollection|array $fields
      *
      * @return $this
      */
-    public function addFieldsToBeginning(array $fields)
+    public function addFieldsToBeginning($fields)
     {
 
         $this->fields->addFieldsToBeginning($fields);
@@ -216,22 +238,22 @@ class FieldWithFields extends Field
     }
 
     /**
-     * @param array $names
-     */
-    public function removeFields(array $names)
-    {
-
-        $this->fields->removeFields($names);
-
-    }
-
-    /**
      * @param string $key
      */
     public function removeFieldByKey($key)
     {
 
         $this->fields->removeFieldByKey($key);
+
+    }
+
+    /**
+     * @param array $names
+     */
+    public function removeFields(array $names)
+    {
+
+        $this->fields->removeFields($names);
 
     }
 
@@ -274,22 +296,22 @@ class FieldWithFields extends Field
     }
 
     /**
-     * @param array $names
-     */
-    public function unRemoveFields(array $names)
-    {
-
-        $this->fields->unRemoveFields($names);
-
-    }
-
-    /**
      * @param string $key
      */
     public function unRemoveFieldByKey($key)
     {
 
         $this->fields->unRemoveFieldByKey($key);
+
+    }
+
+    /**
+     * @param array $names
+     */
+    public function unRemoveFields(array $names)
+    {
+
+        $this->fields->unRemoveFields($names);
 
     }
 

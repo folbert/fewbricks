@@ -10,7 +10,7 @@ use Fewbricks\Collection;
  *
  * @package Fewbricks\ACF
  */
-class FieldCollection extends Collection
+class FieldCollection extends Collection implements FieldCollectionInterface
 {
 
     /**
@@ -101,9 +101,8 @@ class FieldCollection extends Collection
      * @param Brick $brick
      *
      * @return $this
-     * @throws \Fewbricks\KeyInUseException
      */
-    public function addBrick($brick)
+    public function addBrick(Brick $brick)
     {
 
         $brick->setFields();
@@ -124,20 +123,11 @@ class FieldCollection extends Collection
      * @param Field $field
      *
      * @return $this
-     * @throws \Fewbricks\KeyInUseException
      */
     public function addField(Field $field)
     {
 
-        try {
-
-            parent::addItem($field, $field->getKey());
-
-        } catch (KeyInUseException $keyInUseException) {
-
-            $keyInUseException->wpDie();
-
-        }
+        parent::addItem($field, $field->getKey());
 
         return $this;
 
@@ -147,9 +137,9 @@ class FieldCollection extends Collection
      * @param Field  $field
      * @param string $fieldNameToAddAfter
      *
-     * @return FieldGroup
+     * @return FieldCollection
      */
-    public function addFieldAfter($field, $fieldNameToAddAfter)
+    public function addFieldAfter(Field $field, $fieldNameToAddAfter)
     {
 
         $this->fieldsToAddAfterFieldsOnBuild[] = [$field, $fieldNameToAddAfter];
@@ -162,7 +152,7 @@ class FieldCollection extends Collection
      * @param Field  $field
      * @param string $nameToAddAfter
      */
-    public function addFieldAfterByName($field, $nameToAddAfter)
+    public function addFieldAfterByName(Field $field, $nameToAddAfter)
     {
 
         /** @var Field $fieldToAddAfter */
@@ -180,9 +170,9 @@ class FieldCollection extends Collection
      * @param Field  $field
      * @param string $fieldNameToAddBefore
      *
-     * @return FieldGroup
+     * @return FieldCollection
      */
-    public function addFieldBefore($field, $fieldNameToAddBefore)
+    public function addFieldBefore(Field $field, $fieldNameToAddBefore)
     {
 
         $this->fieldsToAddBeforeFieldsOnBuild[] = [$field, $fieldNameToAddBefore];
@@ -197,7 +187,7 @@ class FieldCollection extends Collection
      *
      * @return FieldCollection
      */
-    public function addFieldBeforeByName($field, $nameToAddBefore)
+    public function addFieldBeforeByName(Field $field, $nameToAddBefore)
     {
 
         /** @var Field $itemToAddAfter */
@@ -231,10 +221,26 @@ class FieldCollection extends Collection
     }
 
     /**
+     * @param FieldCollection $fieldCollection
+     *
+     * @return FieldCollection
+     */
+    public function addFieldCollectionToBeginning(FieldCollection $fieldCollection)
+    {
+
+        $fieldCollection->prepareForAcfArray();
+
+        $this->addFieldsToBeginning($fieldCollection->getItems());
+
+        return $this;
+
+    }
+
+    /**
      * Set ACF settings on fields in this collection. The values will be applied as they are so don't use this to set
      * keys or conditional logic.
      *
-     * @param array  $fieldKey      The original key (the one set when a field was created) of a field in this
+     * @param string $fieldKey      The original key (the one set when a field was created) of a field in this
      *                              collection..
      * @param string $settingsName  Should correspond to the name of an ACF setting
      * @param mixed  $settingsValue A valid value for the setting
@@ -271,12 +277,12 @@ class FieldCollection extends Collection
     }
 
     /**
-     * @param array $fields
+     * @param FieldCollection|array $fields
      *
      * @return FieldCollection
      * @throws \Fewbricks\KeyInUseException
      */
-    public function addFields(array $fields)
+    public function addFields($fields)
     {
 
         if (is_array($fields)) {
@@ -287,6 +293,10 @@ class FieldCollection extends Collection
 
             }
 
+        } else if ($fields instanceof FieldCollection) {
+
+            $this->addFieldCollection($fields);
+
         }
 
         return $this;
@@ -294,14 +304,22 @@ class FieldCollection extends Collection
     }
 
     /**
-     * @param array $fields
+     * @param FieldCollection|array $fields
      *
      * @return FieldCollection
      */
-    public function addFieldsToBeginning(array $fields)
+    public function addFieldsToBeginning($fields)
     {
 
-        $this->addItemsToBeginning($fields);
+        if (is_array($fields)) {
+
+            $this->addItemsToBeginning($fields);
+
+        } else if ($fields instanceof FieldCollection) {
+
+            $this->addFieldCollectionToBeginning($fields);
+
+        }
 
         return $this;
 
@@ -478,6 +496,7 @@ class FieldCollection extends Collection
                             = $conditionalLogic[$conditionalLogicGroupKey][$conditionalLogicItemKey]['field'];
 
                         // Loop all other items in this collection
+                        /** @var Field $otherFieldObject */
                         foreach ($this->items AS $otherFieldObject) {
 
                             if ($otherFieldObject->getOriginalKey() === $targetFieldKey) {
@@ -546,7 +565,7 @@ class FieldCollection extends Collection
      *
      * @param string $fieldName The name of a field. Not the key, not the label, the name.
      *
-     * @return FieldGroup
+     * @return FieldCollection
      */
     public function removeField($fieldName)
     {
@@ -573,9 +592,9 @@ class FieldCollection extends Collection
      *
      * @param array $fieldNames Array of names of fields to remove.
      *
-     * @return FieldGroup
+     * @return FieldCollection
      */
-    public function removeFields($fieldNames)
+    public function removeFields(array $fieldNames)
     {
 
         foreach ($fieldNames AS $fieldName) {
@@ -591,10 +610,10 @@ class FieldCollection extends Collection
     /**
      * @param array $keys
      */
-    public function removeFieldsByKey($keys)
+    public function removeFieldsByKey(array $keys)
     {
 
-        foreach($keys AS $key) {
+        foreach ($keys AS $key) {
 
             $this->removeFieldByKey($key);
 
@@ -682,7 +701,7 @@ class FieldCollection extends Collection
      *
      * @param string $fieldName
      *
-     * @return FieldGroup
+     * @return FieldCollection
      */
     public function unRemoveField($fieldName)
     {
@@ -708,11 +727,11 @@ class FieldCollection extends Collection
     }
 
     /**
-     * @param $fieldNames
+     * @param array $fieldNames
      *
      * @return $this
      */
-    public function unRemoveFields($fieldNames)
+    public function unRemoveFields(array $fieldNames)
     {
 
         foreach ($fieldNames AS $fieldName) {
@@ -730,7 +749,7 @@ class FieldCollection extends Collection
      *
      * @return $this
      */
-    public function unRemoveFieldsByKey($keys)
+    public function unRemoveFieldsByKey(array $keys)
     {
 
         foreach ($keys AS $key) {
