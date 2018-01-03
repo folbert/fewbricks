@@ -3,7 +3,6 @@
 namespace App\FewbricksDemo\SharedFields;
 
 use Fewbricks\ACF\Fields\Image;
-use Fewbricks\SharedFieldCollection;
 use Fewbricks\SharedFields;
 
 /**

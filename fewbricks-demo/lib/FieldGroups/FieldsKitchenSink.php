@@ -8,7 +8,6 @@ use Fewbricks\ACF\FieldGroup;
 use Fewbricks\ACF\FieldGroupInterface;
 use Fewbricks\ACF\FieldGroupLocationRuleGroup;
 use Fewbricks\ACF\Fields as FAFields;
-use Fewbricks\ACF\Layout;
 use Fewbricks\ACF\Rule;
 
 /**
@@ -212,7 +211,7 @@ class FieldsKitchenSink extends FieldGroup implements FieldGroupInterface
         // -------------
 
         $this->addField((new FAFields\Relationship('Relationship', 'fd_relationship', '1711242111a'))
-            ->setPostType('fewbricks_demo_post')
+            ->setPostType(['fewbricks_demo_post'])
         );
 
         $this->addField(new FAFields\Select('Select', 'fd_select', '1711210919a', [

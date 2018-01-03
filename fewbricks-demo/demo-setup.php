@@ -15,6 +15,8 @@ namespace App\FewbricksDemo;
  * Feel free to modify or delete the function as you see fit.
  * The function assumes that you are using the namespace App\FewbricksDemo.
  */
+use Fewbricks\Helper;
+
 spl_autoload_register(function ($class) {
 
     $namespaceParts = explode('\\', $class);
@@ -29,7 +31,7 @@ spl_autoload_register(function ($class) {
 
         // Start with our base path. Using the helper function will take into account
         // any filters used to modify the base path.
-        $path = \Fewbricks\Helper::getProjectFilesBasePath() . '/lib/';
+        $path = Helper::getProjectFilesBasePath() . '/lib/';
 
         // If there is more than App\Fewbricks\Bricks\BrickName.php...
         if (count($namespaceParts) > 3) {

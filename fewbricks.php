@@ -41,7 +41,7 @@ spl_autoload_register(function ($class) {
 
         // Yes, by not checking of the file exists, we do get ugly error messages.
         // But we save some execution time by not checking if the file exists first.
-        include($path);
+        include $path;
 
     }
 

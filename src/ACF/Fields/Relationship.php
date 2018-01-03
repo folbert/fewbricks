@@ -178,7 +178,7 @@ class Relationship extends Field implements FieldInterface
      *
      * @return $this
      */
-    public function setPostType($postType)
+    public function setPostType(array $postType)
     {
 
         $this->setSetting('post_type', $postType);

@@ -137,7 +137,7 @@ class FieldCollection extends Collection implements FieldCollectionInterface
      * @param Field  $field
      * @param string $fieldNameToAddAfter
      *
-     * @return FieldCollection
+     * @return $this
      */
     public function addFieldAfter(Field $field, $fieldNameToAddAfter)
     {

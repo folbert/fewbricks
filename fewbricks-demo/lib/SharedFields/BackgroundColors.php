@@ -3,7 +3,6 @@
 namespace App\FewbricksDemo\SharedFields;
 
 use Fewbricks\ACF\Fields\Select;
-use Fewbricks\SharedFieldCollection;
 use Fewbricks\SharedFields;
 
 /**
@@ -15,7 +14,7 @@ class BackgroundColors extends SharedFields
 {
 
     /**
-     * @throws \Fewbricks\KeyInUseException
+     *
      */
     protected function applyFields()
     {

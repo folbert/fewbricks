@@ -22,11 +22,12 @@
 
                             foreach ($fieldGroupCodes AS $fieldGroupKey => $data) {
                                 ?>
-                                <p><label for="fewbricks-php-export-"<?php echo $fieldGroupKey; ?>><b>PHP Code for
+                                <p><label for="fewbricks-php-export-<?php echo $fieldGroupKey; ?>"><b>PHP Code for
                                             field group
                                             "<?php echo $data[0] . '"  with key <i>' . $fieldGroupKey
                                                         . '</i>'; ?></b></label></p>
-                                <textarea readonly class="fewbricks__export-textarea"><?php echo $data[1]; ?></textarea>
+                                <textarea readonly class="fewbricks__export-textarea" id="fewbricks-php-export-<?php echo $fieldGroupKey; ?>"><?php echo $data[1];
+                                ?></textarea>
 
                                 <?php
                             }
@@ -128,10 +129,10 @@
                                         generating PHP):', 'fewbricks'); ?></label>
                                     </div>
                                     <select name="fewbricks_generate_php_split" id="fewbricks_generate_php_split">
-                                        <option value="one_per_field_group"><?php _e('One textarea per field 
-                                        group', 'fewbricks'); ?></option>
                                         <option value="no_split"><?php _e('One textarea with all field groups in 
                                         it', 'fewbricks'); ?></option>
+                                        <option value="one_per_field_group"><?php _e('One textarea per field 
+                                        group', 'fewbricks'); ?></option>
                                     </select>
 
                                     <p class="acf-submit">

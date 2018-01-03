@@ -2,7 +2,7 @@
 
 namespace App\FewbricksDemo\FieldGroupGroups;
 
-use \App\Fewbricks\FieldGroups as FewbricksFieldGroups;
+use App\FewbricksDemo\FieldGroups\FieldsKitchenSink;
 use Fewbricks\ACF\Field;
 use Fewbricks\ACF\FieldGroup;
 use Fewbricks\ACF\FieldGroupLocationRuleGroup;
@@ -25,13 +25,11 @@ class DemoPage extends FieldGroupsCollection
     {
 
         // Adding a predefined field group
-        $kitchenSinkFg
-            = new FewbricksFieldGroups\FieldsKitchenSink('Fewbricks Demo - Kitchen Sink',
+        $kitchenSinkFg = new FieldsKitchenSink('Fewbricks Demo - Kitchen Sink',
             '1711172225a');
 
         $kitchenSinkFg->addLocationRuleGroups($this->getFieldGroupLocationRuleGroups());
-
-        $kitchenSinkFg->hideOnScreen(false, ['permalink']);
+        
         $kitchenSinkFg->setMenuOrder(100);
 
         // Testing different ways to show/hide elements
