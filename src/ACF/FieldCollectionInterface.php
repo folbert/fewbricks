@@ -13,11 +13,7 @@ interface FieldCollectionInterface
 
     public function addFieldAfter(Field $field, $fieldNameToAddAfter);
 
-    public function addFieldAfterByName(Field $field, $nameToAddAfter);
-
     public function addFieldBefore(Field $field, $fieldNameToAddBefore);
-
-    public function addFieldBeforeByName(Field $field, $nameToAddBefore);
 
     public function addFieldCollection(FieldCollection $fieldCollection);
 

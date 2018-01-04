@@ -94,12 +94,21 @@ class Collection
     }
 
     /**
-     * @param $item
+     * @param mixed $item
+     * @param bool  $key
      */
-    public function addItemToBeginning($item)
+    public function addItemToBeginning($item, $key = false)
     {
 
-        array_unshift($this->items, $item);
+        if ($key === false) {
+
+            array_unshift($this->items, $item);
+
+        } else {
+
+            $this->items = array_merge([$key => $item], $this->items);
+
+        }
 
     }
 
@@ -109,7 +118,7 @@ class Collection
     public function addItemsToBeginning($items)
     {
 
-        array_unshift($this->items, $items);
+        $this->items = array_merge($items, $this->items);
 
     }
 

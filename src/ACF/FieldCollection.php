@@ -152,7 +152,7 @@ class FieldCollection extends Collection implements FieldCollectionInterface
      * @param Field  $field
      * @param string $nameToAddAfter
      */
-    public function addFieldAfterByName(Field $field, $nameToAddAfter)
+    private function doAddFieldAfterByName(Field $field, $nameToAddAfter)
     {
 
         /** @var Field $fieldToAddAfter */
@@ -187,7 +187,7 @@ class FieldCollection extends Collection implements FieldCollectionInterface
      *
      * @return FieldCollection
      */
-    public function addFieldBeforeByName(Field $field, $nameToAddBefore)
+    private function doAddFieldBeforeByName(Field $field, $nameToAddBefore)
     {
 
         /** @var Field $itemToAddAfter */
@@ -270,7 +270,7 @@ class FieldCollection extends Collection implements FieldCollectionInterface
     public function addFieldToBeginning(Field $field)
     {
 
-        $this->addItemToBeginning($field);
+        $this->addItemToBeginning($field, $field->getKey());
 
         return $this;
 
@@ -313,7 +313,16 @@ class FieldCollection extends Collection implements FieldCollectionInterface
 
         if (is_array($fields)) {
 
-            $this->addItemsToBeginning($fields);
+            $keyedFields = [];
+
+            /** @var Field $field */
+            foreach($fields AS $field) {
+
+                $keyedFields[$field->getKey()] = $field;
+
+            }
+
+            $this->addItemsToBeginning($keyedFields);
 
         } else if ($fields instanceof FieldCollection) {
 
@@ -333,7 +342,7 @@ class FieldCollection extends Collection implements FieldCollectionInterface
 
         foreach ($this->fieldsToAddAfterFieldsOnBuild AS $data) {
 
-            $this->addFieldAfterByName($data[0], $data[1]);
+            $this->doAddFieldAfterByName($data[0], $data[1]);
 
         }
 
@@ -347,7 +356,7 @@ class FieldCollection extends Collection implements FieldCollectionInterface
 
         foreach ($this->fieldsToAddBeforeFieldsOnBuild AS $data) {
 
-            $this->addFieldBeforeByName($data[0], $data[1]);
+            $this->doAddFieldBeforeByName($data[0], $data[1]);
 
         }
 

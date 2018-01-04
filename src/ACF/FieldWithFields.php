@@ -85,20 +85,6 @@ class FieldWithFields extends Field implements FieldCollectionInterface
 
     /**
      * @param Field $field
-     * @param       $nameToAddAfter
-     *
-     * @return $this
-     */
-    public function addFieldAfterByName(Field $field, $nameToAddAfter) {
-
-        $this->fields->addFieldAfterByName($field, $nameToAddAfter);
-
-        return $this;
-
-    }
-
-    /**
-     * @param Field $field
      * @param       $fieldNameToAddBefore
      *
      * @return FieldWithFields
@@ -107,20 +93,6 @@ class FieldWithFields extends Field implements FieldCollectionInterface
     {
 
         $this->fields->addFieldBefore($field, $fieldNameToAddBefore);
-
-        return $this;
-
-    }
-
-    /**
-     * @param Field $field
-     * @param       $nameToAddBefore
-     *
-     * @return $this
-     */
-    public function addFieldBeforeByName(Field $field, $nameToAddBefore)
-    {
-        $this->fields->addFieldBeforeByName($field, $nameToAddBefore);
 
         return $this;
 
