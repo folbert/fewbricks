@@ -293,7 +293,7 @@ class FieldsKitchenSink extends FieldGroup implements FieldGroupInterface
 
         }
 
-        $this->hideOnScreen('the_content');
+        $this->setHideOnScreen('the_content');
 
     }
 

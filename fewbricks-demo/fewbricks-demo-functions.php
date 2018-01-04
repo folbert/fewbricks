@@ -59,7 +59,7 @@ if (defined('FEWBRICKS_ENV') && FEWBRICKS_ENV === 'production') {
             (new FieldGroupLocationRuleGroup())
                 ->addRule(new Rule('post_type', '==', 'fewbricks_demo_pg'))
         )
-        ->hideOnScreen('content')
+        ->setHideOnScreen('content')
         ->register();
 
     (new FieldGroup('fg1712282142a'))
@@ -77,7 +77,7 @@ if (defined('FEWBRICKS_ENV') && FEWBRICKS_ENV === 'production') {
             (new FieldGroupLocationRuleGroup())
                 ->addRule(new Rule('post_type', '==', 'fewbricks_demo_pg'))
         )
-        ->hideOnScreen('content')
+        ->setHideOnScreen('content')
         ->register();
 
     // Demoing a class
@@ -103,7 +103,7 @@ if (defined('FEWBRICKS_ENV') && FEWBRICKS_ENV === 'production') {
             ),
         ])
         ->setTitle('Secondary content')
-        ->hideOnScreen('the_content')
+        ->setHideOnScreen('the_content')
         ->setFieldNamesPrefix('secondary_content_')
         ->setFieldLabelsPrefix('Secondary content - ')
         ->register();

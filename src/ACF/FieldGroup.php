@@ -127,16 +127,6 @@ class FieldGroup extends FieldCollection implements FieldGroupInterface
     }
 
     /**
-     * @return FieldCollection
-     */
-    /*public function getFieldObjects()
-    {
-
-        return $this->fieldObjects;
-
-    }*/
-
-    /**
      * @return $this
      */
     public function clearLocationRuleGroups()
@@ -358,7 +348,7 @@ class FieldGroup extends FieldCollection implements FieldGroupInterface
     /**
      * Allow you to set which elements that should be hidden on screen.
      *
-     * @see FieldGroup::setHideOnScreen()
+     * @see FieldGroup::doSetHideOnScreen()
      *
      * @param string|array $elementNames One or many of the values of the following: 'permalink', 'the_content',
      *                                   'excerpt', 'custom_fields', 'discussion', 'comments', 'revisions', 'slug',
@@ -368,10 +358,10 @@ class FieldGroup extends FieldCollection implements FieldGroupInterface
      *
      * @return $this
      */
-    public function hideOnScreen($elementNames)
+    public function setHideOnScreen($elementNames)
     {
 
-        $this->setHideOnScreen($elementNames);
+        $this->doSetHideOnScreen($elementNames);
 
         return $this;
 
@@ -440,7 +430,7 @@ class FieldGroup extends FieldCollection implements FieldGroupInterface
      *
      * @return $this
      */
-    public function setHideOnScreen($hideOnScreen, $showOnScreen = [])
+    private function doSetHideOnScreen($hideOnScreen, $showOnScreen = [])
     {
 
         $currentValues = $this->getHideOnScreenSetting();
@@ -598,7 +588,7 @@ class FieldGroup extends FieldCollection implements FieldGroupInterface
     /**
      * If the element has been previously set to be hidden, this will set it to be shown instead.
      *
-     * @see FieldGroup::hideOnScreen()
+     * @see FieldGroup::setHideOnScreen()
      *
      * @param string|array $elementNames One or many of the values of the following: 'permalink', 'the_content',
      *                                   'excerpt', 'custom_fields', 'discussion', 'comments', 'revisions', 'slug',
@@ -608,10 +598,10 @@ class FieldGroup extends FieldCollection implements FieldGroupInterface
      *
      * @return $this
      */
-    public function showOnScreen($elementNames)
+    public function setShowOnScreen($elementNames)
     {
 
-        $this->setHideOnScreen([], $elementNames);
+        $this->doSetHideOnScreen([], $elementNames);
 
         return $this;
 
