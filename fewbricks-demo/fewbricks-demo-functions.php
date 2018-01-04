@@ -20,22 +20,41 @@ use Fewbricks\Helper;
 
 // The setup file deals with demo specific functionality so it was moved to own file to keep this file as focused on
 // Fewbricks as possible.
-require_once 'demo-setup.php';
+require_once 'fewbricks-demo-setup.php';
 
 // Define the filters for the demo
 Filters::defineHooks();
 
-// Demoing how to use "caching" functionality using PHP code files
+// Demoing an example on how to use "caching" functionality using PHP code files.
+// This will use the php code file when in production and run al the code and write to
+// the php file when not in production.
 if (defined('FEWBRICKS_ENV') && FEWBRICKS_ENV === 'production') {
 
-    //dump('Using file');
     require_once Helper::getAutoWritePhpCodeFile();
 
 } else {
 
-    //dump('Loading all code');
+    (new FieldGroup('1801042233a'))
+        ->setTitle('Teaser data')
+        ->addLocationRuleGroup(
+            (new FieldGroupLocationRuleGroup())
+                ->addRule(new Rule('post_type', '==', 'fewbricks_demo_pg'))
+        )
+        ->addLocationRuleGroup(
+            (new FieldGroupLocationRuleGroup())
+                ->addRule(new Rule('post_type', '==', 'fewbricks_demo_pg2'))
+        )
+        ->setHideOnScreen('all')
+        ->setShowOnScreen('permalink')
+        ->addField(new Text('Text 1', 'text_1', '1801042359a'))
+        ->addFields([
+            new Text('Text 2', 'text_2', '1801050012a'),
+            new Text('Text 3', 'text_3', '1801050012b'),
+        ])
+        ->addFieldAfter(new Text('Text 4', 'text_4', '1801050012c'), 'text_1')
+        ->register();
 
-    (new Heroes('1712262204a'))
+    /*(new Heroes('1712262204a'))
         ->addLocationRuleGroup(
             (new FieldGroupLocationRuleGroup())
                 ->addRule(new Rule('post_type', '==', 'fewbricks_demo_pg'))
@@ -107,7 +126,7 @@ if (defined('FEWBRICKS_ENV') && FEWBRICKS_ENV === 'production') {
                 ),
             'fd_button_group'
         )
-        ->register();
+        ->register();*/
 
     // Lots of field groups fo perf tests
     /*(new FieldsKitchenSink('fg1712252102a'))
