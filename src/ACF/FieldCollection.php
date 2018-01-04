@@ -443,11 +443,12 @@ class FieldCollection extends Collection implements FieldCollectionInterface
          * @var string $itemKey
          * @var Field  $field
          */
-        foreach ($this->items AS $itemKey => $field) {
+        foreach ($this->items AS $itemKey => $possibleField) {
 
-            if ($field->getName() === $name) {
+            if ($possibleField->getName() === $name) {
 
                 $field = parent::getItem($itemKey);
+                break;
 
             }
 
