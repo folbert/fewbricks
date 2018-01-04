@@ -207,14 +207,7 @@ class FieldGroup extends FieldCollection implements FieldGroupInterface
     {
 
         // These are the items that ACF supports hiding as of v5.6.5
-        $currentValues = $this->getSetting('hide_on_screen');
-
-        // If the setting has not been set
-        if ($currentValues === false) {
-
-            $currentValues = self::HIDE_ON_SCREEN_ITEMS;
-
-        }
+        $currentValues = $this->getSetting('hide_on_screen', []);
 
         return $currentValues;
 
