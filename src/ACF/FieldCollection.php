@@ -16,7 +16,7 @@ class FieldCollection extends Collection implements FieldCollectionInterface
     /**
      * @var array
      */
-    protected $args;
+    protected $arguments;
 
     /**
      * @var string
@@ -44,26 +44,6 @@ class FieldCollection extends Collection implements FieldCollectionInterface
     private $fieldsSettings;
 
     /**
-     * @var array
-     */
-    private $fieldsToRemove;
-
-    /**
-     * @var array
-     */
-    private $fieldsToRemoveByKey;
-
-    /**
-     * @var array
-     */
-    private $fieldsToAddAfterFieldsOnBuild;
-
-    /**
-     * @var array
-     */
-    private $fieldsToAddBeforeFieldsOnBuild;
-
-    /**
      * @var boolean
      */
     private $preparedForAcfArray;
@@ -71,26 +51,16 @@ class FieldCollection extends Collection implements FieldCollectionInterface
     /**
      * FieldCollection constructor.
      *
-     * @param array $args
+     * @param array $arguments
      */
-    public function __construct($args = [])
+    public function __construct(array $arguments = [])
     {
 
-        if (!is_array($args)) {
-            $args = [];
-        }
-
-        $this->args = $args;
-
-        $this->fieldNamesPrefix               = '';
-        $this->fieldLabelsPrefix              = '';
-        $this->fieldLabelsSuffix              = '';
-        $this->fieldsToRemove                 = [];
-        $this->fieldsToRemoveByKey            = [];
-        $this->fieldsToAddAfterFieldsOnBuild  = [];
-        $this->fieldsToAddBeforeFieldsOnBuild = [];
-        $this->fieldsSettings                 = [];
-
+        $this->arguments           = $arguments;
+        $this->fieldNamesPrefix    = '';
+        $this->fieldLabelsPrefix   = '';
+        $this->fieldLabelsSuffix   = '';
+        $this->fieldsSettings      = [];
         $this->preparedForAcfArray = false;
 
         parent::__construct();
@@ -139,30 +109,19 @@ class FieldCollection extends Collection implements FieldCollectionInterface
      *
      * @return $this
      */
-    public function addFieldAfter(Field $field, $fieldNameToAddAfter)
-    {
-
-        $this->fieldsToAddAfterFieldsOnBuild[] = [$field, $fieldNameToAddAfter];
-
-        return $this;
-
-    }
-
-    /**
-     * @param Field  $field
-     * @param string $nameToAddAfter
-     */
-    private function doAddFieldAfterByName(Field $field, $nameToAddAfter)
+    public function addFieldAfterByName(Field $field, $fieldNameToAddAfter)
     {
 
         /** @var Field $fieldToAddAfter */
-        $fieldToAddAfter = $this->getFieldByName($nameToAddAfter);
+        $fieldToAddAfter = $this->getFieldByName($fieldNameToAddAfter);
 
         if ($fieldToAddAfter !== false) {
 
-            parent::addItemAfter($field, $fieldToAddAfter->getKey());
+            parent::addItemAfter($field, $fieldToAddAfter->getKey(), $field->getKey());
 
         }
+
+        return $this;
 
     }
 
@@ -172,30 +131,15 @@ class FieldCollection extends Collection implements FieldCollectionInterface
      *
      * @return FieldCollection
      */
-    public function addFieldBefore(Field $field, $fieldNameToAddBefore)
-    {
-
-        $this->fieldsToAddBeforeFieldsOnBuild[] = [$field, $fieldNameToAddBefore];
-
-        return $this;
-
-    }
-
-    /**
-     * @param Field  $field
-     * @param string $nameToAddBefore
-     *
-     * @return FieldCollection
-     */
-    private function doAddFieldBeforeByName(Field $field, $nameToAddBefore)
+    public function addFieldBeforeByName(Field $field, $fieldNameToAddBefore)
     {
 
         /** @var Field $itemToAddAfter */
-        $fieldToAddBefore = $this->getFieldByName($nameToAddBefore);
+        $fieldToAddBefore = $this->getFieldByName($fieldNameToAddBefore);
 
         if ($fieldToAddBefore !== false) {
 
-            parent::addItemBefore($field, $fieldToAddBefore->getKey());
+            parent::addItemBefore($field, $fieldToAddBefore->getKey(), $field->getKey());
 
         }
 
@@ -207,7 +151,6 @@ class FieldCollection extends Collection implements FieldCollectionInterface
      * @param FieldCollection $fieldCollection
      *
      * @return FieldCollection
-     * @throws \Fewbricks\KeyInUseException
      */
     public function addFieldCollection(FieldCollection $fieldCollection)
     {
@@ -280,7 +223,6 @@ class FieldCollection extends Collection implements FieldCollectionInterface
      * @param FieldCollection|array $fields
      *
      * @return FieldCollection
-     * @throws \Fewbricks\KeyInUseException
      */
     public function addFields($fields)
     {
@@ -304,6 +246,47 @@ class FieldCollection extends Collection implements FieldCollectionInterface
     }
 
     /**
+     * @param array  $fields
+     * @param string $fieldNameToAddAfter
+     *
+     * @return FieldCollection
+     */
+    public function addFieldsAfterByName(array $fields, $fieldNameToAddAfter)
+    {
+
+        // Reverse the array to add the fields in the desired order
+        $fields = array_reverse($fields);
+
+        foreach ($fields AS $field) {
+
+            $this->addFieldAfterByName($field, $fieldNameToAddAfter);
+
+        }
+
+        return $this;
+
+    }
+
+    /**
+     * @param array  $fields
+     * @param string $fieldNameToAddBefore
+     *
+     * @return FieldCollection
+     */
+    public function addFieldsBeforeByName(array $fields, $fieldNameToAddBefore)
+    {
+
+        foreach ($fields AS $field) {
+
+            $this->addFieldBeforeByName($field, $fieldNameToAddBefore);
+
+        }
+
+        return $this;
+
+    }
+
+    /**
      * @param FieldCollection|array $fields
      *
      * @return FieldCollection
@@ -316,7 +299,7 @@ class FieldCollection extends Collection implements FieldCollectionInterface
             $keyedFields = [];
 
             /** @var Field $field */
-            foreach($fields AS $field) {
+            foreach ($fields AS $field) {
 
                 $keyedFields[$field->getKey()] = $field;
 
@@ -335,86 +318,15 @@ class FieldCollection extends Collection implements FieldCollectionInterface
     }
 
     /**
-     *
-     */
-    protected function doAddFieldsAfter()
-    {
-
-        foreach ($this->fieldsToAddAfterFieldsOnBuild AS $data) {
-
-            $this->doAddFieldAfterByName($data[0], $data[1]);
-
-        }
-
-    }
-
-    /**
-     *
-     */
-    protected function doAddFieldsBefore()
-    {
-
-        foreach ($this->fieldsToAddBeforeFieldsOnBuild AS $data) {
-
-            $this->doAddFieldBeforeByName($data[0], $data[1]);
-
-        }
-
-    }
-
-    /**
-     * @param $name
-     */
-    private function doRemoveFieldByName($name)
-    {
-
-        /** @var Field $field */
-        foreach ($this->items AS $itemKey => $field) {
-
-            if ($field->getName() === $name) {
-
-                parent::removeItem($itemKey);
-
-            }
-
-        }
-
-    }
-
-    /**
-     *
-     */
-    protected function doRemoveFields()
-    {
-
-        foreach ($this->fieldsToRemove AS $fieldToRemove) {
-
-            $this->doRemoveFieldByName($fieldToRemove);
-
-        }
-
-        foreach ($this->fieldsToRemoveByKey AS $keyToRemove) {
-
-            if (substr($keyToRemove, 0, 6) !== 'field_') {
-                $keyToRemove = 'field_' . $keyToRemove;
-            }
-
-            $this->removeItem($keyToRemove);
-
-        }
-
-    }
-
-    /**
      * @param string $name
      * @param null   $defaultValue Value to return if arg is not set
      *
      * @return mixed|null
      */
-    public function getArg($name, $defaultValue = null)
+    public function getArgument($name, $defaultValue = null)
     {
 
-        return (isset($this->args[$name]) ? $this->args[$name] : $defaultValue);
+        return (isset($this->arguments[$name]) ? $this->arguments[$name] : $defaultValue);
 
     }
 
@@ -450,7 +362,7 @@ class FieldCollection extends Collection implements FieldCollectionInterface
 
         /**
          * @var string $itemKey
-         * @var Field  $field
+         * @var Field  $possibleField
          */
         foreach ($this->items AS $itemKey => $possibleField) {
 
@@ -544,10 +456,6 @@ class FieldCollection extends Collection implements FieldCollectionInterface
 
         if (!$this->preparedForAcfArray) {
 
-            $this->doRemoveFields();
-            $this->doAddFieldsAfter();
-            $this->doAddFieldsBefore();
-
             /** @var Field $field */
             foreach ($this->items AS &$field) {
 
@@ -573,6 +481,24 @@ class FieldCollection extends Collection implements FieldCollectionInterface
     }
 
     /**
+     * @param string $key
+     *
+     * @return $this
+     */
+    public function removeFieldByKey($key)
+    {
+
+        if (substr($key, 0, 6) !== 'field_') {
+            $key = 'field_' . $key;
+        }
+
+        $this->removeItem($key);
+
+        return $this;
+
+    }
+
+    /**
      * Removes a field from the collection. Note that the actual removal does not take place until the collection is
      * finalized.
      *
@@ -580,22 +506,39 @@ class FieldCollection extends Collection implements FieldCollectionInterface
      *
      * @return FieldCollection
      */
-    public function removeField($fieldName)
+    public function removeFieldByName($fieldName)
     {
 
-        $this->fieldsToRemove[] = $fieldName;
+        /** @var Field $field */
+        foreach ($this->items AS $itemKey => $field) {
+
+            if ($field->getName() === $fieldName) {
+
+                parent::removeItem($itemKey);
+
+            }
+
+        }
 
         return $this;
 
     }
 
     /**
-     * @param $key
+     * @param array $keys
+     *
+     * @return FieldCollection
      */
-    public function removeFieldByKey($key)
+    public function removeFieldsByKey(array $keys)
     {
 
-        $this->fieldsToRemoveByKey[] = $key;
+        foreach ($keys AS $key) {
+
+            $this->removeFieldByKey($key);
+
+        }
+
+        return $this;
 
     }
 
@@ -607,12 +550,12 @@ class FieldCollection extends Collection implements FieldCollectionInterface
      *
      * @return FieldCollection
      */
-    public function removeFields(array $fieldNames)
+    public function removeFieldsByName(array $fieldNames)
     {
 
         foreach ($fieldNames AS $fieldName) {
 
-            $this->removeField($fieldName);
+            $this->removeFieldByName($fieldName);
 
         }
 
@@ -621,29 +564,33 @@ class FieldCollection extends Collection implements FieldCollectionInterface
     }
 
     /**
-     * @param array $keys
+     * @param string $name
+     * @param mixed  $value
+     *
+     * @return $this
      */
-    public function removeFieldsByKey(array $keys)
+    public function setArgument($name, $value)
     {
 
-        foreach ($keys AS $key) {
+        $this->arguments[$name] = $value;
 
-            $this->removeFieldByKey($key);
-
-        }
+        return $this;
 
     }
 
     /**
-     * @param string $name
-     * @param        $value
+     * @param array $arguments
      *
      * @return $this
      */
-    public function setArg($name, $value)
+    public function setArguments(array $arguments)
     {
 
-        $this->args[$name] = $value;
+        foreach ($arguments as $name => $value) {
+
+            $this->setArgument($name, $value);
+
+        }
 
         return $this;
 
@@ -705,73 +652,6 @@ class FieldCollection extends Collection implements FieldCollectionInterface
         $acfArray = $this->prepareFieldsConditionalLogic($acfArray);
 
         return $acfArray;
-
-    }
-
-    /**
-     * If you change your mind about removing a field, use this function to un-remove it. Since we are not actually
-     * adding a field, we are un-removing it.
-     *
-     * @param string $fieldName
-     *
-     * @return FieldCollection
-     */
-    public function unRemoveField($fieldName)
-    {
-
-        unset($this->fieldsToRemove[$fieldName]);
-
-        return $this;
-
-    }
-
-    /**
-     * @param $key
-     *
-     * @return FieldCollection
-     */
-    public function unRemoveFieldByKey($key)
-    {
-
-        unset($this->fieldsToRemoveByKey[$key]);
-
-        return $this;
-
-    }
-
-    /**
-     * @param array $fieldNames
-     *
-     * @return $this
-     */
-    public function unRemoveFields(array $fieldNames)
-    {
-
-        foreach ($fieldNames AS $fieldName) {
-
-            $this->unRemoveField($fieldName);
-
-        }
-
-        return $this;
-
-    }
-
-    /**
-     * @param $keys
-     *
-     * @return $this
-     */
-    public function unRemoveFieldsByKey(array $keys)
-    {
-
-        foreach ($keys AS $key) {
-
-            $this->unRemoveFieldByKey($key);
-
-        }
-
-        return $this;
 
     }
 

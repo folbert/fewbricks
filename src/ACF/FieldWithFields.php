@@ -3,7 +3,6 @@
 namespace Fewbricks\ACF;
 
 use Fewbricks\Brick;
-use Fewbricks\KeyInUseException;
 
 /**
  * Class ItemWithSubFields
@@ -74,10 +73,10 @@ class FieldWithFields extends Field implements FieldCollectionInterface
      *
      * @return FieldWithFields
      */
-    public function addFieldAfter(Field $field, $fieldNameToAddAfter)
+    public function addFieldAfterByName(Field $field, $fieldNameToAddAfter)
     {
 
-        $this->fields->addFieldAfter($field, $fieldNameToAddAfter);
+        $this->fields->addFieldAfterByName($field, $fieldNameToAddAfter);
 
         return $this;
 
@@ -89,10 +88,10 @@ class FieldWithFields extends Field implements FieldCollectionInterface
      *
      * @return FieldWithFields
      */
-    public function addFieldBefore(Field $field, $fieldNameToAddBefore)
+    public function addFieldBeforeByName(Field $field, $fieldNameToAddBefore)
     {
 
-        $this->fields->addFieldBefore($field, $fieldNameToAddBefore);
+        $this->fields->addFieldBeforeByName($field, $fieldNameToAddBefore);
 
         return $this;
 
@@ -102,7 +101,6 @@ class FieldWithFields extends Field implements FieldCollectionInterface
      * @param FieldCollection $fieldCollection
      *
      * @return $this
-     * @throws KeyInUseException
      */
     public function addFieldCollection(FieldCollection $fieldCollection)
     {
@@ -148,7 +146,6 @@ class FieldWithFields extends Field implements FieldCollectionInterface
      * @param FieldCollection|array $fields
      *
      * @return FieldWithFields
-     * @throws KeyInUseException
      */
     public function addFields($fields)
     {
@@ -200,10 +197,10 @@ class FieldWithFields extends Field implements FieldCollectionInterface
      *
      * @return $this
      */
-    public function removeField($name)
+    public function removeFieldByName($name)
     {
 
-        $this->fields->removeField($name);
+        $this->fields->removeFieldByName($name);
 
         return $this;
 
@@ -222,10 +219,10 @@ class FieldWithFields extends Field implements FieldCollectionInterface
     /**
      * @param array $names
      */
-    public function removeFields(array $names)
+    public function removeFieldsByName(array $names)
     {
 
-        $this->fields->removeFields($names);
+        $this->fields->removeFieldsByName($names);
 
     }
 
@@ -254,46 +251,6 @@ class FieldWithFields extends Field implements FieldCollectionInterface
         $settings['sub_fields'] = $this->fields->toAcfArray();
 
         return $settings;
-
-    }
-
-    /**
-     * @param string $name
-     */
-    public function unRemoveField($name)
-    {
-
-        $this->fields->unRemoveField($name);
-
-    }
-
-    /**
-     * @param string $key
-     */
-    public function unRemoveFieldByKey($key)
-    {
-
-        $this->fields->unRemoveFieldByKey($key);
-
-    }
-
-    /**
-     * @param array $names
-     */
-    public function unRemoveFields(array $names)
-    {
-
-        $this->fields->unRemoveFields($names);
-
-    }
-
-    /**
-     * @param array $keys
-     */
-    public function unRemoveFieldsByKey(array $keys)
-    {
-
-        $this->fields->unRemoveFieldsByKey($keys);
 
     }
 

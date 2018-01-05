@@ -112,7 +112,7 @@ class FieldWithLayouts extends Field
     public function removeLayout($name)
     {
 
-        $this->layouts->removeField($name);
+        $this->layouts->removeFieldByName($name);
 
         return $this;
 

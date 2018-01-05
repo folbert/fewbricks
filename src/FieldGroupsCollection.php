@@ -15,7 +15,7 @@ class FieldGroupsCollection
     /**
      * @var array
      */
-    protected $args;
+    protected $arguments;
 
     /**
      * @var array The field groups.
@@ -25,14 +25,14 @@ class FieldGroupsCollection
     /**
      * EditScreen constructor.
      *
-     * @param array $args
+     * @param array $arguments
      */
-    public function __construct($args = [])
+    public function __construct($arguments = [])
     {
 
         $this->fieldGroups = [];
 
-        $this->args = $args;
+        $this->arguments = $arguments;
 
         $this->build();
 
@@ -51,31 +51,31 @@ class FieldGroupsCollection
     /**
      * @return array
      */
-    public function get_args()
+    public function getArguments()
     {
 
-        return $this->args;
+        return $this->arguments;
 
     }
 
     /**
-     * @param $args
+     * @param $arguments
      */
-    public function set_args($args)
+    public function setArguments(array $arguments)
     {
 
-        $this->args = $args;
+        $this->arguments = $arguments;
 
     }
 
     /**
-     * @param $name
-     * @param $value
+     * @param string $name
+     * @param mixed  $value
      */
-    public function set_arg($name, $value)
+    public function setArgument($name, $value)
     {
 
-        $this->args[$name] = $value;
+        $this->arguments[$name] = $value;
 
     }
 

@@ -26,19 +26,19 @@ class Brick extends FieldCollection implements BrickInterface
     /**
      * Brick constructor.
      *
-     * @param string $name Name to use when fetching data for the brick.
-     * @param string $key  This value must be unique system wide. See the readme-file for tips on how to achieve this.
-     *                     Note that it only needs to be set when registering the brick to a field group, layout etc.
-     *                     No need to pass it when called from the frontend to print the brick.
-     * @param array  $args Arbitrary arguments you want to pass to a brick instance to be used within the brick.
+     * @param string $name      Name to use when fetching data for the brick.
+     * @param string $key       This value must be unique system wide. See the readme-file for tips on how to achieve this.
+     *                          Note that it only needs to be set when registering the brick to a field group, layout etc.
+     *                          No need to pass it when called from the frontend to print the brick.
+     * @param array  $arguments Arbitrary arguments you want to pass to a brick instance to be used within the brick.
      */
-    public function __construct($name, $key, $args = [])
+    public function __construct($name, $key, $arguments = [])
     {
 
         $this->name = $name;
         $this->key  = $key;
 
-        parent::__construct($args);
+        parent::__construct($arguments);
 
     }
 

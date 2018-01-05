@@ -61,15 +61,17 @@ class FieldGroup extends FieldCollection implements FieldGroupInterface
     /**
      * FieldGroup constructor.
      *
+     * @param string $title
      * @param string $key
-     * @param array  $settings Any other settings that will affect ACF.
-     *                         https://www.advancedcustomfields.com/resources/register-fields-via-php/#group-settings
-     * @param array  $args     An array enabling you to pass any argument that you need.
+     * @param array  $settings  Any other settings that will affect ACF.
+     *                          https://www.advancedcustomfields.com/resources/register-fields-via-php/#group-settings
+     * @param array  $arguments An array enabling you to pass any argument that you need.
      */
     public function __construct(
+        $title,
         $key,
         $settings = [],
-        $args = []
+        $arguments = []
     ) {
 
         if (!is_array($settings)) {
@@ -78,11 +80,12 @@ class FieldGroup extends FieldCollection implements FieldGroupInterface
 
         // Let's keep these crucial settings as class vars to enable nicer
         // and more OOP-oriented access
+        $this->title    = $title;
         $this->key      = $key;
         $this->settings = $settings;
         $this->clearLocationRuleGroups();
 
-        parent::__construct($args);
+        parent::__construct($arguments);
 
     }
 
@@ -119,14 +122,6 @@ class FieldGroup extends FieldCollection implements FieldGroupInterface
     }
 
     /**
-     * @return mixed|void
-     */
-    public function build()
-    {
-
-    }
-
-    /**
      * @return $this
      */
     public function clearLocationRuleGroups()
@@ -139,20 +134,68 @@ class FieldGroup extends FieldCollection implements FieldGroupInterface
     }
 
     /**
+     * ACF setting. An array of elements to hide on the screen.
+     * Important: If multiple field groups appear on an edit screen, the first field group's options will be used
+     * (the one with the lowest order number).
      *
+     * Possible values in the array: 'permalink', 'the_content', 'excerpt', 'custom_fields', 'discussion',
+     * 'comments', 'revisions', 'slug', 'author', 'format', 'page_attributes', 'featured_image', 'categories',
+     * 'tags', 'send-trackbacks', 'all'
+     *
+     * @param array $hideOnScreen Array with items to hide on the screen.
+     * @param array $showOnScreen Fewbricks addition. Enables you to define which fields should be visible on screen.
+     *                            This will create an array with all the items that ACF supports hiding and then
+     *                            remove the items that you have set in $showOnScreen. Passing a non-empty value here
+     *                            will make the function ignore the $hideOnScreen variable completely
+     *
+     * @return $this
      */
-    protected function doRegister()
+    private function doSetHideOnScreen($hideOnScreen, $showOnScreen = [])
     {
 
-        $acfSettingsArray = $this->toAcfArray();
+        $currentValues = $this->getHideOnScreenSetting();
 
-        Helper::maybeStoreSimpleFieldGroupData($acfSettingsArray['title'], $acfSettingsArray['key']);
-        Helper::maybeStoreFieldGroupAcfSettings($acfSettingsArray);
+        if (!empty($showOnScreen)) {
 
-        acf_add_local_field_group($acfSettingsArray);
+            // If the user want to show all...
+            if ($showOnScreen === 'all') {
 
-        // No use in having a potentially large collection of objects anymore
-        unset($this->items);
+                // ...we should hide nothing
+                $hideOnScreen = [];
+
+            } else {
+
+                // Make sure we have an array
+                if (!is_array($showOnScreen)) {
+                    $showOnScreen = [$showOnScreen];
+                }
+
+                $hideOnScreen = array_diff($currentValues, $showOnScreen);
+
+            }
+
+        } else {
+
+            // If the user want to hide all
+            if ($hideOnScreen === 'all') {
+
+                $hideOnScreen = self::HIDE_ON_SCREEN_ITEMS;
+
+            } else {
+
+                if (!is_array($hideOnScreen)) {
+                    $hideOnScreen = [$hideOnScreen];
+                }
+
+                $hideOnScreen = array_merge($currentValues, $hideOnScreen);
+
+            }
+
+        }
+
+        $this->setSetting('hide_on_screen', $hideOnScreen);
+
+        return $this;
 
     }
 
@@ -346,24 +389,10 @@ class FieldGroup extends FieldCollection implements FieldGroupInterface
     }
 
     /**
-     * Allow you to set which elements that should be hidden on screen.
-     *
-     * @see FieldGroup::doSetHideOnScreen()
-     *
-     * @param string|array $elementNames One or many of the values of the following: 'permalink', 'the_content',
-     *                                   'excerpt', 'custom_fields', 'discussion', 'comments', 'revisions', 'slug',
-     *                                   'author', 'format', 'page_attributes', 'featured_image', 'categories', 'tags',
-     *                                   'send-trackbacks', 'all'. Note 'all' which will show all elements that
-     *                                   are possible to hide.
-     *
-     * @return $this
+     * @return mixed|void
      */
-    public function setHideOnScreen($elementNames)
+    public function prepareForRegistration()
     {
-
-        $this->doSetHideOnScreen($elementNames);
-
-        return $this;
 
     }
 
@@ -374,9 +403,17 @@ class FieldGroup extends FieldCollection implements FieldGroupInterface
     public function register()
     {
 
-        $this->build();
+        $this->prepareForRegistration();
 
-        $this->doRegister();
+        $acfSettingsArray = $this->toAcfArray();
+
+        Helper::maybeStoreSimpleFieldGroupData($acfSettingsArray['title'], $acfSettingsArray['key']);
+        Helper::maybeStoreFieldGroupAcfSettings($acfSettingsArray);
+
+        acf_add_local_field_group($acfSettingsArray);
+
+        // No use in having a potentially large collection of objects anymore
+        unset($this->items);
 
     }
 
@@ -414,66 +451,22 @@ class FieldGroup extends FieldCollection implements FieldGroupInterface
     }
 
     /**
-     * ACF setting. An array of elements to hide on the screen.
-     * Important: If multiple field groups appear on an edit screen, the first field group's options will be used
-     * (the one with the lowest order number).
+     * Allow you to set which elements that should be hidden on screen.
      *
-     * Possible values in the array: 'permalink', 'the_content', 'excerpt', 'custom_fields', 'discussion',
-     * 'comments', 'revisions', 'slug', 'author', 'format', 'page_attributes', 'featured_image', 'categories',
-     * 'tags', 'send-trackbacks', 'all'
+     * @see FieldGroup::doSetHideOnScreen()
      *
-     * @param array $hideOnScreen Array with items to hide on the screen.
-     * @param array $showOnScreen Fewbricks addition. Enables you to define which fields should be visible on screen.
-     *                            This will create an array with all the items that ACF supports hiding and then
-     *                            remove the items that you have set in $showOnScreen. Passing a non-empty value here
-     *                            will make the function ignore the $hideOnScreen variable completely
+     * @param string|array $elementNames One or many of the values of the following: 'permalink', 'the_content',
+     *                                   'excerpt', 'custom_fields', 'discussion', 'comments', 'revisions', 'slug',
+     *                                   'author', 'format', 'page_attributes', 'featured_image', 'categories', 'tags',
+     *                                   'send-trackbacks', 'all'. Note 'all' which will show all elements that
+     *                                   are possible to hide.
      *
      * @return $this
      */
-    private function doSetHideOnScreen($hideOnScreen, $showOnScreen = [])
+    public function setHideOnScreen($elementNames)
     {
 
-        $currentValues = $this->getHideOnScreenSetting();
-
-        if (!empty($showOnScreen)) {
-
-            // If the user want to show all...
-            if ($showOnScreen === 'all') {
-
-                // ...we should hide nothing
-                $hideOnScreen = [];
-
-            } else {
-
-                // Make sure we have an array
-                if (!is_array($showOnScreen)) {
-                    $showOnScreen = [$showOnScreen];
-                }
-
-                $hideOnScreen = array_diff($currentValues, $showOnScreen);
-
-            }
-
-        } else {
-
-            // If the user want to hide all
-            if ($hideOnScreen === 'all') {
-
-                $hideOnScreen = self::HIDE_ON_SCREEN_ITEMS;
-
-            } else {
-
-                if (!is_array($hideOnScreen)) {
-                    $hideOnScreen = [$hideOnScreen];
-                }
-
-                $hideOnScreen = array_merge($currentValues, $hideOnScreen);
-
-            }
-
-        }
-
-        $this->setSetting('hide_on_screen', $hideOnScreen);
+        $this->doSetHideOnScreen($elementNames);
 
         return $this;
 
@@ -570,22 +563,6 @@ class FieldGroup extends FieldCollection implements FieldGroupInterface
     }
 
     /**
-     * Determines the meta box style. Choices of 'default' or 'seamless'
-     *
-     * @param string $style 'default' or 'seamless'
-     *
-     * @return $this
-     */
-    public function setStyle($style)
-    {
-
-        $this->setSetting('style', $style);
-
-        return $this;
-
-    }
-
-    /**
      * If the element has been previously set to be hidden, this will set it to be shown instead.
      *
      * @see FieldGroup::setHideOnScreen()
@@ -602,6 +579,22 @@ class FieldGroup extends FieldCollection implements FieldGroupInterface
     {
 
         $this->doSetHideOnScreen([], $elementNames);
+
+        return $this;
+
+    }
+
+    /**
+     * Determines the meta box style. Choices of 'default' or 'seamless'
+     *
+     * @param string $style 'default' or 'seamless'
+     *
+     * @return $this
+     */
+    public function setStyle($style)
+    {
+
+        $this->setSetting('style', $style);
 
         return $this;
 

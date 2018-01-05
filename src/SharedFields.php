@@ -12,9 +12,9 @@ use Fewbricks\ACF\FieldCollection;
 class SharedFields extends FieldCollection
 {
 
-    public function __construct(array $args = [])
+    public function __construct(array $arguments = [])
     {
-        parent::__construct($args);
+        parent::__construct($arguments);
 
         $this->applyFields();
 

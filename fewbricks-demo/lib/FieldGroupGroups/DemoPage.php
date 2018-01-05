@@ -33,14 +33,14 @@ class DemoPage extends FieldGroupsCollection
         $kitchenSinkFg->setMenuOrder(100);
 
         // Testing different ways to show/hide elements
-        $kitchenSinkFg->showOnScreen('the_content');
-        $kitchenSinkFg->hideOnScreen('the_content');
-        $kitchenSinkFg->showOnScreen('the_content');
-        $kitchenSinkFg->hideOnScreen('all');
-        $kitchenSinkFg->showOnScreen('all');
-        $kitchenSinkFg->hideOnScreen('all');
-        $kitchenSinkFg->showOnScreen(['permalink', 'featured_image']);
-        $kitchenSinkFg->hideOnScreen(['featured_image']);
+        $kitchenSinkFg->setShowOnScreen('the_content');
+        $kitchenSinkFg->setHideOnScreen('the_content');
+        $kitchenSinkFg->setShowOnScreen('the_content');
+        $kitchenSinkFg->setHideOnScreen('all');
+        $kitchenSinkFg->setShowOnScreen('all');
+        $kitchenSinkFg->setHideOnScreen('all');
+        $kitchenSinkFg->setShowOnScreen(['permalink', 'featured_image']);
+        $kitchenSinkFg->setHideOnScreen(['featured_image']);
 
         $this->addFieldGroup($kitchenSinkFg);
 

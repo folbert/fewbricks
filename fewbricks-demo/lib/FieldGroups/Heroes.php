@@ -13,11 +13,20 @@ use Fewbricks\ACF\Fields\Text;
 class Heroes extends FieldGroup
 {
 
-    protected $title = 'Heroes';
+    /**
+     * Heroes constructor.
+     *
+     * @param string $key
+     * @param array  $settings
+     * @param array  $arguments
+     */
+    public function __construct($key, array $settings = [], array $arguments = [])
+    {
+        parent::__construct('Heroes', $key, $settings, $arguments);
+    }
 
     /**
      * @return mixed|void
-     * @throws \Fewbricks\KeyInUseException
      */
     public function build()
     {
@@ -39,7 +48,7 @@ class Heroes extends FieldGroup
                         ->setMessage('Lorem ipsum dolor')
                 )
                 ->addFieldCollection(new Background())
-                ->addFieldBefore(new Text('Headline', 'headline', '1712272054a'), 'message')
+                ->addFieldBeforeByName(new Text('Headline', 'headline', '1712272054a'), 'message')
         );
 
         $this->addField($flexibleContent);

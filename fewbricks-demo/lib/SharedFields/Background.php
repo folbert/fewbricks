@@ -14,7 +14,7 @@ class Background extends SharedFields
 {
 
     /**
-     * @throws \Fewbricks\KeyInUseException
+     *
      */
     protected function applyFields()
     {

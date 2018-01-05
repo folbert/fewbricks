@@ -11,9 +11,9 @@ interface FieldCollectionInterface
 
     public function addField(Field $field);
 
-    public function addFieldAfter(Field $field, $fieldNameToAddAfter);
+    public function addFieldAfterByName(Field $field, $fieldNameToAddAfter);
 
-    public function addFieldBefore(Field $field, $fieldNameToAddBefore);
+    public function addFieldBeforeByName(Field $field, $fieldNameToAddBefore);
 
     public function addFieldCollection(FieldCollection $fieldCollection);
 
@@ -25,20 +25,12 @@ interface FieldCollectionInterface
 
     public function addFieldsToBeginning($fields);
 
-    public function removeField($fieldName);
+    public function removeFieldByName($fieldName);
 
     public function removeFieldByKey($key);
 
-    public function removeFields(array $fieldNames);
+    public function removeFieldsByName(array $fieldNames);
 
     public function removeFieldsByKey(array $keys);
-
-    public function unRemoveField($fieldName);
-
-    public function unRemoveFieldByKey($key);
-
-    public function unRemoveFields(array $fieldNames);
-
-    public function unRemoveFieldsByKey(array $keys);
 
 }

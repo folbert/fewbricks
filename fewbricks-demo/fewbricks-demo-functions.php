@@ -23,7 +23,7 @@ use Fewbricks\Helper;
 require_once 'fewbricks-demo-setup.php';
 
 // Define the filters for the demo
-Filters::defineHooks();
+FiltersApplier::defineHooks();
 
 // Demoing an example on how to use "caching" functionality using PHP code files.
 // This will use the php code file when in production and run al the code and write to
@@ -34,8 +34,7 @@ if (defined('FEWBRICKS_ENV') && FEWBRICKS_ENV === 'production') {
 
 } else {
 
-    (new FieldGroup('1801042233a'))
-        ->setTitle('Teaser data')
+    (new FieldGroup('Teaser data', '1801042233a'))
         ->addLocationRuleGroup(
             (new FieldGroupLocationRuleGroup())
                 ->addRule(new Rule('post_type', '==', 'fewbricks_demo_pg'))
@@ -46,15 +45,40 @@ if (defined('FEWBRICKS_ENV') && FEWBRICKS_ENV === 'production') {
         )
         ->setHideOnScreen('all')
         ->setShowOnScreen('permalink')
-        ->addField(new Text('Text 1', 'text_1', '1801042359a'))
-        ->addFields([
-            new Text('Text 2', 'text_2', '1801050012a'),
-            new Text('Text 3', 'text_3', '1801050012b'),
+        ->setMenuOrder(-100)
+        ->setArgument('argument_name', 'argument_value')
+        ->setArguments([
+            'another_argument_name' => 'another_argument_value',
+            'yet_another_argument_name' => 'yet_another_argument_value',
         ])
-        ->addFieldAfter(new Text('Text 4', 'text_4', '1801050012c'), 'text_1')
+        ->addField(new Text('Text 1', 'text_1', '1801050012a'))
+        ->addFields([
+            new Text('Text 2', 'text_2', '1801050012b'),
+            new Text('Text 3', 'text_3', '1801050012c'),
+        ])
+        ->addFieldToBeginning(new Text('Text 4', 'text_4', '1801050012d'))
+        ->addFieldsToBeginning([
+            new Text('Text 5', 'text_5', '1801050012e'),
+            new Text('Text 6', 'text_6', '1801050012f'),
+        ])
+        ->addFieldBeforeByName(new Text('Text 7', 'text_7', '1801050012g'), 'text_3')
+        ->addFieldsBeforeByName([
+            new Text('Text 8', 'text_8', '1801050012h'),
+            new Text('Text 9', 'text_9', '1801050012i'),
+        ], 'text_1')
+        ->addFieldAfterByName(new Text('Text 10', 'text_10', '1801050012j'), 'text_9')
+        ->addFieldsAfterByName([
+            new Text('Text 11', 'text_11', '1801050012k'),
+            new Text('Text 12', 'text_12', '1801050012l'),
+        ], 'text_5')
+        ->removeFieldByName('text_9')
+        ->removeFieldsByName(['text_11', 'text_4'])
+        ->removeFieldByKey('1801050012e')
+        ->removeFieldsByKey(['1801050012g', '1801050012b'])
+        ->addFieldSetting('1801050012h', 'default_value', 'Default value for Text 8')
         ->register();
 
-    /*(new Heroes('1712262204a'))
+    (new Heroes('1712262204a'))
         ->addLocationRuleGroup(
             (new FieldGroupLocationRuleGroup())
                 ->addRule(new Rule('post_type', '==', 'fewbricks_demo_pg'))
@@ -62,8 +86,7 @@ if (defined('FEWBRICKS_ENV') && FEWBRICKS_ENV === 'production') {
         ->setHideOnScreen('content')
         ->register();
 
-    (new FieldGroup('fg1712282142a'))
-        ->setTitle('Field group with bricks')
+    (new FieldGroup('Field group with bricks', 'fg1712282142a'))
         ->addBrick(
             (new Wysiwyg('wysiwyg_1', 'br1712282146a'))
                 ->setFieldLabelsPrefix('WYSIWYG 1 - ')
@@ -82,17 +105,18 @@ if (defined('FEWBRICKS_ENV') && FEWBRICKS_ENV === 'production') {
 
     // Demoing a class
     (new FieldsKitchenSink('fg1712042021a'))
-        ->setTitle('Main content')
+        ->setTitle('Kitchen sink 1')
         // This will be prefixed to all field names i the field group.
         // Since we are re-using the same field group multiple times on the same page,
         // this is necessary to avoid clashes
         ->setFieldNamesPrefix('main_content_')
-        ->setArg('remove_layouts', ['fd_text_and_select', 'fd_single_image'])
-        ->setArg('remove_sub_fields', ['fd_repeater_image', 'fd_repeater_text_2'])
+        ->setArgument('remove_layouts', ['fd_text_and_select', 'fd_single_image'])
+        ->setArgument('remove_sub_fields', ['fd_repeater_image', 'fd_repeater_text_2'])
         ->register();
 
     // Demoing the same class but but changing it on the fly
     (new FieldsKitchenSink('fg17120529561a'))
+        ->setTitle('Kitchen sink 2')
         ->clearLocationRuleGroups()
         ->addLocationRuleGroups([
             (new FieldGroupLocationRuleGroup())->addRule(
@@ -105,19 +129,19 @@ if (defined('FEWBRICKS_ENV') && FEWBRICKS_ENV === 'production') {
         ->setTitle('Secondary content')
         ->setHideOnScreen('the_content')
         ->setFieldNamesPrefix('secondary_content_')
-        ->setFieldLabelsPrefix('Secondary content - ')
+        ->setFieldLabelsPrefix('Kitchen sink 2 - ')
         ->register();
 
     (new FieldsKitchenSink('fg1712111413a'))
-        ->removeField('fd_tab1')
-        ->removeFields(['fd_color_picker', 'fd_file'])
-        ->removeField('fd_checkbox')
-        ->unRemoveField('fd_tab1')
-        ->addFieldAfter(
+        ->setTitle('Kitchen Sink 3')
+        ->removeFieldByName('fd_tab1')
+        ->removeFieldsByName(['fd_color_picker', 'fd_file'])
+        ->removeFieldByName('fd_checkbox')
+        ->addFieldAfterByName(
             new Text('Text - added after Button Group', 'fd_text_after_button_group', '1712121051a'),
             'fd_button_group'
         )
-        ->addFieldAfter(
+        ->addFieldAfterByName(
             (new Text('Another text added after the button group', 'fd_text_after_new_text', '17121206a'))
                 ->addConditionalLogicRuleGroup(
                     (new ConditionalLogicRuleGroup())
@@ -126,31 +150,25 @@ if (defined('FEWBRICKS_ENV') && FEWBRICKS_ENV === 'production') {
                 ),
             'fd_button_group'
         )
-        ->register();*/
+        ->register();
 
     // Lots of field groups fo perf tests
     /*(new FieldsKitchenSink('fg1712252102a'))
-        ->setTitle('Main content')
         ->setFieldNamesPrefix('main_contenta_')
         ->register();
     (new FieldsKitchenSink('fg1712252102b'))
-        ->setTitle('Main content')
         ->setFieldNamesPrefix('main_contentb_')
         ->register();
     (new FieldsKitchenSink('fg1712252102c'))
-        ->setTitle('Main content')
         ->setFieldNamesPrefix('main_contentc_')
         ->register();
     (new FieldsKitchenSink('fg1712252102d'))
-        ->setTitle('Main content')
         ->setFieldNamesPrefix('main_contentd_')
         ->register();
     (new FieldsKitchenSink('fg1712252102e'))
-        ->setTitle('Main content')
         ->setFieldNamesPrefix('main_contente_')
         ->register();
     (new FieldsKitchenSink('fg1712252102f'))
-        ->setTitle('Main content')
         ->setFieldNamesPrefix('main_contentf_')
         ->register();*/
 

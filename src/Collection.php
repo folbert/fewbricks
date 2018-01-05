@@ -40,14 +40,9 @@ class Collection
 
         } else {
 
-            try {
+            if ($this->validateKey($item, $key)) {
 
-                $this->validateKey($item, $key);
                 $this->items[$key] = $item;
-
-            } catch (KeyInUseException $keyInUseException) {
-
-                $keyInUseException->wpDie();
 
             }
 
@@ -58,15 +53,25 @@ class Collection
     /**
      * @param Field  $item
      * @param string $keyToAddAfter
+     * @param null   $keyOfNewItem
      */
-    public function addItemAfter($item, $keyToAddAfter)
+    public function addItemAfter($item, $keyToAddAfter, $keyOfNewItem = null)
     {
 
         if (false !== ($positionToAddAfter = $this->getItemIndex($keyToAddAfter))) {
 
+            if (is_null($keyOfNewItem)) {
+                $newItem = [$item];
+            } else {
+
+                $this->validateKey($item, $keyOfNewItem);
+                $newItem = [$keyOfNewItem => $item];
+
+            }
+
             $this->items = array_merge(
                 array_slice($this->items, 0, ($positionToAddAfter + 1)),
-                [$item],
+                $newItem,
                 array_slice($this->items, ($positionToAddAfter + 1))
             );
 
@@ -77,15 +82,22 @@ class Collection
     /**
      * @param Field  $item
      * @param string $keyToAddBefore
+     * @param null   $keyOfNewItem
      */
-    public function addItemBefore($item, $keyToAddBefore)
+    public function addItemBefore($item, $keyToAddBefore, $keyOfNewItem = null)
     {
 
         if (false !== ($positionToAddBefore = $this->getItemIndex($keyToAddBefore))) {
 
+            if (is_null($keyOfNewItem)) {
+                $newItem = [$item];
+            } else {
+                $newItem = [$keyOfNewItem => $item];
+            }
+
             $this->items = array_merge(
                 array_slice($this->items, 0, $positionToAddBefore),
-                [$item],
+                $newItem,
                 array_slice($this->items, $positionToAddBefore)
             );
 
@@ -95,18 +107,18 @@ class Collection
 
     /**
      * @param mixed $item
-     * @param bool  $key
+     * @param bool  $keyOfNewItem
      */
-    public function addItemToBeginning($item, $key = false)
+    public function addItemToBeginning($item, $keyOfNewItem = false)
     {
 
-        if ($key === false) {
+        if ($keyOfNewItem === false) {
 
             array_unshift($this->items, $item);
 
         } else {
 
-            $this->items = array_merge([$key => $item], $this->items);
+            $this->items = array_merge([$keyOfNewItem => $item], $this->items);
 
         }
 
@@ -182,40 +194,6 @@ class Collection
     }
 
     /**
-     * @param $itemAttemptedToAdd
-     * @param $keyAttemptedToAdd
-     *
-     * @return string
-     */
-    public function getKeyInUseExceptionMessage($itemAttemptedToAdd, $keyAttemptedToAdd)
-    {
-
-        $message = '';
-
-        if (method_exists($itemAttemptedToAdd, 'getLabel')) {
-
-            $message .= 'Error when attempting to register the item with the key <code>'
-                        . $keyAttemptedToAdd . '</code> and label "' . $itemAttemptedToAdd->getLabel() . '". The key is already
-                                            used by an item named "' . $this->items[$keyAttemptedToAdd]->getLabel() . '" and keys must
-                                             be unique.';
-
-        } else {
-
-            $message .= 'Error when attempting to register the item with the key ' . $keyAttemptedToAdd;
-
-        }
-
-        $message
-            .= '<br><br>Pro-tip: create your keys manually by using the current date and time . So if you
-are creating a field at 09:59 on December 11 2017, the key might be "1712110959a" . Note the addition of an extra
-character to ensure that ACF can use the key but also to make sure that if you create another key within the same
-minute, you can simply append some other "random" letter to that key like "1712110989x"';
-
-        return $message;
-
-    }
-
-    /**
      * @return array
      */
     public function getKeys()
@@ -263,14 +241,33 @@ minute, you can simply append some other "random" letter to that key like "17121
      * @param string $key
      *
      * @return bool
-     * @throws KeyInUseException
      */
     public function validateKey($item, $key)
     {
 
         if (isset($this->items[$key])) {
 
-            throw new KeyInUseException($this->getKeyInUseExceptionMessage($item, $key));
+            $message = '';
+
+            if (method_exists($item, 'getLabel')) {
+
+                $message .= 'Error when attempting to register the item with the key "' . $key . '" and label "'
+                            . $item->getLabel() . '". The key is already used by an item named "'
+                            . $this->items[$key]->getLabel() . '" and keys must be unique.';
+
+            } else {
+
+                $message .= 'Error when attempting to register the item with the key ' . $key;
+
+            }
+
+            $message
+                .= '<br><br>Pro-tip: create your keys manually by using the current date and time . So if you
+are creating a field at 09:59 on December 11 2017, the key might be "1712110959a" . Note the addition of an extra
+character to ensure that ACF can use the key but also to make sure that if you create another key within the same
+minute, you can simply append some other "random" letter to that key like "1712110989x"';
+
+            wp_die($message);
 
         }
 

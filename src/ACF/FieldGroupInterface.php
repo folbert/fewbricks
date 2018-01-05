@@ -10,9 +10,4 @@ namespace Fewbricks\ACF;
 interface FieldGroupInterface
 {
 
-    /**
-     * @return mixed
-     */
-    public function build();
-
 }

@@ -19,13 +19,19 @@ use Fewbricks\ACF\Rule;
 class FieldsKitchenSink extends FieldGroup implements FieldGroupInterface
 {
 
-    /**
-     * @var string
-     */
-    protected $title = 'Kitchen Sink';
+    public function __construct($key, array $settings = [], array $arguments = [])
+    {
+
+        parent::__construct('Kitchen sink', $key, $settings, $arguments);
+
+        $this->addMyFields();
+        $this->setHideOnScreen('the_content');
+
+    }
 
     /**
-     * A large function adding all available fields and then some.
+     * A large function adding all available fields and then some. This is mainly for demo purposes.
+     * In a real project you would probably want to split this into smaller functions.
      */
     private function addMyFields()
     {
@@ -122,7 +128,7 @@ class FieldsKitchenSink extends FieldGroup implements FieldGroupInterface
 
         // This is of course a somewhat stupid usage of the functionality since we could simply
         // not add the sub field to start with. But for demo purposes...
-        $layoutsToRemove = $this->getArg('remove_layouts', false);
+        $layoutsToRemove = $this->getArgument('remove_layouts', false);
         if ($layoutsToRemove !== false) {
             foreach ($layoutsToRemove AS $layoutToRemove) {
                 $fc->removeLayout($layoutToRemove);
@@ -199,10 +205,10 @@ class FieldsKitchenSink extends FieldGroup implements FieldGroupInterface
 
         // This is of course a somewhat stupid usage of the functionality since we could simply
         // not add the sub field to start with. But for demo purposes...
-        $subFieldsToRemove = $this->getArg('remove_sub_fields', false);
+        $subFieldsToRemove = $this->getArgument('remove_sub_fields', false);
         if ($subFieldsToRemove !== false) {
             foreach ($subFieldsToRemove AS $subFieldToRemove) {
-                $repeater->removeField($subFieldToRemove);
+                $repeater->removeFieldByName($subFieldToRemove);
             }
         }
 
@@ -270,18 +276,12 @@ class FieldsKitchenSink extends FieldGroup implements FieldGroupInterface
     }
 
     /**
-     * Any class extending FieldGroup can have a function named build. This function will be called
-     * right before the field group is registered to ACF. Inside this function you can do whatever you want.
-     * This basically enables you to have a field group that can be reused and by utilizing the $args that you can pass
-     * when instantiating an object, you can affect which fields should be included etc.
      *
-     * @return void
      */
-    public function build()
+    private function setLocationRules()
     {
 
-        $this->addMyFields();
-
+        // Allow for rules to be set by instance creators
         if ($this->getLocationRuleGroups()->isEmpty()) {
 
             $this->addLocationRuleGroups([
@@ -293,7 +293,18 @@ class FieldsKitchenSink extends FieldGroup implements FieldGroupInterface
 
         }
 
-        $this->setHideOnScreen('the_content');
+    }
+
+    /**
+     * Any class extending FieldGroup can have a function named prepareForRegistration. This function will be called
+     * right before the field group is registered to ACF. Inside this function you can do whatever you want.
+     *
+     * @return void
+     */
+    public function prepareForRegistration()
+    {
+
+        $this->setLocationRules();
 
     }
 

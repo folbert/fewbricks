@@ -30,13 +30,15 @@ class Field extends Item
      *                         https://www.advancedcustomfields.com/resources/register-fields-via-php/#field-type%20settings
      * @param string $type     Name of a valid ACF field type. Makes it possible to create custom field types.
      */
-    public function __construct($label, $name, $key, $settings = [], $type = '')
+    public function __construct($label, $name, $key, array $settings = [], $type = '')
     {
 
         parent::__construct($label, $name, $key, $settings);
 
         if (!empty($type)) {
             $this->setType($type);
+        } else {
+            $this->setType($this->getType());
         }
 
         $this->clearConditionalLogic();
@@ -84,33 +86,6 @@ class Field extends Item
         $this->conditionalLogicRuleGroups = new RuleGroupCollection();
 
         return $this;
-
-    }
-
-    /**
-     * @param array $extraSettings Any extra settings that you want to apply at the last minute. Be careful not to set
-     *                             crucial settings like "key" and "conditional_logic" here. We will not remove any
-     *                             such items from the array in case you really want to set them,
-     *
-     * @return array
-     */
-    public function toAcfArray(array $extraSettings = [])
-    {
-
-        $settings = array_merge(parent::toAcfArray(), [
-            'fewbricks_original_key' => $this->getOriginalKey(),
-            'type'                   => $this->getType(),
-        ]);
-
-        if (!$this->conditionalLogicRuleGroups->isEmpty()) {
-
-            $settings['conditional_logic'] = $this->conditionalLogicRuleGroups->toArray();
-
-        }
-
-        $settings = array_merge($settings, $extraSettings);
-
-        return $settings;
 
     }
 
@@ -289,6 +264,33 @@ class Field extends Item
         $this->setSetting('wrapper', $wrapper);
 
         return $this;
+
+    }
+
+    /**
+     * @param array $extraSettings Any extra settings that you want to apply at the last minute. Be careful not to set
+     *                             crucial settings like "key" and "conditional_logic" here. We will not remove any
+     *                             such items from the array in case you really want to set them,
+     *
+     * @return array
+     */
+    public function toAcfArray(array $extraSettings = [])
+    {
+
+        $settings = array_merge(parent::toAcfArray(), [
+            'fewbricks_original_key' => $this->getOriginalKey(),
+            'type'                   => $this->getType(),
+        ]);
+
+        if (!$this->conditionalLogicRuleGroups->isEmpty()) {
+
+            $settings['conditional_logic'] = $this->conditionalLogicRuleGroups->toArray();
+
+        }
+
+        $settings = array_merge($settings, $extraSettings);
+
+        return $settings;
 
     }
 
