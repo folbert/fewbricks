@@ -47,9 +47,14 @@ spl_autoload_register(function ($class) {
         // In a real environment i would probably go without this check to speed things up a bit
         // but since this is a test/dev environment, lets do it like this.
         if (file_exists($path)) {
+
+            /** @noinspection PhpIncludeInspection */
             include $path;
+
         } else {
+
             wp_die('Fewbricks could not locate the class ' . $class);
+
         }
 
     }
@@ -195,9 +200,9 @@ if (!function_exists('register_fewbricks_custom_post_type')) {
 function templateInclude($template)
 {
 
-    if (get_post_type() === 'fewbricks_demo_page') {
+    if (get_post_type() === 'fewbricks_demo_pg' or get_post_type() === 'fewbricks_demo_pg2') {
 
-        $template = __DIR__ . '/demo-page-template.php';
+        $template = __DIR__ . '/templates/demo-page-template.php';
     }
 
     return $template;

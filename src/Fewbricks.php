@@ -102,6 +102,7 @@ class Fewbricks
 
         self::displayNotices();
 
+        /** @noinspection PhpIncludeInspection */
         require Helper::getProjectInitFilePath();
 
         Helper::initDebug();

@@ -10,14 +10,18 @@
 
 <body class="fewbricks-demo">
 
-<?php
-while (have_posts()) {
 
-    the_post();
+<div class="container">
+    <div class="row">
+        <div class="col">
 
-}
+            <?php
+            echo (new \App\FewbricksDemo\Bricks\HeadlineAndText('headline_and_text_1'))->getHtml();
+            ?>
 
-?>
+        </div>
+    </div>
+</div>
 
 </body>
 </html>

@@ -6,6 +6,8 @@
 
 namespace App\FewbricksDemo;
 
+use Fewbricks\Helper;
+
 /**
  * Class FiltersApplier
  *
@@ -27,8 +29,8 @@ class FiltersApplier
         /*add_filter('fewbricks/project_files_base_path',
             [$me . '\\Fewbricks', 'getProjectFilesBasePath']);*/
 
-        add_filter('fewbricks/brick/brick_layout_base_path',
-            [$me, 'getLayoutBasePath']);
+        add_filter('fewbricks/brick/brick_layouts_base_path',
+            [$me, 'getLayoutsBasePath']);
 
         /*add_filter('fewbricks/brick/brick_template_base_path',
             [$me, 'getBrickTemplateBasePath']);*/
@@ -42,8 +44,6 @@ class FiltersApplier
         add_filter('fewbricks/auto_write_php_code_file', [$me, 'setPhpCodeFilePath']);
 
         add_filter('fewbricks/show_fields_info', '__return_true');
-
-        add_filter('fewbricks/debug_mode', '__return_true');
 
         //add_filter('fewbricks/display_php_file_written_message', '__return_false');
 
@@ -84,10 +84,10 @@ class FiltersApplier
     /**
      * @return string
      */
-    public static function getLayoutBasePath()
+    public static function getLayoutsBasePath()
     {
 
-        return get_template_directory() . '/templates/module-layouts';
+        return Helper::getProjectFilesBasePath() . '/brick-layouts';
 
     }
 

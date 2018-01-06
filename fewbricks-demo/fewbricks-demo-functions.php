@@ -7,6 +7,7 @@
 
 namespace App\FewbricksDemo;
 
+use App\FewbricksDemo\Bricks\HeadlineAndText;
 use App\FewbricksDemo\Bricks\Wysiwyg;
 use App\FewbricksDemo\FieldGroups\FieldsKitchenSink;
 use App\FewbricksDemo\FieldGroups\Heroes;
@@ -28,13 +29,14 @@ FiltersApplier::defineHooks();
 // Demoing an example on how to use "caching" functionality using PHP code files.
 // This will use the php code file when in production and run al the code and write to
 // the php file when not in production.
-if (defined('FEWBRICKS_ENV') && FEWBRICKS_ENV === 'production') {
+if (defined('FEWBRICKS_ENV') && FEWBRICKS_ENV === 'production' && file_exists(Helper::getAutoWritePhpCodeFile())) {
 
+    /** @noinspection PhpIncludeInspection */
     require_once Helper::getAutoWritePhpCodeFile();
 
 } else {
 
-    (new FieldGroup('Teaser data', '1801042233a'))
+    (new FieldGroup('Showing ways to add and remove fields', '1801042233a'))
         ->addLocationRuleGroup(
             (new FieldGroupLocationRuleGroup())
                 ->addRule(new Rule('post_type', '==', 'fewbricks_demo_pg'))
@@ -48,7 +50,7 @@ if (defined('FEWBRICKS_ENV') && FEWBRICKS_ENV === 'production') {
         ->setMenuOrder(-100)
         ->setArgument('argument_name', 'argument_value')
         ->setArguments([
-            'another_argument_name' => 'another_argument_value',
+            'another_argument_name'     => 'another_argument_value',
             'yet_another_argument_name' => 'yet_another_argument_value',
         ])
         ->addField(new Text('Text 1', 'text_1', '1801050012a'))
@@ -76,7 +78,26 @@ if (defined('FEWBRICKS_ENV') && FEWBRICKS_ENV === 'production') {
         ->removeFieldByKey('1801050012e')
         ->removeFieldsByKey(['1801050012g', '1801050012b'])
         ->addFieldSetting('1801050012h', 'default_value', 'Default value for Text 8')
+        ->addBrick(
+            (new HeadlineAndText('headline_and_text_1', 'br1801060137a'))
+                ->setFieldLabelsPrefix('Headlines and text 1 - ')
+        )
+        ->addBrick(
+            (new HeadlineAndText('headline_and_text_2', 'br1801060137b'))
+                ->setFieldLabelsPrefix('Headlines and text 2 - ')
+                ->setArgument('show_badge', true)
+        )
+        ->addBrick(
+            (new Wysiwyg('wysiwyg_1', 'br1712282146a'))
+                ->setFieldLabelsPrefix('WYSIWYG 1 - ')
+        )
+        ->addBrick(
+            (new Wysiwyg('wysiwyg2', 'br1712282227u'))
+                ->setFieldLabelsPrefix('WYSIWYG 2 - ')
+                ->addFieldSetting('1712282148a', 'delay', true) // Setting ACF setting late in the process
+        )
         ->register();
+
 
     (new Heroes('1712262204a'))
         ->addLocationRuleGroup(
@@ -85,6 +106,7 @@ if (defined('FEWBRICKS_ENV') && FEWBRICKS_ENV === 'production') {
         )
         ->setHideOnScreen('content')
         ->register();
+
 
     (new FieldGroup('Field group with bricks', 'fg1712282142a'))
         ->addBrick(
@@ -103,6 +125,7 @@ if (defined('FEWBRICKS_ENV') && FEWBRICKS_ENV === 'production') {
         ->setHideOnScreen('content')
         ->register();
 
+
     // Demoing a class
     (new FieldsKitchenSink('fg1712042021a'))
         ->setTitle('Kitchen sink 1')
@@ -113,6 +136,7 @@ if (defined('FEWBRICKS_ENV') && FEWBRICKS_ENV === 'production') {
         ->setArgument('remove_layouts', ['fd_text_and_select', 'fd_single_image'])
         ->setArgument('remove_sub_fields', ['fd_repeater_image', 'fd_repeater_text_2'])
         ->register();
+
 
     // Demoing the same class but but changing it on the fly
     (new FieldsKitchenSink('fg17120529561a'))
@@ -130,26 +154,6 @@ if (defined('FEWBRICKS_ENV') && FEWBRICKS_ENV === 'production') {
         ->setHideOnScreen('the_content')
         ->setFieldNamesPrefix('secondary_content_')
         ->setFieldLabelsPrefix('Kitchen sink 2 - ')
-        ->register();
-
-    (new FieldsKitchenSink('fg1712111413a'))
-        ->setTitle('Kitchen Sink 3')
-        ->removeFieldByName('fd_tab1')
-        ->removeFieldsByName(['fd_color_picker', 'fd_file'])
-        ->removeFieldByName('fd_checkbox')
-        ->addFieldAfterByName(
-            new Text('Text - added after Button Group', 'fd_text_after_button_group', '1712121051a'),
-            'fd_button_group'
-        )
-        ->addFieldAfterByName(
-            (new Text('Another text added after the button group', 'fd_text_after_new_text', '17121206a'))
-                ->addConditionalLogicRuleGroup(
-                    (new ConditionalLogicRuleGroup())
-                        ->addRule(new ConditionalLogicRule('1711172249u', '==', 'black')
-                        )
-                ),
-            'fd_button_group'
-        )
         ->register();
 
     // Lots of field groups fo perf tests

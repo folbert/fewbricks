@@ -11,11 +11,11 @@ class ConditionalLogicRuleGroup extends RuleGroup
 {
 
     /**
-     * @param ConditionalLogicRule $rule
+     * @param Rule $rule
      *
      * @return $this
      */
-    public function addRule($rule)
+    public function addRule(Rule $rule)
     {
 
         if (!($rule instanceof ConditionalLogicRule)) {

@@ -32,7 +32,7 @@ class RuleGroup
      *
      * @return $this
      */
-    public function addRule($rule)
+    public function addRule(Rule $rule)
     {
 
         $this->rules->addItem($rule);
@@ -44,10 +44,10 @@ class RuleGroup
     /**
      * @return array An array that ACF can work with.
      */
-    public function toArray()
+    public function toAcfArray()
     {
 
-        return $this->rules->toArray();
+        return $this->rules->toAcfArray();
 
     }
 

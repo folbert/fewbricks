@@ -104,7 +104,7 @@ class Rule
     /**
      * @return array An array that ACF can work with.
      */
-    public function toArray()
+    public function toAcfArray()
     {
 
         return ['param' => $this->param, 'operator' => $this->operator, 'value' => $this->value];

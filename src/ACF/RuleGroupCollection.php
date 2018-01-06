@@ -25,7 +25,7 @@ class RuleGroupCollection extends Collection
         /** @var FieldGroupLocationRuleGroup $ruleGroup */
         foreach ($this->items AS $ruleGroup) {
 
-            $array[] = $ruleGroup->toArray();
+            $array[] = $ruleGroup->toAcfArray();
 
         }
 
