@@ -181,13 +181,62 @@ class Brick extends FieldCollection implements BrickInterface
 
     }
 
-    public function getChildBrick($className, $name)
+    /**
+     * Executes a template file for the current class and returns the output.
+     *
+     * @param array       $data             Array of data to pass to the template file
+     * @param bool|string $templateFilePath If you want to set a specific base path, pass it here. End with a slash.
+     *
+     * @return string
+     */
+    protected function getBrickTemplateHtml(array $data = [], $templateFilePath = false)
     {
 
-        return (new $className($name));
-        //->setIsLayout($isLayout)
-        //->setIsSubField($isSubField)
-        //->setIsOption($this->isOption);
+        if ($templateFilePath === false) {
+
+            $templateFilePath = Helper::getBrickTemplatesBasePath($this) . Helper::getBrickTemplateFileName($this);
+
+        }
+
+        ob_start();
+
+        /** @noinspection PhpIncludeInspection */
+        include($templateFilePath);
+
+        return ob_get_clean();
+
+    }
+
+    /**
+     *
+     *
+     * @param string $className
+     * @param string $brickName
+     * @param bool   $isLayout   If the child brick is a layout.
+     * @param bool   $isSubField If the child brick is a sub field
+     * @param bool   $isOption   If the child brick is an option. All field swill be fetched using ACFs "option"
+     *                           argument.
+     *
+     * @return object An instance of the class passed as $className
+     */
+    public function getChildBrick($className, $brickName, $isLayout = false, $isSubField = false, $isOption = false)
+    {
+
+        // If no special case has been forced on the function call...
+        if ($isLayout === false && $isSubField === false && $isOption === false) {
+
+            // Let the calling object decide
+            $isLayout   = $this->isLayout;
+            $isSubField = $this->isSubField;
+            $isOption   = $this->isOption;
+            $brickName  = $this->name . '_' . $brickName;
+
+        }
+
+        return (new $className($brickName))
+            ->setIsLayout($isLayout)
+            ->setIsSubField($isSubField)
+            ->setIsOption($isOption);
 
     }
 
@@ -295,7 +344,7 @@ class Brick extends FieldCollection implements BrickInterface
 
             $dataValue = $this->data[$name];
 
-        } else if ($postId === false && ($getFromSubField || $this->is_layout || $this->is_sub_field)) {
+        } else if ($postId === false && ($getFromSubField || $this->isLayout || $this->isSubField)) {
 
             // We should get data using acf functions and we are dealing with layout or sub field
 
@@ -323,7 +372,7 @@ class Brick extends FieldCollection implements BrickInterface
         } else {
             // ACF data which is not a layout or sub field
 
-            if ($this->is_option === true) {
+            if ($this->isOption === true) {
 
                 if (null !== ($value = get_field($name, 'options', $formatValue))) {
 
@@ -418,6 +467,78 @@ class Brick extends FieldCollection implements BrickInterface
     }
 
     /**
+     * @return bool
+     */
+    public function getIsLayout()
+    {
+
+        return $this->isLayout;
+
+    }
+
+    /**
+     * @param $isLayout
+     *
+     * @return Brick
+     */
+    public function setIsLayout($isLayout)
+    {
+
+        $this->isLayout = $isLayout;
+
+        return $this;
+
+    }
+
+    /**
+     * @return bool
+     */
+    public function getIsOption()
+    {
+
+        return $this->isOption;
+
+    }
+
+    /**
+     * @param $isOption
+     *
+     * @return $this
+     */
+    public function setIsOption($isOption)
+    {
+
+        $this->isOption = $isOption;
+
+        return $this;
+
+    }
+
+    /**
+     * @return bool
+     */
+    public function getIsSubField()
+    {
+
+        return $this->isSubField;
+
+    }
+
+    /**
+     * @param $isSubField
+     *
+     * @return $this
+     */
+    public function setIsSubField($isSubField)
+    {
+
+        $this->isSubField = $isSubField;
+
+        return $this;
+
+    }
+
+    /**
      * @return mixed
      */
     public function getPostIdToGetFieldFrom()
@@ -493,7 +614,9 @@ class Brick extends FieldCollection implements BrickInterface
      */
     public function toAcfArray()
     {
+
         return parent::toAcfArray();
+
     }
 
 }

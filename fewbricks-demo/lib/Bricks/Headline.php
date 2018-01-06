@@ -63,10 +63,21 @@ class Headline extends ProjectBrick
 
     }
 
+    /**
+     * @return array
+     */
     private function getViewData()
     {
 
+        $viewData = $this->getFieldValues([
+            'text',
+            'badge',
+            'level',
+        ]);
 
+        dump($viewData);
+
+        return $viewData;
 
     }
 
@@ -79,7 +90,7 @@ class Headline extends ProjectBrick
 
         $this->getViewData();
 
-        return 'Headline html';
+        return $this->getBrickTemplateHtml($this->getViewData());
 
     }
 

@@ -52,9 +52,7 @@ spl_autoload_register(function ($class) {
             include $path;
 
         } else {
-
             wp_die('Fewbricks could not locate the class ' . $class);
-
         }
 
     }

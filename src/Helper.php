@@ -39,6 +39,9 @@ class Helper
 
     }
 
+    /**
+     * @return mixed|void
+     */
     public static function getBrickLayoutsBasePath()
     {
 
@@ -65,6 +68,43 @@ class Helper
     {
 
         return __DIR__ . '/../fewbricks-demo';
+
+    }
+
+    /**
+     * @param $brickObject
+     *
+     * @return mixed
+     */
+    public static function getBrickTemplateFileName($brickObject)
+    {
+
+        $namespacedClassNamePieces = explode('\\', get_class($brickObject));
+        $className = array_pop($namespacedClassNamePieces);
+
+        $dashedClassName = preg_replace('/([A-Z]+)/', "-$1", lcfirst($className));
+
+        return apply_filters(
+            'fewbricks/brick_template_file_name',
+            strtolower($dashedClassName) . '.view.php',
+            $brickObject
+        );
+
+    }
+
+    /**
+     * @param object $brickObject
+     *
+     * @return mixed|void
+     */
+    public static function getBrickTemplatesBasePath($brickObject)
+    {
+
+        return apply_filters(
+            'fewbricks/brick_templates_base_path',
+            self::getProjectFilesBasePath() . '/brick-templates',
+            $brickObject
+        );
 
     }
 
