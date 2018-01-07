@@ -5,6 +5,7 @@
  * follow the same structure that this file has.
  */
 
+// Constant to use for filters etc.
 define('FEWBRICKS_PROJECT_FILES_BASE_PATH', __DIR__);
 
 // Remove this to remove all demo related stuff

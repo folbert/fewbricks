@@ -79,9 +79,10 @@ class Helper
     public static function getBrickTemplateFileName($brickObject)
     {
 
-        $namespacedClassNamePieces = explode('\\', get_class($brickObject));
-        $className = array_pop($namespacedClassNamePieces);
+        $namespacedPieces = explode('\\', get_class($brickObject));
+        $className        = array_pop($namespacedPieces);
 
+        // Turn CamelCaseFileNames to dashed-versions. (ClassName -> class-name)
         $dashedClassName = preg_replace('/([A-Z]+)/', "-$1", lcfirst($className));
 
         return apply_filters(

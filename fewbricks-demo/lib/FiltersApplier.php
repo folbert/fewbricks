@@ -67,11 +67,11 @@ class FiltersApplier
     }
 
     /**
-     * @param $brickObject
+     * @param $brickInstance
      *
      * @return string
      */
-    public static function getBrickTemplatesBasePath($brickTemplatesBasePath, $brickObject)
+    public static function getBrickTemplatesBasePath($brickTemplatesBasePath, $brickInstance)
     {
 
         return FEWBRICKS_PROJECT_FILES_BASE_PATH . '/lib/Bricks/';
@@ -119,12 +119,12 @@ class FiltersApplier
     }
 
     /**
-     * @param $fileName
-     * @param $brickObject
+     * @param string $fileName
+     * @param object $brickInstance
      *
      * @return string
      */
-    public static function getBrickTemplateFileName($fileName, $brickObject)
+    public static function getBrickTemplateFileName($fileName, $brickInstance)
     {
 
         return $fileName;

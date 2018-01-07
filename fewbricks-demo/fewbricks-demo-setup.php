@@ -200,7 +200,7 @@ function templateInclude($template)
 
     if (get_post_type() === 'fewbricks_demo_pg' or get_post_type() === 'fewbricks_demo_pg2') {
 
-        $template = __DIR__ . '/templates/demo-page-template.php';
+        $template = __DIR__ . '/page-templates/demo-page-template.php';
     }
 
     return $template;
