@@ -6,25 +6,13 @@ the WordPress Plugin Directory.
 **Fewbricks 2 is a complete rewrite of Fewbricks and introduces an insane amount of breaking changes so I am strongly
 advising against installing it in a setup that is already implemented using Fewbricks 1.x.**
 
-+ [Legal](#legal) 
-+ [Dictionary](#dictionary)
-+ [About](#about)
-+ [Requirements](#requirements)
-+ [Installation](#installation)
-+ [Filters](#filters)
-
 ## Legal
-Fewbricks and its developers are in no way associated with Advanced Custom Fields. Fewbricks is released under GPLv3.
+Fewbricks is released under GPLv3 and is in no way associated with Advanced Custom Fields.
 
 ## More info
-I am moving the documentation to [https://fewbricksdocs.readme.io/](https://fewbricksdocs.readme.io/).
+The documentation is moving to [https://fewbricksdocs.readme.io/](https://fewbricksdocs.readme.io/). Text below is kept for now but may not pply to v2.
 
-
-
-
-
-
-
+---
 
 ## Dictionary
 The following words will be explained in detail later in this document,
