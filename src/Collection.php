@@ -209,6 +209,9 @@ class Collection
         return count($this->items);
     }
 
+    /**
+     * @return bool
+     */
     public function isEmpty()
     {
         return $this->getLength() === 0;
@@ -232,6 +235,23 @@ class Collection
 
         if (isset($this->items[$key])) {
             unset($this->items[$key]);
+        }
+
+    }
+
+    /**
+     * @param string $functionName
+     * @param mixed $value
+     */
+    public function removeItemByFunctionValue($functionName, $value)
+    {
+
+        foreach($this->items AS $itemKey => $item) {
+
+            if($item->$functionName() === $value) {
+                $this->removeItem($itemKey);
+            }
+
         }
 
     }
