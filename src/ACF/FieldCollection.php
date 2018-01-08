@@ -75,8 +75,7 @@ class FieldCollection extends Collection implements FieldCollectionInterface
     public function addBrick(Brick $brick)
     {
 
-        $brick->setFields();
-        $brick->prepareForAcfArray();
+        $this->prepareBrickForAdd($brick);
 
         /** @var Field $field */
         foreach ($brick->getFields() AS $field) {
@@ -86,6 +85,27 @@ class FieldCollection extends Collection implements FieldCollectionInterface
         }
 
         return $this;
+
+    }
+
+    /**
+     * @param Brick $brick
+     */
+    private function prepareBrickForAdd(Brick &$brick)
+    {
+
+        $brick->setFields();
+        $brick->prepareForAcfArray();
+
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getFields()
+    {
+
+        return $this->getItems();
 
     }
 
@@ -104,20 +124,67 @@ class FieldCollection extends Collection implements FieldCollectionInterface
     }
 
     /**
-     * @param Field  $field
+     * Prepares all fields in the collection for being transformed to an array. This must be called before creating
+     * an ACF array and should be called just before doing so.
+     */
+    protected function prepareForAcfArray()
+    {
+
+        if (!$this->preparedForAcfArray) {
+
+            /** @var Field $field */
+            foreach ($this->items AS &$field) {
+
+                $field->prefixName($this->fieldNamesPrefix);
+                $field->prefixLabel($this->fieldLabelsPrefix);
+                $field->suffixLabel($this->fieldLabelsSuffix);
+
+                $extraSettings = (isset($this->fieldsSettings[$field->getOriginalKey()])
+                    ? $this->fieldsSettings[$field->getOriginalKey()] : false);
+
+                if ($extraSettings !== false) {
+
+                    $field->setSettings($extraSettings);
+
+                }
+
+            }
+
+        }
+
+        $this->preparedForAcfArray = true;
+
+    }
+
+    /**
+     * @param Brick  $brick
      * @param string $fieldNameToAddAfter
      *
      * @return $this
      */
-    public function addFieldAfterByName(Field $field, $fieldNameToAddAfter)
+    public function addBrickAfterByName(Brick $brick, $fieldNameToAddAfter)
     {
 
-        /** @var Field $fieldToAddAfter */
-        $fieldToAddAfter = $this->getFieldByName($fieldNameToAddAfter);
+        $this->prepareBrickForAdd($brick);
 
-        if ($fieldToAddAfter !== false) {
+        $this->addFieldsAfterByName($brick->getFields(), $fieldNameToAddAfter);
 
-            parent::addItemAfter($field, $fieldToAddAfter->getKey(), $field->getKey());
+        return $this;
+
+    }
+
+    /**
+     * @param array  $fields
+     * @param string $fieldNameToAddBefore
+     *
+     * @return FieldCollection
+     */
+    public function addFieldsBeforeByName(array $fields, $fieldNameToAddBefore)
+    {
+
+        foreach ($fields AS $field) {
+
+            $this->addFieldBeforeByName($field, $fieldNameToAddBefore);
 
         }
 
@@ -148,16 +215,94 @@ class FieldCollection extends Collection implements FieldCollectionInterface
     }
 
     /**
-     * @param FieldCollection $fieldCollection
+     * @param $name
+     *
+     * @return bool|mixed
+     */
+    public function getFieldByName($name)
+    {
+
+        $field = false;
+
+        /**
+         * @var string $itemKey
+         * @var Field  $possibleField
+         */
+        foreach ($this->items AS $itemKey => $possibleField) {
+
+            if ($possibleField->getName() === $name) {
+
+                $field = parent::getItem($itemKey);
+                break;
+
+            }
+
+        }
+
+        return $field;
+
+    }
+
+    /**
+     * @param Brick  $brick
+     * @param string $fieldNameToAddBefore
+     *
+     * @return $this
+     */
+    public function addBrickBeforeByName(Brick $brick, $fieldNameToAddBefore)
+    {
+
+        $this->prepareBrickForAdd($brick);
+
+        $this->addFieldsBeforeByName($brick->getFields(), $fieldNameToAddBefore);
+
+        return $this;
+
+    }
+
+    /**
+     * @param Brick $brick
+     *
+     * @return $this
+     */
+    public function addBrickToBeginning(Brick $brick)
+    {
+
+        $this->prepareBrickForAdd($brick);
+
+        // Since we wil be using addFields, lets reverse fields order to make sure they are added in the correct order
+        $this->addFieldsToBeginning($brick->getFields());
+
+        return $this;
+
+    }
+
+    /**
+     * @param FieldCollection|array $fields
      *
      * @return FieldCollection
      */
-    public function addFieldCollection(FieldCollection $fieldCollection)
+    public function addFieldsToBeginning($fields)
     {
 
-        $fieldCollection->prepareForAcfArray();
+        if (is_array($fields)) {
 
-        $this->addFields($fieldCollection->getFields());
+            $keyedFields = [];
+
+            /** @var Field $field */
+            foreach ($fields AS $field) {
+
+                $keyedFields[$field->getKey()] = $field;
+
+            }
+
+            $this->addItemsToBeginning($keyedFields);
+
+        } else if ($fields instanceof FieldCollection) {
+
+            $this->addFieldCollectionToBeginning($fields);
+
+        }
 
         return $this;
 
@@ -174,6 +319,48 @@ class FieldCollection extends Collection implements FieldCollectionInterface
         $fieldCollection->prepareForAcfArray();
 
         $this->addFieldsToBeginning($fieldCollection->getItems());
+
+        return $this;
+
+    }
+
+    /**
+     * @param FieldCollection $fieldCollection
+     *
+     * @return FieldCollection
+     */
+    public function addFieldCollection(FieldCollection $fieldCollection)
+    {
+
+        $fieldCollection->prepareForAcfArray();
+
+        $this->addFields($fieldCollection->getFields());
+
+        return $this;
+
+    }
+
+    /**
+     * @param FieldCollection|array $fields
+     *
+     * @return FieldCollection
+     */
+    public function addFields($fields)
+    {
+
+        if (is_array($fields)) {
+
+            foreach ($fields AS $field) {
+
+                $this->addField($field);
+
+            }
+
+        } else if ($fields instanceof FieldCollection) {
+
+            $this->addFieldCollection($fields);
+
+        }
 
         return $this;
 
@@ -220,32 +407,6 @@ class FieldCollection extends Collection implements FieldCollectionInterface
     }
 
     /**
-     * @param FieldCollection|array $fields
-     *
-     * @return FieldCollection
-     */
-    public function addFields($fields)
-    {
-
-        if (is_array($fields)) {
-
-            foreach ($fields AS $field) {
-
-                $this->addField($field);
-
-            }
-
-        } else if ($fields instanceof FieldCollection) {
-
-            $this->addFieldCollection($fields);
-
-        }
-
-        return $this;
-
-    }
-
-    /**
      * @param array  $fields
      * @param string $fieldNameToAddAfter
      *
@@ -268,48 +429,20 @@ class FieldCollection extends Collection implements FieldCollectionInterface
     }
 
     /**
-     * @param array  $fields
-     * @param string $fieldNameToAddBefore
+     * @param Field  $field
+     * @param string $fieldNameToAddAfter
      *
-     * @return FieldCollection
+     * @return $this
      */
-    public function addFieldsBeforeByName(array $fields, $fieldNameToAddBefore)
+    public function addFieldAfterByName(Field $field, $fieldNameToAddAfter)
     {
 
-        foreach ($fields AS $field) {
+        /** @var Field $fieldToAddAfter */
+        $fieldToAddAfter = $this->getFieldByName($fieldNameToAddAfter);
 
-            $this->addFieldBeforeByName($field, $fieldNameToAddBefore);
+        if ($fieldToAddAfter !== false) {
 
-        }
-
-        return $this;
-
-    }
-
-    /**
-     * @param FieldCollection|array $fields
-     *
-     * @return FieldCollection
-     */
-    public function addFieldsToBeginning($fields)
-    {
-
-        if (is_array($fields)) {
-
-            $keyedFields = [];
-
-            /** @var Field $field */
-            foreach ($fields AS $field) {
-
-                $keyedFields[$field->getKey()] = $field;
-
-            }
-
-            $this->addItemsToBeginning($keyedFields);
-
-        } else if ($fields instanceof FieldCollection) {
-
-            $this->addFieldCollectionToBeginning($fields);
+            parent::addItemAfter($field, $fieldToAddAfter->getKey(), $field->getKey());
 
         }
 
@@ -331,152 +464,20 @@ class FieldCollection extends Collection implements FieldCollectionInterface
     }
 
     /**
-     * @return mixed
-     */
-    public function getBaseKey()
-    {
-
-        return $this->baseKey;
-
-    }
-
-    /**
-     * @param string $baseKey
-     */
-    public function setBaseKey($baseKey)
-    {
-
-        $this->baseKey = $baseKey;
-
-    }
-
-    /**
-     * @param $name
+     * @param array $keys
      *
-     * @return bool|mixed
+     * @return FieldCollection
      */
-    public function getFieldByName($name)
+    public function removeFieldsByKey(array $keys)
     {
 
-        $field = false;
+        foreach ($keys AS $key) {
 
-        /**
-         * @var string $itemKey
-         * @var Field  $possibleField
-         */
-        foreach ($this->items AS $itemKey => $possibleField) {
-
-            if ($possibleField->getName() === $name) {
-
-                $field = parent::getItem($itemKey);
-                break;
-
-            }
+            $this->removeFieldByKey($key);
 
         }
 
-        return $field;
-
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getFields()
-    {
-
-        return $this->getItems();
-
-    }
-
-    /**
-     * @param array $fieldsSettings
-     *
-     * @return mixed
-     */
-    private function prepareFieldsConditionalLogic($fieldsSettings)
-    {
-
-        // Conditional logic for ACF is made up of a three-levelled where the first level is the entire logic,
-        // the second level are groups (whose relations are OR) and the third level are items (whose relations are AND).
-
-        foreach ($fieldsSettings AS $fieldSettingsKey => $fieldSettings) {
-
-            // Do the field have conditional logic
-            if (isset($fieldSettings['conditional_logic'])
-                && is_array($fieldSettings['conditional_logic'])
-            ) {
-
-                $conditionalLogic = $fieldSettings['conditional_logic'];
-
-                // Traverse down the conditional logic array
-                foreach ($conditionalLogic AS $conditionalLogicGroupKey => $conditionalLogicGroupValue) {
-
-                    foreach (
-                        $conditionalLogic[$conditionalLogicGroupKey] AS $conditionalLogicItemKey =>
-                        $conditionalLogicItemValue
-                    ) {
-
-                        $targetFieldKey
-                            = $conditionalLogic[$conditionalLogicGroupKey][$conditionalLogicItemKey]['field'];
-
-                        // Loop all other items in this collection
-                        /** @var Field $otherFieldObject */
-                        foreach ($this->items AS $otherFieldObject) {
-
-                            if ($otherFieldObject->getOriginalKey() === $targetFieldKey) {
-
-                                $conditionalLogic[$conditionalLogicGroupKey][$conditionalLogicItemKey]['field']
-                                    = $otherFieldObject->getKey();
-
-                            }
-
-                        }
-
-                    }
-
-                }
-
-                $fieldsSettings[$fieldSettingsKey]['conditional_logic'] = $conditionalLogic;
-
-            }
-
-        }
-
-        return $fieldsSettings;
-
-    }
-
-    /**
-     * Prepares all fields in the collection for being transformed to an array. This must be called before creating
-     * an ACF array and should be called just before doing so.
-     */
-    protected function prepareForAcfArray()
-    {
-
-        if (!$this->preparedForAcfArray) {
-
-            /** @var Field $field */
-            foreach ($this->items AS &$field) {
-
-                $field->prefixName($this->fieldNamesPrefix);
-                $field->prefixLabel($this->fieldLabelsPrefix);
-                $field->suffixLabel($this->fieldLabelsSuffix);
-
-                $extraSettings = (isset($this->fieldsSettings[$field->getOriginalKey()])
-                    ? $this->fieldsSettings[$field->getOriginalKey()] : false);
-
-                if ($extraSettings !== false) {
-
-                    $field->setSettings($extraSettings);
-
-                }
-
-            }
-
-        }
-
-        $this->preparedForAcfArray = true;
+        return $this;
 
     }
 
@@ -493,6 +494,29 @@ class FieldCollection extends Collection implements FieldCollectionInterface
         }
 
         $this->removeItem($key);
+
+        //$this->removeItemByFunctionValue('getOriginalKey', $key);
+
+        return $this;
+
+    }
+
+    /**
+     * Remove a bunch of fields in one function call. Utilizes the function removeField. Note that the actual removal
+     * of the field does not take place until the collection is finalized.
+     *
+     * @param array $fieldNames Array of names of fields to remove.
+     *
+     * @return FieldCollection
+     */
+    public function removeFieldsByName(array $fieldNames)
+    {
+
+        foreach ($fieldNames AS $fieldName) {
+
+            $this->removeFieldByName($fieldName);
+
+        }
 
         return $this;
 
@@ -525,37 +549,16 @@ class FieldCollection extends Collection implements FieldCollectionInterface
     }
 
     /**
-     * @param array $keys
+     * @param array $arguments
      *
-     * @return FieldCollection
+     * @return $this
      */
-    public function removeFieldsByKey(array $keys)
+    public function setArguments(array $arguments)
     {
 
-        foreach ($keys AS $key) {
+        foreach ($arguments as $name => $value) {
 
-            $this->removeFieldByKey($key);
-
-        }
-
-        return $this;
-
-    }
-
-    /**
-     * Remove a bunch of fields in one function call. Utilizes the function removeField. Note that the actual removal
-     * of the field does not take place until the collection is finalized.
-     *
-     * @param array $fieldNames Array of names of fields to remove.
-     *
-     * @return FieldCollection
-     */
-    public function removeFieldsByName(array $fieldNames)
-    {
-
-        foreach ($fieldNames AS $fieldName) {
-
-            $this->removeFieldByName($fieldName);
+            $this->setArgument($name, $value);
 
         }
 
@@ -573,24 +576,6 @@ class FieldCollection extends Collection implements FieldCollectionInterface
     {
 
         $this->arguments[$name] = $value;
-
-        return $this;
-
-    }
-
-    /**
-     * @param array $arguments
-     *
-     * @return $this
-     */
-    public function setArguments(array $arguments)
-    {
-
-        foreach ($arguments as $name => $value) {
-
-            $this->setArgument($name, $value);
-
-        }
 
         return $this;
 
@@ -652,6 +637,84 @@ class FieldCollection extends Collection implements FieldCollectionInterface
         $acfArray = $this->prepareFieldsConditionalLogic($acfArray);
 
         return $acfArray;
+
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getBaseKey()
+    {
+
+        return $this->baseKey;
+
+    }
+
+    /**
+     * @param string $baseKey
+     */
+    public function setBaseKey($baseKey)
+    {
+
+        $this->baseKey = $baseKey;
+
+    }
+
+    /**
+     * @param array $fieldsSettings
+     *
+     * @return mixed
+     */
+    private function prepareFieldsConditionalLogic($fieldsSettings)
+    {
+
+        // Conditional logic for ACF is made up of a three-levelled where the first level is the entire logic,
+        // the second level are groups (whose relations are OR) and the third level are items (whose relations are AND).
+
+        foreach ($fieldsSettings AS $fieldSettingsKey => $fieldSettings) {
+
+            // Do the field have conditional logic
+            if (isset($fieldSettings['conditional_logic'])
+                && is_array($fieldSettings['conditional_logic'])
+            ) {
+
+                $conditionalLogic = $fieldSettings['conditional_logic'];
+
+                // Traverse down the conditional logic array
+                foreach ($conditionalLogic AS $conditionalLogicGroupKey => $conditionalLogicGroupValue) {
+
+                    foreach (
+                        $conditionalLogic[$conditionalLogicGroupKey] AS $conditionalLogicItemKey =>
+                        $conditionalLogicItemValue
+                    ) {
+
+                        $targetFieldKey
+                            = $conditionalLogic[$conditionalLogicGroupKey][$conditionalLogicItemKey]['field'];
+
+                        // Loop all other items in this collection
+                        /** @var Field $otherFieldObject */
+                        foreach ($this->items AS $otherFieldObject) {
+
+                            if ($otherFieldObject->getOriginalKey() === $targetFieldKey) {
+
+                                $conditionalLogic[$conditionalLogicGroupKey][$conditionalLogicItemKey]['field']
+                                    = $otherFieldObject->getKey();
+
+                            }
+
+                        }
+
+                    }
+
+                }
+
+                $fieldsSettings[$fieldSettingsKey]['conditional_logic'] = $conditionalLogic;
+
+            }
+
+        }
+
+        return $fieldsSettings;
 
     }
 

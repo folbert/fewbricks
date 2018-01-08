@@ -9,6 +9,12 @@ interface FieldCollectionInterface
 
     public function addBrick(Brick $brick);
 
+    public function addBrickAfterByName(Brick $brick, $fieldNameToAddAfter);
+
+    public function addBrickBeforeByName(Brick $brick, $fieldNameToAddBefore);
+
+    public function addBrickToBeginning(Brick $brick);
+
     public function addField(Field $field);
 
     public function addFieldAfterByName(Field $field, $fieldNameToAddAfter);

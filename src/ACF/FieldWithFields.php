@@ -54,6 +54,50 @@ class FieldWithFields extends Field implements FieldCollectionInterface
     }
 
     /**
+     * @param Brick  $brick
+     * @param string $fieldNameToAddAfter
+     *
+     * @return $this
+     */
+    public function addBrickAfterByName(Brick $brick, $fieldNameToAddAfter)
+    {
+
+        $this->fields->addBrickAfterByName($brick, $fieldNameToAddAfter);
+
+        return $this;
+
+    }
+
+    /**
+     * @param Brick  $brick
+     * @param string $fieldNameToAddBefore
+     *
+     * @return $this
+     */
+    public function addBrickBeforeByName(Brick $brick, $fieldNameToAddBefore)
+    {
+
+        $this->fields->addBrickBeforeByName($brick, $fieldNameToAddBefore);
+
+        return $this;
+
+    }
+
+    /**
+     * @param Brick $brick
+     *
+     * @return $this
+     */
+    public function addBrickToBeginning(Brick $brick)
+    {
+
+        $this->fields>$this->addBrickToBeginning($brick);
+
+        return $this;
+
+    }
+
+    /**
      * @param Field $field
      *
      * @return $this
@@ -193,6 +237,16 @@ class FieldWithFields extends Field implements FieldCollectionInterface
     }
 
     /**
+     * @param string $key
+     */
+    public function removeFieldByKey($key)
+    {
+
+        $this->fields->removeFieldByKey($key);
+
+    }
+
+    /**
      * @param string $name
      *
      * @return $this
@@ -207,12 +261,12 @@ class FieldWithFields extends Field implements FieldCollectionInterface
     }
 
     /**
-     * @param string $key
+     * @param array $keys
      */
-    public function removeFieldByKey($key)
+    public function removeFieldsByKey(array $keys)
     {
 
-        $this->fields->removeFieldByKey($key);
+        $this->fields->removeFieldsByKey($keys);
 
     }
 
@@ -223,16 +277,6 @@ class FieldWithFields extends Field implements FieldCollectionInterface
     {
 
         $this->fields->removeFieldsByName($names);
-
-    }
-
-    /**
-     * @param array $keys
-     */
-    public function removeFieldsByKey(array $keys)
-    {
-
-        $this->fields->removeFieldsByKey($keys);
 
     }
 

@@ -80,21 +80,23 @@ if (defined('FEWBRICKS_ENV') && FEWBRICKS_ENV === 'production' && file_exists(He
         ->addFieldSetting('1801050012h', 'default_value', 'Default value for Text 8')
         ->addBrick(
             (new HeadlineAndText('headline_and_text_1', 'br1801060137a'))
-                ->setFieldLabelsPrefix('Headlines and text 1 - ')
+                ->setFieldLabelsPrefix('Headline and text 1 - ')
         )
-        ->addBrick(
+        ->addBrickToBeginning(
             (new HeadlineAndText('headline_and_text_2', 'br1801060137b'))
-                ->setFieldLabelsPrefix('Headlines and text 2 - ')
+                ->setFieldLabelsPrefix('Headline and text 2 - ')
                 ->setArgument('show_badge', true)
         )
-        ->addBrick(
+        ->addBrickBeforeByName(
             (new Wysiwyg('wysiwyg_1', 'br1712282146a'))
-                ->setFieldLabelsPrefix('WYSIWYG 1 - ')
+                ->setFieldLabelsPrefix('WYSIWYG 1 - '),
+            'text_10'
         )
-        ->addBrick(
+        ->addBrickAfterByName(
             (new Wysiwyg('wysiwyg2', 'br1712282227u'))
                 ->setFieldLabelsPrefix('WYSIWYG 2 - ')
-                ->addFieldSetting('1712282148a', 'delay', true) // Setting ACF setting late in the process
+                ->addFieldSetting('1712282148a', 'delay', true),  // Setting ACF setting late in the process
+            'text_3'
         )
         ->register();
 
