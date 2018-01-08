@@ -172,6 +172,28 @@ class Helper
     }
 
     /**
+     * If $key does not exist in $array, $default_value will be returned. Otherwise the value of $array[$key] will be returned
+     *
+     * @param $array
+     * @param $key
+     * @param $defaultValue
+     *
+     * @return mixed
+     */
+    public static function getValueFromArray($array, $key, $defaultValue)
+    {
+
+        $outcome = $defaultValue;
+
+        if (isset($array[$key])) {
+            $outcome = $array[$key];
+        }
+
+        return $outcome;
+
+    }
+
+    /**
      * Returns a timestamp if we are in dev environment. Use for example when developing css and js.
      *
      * @return int
