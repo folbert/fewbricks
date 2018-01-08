@@ -495,8 +495,6 @@ class FieldCollection extends Collection implements FieldCollectionInterface
 
         $this->removeItem($key);
 
-        //$this->removeItemByFunctionValue('getOriginalKey', $key);
-
         return $this;
 
     }

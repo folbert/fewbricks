@@ -7,7 +7,7 @@ use Fewbricks\ACF\Fields\Select;
 use Fewbricks\ACF\Fields\Text;
 
 /**
- * Class Wysiwyg
+ * Class Headline
  *
  * @package App\FewbricksDemo\Bricks
  */
@@ -27,7 +27,10 @@ class Headline extends ProjectBrick
         $this->addLevelsOptions();
 
         if ($this->getArgument('show_badge', false)) {
-            $this->addField(new Text('Badge', 'badge', '1801060145a'));
+            $this->addBrick(
+                (new Badge('badge', '1802090022a'))
+                ->setFieldLabelsPrefix('Badge - ')
+            );
         }
 
     }
@@ -75,7 +78,11 @@ class Headline extends ProjectBrick
             'level',
         ]);
 
-        dump($viewData);
+        if(!empty($this->getFieldValue('badge_text'))) {
+
+            $viewData['badgeHtml'] = ($this->getChildBrick(__NAMESPACE__ . '\\Badge', 'badge'))->getHtml();
+
+        }
 
         return $viewData;
 

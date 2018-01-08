@@ -16,6 +16,16 @@ class HeadlineAndText extends ProjectBrick
     protected $name = 'Headline and text';
 
     /**
+     * @return string
+     */
+    protected function getBrickHtml()
+    {
+
+        return $this->getChildBrick('App\FewbricksDemo\Bricks\Headline', 'headline')->getHtml();
+
+    }
+
+    /**
      *
      */
     public function setFields()
@@ -23,24 +33,10 @@ class HeadlineAndText extends ProjectBrick
 
         $this->addBrick(
             (new Headline('headline', '1801060149a'))
-            ->setArgument('show_badge', $this->getArgument('show_badge', false))
+                ->setArgument('show_badge', $this->getArgument('show_badge', false))
         );
 
         $this->addField(new Textarea('Text', 'text', '1801060126b'));
-
-    }
-
-    /**
-     * @return string
-     */
-    protected function getBrickHtml()
-    {
-
-        $html = '';
-
-        $html .= $this->getChildBrick('App\FewbricksDemo\Bricks\Headline', 'headline')->getHtml();
-
-        return $html;
 
     }
 

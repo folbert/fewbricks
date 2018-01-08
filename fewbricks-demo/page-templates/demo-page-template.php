@@ -13,13 +13,22 @@
 
 <div class="container">
     <div class="row">
-        <div class="col">
+        <div class="col-sm-6">
 
             <?php
             echo (new \App\FewbricksDemo\Bricks\HeadlineAndText('headline_and_text_1'))->getHtml();
             ?>
 
         </div>
+
+        <div class="col-sm-6">
+
+            <?php
+            echo (new \App\FewbricksDemo\Bricks\HeadlineAndText('headline_and_text_2'))->getHtml();
+            ?>
+
+        </div>
+
     </div>
 </div>
 

@@ -24,5 +24,4 @@ class Wysiwyg extends ProjectBrick
 
     }
 
-
 }
