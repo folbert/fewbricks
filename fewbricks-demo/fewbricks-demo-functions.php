@@ -98,6 +98,8 @@ if (defined('FEWBRICKS_ENV') && FEWBRICKS_ENV === 'production' && file_exists(He
                 ->addFieldSetting('1712282148a', 'delay', true),  // Setting ACF setting late in the process
             'text_3'
         )
+        ->removeBrickByName('headline_and_text_2')
+        ->removeBrickByKey('br1712282227u')
         ->register();
 
 

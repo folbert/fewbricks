@@ -106,6 +106,8 @@ class Brick extends FieldCollection implements BrickInterface
 
         $field->prefixKey($this->getKey() . '_');
         $field->prefixName($this->getName() . '_');
+        $field->setParentBrickKey($this->getKey());
+        $field->setParentBrickName($this->getName());
 
         parent::addField($field);
 

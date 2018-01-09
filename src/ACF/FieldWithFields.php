@@ -91,7 +91,7 @@ class FieldWithFields extends Field implements FieldCollectionInterface
     public function addBrickToBeginning(Brick $brick)
     {
 
-        $this->fields>$this->addBrickToBeginning($brick);
+        $this->fields > $this->addBrickToBeginning($brick);
 
         return $this;
 
@@ -233,6 +233,26 @@ class FieldWithFields extends Field implements FieldCollectionInterface
     {
 
         return $this->fields;
+
+    }
+
+    /**
+     * @param string $key
+     */
+    public function removeBrickByKey($key)
+    {
+
+        $this->fields->removeBrickByKey($key);
+
+    }
+
+    /**
+     * @param string $name
+     */
+    public function removeBrickByName($name)
+    {
+
+        $this->fields->removeBrickByName($name);
 
     }
 

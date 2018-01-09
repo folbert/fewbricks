@@ -46,14 +46,36 @@ class Field extends Item
     }
 
     /**
-     * @param ConditionalLogicRuleGroup $ruleGroup
-     *
-     * @return $this
+     * @return string The ACF field type that this field is
      */
-    public function addConditionalLogicRuleGroup($ruleGroup)
+    public function getType()
     {
 
-        $this->conditionalLogicRuleGroups->addItem($ruleGroup);
+        return $this->type;
+
+    }
+
+    /**
+     * @param $type
+     *
+     * @return Field
+     */
+    public function setType($type)
+    {
+
+        $this->type = $type;
+
+        return $this;
+
+    }
+
+    /**
+     * @return $this
+     */
+    public function clearConditionalLogic()
+    {
+
+        $this->conditionalLogicRuleGroups = new RuleGroupCollection();
 
         return $this;
 
@@ -78,12 +100,14 @@ class Field extends Item
     }
 
     /**
+     * @param ConditionalLogicRuleGroup $ruleGroup
+     *
      * @return $this
      */
-    public function clearConditionalLogic()
+    public function addConditionalLogicRuleGroup($ruleGroup)
     {
 
-        $this->conditionalLogicRuleGroups = new RuleGroupCollection();
+        $this->conditionalLogicRuleGroups->addItem($ruleGroup);
 
         return $this;
 
@@ -155,37 +179,12 @@ class Field extends Item
 
     /**
      * @return mixed The value of the ACF setting "required". Returns the default ACF value false if none has been set
-     * using
-     * Fewbricks.
+     * using Fewbricks.
      */
     public function getRequired()
     {
 
         return $this->getSetting('required', false);
-
-    }
-
-    /**
-     * @return string The ACF field type that this field is
-     */
-    public function getType()
-    {
-
-        return $this->type;
-
-    }
-
-    /**
-     * @param $type
-     *
-     * @return Field
-     */
-    public function setType($type)
-    {
-
-        $this->type = $type;
-
-        return $this;
 
     }
 
@@ -278,8 +277,10 @@ class Field extends Item
     {
 
         $settings = array_merge(parent::toAcfArray(), [
-            'fewbricks_original_key' => $this->getOriginalKey(),
-            'type'                   => $this->getType(),
+            'fewbricks__original_key' => $this->getOriginalKey(),
+            'fewbricks__brick_key'    => $this->getParentBrickKey(),
+            'fewbricks__brick_name'   => $this->getParentBrickName(),
+            'type'                    => $this->getType(),
         ]);
 
         if (!$this->conditionalLogicRuleGroups->isEmpty()) {

@@ -122,7 +122,7 @@ class Helper
 
         foreach ($acfArrayItems AS $acfArrayItem) {
 
-            if ($acfArrayItem['fewbricks_original_key'] === $originalKey) {
+            if ($acfArrayItem['fewbricks__original_key'] === $originalKey) {
 
                 $outcome = $acfArrayItem['key'];
                 break;

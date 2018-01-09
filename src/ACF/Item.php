@@ -13,11 +13,6 @@ class Item
 {
 
     /**
-     * @var string The key of the brick, if any, that this item is part of.
-     */
-    protected $brickKey;
-
-    /**
      * @var string The key required by ACF. Must be unique across the site.
      */
     protected $key;
@@ -37,6 +32,16 @@ class Item
      * with parent field groups, bricks etc.
      */
     protected $originalKey;
+
+    /**
+     * @var string The key of the brick, if any, that this item is part of.
+     */
+    protected $parentBrickKey;
+
+    /**
+     * @var string The name of the brick, if any, that this item is part of.
+     */
+    protected $parentBrickName;
 
     /**
      * The array that makes up the field.
@@ -66,76 +71,52 @@ class Item
         $this->name  = $name;
         $this->key   = $key;
 
-        // ACF states that keys must start with field_ but let's wait with
-        // ensuring that until the key has been prepended with keys of
-        // field groups, bricks etc.
-
         $this->setSettings($settings);
 
         $this->originalKey = $key;
 
-        $this->brickKey = false;
+        $this->parentBrickKey  = false;
+        $this->parentBrickName = false;
 
     }
 
     /**
-     * @return array
-     */
-    public function toAcfArray()
-    {
-
-        $settings          = $this->settings;
-        $settings['key']   = $this->getKey();
-        $settings['label'] = $this->label;
-        $settings['name']  = $this->name;
-
-        return $settings;
-
-    }
-
-    /**
-     * @return string|boolean
-     */
-    public function getBrickKey()
-    {
-
-        return $this->brickKey;
-
-    }
-
-    /**
-     * @param $key
+     * Allows you to set multiple settings at once.
+     *
+     * @param $settings
      *
      * @return $this
      */
-    public function setBrickKey($key)
+    public function setSettings($settings)
     {
 
-        $this->brickKey = $key;
+        foreach ($settings AS $name => $value) {
+
+            $this->setSetting($name, $value);
+
+        }
 
         return $this;
 
     }
 
     /**
-     * @return string The key of the field
-     */
-    public function getKey()
-    {
-
-        return $this->key;
-
-    }
-
-    /**
-     * @param string $key
+     * @param $name
+     * @param $value
      *
      * @return $this
      */
-    public function setKey($key)
+    public function setSetting($name, $value)
     {
 
-        $this->key = $key;
+        $classVars = ['key', 'label', 'name', 'type'];
+
+        // Make sure to keep any crucial setting class vars up to date
+        if (in_array($name, $classVars)) {
+            $this->{$name} = $value;
+        }
+
+        $this->settings[$name] = $value;
 
         return $this;
 
@@ -172,6 +153,54 @@ class Item
     }
 
     /**
+     * @return string|boolean
+     */
+    public function getParentBrickKey()
+    {
+
+        return $this->parentBrickKey;
+
+    }
+
+    /**
+     * @param $key
+     *
+     * @return $this
+     */
+    public function setParentBrickKey($key)
+    {
+
+        $this->parentBrickKey = $key;
+
+        return $this;
+
+    }
+
+    /**
+     * @return string|boolean
+     */
+    public function getParentBrickName()
+    {
+
+        return $this->parentBrickName;
+
+    }
+
+    /**
+     * @param $name
+     *
+     * @return $this
+     */
+    public function setParentBrickName($name)
+    {
+
+        $this->parentBrickName = $name;
+
+        return $this;
+
+    }
+
+    /**
      * Get the value of a specific setting. Please note that you can only
      * get the settings that you have set when creating the instance.
      * Any default values that are set by ACF and that has not been overridden
@@ -198,6 +227,16 @@ class Item
     }
 
     /**
+     * @param $prefix
+     */
+    public function prefixKey($prefix)
+    {
+
+        $this->key = $prefix . $this->key;
+
+    }
+
+    /**
      * @param string $prefix
      */
     public function prefixLabel($prefix)
@@ -218,64 +257,51 @@ class Item
     }
 
     /**
-     * @param $prefix
-     */
-    public function prefixKey($prefix)
-    {
-
-        $this->key = $prefix . $this->key;
-
-    }
-
-    /**
-     * @param $name
-     * @param $value
-     *
-     * @return $this
-     */
-    public function setSetting($name, $value)
-    {
-
-        $classVars = ['key', 'label', 'name', 'type'];
-
-        // Make sure to keep any crucial setting class vars up to date
-        if (in_array($name, $classVars)) {
-            $this->{$name} = $value;
-        }
-
-        $this->settings[$name] = $value;
-
-        return $this;
-
-    }
-
-    /**
-     * Allows you to set multiple settings at once.
-     *
-     * @param $settings
-     *
-     * @return $this
-     */
-    public function setSettings($settings)
-    {
-
-        foreach ($settings AS $name => $value) {
-
-            $this->setSetting($name, $value);
-
-        }
-
-        return $this;
-
-    }
-
-    /**
      * @param string $suffix
      */
     public function suffixLabel($suffix)
     {
 
         $this->label .= $suffix;
+
+    }
+
+    /**
+     * @return array
+     */
+    public function toAcfArray()
+    {
+
+        $settings          = $this->settings;
+        $settings['key']   = $this->getKey();
+        $settings['label'] = $this->label;
+        $settings['name']  = $this->name;
+
+        return $settings;
+
+    }
+
+    /**
+     * @return string The key of the field
+     */
+    public function getKey()
+    {
+
+        return $this->key;
+
+    }
+
+    /**
+     * @param string $key
+     *
+     * @return $this
+     */
+    public function setKey($key)
+    {
+
+        $this->key = $key;
+
+        return $this;
 
     }
 

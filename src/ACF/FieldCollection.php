@@ -77,12 +77,7 @@ class FieldCollection extends Collection implements FieldCollectionInterface
 
         $this->prepareBrickForAdd($brick);
 
-        /** @var Field $field */
-        foreach ($brick->getFields() AS $field) {
-
-            $this->addField($field);
-
-        }
+        $this->addFields($brick->getFields());
 
         return $this;
 
@@ -100,26 +95,38 @@ class FieldCollection extends Collection implements FieldCollectionInterface
     }
 
     /**
+     * @param FieldCollection|array $fields
+     *
+     * @return FieldCollection
+     */
+    public function addFields($fields)
+    {
+
+        if (is_array($fields)) {
+
+            foreach ($fields AS $field) {
+
+                $this->addField($field);
+
+            }
+
+        } else if ($fields instanceof FieldCollection) {
+
+            $this->addFieldCollection($fields);
+
+        }
+
+        return $this;
+
+    }
+
+    /**
      * @return mixed
      */
     public function getFields()
     {
 
         return $this->getItems();
-
-    }
-
-    /**
-     * @param Field $field
-     *
-     * @return $this
-     */
-    public function addField(Field $field)
-    {
-
-        parent::addItem($field, $field->getKey());
-
-        return $this;
 
     }
 
@@ -157,6 +164,36 @@ class FieldCollection extends Collection implements FieldCollectionInterface
     }
 
     /**
+     * @param Field $field
+     *
+     * @return $this
+     */
+    public function addField(Field $field)
+    {
+
+        parent::addItem($field, $field->getKey());
+
+        return $this;
+
+    }
+
+    /**
+     * @param FieldCollection $fieldCollection
+     *
+     * @return FieldCollection
+     */
+    public function addFieldCollection(FieldCollection $fieldCollection)
+    {
+
+        $fieldCollection->prepareForAcfArray();
+
+        $this->addFields($fieldCollection->getFields());
+
+        return $this;
+
+    }
+
+    /**
      * @param Brick  $brick
      * @param string $fieldNameToAddAfter
      *
@@ -175,16 +212,19 @@ class FieldCollection extends Collection implements FieldCollectionInterface
 
     /**
      * @param array  $fields
-     * @param string $fieldNameToAddBefore
+     * @param string $fieldNameToAddAfter
      *
      * @return FieldCollection
      */
-    public function addFieldsBeforeByName(array $fields, $fieldNameToAddBefore)
+    public function addFieldsAfterByName(array $fields, $fieldNameToAddAfter)
     {
+
+        // Reverse the array to add the fields in the desired order
+        $fields = array_reverse($fields);
 
         foreach ($fields AS $field) {
 
-            $this->addFieldBeforeByName($field, $fieldNameToAddBefore);
+            $this->addFieldAfterByName($field, $fieldNameToAddAfter);
 
         }
 
@@ -194,19 +234,19 @@ class FieldCollection extends Collection implements FieldCollectionInterface
 
     /**
      * @param Field  $field
-     * @param string $fieldNameToAddBefore
+     * @param string $fieldNameToAddAfter
      *
-     * @return FieldCollection
+     * @return $this
      */
-    public function addFieldBeforeByName(Field $field, $fieldNameToAddBefore)
+    public function addFieldAfterByName(Field $field, $fieldNameToAddAfter)
     {
 
-        /** @var Field $itemToAddAfter */
-        $fieldToAddBefore = $this->getFieldByName($fieldNameToAddBefore);
+        /** @var Field $fieldToAddAfter */
+        $fieldToAddAfter = $this->getFieldByName($fieldNameToAddAfter);
 
-        if ($fieldToAddBefore !== false) {
+        if ($fieldToAddAfter !== false) {
 
-            parent::addItemBefore($field, $fieldToAddBefore->getKey(), $field->getKey());
+            parent::addItemAfter($field, $fieldToAddAfter->getKey(), $field->getKey());
 
         }
 
@@ -255,6 +295,47 @@ class FieldCollection extends Collection implements FieldCollectionInterface
         $this->prepareBrickForAdd($brick);
 
         $this->addFieldsBeforeByName($brick->getFields(), $fieldNameToAddBefore);
+
+        return $this;
+
+    }
+
+    /**
+     * @param array  $fields
+     * @param string $fieldNameToAddBefore
+     *
+     * @return FieldCollection
+     */
+    public function addFieldsBeforeByName(array $fields, $fieldNameToAddBefore)
+    {
+
+        foreach ($fields AS $field) {
+
+            $this->addFieldBeforeByName($field, $fieldNameToAddBefore);
+
+        }
+
+        return $this;
+
+    }
+
+    /**
+     * @param Field  $field
+     * @param string $fieldNameToAddBefore
+     *
+     * @return FieldCollection
+     */
+    public function addFieldBeforeByName(Field $field, $fieldNameToAddBefore)
+    {
+
+        /** @var Field $itemToAddAfter */
+        $fieldToAddBefore = $this->getFieldByName($fieldNameToAddBefore);
+
+        if ($fieldToAddBefore !== false) {
+
+            parent::addItemBefore($field, $fieldToAddBefore->getKey(), $field->getKey());
+
+        }
 
         return $this;
 
@@ -325,48 +406,6 @@ class FieldCollection extends Collection implements FieldCollectionInterface
     }
 
     /**
-     * @param FieldCollection $fieldCollection
-     *
-     * @return FieldCollection
-     */
-    public function addFieldCollection(FieldCollection $fieldCollection)
-    {
-
-        $fieldCollection->prepareForAcfArray();
-
-        $this->addFields($fieldCollection->getFields());
-
-        return $this;
-
-    }
-
-    /**
-     * @param FieldCollection|array $fields
-     *
-     * @return FieldCollection
-     */
-    public function addFields($fields)
-    {
-
-        if (is_array($fields)) {
-
-            foreach ($fields AS $field) {
-
-                $this->addField($field);
-
-            }
-
-        } else if ($fields instanceof FieldCollection) {
-
-            $this->addFieldCollection($fields);
-
-        }
-
-        return $this;
-
-    }
-
-    /**
      * Set ACF settings on fields in this collection. The values will be applied as they are so don't use this to set
      * keys or conditional logic.
      *
@@ -407,50 +446,6 @@ class FieldCollection extends Collection implements FieldCollectionInterface
     }
 
     /**
-     * @param array  $fields
-     * @param string $fieldNameToAddAfter
-     *
-     * @return FieldCollection
-     */
-    public function addFieldsAfterByName(array $fields, $fieldNameToAddAfter)
-    {
-
-        // Reverse the array to add the fields in the desired order
-        $fields = array_reverse($fields);
-
-        foreach ($fields AS $field) {
-
-            $this->addFieldAfterByName($field, $fieldNameToAddAfter);
-
-        }
-
-        return $this;
-
-    }
-
-    /**
-     * @param Field  $field
-     * @param string $fieldNameToAddAfter
-     *
-     * @return $this
-     */
-    public function addFieldAfterByName(Field $field, $fieldNameToAddAfter)
-    {
-
-        /** @var Field $fieldToAddAfter */
-        $fieldToAddAfter = $this->getFieldByName($fieldNameToAddAfter);
-
-        if ($fieldToAddAfter !== false) {
-
-            parent::addItemAfter($field, $fieldToAddAfter->getKey(), $field->getKey());
-
-        }
-
-        return $this;
-
-    }
-
-    /**
      * @param string $name
      * @param null   $defaultValue Value to return if arg is not set
      *
@@ -460,6 +455,52 @@ class FieldCollection extends Collection implements FieldCollectionInterface
     {
 
         return (isset($this->arguments[$name]) ? $this->arguments[$name] : $defaultValue);
+
+    }
+
+    /**
+     * Removes all fields that came from the brick with the passed key.
+     *
+     * @param string $key
+     *
+     * @return $this
+     */
+    public function removeBrickByKey($key)
+    {
+
+        /** @var Field $field */
+        foreach ($this->items AS $fieldKey => $field) {
+
+            if ($field->getParentBrickKey() === $key) {
+                $this->removeItem($fieldKey);
+            }
+
+        }
+
+        return $this;
+
+    }
+
+    /**
+     * Removes all fields that came from the brick with the passed name.
+     *
+     * @param string $name
+     *
+     * @return $this
+     */
+    public function removeBrickByName($name)
+    {
+
+        /** @var Field $field */
+        foreach ($this->items AS $fieldKey => $field) {
+
+            if ($field->getParentBrickName() === $name) {
+                $this->removeItem($fieldKey);
+            }
+
+        }
+
+        return $this;
 
     }
 

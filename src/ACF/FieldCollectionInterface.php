@@ -31,6 +31,10 @@ interface FieldCollectionInterface
 
     public function addFieldsToBeginning($fields);
 
+    public function removeBrickByKey($key);
+
+    public function removeBrickByName($name);
+
     public function removeFieldByName($fieldName);
 
     public function removeFieldByKey($key);
