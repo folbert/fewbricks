@@ -10,6 +10,44 @@
 
 <body class="fewbricks-demo">
 
+<?php
+$attributeStringBuilder = new \Fewbricks\HtmlElementAttributesStringBuilder();
+
+$attributeStringBuilder->addClassName('container');
+$attributeStringBuilder->addClassName('container-fluid');
+$attributeStringBuilder->removeClassName('container');
+
+$attributeStringBuilder->addStylePropertyAndValue('background', 'red');
+$attributeStringBuilder->addStylePropertyAndValue('color', 'white');
+$attributeStringBuilder->addStylePropertiesAndValues([
+    ['font-size', '2rem'],
+    ['color', 'blue'],
+]);
+$attributeStringBuilder->removeStylePropertyAndValue('color');
+
+$attributeStringBuilder->addValue('data-test-1', 'value1');
+$attributeStringBuilder->addValue('data-test-1', 'value2');
+$attributeStringBuilder->addValue('data-test-1', 'value3');
+$attributeStringBuilder->setValuesSeparators('data-test-1', '|');
+$attributeStringBuilder->removeValue('data-test-1', 'value3');
+
+$attributeStringBuilder->addValues('data-test-2', [
+    ['first1', 'first2', 'first3'],
+    ['second1', 'second2', 'second3'],
+    ['third1', 'third2', 'third3'],
+]);
+// + will separate values from each array above ("first3" and "second1")
+// - will separate "first1" and "first2" (and "second1" and"second2")
+// * will separate "first2" and "first3" (and "second2" and "second3")
+$attributeStringBuilder->setValuesSeparators('data-test-2', [' + ', ' - ', ' * ']);
+$attributeStringBuilder->removeValue('data-test-2', ['third1', 'third2', 'third3']);
+
+echo $attributeStringBuilder;
+
+?>
+
+<div <?php echo $attributeStringBuilder; ?>>Lorem ipsum</div>
+
 
 <div class="container">
     <div class="row">
