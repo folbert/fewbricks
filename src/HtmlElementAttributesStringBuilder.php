@@ -29,7 +29,9 @@ class HtmlElementAttributesStringBuilder
     {
 
         $this->attributes       = [];
-        $this->valuesSeparators = [];
+        $this->valuesSeparators = [
+            'style' => [':', ';'],
+        ];
         $this->quoteCharacter   = '"';
 
     }
@@ -41,8 +43,6 @@ class HtmlElementAttributesStringBuilder
     {
 
         $string = '';
-
-        dump($this->attributes);
 
         foreach ($this->attributes AS $attributeName => $values) {
 
@@ -64,23 +64,79 @@ class HtmlElementAttributesStringBuilder
 
         $valuesString = '';
 
-        $valuesForAttribute = $this->attributes[$attributeName];
-
-        $valueSeparator = $this->getValueSeparator($attributeName, 1);
+        $valuesForAttribute = $this->getValuesForAttribute($attributeName);
 
         $lastValue = end($valuesForAttribute);
 
-        foreach ($valuesForAttribute AS $value) {
+        foreach ($valuesForAttribute AS $key => $value) {
 
-            $valuesString .= $this->getValueString($value, $attributeName);
+            $valuesString .= $this->getValuesString($attributeName, $value);
 
             if ($value !== $lastValue) {
-                $valuesString .= $valueSeparator;
+                $valuesString .= $this->getValueSeparator($attributeName, 1);
             }
 
         }
 
         return ' ' . $attributeName . '=' . $this->quoteCharacter . $valuesString . $this->quoteCharacter . ' ';
+
+    }
+
+    /**
+     * @param string $attributeName
+     *
+     * @return array|string
+     */
+    public function getValuesForAttribute($attributeName)
+    {
+
+        $values = [];
+
+        if (isset($this->attributes[$attributeName])) {
+
+            $values = $this->attributes[$attributeName];
+
+            if (!is_array($values)) {
+                $values = [$values];
+            }
+
+        }
+
+        return $values;
+
+    }
+
+    /**
+     * @param string $attributeName
+     * @param mixed  $value
+     *
+     * @return string
+     */
+    private function getValuesString($attributeName, $value)
+    {
+
+        if (is_array($value)) {
+
+            $valuesString = '';
+            $values       = array_values($value); // Make sure we are working with a numeric array
+
+            foreach ($values AS $key => $value) {
+
+                $valuesString .= $value;
+
+                if ($key + 1 < (count($values))) {
+                    $valuesString .= $this->getValueSeparator($attributeName, (count($value) - ($key + 1)));
+                }
+
+            }
+
+        } else {
+
+            $valuesString = $value;
+
+        }
+
+        return $valuesString;
 
     }
 
@@ -93,11 +149,9 @@ class HtmlElementAttributesStringBuilder
     public function getValueSeparator($attributeName, $valuesLevel = 1)
     {
 
-        $separator = null;
-
         if (isset($this->valuesSeparators[$attributeName])) {
 
-            $separator = $this->getCustomSeparator($attributeName, $valuesLevel);
+            $separator = $this->getValuesSeparator($attributeName, $valuesLevel);
 
         } else if ($attributeName === 'style') {
 
@@ -109,51 +163,7 @@ class HtmlElementAttributesStringBuilder
 
         }
 
-        if (is_null($separator)) {
-
-            wp_die('HtmlElementAttributesManager could not find separator for attribute "' . $attributeName
-                   . '" at level ' . $valuesLevel);
-
-        }
-
         return $separator;
-
-    }
-
-    /**
-     * @param $value
-     * @param $attributeName
-     *
-     * @return string
-     */
-    private function getValueString($value, $attributeName)
-    {
-
-        if (is_array($value)) {
-
-            $valueString = '';
-            $values      = $value;
-            $valueLevel  = 2;
-            $lastValue   = end($values);
-
-            foreach ($values AS $value) {
-
-                $valueString .= $value;
-
-                if ($value !== $lastValue) {
-                    $valueString .= $this->getValueSeparator($attributeName, $valueLevel);
-                    $valueLevel++;
-                }
-
-            }
-
-        } else {
-
-            $valueString = $value;
-
-        }
-
-        return $valueString;
 
     }
 
@@ -163,39 +173,20 @@ class HtmlElementAttributesStringBuilder
      *
      * @return string
      */
-    public function getCustomSeparator($attributeName, $valuesLevel)
+    public function getValuesSeparator($attributeName, $valuesLevel)
     {
 
         $separator = ' ';
 
         if (isset($this->valuesSeparators[$attributeName])
-            && isset
-            ($this->valuesSeparators[$attributeName][($valuesLevel - 1)])
+            && count($this->valuesSeparators[$attributeName]) >= $valuesLevel
         ) {
 
-            $separator = ($this->valuesSeparators[$attributeName][($valuesLevel - 1)]);
+            $separator = array_slice($this->valuesSeparators[$attributeName], (0 - $valuesLevel), 1)[0];
 
         }
 
         return $separator;
-
-
-    }
-
-    /**
-     * @param $valuesLevel
-     *
-     * @return mixed
-     */
-    public function getSeparatorForStyle($valuesLevel)
-    {
-
-        $separators = [
-            1 => ';',
-            2 => ':',
-        ];
-
-        return $separators[$valuesLevel];
 
     }
 
@@ -207,23 +198,28 @@ class HtmlElementAttributesStringBuilder
     public function addClassName($className)
     {
 
-        $this->addValue('class', $className);
+        $this->addValueToAttribute($className, 'class');
 
         return $this;
 
     }
 
     /**
-     * @param string $name
-     * @param mixed  $value
+     *
+     * @param string $value
+     * @param string $attributeName
      *
      * @return HtmlElementAttributesStringBuilder
      */
-    public function addValue($name, $value)
+    public function addValueToAttribute($value, $attributeName)
     {
 
-        if (!isset($this->attributes[$name])) {
-            $this->attributes[$name] = [];
+        if($attributeName === 'style') {
+            $this->removeStyleProperty($value[0]);
+        }
+
+        if (!isset($this->attributes[$attributeName])) {
+            $this->attributes[$attributeName] = [];
         }
 
         if (is_array($value)) {
@@ -233,7 +229,7 @@ class HtmlElementAttributesStringBuilder
         }
 
         // Disables duplicate values and also makes it easy to find existing values
-        $this->attributes[$name][$key] = $value;
+        $this->attributes[$attributeName][$key] = $value;
 
         return $this;
 
@@ -241,6 +237,8 @@ class HtmlElementAttributesStringBuilder
 
     /**
      * @param array $propertiesAndValues
+     *
+     * @return HtmlElementAttributesStringBuilder
      */
     public function addStylePropertiesAndValues(array $propertiesAndValues)
     {
@@ -250,6 +248,8 @@ class HtmlElementAttributesStringBuilder
             $this->addStylePropertyAndValue($propertyAndValue[0], $propertyAndValue[1]);
 
         }
+
+        return $this;
 
     }
 
@@ -262,24 +262,25 @@ class HtmlElementAttributesStringBuilder
     public function addStylePropertyAndValue($property, $value)
     {
 
-        $this->addValue('style', [$property, $value]);
+        $this->removeStyleProperty($property);
+        $this->addValueToAttribute([$property, $value], 'style');
 
         return $this;
 
     }
 
     /**
-     * @param string $name
      * @param array  $values
+     * @param string $attributeName
      *
      * @return HtmlElementAttributesStringBuilder
      */
-    public function addValues($name, $values)
+    public function addValuesToAttribute($values, $attributeName)
     {
 
         foreach ($values AS $value) {
 
-            $this->addValue($name, $value);
+            $this->addValueToAttribute($value, $attributeName);
 
         }
 
@@ -294,33 +295,6 @@ class HtmlElementAttributesStringBuilder
     {
 
         return $this->attributes;
-
-    }
-
-    /**
-     * @param $attributeName
-     * @param $valuesLevel
-     *
-     * @return array|mixed
-     */
-    public function getCustomAttributeSeparator($attributeName, $valuesLevel)
-    {
-
-        $separators = $this->valuesSeparators[$attributeName];
-
-        $levelIndex = ($valuesLevel - 1);
-
-        if (is_array($separators) && isset($separators[$valuesLevel])) {
-
-            $separator = $separators[$levelIndex];
-
-        } else {
-
-            $separator = $separators;
-
-        }
-
-        return $separator;
 
     }
 
@@ -340,11 +314,15 @@ class HtmlElementAttributesStringBuilder
 
     /**
      * @param string $className
+     *
+     * @return HtmlElementAttributesStringBuilder
      */
     public function removeClassName($className)
     {
 
-        $this->removeValue('class', $className);
+        $this->removeValueFromAttribute($className, 'class');
+
+        return $this;
 
     }
 
@@ -352,17 +330,21 @@ class HtmlElementAttributesStringBuilder
      * If you want to remove a value like "color" for "style" which you set by passing an array ["color", "red"], you
      * must pass "color" as the value you want to remove.
      *
-     * @param string $attributeName
      * @param mixed  $value
+     * @param string $attributeName
      *
      * @return HtmlElementAttributesStringBuilder
      */
-    public function removeValue($attributeName, $value)
+    public function removeValueFromAttribute($value, $attributeName)
     {
+
+        if($attributeName === 'style') {
+            die('Please use the function removeStyleProperty to remove a style property');
+        }
 
         if (isset($this->attributes[$attributeName])) {
 
-            if(is_array($value)) {
+            if (is_array($value)) {
 
                 unset($this->attributes[$attributeName][md5(serialize($value))]);
 
@@ -383,10 +365,20 @@ class HtmlElementAttributesStringBuilder
      *
      * @return $this
      */
-    public function removeStylePropertyAndValue($property)
+    public function removeStyleProperty($property)
     {
 
-        $this->removeValue('style', $property);
+        $styleValues = $this->getValuesForAttribute('style');
+
+        foreach($styleValues AS $key => $styleValue) {
+
+            if($styleValue[0] === $property) {
+
+                unset($this->attributes['style'][$key]);
+
+            }
+
+        }
 
         return $this;
 
@@ -428,12 +420,12 @@ class HtmlElementAttributesStringBuilder
      * here. But if you for example were to set the separators for "style", you would pass [':', ';'] and for the
      * attribute "class", you would pass " " or [" "]
      *
-     * @param string       $attributeName
      * @param array|string $separators
+     * @param string       $attributeName
      *
      * @return HtmlElementAttributesStringBuilder
      */
-    public function setValuesSeparators($attributeName, $separators)
+    public function setValuesSeparatorsForAttribute($separators, $attributeName)
     {
 
         if (!is_array($separators)) {

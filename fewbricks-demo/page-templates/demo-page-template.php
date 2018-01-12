@@ -7,46 +7,44 @@
 
 </head>
 
-
 <body class="fewbricks-demo">
 
 <?php
-$attributeStringBuilder = new \Fewbricks\HtmlElementAttributesStringBuilder();
-
-$attributeStringBuilder->addClassName('container');
-$attributeStringBuilder->addClassName('container-fluid');
-$attributeStringBuilder->removeClassName('container');
-
-$attributeStringBuilder->addStylePropertyAndValue('background', 'red');
-$attributeStringBuilder->addStylePropertyAndValue('color', 'white');
-$attributeStringBuilder->addStylePropertiesAndValues([
-    ['font-size', '2rem'],
-    ['color', 'blue'],
-]);
-$attributeStringBuilder->removeStylePropertyAndValue('color');
-
-$attributeStringBuilder->addValue('data-test-1', 'value1');
-$attributeStringBuilder->addValue('data-test-1', 'value2');
-$attributeStringBuilder->addValue('data-test-1', 'value3');
-$attributeStringBuilder->setValuesSeparators('data-test-1', '|');
-$attributeStringBuilder->removeValue('data-test-1', 'value3');
-
-$attributeStringBuilder->addValues('data-test-2', [
-    ['first1', 'first2', 'first3'],
-    ['second1', 'second2', 'second3'],
-    ['third1', 'third2', 'third3'],
-]);
-// + will separate values from each array above ("first3" and "second1")
-// - will separate "first1" and "first2" (and "second1" and"second2")
-// * will separate "first2" and "first3" (and "second2" and "second3")
-$attributeStringBuilder->setValuesSeparators('data-test-2', [' + ', ' - ', ' * ']);
-$attributeStringBuilder->removeValue('data-test-2', ['third1', 'third2', 'third3']);
+$attributeStringBuilder = (new \Fewbricks\HtmlElementAttributesStringBuilder())
+    ->addClassName('container')
+    ->addClassName('container-fluid')
+    ->removeClassName('container')
+    ->addStylePropertyAndValue('background', 'red')
+    ->addStylePropertyAndValue('color', 'white')
+    ->addStylePropertiesAndValues([
+        ['font-size', '2rem'],
+        ['color', 'blue'],
+        ['padding', '20px'],
+    ])
+    ->removeStyleProperty('padding')
+    ->addStylePropertyAndValue('font-size', '3rem')
+    ->addValueToAttribute('value1', 'data-test-1')
+    ->addValueToAttribute('value2', 'data-test-1')
+    ->addValueToAttribute('value3', 'data-test-1')
+    ->setValuesSeparatorsForAttribute('|', 'data-test-1')
+    ->removeValueFromAttribute('value3', 'data-test-1')
+    ->addValuesToAttribute([
+        ['first1', 'first2', 'first3'],
+        ['second1', 'second2', 'second3'],
+        ['third1', 'third2', 'third3'],
+    ], 'data-test-2')
+    // + will separate "first1" and "first2" (and "second1" and"second2")
+    // - will separate "first2" and "first3" (and "second2" and "second3")
+    // * will separate values from each array above ("first3" and "second1")
+    ->setValuesSeparatorsForAttribute([' + ', ' - ', ' * '], 'data-test-2')
+    ->removeValueFromAttribute(['third1', 'third2', 'third3'], 'data-test-2')
+    ->setIdValue('element-id');
 
 echo $attributeStringBuilder;
 
 ?>
 
-<div <?php echo $attributeStringBuilder; ?>>Lorem ipsum</div>
+<div <?php echo $attributeStringBuilder; ?>><div class="row"><div class="col">Lorem ipsum</div></div></div>
 
 
 <div class="container">
