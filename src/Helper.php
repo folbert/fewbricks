@@ -18,11 +18,7 @@ class Helper
     public static function acfIsActivated()
     {
 
-        // We must include this file here since we are calling is_plugin_active in an unusual place.
-        include_once(ABSPATH . 'wp-admin/includes/plugin.php');
-
-        return is_plugin_active('advanced-custom-fields-pro/acf.php')
-               || is_plugin_active('advanced-custom-fields/acf.php');
+        return class_exists('acf');
 
     }
 
