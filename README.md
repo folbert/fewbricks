@@ -10,7 +10,7 @@ advising against installing it in a setup that is already implemented using Fewb
 Fewbricks is released under GPLv3 and is in no way associated with Advanced Custom Fields.
 
 ## More info
-The documentation is moving to [https://fewbricksdocs.readme.io/](https://fewbricksdocs.readme.io/). Text below is kept for now but may not pply to v2.
+The documentation is moving to [https://fewbricksdocs.readme.io/](https://fewbricksdocs.readme.io/). Text below is kept for now but may not apply to v2.
 
 ---
 

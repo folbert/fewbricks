@@ -56,8 +56,9 @@ class FieldsKitchenSink extends FieldGroup implements FieldGroupInterface
         // Showing how to set field settings after the field has been created
         $button_group = new FAFields\ButtonGroup('Button Group', 'fd_button_group', '1711172249u');
         $button_group->setChoices([
-            'red'   => 'Red',
+            'red' => 'Red',
             'black' => 'Black',
+            'green' => 'Green',
         ]);
         $button_group->setSetting('required', true);
         $button_group->setDefaultValue('black');
@@ -65,9 +66,9 @@ class FieldsKitchenSink extends FieldGroup implements FieldGroupInterface
 
         $this->addField(new FAFields\Checkbox('Checkbox', 'fd_checkbox',
             '1711172310a', [
-                'choices'      => [
-                    'one'   => 'One',
-                    'two'   => 'Two',
+                'choices' => [
+                    'one' => 'One',
+                    'two' => 'Two',
                     'three' => 'Three',
                 ],
                 'allow_custom' => true,
@@ -158,8 +159,8 @@ class FieldsKitchenSink extends FieldGroup implements FieldGroupInterface
         $group->addField(
             (new FAFields\Select('Select', 'fd_select', '1711232310c'))
                 ->setChoices([
-                    'one'   => 'One',
-                    'two'   => 'Two',
+                    'one' => 'One',
+                    'two' => 'Two',
                     'three' => 'Three',
                 ])
         );
@@ -220,14 +221,13 @@ class FieldsKitchenSink extends FieldGroup implements FieldGroupInterface
             ->setPostType(['fewbricks_demo_post'])
         );
 
-        $this->addField(new FAFields\Select('Select', 'fd_select', '1711210919a', [
-            'choices'       => [
-                'one'   => 'One',
-                'two'   => 'Two',
+        $this->addField((new FAFields\Select('Select', 'fd_select', '1711210919a'))
+            ->setChoices([
+                'one' => 'One',
+                'two' => 'Two',
                 'three' => 'Three',
-            ],
-            'default_value' => 'two',
-        ]));
+            ])
+            ->setDefaultValue('two'));
 
         $this->addField(new FAFields\Text('Text', 'fd_text', '1711172249a'));
 
@@ -272,6 +272,11 @@ class FieldsKitchenSink extends FieldGroup implements FieldGroupInterface
 
         $this->addField(new FAFields\Wysiwyg('Wysiwyg', 'fd_wysiwyg', '1711172249i',
             ['media_upload' => false, 'delay' => true]));
+
+        // Showing off another tab
+        $this->addField(new FAFields\Tab('Another tab', 'fd_tab2', '1811212230a'));
+
+        $this->addField((new FAFields\Text('Another text field', 'fd_text2', '1811212231a')));
 
     }
 

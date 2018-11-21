@@ -78,7 +78,7 @@ class FieldWithLayouts extends Field
     public function getButtonLabel()
     {
 
-        return $this->getSetting('max', __('Add Row', 'acf'));
+        return $this->getSetting('button_label', __('Add Row', 'acf'));
 
     }
 

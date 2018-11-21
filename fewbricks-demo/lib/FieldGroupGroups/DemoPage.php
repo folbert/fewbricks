@@ -32,7 +32,7 @@ class DemoPage extends FieldGroupsCollection
 
         $kitchenSinkFg->setMenuOrder(100);
 
-        // Testing different ways to show/hide elements
+        // Demoing different ways to show/hide elements
         $kitchenSinkFg->setShowOnScreen('the_content');
         $kitchenSinkFg->setHideOnScreen('the_content');
         $kitchenSinkFg->setShowOnScreen('the_content');

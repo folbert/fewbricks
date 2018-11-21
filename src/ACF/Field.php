@@ -30,10 +30,10 @@ class Field extends Item
      *                         https://www.advancedcustomfields.com/resources/register-fields-via-php/#field-type%20settings
      * @param string $type     Name of a valid ACF field type. Makes it possible to create custom field types.
      */
-    public function __construct($label, $name, $key, array $settings = [], $type = '')
+    public function __construct($label, $name, $key, $type = '')
     {
 
-        parent::__construct($label, $name, $key, $settings);
+        parent::__construct($label, $name, $key);
 
         if (!empty($type)) {
             $this->setType($type);

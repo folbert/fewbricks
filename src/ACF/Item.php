@@ -56,13 +56,9 @@ class Item
      *
      * @param string $label    The label of the field
      * @param string $name     The name of the field
-     * @param string $key      The key of the field. Must be unique across the
-     *                         entire app
-     * @param array  $settings Array where you can pass all the possible
-     *                         settings for the field.
-     *                         https://www.advancedcustomfields.com/resources/register-fields-via-php/#field-type%20settings
+     * @param string $key      The key of the field. Must be unique across the entire app
      */
-    public function __construct($label, $name, $key, $settings = [])
+    public function __construct($label, $name, $key)
     {
 
         // Lets keep these crucial settings as class vars to make them easier
@@ -70,8 +66,6 @@ class Item
         $this->label = $label;
         $this->name  = $name;
         $this->key   = $key;
-
-        $this->setSettings($settings);
 
         $this->originalKey = $key;
 

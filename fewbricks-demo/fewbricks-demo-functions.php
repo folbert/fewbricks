@@ -1,18 +1,20 @@
 <?php
 
 /**
- * This file contains code that could be put directly in your themes functions.php-file but I strongly suggest you
- * put it in a dedicated file for setting up Fewbricks or even better in a class.
+ * This file contains code that could be put directly in your themes functions.php but I strongly suggest you
+ * put it in a dedicated file for setting up Fewbricks. Or, even better, in a class.
  */
 
 namespace App\FewbricksDemo;
 
 use App\FewbricksDemo\Bricks\HeadlineAndText;
 use App\FewbricksDemo\Bricks\Wysiwyg;
+use App\FewbricksDemo\FieldGroups\Content1;
 use App\FewbricksDemo\FieldGroups\FieldsKitchenSink;
 use App\FewbricksDemo\FieldGroups\Heroes;
 use Fewbricks\ACF\ConditionalLogicRule;
 use Fewbricks\ACF\ConditionalLogicRuleGroup;
+use Fewbricks\ACF\Field;
 use Fewbricks\ACF\FieldGroup;
 use Fewbricks\ACF\FieldGroupLocationRuleGroup;
 use Fewbricks\ACF\Fields\Text;
@@ -36,6 +38,27 @@ if (defined('FEWBRICKS_ENV') && FEWBRICKS_ENV === 'production' && file_exists(He
 
 } else {
 
+    // Create instance of a field group and register it
+    $content1 = new Content1('181201102101a');
+    $content1->setTitle('Main content');
+    $content1->setMenuOrder(-100);
+    $content1->setHideOnScreen('all');
+    $content1->setShowOnScreen('permalink');
+    $content1->addLocationRuleGroup((new FieldGroupLocationRuleGroup())
+        ->addRule(new Rule('post_type', '==', 'fewbricks_demo_pg')));
+    $content1->addLocationRuleGroup((
+    (new FieldGroupLocationRuleGroup())
+        ->addRule(new Rule('post_type', '==', 'fewbricks_demo_pg2'))
+    ));
+    $content1->register();
+
+    $heroes = new Heroes('1712262204a');
+    $heroes->addLocationRuleGroup((new FieldGroupLocationRuleGroup())
+        ->addRule(new Rule('post_type', '==', 'fewbricks_demo_pg'))
+    );
+    $heroes->setHideOnScreen('content');
+    $heroes->register();
+
     (new FieldGroup('Showing ways to add and remove fields', '1801042233a'))
         ->addLocationRuleGroup(
             (new FieldGroupLocationRuleGroup())
@@ -47,10 +70,10 @@ if (defined('FEWBRICKS_ENV') && FEWBRICKS_ENV === 'production' && file_exists(He
         )
         ->setHideOnScreen('all')
         ->setShowOnScreen('permalink')
-        ->setMenuOrder(-100)
+        ->setMenuOrder(100)
         ->setArgument('argument_name', 'argument_value')
         ->setArguments([
-            'another_argument_name'     => 'another_argument_value',
+            'another_argument_name' => 'another_argument_value',
             'yet_another_argument_name' => 'yet_another_argument_value',
         ])
         ->addField(new Text('Text 1', 'text_1', '1801050012a'))
@@ -82,9 +105,14 @@ if (defined('FEWBRICKS_ENV') && FEWBRICKS_ENV === 'production' && file_exists(He
             (new HeadlineAndText('headline_and_text_1', 'br1801060137a'))
                 ->setFieldLabelsPrefix('Headline and text 1 - ')
         )
-        ->addBrickToBeginning(
+        ->addBrick(
             (new HeadlineAndText('headline_and_text_2', 'br1801060137b'))
                 ->setFieldLabelsPrefix('Headline and text 2 - ')
+                ->setArgument('show_badge', true)
+        )
+        ->addBrickToBeginning(
+            (new HeadlineAndText('headline_and_text_3', 'br1002121421a'))
+                ->setFieldLabelsPrefix('Headline and text 3 - ')
                 ->setArgument('show_badge', true)
         )
         ->addBrickBeforeByName(
@@ -98,17 +126,8 @@ if (defined('FEWBRICKS_ENV') && FEWBRICKS_ENV === 'production' && file_exists(He
                 ->addFieldSetting('1712282148a', 'delay', true),  // Setting ACF setting late in the process
             'text_3'
         )
-        ->removeBrickByName('headline_and_text_2')
+        ->removeBrickByName('headline_and_text_3')
         ->removeBrickByKey('br1712282227u')
-        ->register();
-
-
-    (new Heroes('1712262204a'))
-        ->addLocationRuleGroup(
-            (new FieldGroupLocationRuleGroup())
-                ->addRule(new Rule('post_type', '==', 'fewbricks_demo_pg'))
-        )
-        ->setHideOnScreen('content')
         ->register();
 
 
@@ -137,8 +156,6 @@ if (defined('FEWBRICKS_ENV') && FEWBRICKS_ENV === 'production' && file_exists(He
         // Since we are re-using the same field group multiple times on the same page,
         // this is necessary to avoid clashes
         ->setFieldNamesPrefix('main_content_')
-        ->setArgument('remove_layouts', ['fd_text_and_select', 'fd_single_image'])
-        ->setArgument('remove_sub_fields', ['fd_repeater_image', 'fd_repeater_text_2'])
         ->register();
 
 
@@ -160,7 +177,7 @@ if (defined('FEWBRICKS_ENV') && FEWBRICKS_ENV === 'production' && file_exists(He
         ->setFieldLabelsPrefix('Kitchen sink 2 - ')
         ->register();
 
-    // Lots of field groups fo perf tests
+    // Lots of field groups fo performance tests
     /*(new FieldsKitchenSink('fg1712252102a'))
         ->setFieldNamesPrefix('main_contenta_')
         ->register();
