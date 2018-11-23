@@ -21,6 +21,24 @@ logic and HTML separated.
 - Is primarily developed by [Björn Folbert](https://folbert.com), web developer at [KAN](https://kan.se) in Malmö, 
 Sweden.
 
+## Quick example
+
+```php
+<?php
+
+$field_group = new FieldGroup('1801032151a'); // Site wide unique ID
+$field_group->setTitle('A field group');
+$field_group->addLocationRuleGroup(
+    (new FieldGroupLocationRuleGroup())
+        ->addRule(
+            new Rule('post_type', '==', 'page') // Show field group when editing a page
+        )
+    );
+$field_group->hideOnScreen('content'); // Hide the standard WP content field
+$field_group->addField(new Text('A text field', 'text', '1801032152a'));
+$field_group->register();
+```
+
 ## Why does Fewbricks exist?
  
 ### Portability and re-usability.
