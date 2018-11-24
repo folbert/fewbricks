@@ -63,7 +63,7 @@ class Helper
     public static function getDefaultProjectFilesBasePath()
     {
 
-        return __DIR__ . '/../fewbricks-demo';
+        return __DIR__ . '/../fewbricks-demo-bak';
 
     }
 
