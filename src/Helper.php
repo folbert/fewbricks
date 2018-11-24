@@ -41,86 +41,57 @@ class Helper
     public static function getBrickLayoutsBasePath()
     {
 
-        return apply_filters('fewbricks/brick_layouts_base_path', self::getProjectFilesBasePath() . '/brick-layouts');
+        return apply_filters('fewbricks/brick_layouts_base_path', false);
 
     }
 
     /**
-     * @return string The base path to the project files.
-     */
-    public static function getProjectFilesBasePath()
-    {
-
-        $basePath = apply_filters('fewbricks/project_files_base_path', self::getDefaultProjectFilesBasePath());
-
-        return $basePath;
-
-    }
-
-    /**
-     * @return string
-     */
-    public static function getDefaultProjectFilesBasePath()
-    {
-
-        return __DIR__ . '/../fewbricks-demo-bak';
-
-    }
-
-    /**
-     * @param $brickObject
+     * @param $brick_object
      *
      * @return mixed
      */
-    public static function getBrickTemplateFileName($brickObject)
+    public static function getBrickTemplateFileName($brick_object)
     {
 
-        $namespacedPieces = explode('\\', get_class($brickObject));
-        $className        = array_pop($namespacedPieces);
+        $namespaced_pieces = explode('\\', get_class($brick_object));
+        $class_name        = array_pop($namespaced_pieces);
 
         // Turn CamelCaseFileNames to dashed-versions. (ClassName -> class-name)
-        $dashedClassName = preg_replace('/([A-Z]+)/', "-$1", lcfirst($className));
+        $dashed_class_name = preg_replace('/([A-Z]+)/', "-$1", lcfirst($class_name));
 
-        return apply_filters(
-            'fewbricks/brick_template_file_name',
-            strtolower($dashedClassName) . '.view.php',
-            $brickObject
-        );
+        return apply_filters('fewbricks/brick_template_file_name', strtolower($dashed_class_name) . '.view.php',
+            $brick_object);
 
     }
 
     /**
-     * @param object $brickObject
+     * @param object $brick_object
      *
      * @return mixed|void
      */
-    public static function getBrickTemplatesBasePath($brickObject)
+    public static function getBrickTemplatesBasePath($brick_object)
     {
 
-        return apply_filters(
-            'fewbricks/brick_templates_base_path',
-            self::getProjectFilesBasePath() . '/brick-templates',
-            $brickObject
-        );
+        return apply_filters('fewbricks/brick_templates_base_path', false, $brick_object);
 
     }
 
     /**
-     * @param string $originalKey
-     * @param array  $acfArrayItems
+     * @param string $original_key
+     * @param array  $acf_array_items
      *
      * @return bool|string
      */
-    public static function getNewKeyByOriginalKeyInAcfArray($originalKey, $acfArrayItems)
+    public static function getNewKeyByOriginalKeyInAcfArray($original_key, $acf_array_items)
     {
 
         $outcome = false;
 
-        foreach ($acfArrayItems AS $acfArrayItem) {
+        foreach ($acf_array_items AS $acf_array_item) {
 
-            if ($acfArrayItem['fewbricks__original_key'] === $originalKey) {
+            if ($acf_array_item['fewbricks__original_key'] === $original_key) {
 
-                $outcome = $acfArrayItem['key'];
+                $outcome = $acf_array_item['key'];
                 break;
 
             }
@@ -128,26 +99,6 @@ class Helper
         }
 
         return $outcome;
-
-    }
-
-    /**
-     * @return string
-     */
-    public static function getProjectInitFilePath()
-    {
-
-        return self::getProjectFilesBasePath() . '/' . self::getProjectInitFileName();
-
-    }
-
-    /**
-     * @return string
-     */
-    public static function getProjectInitFileName()
-    {
-
-        return apply_filters('fewbricks/project_init_file_name', 'fewbricks-init.php');
 
     }
 
@@ -553,36 +504,6 @@ class Helper
     {
 
         return apply_filters('fewbricks/display_php_file_written_message', '__return_true');
-
-    }
-
-    /**
-     * @return bool
-     */
-    public static function projectBasePathExists()
-    {
-
-        return file_exists(Helper::getProjectFilesBasePath());
-
-    }
-
-    /**
-     * @return bool
-     */
-    public static function projectBasePathIsDefault()
-    {
-
-        return self::getProjectFilesBasePath() === self::getDefaultProjectFilesBasePath();
-
-    }
-
-    /**
-     * @return bool
-     */
-    public static function projectInitFileExists()
-    {
-
-        return file_exists(self::getProjectFilesBasePath() . '/' . self::getProjectInitFileName());
 
     }
 

@@ -187,23 +187,34 @@ class Brick extends FieldCollection implements BrickInterface
      * Executes a template file for the current class and returns the output.
      *
      * @param array       $data             Array of data to pass to the template file
-     * @param bool|string $templateFilePath If you want to set a specific base path, pass it here. End with a slash.
+     * @param bool|string $template_file_path If you want to set a specific base path, pass it here. End with a slash.
      *
      * @return string
      */
-    protected function getBrickTemplateHtml(array $data = [], $templateFilePath = false)
+    protected function getBrickTemplateHtml(array $data = [], $template_file_path = false)
     {
 
-        if ($templateFilePath === false) {
+        if ($template_file_path === false) {
 
-            $templateFilePath = Helper::getBrickTemplatesBasePath($this) . Helper::getBrickTemplateFileName($this);
+            $brick_templates_base_path = Helper::getBrickTemplatesBasePath($this);
+
+            if($brick_templates_base_path !== false) {
+
+                $template_file_path = $brick_templates_base_path . '/' . Helper::getBrickTemplateFileName($this);
+
+            } else {
+
+                wp_die(__('Please make sure that you have used the filter <code>fewbricks/brick_layouts_base_path</code>
+to tell Brick::getBrickTemplateHtml() where to look for brick layouts.', 'fewbricks'));
+
+            }
 
         }
 
         ob_start();
 
         /** @noinspection PhpIncludeInspection */
-        include($templateFilePath);
+        include($template_file_path);
 
         return ob_get_clean();
 
@@ -443,20 +454,22 @@ class Brick extends FieldCollection implements BrickInterface
     public function getBrickLayoutedHtml($html)
     {
 
-        if (!empty($this->brickLayouts)) {
+        if(false === ($layoutsBasePath = Helper::getBrickLayoutsBasePath())) {
+            return $html;
+        }
 
-            $layoutsBasePath = Helper::getBrickLayoutsBasePath();
+        if(empty($this->brickLayouts)) {
+            return $html;
+        }
 
-            foreach ($this->brickLayouts AS $brickLayout) {
+        foreach ($this->brickLayouts AS $brickLayout) {
 
-                ob_start();
+            ob_start();
 
-                /** @noinspection PhpIncludeInspection */
-                include $layoutsBasePath . '/' . $brickLayout . '.php';
+            /** @noinspection PhpIncludeInspection */
+            include $layoutsBasePath . '/' . $brickLayout . '.php';
 
-                $html = ob_get_clean();
-
-            }
+            $html = ob_get_clean();
 
         }
 
