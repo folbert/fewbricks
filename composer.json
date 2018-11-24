@@ -10,7 +10,7 @@
         "reusable"
     ],
     "homepage": "https://github.com/folbert/fewbricks",
-    "license": "GPLv3",
+    "license": "GPL-3.0-or-later",
     "authors": [
         {
             "name": "Björn Folbert",
