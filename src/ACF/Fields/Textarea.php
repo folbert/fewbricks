@@ -76,15 +76,11 @@ class Textarea extends Field implements FieldInterface
      * ACF setting.
      *
      * @param int $maxlength [sic]
-     *
-     * @return $this
      */
     public function setMaxlength($maxlength)
     {
 
         $this->setSetting('maxlength', $maxlength);
-
-        return $this;
 
     }
 
@@ -92,15 +88,11 @@ class Textarea extends Field implements FieldInterface
      * ACF setting. Controls how new lines are rendered.
      *
      * @param string $newLines "wpautop", "br" or ""
-     *
-     * @return $this
      */
     public function setNewLines($newLines)
     {
 
         $this->setSetting('new_lines', $newLines);
-
-        return $this;
 
     }
 
@@ -108,15 +100,11 @@ class Textarea extends Field implements FieldInterface
      * ACF setting.
      *
      * @param string $placeholder
-     *
-     * @return $this
      */
     public function setPlaceholder($placeholder)
     {
 
         $this->setSetting('placeholder', $placeholder);
-
-        return $this;
 
     }
 
@@ -124,15 +112,11 @@ class Textarea extends Field implements FieldInterface
      * ACF setting.
      *
      * @param int $rows
-     *
-     * @return $this
      */
     public function setRows($rows)
     {
 
         $this->setSetting('rows', $rows);
-
-        return $this;
 
     }
 

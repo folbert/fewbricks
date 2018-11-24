@@ -43,15 +43,11 @@ class Link extends Field implements FieldInterface
      * ACF setting.
      *
      * @param string $returnFormat "array" or "url"
-     *
-     * @return $this
      */
     public function setReturnFormat($returnFormat)
     {
 
         $this->setSetting('return_format', $returnFormat);
-
-        return $this;
 
     }
 

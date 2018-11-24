@@ -63,15 +63,11 @@ class Accordion extends Field implements FieldInterface
      * ACF setting. Set if this field should be used as an end-point and start a new group of tabs
      *
      * @param boolean $endPoint
-     *
-     * @return $this
      */
     public function setEndpoint($endPoint)
     {
 
         $this->setSetting('endpoint', $endPoint);
-
-        return $this;
 
     }
 
@@ -79,15 +75,11 @@ class Accordion extends Field implements FieldInterface
      * ACF setting. Pass true to allow this accordion to open without closing others.
      *
      * @param boolean $multiExpand
-     *
-     * @return $this
      */
     public function setMultiExpand($multiExpand)
     {
 
         $this->setSetting('multi_expand', $multiExpand);
-
-        return $this;
 
     }
 
@@ -95,15 +87,11 @@ class Accordion extends Field implements FieldInterface
      * ACF setting. Pass true to display this accordion as open on page load.
      *
      * @param boolean $open
-     *
-     * @return $this
      */
     public function setOpen($open)
     {
 
         $this->setSetting('open', $open);
-
-        return $this;
 
     }
 

@@ -76,15 +76,11 @@ class PageLink extends Field implements FieldInterface
      * ACF setting.
      *
      * @param boolean $allowArchives
-     *
-     * @return PageLink
      */
     public function setAllowArchives($allowArchives)
     {
 
         $this->setSetting('allow_archives', $allowArchives);
-
-        return $this;
 
     }
 
@@ -92,15 +88,11 @@ class PageLink extends Field implements FieldInterface
      * ACF setting.
      *
      * @param boolean $multiple
-     *
-     * @return PageLink
      */
     public function setMultiple($multiple)
     {
 
         $this->setSetting('multiple', $multiple);
-
-        return $this;
 
     }
 
@@ -108,15 +100,11 @@ class PageLink extends Field implements FieldInterface
      * ACF setting.
      *
      * @param array $postType Array with post type names
-     *
-     * @return PageLink
      */
     public function setPostType(array $postType)
     {
 
         $this->setSetting('post_type', $postType);
-
-        return $this;
 
     }
 

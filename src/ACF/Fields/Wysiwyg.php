@@ -76,15 +76,11 @@ class Wysiwyg extends Field implements FieldInterface
      * ACF setting. Set whether TinyMCE should be initialized until field is clicked
      *
      * @param boolean $delay
-     *
-     * @return $this
      */
     public function setDelay($delay)
     {
 
         $this->setSetting('delay', $delay);
-
-        return $this;
 
     }
 
@@ -92,15 +88,11 @@ class Wysiwyg extends Field implements FieldInterface
      * ACF setting.
      *
      * @param boolean $showMediaUploadButtons Boolean indicating whether buttons should be shown or not.
-     *
-     * @return $this
      */
     public function setMediaUpload($showMediaUploadButtons)
     {
 
         $this->setSetting('media_upload', $showMediaUploadButtons);
-
-        return $this;
 
     }
 
@@ -108,15 +100,11 @@ class Wysiwyg extends Field implements FieldInterface
      * ACF settings. Which tabs should be visible.
      *
      * @param string $tabs "visual", "text" or "all" (for both visual and text)
-     *
-     * @return $this
      */
     public function setTabs($tabs)
     {
 
         $this->setSetting('tabs', $tabs);
-
-        return $this;
 
     }
 
@@ -126,15 +114,11 @@ class Wysiwyg extends Field implements FieldInterface
      * @param string $toolbar "full", "basic" or any custom value.
      *
      * @link https://www.advancedcustomfields.com/resources/customize-the-wysiwyg-toolbars/
-     *
-     * @return $this
      */
     public function setToolbar($toolbar)
     {
 
         $this->setSetting('toolbar', $toolbar);
-
-        return $this;
 
     }
 

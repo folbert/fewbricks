@@ -55,15 +55,11 @@ class Image extends FieldWithImages implements FieldInterface
      *
      * @param string $previewSize The name of a defined image size. For example "thumbnail", "medium", "large" or any
      *                            custom image size.
-     *
-     * @return $this
      */
     public function setPreviewSize($previewSize)
     {
 
         $this->setSetting('preview_size', $previewSize);
-
-        return $this;
 
     }
 
@@ -71,15 +67,11 @@ class Image extends FieldWithImages implements FieldInterface
      * ACF setting. Specify the returned value on front end.
      *
      * @param string $returnFormat "array", "url" or "id"
-     *
-     * @return $this
      */
     public function setReturnFormat($returnFormat)
     {
 
         $this->setSetting('return_format', $returnFormat);
-
-        return $this;
 
     }
 

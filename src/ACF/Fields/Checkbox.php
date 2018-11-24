@@ -65,15 +65,11 @@ class Checkbox extends FieldWithChoices implements FieldInterface
      * ACF setting.
      *
      * @param boolean $allowCustom
-     *
-     * @return $this
      */
     public function setAllowCustom($allowCustom)
     {
 
         $this->setSetting('allow_custom', $allowCustom);
-
-        return $this;
 
     }
 
@@ -81,15 +77,11 @@ class Checkbox extends FieldWithChoices implements FieldInterface
      * ACF setting
      *
      * @param string $layout vertical or horizontal
-     *
-     * @return $this
      */
     public function setLayout($layout)
     {
 
         $this->setSetting('layout', $layout);
-
-        return $this;
 
     }
 
@@ -97,15 +89,11 @@ class Checkbox extends FieldWithChoices implements FieldInterface
      * ACF setting.
      *
      * @param boolean $saveCustom
-     *
-     * @return Checkbox $this
      */
     public function setSaveCustom($saveCustom)
     {
 
         $this->setSetting('save_custom', $saveCustom);
-
-        return $this;
 
     }
 
@@ -113,15 +101,11 @@ class Checkbox extends FieldWithChoices implements FieldInterface
      * ACF setting. Send true to prepend an extra checkbox to toggle all choices.
      *
      * @param boolean $toggle
-     *
-     * @return Checkbox $this
      */
     public function setToggle($toggle)
     {
 
         $this->setSetting('toggle', $toggle);
-
-        return $this;
 
     }
 

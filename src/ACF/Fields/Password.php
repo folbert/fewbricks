@@ -65,15 +65,11 @@ class Password extends Field implements FieldInterface
      * ACF setting. Set text to appear after the input.
      *
      * @param string $append Text to appear after the input.
-     *
-     * @return $this
      */
     public function setAppend($append)
     {
 
         $this->setSetting('append', $append);
-
-        return $this;
 
     }
 
@@ -81,15 +77,11 @@ class Password extends Field implements FieldInterface
      * ACF setting. Set text to appear within the input.
      *
      * @param string $placeholder Text to appear within the input.
-     *
-     * @return $this
      */
     public function setPlaceholder($placeholder)
     {
 
         $this->setSetting('placeholder', $placeholder);
-
-        return $this;
 
     }
 
@@ -97,15 +89,11 @@ class Password extends Field implements FieldInterface
      * ACF setting. Set text to appear before the input.
      *
      * @param string $prepend Text to appear before the input.
-     *
-     * @return $this
      */
     public function setPrepend($prepend)
     {
 
         $this->setSetting('prepend', $prepend);
-
-        return $this;
 
     }
 

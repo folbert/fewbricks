@@ -65,15 +65,11 @@ class Select extends FieldWithChoices implements FieldInterface
      * ACF setting. If AJAX should be used to lazy load the choices.
      *
      * @param boolean $ajax
-     *
-     * @return $this
      */
     public function setAjax($ajax)
     {
 
         $this->setSetting('ajax', $ajax);
-
-        return $this;
 
     }
 
@@ -87,23 +83,17 @@ class Select extends FieldWithChoices implements FieldInterface
 
         $this->getSetting('multiple', $multiple);
 
-        return $this;
-
     }
 
     /**
      * ACF settings. Whether or not to use the stylised UI:
      *
      * @param boolean $ui
-     *
-     * @return $this
      */
     public function setUi($ui)
     {
 
         $this->setSetting('ui', $ui);
-
-        return $this;
 
     }
 

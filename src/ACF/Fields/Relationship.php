@@ -110,15 +110,11 @@ class Relationship extends Field implements FieldInterface
      * ACF setting.
      *
      * @param array $elements Name of elements to display
-     *
-     * @return $this
      */
     public function setElements(array $elements)
     {
 
         $this->setSetting('elements', $elements);
-
-        return $this;
 
     }
 
@@ -127,15 +123,11 @@ class Relationship extends Field implements FieldInterface
      *
      * @param array $filters Which filters should be available to the administrator. Possible values: "search",
      *                       "post_type", "taxonomy".
-     *
-     * @return $this
      */
     public function setFilters(array $filters)
     {
 
         $this->setSetting('filters', $filters);
-
-        return $this;
 
     }
 
@@ -143,15 +135,11 @@ class Relationship extends Field implements FieldInterface
      * ACF setting.
      *
      * @param int $max
-     *
-     * @return $this
      */
     public function setMax($max)
     {
 
         $this->setSetting('max', $max);
-
-        return $this;
 
     }
 
@@ -159,15 +147,11 @@ class Relationship extends Field implements FieldInterface
      * ACF setting.
      *
      * @param int $min
-     *
-     * @return $this
      */
     public function setMin($min)
     {
 
         $this->setSetting('min', $min);
-
-        return $this;
 
     }
 
@@ -175,15 +159,11 @@ class Relationship extends Field implements FieldInterface
      * ACF setting. Set which post types to display in drop down.
      *
      * @param array $postType Array with post type names.
-     *
-     * @return $this
      */
     public function setPostType(array $postType)
     {
 
         $this->setSetting('post_type', $postType);
-
-        return $this;
 
     }
 
@@ -191,15 +171,11 @@ class Relationship extends Field implements FieldInterface
      * ACF setting.
      *
      * @param string $returnFormat "object" or "id"
-     *
-     * @return $this
      */
     public function setReturnFormat($returnFormat)
     {
 
         $this->setSetting('return_format', $returnFormat);
-
-        return $this;
 
     }
 
@@ -208,15 +184,11 @@ class Relationship extends Field implements FieldInterface
      *
      * @param array $taxonomy        An array where each item is made up of "taxonomy:term". For example
      *                               ["category:uncategorized"]
-     *
-     * @return $this
      */
     public function setTaxonomy(array $taxonomy)
     {
 
         $this->setSetting('taxonomy', $taxonomy);
-
-        return $this;
 
     }
 

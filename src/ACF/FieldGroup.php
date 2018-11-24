@@ -91,22 +91,16 @@ class FieldGroup extends FieldCollection implements FieldGroupInterface
 
     /**
      * @param FieldGroupLocationRuleGroup $ruleGroup
-     *
-     * @return $this
      */
     public function addLocationRuleGroup($ruleGroup)
     {
 
         $this->locationRuleGroups->addItem($ruleGroup);
 
-        return $this;
-
     }
 
     /**
      * @param FieldGroupLocationRuleGroup[] $ruleGroups
-     *
-     * @return $this
      */
     public function addLocationRuleGroups($ruleGroups)
     {
@@ -117,19 +111,14 @@ class FieldGroup extends FieldCollection implements FieldGroupInterface
 
         }
 
-        return $this;
-
     }
 
     /**
-     * @return $this
      */
     public function clearLocationRuleGroups()
     {
 
         $this->locationRuleGroups = new RuleGroupCollection();
-
-        return $this;
 
     }
 
@@ -147,8 +136,6 @@ class FieldGroup extends FieldCollection implements FieldGroupInterface
      *                            This will create an array with all the items that ACF supports hiding and then
      *                            remove the items that you have set in $showOnScreen. Passing a non-empty value here
      *                            will make the function ignore the $hideOnScreen variable completely
-     *
-     * @return $this
      */
     private function doSetHideOnScreen($hideOnScreen, $showOnScreen = [])
     {
@@ -194,8 +181,6 @@ class FieldGroup extends FieldCollection implements FieldGroupInterface
         }
 
         $this->setSetting('hide_on_screen', $hideOnScreen);
-
-        return $this;
 
     }
 
@@ -376,15 +361,11 @@ class FieldGroup extends FieldCollection implements FieldGroupInterface
 
     /**
      * @param $title
-     *
-     * @return FieldGroup
      */
     public function setTitle($title)
     {
 
         $this->title = $title;
-
-        return $this;
 
     }
 
@@ -421,15 +402,11 @@ class FieldGroup extends FieldCollection implements FieldGroupInterface
      * ACF setting. If the field group should be registered or not.
      *
      * @param $active
-     *
-     * @return $this
      */
     public function setActive($active)
     {
 
         $this->setSetting('active', $active);
-
-        return $this;
 
     }
 
@@ -438,15 +415,11 @@ class FieldGroup extends FieldCollection implements FieldGroupInterface
      * never be used by Fewbricks users. But lets add this function anyways just to be nice :)
      *
      * @param string $description The description
-     *
-     * @return $this
      */
     public function setDescription($description)
     {
 
         $this->setSetting('description', $description);
-
-        return $this;
 
     }
 
@@ -460,15 +433,11 @@ class FieldGroup extends FieldCollection implements FieldGroupInterface
      *                                   'author', 'format', 'page_attributes', 'featured_image', 'categories', 'tags',
      *                                   'send-trackbacks', 'all'. Note 'all' which will show all elements that
      *                                   are possible to hide.
-     *
-     * @return $this
      */
     public function setHideOnScreen($elementNames)
     {
 
         $this->doSetHideOnScreen($elementNames);
-
-        return $this;
 
     }
 
@@ -476,15 +445,11 @@ class FieldGroup extends FieldCollection implements FieldGroupInterface
      * ACF Setting. Determines where field instructions are placed in relation to fields.
      *
      * @param string $instruction_placement 'label' (Below labels) or 'field' (Below fields)
-     *
-     * @return $this
      */
     public function setInstructionPlacement($instruction_placement)
     {
 
         $this->setSetting('instruction_placement', $instruction_placement);
-
-        return $this;
 
     }
 
@@ -492,16 +457,11 @@ class FieldGroup extends FieldCollection implements FieldGroupInterface
      * ACF Setting. Determines where field labels are placed in relation to fields. Defaults to 'top'.
      *
      * @param string $labelPlacement 'top' (Above fields) or 'left' (Beside fields)
-     *
-     * @return $this
      */
     public function setLabelPlacement($labelPlacement)
     {
 
         $this->setSetting('label_placement', $labelPlacement);
-
-        return $this;
-
 
     }
 
@@ -509,15 +469,11 @@ class FieldGroup extends FieldCollection implements FieldGroupInterface
      * ACF setting. Field groups are shown in order from lowest to highest.
      *
      * @param int $menuOrder
-     *
-     * @return $this
      */
     public function setMenuOrder($menuOrder)
     {
 
         $this->setSetting('menu_order', $menuOrder);
-
-        return $this;
 
     }
 
@@ -525,15 +481,11 @@ class FieldGroup extends FieldCollection implements FieldGroupInterface
      * ACF setting. Determines the position on the edit screen. Defaults to 'normal'.
      *
      * @param string $position 'acf_after_title', 'normal' or 'side'
-     *
-     * @return $this
      */
     public function setPosition($position)
     {
 
         $this->setSetting('position', $position);
-
-        return $this;
 
     }
 
@@ -543,8 +495,6 @@ class FieldGroup extends FieldCollection implements FieldGroupInterface
      *
      * @param $name
      * @param $value
-     *
-     * @return $this
      */
     public function setSetting($name, $value)
     {
@@ -558,8 +508,6 @@ class FieldGroup extends FieldCollection implements FieldGroupInterface
 
         $this->settings[$name] = $value;
 
-        return $this;
-
     }
 
     /**
@@ -572,15 +520,11 @@ class FieldGroup extends FieldCollection implements FieldGroupInterface
      *                                   'author', 'format', 'page_attributes', 'featured_image', 'categories', 'tags',
      *                                   'send-trackbacks', 'all'. Note 'all' which will show all elements that
      *                                   ar possible to hide.
-     *
-     * @return $this
      */
     public function setShowOnScreen($elementNames)
     {
 
         $this->doSetHideOnScreen([], $elementNames);
-
-        return $this;
 
     }
 
@@ -588,15 +532,11 @@ class FieldGroup extends FieldCollection implements FieldGroupInterface
      * Determines the meta box style. Choices of 'default' or 'seamless'
      *
      * @param string $style 'default' or 'seamless'
-     *
-     * @return $this
      */
     public function setStyle($style)
     {
 
         $this->setSetting('style', $style);
-
-        return $this;
 
     }
 

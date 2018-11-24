@@ -98,15 +98,11 @@ class Number extends Field implements FieldInterface
      * ACF setting. Appears after the input.
      *
      * @param string $append
-     *
-     * @return $this
      */
     public function setAppend($append)
     {
 
         $this->setSetting('append', $append);
-
-        return $this;
 
     }
 
@@ -114,15 +110,11 @@ class Number extends Field implements FieldInterface
      * ACF setting.
      *
      * @param int $maximumValue
-     *
-     * @return $this
      */
     public function setMaximumValue($maximumValue)
     {
 
         $this->setSetting('max', $maximumValue);
-
-        return $this;
 
     }
 
@@ -130,15 +122,11 @@ class Number extends Field implements FieldInterface
      * ACF setting.
      *
      * @param int $minimumValue
-     *
-     * @return $this
      */
     public function setMinimumValue($minimumValue)
     {
 
         $this->setSetting('min', $minimumValue);
-
-        return $this;
 
     }
 
@@ -146,15 +134,11 @@ class Number extends Field implements FieldInterface
      * ACF setting. Set the placeholder for the field
      *
      * @param string $placeholder
-     *
-     * @return $this
      */
     public function setPlaceholder($placeholder)
     {
 
         $this->setSetting('placeholder', $placeholder);
-
-        return $this;
 
     }
 
@@ -162,15 +146,11 @@ class Number extends Field implements FieldInterface
      * ACF setting. Appears before the input.
      *
      * @param string $prepend
-     *
-     * @return $this
      */
     public function setPrepend($prepend)
     {
 
         $this->setSetting('prepend', $prepend);
-
-        return $this;
 
     }
 
@@ -178,15 +158,11 @@ class Number extends Field implements FieldInterface
      * ACF setting.
      *
      * @param int $step
-     *
-     * @return $this
      */
     public function setStep($step)
     {
 
         $this->setSetting('step', $step);
-
-        return $this;
 
     }
 

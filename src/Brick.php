@@ -254,15 +254,11 @@ class Brick extends FieldCollection implements BrickInterface
 
     /**
      * @param array $data
-     *
-     * @return brick $this
      */
     public function setData($data)
     {
 
         $this->data = $data;
-
-        return $this;
 
     }
 
@@ -480,15 +476,11 @@ class Brick extends FieldCollection implements BrickInterface
 
     /**
      * @param $isLayout
-     *
-     * @return Brick
      */
     public function setIsLayout($isLayout)
     {
 
         $this->isLayout = $isLayout;
-
-        return $this;
 
     }
 
@@ -504,15 +496,11 @@ class Brick extends FieldCollection implements BrickInterface
 
     /**
      * @param $isOption
-     *
-     * @return $this
      */
     public function setIsOption($isOption)
     {
 
         $this->isOption = $isOption;
-
-        return $this;
 
     }
 
@@ -535,8 +523,6 @@ class Brick extends FieldCollection implements BrickInterface
     {
 
         $this->isSubField = $isSubField;
-
-        return $this;
 
     }
 

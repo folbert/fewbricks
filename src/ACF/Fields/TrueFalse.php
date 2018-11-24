@@ -63,29 +63,21 @@ class TrueFalse extends Field implements FieldInterface
 
     /**
      * @param string $message
-     *
-     * @return $this
      */
     public function setMessage($message)
     {
 
         $this->setSetting('message', $message);
 
-        return $this;
-
     }
 
     /**
      * @param $ui
-     *
-     * @return $this
      */
     public function setUi($ui)
     {
 
         $this->setSetting('ui', $ui);
-
-        return $this;
 
     }
 

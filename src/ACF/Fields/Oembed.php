@@ -54,15 +54,11 @@ class Oembed extends Field implements FieldInterface
      * ACF setting.
      *
      * @param int $height Width in px (without "px")
-     *
-     * @return $this
      */
     public function setHeight($height)
     {
 
         $this->setSetting('height', $height);
-
-        return $this;
 
     }
 
@@ -70,15 +66,11 @@ class Oembed extends Field implements FieldInterface
      * ACF setting.
      *
      * @param int $width Width in px (without "px")
-     *
-     * @return $this
      */
     public function setWidth($width)
     {
 
         $this->setSetting('width', $width);
-
-        return $this;
 
     }
 

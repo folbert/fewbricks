@@ -25,9 +25,7 @@ class ButtonGroup extends FieldWithChoices implements FieldInterface
     public function getLayout()
     {
 
-        $this->getSetting('layout', 'horizontal');
-
-        return $this;
+        return $this->getSetting('layout', 'horizontal');
 
     }
 
@@ -45,15 +43,11 @@ class ButtonGroup extends FieldWithChoices implements FieldInterface
      * ACF setting.
      *
      * @param string $layout "horizontal" or "vertical"
-     *
-     * @return $this
      */
     public function setLayout($layout)
     {
 
         $this->setSetting('layout', $layout);
-
-        return $this;
 
     }
 

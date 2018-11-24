@@ -65,15 +65,11 @@ class Gallery extends FieldWithImages implements FieldInterface
      * ACF setting. Specify where new attachments are added
      *
      * @param string $insert "append" or "prepend"
-     *
-     * @return $this
      */
     public function setInsert($insert)
     {
 
         $this->setSetting('insert', $insert);
-
-        return $this;
 
     }
 
@@ -81,15 +77,11 @@ class Gallery extends FieldWithImages implements FieldInterface
      * ACF setting maximum selection.
      *
      * @param int $max
-     *
-     * @return $this
      */
     public function setMax($max)
     {
 
         $this->setSetting('max', $max);
-
-        return $this;
 
     }
 
@@ -97,15 +89,11 @@ class Gallery extends FieldWithImages implements FieldInterface
      * ACF setting minimum selection.
      *
      * @param int $min
-     *
-     * @return $this
      */
     public function setMin($min)
     {
 
         $this->setSetting('min', $min);
-
-        return $this;
 
     }
 

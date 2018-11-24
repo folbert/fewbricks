@@ -62,15 +62,11 @@ class Layout extends FieldWithFields implements FieldInterface
      * ACF setting. Sets the value which is set using the select box labelled "Layout" in the GUI
      *
      * @param string $display table, block or row
-     *
-     * @return $this
      */
     public function setDisplay($display)
     {
 
         $this->setSetting('display', $display);
-
-        return $this;
 
     }
 
@@ -79,15 +75,11 @@ class Layout extends FieldWithFields implements FieldInterface
      *
      * @param int|string $max An empty string to disable this setting which is only needed if you have previously set it
      *                        to an int and wants to unset it.
-     *
-     * @return $this
      */
     public function setMax($max)
     {
 
         $this->setSetting('max', $max);
-
-        return $this;
 
     }
 
@@ -96,15 +88,11 @@ class Layout extends FieldWithFields implements FieldInterface
      *
      * @param int|string $min An empty string to disable this setting which is only needed if you have previously set it
      *                        to an int and wants to unset it.
-     *
-     * @return $this
      */
     public function setMin($min)
     {
 
         $this->setSetting('min', $min);
-
-        return $this;
 
     }
 

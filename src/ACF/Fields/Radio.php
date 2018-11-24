@@ -43,15 +43,11 @@ class Radio extends FieldWithChoices implements FieldInterface
      * ACF setting.
      *
      * @param string $layout "vertical" or "horizontal".
-     *
-     * @return $this
      */
     public function setLayout($layout)
     {
 
         $this->setSetting('layout', $layout);
-
-        return $this;
 
     }
 

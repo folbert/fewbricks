@@ -30,8 +30,6 @@ class FieldWithImages extends Field
 
         $this->getSetting('max_height', 0);
 
-        return $this;
-
     }
 
     /**
@@ -104,15 +102,11 @@ class FieldWithImages extends Field
      * ACF setting. Limit the media library choice.
      *
      * @param $library "all" or "uploadedTo"
-     *
-     * @return $this
      */
     public function setLibrary($library)
     {
 
         $this->setSetting('library', $library);
-
-        return $this;
 
     }
 
@@ -120,15 +114,11 @@ class FieldWithImages extends Field
      * ACF setting. Restrict which images can be uploaded.
      *
      * @param int $maxHeight max height in px (without "px")
-     *
-     * @return $this
      */
     public function setMaxHeight($maxHeight)
     {
 
         $this->setSetting('max_height', $maxHeight);
-
-        return $this;
 
     }
 
@@ -136,15 +126,11 @@ class FieldWithImages extends Field
      * ACF setting. Restrict which images can be uploaded.
      *
      * @param int $maxSize max size in MB (without "MB")
-     *
-     * @return $this
      */
     public function setMaxSize($maxSize)
     {
 
         $this->setSetting('max_size', $maxSize);
-
-        return $this;
 
     }
 
@@ -152,15 +138,11 @@ class FieldWithImages extends Field
      * ACF setting. Restrict which images can be uploaded.
      *
      * @param int $maxWidth max width in px (without "px")
-     *
-     * @return $this
      */
     public function setMaxWidth($maxWidth)
     {
 
         $this->setSetting('max_width', $maxWidth);
-
-        return $this;
 
     }
 
@@ -168,8 +150,6 @@ class FieldWithImages extends Field
      * ACF setting. Don't use or pass an empty value for all types.
      *
      * @param array $mime_types Max file size in MB
-     *
-     * @return $this
      */
     public function setMimeTypes($mime_types)
     {
@@ -180,23 +160,17 @@ class FieldWithImages extends Field
 
         $this->setSetting('mime_types', $mime_types);
 
-        return $this;
-
     }
 
     /**
      * ACF setting. Restrict which images can be uploaded.
      *
      * @param int $minHeight Min height in px (without "px")
-     *
-     * @return $this
      */
     public function setMinHeight($minHeight)
     {
 
         $this->setSetting('min_height', $minHeight);
-
-        return $this;
 
     }
 
@@ -204,15 +178,11 @@ class FieldWithImages extends Field
      * ACF setting. Restrict which images can be uploaded.
      *
      * @param int $minSize Min size in MB (without "MB")
-     *
-     * @return $this
      */
     public function setMinSize($minSize)
     {
 
         $this->setSetting('min_size', $minSize);
-
-        return $this;
 
     }
 
@@ -220,15 +190,11 @@ class FieldWithImages extends Field
      * ACF setting. Restrict which images can be uploaded.
      *
      * @param int $minWidth Min width in px (without "px")
-     *
-     * @return $this
      */
     public function setMinWidth($minWidth)
     {
 
         $this->setSetting('min_width', $minWidth);
-
-        return $this;
 
     }
 

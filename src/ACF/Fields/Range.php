@@ -87,15 +87,11 @@ class Range extends Field implements FieldInterface
      * ACF setting.
      *
      * @param string $append
-     *
-     * @return $this
      */
     public function setAppend($append)
     {
 
         $this->setSetting('append', $append);
-
-        return $this;
 
     }
 
@@ -103,15 +99,11 @@ class Range extends Field implements FieldInterface
      * ACF setting.
      *
      * @param int $max
-     *
-     * @return $this
      */
     public function setMax($max)
     {
 
         $this->setSetting('max', $max);
-
-        return $this;
 
     }
 
@@ -119,15 +111,11 @@ class Range extends Field implements FieldInterface
      * ACF setting.
      *
      * @param int $min
-     *
-     * @return $this
      */
     public function setMin($min)
     {
 
         $this->setSetting('min', $min);
-
-        return $this;
 
     }
 
@@ -135,15 +123,11 @@ class Range extends Field implements FieldInterface
      * ACF setting.
      *
      * @param string $prepend
-     *
-     * @return $this
      */
     public function setPrepend($prepend)
     {
 
         $this->setSetting('prepend', $prepend);
-
-        return $this;
 
     }
 
@@ -151,15 +135,11 @@ class Range extends Field implements FieldInterface
      * ACF setting.
      *
      * @param int $step
-     *
-     * @return $this
      */
     public function setStep($step)
     {
 
         $this->setSetting('step', $step);
-
-        return $this;
 
     }
 

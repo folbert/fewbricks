@@ -87,15 +87,11 @@ class PostObject extends Field implements FieldInterface
      * ACF setting.
      *
      * @param boolean $allowNull
-     *
-     * @return $this
      */
     public function setAllowNull($allowNull)
     {
 
         $this->setSetting('null', $allowNull);
-
-        return $this;
 
     }
 
@@ -103,15 +99,11 @@ class PostObject extends Field implements FieldInterface
      * ACF setting.
      *
      * @param boolean $multiple
-     *
-     * @return $this
      */
     public function setMultiple($multiple)
     {
 
         $this->setSetting('multiple', $multiple);
-
-        return $this;
 
     }
 
@@ -119,15 +111,11 @@ class PostObject extends Field implements FieldInterface
      * ACF setting. Set which post types to display in drop down.
      *
      * @param array $postType Array with post type names.
-     *
-     * @return $this
      */
     public function setPostType(array $postType)
     {
 
         $this->setSetting('post_type', $postType);
-
-        return $this;
 
     }
 
@@ -135,15 +123,11 @@ class PostObject extends Field implements FieldInterface
      * ACF setting.
      *
      * @param $returnFormat "object" for post object or "id" for post id.
-     *
-     * @return $this
      */
     public function setReturnFormat($returnFormat)
     {
 
         $this->setSetting('return_format', $returnFormat);
-
-        return $this;
 
     }
 
@@ -152,15 +136,11 @@ class PostObject extends Field implements FieldInterface
      *
      * @param array $taxonomy        An array where each item is made up of "taxonomy:term". For example
      *                               ["category:uncategorized"]
-     *
-     * @return $this
      */
     public function setTaxonomy(array $taxonomy)
     {
 
         $this->setSetting('taxonomy', $taxonomy);
-
-        return $this;
 
     }
 

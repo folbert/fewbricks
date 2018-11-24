@@ -39,15 +39,11 @@ class Group extends FieldWithFields implements FieldInterface
      * ACF setting to specify the style used to render the selected fields.
      *
      * @param string $layout "block", "table" or "row"
-     *
-     * @return $this
      */
     public function setLayout($layout)
     {
 
         $this->setSetting('layout', $layout);
-
-        return $this;
 
     }
 

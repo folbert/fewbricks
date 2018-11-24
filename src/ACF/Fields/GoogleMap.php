@@ -76,15 +76,11 @@ class GoogleMap extends Field implements FieldInterface
      * ACF setting. Where to center the initial map on the latitude axis.
      *
      * @param int $lat
-     *
-     * @return $this
      */
     public function setCenterLat($lat)
     {
 
         $this->setSetting('center_lat', $lat);
-
-        return $this;
 
     }
 
@@ -92,31 +88,11 @@ class GoogleMap extends Field implements FieldInterface
      * ACF setting. Where to center the initial map on the latitude axis.
      *
      * @param int $lng
-     *
-     * @return $this
      */
     public function setCenterLng($lng)
     {
 
         $this->setSetting('center_lng', $lng);
-
-        return $this;
-
-    }
-
-    /**
-     * ACF setting. Customize teh map height.
-     *
-     * @param int $height Height in px (without "px")
-     *
-     * @return $this
-     */
-    public function setHeight($height)
-    {
-
-        $this->setSetting('height', $height);
-
-        return $this;
 
     }
 
@@ -124,15 +100,23 @@ class GoogleMap extends Field implements FieldInterface
      * ACF setting. The initial zoom level.
      *
      * @param int $zoom
-     *
-     * @return $this
      */
     public function setZoom($zoom)
     {
 
         $this->setSetting('zoom', $zoom);
 
-        return $this;
+    }
+
+    /**
+     * ACF setting. Customize teh map height.
+     *
+     * @param int $height Height in px (without "px")
+     */
+    public function setHeight($height)
+    {
+
+        $this->setSetting('height', $height);
 
     }
 

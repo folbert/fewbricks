@@ -43,15 +43,11 @@ class Url extends Field implements FieldInterface
      * ACF setting. Text that appears within the input.
      *
      * @param string $placeholder
-     *
-     * @return $this
      */
     public function setPlaceholder($placeholder)
     {
 
         $this->setSetting('placeholder', $placeholder);
-
-        return $this;
 
     }
 

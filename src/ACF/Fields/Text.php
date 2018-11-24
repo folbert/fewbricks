@@ -76,15 +76,11 @@ class Text extends Field implements FieldInterface
      * ACF setting. Set text to appear after the input.
      *
      * @param string $append Text to appear after the input.
-     *
-     * @return $this
      */
     public function setAppend($append)
     {
 
         $this->setSetting('append', $append);
-
-        return $this;
 
     }
 
@@ -92,15 +88,11 @@ class Text extends Field implements FieldInterface
      * ACF setting.
      *
      * @param int $maxlength [sic]
-     *
-     * @return $this
      */
     public function setMaxlength($maxlength)
     {
 
         $this->setSetting('maxlength', $maxlength);
-
-        return $this;
 
     }
 
@@ -108,15 +100,11 @@ class Text extends Field implements FieldInterface
      * ACF setting.
      *
      * @param string $placeholder
-     *
-     * @return $this
      */
     public function setPlaceholder($placeholder)
     {
 
         $this->setSetting('placeholder', $placeholder);
-
-        return $this;
 
     }
 
@@ -124,15 +112,11 @@ class Text extends Field implements FieldInterface
      * ACF setting. Set text to appear before the input.
      *
      * @param string $prepend Text to appear before the input.
-     *
-     * @return $this
      */
     public function setPrepend($prepend)
     {
 
         $this->setSetting('prepend', $prepend);
-
-        return $this;
 
     }
 

@@ -29,15 +29,11 @@ class RuleGroup
 
     /**
      * @param Rule $rule
-     *
-     * @return $this
      */
     public function addRule(Rule $rule)
     {
 
         $this->rules->addItem($rule);
-
-        return $this;
 
     }
 

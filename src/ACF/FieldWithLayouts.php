@@ -41,15 +41,11 @@ class FieldWithLayouts extends Field
 
     /**
      * @param Layout $layout
-     *
-     * @return $this
      */
     public function addLayout($layout)
     {
 
         $this->layouts->addItem($layout, $layout->getKey());
-
-        return $this;
 
     }
 
@@ -106,29 +102,21 @@ class FieldWithLayouts extends Field
 
     /**
      * @param int $name
-     *
-     * @return $this
      */
     public function removeLayout($name)
     {
 
         $this->layouts->removeFieldByName($name);
 
-        return $this;
-
     }
 
     /**
      * @param $buttonLabel
-     *
-     * @return $this
      */
     public function setButtonLabel($buttonLabel)
     {
 
         $this->setSetting('button_label', $buttonLabel);
-
-        return $this;
 
     }
 

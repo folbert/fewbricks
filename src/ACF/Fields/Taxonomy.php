@@ -109,15 +109,11 @@ class Taxonomy extends Field implements FieldInterface
      * ACF setting. Set if new terms can be added whilst editing.
      *
      * @param boolean $add_term
-     *
-     * @return $this
      */
     public function setAddTerm($add_term)
     {
 
         $this->setSetting('add_term', $add_term);
-
-        return $this;
 
     }
 
@@ -125,15 +121,11 @@ class Taxonomy extends Field implements FieldInterface
      * ACF settings.
      *
      * @param $allowNull
-     *
-     * @return $this
      */
     public function setAllowNull($allowNull)
     {
 
         $this->setSetting('allow_null', $allowNull);
-
-        return $this;
 
     }
 
@@ -141,15 +133,11 @@ class Taxonomy extends Field implements FieldInterface
      * ACF setting. NOt what kind of field this is but what kind of field to use when displaying the terms
      *
      * @param string $field_type "checkbox", "radio", "multi_select" or "select"
-     *
-     * @return $this
      */
     public function setFieldType($field_type)
     {
 
         $this->setSetting('field_type', $field_type);
-
-        return $this;
 
     }
 
@@ -157,15 +145,11 @@ class Taxonomy extends Field implements FieldInterface
      * ACF settings. Set if value should be loaded from posts terms.
      *
      * @param $loadTerms
-     *
-     * @return $this
      */
     public function setLoadTerms($loadTerms)
     {
 
         $this->setSetting('load_terms', $loadTerms);
-
-        return $this;
 
     }
 
@@ -173,15 +157,11 @@ class Taxonomy extends Field implements FieldInterface
      * ACF setting.
      *
      * @param string $returnFormat "object" or "id"
-     *
-     * @return $this
      */
     public function setReturnFormat($returnFormat)
     {
 
         $this->setSetting('return_format', $returnFormat);
-
-        return $this;
 
     }
 
@@ -189,15 +169,11 @@ class Taxonomy extends Field implements FieldInterface
      * ACF setting. Set if selected terms should be connected to the post.
      *
      * @param boolean $saveTerms
-     *
-     * @return $this
      */
     public function setSaveTerms($saveTerms)
     {
 
         $this->setSetting('save_terms', $saveTerms);
-
-        return $this;
 
     }
 
@@ -205,15 +181,11 @@ class Taxonomy extends Field implements FieldInterface
      * ACF setting. Set the taxonomy to be displayed.
      *
      * @param string $taxonomy The name of a taxonomy
-     *
-     * @return $this
      */
     public function setTaxonomy($taxonomy)
     {
 
         $this->setSetting('taxonomy', $taxonomy);
-
-        return $this;
 
     }
 

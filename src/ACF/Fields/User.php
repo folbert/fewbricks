@@ -65,15 +65,11 @@ class User extends Field implements FieldInterface
      * ACF setting.
      *
      * @param boolean $allowNull
-     *
-     * @return $this
      */
     public function setAllowNull($allowNull)
     {
 
         $this->setSetting('allow_null', $allowNull);
-
-        return $this;
 
     }
 
@@ -81,15 +77,11 @@ class User extends Field implements FieldInterface
      * ACF setting.
      *
      * @param boolean $multiple
-     *
-     * @return $this
      */
     public function setMultiple($multiple)
     {
 
         $this->setSetting('multiple', $multiple);
-
-        return $this;
 
     }
 
@@ -99,15 +91,11 @@ class User extends Field implements FieldInterface
      * @param array $role      Array with names of the user roles that the editor should be able to choose from.
      *                         For example: ['editor', 'author']. Send an empty array (or don't call the function at
      *                         all) to be able to choose from al roles.
-     *
-     * @return $this
      */
     public function setRole(array $role)
     {
 
         $this->setSetting('role', $role);
-
-        return $this;
 
     }
 

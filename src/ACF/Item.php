@@ -78,8 +78,6 @@ class Item
      * Allows you to set multiple settings at once.
      *
      * @param $settings
-     *
-     * @return $this
      */
     public function setSettings($settings)
     {
@@ -90,15 +88,11 @@ class Item
 
         }
 
-        return $this;
-
     }
 
     /**
      * @param $name
      * @param $value
-     *
-     * @return $this
      */
     public function setSetting($name, $value)
     {
@@ -111,8 +105,6 @@ class Item
         }
 
         $this->settings[$name] = $value;
-
-        return $this;
 
     }
 
@@ -158,15 +150,11 @@ class Item
 
     /**
      * @param $key
-     *
-     * @return $this
      */
     public function setParentBrickKey($key)
     {
 
         $this->parentBrickKey = $key;
-
-        return $this;
 
     }
 
@@ -182,15 +170,11 @@ class Item
 
     /**
      * @param $name
-     *
-     * @return $this
      */
     public function setParentBrickName($name)
     {
 
         $this->parentBrickName = $name;
-
-        return $this;
 
     }
 
@@ -287,15 +271,11 @@ class Item
 
     /**
      * @param string $key
-     *
-     * @return $this
      */
     public function setKey($key)
     {
 
         $this->key = $key;
-
-        return $this;
 
     }
 
