@@ -26,20 +26,13 @@ class Field extends Item
      * @param string $label The label of the field
      * @param string $name The name of the field
      * @param string $key The key of the field. Must be unique across the entire app
-     * @param array $settings Array where you can pass all/any of the possible settings for the field.
-     *                         https://www.advancedcustomfields.com/resources/register-fields-via-php/#field-type%20settings
-     * @param string $type Name of a valid ACF field type. Makes it possible to create custom field types.
      */
-    public function __construct($label, $name, $key, $type = '')
+    public function __construct($label, $name, $key)
     {
 
         parent::__construct($label, $name, $key);
 
-        if (!empty($type)) {
-            $this->setType($type);
-        } else {
-            $this->setType($this->getType());
-        }
+        $this->type = static::$mytype;
 
         $this->clearConditionalLogic();
 

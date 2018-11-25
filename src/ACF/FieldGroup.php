@@ -16,7 +16,7 @@ class FieldGroup extends FieldCollection implements FieldGroupInterface
     /**
      * The items that ACF supports hiding as of v5.6.5
      */
-    const HIDE_ON_SCREEN_ITEMS
+    private const HIDE_ON_SCREEN_ITEMS
         = [
             'permalink',
             'the_content',
@@ -63,29 +63,18 @@ class FieldGroup extends FieldCollection implements FieldGroupInterface
      *
      * @param string $title
      * @param string $key
-     * @param array  $settings  Any other settings that will affect ACF.
-     *                          https://www.advancedcustomfields.com/resources/register-fields-via-php/#group-settings
-     * @param array  $arguments An array enabling you to pass any argument that you need.
      */
-    public function __construct(
-        $title,
-        $key,
-        $settings = [],
-        $arguments = []
-    ) {
-
-        if (!is_array($settings)) {
-            $settings = [];
-        }
+    public function __construct(string $title, string $key)
+    {
 
         // Let's keep these crucial settings as class vars to enable nicer
         // and more OOP-oriented access
-        $this->title    = $title;
-        $this->key      = $key;
-        $this->settings = $settings;
+        $this->title = $title;
+        $this->key = $key;
+        $this->settings = [];
         $this->clearLocationRuleGroups();
 
-        parent::__construct($arguments);
+        parent::__construct();
 
     }
 
@@ -309,8 +298,8 @@ class FieldGroup extends FieldCollection implements FieldGroupInterface
     /**
      * Get the value of a specific setting.
      *
-     * @param string $name         The name of the setting
-     * @param bool   $defaultValue The value to return if the setting does not exist
+     * @param string $name The name of the setting
+     * @param bool $defaultValue The value to return if the setting does not exist
      *
      * @return bool|mixed
      */
@@ -547,10 +536,10 @@ class FieldGroup extends FieldCollection implements FieldGroupInterface
     {
 
         return array_merge($this->settings, [
-            'key'      => $this->getKey(),
-            'title'    => $this->getTitle(),
+            'key' => $this->getKey(),
+            'title' => $this->getTitle(),
             'location' => $this->locationRuleGroups->toArray(),
-            'fields'   => parent::toAcfArray(),
+            'fields' => parent::toAcfArray(),
         ]);
 
     }

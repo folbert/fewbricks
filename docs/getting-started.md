@@ -40,15 +40,19 @@ plugin.
 In the admin-area, you should now see new post types "Fewbricks Demo Pages Type 1" and "Fewbricks Demo pages Type 2".
 This is because Fewbricks comes with a bunch of demo code for you to use as you want.
 
-The first thing you want to do is to tell Fewbricks that the code you are going to write for it will not be located at
+@todo Describe action fewbricks/init
+
+~~~The first thing you want to do is to tell Fewbricks that the code you are going to write for it will not be 
+located at
 plugins/fewbricks/fewbricks-demo which is the default location. This is because if you kept your custom code in the
 Fewbricks core directory, it would be overwritten on the next plugin update. So let's keep your custom code somewhere
 safe. It may be in a functionality plugin or in your theme or any other place you prefer. Wherever you place the
-files, you need to tell Fewbricks where they are by using the filter [set_brick_template_base_path](doc:set-brick-template-base-path).
+files, you need to tell Fewbricks where they are by using the filter [set_brick_template_base_path]
+(doc:set-brick-template-base-path).~~
 
-Let's assume that you are going to keep all the custom Fewbricks code in a directory called "project-fewbricks" in the
+~Let's assume that you are going to keep all the custom Fewbricks code in a directory called "project-fewbricks" in the
 directory of the theme you are developing. You would then add this to one of your theme files (for example `function
-.php`).
+.php`).~~~
 
 ```php
 <?php
@@ -57,11 +61,10 @@ add_filter('fewbricks/project_files_base_path', function() {
   return get_template_directory() . '/project-fewbricks';
 });
 ```
-If you want to, feel free to copy the directory plugins/fewbricks/fewbricks-demo to project-fewbricks. This will give
+~~If you want to, feel free to copy the directory plugins/fewbricks/fewbricks-demo to project-fewbricks. This will give
 you some example code to play around with. You will also get code for an auto loader that you can keep, edit or
 delete as you see fit. The rest of the documentation will assume that you have auto-loading in place in one way or
-another.
+another.~~
  
-Make sure that there is a file named fewbricks-init.php in the root of the directory where your custom
-Fewbricks files will reside.
-{: .fw-700 }
+~~Make sure that there is a file named fewbricks-init.php in the root of the directory where your custom
+Fewbricks files will reside.~~

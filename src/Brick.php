@@ -16,7 +16,7 @@ class Brick extends FieldCollection implements BrickInterface
     /**
      * @var array
      */
-    protected $brickLayouts;
+    protected $brick_layouts;
 
     /**
      * @var array
@@ -26,17 +26,17 @@ class Brick extends FieldCollection implements BrickInterface
     /**
      * @var bool True if the brick is a layout for flexible content
      */
-    protected $isLayout;
+    protected $is_layout;
 
     /**
      * @var bool True if the brick belongs to an ACF options page.
      */
-    protected $isOption;
+    protected $is_option;
 
     /**
      * @var bool True if the brick is a sub field for a repeater
      */
-    protected $isSubField;
+    protected $is_sub_field;
 
     /**
      * @var string
@@ -46,7 +46,7 @@ class Brick extends FieldCollection implements BrickInterface
     /**
      * @var array
      */
-    private $getHtmlArguments;
+    private $get_html_arguments;
 
     /**
      * @var string
@@ -56,7 +56,7 @@ class Brick extends FieldCollection implements BrickInterface
     /**
      * @var int What post id we should get field from.
      */
-    private $postIdToGetFieldFrom;
+    private $post_id_to_get_field_from;
 
     /**
      * Brick constructor.
@@ -73,12 +73,12 @@ class Brick extends FieldCollection implements BrickInterface
         $this->key  = $key;
         $this->name = $name;
 
-        $this->brickLayouts         = [];
+        $this->brick_layouts         = [];
         $this->data                 = [];
-        $this->isLayout             = false;
-        $this->isOption             = false;
-        $this->isSubField           = false;
-        $this->postIdToGetFieldFrom = false;
+        $this->is_layout             = false;
+        $this->is_option             = false;
+        $this->is_sub_field           = false;
+        $this->post_id_to_get_field_from = false;
 
         parent::__construct($arguments);
 
@@ -88,13 +88,13 @@ class Brick extends FieldCollection implements BrickInterface
      * Add a single layout to the brick. String with the name of the layout (without .php).
      * Layout files must be placed in [theme]/fewbricks/brick-layouts/.
      *
-     * @param string $brickLayout
+     * @param string $brick_layout
      */
-    public function addBrickLayout($brickLayout)
+    public function addBrickLayout($brick_layout)
     {
 
         // Avoid nesting brick layouts
-        $this->brickLayouts[$brickLayout] = $brickLayout;
+        $this->brick_layouts[$brick_layout] = $brick_layout;
 
     }
 
@@ -152,30 +152,30 @@ class Brick extends FieldCollection implements BrickInterface
     public function getBrickLayouts()
     {
 
-        return $this->brickLayouts;
+        return $this->brick_layouts;
 
     }
 
     /**
      * Set brick layouts.
      *
-     * @param string|array $brickLayouts  Array or string with the name of the layout(s) (without .php).
+     * @param string|array $brick_layouts  Array or string with the name of the layout(s) (without .php).
      *                                    Layout files must be placed in [theme]/fewbricks/brick-layouts/.
      */
-    public function setBrickLayouts($brickLayouts)
+    public function setBrickLayouts($brick_layouts)
     {
 
-        if (is_string($brickLayouts)) {
+        if (is_string($brick_layouts)) {
 
-            $brickLayouts = [$brickLayouts];
+            $brick_layouts = [$brick_layouts];
 
         }
 
-        if (is_array($brickLayouts)) {
+        if (is_array($brick_layouts)) {
 
-            foreach ($brickLayouts AS $brickLayout) {
+            foreach ($brick_layouts AS $brick_layout) {
 
-                $this->addBrickLayout($brickLayout);
+                $this->addBrickLayout($brick_layout);
 
             }
 
@@ -223,33 +223,33 @@ to tell Brick::getBrickTemplateHtml() where to look for brick layouts.', 'fewbri
     /**
      *
      *
-     * @param string $className
-     * @param string $brickName
-     * @param bool   $isLayout   If the child brick is a layout.
-     * @param bool   $isSubField If the child brick is a sub field
-     * @param bool   $isOption   If the child brick is an option. All field swill be fetched using ACFs "option"
+     * @param string $class_name
+     * @param string $brick_name
+     * @param bool   $is_layout   If the child brick is a layout.
+     * @param bool   $is_sub_field If the child brick is a sub field
+     * @param bool   $is_option   If the child brick is an option. All field swill be fetched using ACFs "option"
      *                           argument.
      *
      * @return object An instance of the class passed as $className
      */
-    public function getChildBrick($className, $brickName, $isLayout = false, $isSubField = false, $isOption = false)
+    public function getChildBrick($class_name, $brick_name, $is_layout = false, $is_sub_field = false, $is_option = false)
     {
 
         // If no special case has been forced on the function call...
-        if ($isLayout === false && $isSubField === false && $isOption === false) {
+        if ($is_layout === false && $is_sub_field === false && $is_option === false) {
 
             // Let the calling object decide
-            $isLayout   = $this->isLayout;
-            $isSubField = $this->isSubField;
-            $isOption   = $this->isOption;
-            $brickName  = $this->name . '_' . $brickName;
+            $is_layout   = $this->is_layout;
+            $is_sub_field = $this->is_sub_field;
+            $is_option   = $this->is_option;
+            $brick_name  = $this->name . '_' . $brick_name;
 
         }
 
-        return (new $className($brickName))
-            ->setIsLayout($isLayout)
-            ->setIsSubField($isSubField)
-            ->setIsOption($isOption);
+        return (new $class_name($brick_name))
+            ->setIsLayout($is_layout)
+            ->setIsSubField($is_sub_field)
+            ->setIsOption($is_option);
 
     }
 
@@ -280,25 +280,25 @@ to tell Brick::getBrickTemplateHtml() where to look for brick layouts.', 'fewbri
      * in in the returned array: ['field_name_1', 'field_name_2', ['field_name_3' => 'name_to_save_as']]
      * Does not support passing extra arguments to getFieldValue().
      *
-     * @param array $fieldNames
+     * @param array $field_names
      *
      * @return array
      */
-    public function getFieldValues(array $fieldNames)
+    public function getFieldValues(array $field_names)
     {
 
         $values = [];
 
-        foreach ($fieldNames AS $fieldName) {
+        foreach ($field_names AS $field_name) {
 
-            if (is_array($fieldName)) {
+            if (is_array($field_name)) {
 
-                $key                      = key($fieldName);
-                $values[$fieldName[$key]] = $this->getFieldValue($key);
+                $key                      = key($field_name);
+                $values[$field_name[$key]] = $this->getFieldValue($key);
 
             } else {
 
-                $values[$fieldName] = $this->getFieldValue($fieldName);
+                $values[$field_name] = $this->getFieldValue($field_name);
 
             }
         }
@@ -308,12 +308,12 @@ to tell Brick::getBrickTemplateHtml() where to look for brick layouts.', 'fewbri
     }
 
     /**
-     * @param string $dataName                  The first parameter to pass to ACFs get_field-function. This value may be changed
+     * @param string $data_name                  The first parameter to pass to ACFs get_field-function. This value may be changed
      *                                          inside the function depending on the values of other parameters.
-     * @param bool   $postId                    Second parameter to pass to ACFs get_field-function
-     * @param bool   $formatValue               Third parameter to pass to ACFs get_field-function
-     * @param bool   $prependCurrentObjectsName If the current objects name should be prepended to $dataName
-     * @param bool   $getFromSubField
+     * @param bool   $post_id                    Second parameter to pass to ACFs get_field-function
+     * @param bool   $format_value               Third parameter to pass to ACFs get_field-function
+     * @param bool   $prepend_current_objects_name If the current objects name should be prepended to $dataName
+     * @param bool   $get_from_sub_field
      *
      * @return bool|mixed|null
      *
@@ -321,29 +321,29 @@ to tell Brick::getBrickTemplateHtml() where to look for brick layouts.', 'fewbri
      * @link https://www.advancedcustomfields.com/resources/get_field/
      */
     protected function getFieldValue(
-        $dataName,
-        $postId = false,
-        $formatValue = true,
-        $prependCurrentObjectsName = true,
-        $getFromSubField = false
+        $data_name,
+        $post_id = false,
+        $format_value = true,
+        $prepend_current_objects_name = true,
+        $get_from_sub_field = false
     ) {
 
-        if ($prependCurrentObjectsName) {
+        if ($prepend_current_objects_name) {
 
-            if (substr($dataName, 0, 1) !== '_') {
-                $dataName = '_' . $dataName;
+            if (substr($data_name, 0, 1) !== '_') {
+                $data_name = '_' . $data_name;
             }
 
-            $name = $this->name . $dataName;
+            $name = $this->name . $data_name;
 
         } else {
 
-            $name = $dataName;
+            $name = $data_name;
 
         }
 
-        if ($postId === false && $this->postIdToGetFieldFrom !== false) {
-            $postId = $this->postIdToGetFieldFrom;
+        if ($post_id === false && $this->post_id_to_get_field_from !== false) {
+            $post_id = $this->post_id_to_get_field_from;
         }
 
         $dataValue = null;
@@ -353,7 +353,7 @@ to tell Brick::getBrickTemplateHtml() where to look for brick layouts.', 'fewbri
 
             $dataValue = $this->data[$name];
 
-        } else if ($postId === false && ($getFromSubField || $this->isLayout || $this->isSubField)) {
+        } else if ($post_id === false && ($get_from_sub_field || $this->is_layout || $this->is_sub_field)) {
 
             // We should get data using acf functions and we are dealing with layout or sub field
 
@@ -370,7 +370,7 @@ to tell Brick::getBrickTemplateHtml() where to look for brick layouts.', 'fewbri
             } else {*/
             // Not ACF option
 
-            if (null !== ($value = get_sub_field($name, $formatValue))) {
+            if (null !== ($value = get_sub_field($name, $format_value))) {
 
                 $dataValue = $value;
 
@@ -381,15 +381,15 @@ to tell Brick::getBrickTemplateHtml() where to look for brick layouts.', 'fewbri
         } else {
             // ACF data which is not a layout or sub field
 
-            if ($this->isOption === true) {
+            if ($this->is_option === true) {
 
-                if (null !== ($value = get_field($name, 'options', $formatValue))) {
+                if (null !== ($value = get_field($name, 'options', $format_value))) {
 
                     $dataValue = $value;
 
                 }
 
-            } else if (null !== ($value = get_field($name, $postId, $formatValue))) {
+            } else if (null !== ($value = get_field($name, $post_id, $format_value))) {
 
                 $dataValue = $value;
 
@@ -405,20 +405,20 @@ to tell Brick::getBrickTemplateHtml() where to look for brick layouts.', 'fewbri
      * Get value of html_arg.
      *
      * @param string $name
-     * @param mixed  $defaultValue Value to return if the arg has not been set
+     * @param mixed  $default_value Value to return if the arg has not been set
      *
      * @return bool
      */
-    public function getGetHtmlArg($name, $defaultValue = false)
+    public function getGetHtmlArg($name, $default_value = false)
     {
 
-        if (isset($this->getHtmlArguments[$name])) {
+        if (isset($this->get_html_arguments[$name])) {
 
-            $outcome = $this->getHtmlArguments[$name];
+            $outcome = $this->get_html_arguments[$name];
 
         } else {
 
-            $outcome = $defaultValue;
+            $outcome = $default_value;
 
         }
 
@@ -429,18 +429,18 @@ to tell Brick::getBrickTemplateHtml() where to look for brick layouts.', 'fewbri
     /**
      * @param array $arguments    Any arguments that you need to pass to the brick on runtime.
      *                            Available as $this->getHtmlArguments
-     * @param mixed $brickLayouts Array or string with the file name(s) (without .php) of any layouts that you want to
+     * @param mixed $brick_layouts Array or string with the file name(s) (without .php) of any layouts that you want to
      *                            wrap the brick in. Use the filter fewbricks/brick_layouts_base_path to change the
      *                            base path of the brick layout files.
      *
      * @return string
      */
-    public function getHtml($arguments = [], $brickLayouts = false)
+    public function getHtml($arguments = [], $brick_layouts = false)
     {
 
-        $this->setBrickLayouts($brickLayouts);
+        $this->setBrickLayouts($brick_layouts);
 
-        $this->getHtmlArguments = $arguments;
+        $this->get_html_arguments = $arguments;
 
         return $this->getBrickLayoutedHtml($this->getBrickHtml());
 
@@ -454,20 +454,20 @@ to tell Brick::getBrickTemplateHtml() where to look for brick layouts.', 'fewbri
     public function getBrickLayoutedHtml($html)
     {
 
-        if(false === ($layoutsBasePath = Helper::getBrickLayoutsBasePath())) {
+        if(false === ($layouts_base_path = Helper::getBrickLayoutsBasePath())) {
             return $html;
         }
 
-        if(empty($this->brickLayouts)) {
+        if(empty($this->brick_layouts)) {
             return $html;
         }
 
-        foreach ($this->brickLayouts AS $brickLayout) {
+        foreach ($this->brick_layouts AS $brick_layout) {
 
             ob_start();
 
             /** @noinspection PhpIncludeInspection */
-            include $layoutsBasePath . '/' . $brickLayout . '.php';
+            include $layouts_base_path . '/' . $brick_layout . '.php';
 
             $html = ob_get_clean();
 
@@ -483,7 +483,7 @@ to tell Brick::getBrickTemplateHtml() where to look for brick layouts.', 'fewbri
     public function getIsLayout()
     {
 
-        return $this->isLayout;
+        return $this->is_layout;
 
     }
 
@@ -493,7 +493,7 @@ to tell Brick::getBrickTemplateHtml() where to look for brick layouts.', 'fewbri
     public function setIsLayout($isLayout)
     {
 
-        $this->isLayout = $isLayout;
+        $this->is_layout = $isLayout;
 
     }
 
@@ -503,49 +503,49 @@ to tell Brick::getBrickTemplateHtml() where to look for brick layouts.', 'fewbri
     public function getIsOption()
     {
 
-        return $this->isOption;
+        return $this->is_option;
 
     }
 
     /**
-     * @param $isOption
+     * @param $is_option
      */
-    public function setIsOption($isOption)
+    public function setIsOption($is_option)
     {
 
-        $this->isOption = $isOption;
+        $this->is_option = $is_option;
 
     }
 
     /**
      * @return bool
      */
-    public function getIsSubField()
+    public function getIsSubfield()
     {
 
-        return $this->isSubField;
+        return $this->is_sub_field;
 
     }
 
     /**
-     * @param $isSubField
+     * @param $is_sub_field
      *
      * @return $this
      */
-    public function setIsSubField($isSubField)
+    public function setIsSubfield($is_sub_field)
     {
 
-        $this->isSubField = $isSubField;
+        $this->is_sub_field = $is_sub_field;
 
     }
 
     /**
      * @return mixed
      */
-    public function getPostIdToGetFieldFrom()
+    public function getPostIdtogetfieldfrom()
     {
 
-        return $this->postIdToGetFieldFrom;
+        return $this->post_id_to_get_field_from;
 
     }
 
@@ -556,12 +556,12 @@ to tell Brick::getBrickTemplateHtml() where to look for brick layouts.', 'fewbri
      *
      * @link http://www.advancedcustomfields.com/resources/get_field/
      *
-     * @param $postId
+     * @param $post_id
      */
-    public function setPostIdToGetFieldFrom($postId)
+    public function setPostIdToGetFieldFrom($post_id)
     {
 
-        $this->postIdToGetFieldFrom = $postId;
+        $this->post_id_to_get_field_from = $post_id;
 
     }
 
@@ -569,34 +569,34 @@ to tell Brick::getBrickTemplateHtml() where to look for brick layouts.', 'fewbri
      * Checks if the brick has a layout with the name that you pass to the function. Returns true if it does, false if
      * not.
      *
-     * @param string $brickLayoutName
+     * @param string $brick_layout_name
      *
      * @return boolean True if the brick has a layout with the passed name, false if not.
      */
-    public function hasBrickLayout($brickLayoutName)
+    public function hasBrickLayout($brick_layout_name)
     {
 
-        return in_array($brickLayoutName, $this->brickLayouts);
+        return in_array($brick_layout_name, $this->brick_layouts);
 
     }
 
     /**
      * Use this to set custom data for the brick.
      *
-     * @param string $itemName  The name of the item.
+     * @param string $item_name  The name of the item.
      * @param mixed  $value     The value of the item.
-     * @param bool   $groupName Use this if you want to create groups of data.
+     * @param bool   $group_name Use this if you want to create groups of data.
      */
-    public function setDataItem($itemName, $value, $groupName = false)
+    public function setDataItem($item_name, $value, $group_name = false)
     {
 
-        if ($groupName === false) {
+        if ($group_name === false) {
 
-            $this->data[$itemName] = $value;
+            $this->data[$item_name] = $value;
 
         } else {
 
-            $this->data[$groupName][$itemName] = $value;
+            $this->data[$group_name][$item_name] = $value;
 
         }
 

@@ -13,7 +13,7 @@ class Fewbricks
     /**
      *
      */
-    public static function applyHooks()
+    public static function addHooks()
     {
 
         add_action('wp_loaded', __NAMESPACE__ . '\\Helper::maybeWriteToPhpCodeFile');
@@ -87,8 +87,7 @@ class Fewbricks
 
         self::displayNotices();
 
-        /** @noinspection PhpIncludeInspection */
-        //require Helper::getProjectInitFilePath();
+        do_action('fewbricks/init');
 
         Helper::initDebug();
 
@@ -102,7 +101,7 @@ class Fewbricks
 
         // Only perform requirement checks in admin system.
         // If any requirements are not met, this should be discovered by devs before pushing to production so let's save
-        // some CPU cycles on the frontend by not running all these checks there.
+        // some CPU cycles on the frontend by not running all the checks there.
         if (!is_admin() || (is_admin() && self::checkRequirements())) {
 
             self::init();
@@ -110,10 +109,10 @@ class Fewbricks
         }
 
         if (is_admin()) {
-            Admin::applyHooks();
+            Admin::addHooks();
         }
 
-        self::applyHooks();
+        self::addHooks();
 
     }
 

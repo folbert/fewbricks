@@ -13,7 +13,7 @@ class Admin
     /**
      *
      */
-    public static function applyHooks()
+    public static function addHooks()
     {
 
         add_action('admin_enqueue_scripts', __NAMESPACE__ . '\\Admin::applyStyles');

@@ -6,7 +6,7 @@ nav_order: 2
 permalink: filters/show_fields_info
 ---
 
-# Fields - show_fields_info
+# Filter - show_fields_info
 
 Set to `true` to display info about each field in the backend.
 This is separated this from the debug-mode filter (described further down) because while you may want to debug, you

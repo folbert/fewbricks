@@ -56,11 +56,11 @@ class FieldCollection extends Collection implements FieldCollectionInterface
     public function __construct(array $arguments = [])
     {
 
-        $this->arguments           = $arguments;
-        $this->fieldNamesPrefix    = '';
-        $this->fieldLabelsPrefix   = '';
-        $this->fieldLabelsSuffix   = '';
-        $this->fieldsSettings      = [];
+        $this->arguments = $arguments;
+        $this->fieldNamesPrefix = '';
+        $this->fieldLabelsPrefix = '';
+        $this->fieldLabelsSuffix = '';
+        $this->fieldsSettings = [];
         $this->preparedForAcfArray = false;
 
         parent::__construct();
@@ -178,7 +178,7 @@ class FieldCollection extends Collection implements FieldCollectionInterface
     }
 
     /**
-     * @param Brick  $brick
+     * @param Brick $brick
      * @param string $fieldNameToAddAfter
      */
     public function addBrickAfterByName(Brick $brick, $fieldNameToAddAfter)
@@ -191,7 +191,7 @@ class FieldCollection extends Collection implements FieldCollectionInterface
     }
 
     /**
-     * @param array  $fields
+     * @param array $fields
      * @param string $fieldNameToAddAfter
      */
     public function addFieldsAfterByName(array $fields, string $fieldNameToAddAfter)
@@ -209,7 +209,7 @@ class FieldCollection extends Collection implements FieldCollectionInterface
     }
 
     /**
-     * @param Field  $field
+     * @param Field $field
      * @param string $fieldNameToAddAfter
      */
     public function addFieldAfterByName(Field $field, string $fieldNameToAddAfter)
@@ -238,7 +238,7 @@ class FieldCollection extends Collection implements FieldCollectionInterface
 
         /**
          * @var string $itemKey
-         * @var Field  $possibleField
+         * @var Field $possibleField
          */
         foreach ($this->items AS $itemKey => $possibleField) {
 
@@ -256,7 +256,7 @@ class FieldCollection extends Collection implements FieldCollectionInterface
     }
 
     /**
-     * @param Brick  $brick
+     * @param Brick $brick
      * @param string $fieldNameToAddBefore
      */
     public function addBrickBeforeByName(Brick $brick, string $fieldNameToAddBefore)
@@ -269,7 +269,7 @@ class FieldCollection extends Collection implements FieldCollectionInterface
     }
 
     /**
-     * @param array  $fields
+     * @param array $fields
      * @param string $fieldNameToAddBefore
      */
     public function addFieldsBeforeByName(array $fields, string $fieldNameToAddBefore)
@@ -284,7 +284,7 @@ class FieldCollection extends Collection implements FieldCollectionInterface
     }
 
     /**
-     * @param Field  $field
+     * @param Field $field
      * @param string $fieldNameToAddBefore
      */
     public function addFieldBeforeByName(Field $field, $fieldNameToAddBefore)
@@ -357,10 +357,10 @@ class FieldCollection extends Collection implements FieldCollectionInterface
      * Set ACF settings on fields in this collection. The values will be applied as they are so don't use this to set
      * keys or conditional logic.
      *
-     * @param string $fieldKey      The original key (the one set when a field was created) of a field in this
+     * @param string $fieldKey The original key (the one set when a field was created) of a field in this
      *                              collection..
-     * @param string $settingsName  Should correspond to the name of an ACF setting
-     * @param mixed  $settingsValue A valid value for the setting
+     * @param string $settingsName Should correspond to the name of an ACF setting
+     * @param mixed $settingsValue A valid value for the setting
      */
     public function addFieldSetting($fieldKey, $settingsName, $settingsValue)
     {
@@ -387,7 +387,7 @@ class FieldCollection extends Collection implements FieldCollectionInterface
 
     /**
      * @param string $name
-     * @param null   $defaultValue Value to return if arg is not set
+     * @param null $defaultValue Value to return if arg is not set
      *
      * @return mixed|null
      */
@@ -519,7 +519,7 @@ class FieldCollection extends Collection implements FieldCollectionInterface
 
     /**
      * @param string $name
-     * @param mixed  $value
+     * @param mixed $value
      */
     public function setArgument($name, $value)
     {
