@@ -287,7 +287,7 @@ class FieldsKitchenSink extends FieldGroup implements FieldGroupInterface
     {
 
         // Allow for rules to be set by instance creators
-        if ($this->getLocationRuleGroups()->isEmpty()) {
+        if ($this->getLocationRulegroups()->isEmpty()) {
 
             $this->addLocationRuleGroups([
                 (new FieldGroupLocationRuleGroup())

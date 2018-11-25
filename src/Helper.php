@@ -23,6 +23,16 @@ class Helper
     }
 
     /**
+     * @param $var
+     */
+    public static function dd($var)
+    {
+
+        dump($var);die();
+
+    }
+
+    /**
      * @return bool
      */
     public static function fewbricksHiddenIsActivated()
@@ -174,7 +184,7 @@ class Helper
     public static function getVersion()
     {
 
-        return get_option('fewbricks-version', -1);
+        return get_option('fewbricks-version', 0);
 
     }
 
@@ -183,6 +193,10 @@ class Helper
      */
     public static function initDebug()
     {
+
+        if(apply_filters('fewbricks/dev_info/display', false) !== false) {
+            DevHelper::run();
+        }
 
         self::initFieldSnitch();
 
@@ -504,6 +518,26 @@ class Helper
     {
 
         return apply_filters('fewbricks/display_php_file_written_message', '__return_true');
+
+    }
+
+    /**
+     * @return string
+     */
+    public static function getFewbricksInstallUri()
+    {
+
+        return plugins_url('fewbricks');
+
+    }
+
+    /**
+     * @return string
+     */
+    public static function getFewbricksAssetsBaseUri()
+    {
+
+        return plugins_url('fewbricks') . '/assets';
 
     }
 
