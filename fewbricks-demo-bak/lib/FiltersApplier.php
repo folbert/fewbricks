@@ -20,29 +20,25 @@ class FiltersApplier
     public static function defineHooks()
     {
 
-        $me = get_class();
-
         // In a real project, this particular filter would have to be added outside the Fewbricks folder.
         // Like for example in functions.php
         /*add_filter('fewbricks/project_files_base_path',
             [$me . '\\Fewbricks', 'getProjectFilesBasePath']);*/
 
         add_filter('fewbricks/brick/brick_layouts_base_path',
-            [$me, 'getBrickLayoutsBasePath']);
+            [self::class, 'getBrickLayoutsBasePath']);
 
-        add_filter('fewbricks/brick_templates_base_path', [$me, 'getBrickTemplatesBasePath'], 10, 2);
-
-        add_action('admin_notices',
-            [$me, 'editFieldGroupInfo']);
-
-        add_filter('fewbricks/auto_write_php_code_file', [$me, 'getPhpCodeFilePath']);
-
-        add_filter('fewbricks/show_fields_info', '__return_true');
+        add_filter('fewbricks/brick_templates_base_path', [self::class, 'getBrickTemplatesBasePath'], 10, 2);
 
         // Not used but added for demo puprposes
-        //add_filter('fewbricks/brick_template_file_name', [$me, 'getBrickTemplateFileName'], 10, 2);
+        //add_filter('fewbricks/brick_template_file_name', [self::class, 'getBrickTemplateFileName'], 10, 2);
 
-        add_filter('fewbricks/display_php_file_written_message', '__return_false');
+        add_filter('fewbricks/exporter/auto_write_php_code_file', [self::class, 'getPhpCodeFilePath']);
+        add_filter('fewbricks/exporter/display_php_file_written_message', '__return_false');
+
+        add_filter('fewbricks/dev_tools/show_fields_info', '__return_true');
+
+        add_action('admin_notices', [self::class, 'editFieldGroupInfo']);
 
     }
 

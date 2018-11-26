@@ -1,12 +1,12 @@
 ---
 parent: Filters
 layout: default
-title: display_php_file_written_message
+title: exporter/display_php_file_written_message
 nav_order: 5
-permalink: /filters/display_php_file_written_message/
+permalink: /filters/exporter--display_php_file_written_message/
 ---
 
-# Filters - fewbricks/display_php_file_written_message
+# Filters - fewbricks/exporter/display_php_file_written_message
 
 ```php
 fewbricks/display_php_file_written_message

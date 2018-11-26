@@ -18,7 +18,7 @@ class Admin
 
         add_action('admin_enqueue_scripts', __NAMESPACE__ . '\\Admin::applyStyles');
         add_action('admin_menu', __NAMESPACE__ . '\\Admin::editMenu');
-        add_action('admin_menu', 'Fewbricks\\Helper::maybeExportJson');
+        add_action('admin_menu', __NAMESPACE__ . '\\Exporter::maybeExportJson');
 
     }
 

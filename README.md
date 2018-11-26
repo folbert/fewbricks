@@ -166,7 +166,7 @@ function fewbricks_project_files_base_path() {
 Allows you to change the name of the file that intializes your custom implementation of Fewbricks. Defaults to
 fewbricks-init.php. Should always be located in the directory that the filter `fewbricks/project_files_base_path` returns.
 
-### `fewbricks/show_fields_info`
+### `fewbricks/dv_tools/show_fields_info`
 Set to true to display field name and key for every field in the backend. Default value is `false`.
 
 

@@ -3,6 +3,7 @@
 namespace Fewbricks\ACF;
 
 use Fewbricks\DevTools;
+use Fewbricks\Exporter;
 use Fewbricks\Helper;
 
 /**
@@ -39,7 +40,7 @@ class FieldGroup extends FieldCollection implements FieldGroupInterface
     /**
      * @var string
      */
-    protected $title = 'Field Group';
+    private $title;
 
     /**
      * @var string
@@ -82,7 +83,7 @@ class FieldGroup extends FieldCollection implements FieldGroupInterface
     /**
      * @param FieldGroupLocationRuleGroup $rule_group
      */
-    public function addLocationRuleGroup($rule_group)
+    public function addLocationRuleGroup(FieldGroupLocationRuleGroup $rule_group)
     {
 
         $this->location_rule_groups->addItem($rule_group);
@@ -92,7 +93,7 @@ class FieldGroup extends FieldCollection implements FieldGroupInterface
     /**
      * @param FieldGroupLocationRuleGroup[] $rule_groups
      */
-    public function addLocationRuleGroups($rule_groups)
+    public function addLocationRuleGroups(array $rule_groups)
     {
 
         foreach ($rule_groups AS $rule_group) {
@@ -117,15 +118,16 @@ class FieldGroup extends FieldCollection implements FieldGroupInterface
      * Important: If multiple field groups appear on an edit screen, the first field group's options will be used
      * (the one with the lowest order number).
      *
-     * Possible values in the array: 'permalink', 'the_content', 'excerpt', 'custom_fields', 'discussion',
-     * 'comments', 'revisions', 'slug', 'author', 'format', 'page_attributes', 'featured_image', 'categories',
-     * 'tags', 'send-trackbacks', 'all'
+     * Possible values in the array: see FieldGroup::HIDE_ON_SCREEN_ITEMS
      *
-     * @param array $hide_on_screen Array with items to hide on the screen.
+     * @param array $hide_on_screen Array with items from FieldGroup::HIDE_ON_SCREEN_ITEMS to hide on the screen or
+     *                              "all" to hide all.
+     *
      * @param array $show_on_screen Fewbricks addition. Enables you to define which fields should be visible on screen.
-     *                            This will create an array with all the items that ACF supports hiding and then
-     *                            remove the items that you have set in $showOnScreen. Passing a non-empty value here
-     *                            will make the function ignore the $hideOnScreen variable completely
+     *                              This will create an array with all the items that ACF supports hiding and then
+     *                              remove the items that you have set in $showOnScreen. Passing a non-empty value here
+     *                              will make the function ignore the $hideOnScreen variable completely. Possible
+     *                              values: items from FieldGroup::HIDE_ON_SCREEN_ITEMS or "all" to show all.
      */
     private function doSetHideOnScreen($hide_on_screen, $show_on_screen = [])
     {
@@ -175,14 +177,12 @@ class FieldGroup extends FieldCollection implements FieldGroupInterface
     }
 
     /**
-     * @param null $default_value
-     *
      * @return bool|mixed
      */
-    public function getActive($default_value = null)
+    public function getActive()
     {
 
-        return $this->getSetting('active', $default_value);
+        return $this->getSetting('active', true);
 
     }
 
@@ -197,14 +197,12 @@ class FieldGroup extends FieldCollection implements FieldGroupInterface
     }
 
     /**
-     * @param string $default_value
-     *
      * @return bool|mixed
      */
-    public function getDescription($default_value = '')
+    public function getDescription()
     {
 
-        return $this->getSetting('description', $default_value);
+        return $this->getSetting('description', '');
 
     }
 
@@ -214,22 +212,17 @@ class FieldGroup extends FieldCollection implements FieldGroupInterface
     public function getHideOnScreenSetting()
     {
 
-        // These are the items that ACF supports hiding as of v5.6.5
-        $current_values = $this->getSetting('hide_on_screen', []);
-
-        return $current_values;
+        return $this->getSetting('hide_on_screen', []);
 
     }
 
     /**
-     * @param bool $default_value
-     *
      * @return bool|mixed
      */
-    public function getInstructionPlacement($default_value = false)
+    public function getInstructionPlacement()
     {
 
-        return $this->getSetting('instruction_placement', $default_value);
+        return $this->getSetting('instruction_placement', 'label');
 
     }
 
@@ -251,21 +244,19 @@ class FieldGroup extends FieldCollection implements FieldGroupInterface
     }
 
     /**
-     * @param $default_value
-     *
      * @return bool|mixed
      */
-    public function getLabelPlacement($default_value)
+    public function getLabelPlacement()
     {
 
-        return $this->getSetting('label_placement', $default_value);
+        return $this->getSetting('label_placement', 'top');
 
     }
 
     /**
      * @return RuleGroupCollection
      */
-    public function getLocationRulegroups()
+    public function getLocationRuleGroups()
     {
 
         return $this->location_rule_groups;
@@ -273,26 +264,22 @@ class FieldGroup extends FieldCollection implements FieldGroupInterface
     }
 
     /**
-     * @param $default_value
-     *
      * @return bool|mixed
      */
-    public function getMenuOrder($default_value)
+    public function getMenuOrder()
     {
 
-        return $this->getSetting('menu_order', $default_value);
+        return $this->getSetting('menu_order', 0);
 
     }
 
     /**
-     * @param $default_value
-     *
      * @return bool|mixed
      */
-    public function getPosition($default_value)
+    public function getPosition()
     {
 
-        return $this->getSetting('position', $default_value);
+        return $this->getSetting('position', 'normal');
 
     }
 
@@ -328,14 +315,12 @@ class FieldGroup extends FieldCollection implements FieldGroupInterface
     }
 
     /**
-     * @param mixed $default_value
-     *
      * @return bool|mixed
      */
-    public function getStyle($default_value = false)
+    public function getStyle()
     {
 
-        return $this->getSetting('style', $default_value);
+        return $this->getSetting('style', 'default');
 
     }
 
@@ -360,9 +345,10 @@ class FieldGroup extends FieldCollection implements FieldGroupInterface
     }
 
     /**
-     * @return mixed|void
+     * Called just before sending field to ACF. This way you can add this function to your own classes extending
+     * this class and write any last-minute custom logic to execute right before senfing the field group to ACF.
      */
-    public function prepareForRegistration()
+    private function prepareForRegistration()
     {
 
     }
@@ -370,22 +356,28 @@ class FieldGroup extends FieldCollection implements FieldGroupInterface
     /**
      * In order to keep in sync with ACFs namings, we have this function to call publicly. And then use doRegister()
      * to actually register.
+     * @param bool $unset_after_added_to_acf
      */
-    public function register()
+    public function register($unset_after_added_to_acf = true)
     {
 
         $this->prepareForRegistration();
 
         $acf_settings_array = $this->toAcfArray();
 
-        Helper::maybeStoreSimpleFieldGroupData($acf_settings_array['title'], $acf_settings_array['key']);
-        Helper::maybeStoreFieldGroupAcfSettings($acf_settings_array);
+        Exporter::maybeStoreSimpleFieldGroupData($acf_settings_array['title'], $acf_settings_array['key']);
+        Exporter::maybeStoreFieldGroupAcfSettings($acf_settings_array);
         DevTools::maybeStoreAcfSettingsArrayForDevDisplay($acf_settings_array);
 
         acf_add_local_field_group($acf_settings_array);
 
-        // No use in having a potentially large collection of objects anymore
-        unset($this->items);
+        if($unset_after_added_to_acf) {
+
+            // Lets clear up some space
+            unset($this->settings);
+            unset($this->items);
+
+        }
 
     }
 

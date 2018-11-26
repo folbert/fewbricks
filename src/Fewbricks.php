@@ -21,7 +21,7 @@ class Fewbricks
     public static function addHooks()
     {
 
-        add_action('wp_loaded', __NAMESPACE__ . '\\Helper::maybeWriteToPhpCodeFile');
+        add_action('wp_loaded', __NAMESPACE__ . '\\Exporter::maybeWriteToPhpCodeFile');
 
     }
 

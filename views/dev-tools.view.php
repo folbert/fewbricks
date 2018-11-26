@@ -67,6 +67,9 @@ use \Fewbricks\DevTools;
 
         <h2>Misc</h2>
         <ul>
+            <li><a href="<?php echo admin_url('edit.php?post_type=acf-field-group&page=fewbricksdev'); ?>"
+                   target="_blank">Fewbricks
+                    admin page</a></li>
             <li><a href="https://fewbricks2.folbert.com" target="_blank">Fewbricks2 Documentation</a></li>
             <li><a href="https://github.com/folbert/fewbricks" target="_blank">Fewbricks on GitHub</a></li>
         </ul>

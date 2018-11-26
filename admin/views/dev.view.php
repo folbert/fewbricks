@@ -2,10 +2,10 @@
     <h1>Fewbricks</h1>
 
     <?php
-    if (\Fewbricks\Helper::generatePhpCodeTriggered()) {
+    if (\Fewbricks\Exporter::generatePhpCodeTriggered()) {
 
         $fieldGroupCodes
-            = \Fewbricks\Helper::getFieldGroupsPhpCodes($_GET['fewbricks_selected_field_groups_for_export']);
+            = \Fewbricks\Exporter::getFieldGroupsPhpCodes($_GET['fewbricks_selected_field_groups_for_export']);
 
         if (!empty($fieldGroupCodes)) {
             ?>
@@ -61,7 +61,6 @@
 
     ?>
 
-
     <div class="acf-meta-box-wrap -grid">
 
         <div class="postbox">
@@ -85,7 +84,7 @@
 
                                 <?php
 
-                                $fieldGroupData = \Fewbricks\Helper::getStoredSimpleFieldGroupData();
+                                $fieldGroupData = \Fewbricks\Exporter::getStoredSimpleFieldGroupData();
 
                                 if (!empty($fieldGroupData)) {
 
@@ -179,9 +178,13 @@
 
             <div class="inside">
 
-                Use the filter <a href="https://fewbricksdocs.readme.io/v2.0/docs/auto_write_php_code_file"
+                Use the filter <a href="https://fewbricks2.folbert.com/filters/auto_write_php_code_file"
                                   target="_blank">auto_write_php_code_file</a> to automatically render PHP code and
                 write it to a file on each page load.
+
+                <p>Please note that doing so will render any dynamic creation of fields/values etc. that you may
+                    have written useless.</p>
+
             </div>
 
         </div>

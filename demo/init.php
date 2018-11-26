@@ -6,14 +6,22 @@ use Fewbricks\ACF\FieldGroup;
 use Fewbricks\ACF\FieldGroupLocationRule;
 use Fewbricks\ACF\FieldGroupLocationRuleGroup;
 use Fewbricks\ACF\Fields\Text;
+use Fewbricks\Helper;
 
 add_filter('fewbricks/dev_tools/display', function () {
-    return 33;
+    return true;
 });
 
 add_filter('fewbricks/dev_tools/acf_arrays/keys', function () {
     return false;
 });
+
+add_filter('fewbricks/exporter/auto_write_php_code_file', function() {
+    return false;
+    //return Helper::getFewbricksInstallPath() . '/gitignored/fewbricks-php.php';
+});
+
+add_filter('fewbricks/exporter/display_php_file_written_message', '__return_true');
 
 add_action('fewbricks/init', function () {
 
@@ -24,6 +32,7 @@ add_action('fewbricks/init', function () {
         ]))
     );
     $demo_field_group_1->setDisplayInFewbricksDevTools(true);
+    $demo_field_group_1->setHideOnScreen('all');
 
     $text_field = new Text('Text field', 'text_field', '1811262140a');
     $text_field->setDisplayInFewbricksDevTools(true);
