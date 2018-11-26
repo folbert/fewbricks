@@ -40,7 +40,7 @@ class DevHelper
 
         $html = '<div id="fewbricks-dev-info">';
         $html .= '<div>';
-        $html .= '<h1 class="fewbricks-dev-info__title">Fewbricks Dev Helper</h1>';
+        $html .= '<h1 class="fewbricks-dev-info__title">Fewbricks\DevHelper</h1>';
 
         $html .= '<h2 class="fewbricks-dev-info__section-title">Data sent to ACF</h2>';
         $html .= '<p class="fewbricks-dev-info__filter-value">Using the filter "fewbricks/fewbricks/dev_info/keys", you asked DevHelper to display data for:<br>';
@@ -68,11 +68,25 @@ class DevHelper
 
         }
 
-        $html .= '<button id="fewbricks-dev-info__full-toggler" ';
-        $html .= 'data-expand-text="Expand" data-contract-text="Contract">Expand</button>';
+        $html .= self::getTogglerHtml();
         $html .= '</div>';
         $html .= '</div>';
         echo $html;
+
+    }
+
+    /**
+     * @return string
+     */
+    private static function getTogglerHtml()
+    {
+
+        $html = '<div id="fewbricks-dev-info__togglers-wrapper">';
+        $html .= '<button id="fewbricks-dev-info__toggler--100" class="fewbricks-dev-info__toggler" ';
+        $html .= 'data-expand-text="Expand" data-contract-text="Contract">100%</button>';
+        $html .= '</div>';
+
+        return $html;
 
     }
 

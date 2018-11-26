@@ -1,15 +1,15 @@
 ---
 parent: Filters
 layout: default
-title: dev_info/keys
+title: dev_tools/keys
 nav_order: 3
-permalink: filters/dev_info/keys
+permalink: filters/dev_tools/keys
 ---
 
-# Filters - fewbricks/dev_info/keys
+# Filters - fewbricks/dev_tools/keys
 
 ```php
-fewbricks/dev_info/keys
+fewbricks/dev_tools/keys
 ```
 
 `true` - Display all field groups
