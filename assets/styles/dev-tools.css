@@ -48,9 +48,12 @@
 }
 
 #fewbricks-dev-tools .fewbricks-dev-tools__togglers-wrapper {
-    position: absolute;
-    top: 6px;
-    right: 0;
+    position: fixed;
+    bottom: 6px;
+    right: 6px;
+    z-index: 99999; /* Over dump()-output */
+    display: inline-block;
+    background: #18171B;
 }
 
 #fewbricks-dev-tools .fewbricks-dev-tools__toggler {

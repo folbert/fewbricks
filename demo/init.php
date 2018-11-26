@@ -7,14 +7,13 @@ use Fewbricks\ACF\FieldGroupLocationRule;
 use Fewbricks\ACF\FieldGroupLocationRuleGroup;
 use Fewbricks\ACF\Fields\Text;
 
-add_filter('fewbricks/dev_tools/display', function() {
+add_filter('fewbricks/dev_tools/display', function () {
     return 70;
 });
 
-add_filter('fewbricks/dev_tools/keys', function() {
-
-    return 'group_1811252128b';
-
+add_filter('fewbricks/dev_tools/keys', function () {
+    return true;
+    //return 'group_1811252128b';
 });
 
 add_action('fewbricks/init', function () {
@@ -28,10 +27,20 @@ add_action('fewbricks/init', function () {
     $demo_field_group_1->register();
 
     $demo_field_group_2 = new FieldGroup('Demo field group 2', '1811252128b');
-    $demo_field_group_2->addLocationRuleGroup(
-        (new FieldGroupLocationRuleGroup([
-            new FieldGroupLocationRule('post_type', '==', 'post'),
-        ]))
+    $demo_field_group_2->addLocationRuleGroups(
+        [
+            (new FieldGroupLocationRuleGroup(
+                [
+                    new FieldGroupLocationRule('post_type', '==', 'post'),
+                    new FieldGroupLocationRule('post_type', '==', 'page'),
+                ]
+            )),
+            (new FieldGroupLocationRuleGroup(
+                [
+                    new FieldGroupLocationRule('post_type', '==', 'post'),
+                ]
+            ))
+        ]
     );
     $demo_field_group_2->register();
 
