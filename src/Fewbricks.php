@@ -13,6 +13,11 @@ class Fewbricks
     /**
      *
      */
+    private const FEWBRICKS_VERSION = '2.0.0-alpha';
+
+    /**
+     *
+     */
     public static function addHooks()
     {
 
@@ -82,11 +87,22 @@ class Fewbricks
     /**
      *
      */
+    public static function getVersion()
+    {
+
+        return self::FEWBRICKS_VERSION;
+
+    }
+
+    /**
+     *
+     */
     private static function init()
     {
 
         self::displayNotices();
 
+        // More efficient to just start it than to first check if DevTools are enabled.
         DevTools::startExecutionTimer();
 
         do_action('fewbricks/init');

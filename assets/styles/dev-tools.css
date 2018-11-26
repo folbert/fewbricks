@@ -22,14 +22,37 @@
     padding-top: 8px;
 }
 
+/* All this since we don't want to mess with dump() */
 #fewbricks-dev-tools > div > h1,
 #fewbricks-dev-tools > div > h2,
 #fewbricks-dev-tools > div > h3,
 #fewbricks-dev-tools > div > p,
+#fewbricks-dev-tools > div > span,
+#fewbricks-dev-tools > div > ul,
+#fewbricks-dev-tools > div > .fdt-pre,
+#fewbricks-dev-tools .fewbricks-dev-tools__toggler,
+#fewbricks-dev-tools a {
+    color: #7294b3;
+}
+
+#fewbricks-dev-tools > div > h1,
+#fewbricks-dev-tools > div > h2,
+#fewbricks-dev-tools > div > h3,
+#fewbricks-dev-tools > div > p,
+#fewbricks-dev-tools > div > span,
+#fewbricks-dev-tools > div > ul,
+#fewbricks-dev-tools > div > .fdt-pre,
 #fewbricks-dev-tools .fewbricks-dev-tools__toggler {
-    max-width: 1200px;
-    color: #426380;
+    max-width: 960px;
     font-family: Menlo, Monaco, Consolas, monospace;
+}
+
+#fewbricks-dev-tools a {
+    text-decoration: underline;
+}
+
+#fewbricks-dev-tools a:hover {
+    text-decoration: none;
 }
 
 #fewbricks-dev-tools > div > h1 {
@@ -45,6 +68,11 @@
 #fewbricks-dev-tools > div > h3 {
     font-size: 1rem;
     margin-bottom: 2px;
+}
+
+#fewbricks-dev-tools > div > p,
+#fewbricks-dev-tools > div > ul {
+    margin-top: 0;
 }
 
 #fewbricks-dev-tools .fewbricks-dev-tools__togglers-wrapper {

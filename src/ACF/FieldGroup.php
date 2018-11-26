@@ -415,6 +415,17 @@ class FieldGroup extends FieldCollection implements FieldGroupInterface
     }
 
     /**
+     * @param bool $display
+     */
+
+    public function setDisplayInFewbricksDevTools(bool $display)
+    {
+
+        $this->setSetting(DevTools::getSettingsNameForDisplayingAcfArray(), $display);
+
+    }
+
+    /**
      * Allow you to set which elements that should be hidden on screen.
      *
      * @see FieldGroup::doSetHideOnScreen()

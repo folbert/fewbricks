@@ -2,6 +2,8 @@
 
 namespace Fewbricks\ACF;
 
+use Fewbricks\DevTools;
+
 /**
  * Class Field
  *
@@ -183,6 +185,17 @@ class Field extends Item
     {
 
         $this->setSetting('default_value', $defaultValue);
+
+    }
+
+    /**
+     * @param bool $display
+     */
+
+    public function setDisplayInFewbricksDevTools(bool $display)
+    {
+
+        $this->setSetting(DevTools::getSettingsNameForDisplayingAcfArray(), $display);
 
     }
 
