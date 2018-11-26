@@ -2,7 +2,7 @@
 layout: default
 title: Field Collections 
 nav_order: 7
-permalink: /field-collections
+permalink: /field-collections/
 ---
 
 # Field collections

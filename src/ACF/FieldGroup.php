@@ -2,7 +2,7 @@
 
 namespace Fewbricks\ACF;
 
-use Fewbricks\DevHelper;
+use Fewbricks\DevTools;
 use Fewbricks\Helper;
 
 /**
@@ -380,7 +380,7 @@ class FieldGroup extends FieldCollection implements FieldGroupInterface
 
         Helper::maybeStoreSimpleFieldGroupData($acf_settings_array['title'], $acf_settings_array['key']);
         Helper::maybeStoreFieldGroupAcfSettings($acf_settings_array);
-        DevHelper::maybeStoreAcfSettingsArrayForDevDisplay($acf_settings_array);
+        DevTools::maybeStoreAcfSettingsArrayForDevDisplay($acf_settings_array);
 
         acf_add_local_field_group($acf_settings_array);
 

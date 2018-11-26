@@ -3,7 +3,7 @@ layout: default
 title: Fields 
 nav_order: 5
 has_children: true
-permalink: fields
+permalink: /fields/
 ---
 
 # Fields

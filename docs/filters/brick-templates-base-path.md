@@ -3,7 +3,7 @@ parent: Filters
 layout: default
 title: brick_templates_base_path
 nav_order: 3
-permalink: filters/brick_templates_base_path
+permalink: /filters/brick_templates_base_path/
 ---
 
 # Filters - fewbricks/brick_templates_base_path

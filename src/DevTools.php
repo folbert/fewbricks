@@ -2,19 +2,67 @@
 
 namespace Fewbricks;
 
-class DevHelper
+/**
+ * Class DevTools
+ * @package Fewbricks
+ */
+class DevTools
 {
 
-    private const GLOBALS_KEY_ACF_KEYS = 'fewbricks_dev_info_acf_array_keys';
+    /**
+     * @var array
+     */
+    private static $acf_settings_arrays = [];
+
+    private static $execution_timer_start = 0;
+
+    private static $execution_timer_end = 0;
+
+    private static $start_height;
 
     /**
      *
      */
-    public static function run()
+    public static function run($start_height)
     {
 
+        self::setStartHeight($start_height);
+
+        self::injectJs();
         add_action('admin_enqueue_scripts', [self::class, 'enqueue_assets']);
         add_action('admin_footer', [self::class, 'display']);
+
+    }
+
+    /**
+     * @param $start_height
+     */
+    private static function setStartHeight($start_height)
+    {
+
+        if($start_height === true) {
+            $start_height = '"minimized"';
+        }
+
+        self::$start_height = $start_height;
+
+    }
+
+    /**
+     *
+     */
+    private static function injectJs()
+    {
+
+        add_action('admin_head', function() {
+
+            echo '<script>
+              var fewbricksDevTools = {
+                startHeight: ' . DevTools::$start_height . '
+              };
+            </script>';
+
+        });
 
     }
 
@@ -24,10 +72,10 @@ class DevHelper
     public static function enqueue_assets()
     {
 
-        wp_enqueue_script('fewbricks-dev-helper', Helper::getFewbricksAssetsBaseUri() . '/scripts/dev-helper.js',
+        wp_enqueue_script('fewbricks-dev-tools', Helper::getFewbricksAssetsBaseUri() . '/scripts/dev-tools.js',
             [], Helper::getVersionOrTimestamp(), true);
 
-        wp_enqueue_style('fewbricks-dev-helper', Helper::getFewbricksAssetsBaseUri() . '/styles/dev-helper.css',
+        wp_enqueue_style('fewbricks-dev-tools', Helper::getFewbricksAssetsBaseUri() . '/styles/dev-tools.css',
             [], Helper::getVersionOrTimestamp(), false);
 
     }
@@ -38,55 +86,9 @@ class DevHelper
     public static function display()
     {
 
-        $html = '<div id="fewbricks-dev-info">';
-        $html .= '<div>';
-        $html .= '<h1 class="fewbricks-dev-info__title">Fewbricks\DevHelper</h1>';
-
-        $html .= '<h2 class="fewbricks-dev-info__section-title">Data sent to ACF</h2>';
-        $html .= '<p class="fewbricks-dev-info__filter-value">Using the filter "fewbricks/fewbricks/dev_info/keys", you asked DevHelper to display data for:<br>';
-        $html .= self::getFilterString() . '</p>';
-
-        if (isset($GLOBALS[self::GLOBALS_KEY_ACF_KEYS]) && is_array($GLOBALS[self::GLOBALS_KEY_ACF_KEYS])) {
-
-            foreach ($GLOBALS[self::GLOBALS_KEY_ACF_KEYS] AS $acf_array_to_display) {
-
-                $html .= '<h3 class="fewbricks-dev-info__section-sub-title">' . $acf_array_to_display['title'] . '</h3>';
-
-                ob_start();
-
-                if (function_exists('dump')) {
-                    dump($acf_array_to_display);
-                } else {
-                    echo '<pre>';
-                    var_dump();
-                    echo '</pre>';
-                }
-
-                $html .= ob_get_clean();
-
-            }
-
-        }
-
-        $html .= self::getTogglerHtml();
-        $html .= '</div>';
-        $html .= '</div>';
-        echo $html;
-
-    }
-
-    /**
-     * @return string
-     */
-    private static function getTogglerHtml()
-    {
-
-        $html = '<div id="fewbricks-dev-info__togglers-wrapper">';
-        $html .= '<button id="fewbricks-dev-info__toggler--100" class="fewbricks-dev-info__toggler" ';
-        $html .= 'data-expand-text="Expand" data-contract-text="Contract">100%</button>';
-        $html .= '</div>';
-
-        return $html;
+        ob_start();
+        require_once __DIR__ . '/../views/dev-tools.view.php';
+        echo ob_get_clean();
 
     }
 
@@ -96,7 +98,7 @@ class DevHelper
     public static function maybeStoreAcfSettingsArrayForDevDisplay($acf_settings_array)
     {
 
-        $filter_value = apply_filters('fewbricks/dev_info/keys', false);
+        $filter_value = apply_filters('fewbricks/dev_tools/keys', false);
         $settings_key = $acf_settings_array['key'];
 
         if (
@@ -108,41 +110,19 @@ class DevHelper
             )
         ) {
 
-            if (!isset($GLOBALS[self::GLOBALS_KEY_ACF_KEYS])) {
-                $GLOBALS[self::GLOBALS_KEY_ACF_KEYS] = [];
-            }
-
-            $GLOBALS[self::GLOBALS_KEY_ACF_KEYS][$settings_key] = $acf_settings_array;
+            self::$acf_settings_arrays[$settings_key] = $acf_settings_array;
 
         }
-
-    }
-
-    /**
-     * @return int
-     */
-    private static function getNrOfItemsToDisplay()
-    {
-
-        $nr_of_items = 0;
-
-        if (isset($GLOBALS[self::GLOBALS_KEY_ACF_KEYS])) {
-
-            $nr_of_items = count($GLOBALS[self::GLOBALS_KEY_ACF_KEYS]);
-
-        }
-
-        return $nr_of_items;
 
     }
 
     /**
      * @return string
      */
-    private static function getFilterString()
+    public static function getFilterString()
     {
 
-        $filter_value = apply_filters('fewbricks/dev_info/keys', false);
+        $filter_value = apply_filters('fewbricks/dev_tools/keys', false);
 
         if (is_array($filter_value)) {
             $string = '[' . implode(', ', $filter_value) . ']';
@@ -151,10 +131,46 @@ class DevHelper
         } elseif ($filter_value === false) {
             $string = 'nothing (using "false")';
         } else {
-            $string = (string)$filter_value;
+            $string = '"' . (string)$filter_value . '"';
         }
 
         return $string;
+
+    }
+
+    /**
+     * @return array
+     */
+    public static function getAcfSettingsArrays()
+    {
+
+        return self::$acf_settings_arrays;
+
+    }
+
+    /**
+     *
+     */
+    public static function startExecutionTimer()
+    {
+        self::$execution_timer_start = microtime(true);
+    }
+
+    /**
+     *
+     */
+    public static function endExecutionTimer()
+    {
+        self::$execution_timer_end = microtime(true);
+    }
+
+    /**
+     * @return int
+     */
+    public static function getExecutionTime()
+    {
+
+        return round(self::$execution_timer_end - self::$execution_timer_start, 4);
 
     }
 

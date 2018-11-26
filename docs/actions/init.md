@@ -3,7 +3,7 @@ parent: Actions
 layout: default
 title: init
 nav_order: 1
-permalink: actions/init
+permalink: /actions/init/
 ---
 
 # Actions - fewbricks/init

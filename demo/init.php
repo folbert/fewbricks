@@ -7,9 +7,11 @@ use Fewbricks\ACF\FieldGroupLocationRule;
 use Fewbricks\ACF\FieldGroupLocationRuleGroup;
 use Fewbricks\ACF\Fields\Text;
 
-add_filter('fewbricks/dev_info/display', '__return_true');
+add_filter('fewbricks/dev_tools/display', function() {
+    return 70;
+});
 
-add_filter('fewbricks/dev_info/keys', function() {
+add_filter('fewbricks/dev_tools/keys', function() {
 
     return 'group_1811252128b';
 

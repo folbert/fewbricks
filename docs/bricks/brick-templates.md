@@ -3,7 +3,7 @@ parent: Fields
 layout: default
 title: Repeaters 
 nav_order: 1
-permalink: bricks/templates 
+permalink: /bricks/templates/
 ---
 
 # Bricks - Templates

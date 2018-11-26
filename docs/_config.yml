@@ -13,22 +13,21 @@
 # you will see them accessed via {{ site.title }}, {{ site.email }}, and so on.
 # You can create any custom variable you would like, and they will be accessible
 # in the templates via {{ site.myvariable }}.
-title: Fewbricks
+title: Fewbricks2
 email: b@folbert.com
 description: >- # this means to ignore newlines until "baseurl:"
   Fewbricks allows you to write code for creating fields for Advanced Custom Fields. But it is much more than that...
-baseurl: "" # the subpath of your site, e.g. /blog
-url: "" # the base hostname & protocol for your site, e.g. http://example.com
+baseurl: "/" # the subpath of your site, e.g. /blog
+url: "https://fewbricks2.folbert.com" # the base hostname & protocol for your site, e.g. http://example.com
 github_username: folbert
 
 # Build settings
 markdown: kramdown
 remote_theme: pmarsceill/just-the-docs
 
-
 # Aux links for the upper right navigation
 aux_links:
-    "Just the Docs on GitHub":
+    "Fewbricks on GitHub":
     - "//github.com/folbert/fewbricks"
 
 

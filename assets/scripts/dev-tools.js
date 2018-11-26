@@ -20,6 +20,10 @@
 
             $this.$mainElm = $('#fewbricks-dev-tools');
 
+            if(typeof fewbricksDevTools !== 'undefined' && typeof fewbricksDevTools.startHeight !== 'undefined') {
+                $this.toggleMainElm(fewbricksDevTools.startHeight);
+            }
+
         }
 
         this.initToggler = function() {

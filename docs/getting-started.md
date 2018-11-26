@@ -2,7 +2,7 @@
 layout: default
 title: Getting started 
 nav_order: 3
-permalink: /getting-started
+permalink: /getting-started/
 ---
 
 # Getting started

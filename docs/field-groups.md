@@ -2,7 +2,7 @@
 layout: default
 title: Field Groups 
 nav_order: 4
-permalink: /field-groups
+permalink: /field-groups/
 ---
 
 # Field Groups

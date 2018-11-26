@@ -87,7 +87,11 @@ class Fewbricks
 
         self::displayNotices();
 
+        DevTools::startExecutionTimer();
+
         do_action('fewbricks/init');
+
+        DevTools::endExecutionTimer();
 
         Helper::initDebug();
 

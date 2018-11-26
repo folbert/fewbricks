@@ -2,7 +2,7 @@
 layout: default
 title: Requirements
 nav_order: 2
-permalink: /requirements
+permalink: /requirements/
 ---
 
 # Requirements

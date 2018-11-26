@@ -194,8 +194,9 @@ class Helper
     public static function initDebug()
     {
 
-        if(apply_filters('fewbricks/dev_info/display', false) !== false) {
-            DevHelper::run();
+        $dev_tools_filter_value = apply_filters('fewbricks/dev_tools/display', false);
+        if($dev_tools_filter_value !== false) {
+            DevTools::run($dev_tools_filter_value);
         }
 
         self::initFieldSnitch();

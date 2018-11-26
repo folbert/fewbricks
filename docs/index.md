@@ -5,7 +5,11 @@ nav_order: 1
 permalink: /
 ---
 
-# Fewbricks
+November 2018: Please note that Fewbricks2 is very much a work in progress and the documentation will change before the 
+first non-beta-release.
+{: .label .label-red}
+
+# Fewbricks2
 
 - Gives you a platform for writing code for creating field groups and fields for the awesome WordPress plugin [Advanced 
 Custom Fields 
@@ -17,7 +21,7 @@ different field groups, flexible content layouts, other bricks and more.
 - Comes with handy features like a basic templating system, which you can replace with your own, in order to keep 
 logic and HTML separated.
 - Is [available at GitHub](https://github.com/folbert/fewbricks) where [issues](https://github
-.com/folbert/fewbricks/issues) can be used to ask questions, report bugs and anything else discussed. Pull requests are welcome..
+.com/folbert/fewbricks/issues) can be used to ask questions, report bugs and anything else discussed. Pull requests are welcome.
 - Is primarily developed by [Björn Folbert](https://folbert.com), web developer at [KAN](https://kan.se) in Malmö, 
 Sweden.
 

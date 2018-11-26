@@ -3,7 +3,7 @@ parent: Filters
 layout: default
 title: dev_tools/keys
 nav_order: 3
-permalink: filters/dev_tools/keys
+permalink: /filters/dev_tools--keys/
 ---
 
 # Filters - fewbricks/dev_tools/keys

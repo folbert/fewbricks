@@ -8,6 +8,7 @@
     width: 100%;
     padding: 0 1rem;
     overflow-y: scroll;
+    border-top: solid 2px #fff;
 }
 
 #fewbricks-dev-tools.fewbricks-dev-tools--full {
@@ -21,32 +22,38 @@
     padding-top: 8px;
 }
 
-#fewbricks-dev-tools .fewbricks-dev-tools__title,
-#fewbricks-dev-tools .fewbricks-dev-tools__section-title,
-#fewbricks-dev-tools .fewbricks-dev-tools__section-sub-title,
-#fewbricks-dev-tools .fewbricks-dev-tools__filter-value,
-#fewbricks-dev-tools__toggler {
+#fewbricks-dev-tools > div > h1,
+#fewbricks-dev-tools > div > h2,
+#fewbricks-dev-tools > div > h3,
+#fewbricks-dev-tools > div > p,
+#fewbricks-dev-tools .fewbricks-dev-tools__toggler {
+    max-width: 1200px;
     color: #426380;
     font-family: Menlo, Monaco, Consolas, monospace;
 }
 
-#fewbricks-dev-tools .fewbricks-dev-tools__title {
+#fewbricks-dev-tools > div > h1 {
     font-size: 1.2rem;
     margin-top: 0;
 }
 
-#fewbricks-dev-tools .fewbricks-dev-tools__section-title {
+#fewbricks-dev-tools > div > h2 {
     font-size: 1.1rem;
     margin-bottom: 2px;
 }
 
-#fewbricks-dev-tools .fewbricks-dev-tools__section-sub-title {
+#fewbricks-dev-tools > div > h3 {
     font-size: 1rem;
     margin-bottom: 2px;
 }
 
-#fewbricks-dev-tools__togglers-wrapper {
+#fewbricks-dev-tools .fewbricks-dev-tools__togglers-wrapper {
     position: absolute;
+    top: 6px;
     right: 0;
-    top: 8px;
+}
+
+#fewbricks-dev-tools .fewbricks-dev-tools__toggler {
+    font-size: 12px;
+    font-weight: normal;
 }
