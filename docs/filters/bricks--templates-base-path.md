@@ -1,12 +1,12 @@
 ---
 parent: Filters
 layout: default
-title: brick_templates_base_path
+title: bricks/templates_base_path
 nav_order: 3
-permalink: /filters/brick_templates_base_path/
+permalink: /filters/bricks--templates_base_path/
 ---
 
-# Filters - fewbricks/brick_templates_base_path
+# Filters - fewbricks/bricks/templates_base_path
 
 ```php
 fewbricks/brick_templates_base_path
@@ -20,7 +20,7 @@ slash.
 
 Defaults to `false` which will cause `Brick::getBrickTemplateHtml()` to die and tell you to specify a path. 
 
-Note that the actual file name can be filtered using [brick_template_file_name](brick-template-file-name.md).
+Note that the actual file name can be filtered using [brick_template_file_name](bricks--template-file-name.md).
 
 Your filter function can receive two parameters:
 - The default value as per above

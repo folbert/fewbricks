@@ -16,7 +16,11 @@ class ConditionalLogicRule extends Rule
     public function toAcfArray()
     {
 
-        return ['field' => $this->getParam(), 'operator' => $this->getOperator(), 'value' => $this->getValue()];
+        return [
+            'field' => $this->getParam(),
+            'operator' => $this->getOperator(),
+            'value' => $this->getValue()
+        ];
 
     }
 

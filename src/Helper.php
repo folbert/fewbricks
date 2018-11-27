@@ -51,7 +51,7 @@ class Helper
     public static function getBrickLayoutsBasePath()
     {
 
-        return apply_filters('fewbricks/brick_layouts_base_path', false);
+        return apply_filters('fewbricks/bricks/layouts_base_path', false);
 
     }
 
@@ -69,7 +69,7 @@ class Helper
         // Turn CamelCaseFileNames to dashed-versions. (ClassName -> class-name)
         $dashed_class_name = preg_replace('/([A-Z]+)/', "-$1", lcfirst($class_name));
 
-        return apply_filters('fewbricks/brick_template_file_name', strtolower($dashed_class_name) . '.view.php',
+        return apply_filters('fewbricks/bricks/template_file_name', strtolower($dashed_class_name) . '.view.php',
             $brick_object);
 
     }
@@ -82,7 +82,7 @@ class Helper
     public static function getBrickTemplatesBasePath($brick_object)
     {
 
-        return apply_filters('fewbricks/brick_templates_base_path', false, $brick_object);
+        return apply_filters('fewbricks/bricks/templates_base_path', false, $brick_object);
 
     }
 

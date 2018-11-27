@@ -21,32 +21,35 @@ class FieldCollection extends Collection implements FieldCollectionInterface
     /**
      * @var string
      */
-    protected $baseKey;
+    protected $base_key;
 
     /**
+     * String to prefix labels of all the fields in the collection with.
      * @var string
      */
-    private $fieldLabelsPrefix;
+    private $field_labels_prefix;
 
     /**
+     * String to suffix labels of all the fields in the collection with.
      * @var string
      */
-    private $fieldLabelsSuffix;
+    private $field_labels_suffix;
 
     /**
+     * String to prefix field names of all the fields in the collection with.
      * @var string
      */
-    private $fieldNamesPrefix;
+    private $field_names_prefix;
 
     /**
      * @var array
      */
-    private $fieldsSettings;
+    private $fields_settings;
 
     /**
      * @var boolean
      */
-    private $preparedForAcfArray;
+    private $prepared_for_acf_array;
 
     /**
      * FieldCollection constructor.
@@ -57,11 +60,11 @@ class FieldCollection extends Collection implements FieldCollectionInterface
     {
 
         $this->arguments = $arguments;
-        $this->fieldNamesPrefix = '';
-        $this->fieldLabelsPrefix = '';
-        $this->fieldLabelsSuffix = '';
-        $this->fieldsSettings = [];
-        $this->preparedForAcfArray = false;
+        $this->field_names_prefix = '';
+        $this->field_labels_prefix = '';
+        $this->field_labels_suffix = '';
+        $this->fields_settings = [];
+        $this->prepared_for_acf_array = false;
 
         parent::__construct();
 
@@ -74,7 +77,6 @@ class FieldCollection extends Collection implements FieldCollectionInterface
     {
 
         $this->prepareBrickForAdd($brick);
-
         $this->addFields($brick->getFields());
 
     }
@@ -129,21 +131,21 @@ class FieldCollection extends Collection implements FieldCollectionInterface
     protected function prepareForAcfArray()
     {
 
-        if (!$this->preparedForAcfArray) {
+        if (!$this->prepared_for_acf_array) {
 
             /** @var Field $field */
             foreach ($this->items AS &$field) {
 
-                $field->prefixName($this->fieldNamesPrefix);
-                $field->prefixLabel($this->fieldLabelsPrefix);
-                $field->suffixLabel($this->fieldLabelsSuffix);
+                $field->prefixName($this->field_names_prefix);
+                $field->prefixLabel($this->field_labels_prefix);
+                $field->suffixLabel($this->field_labels_suffix);
 
-                $extraSettings = (isset($this->fieldsSettings[$field->getOriginalKey()])
-                    ? $this->fieldsSettings[$field->getOriginalKey()] : false);
+                if (
+                    isset($this->fields_settings[$field->getOriginalKey()]) &&
+                    $this->fields_settings[$field->getOriginalKey()] !== false
+                ) {
 
-                if ($extraSettings !== false) {
-
-                    $field->setSettings($extraSettings);
+                    $field->setSettings($this->fields_settings[$field->getOriginalKey()]);
 
                 }
 
@@ -151,7 +153,7 @@ class FieldCollection extends Collection implements FieldCollectionInterface
 
         }
 
-        $this->preparedForAcfArray = true;
+        $this->prepared_for_acf_array = true;
 
     }
 
@@ -357,21 +359,20 @@ class FieldCollection extends Collection implements FieldCollectionInterface
      * Set ACF settings on fields in this collection. The values will be applied as they are so don't use this to set
      * keys or conditional logic.
      *
-     * @param string $fieldKey The original key (the one set when a field was created) of a field in this
-     *                              collection..
-     * @param string $settingsName Should correspond to the name of an ACF setting
-     * @param mixed $settingsValue A valid value for the setting
+     * @param string $fieldKey The original key (the one set when a field was created) of a field in this collection...
+     * @param string $settingsName Should correspond to the name of an ACF setting.
+     * @param mixed $settingsValue A valid value for the setting.
      */
     public function addFieldSetting($fieldKey, $settingsName, $settingsValue)
     {
 
-        if (!isset($this->fieldsSettings[$fieldKey])) {
+        if (!isset($this->fields_settings[$fieldKey])) {
 
-            $this->fieldsSettings[$fieldKey] = [];
+            $this->fields_settings[$fieldKey] = [];
 
         }
 
-        $this->fieldsSettings[$fieldKey][$settingsName] = $settingsValue;
+        $this->fields_settings[$fieldKey][$settingsName] = $settingsValue;
 
     }
 
@@ -391,7 +392,7 @@ class FieldCollection extends Collection implements FieldCollectionInterface
      *
      * @return mixed|null
      */
-    public function getArgument($name, $defaultValue = null)
+    public function getArgument(string $name, $defaultValue = null)
     {
 
         return (isset($this->arguments[$name]) ? $this->arguments[$name] : $defaultValue);
@@ -403,7 +404,7 @@ class FieldCollection extends Collection implements FieldCollectionInterface
      *
      * @param string $key
      */
-    public function removeBrickByKey($key)
+    public function removeBrickByKey(string $key)
     {
 
         /** @var Field $field */
@@ -533,10 +534,10 @@ class FieldCollection extends Collection implements FieldCollectionInterface
      *
      * @param $prefix
      */
-    public function setFieldLabelsPrefix($prefix)
+    public function setFieldLabelsprefix($prefix)
     {
 
-        $this->fieldLabelsPrefix = $prefix;
+        $this->field_labels_prefix = $prefix;
 
     }
 
@@ -545,10 +546,10 @@ class FieldCollection extends Collection implements FieldCollectionInterface
      *
      * @param string $prefix
      */
-    public function setFieldNamesPrefix($prefix)
+    public function setFieldNamesprefix($prefix)
     {
 
-        $this->fieldNamesPrefix = $prefix;
+        $this->field_names_prefix = $prefix;
 
     }
 
@@ -565,9 +566,7 @@ class FieldCollection extends Collection implements FieldCollectionInterface
         /** @var Field $field */
         foreach ($this->items AS $field) {
 
-            $keyPrepend = $this->getBaseKey() . '_';
-
-            $field->prefixKey($keyPrepend);
+            $field->prefixKey($this->getBaseKey() . '_');
 
             $acfArray[] = $field->toAcfArray();
 
@@ -585,59 +584,59 @@ class FieldCollection extends Collection implements FieldCollectionInterface
     public function getBaseKey()
     {
 
-        return $this->baseKey;
+        return $this->base_key;
 
     }
 
     /**
-     * @param string $baseKey
+     * @param string $base_key
      */
-    public function setBaseKey($baseKey)
+    public function setBaseKey($base_key)
     {
 
-        $this->baseKey = $baseKey;
+        $this->base_key = $base_key;
 
     }
 
     /**
-     * @param array $fieldsSettings
+     * @param array $fields_settings
      *
      * @return mixed
      */
-    private function prepareFieldsConditionalLogic($fieldsSettings)
+    private function prepareFieldsConditionalLogic($fields_settings)
     {
 
-        // Conditional logic for ACF is made up of a three-levelled where the first level is the entire logic,
+        // Conditional logic for ACF is made up of a three-levelled array where the first level is the entire logic,
         // the second level are groups (whose relations are OR) and the third level are items (whose relations are AND).
 
-        foreach ($fieldsSettings AS $fieldSettingsKey => $fieldSettings) {
+        foreach ($fields_settings AS $field_settings_key => $field_settings) {
 
             // Do the field have conditional logic
-            if (isset($fieldSettings['conditional_logic'])
-                && is_array($fieldSettings['conditional_logic'])
+            if (isset($field_settings['conditional_logic'])
+                && is_array($field_settings['conditional_logic'])
             ) {
 
-                $conditionalLogic = $fieldSettings['conditional_logic'];
+                $conditional_logic_groups = $field_settings['conditional_logic'];
 
                 // Traverse down the conditional logic array
-                foreach ($conditionalLogic AS $conditionalLogicGroupKey => $conditionalLogicGroupValue) {
+                foreach ($conditional_logic_groups AS $conditional_logic_group_key => $conditional_logic_group_value) {
 
                     foreach (
-                        $conditionalLogic[$conditionalLogicGroupKey] AS $conditionalLogicItemKey =>
-                        $conditionalLogicItemValue
+                        $conditional_logic_groups[$conditional_logic_group_key] AS
+                        $conditional_logic_item_key => $conditional_logic_item_value
                     ) {
 
-                        $targetFieldKey
-                            = $conditionalLogic[$conditionalLogicGroupKey][$conditionalLogicItemKey]['field'];
+                        $target_field_key
+                            = $conditional_logic_groups[$conditional_logic_group_key][$conditional_logic_item_key]['field'];
 
                         // Loop all other items in this collection
-                        /** @var Field $otherFieldObject */
-                        foreach ($this->items AS $otherFieldObject) {
+                        /** @var Field $other_field_object */
+                        foreach ($this->items AS $other_field_object) {
 
-                            if ($otherFieldObject->getOriginalKey() === $targetFieldKey) {
+                            if ($other_field_object->getOriginalKey() === $target_field_key) {
 
-                                $conditionalLogic[$conditionalLogicGroupKey][$conditionalLogicItemKey]['field']
-                                    = $otherFieldObject->getKey();
+                                $conditional_logic_groups[$conditional_logic_group_key][$conditional_logic_item_key]['field']
+                                    = $other_field_object->getKey();
 
                             }
 
@@ -647,13 +646,13 @@ class FieldCollection extends Collection implements FieldCollectionInterface
 
                 }
 
-                $fieldsSettings[$fieldSettingsKey]['conditional_logic'] = $conditionalLogic;
+                $fields_settings[$field_settings_key]['conditional_logic'] = $conditional_logic_groups;
 
             }
 
         }
 
-        return $fieldsSettings;
+        return $fields_settings;
 
     }
 

@@ -19,6 +19,11 @@ class Select extends FieldWithChoices implements FieldInterface
 {
 
     /**
+     * @var string
+     */
+    protected static $myType = 'select';
+
+    /**
      * @return mixed The value of the ACF setting "ajax". Returns the default ACF value false if none has been
      * set using Fewbricks.
      */
@@ -37,16 +42,6 @@ class Select extends FieldWithChoices implements FieldInterface
     {
 
         return $this->getSetting('multiple', false);
-
-    }
-
-    /**
-     * @return string The ACF type that ultimately decides what kind of field instances of this class is.
-     */
-    public function getType()
-    {
-
-        return 'select';
 
     }
 

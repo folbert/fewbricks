@@ -1,12 +1,12 @@
 ---
 parent: Filters
 layout: default
-title: brick_template_file_name
+title: bricks/template_file_name
 nav_order: 4
-permalink: /filters/brick_template_file_name/
+permalink: /filters/brick--template_file_name/
 ---
 
-# Filters - fewbricks/brick_template_file_name
+# Filters - fewbricks/bricks/template_file_name
 
 You only need to care about this filter if you intend to use Fewbricks simple templating engine by calling `Brick::getBrickTemplateHtml()`. If you don't, you can ignore this.
 
@@ -29,7 +29,7 @@ Your filter function can receive two parameters:
 ```php
 <?php
 
-add_filter('fewbricks/brick_template_file_name', 'fewbricksDemoGetBrickTemplateFileName', 10, 2);
+add_filter('fewbricks/bricks/template_file_name', 'fewbricksDemoGetBrickTemplateFileName', 10, 2);
 
 function fewbricksDemoGetBrickTemplateFileName($fileName, $brickObject) {
   

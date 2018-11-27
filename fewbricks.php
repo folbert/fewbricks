@@ -27,22 +27,10 @@ spl_autoload_register(function ($class) {
         && $namespaceParts[0] === 'Fewbricks'
     ) {
 
-        // The file name is the last item in the array
-        $fileName = end($namespaceParts) . '.php';
-
-        $path = __DIR__ . '/src/';
-
-        // If there is sub folders in the path
-        if (count($namespaceParts) > 2) {
-            $path .= implode('/', array_slice($namespaceParts, 1, -1)) . '/';
-        }
-
-        $path .= $fileName;
-
+        // First item will always be "Febwricks" and we dont need that when building the path
         // Yes, by not checking of the file exists, we do get ugly error messages.
         // But we save some execution time by not checking if the file exists first.
-        /** @noinspection PhpIncludeInspection */
-        include $path;
+        include __DIR__ . '/src/' . implode('/', array_slice($namespaceParts, 1)) . '.php';
 
     }
 

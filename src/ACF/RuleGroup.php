@@ -2,8 +2,6 @@
 
 namespace Fewbricks\ACF;
 
-use Fewbricks\Helper;
-
 /**
  * Class RuleGroup
  *
@@ -21,18 +19,17 @@ class RuleGroup
 
     /**
      * RuleGroup constructor.
-     * @param array $rules An array of objects of the class
+     *
+     * @param array $rules An array of objects of the class Fewbricks\Rule
      */
-    public function __construct($rules = [])
+    public function __construct(array $rules = [])
     {
 
         $this->rules = new RuleCollection();
 
         foreach ($rules AS $rule) {
 
-            if ($rule instanceof Rule) {
-                $this->rules->addItem($rule);
-            }
+            $this->addRule($rule);
 
         }
 

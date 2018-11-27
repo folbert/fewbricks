@@ -18,7 +18,7 @@ use Fewbricks\ACF\FieldInterface;
 class Text extends Field implements FieldInterface
 {
 
-    protected static $mytype = 'text';
+    protected static $myType = 'text';
 
     /**
      * @return mixed The value of the ACF setting "append". Returns the default ACF value "" if none has been

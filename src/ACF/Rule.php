@@ -32,7 +32,7 @@ class Rule
      * @param $operator
      * @param $value
      */
-    public function __construct($param, $operator, $value)
+    public function __construct($param, $operator, $value = null)
     {
 
         $this->param    = $param;

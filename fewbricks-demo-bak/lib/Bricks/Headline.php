@@ -29,7 +29,7 @@ class Headline extends ProjectBrick
         if ($this->getArgument('show_badge', false)) {
             $this->addBrick(
                 (new Badge('badge', '1802090022a'))
-                ->setFieldLabelsPrefix('Badge - ')
+                ->setFieldLabelsprefix('Badge - ')
             );
         }
 

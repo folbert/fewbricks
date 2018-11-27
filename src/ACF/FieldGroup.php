@@ -177,6 +177,8 @@ class FieldGroup extends FieldCollection implements FieldGroupInterface
     }
 
     /**
+     * ACF setting
+     *
      * @return bool|mixed
      */
     public function getActive()
@@ -197,6 +199,8 @@ class FieldGroup extends FieldCollection implements FieldGroupInterface
     }
 
     /**
+     * ACF setting
+     *
      * @return bool|mixed
      */
     public function getDescription()
@@ -207,6 +211,8 @@ class FieldGroup extends FieldCollection implements FieldGroupInterface
     }
 
     /**
+     * ACF setting
+     *
      * @return array|bool|mixed
      */
     public function getHideOnScreenSetting()
@@ -217,6 +223,8 @@ class FieldGroup extends FieldCollection implements FieldGroupInterface
     }
 
     /**
+     * ACF Setting
+     *
      * @return bool|mixed
      */
     public function getInstructionPlacement()
@@ -244,6 +252,8 @@ class FieldGroup extends FieldCollection implements FieldGroupInterface
     }
 
     /**
+     * ACF Setting
+     *
      * @return bool|mixed
      */
     public function getLabelPlacement()
@@ -264,6 +274,8 @@ class FieldGroup extends FieldCollection implements FieldGroupInterface
     }
 
     /**
+     * ACF Setting
+     *
      * @return bool|mixed
      */
     public function getMenuOrder()
@@ -274,6 +286,8 @@ class FieldGroup extends FieldCollection implements FieldGroupInterface
     }
 
     /**
+     * ACF Setting
+     *
      * @return bool|mixed
      */
     public function getPosition()
@@ -315,6 +329,8 @@ class FieldGroup extends FieldCollection implements FieldGroupInterface
     }
 
     /**
+     * ACF Setting
+     *
      * @return bool|mixed
      */
     public function getStyle()
@@ -331,16 +347,6 @@ class FieldGroup extends FieldCollection implements FieldGroupInterface
     {
 
         return $this->title;
-
-    }
-
-    /**
-     * @param $title
-     */
-    public function setTitle($title)
-    {
-
-        $this->title = $title;
 
     }
 
@@ -371,7 +377,7 @@ class FieldGroup extends FieldCollection implements FieldGroupInterface
 
         acf_add_local_field_group($acf_settings_array);
 
-        if($unset_after_added_to_acf) {
+        if ($unset_after_added_to_acf) {
 
             // Lets clear up some space
             unset($this->settings);
@@ -531,6 +537,16 @@ class FieldGroup extends FieldCollection implements FieldGroupInterface
     {
 
         $this->setSetting('style', $style);
+
+    }
+
+    /**
+     * @param $title
+     */
+    public function setTitle($title)
+    {
+
+        $this->title = $title;
 
     }
 

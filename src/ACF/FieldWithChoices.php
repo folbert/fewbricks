@@ -46,9 +46,9 @@ class FieldWithChoices extends Field
     /**
      * ACF setting.
      *
-     * @param $allowNull
+     * @param bool $allowNull
      */
-    public function setAllowNull($allowNull)
+    public function setAllowNull(bool $allowNull)
     {
 
         $this->setSetting('allow_null', $allowNull);
@@ -61,7 +61,7 @@ class FieldWithChoices extends Field
      *
      * @param array $choices Associative array with options. Key will be name and value will be value.
      */
-    public function setChoices($choices)
+    public function setChoices(array $choices)
     {
 
         $this->setSetting('choices', $choices);
@@ -73,7 +73,7 @@ class FieldWithChoices extends Field
      *
      * @param $returnFormat "value", "label" or "array" (for both)
      */
-    public function setReturnFormat($returnFormat)
+    public function setReturnFormat(string $returnFormat)
     {
 
         $this->setSetting('return_format', $returnFormat);
