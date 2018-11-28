@@ -7,3 +7,8 @@ permalink: /bricks/
 ---
 
 # Bricks
+
+## getBrickHtml()
+If you want to use 
+
+## getHtml()

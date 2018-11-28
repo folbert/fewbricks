@@ -14,7 +14,7 @@
         <div class="col-sm-6">
 
             <?php
-            echo (new \App\FewbricksDemo\Bricks\HeadlineAndText('headline_and_text_1'))->getHtml();
+            echo (new \App\FewbricksDemo\Bricks\HeadlineAndText('headline_and_text_1'))->getLayoutedHtml();
             ?>
 
         </div>
@@ -22,7 +22,7 @@
         <div class="col-sm-6">
 
             <?php
-            echo (new \App\FewbricksDemo\Bricks\HeadlineAndText('headline_and_text_2'))->getHtml();
+            echo (new \App\FewbricksDemo\Bricks\HeadlineAndText('headline_and_text_2'))->getLayoutedHtml();
             ?>
 
         </div>

@@ -4,7 +4,7 @@ namespace FewbricksDemo\Bricks;
 
 use Fewbricks\ACF\Fields\Select;
 use Fewbricks\ACF\Fields\Text;
-use Fewbricks\Templater;
+use Fewbricks\BrickTemplater;
 
 class Headline extends Brick {
 
@@ -33,28 +33,13 @@ class Headline extends Brick {
 
     }
 
-    private function getViewData()
+    /**
+     * @return array
+     */
+    public function getViewData()
     {
 
         return $this->getFieldValues(['level', 'text']);
-
-    }
-
-    /**
-     * @return string
-     */
-    public function getBrickHtml()
-    {
-
-        $viewData = $this->getViewData();
-
-        if (!empty($viewData)) {
-            $outcome = Templater::getBrickHtml($this, $this->getViewData());
-        } else {
-            $outcome = '';
-        }
-
-        return $outcome;
 
     }
 

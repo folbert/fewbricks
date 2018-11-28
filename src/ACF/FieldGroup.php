@@ -82,6 +82,7 @@ class FieldGroup extends FieldCollection implements FieldGroupInterface
 
     /**
      * @param FieldGroupLocationRuleGroup $rule_group
+     * @return $this
      */
     public function addLocationRuleGroup(FieldGroupLocationRuleGroup $rule_group)
     {
@@ -369,6 +370,7 @@ class FieldGroup extends FieldCollection implements FieldGroupInterface
      * In order to keep in sync with ACFs namings, we have this function to call publicly. And then use doRegister()
      * to actually register.
      * @param bool $unset_after_added_to_acf
+     * @return FieldGroup
      */
     public function register($unset_after_added_to_acf = true)
     {
@@ -388,6 +390,10 @@ class FieldGroup extends FieldCollection implements FieldGroupInterface
             // Lets clear up some space
             unset($this->settings);
             unset($this->items);
+
+        } else {
+
+            return $this;
 
         }
 
@@ -442,11 +448,14 @@ class FieldGroup extends FieldCollection implements FieldGroupInterface
      *                                   'author', 'format', 'page_attributes', 'featured_image', 'categories', 'tags',
      *                                   'send-trackbacks', 'all'. Note 'all' which will show all elements that
      *                                   are possible to hide.
+     * @return $this
      */
     public function setHideOnScreen($element_names)
     {
 
-        return $this->doSetHideOnScreen($element_names);
+        $this->doSetHideOnScreen($element_names);
+
+        return $this;
 
     }
 

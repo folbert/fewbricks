@@ -14,7 +14,8 @@ the instructions below the manual installation steps.
 
 ### Install using Composer
 Fewbricks is available on Packagist at [https://packagist.org/packages/folbert/fewbricks](https://packagist
-.org/packages/folbert/fewbricks).
+.org/packages/folbert/fewbricks). Please see the link to find which version is the latest and which one you want to 
+tell Composer to require.
 
 `composer require folbert/fewbricks:2.0`
 
@@ -39,6 +40,11 @@ plugin.
 
 In the admin-area, you should now see new post types "Fewbricks Demo Pages Type 1" and "Fewbricks Demo pages Type 2".
 This is because Fewbricks comes with a bunch of demo code for you to use as you want.
+
+### Running demo code
+If this is your first time running Fewbricks2, you may want to check out the demo code to see what you can do with it
+. In the fewbricks-folder in plugins, you will find a folder named "demo". Copy that folder to, for example, your 
+themes folder. Then require the init.php-file  
 
 @todo Describe action fewbricks/init
 

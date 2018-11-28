@@ -95,8 +95,6 @@ class Headline extends ProjectBrick
     public function getBrickHtml()
     {
 
-        $this->getViewData();
-
         return $this->getBrickTemplateHtml($this->getViewData());
 
     }

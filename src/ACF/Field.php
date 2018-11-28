@@ -98,7 +98,9 @@ class Field extends Item
     public function addConditionalLogicRuleGroup($ruleGroup)
     {
 
-        return $this->conditionalLogicRuleGroups->addItem($ruleGroup);
+        $this->conditionalLogicRuleGroups->addItem($ruleGroup);
+
+        return $this;
 
     }
 

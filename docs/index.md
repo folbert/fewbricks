@@ -26,22 +26,48 @@ logic and HTML separated.
 Sweden.
 
 ## Quick example
+Below is a very simplified example of how you can build field groups and fields in Fewbricks.
+
+### Create some fields
 
 ```php
 <?php
 
-$field_group = new FieldGroup('1801032151a'); // Site wide unique ID
-$field_group->setTitle('A field group');
-$field_group->addLocationRuleGroup(
-    (new FieldGroupLocationRuleGroup())
-        ->addRule(
-            new Rule('post_type', '==', 'page') // Show field group when editing a page
+    $text_field_1 = (new Text('Text field 1', 'text_field_1', '1811262140a'))
+        ->setInstructions('Enter something here to reveal another text field');
+
+    $text_field_2 = (new Text('Text field 2', 'text_field_2', '1811262140b'))
+        ->addConditionalLogicRuleGroup(
+            new ConditionalLogicRuleGroup([ // Only show if field with key 1811262140a is not empty
+                new ConditionalLogicRule('1811262140a', '!=', ''),
+            ])
         )
-    );
-$field_group->hideOnScreen('content'); // Hide the standard WP content field
-$field_group->addField(new Text('A text field', 'text', '1801032152a'));
-$field_group->register();
+        ->setDefaultValue('The man in black fled across the desert');
 ```
+
+### Create a field group
+
+```php
+<?php
+
+    $field_group = (new FieldGroup('Demo field group 1', '1811252128a'))
+        ->addLocationRuleGroup(
+            (new FieldGroupLocationRuleGroup([
+                new FieldGroupLocationRule('post_type', '==', 'post'), // When editing posts
+            ])), // or
+            (new FieldGroupLocationRuleGroup([
+                new FieldGroupLocationRule('post_type', '==', 'page'), // When editing a page
+                new FieldGroupLocationRule('user_role', '==', 'editor'), // And the user is an editor 
+                new FieldGroupLocationRule('page', '==', '3'), // And the id of the page is 3
+            ]))
+        )
+        ->setHideOnScreen('all') // Hide everything that ACF can hide on the screen
+        ->setShowOnScreen('permalink') // But show the permalink
+        ->addFields([$text_field_1, $text_field_2])
+        ->register();
+
+```
+
 
 ## Why does Fewbricks exist?
  
@@ -49,7 +75,7 @@ $field_group->register();
 Almost all web sites have a couple of building blocks (modules or "bricks") in common. This can, for example, be 
 "Page hero", "Plain text", "Image with text to the right", "Image with text to the left", "Image", "YouTube-video"
 and so on. Using a module system which is completely built using code and split up into single responsibility files
-instead of storing settings in the database as ACF does out of the box, we can reuse the fields hoding the code
+instead of storing settings in the database as ACF does out of the box, we can reuse the fields holding the code
 without setting them up every time we set up a new site. Yes, ACF does come with export functionality and ability to
 generate PHP code but it is still, IMHO, cumbersome to cherry-pick bricks for each project.
  
@@ -57,10 +83,11 @@ generate PHP code but it is still, IMHO, cumbersome to cherry-pick bricks for ea
 This is probably the most important, and also the original, reason as to why this system was created. 
 Since, in Fewbricks, all ACF-fields are set up using code, we can reuse fields and even other bricks across multiple 
 bricks. This means that if we need to have, for example, a button in multiple bricks and places, we can create that 
-brick once and then reuse that code all over the place. Now, imagine that the button have multiple settings and must 
-give the administrator the ability to select a style and a functionality (internal link, external link, mail, 
+brick once and then reuse that code all over the place. Now, imagine that the button has multiple settings like  
+giving the administrator the ability to select a style and type (internal link, external link, mail, 
 download etc.) every time a button is used. Having to set that up in multiple times in ACFs visual editor would be a 
 lot of work and you know that the client will want to add new functionality to the button all of a sudden :)
+
 Since development on Fewbricks started, the field "Clone" has been introduced in ACF. While this does solve some of 
 the problems that Fewbricks also solves, Fewbricks offers a lot more which you will see later on.
 
@@ -70,13 +97,14 @@ fields and/or its own output. Or you can add code to an existing brick to allow 
  the class to modify the brick by passing arguments.
 
 ### Cleaner way to output HTML
-By having each brick output its own HTML, figuring out where to make changes in a brick 
-becomes a breeze. Even if the brick is used in multiple places and loops, the HTML can be edited in one place. 
-Fewbricks encourages you to separate the logic and presentation by supporting automatic loading of view-files.
+By having each brick output its own HTML, figuring out where to edit the output of the brick becomes a breeze. Even if
+ the brick is used in multiple places and loops, the HTML can be edited in one place. Fewbricks encourages you to 
+ separate the logic and presentation by supporting automatic loading of view-files.
 
 ### Code readability
-Easier to see what fields belong to a brick. Instead of having to switch between WP Admin and code to see what you 
-named a specific field, you have it all in one brick class file.
+Easier to see which fields belong to a brick. Instead of having to switch between WP Admin and code to see what you 
+named a specific field, you can have it all in one brick class file.
 
 ## Legal
-Fewbricks and its developers are in no way associated with Advanced Custom Fields. Fewbricks is released under GPLv3.
+Fewbricks is released under GPLv3 and its developers are in no way associated with Advanced Custom Fields. But we are
+very grateful to Elliot Condon for creating ACF.

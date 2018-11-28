@@ -7,6 +7,8 @@ use Fewbricks\ACF\ConditionalLogicRuleGroup;
 use Fewbricks\ACF\FieldGroup;
 use Fewbricks\ACF\FieldGroupLocationRule;
 use Fewbricks\ACF\FieldGroupLocationRuleGroup;
+use Fewbricks\ACF\Fields\Email;
+use Fewbricks\ACF\Fields\Link;
 use Fewbricks\ACF\Fields\Text;
 use Fewbricks\Helper;
 use FewbricksDemo\Bricks\Headline;
@@ -28,8 +30,12 @@ spl_autoload_register(function ($class) {
 
 });
 
-add_filter('fewbricks/bricks/templates_base_path', function() {
-    return __DIR__ . '/lib/bricks';
+add_filter('fewbricks/templater/brick_templates_base_path', function () {
+    return __DIR__ . '/views/brick-templates';
+});
+
+add_filter('fewbricks/templater/brick_layouts_base_path', function() {
+    return __DIR__ . '/views/brick-layouts';
 });
 
 add_filter('fewbricks/dev_tools/display', function () {
@@ -49,57 +55,62 @@ add_filter('fewbricks/exporter/display_php_file_written_message', '__return_true
 
 add_action('fewbricks/init', function () {
 
-    $demo_field_group_1 = new FieldGroup('Demo field group 1', '1811252128a');
-    /*$demo_field_group_1->addLocationRuleGroup(
-        (new FieldGroupLocationRuleGroup([
-            new FieldGroupLocationRule('post_type', '==', 'post'),
-        ]))
-    );*/
-    $demo_field_group_1->addLocationRuleGroup(
-        (new FieldGroupLocationRuleGroup([
-            new FieldGroupLocationRule('post_type', '==', 'post'),
-        ])),
-        (new FieldGroupLocationRuleGroup([
-            new FieldGroupLocationRule('post_type', '==', 'page'),
-        ]))
-    );
-    $demo_field_group_1->setDisplayInFewbricksDevTools(true);
-    $demo_field_group_1->setHideOnScreen('all');
+    $text_field = (new Text('Text field 1', 'text_field_1', '1811262140a'))
+        ->setDisplayInFewbricksDevTools(true)
+        ->setInstructions('Enter something here to reveal another text field');
 
-    $text_field = new Text('Text field', 'text_field', '1811262140a');
-    $text_field->setDisplayInFewbricksDevTools(true);
-    $demo_field_group_1->addField($text_field);
+    $text_field2 = (new Text('Text field 2', 'text_field_2', '1811262140b'))
+        ->addConditionalLogicRuleGroup
+        (
+            new ConditionalLogicRuleGroup([
+                new ConditionalLogicRule('1811262140a', '!=', ''),
+            ])
+        )
+        ->setDisplayInFewbricksDevTools(true);
 
-    $text_field2 = new Text('Text field', 'text_field', '1811262140b');
-    $text_field2->addConditionalLogicRuleGroup(
-        new ConditionalLogicRuleGroup([
-            new ConditionalLogicRule('1811262140a', '!=', ''),
+    $link_field = new Link('Link', 'link', '1811281103a');
+
+    $field_group = (new FieldGroup('Demo field group 1', '1811252128a'))
+        ->addLocationRuleGroup
+        (
+            (new FieldGroupLocationRuleGroup([
+                new FieldGroupLocationRule('post_type', '==', 'post'),
+            ])),
+            (new FieldGroupLocationRuleGroup([
+                new FieldGroupLocationRule('post_type', '==', 'page'),
+            ]))
+        )
+        ->setDisplayInFewbricksDevTools(true)
+        ->setHideOnScreen('all')
+        ->setShowOnScreen('permalink')
+        ->addField($text_field)
+        ->addField($text_field2)
+        ->addFields([
+            $link_field,
+            new Email('E-mail', 'e_mail', '1811281100a')
         ])
-    );
-    $text_field2->setDisplayInFewbricksDevTools(true);
-    $demo_field_group_1->addField($text_field2);
+        ->addBrick((new Headline('headline', '1811272140a')))
+        ->register();
 
-    $demo_field_group_1->addBrick(
-        (new Headline('headline', '1811272140a'))
-    );
+    (new FieldGroup('Demo field group 2', '1811252128b'))
+        ->addLocationRuleGroups(
+            [
+                (new FieldGroupLocationRuleGroup(
+                    [
+                        new FieldGroupLocationRule('post_type', '==', 'page'),
+                    ]
+                )),
+                (new FieldGroupLocationRuleGroup(
+                    [
+                        new FieldGroupLocationRule('post_type', '==', 'post'),
+                    ]
+                ))
+            ]
+        )
+        ->register();
 
-    $demo_field_group_1->register();
-
-    $demo_field_group_2 = new FieldGroup('Demo field group 2', '1811252128b');
-    $demo_field_group_2->addLocationRuleGroups(
-        [
-            (new FieldGroupLocationRuleGroup(
-                [
-                    new FieldGroupLocationRule('post_type', '==', 'page'),
-                ]
-            )),
-            (new FieldGroupLocationRuleGroup(
-                [
-                    new FieldGroupLocationRule('post_type', '==', 'post'),
-                ]
-            ))
-        ]
-    );
-    $demo_field_group_2->register();
+    if(isset($_GET['post'])) {
+        //echo get_field('e_mail', $_GET['post']);
+    }
 
 });

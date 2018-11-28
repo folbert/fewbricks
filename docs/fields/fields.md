@@ -7,14 +7,12 @@ permalink: /fields/
 ---
 
 # Fields
-
-All field types that are available in ACF are available in Fewbricks. With one exception; the field type [Clone
-(#section-where-s-the-field-type-clone-).
+All field types that are available in ACF are available in Fewbricks. With one exception; the field type [Clone]
+(#wheres-clone).
 
 ## Create a field instance
 ```php
 <?php
-
 // (label, name, site wide unique key)
 $textField = new Fewbricks\ACF\Fields\Text('A text field', 'text', '1801060035a');
 ```
@@ -121,7 +119,7 @@ public function getType()
 }
 ```
 
-## Where's the field type "Clone"?
+## Where's the field type "Clone"?<a name="wheres-clone"></a>
 Since Fewbricks gives you means to clone fields and field collections using code, I can not see a case where the
 clone field would come in handy. So in order to keep the code as clean as possible and not introduce another way to
 almost do what Fewbricks does (better IMHO), I have decided to keep "clone" out of Fewbricks.

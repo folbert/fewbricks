@@ -8,8 +8,8 @@ namespace FewbricksDemo\Bricks;
  * in your project.
  * @package Fewbricks\Demo
  */
-class Brick extends \Fewbricks\Brick {
-
+class Brick extends \Fewbricks\Brick
+{
 
 
 }

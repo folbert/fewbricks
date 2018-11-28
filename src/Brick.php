@@ -16,11 +16,6 @@ class Brick extends FieldCollection implements BrickInterface
     /**
      * @var array
      */
-    protected $brick_layouts;
-
-    /**
-     * @var array
-     */
     protected $data;
 
     /**
@@ -44,11 +39,6 @@ class Brick extends FieldCollection implements BrickInterface
     protected $name;
 
     /**
-     * @var array
-     */
-    private $get_html_arguments;
-
-    /**
      * @var string
      */
     private $key;
@@ -59,13 +49,12 @@ class Brick extends FieldCollection implements BrickInterface
     private $post_id_to_get_field_from;
 
     /**
-     * Brick constructor.
-     *
      * @param string $name Name to use when fetching data for the brick.
-     * @param string $key This value must be unique system wide. See the readme-file for tips on how to achieve this.
-     *                          Note that it only needs to be set when registering the brick to a field group, layout
-     *     etc. No need to pass it when called from the frontend to print the brick.
-     * @param array $arguments Arbitrary arguments you want to pass to a brick instance to be used within the brick.
+     * @param string $key This value must be unique system wide. See the documentation for motre info on this.
+     * Note that it only needs to be set when registering the brick to a field group, layout etc. There's no need to
+     * pass it when called from the frontend to print the brick.
+     * @param array $arguments Arbitrary arguments you want to pass to a brick instance to be used within your brick
+     * class. This base class does not take any of those arguments into consideration.
      */
     public function __construct($name, $key = '', $arguments = [])
     {
@@ -73,7 +62,6 @@ class Brick extends FieldCollection implements BrickInterface
         $this->key = $key;
         $this->name = $name;
 
-        $this->brick_layouts = [];
         $this->data = [];
         $this->is_layout = false;
         $this->is_option = false;
@@ -85,51 +73,9 @@ class Brick extends FieldCollection implements BrickInterface
     }
 
     /**
-     * Add a single layout to the brick. String with the name of the layout (without .php).
-     * Use the filter fewbricks/bricks/layouts_base_path to set the path to the layout file.
-     *
-     * @param string $brick_layout_file_name
-     */
-    public function addBrickLayout($brick_layout_file_name)
-    {
-
-        // Avoid nesting brick layouts
-        $this->brick_layouts[$brick_layout_file_name] = $brick_layout_file_name;
-
-        return $this;
-
-    }
-
-    /**
-     * Set brick layouts.
-     *
-     * @param string|array $brick_layouts Array or string with the name of the layout(s) (without .php).
-     *                                    Layout files must be placed in [theme]/fewbricks/brick-layouts/.
-     */
-    public function addBrickLayouts($brick_layouts)
-    {
-
-        if (is_string($brick_layouts)) {
-
-            $this->addBrickLayout($brick_layouts);
-
-        } else if (is_array($brick_layouts)) {
-
-            foreach ($brick_layouts AS $brick_layout) {
-
-                $this->addBrickLayout($brick_layout);
-
-            }
-
-        }
-
-        return $this;
-
-    }
-
-    /**
      * Add a field to the brick.
      * @param Field $field
+     * @return $this
      */
     public function addField(Field $field)
     {
@@ -176,37 +122,28 @@ class Brick extends FieldCollection implements BrickInterface
     }
 
     /**
-     * Returns the brick layouts set for the brick. These are the values previously passed to set_brick_layouts and/or
-     * add_brick_layout.
-     *
-     * @return array
-     */
-    public function getBrickLayouts()
-    {
-
-        return $this->brick_layouts;
-
-    }
-
-    /**
-     *
+     * Returns an instance of a brick that belongs to the current brick. This function takes care of passing its own
+     * name and whether it is a layout, sub field or option down to the new instance. You can ovveride if the child
+     * should be a layout, sub field or option by passing any of the arguments to this function.
      *
      * @param string $class_name
      * @param string $brick_name
      * @param bool $is_layout If the child brick is a layout.
      * @param bool $is_sub_field If the child brick is a sub field
      * @param bool $is_option If the child brick is an option. All field swill be fetched using ACFs "option"
-     *                           argument.
+     * argument.
      *
-     * @return object An instance of the class passed as $className
+     * @return object An instance of the class passed as $className with the name of $brick_name prepended with the
+     * name of the current brick.
      */
-    public function getChildBrick($class_name, $brick_name, $is_layout = false, $is_sub_field = false, $is_option = false)
+    public function getChildBrick($class_name, $brick_name, $is_layout = false, $is_sub_field = false,
+                                  $is_option = false)
     {
 
         // If no special case has been forced on the function call...
         if ($is_layout === false && $is_sub_field === false && $is_option === false) {
 
-            // Let the calling object decide
+            // ...let the calling (parent) object decide
             $is_layout = $this->is_layout;
             $is_sub_field = $this->is_sub_field;
             $is_option = $this->is_option;
@@ -233,6 +170,7 @@ class Brick extends FieldCollection implements BrickInterface
 
     /**
      * @param array $data
+     * @return $this
      */
     public function setData($data)
     {
@@ -373,82 +311,6 @@ class Brick extends FieldCollection implements BrickInterface
     }
 
     /**
-     * Get value of html_arg.
-     *
-     * @param string $name
-     * @param mixed $default_value Value to return if the arg has not been set
-     *
-     * @return bool
-     */
-    public function getGetHtmlArg($name, $default_value = false)
-    {
-
-        if (isset($this->get_html_arguments[$name])) {
-
-            $outcome = $this->get_html_arguments[$name];
-
-        } else {
-
-            $outcome = $default_value;
-
-        }
-
-        return $outcome;
-
-    }
-
-    /**
-     * @param array $arguments Any arguments that you need to pass to the brick on runtime.
-     *                            Available as $this->getHtmlArguments
-     * @param mixed $brick_layouts Array or string with the file name(s) (without .php) of any layouts that you want to
-     *                            wrap the brick in. Use the filter fewbricks/bricks/layouts_base_path to change the
-     *                            base path of the brick layout files.
-     *
-     * @return string
-     */
-    public function getHtml($arguments = [], $brick_layouts = false)
-    {
-
-        $this->addBrickLayouts($brick_layouts);
-
-        $this->get_html_arguments = $arguments;
-
-        return $this->getBrickLayoutedHtml($this->getBrickHtml());
-
-    }
-
-    /**
-     * @param $html
-     *
-     * @return string
-     */
-    public function getBrickLayoutedHtml($html)
-    {
-
-        if (false === ($layouts_base_path = Helper::getBrickLayoutsBasePath())) {
-            return $html;
-        }
-
-        if (empty($this->brick_layouts)) {
-            return $html;
-        }
-
-        foreach ($this->brick_layouts AS $brick_layout) {
-
-            ob_start();
-
-            /** @noinspection PhpIncludeInspection */
-            include $layouts_base_path . '/' . $brick_layout . '.php';
-
-            $html = ob_get_clean();
-
-        }
-
-        return $html;
-
-    }
-
-    /**
      * @return bool
      */
     public function getIsLayout()
@@ -460,6 +322,7 @@ class Brick extends FieldCollection implements BrickInterface
 
     /**
      * @param $isLayout
+     * @return $this
      */
     public function setIsLayout($isLayout)
     {
@@ -482,6 +345,7 @@ class Brick extends FieldCollection implements BrickInterface
 
     /**
      * @param $is_option
+     * @return $this
      */
     public function setIsOption($is_option)
     {
@@ -495,7 +359,7 @@ class Brick extends FieldCollection implements BrickInterface
     /**
      * @return bool
      */
-    public function getIsSubfield()
+    public function getIsSubField()
     {
 
         return $this->is_sub_field;
@@ -507,7 +371,7 @@ class Brick extends FieldCollection implements BrickInterface
      *
      * @return $this
      */
-    public function setIsSubfield($is_sub_field)
+    public function setIsSubField($is_sub_field)
     {
 
         $this->is_sub_field = $is_sub_field;
@@ -534,6 +398,7 @@ class Brick extends FieldCollection implements BrickInterface
      * @link http://www.advancedcustomfields.com/resources/get_field/
      *
      * @param $post_id
+     * @return $this
      */
     public function setPostIdToGetFieldFrom($post_id)
     {
@@ -565,6 +430,7 @@ class Brick extends FieldCollection implements BrickInterface
      * @param string $item_name The name of the item.
      * @param mixed $value The value of the item.
      * @param bool $group_name Use this if you want to create groups of data.
+     * @return $this
      */
     public function setDataItem($item_name, $value, $group_name = false)
     {
@@ -584,7 +450,10 @@ class Brick extends FieldCollection implements BrickInterface
     }
 
     /**
-     * This function will be called
+     * This function, which is empty on purpose, will automatically be called when instantiating a brick class. You can
+     * uses this fact by overriding it in your own Brick classes and adding code for adding your own fields or bricks
+     * or whatever you want. By keeping an empty function here, you don't have to implement an empty function
+     * yourself if you, for some reason, want to create a brick that does not have any fields.
      */
     public function setFields()
     {
