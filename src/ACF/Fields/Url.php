@@ -18,6 +18,8 @@ use Fewbricks\ACF\FieldInterface;
 class Url extends Field implements FieldInterface
 {
 
+    const MY_TYPE = 'url';
+
     /**
      * @return mixed The value of the ACF setting "placeholder". Returns the default ACF value "" if none has been
      * set using Fewbricks.
@@ -30,24 +32,15 @@ class Url extends Field implements FieldInterface
     }
 
     /**
-     * @return string The ACF type that ultimately decides what kind of field instances of this class is.
-     */
-    public function getType()
-    {
-
-        return 'url';
-
-    }
-
-    /**
      * ACF setting. Text that appears within the input.
      *
      * @param string $placeholder
+     * @return $this
      */
     public function setPlaceholder($placeholder)
     {
 
-        $this->setSetting('placeholder', $placeholder);
+        return $this->setSetting('placeholder', $placeholder);
 
     }
 

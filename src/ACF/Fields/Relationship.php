@@ -18,6 +18,8 @@ use Fewbricks\ACF\FieldInterface;
 class Relationship extends Field implements FieldInterface
 {
 
+    const MY_TYPE = 'relationship';
+
     /**
      * @return mixed The value of the ACF setting "elements". Returns the default ACF value of an empty array if none
      * has been set using Fewbricks.
@@ -97,24 +99,15 @@ class Relationship extends Field implements FieldInterface
     }
 
     /**
-     * @return string The ACF type that ultimately decides what kind of field instances of this class is.
-     */
-    public function getType()
-    {
-
-        return 'relationship';
-
-    }
-
-    /**
      * ACF setting.
      *
      * @param array $elements Name of elements to display
+     * @return $this
      */
     public function setElements(array $elements)
     {
 
-        $this->setSetting('elements', $elements);
+        return $this->setSetting('elements', $elements);
 
     }
 
@@ -123,11 +116,12 @@ class Relationship extends Field implements FieldInterface
      *
      * @param array $filters Which filters should be available to the administrator. Possible values: "search",
      *                       "post_type", "taxonomy".
+     * @return $this
      */
     public function setFilters(array $filters)
     {
 
-        $this->setSetting('filters', $filters);
+        return $this->setSetting('filters', $filters);
 
     }
 
@@ -135,11 +129,12 @@ class Relationship extends Field implements FieldInterface
      * ACF setting.
      *
      * @param int $max
+     * @return $this
      */
     public function setMax($max)
     {
 
-        $this->setSetting('max', $max);
+        return $this->setSetting('max', $max);
 
     }
 
@@ -147,11 +142,12 @@ class Relationship extends Field implements FieldInterface
      * ACF setting.
      *
      * @param int $min
+     * @return $this
      */
     public function setMin($min)
     {
 
-        $this->setSetting('min', $min);
+        return $this->setSetting('min', $min);
 
     }
 
@@ -159,11 +155,12 @@ class Relationship extends Field implements FieldInterface
      * ACF setting. Set which post types to display in drop down.
      *
      * @param array $postType Array with post type names.
+     * @return $this
      */
     public function setPostType(array $postType)
     {
 
-        $this->setSetting('post_type', $postType);
+        return $this->setSetting('post_type', $postType);
 
     }
 
@@ -171,11 +168,12 @@ class Relationship extends Field implements FieldInterface
      * ACF setting.
      *
      * @param string $returnFormat "object" or "id"
+     * @return $this
      */
     public function setReturnFormat($returnFormat)
     {
 
-        $this->setSetting('return_format', $returnFormat);
+        return $this->setSetting('return_format', $returnFormat);
 
     }
 
@@ -184,11 +182,12 @@ class Relationship extends Field implements FieldInterface
      *
      * @param array $taxonomy        An array where each item is made up of "taxonomy:term". For example
      *                               ["category:uncategorized"]
+     * @return $this
      */
     public function setTaxonomy(array $taxonomy)
     {
 
-        $this->setSetting('taxonomy', $taxonomy);
+        return $this->setSetting('taxonomy', $taxonomy);
 
     }
 

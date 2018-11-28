@@ -47,6 +47,8 @@ class FieldWithLayouts extends Field
 
         $this->layouts->addItem($layout, $layout->getKey());
 
+        return $this;
+
     }
 
     /**
@@ -80,7 +82,6 @@ class FieldWithLayouts extends Field
 
     /**
      * @param int $key
-     *
      * @return mixed
      */
     public function getLayout($key)
@@ -102,21 +103,25 @@ class FieldWithLayouts extends Field
 
     /**
      * @param int $name
+     * @return $this
      */
     public function removeLayout($name)
     {
 
         $this->layouts->removeFieldByName($name);
 
+        return $this;
+
     }
 
     /**
      * @param $buttonLabel
+     * @return $this
      */
     public function setButtonLabel($buttonLabel)
     {
 
-        $this->setSetting('button_label', $buttonLabel);
+        return $this->setSetting('button_label', $buttonLabel);
 
     }
 

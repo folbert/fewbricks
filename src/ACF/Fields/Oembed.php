@@ -18,6 +18,8 @@ use Fewbricks\ACF\FieldInterface;
 class Oembed extends Field implements FieldInterface
 {
 
+    const MY_TYPE = 'oembed';
+
     /**
      * @return mixed The value of the ACF setting "height". Returns the default ACF value "" if none has been
      * set using Fewbricks.
@@ -26,16 +28,6 @@ class Oembed extends Field implements FieldInterface
     {
 
         return $this->getSetting('height', '');
-
-    }
-
-    /**
-     * @return string The ACF type that ultimately decides what kind of field instances of this class is.
-     */
-    public function getType()
-    {
-
-        return 'oembed';
 
     }
 
@@ -54,11 +46,12 @@ class Oembed extends Field implements FieldInterface
      * ACF setting.
      *
      * @param int $height Width in px (without "px")
+     * @return $this
      */
     public function setHeight($height)
     {
 
-        $this->setSetting('height', $height);
+        return $this->setSetting('height', $height);
 
     }
 
@@ -66,11 +59,12 @@ class Oembed extends Field implements FieldInterface
      * ACF setting.
      *
      * @param int $width Width in px (without "px")
+     * @return $this
      */
     public function setWidth($width)
     {
 
-        $this->setSetting('width', $width);
+        return $this->setSetting('width', $width);
 
     }
 

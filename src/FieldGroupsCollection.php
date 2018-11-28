@@ -46,6 +46,8 @@ class FieldGroupsCollection
 
         $fieldGroup->register();
 
+        return $this;
+
     }
 
     /**
@@ -66,6 +68,8 @@ class FieldGroupsCollection
 
         $this->arguments = $arguments;
 
+        return $this;
+
     }
 
     /**
@@ -76,6 +80,8 @@ class FieldGroupsCollection
     {
 
         $this->arguments[$name] = $value;
+
+        return $this;
 
     }
 

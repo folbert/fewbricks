@@ -18,14 +18,6 @@ use Fewbricks\ACF\FieldInterface;
 class ColorPicker extends Field implements FieldInterface
 {
 
-    /**
-     * @return string The ACF type that ultimately decides what kind of field instances of this class is.
-     */
-    public function getType()
-    {
-
-        return 'color_picker';
-
-    }
+    const MY_TYPE = 'color_picker';
 
 }

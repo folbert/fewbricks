@@ -18,6 +18,8 @@ use Fewbricks\ACF\FieldInterface;
 class Password extends Field implements FieldInterface
 {
 
+    const MY_TYPE = 'password';
+
     /**
      * @return mixed The value of the ACF setting "append". Returns the default ACF value "" if none has been
      * set using Fewbricks.
@@ -52,24 +54,15 @@ class Password extends Field implements FieldInterface
     }
 
     /**
-     * @return string The ACF type that ultimately decides what kind of field instances of this class is.
-     */
-    public function getType()
-    {
-
-        return 'password';
-
-    }
-
-    /**
      * ACF setting. Set text to appear after the input.
      *
      * @param string $append Text to appear after the input.
+     * @return $this
      */
     public function setAppend($append)
     {
 
-        $this->setSetting('append', $append);
+        return $this->setSetting('append', $append);
 
     }
 
@@ -77,11 +70,12 @@ class Password extends Field implements FieldInterface
      * ACF setting. Set text to appear within the input.
      *
      * @param string $placeholder Text to appear within the input.
+     * @return $this
      */
     public function setPlaceholder($placeholder)
     {
 
-        $this->setSetting('placeholder', $placeholder);
+        return $this->setSetting('placeholder', $placeholder);
 
     }
 
@@ -89,11 +83,12 @@ class Password extends Field implements FieldInterface
      * ACF setting. Set text to appear before the input.
      *
      * @param string $prepend Text to appear before the input.
+     * @return $this
      */
     public function setPrepend($prepend)
     {
 
-        $this->setSetting('prepend', $prepend);
+        return $this->setSetting('prepend', $prepend);
 
     }
 

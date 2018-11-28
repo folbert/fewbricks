@@ -26,11 +26,12 @@ class DateTimeField extends Field
      * Use formats from http://php.net/manual/en/function.date.php
      *
      * @param string $displayFormat
+     * @return $this
      */
     public function setDisplayFormat($displayFormat)
     {
 
-        $this->setSetting('display_format', $displayFormat);
+        return $this->setSetting('display_format', $displayFormat);
 
     }
 
@@ -38,11 +39,12 @@ class DateTimeField extends Field
      * ACF setting. Set the weekday that the week should start on.
      *
      * @param int $firstDay Integer representing a day. 0 = Sunday, 1 = Monday etc.
+     * @return $this
      */
     public function setFirstDay($firstDay)
     {
 
-        $this->setSetting('first_day', $firstDay);
+        return $this->setSetting('first_day', $firstDay);
 
     }
 
@@ -51,11 +53,12 @@ class DateTimeField extends Field
      * Use formats from http://php.net/manual/en/function.date.php
      *
      * @param string $returnFormat
+     * @return $this
      */
     public function setReturnFormat($returnFormat)
     {
 
-        $this->setSetting('return_format', $returnFormat);
+        return $this->setSetting('return_format', $returnFormat);
 
     }
 

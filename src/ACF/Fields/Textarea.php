@@ -18,6 +18,8 @@ use Fewbricks\ACF\FieldInterface;
 class Textarea extends Field implements FieldInterface
 {
 
+    const MY_TYPE = 'textarea';
+
     /**
      * @return mixed The value of the ACF setting "maxlength". Returns the default ACF value "" if none has been
      * set using Fewbricks.
@@ -63,24 +65,15 @@ class Textarea extends Field implements FieldInterface
     }
 
     /**
-     * @return string The ACF type that ultimately decides what kind of field instances of this class is.
-     */
-    public function getType()
-    {
-
-        return 'textarea';
-
-    }
-
-    /**
      * ACF setting.
      *
      * @param int $maxlength [sic]
+     * @return $this
      */
     public function setMaxlength($maxlength)
     {
 
-        $this->setSetting('maxlength', $maxlength);
+        return $this->setSetting('maxlength', $maxlength);
 
     }
 
@@ -88,11 +81,12 @@ class Textarea extends Field implements FieldInterface
      * ACF setting. Controls how new lines are rendered.
      *
      * @param string $newLines "wpautop", "br" or ""
+     * @return $this
      */
     public function setNewLines($newLines)
     {
 
-        $this->setSetting('new_lines', $newLines);
+        return $this->setSetting('new_lines', $newLines);
 
     }
 
@@ -100,11 +94,12 @@ class Textarea extends Field implements FieldInterface
      * ACF setting.
      *
      * @param string $placeholder
+     * @return $this
      */
     public function setPlaceholder($placeholder)
     {
 
-        $this->setSetting('placeholder', $placeholder);
+        return $this->setSetting('placeholder', $placeholder);
 
     }
 
@@ -112,11 +107,12 @@ class Textarea extends Field implements FieldInterface
      * ACF setting.
      *
      * @param int $rows
+     * @return $this
      */
     public function setRows($rows)
     {
 
-        $this->setSetting('rows', $rows);
+        return $this->setSetting('rows', $rows);
 
     }
 

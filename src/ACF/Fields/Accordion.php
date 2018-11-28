@@ -16,6 +16,8 @@ use Fewbricks\ACF\FieldInterface;
 class Accordion extends Field implements FieldInterface
 {
 
+    const MY_TYPE = 'accordion';
+
     /**
      * @return mixed The value of the ACF setting "endpoint". Returns the default ACF value "false" if none has been
      * set using Fewbricks.
@@ -50,24 +52,15 @@ class Accordion extends Field implements FieldInterface
     }
 
     /**
-     * @return string The ACF type that ultimately decides what kind of field instances of this class is.
-     */
-    public function getType()
-    {
-
-        return 'accordion';
-
-    }
-
-    /**
      * ACF setting. Set if this field should be used as an end-point and start a new group of tabs
      *
      * @param boolean $endPoint
+     * @return $this
      */
     public function setEndpoint($endPoint)
     {
 
-        $this->setSetting('endpoint', $endPoint);
+        return $this->setSetting('endpoint', $endPoint);
 
     }
 
@@ -75,11 +68,12 @@ class Accordion extends Field implements FieldInterface
      * ACF setting. Pass true to allow this accordion to open without closing others.
      *
      * @param boolean $multiExpand
+     * @return $this
      */
     public function setMultiExpand($multiExpand)
     {
 
-        $this->setSetting('multi_expand', $multiExpand);
+        return $this->setSetting('multi_expand', $multiExpand);
 
     }
 
@@ -87,11 +81,12 @@ class Accordion extends Field implements FieldInterface
      * ACF setting. Pass true to display this accordion as open on page load.
      *
      * @param boolean $open
+     * @return $this
      */
     public function setOpen($open)
     {
 
-        $this->setSetting('open', $open);
+        return $this->setSetting('open', $open);
 
     }
 

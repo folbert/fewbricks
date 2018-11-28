@@ -72,12 +72,15 @@ class FieldCollection extends Collection implements FieldCollectionInterface
 
     /**
      * @param Brick $brick
+     * @return $this
      */
     public function addBrick(Brick $brick)
     {
 
         $this->prepareBrickForAdd($brick);
         $this->addFields($brick->getFields());
+
+        return $this;
 
     }
 
@@ -94,6 +97,7 @@ class FieldCollection extends Collection implements FieldCollectionInterface
 
     /**
      * @param FieldCollection|array $fields
+     * @return $this
      */
     public function addFields($fields)
     {
@@ -111,6 +115,8 @@ class FieldCollection extends Collection implements FieldCollectionInterface
             $this->addFieldCollection($fields);
 
         }
+
+        return $this;
 
     }
 
@@ -159,16 +165,20 @@ class FieldCollection extends Collection implements FieldCollectionInterface
 
     /**
      * @param Field $field
+     * @return $this
      */
     public function addField(Field $field)
     {
 
         parent::addItem($field, $field->getKey());
 
+        return $this;
+
     }
 
     /**
      * @param FieldCollection $fieldCollection
+     * @return $this
      */
     public function addFieldCollection(FieldCollection $fieldCollection)
     {
@@ -177,11 +187,14 @@ class FieldCollection extends Collection implements FieldCollectionInterface
 
         $this->addFields($fieldCollection->getFields());
 
+        return $this;
+
     }
 
     /**
      * @param Brick $brick
      * @param string $fieldNameToAddAfter
+     * @return $this
      */
     public function addBrickAfterByName(Brick $brick, $fieldNameToAddAfter)
     {
@@ -190,11 +203,14 @@ class FieldCollection extends Collection implements FieldCollectionInterface
 
         $this->addFieldsAfterByName($brick->getFields(), $fieldNameToAddAfter);
 
+        return $this;
+
     }
 
     /**
      * @param array $fields
      * @param string $fieldNameToAddAfter
+     * @return $this
      */
     public function addFieldsAfterByName(array $fields, string $fieldNameToAddAfter)
     {
@@ -208,11 +224,14 @@ class FieldCollection extends Collection implements FieldCollectionInterface
 
         }
 
+        return $this;
+
     }
 
     /**
      * @param Field $field
      * @param string $fieldNameToAddAfter
+     * @return $this
      */
     public function addFieldAfterByName(Field $field, string $fieldNameToAddAfter)
     {
@@ -225,6 +244,8 @@ class FieldCollection extends Collection implements FieldCollectionInterface
             parent::addItemAfter($field, $fieldToAddAfter->getKey(), $field->getKey());
 
         }
+
+        return $this;
 
     }
 
@@ -260,6 +281,7 @@ class FieldCollection extends Collection implements FieldCollectionInterface
     /**
      * @param Brick $brick
      * @param string $fieldNameToAddBefore
+     * @return $this
      */
     public function addBrickBeforeByName(Brick $brick, string $fieldNameToAddBefore)
     {
@@ -268,11 +290,14 @@ class FieldCollection extends Collection implements FieldCollectionInterface
 
         $this->addFieldsBeforeByName($brick->getFields(), $fieldNameToAddBefore);
 
+        return $this;
+
     }
 
     /**
      * @param array $fields
      * @param string $fieldNameToAddBefore
+     * @return $this
      */
     public function addFieldsBeforeByName(array $fields, string $fieldNameToAddBefore)
     {
@@ -283,11 +308,14 @@ class FieldCollection extends Collection implements FieldCollectionInterface
 
         }
 
+        return $this;
+
     }
 
     /**
      * @param Field $field
      * @param string $fieldNameToAddBefore
+     * @return $this
      */
     public function addFieldBeforeByName(Field $field, $fieldNameToAddBefore)
     {
@@ -301,10 +329,13 @@ class FieldCollection extends Collection implements FieldCollectionInterface
 
         }
 
+        return $this;
+
     }
 
     /**
      * @param Brick $brick
+     * @return $this
      */
     public function addBrickToBeginning(Brick $brick)
     {
@@ -314,10 +345,13 @@ class FieldCollection extends Collection implements FieldCollectionInterface
         // Since we wil be using addFields, lets reverse fields order to make sure they are added in the correct order
         $this->addFieldsToBeginning($brick->getFields());
 
+        return $this;
+
     }
 
     /**
      * @param FieldCollection|array $fields
+     * @return $this
      */
     public function addFieldsToBeginning($fields)
     {
@@ -341,10 +375,13 @@ class FieldCollection extends Collection implements FieldCollectionInterface
 
         }
 
+        return $this;
+
     }
 
     /**
      * @param FieldCollection $fieldCollection
+     * @return $this
      */
     public function addFieldCollectionToBeginning(FieldCollection $fieldCollection)
     {
@@ -352,6 +389,8 @@ class FieldCollection extends Collection implements FieldCollectionInterface
         $fieldCollection->prepareForAcfArray();
 
         $this->addFieldsToBeginning($fieldCollection->getItems());
+
+        return $this;
 
     }
 
@@ -362,6 +401,7 @@ class FieldCollection extends Collection implements FieldCollectionInterface
      * @param string $fieldKey The original key (the one set when a field was created) of a field in this collection...
      * @param string $settingsName Should correspond to the name of an ACF setting.
      * @param mixed $settingsValue A valid value for the setting.
+     * @return $this
      */
     public function addFieldSetting($fieldKey, $settingsName, $settingsValue)
     {
@@ -374,15 +414,20 @@ class FieldCollection extends Collection implements FieldCollectionInterface
 
         $this->fields_settings[$fieldKey][$settingsName] = $settingsValue;
 
+        return $this;
+
     }
 
     /**
      * @param Field $field
+     * @return $this
      */
     public function addFieldToBeginning(Field $field)
     {
 
         $this->addItemToBeginning($field, $field->getKey());
+
+        return $this;
 
     }
 
@@ -403,6 +448,7 @@ class FieldCollection extends Collection implements FieldCollectionInterface
      * Removes all fields that came from the brick with the passed key.
      *
      * @param string $key
+     * @return $this
      */
     public function removeBrickByKey(string $key)
     {
@@ -416,12 +462,15 @@ class FieldCollection extends Collection implements FieldCollectionInterface
 
         }
 
+        return $this;
+
     }
 
     /**
      * Removes all fields that came from the brick with the passed name.
      *
      * @param string $name
+     * @return $this
      */
     public function removeBrickByName($name)
     {
@@ -435,10 +484,13 @@ class FieldCollection extends Collection implements FieldCollectionInterface
 
         }
 
+        return $this;
+
     }
 
     /**
      * @param array $keys
+     * @return $this
      */
     public function removeFieldsByKey(array $keys)
     {
@@ -449,10 +501,13 @@ class FieldCollection extends Collection implements FieldCollectionInterface
 
         }
 
+        return $this;
+
     }
 
     /**
      * @param string $key
+     * @return $this
      */
     public function removeFieldByKey($key)
     {
@@ -463,6 +518,8 @@ class FieldCollection extends Collection implements FieldCollectionInterface
 
         $this->removeItem($key);
 
+        return $this;
+
     }
 
     /**
@@ -470,6 +527,7 @@ class FieldCollection extends Collection implements FieldCollectionInterface
      * of the field does not take place until the collection is finalized.
      *
      * @param array $fieldNames Array of names of fields to remove.
+     * @return $this
      */
     public function removeFieldsByName(array $fieldNames)
     {
@@ -480,6 +538,8 @@ class FieldCollection extends Collection implements FieldCollectionInterface
 
         }
 
+        return $this;
+
     }
 
     /**
@@ -487,6 +547,7 @@ class FieldCollection extends Collection implements FieldCollectionInterface
      * finalized.
      *
      * @param string $fieldName The name of a field. Not the key, not the label, the name.
+     * @return $this
      */
     public function removeFieldByName($fieldName)
     {
@@ -502,10 +563,13 @@ class FieldCollection extends Collection implements FieldCollectionInterface
 
         }
 
+        return $this;
+
     }
 
     /**
      * @param array $arguments
+     * @return $this
      */
     public function setArguments(array $arguments)
     {
@@ -516,16 +580,21 @@ class FieldCollection extends Collection implements FieldCollectionInterface
 
         }
 
+        return $this;
+
     }
 
     /**
      * @param string $name
      * @param mixed $value
+     * @return $this
      */
     public function setArgument($name, $value)
     {
 
         $this->arguments[$name] = $value;
+
+        return $this;
 
     }
 
@@ -533,11 +602,14 @@ class FieldCollection extends Collection implements FieldCollectionInterface
      * Set a string that will be prefixed to the labels of the fields that are added to this field group.
      *
      * @param $prefix
+     * @return $this
      */
     public function setFieldLabelsprefix($prefix)
     {
 
         $this->field_labels_prefix = $prefix;
+
+        return $this;
 
     }
 
@@ -545,11 +617,14 @@ class FieldCollection extends Collection implements FieldCollectionInterface
      * Set a string that will be prefixed to the names of the fields that are added to this field group.
      *
      * @param string $prefix
+     * @return $this
      */
     public function setFieldNamesprefix($prefix)
     {
 
         $this->field_names_prefix = $prefix;
+
+        return $this;
 
     }
 
@@ -590,11 +665,14 @@ class FieldCollection extends Collection implements FieldCollectionInterface
 
     /**
      * @param string $base_key
+     * @return $this
      */
     public function setBaseKey($base_key)
     {
 
         $this->base_key = $base_key;
+
+        return $this;
 
     }
 

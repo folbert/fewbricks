@@ -18,6 +18,8 @@ use Fewbricks\ACF\FieldInterface;
 class Tab extends Field implements FieldInterface
 {
 
+    const MY_TYPE = 'tab';
+
     /**
      * @return mixed The value of the ACF setting "". Returns the default ACF value "" if none has been
      * set using Fewbricks.
@@ -41,24 +43,15 @@ class Tab extends Field implements FieldInterface
     }
 
     /**
-     * @return string The ACF type that ultimately decides what kind of field instances of this class is.
-     */
-    public function getType()
-    {
-
-        return 'tab';
-
-    }
-
-    /**
      * ACF setting. Set if this field should be used as an end-point and start a new group of tabs
      *
      * @param boolean $endPoint
+     * @return $this
      */
     public function setEndpoint($endPoint)
     {
 
-        $this->setSetting('endpoint', $endPoint);
+        return $this->setSetting('endpoint', $endPoint);
 
     }
 
@@ -66,11 +59,12 @@ class Tab extends Field implements FieldInterface
      * ACF setting.
      *
      * @param string $placement "top" or "left"
+     * @return $this
      */
     public function setPlacement($placement)
     {
 
-        $this->setSetting('placement', $placement);
+        return $this->setSetting('placement', $placement);
 
     }
 

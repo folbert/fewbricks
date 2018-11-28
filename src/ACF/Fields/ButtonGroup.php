@@ -18,6 +18,8 @@ use Fewbricks\ACF\FieldWithChoices;
 class ButtonGroup extends FieldWithChoices implements FieldInterface
 {
 
+    const MY_TYPE = 'button_group';
+
     /**
      * @return mixed The value of the ACF setting "layout". Returns the default ACF value "horizontal" if none has been
      * set using Fewbricks.
@@ -30,24 +32,15 @@ class ButtonGroup extends FieldWithChoices implements FieldInterface
     }
 
     /**
-     * @return string The ACF type that ultimately decides what kind of field instances of this class is.
-     */
-    public function getType()
-    {
-
-        return 'button_group';
-
-    }
-
-    /**
      * ACF setting.
      *
      * @param string $layout "horizontal" or "vertical"
+     * @return $this
      */
     public function setLayout($layout)
     {
 
-        $this->setSetting('layout', $layout);
+        return $this->setSetting('layout', $layout);
 
     }
 

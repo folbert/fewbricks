@@ -18,6 +18,8 @@ use Fewbricks\ACF\FieldInterface;
 class PageLink extends Field implements FieldInterface
 {
 
+    const MY_TYPE = 'page_link';
+
     /**
      * @return mixed The value of the ACF setting "allow_archives". Returns the default ACF value true if none has been
      * set using Fewbricks.
@@ -63,24 +65,15 @@ class PageLink extends Field implements FieldInterface
     }
 
     /**
-     * @return string The ACF type that ultimately decides what kind of field instances of this class is.
-     */
-    public function getType()
-    {
-
-        return 'page_link';
-
-    }
-
-    /**
      * ACF setting.
      *
      * @param boolean $allowArchives
+     * @return $this
      */
     public function setAllowArchives($allowArchives)
     {
 
-        $this->setSetting('allow_archives', $allowArchives);
+        return $this->setSetting('allow_archives', $allowArchives);
 
     }
 
@@ -88,11 +81,12 @@ class PageLink extends Field implements FieldInterface
      * ACF setting.
      *
      * @param boolean $multiple
+     * @return $this
      */
     public function setMultiple($multiple)
     {
 
-        $this->setSetting('multiple', $multiple);
+        return $this->setSetting('multiple', $multiple);
 
     }
 
@@ -100,11 +94,12 @@ class PageLink extends Field implements FieldInterface
      * ACF setting.
      *
      * @param array $postType Array with post type names
+     * @return $this
      */
     public function setPostType(array $postType)
     {
 
-        $this->setSetting('post_type', $postType);
+        return $this->setSetting('post_type', $postType);
 
     }
 

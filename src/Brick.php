@@ -96,6 +96,8 @@ class Brick extends FieldCollection implements BrickInterface
         // Avoid nesting brick layouts
         $this->brick_layouts[$brick_layout_file_name] = $brick_layout_file_name;
 
+        return $this;
+
     }
 
     /**
@@ -121,6 +123,8 @@ class Brick extends FieldCollection implements BrickInterface
 
         }
 
+        return $this;
+
     }
 
     /**
@@ -136,6 +140,8 @@ class Brick extends FieldCollection implements BrickInterface
         $field->setParentBrickName($this->getName());
 
         parent::addField($field);
+
+        return $this;
 
     }
 
@@ -232,6 +238,8 @@ class Brick extends FieldCollection implements BrickInterface
     {
 
         $this->data = $data;
+
+        return $this;
 
     }
 
@@ -458,6 +466,8 @@ class Brick extends FieldCollection implements BrickInterface
 
         $this->is_layout = $isLayout;
 
+        return $this;
+
     }
 
     /**
@@ -477,6 +487,8 @@ class Brick extends FieldCollection implements BrickInterface
     {
 
         $this->is_option = $is_option;
+
+        return $this;
 
     }
 
@@ -499,6 +511,8 @@ class Brick extends FieldCollection implements BrickInterface
     {
 
         $this->is_sub_field = $is_sub_field;
+
+        return $this;
 
     }
 
@@ -525,6 +539,8 @@ class Brick extends FieldCollection implements BrickInterface
     {
 
         $this->post_id_to_get_field_from = $post_id;
+
+        return $this;
 
     }
 
@@ -562,6 +578,8 @@ class Brick extends FieldCollection implements BrickInterface
             $this->data[$group_name][$item_name] = $value;
 
         }
+
+        return $this;
 
     }
 

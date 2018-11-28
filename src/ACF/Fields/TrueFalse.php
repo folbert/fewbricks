@@ -18,6 +18,8 @@ use Fewbricks\ACF\FieldInterface;
 class TrueFalse extends Field implements FieldInterface
 {
 
+    const MY_TYPE = 'true_false';
+
     /**
      * @return mixed The value of the ACF setting "default_value". Returns the default ACF value false" if none has been
      * set using Fewbricks.
@@ -41,16 +43,6 @@ class TrueFalse extends Field implements FieldInterface
     }
 
     /**
-     * @return string The ACF type that ultimately decides what kind of field instances of this class is.
-     */
-    public function getType()
-    {
-
-        return 'true_false';
-
-    }
-
-    /**
      * @return mixed The value of the ACF setting "ui". Returns the default ACF value false if none has been
      * set using Fewbricks.
      */
@@ -63,21 +55,23 @@ class TrueFalse extends Field implements FieldInterface
 
     /**
      * @param string $message
+     * @return $this
      */
     public function setMessage($message)
     {
 
-        $this->setSetting('message', $message);
+        return $this->setSetting('message', $message);
 
     }
 
     /**
      * @param $ui
+     * @return $this
      */
     public function setUi($ui)
     {
 
-        $this->setSetting('ui', $ui);
+        return $this->setSetting('ui', $ui);
 
     }
 

@@ -11,17 +11,17 @@ class Rule
 {
 
     /**
-     * @var
+     * @var string
      */
     private $param;
 
     /**
-     * @var
+     * @var string
      */
     private $operator;
 
     /**
-     * @var
+     * @var string
      */
     private $value;
 
@@ -35,14 +35,15 @@ class Rule
     public function __construct($param, $operator, $value = null)
     {
 
-        $this->param    = $param;
+        $this->param = $param;
         $this->operator = $operator;
-        $this->value    = $value;
+        $this->value = $value;
 
     }
 
     /**
      * @return mixed
+     * @return $this
      */
     public function getOperator()
     {
@@ -53,11 +54,14 @@ class Rule
 
     /**
      * @param $operator
+     * @return $this
      */
-    public function setOperator($operator)
+    public function setOperator(string $operator)
     {
 
         $this->operator = $operator;
+
+        return $this;
 
     }
 
@@ -73,11 +77,14 @@ class Rule
 
     /**
      * @param $param
+     * @return $this
      */
     public function setParam($param)
     {
 
         $this->param = $param;
+
+        return $this;
 
     }
 
@@ -93,11 +100,14 @@ class Rule
 
     /**
      * @param $value
+     * @return $this
      */
     public function setValue($value)
     {
 
         $this->value = $value;
+
+        return $this;
 
     }
 

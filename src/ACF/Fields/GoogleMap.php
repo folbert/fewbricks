@@ -18,6 +18,8 @@ use Fewbricks\ACF\FieldInterface;
 class GoogleMap extends Field implements FieldInterface
 {
 
+    const MY_TYPE = 'google_map';
+
     /**
      * @return mixed The value of the ACF setting "center_lat". Returns the default ACF value "-37.81411" if none has
      * been set using Fewbricks.
@@ -52,16 +54,6 @@ class GoogleMap extends Field implements FieldInterface
     }
 
     /**
-     * @return string The ACF type that ultimately decides what kind of field instances of this class is.
-     */
-    public function getType()
-    {
-
-        return 'google_map';
-
-    }
-
-    /**
      * @return mixed The value of the ACF setting "zoom". Returns the default ACF value "14" if none has
      * been set using Fewbricks.
      */
@@ -76,11 +68,12 @@ class GoogleMap extends Field implements FieldInterface
      * ACF setting. Where to center the initial map on the latitude axis.
      *
      * @param int $lat
+     * @return $this
      */
     public function setCenterLat($lat)
     {
 
-        $this->setSetting('center_lat', $lat);
+        return $this->setSetting('center_lat', $lat);
 
     }
 
@@ -88,11 +81,12 @@ class GoogleMap extends Field implements FieldInterface
      * ACF setting. Where to center the initial map on the latitude axis.
      *
      * @param int $lng
+     * @return $this
      */
     public function setCenterLng($lng)
     {
 
-        $this->setSetting('center_lng', $lng);
+        return $this->setSetting('center_lng', $lng);
 
     }
 
@@ -100,11 +94,12 @@ class GoogleMap extends Field implements FieldInterface
      * ACF setting. The initial zoom level.
      *
      * @param int $zoom
+     * @return $this
      */
     public function setZoom($zoom)
     {
 
-        $this->setSetting('zoom', $zoom);
+        return $this->setSetting('zoom', $zoom);
 
     }
 
@@ -112,11 +107,12 @@ class GoogleMap extends Field implements FieldInterface
      * ACF setting. Customize teh map height.
      *
      * @param int $height Height in px (without "px")
+     * @return $this
      */
     public function setHeight($height)
     {
 
-        $this->setSetting('height', $height);
+        return $this->setSetting('height', $height);
 
     }
 

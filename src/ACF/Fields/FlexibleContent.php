@@ -14,6 +14,8 @@ use Fewbricks\ACF\FieldWithLayouts;
 class FlexibleContent extends FieldWithLayouts implements FieldInterface
 {
 
+    const MY_TYPE = 'flexible_content';
+
     /**
      * @return mixed The value of the ACF setting "max". Returns the default ACF value "" if none has been
      * set using Fewbricks.
@@ -41,21 +43,12 @@ class FlexibleContent extends FieldWithLayouts implements FieldInterface
      *
      * @param int|string $max An empty string to disable this setting which is only needed if you have previously set it
      *                        to an int and wants to unset it.
+     * @return $this
      */
     public function setMax($max)
     {
 
-        $this->setSetting('max', $max);
-
-    }
-
-    /**
-     * @return string The ACF type that ultimately decides what kind of field instances of this class is.
-     */
-    public function getType()
-    {
-
-        return 'flexible_content';
+        return $this->setSetting('max', $max);
 
     }
 
@@ -64,11 +57,12 @@ class FlexibleContent extends FieldWithLayouts implements FieldInterface
      *
      * @param int|string $min An empty string to disable this setting which is only needed if you have previously set it
      *                        to an int and wants to unset it.
+     * @return $this
      */
     public function setMin($min)
     {
 
-        $this->setSetting('min', $min);
+        return $this->setSetting('min', $min);
 
     }
 

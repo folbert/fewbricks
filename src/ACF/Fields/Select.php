@@ -18,10 +18,7 @@ use Fewbricks\ACF\FieldWithChoices;
 class Select extends FieldWithChoices implements FieldInterface
 {
 
-    /**
-     * @var string
-     */
-    protected static $myType = 'select';
+    const MY_TYPE = 'select';
 
     /**
      * @return mixed The value of the ACF setting "ajax". Returns the default ACF value false if none has been
@@ -59,24 +56,24 @@ class Select extends FieldWithChoices implements FieldInterface
     /**
      * ACF setting. If AJAX should be used to lazy load the choices.
      *
-     * @param boolean $ajax
+     * @param bool $ajax
+     * @return $this
      */
     public function setAjax($ajax)
     {
 
-        $this->setSetting('ajax', $ajax);
+        return $this->setSetting('ajax', $ajax);
 
     }
 
     /**
-     * @param $multiple
-     *
-     * @return mixed
+     * @param bool $multiple
+     * @return $this
      */
     public function setMultiple($multiple)
     {
 
-        $this->getSetting('multiple', $multiple);
+        return $this->getSetting('multiple', $multiple);
 
     }
 
@@ -84,11 +81,12 @@ class Select extends FieldWithChoices implements FieldInterface
      * ACF settings. Whether or not to use the stylised UI:
      *
      * @param boolean $ui
+     * @return $this
      */
     public function setUi($ui)
     {
 
-        $this->setSetting('ui', $ui);
+        return $this->setSetting('ui', $ui);
 
     }
 

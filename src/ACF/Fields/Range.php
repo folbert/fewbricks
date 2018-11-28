@@ -18,6 +18,8 @@ use Fewbricks\ACF\FieldInterface;
 class Range extends Field implements FieldInterface
 {
 
+    const MY_TYPE = 'range';
+
     /**
      * @return mixed The value of the ACF setting "append". Returns the default ACF value "" if none has been
      * set using Fewbricks.
@@ -74,24 +76,15 @@ class Range extends Field implements FieldInterface
     }
 
     /**
-     * @return string The ACF type that ultimately decides what kind of field instances of this class is.
-     */
-    public function getType()
-    {
-
-        return 'range';
-
-    }
-
-    /**
      * ACF setting.
      *
      * @param string $append
+     * @return $this
      */
     public function setAppend($append)
     {
 
-        $this->setSetting('append', $append);
+        return $this->setSetting('append', $append);
 
     }
 
@@ -99,11 +92,12 @@ class Range extends Field implements FieldInterface
      * ACF setting.
      *
      * @param int $max
+     * @return $this
      */
     public function setMax($max)
     {
 
-        $this->setSetting('max', $max);
+        return $this->setSetting('max', $max);
 
     }
 
@@ -111,11 +105,12 @@ class Range extends Field implements FieldInterface
      * ACF setting.
      *
      * @param int $min
+     * @return $this
      */
     public function setMin($min)
     {
 
-        $this->setSetting('min', $min);
+        return $this->setSetting('min', $min);
 
     }
 
@@ -123,11 +118,12 @@ class Range extends Field implements FieldInterface
      * ACF setting.
      *
      * @param string $prepend
+     * @return $this
      */
     public function setPrepend($prepend)
     {
 
-        $this->setSetting('prepend', $prepend);
+        return $this->setSetting('prepend', $prepend);
 
     }
 
@@ -135,11 +131,12 @@ class Range extends Field implements FieldInterface
      * ACF setting.
      *
      * @param int $step
+     * @return $this
      */
     public function setStep($step)
     {
 
-        $this->setSetting('step', $step);
+        return $this->setSetting('step', $step);
 
     }
 

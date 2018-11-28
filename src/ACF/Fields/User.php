@@ -18,6 +18,8 @@ use Fewbricks\ACF\FieldInterface;
 class User extends Field implements FieldInterface
 {
 
+    const MY_TYPE = 'user';
+
     /**
      * @return mixed The value of the ACF setting "allow_null". Returns the default ACF value false if none has been
      * set using Fewbricks.
@@ -52,36 +54,28 @@ class User extends Field implements FieldInterface
     }
 
     /**
-     * @return string The ACF type that ultimately decides what kind of field instances of this class is.
-     */
-    public function getType()
-    {
-
-        return 'user';
-
-    }
-
-    /**
      * ACF setting.
      *
      * @param boolean $allowNull
+     * @return $this
      */
     public function setAllowNull($allowNull)
     {
 
-        $this->setSetting('allow_null', $allowNull);
+        return $this->setSetting('allow_null', $allowNull);
 
     }
 
     /**
      * ACF setting.
      *
-     * @param boolean $multiple
+     * @param boolean
+     * @return $this
      */
     public function setMultiple($multiple)
     {
 
-        $this->setSetting('multiple', $multiple);
+        return $this->setSetting('multiple', $multiple);
 
     }
 
@@ -91,11 +85,12 @@ class User extends Field implements FieldInterface
      * @param array $role      Array with names of the user roles that the editor should be able to choose from.
      *                         For example: ['editor', 'author']. Send an empty array (or don't call the function at
      *                         all) to be able to choose from al roles.
+     * @return $this
      */
     public function setRole(array $role)
     {
 
-        $this->setSetting('role', $role);
+        return $this->setSetting('role', $role);
 
     }
 

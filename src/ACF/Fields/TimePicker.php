@@ -18,6 +18,8 @@ use Fewbricks\ACF\FieldInterface;
 class TimePicker extends DateTimeField implements FieldInterface
 {
 
+    const MY_TYPE = 'time_picker';
+
     /**
      * @return mixed The value of the ACF setting "display_format". Returns the default ACF value "g:i a" if none has
      * been
@@ -39,16 +41,6 @@ class TimePicker extends DateTimeField implements FieldInterface
     {
 
         return $this->getSetting('return_format', 'g:i a');
-
-    }
-
-    /**
-     * @return string The ACF type that ultimately decides what kind of field instances of this class is.
-     */
-    public function getType()
-    {
-
-        return 'time_picker';
 
     }
 

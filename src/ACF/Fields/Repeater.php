@@ -15,6 +15,8 @@ use Fewbricks\Helper;
 class Repeater extends FieldWithFields implements FieldInterface
 {
 
+    const MY_TYPE = 'repeater';
+
     /**
      * @param $acfArray
      *
@@ -112,22 +114,13 @@ class Repeater extends FieldWithFields implements FieldInterface
     }
 
     /**
-     * @return string The ACF type that ultimately decides what kind of field instances of this class is.
-     */
-    public function getType()
-    {
-
-        return 'repeater';
-
-    }
-
-    /**
      * @param string $buttonLabel
+     * @return $this
      */
     public function setButtonLabel($buttonLabel)
     {
 
-        $this->setSetting('button_label', $buttonLabel);
+        return $this->setSetting('button_label', $buttonLabel);
 
     }
 
@@ -135,21 +128,23 @@ class Repeater extends FieldWithFields implements FieldInterface
      * Set a sub field to show when row is collapsed
      *
      * @param string $fieldKey
+     * @return $this
      */
     public function setCollapsed($fieldKey)
     {
 
-        $this->setSetting('collapsed', $fieldKey);
+        return $this->setSetting('collapsed', $fieldKey);
 
     }
 
     /**
      * @param string $layout table, block or row
+     * @return $this
      */
     public function setLayout($layout)
     {
 
-        $this->setSetting('layout', $layout);
+        return $this->setSetting('layout', $layout);
 
     }
 
@@ -157,11 +152,12 @@ class Repeater extends FieldWithFields implements FieldInterface
      * Set maximum nr of rows
      *
      * @param int $max
+     * @return $this
      */
     public function setMax($max)
     {
 
-        $this->setSetting('max', $max);
+        return $this->setSetting('max', $max);
 
     }
 
@@ -169,11 +165,12 @@ class Repeater extends FieldWithFields implements FieldInterface
      * Set minimum nr of rows
      *
      * @param int $min
+     * @return $this
      */
     public function setMin($min)
     {
 
-        $this->setSetting('min', $min);
+        return $this->setSetting('min', $min);
 
     }
 

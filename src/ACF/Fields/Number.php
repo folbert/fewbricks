@@ -18,6 +18,8 @@ use Fewbricks\ACF\FieldInterface;
 class Number extends Field implements FieldInterface
 {
 
+    const MY_TYPE = 'number';
+
     /**
      * @return mixed The value of the ACF setting "append". Returns the default ACF value "" if none has been
      * set using Fewbricks.
@@ -85,24 +87,15 @@ class Number extends Field implements FieldInterface
     }
 
     /**
-     * @return string The ACF type that ultimately decides what kind of field instances of this class is.
-     */
-    public function getType()
-    {
-
-        return 'number';
-
-    }
-
-    /**
      * ACF setting. Appears after the input.
      *
      * @param string $append
+     * @return $this
      */
     public function setAppend($append)
     {
 
-        $this->setSetting('append', $append);
+        return $this->setSetting('append', $append);
 
     }
 
@@ -110,11 +103,12 @@ class Number extends Field implements FieldInterface
      * ACF setting.
      *
      * @param int $maximumValue
+     * @return $this
      */
     public function setMaximumValue($maximumValue)
     {
 
-        $this->setSetting('max', $maximumValue);
+        return $this->setSetting('max', $maximumValue);
 
     }
 
@@ -122,11 +116,12 @@ class Number extends Field implements FieldInterface
      * ACF setting.
      *
      * @param int $minimumValue
+     * @return $this
      */
     public function setMinimumValue($minimumValue)
     {
 
-        $this->setSetting('min', $minimumValue);
+        return $this->setSetting('min', $minimumValue);
 
     }
 
@@ -134,11 +129,12 @@ class Number extends Field implements FieldInterface
      * ACF setting. Set the placeholder for the field
      *
      * @param string $placeholder
+     * @return $this
      */
     public function setPlaceholder($placeholder)
     {
 
-        $this->setSetting('placeholder', $placeholder);
+        return $this->setSetting('placeholder', $placeholder);
 
     }
 
@@ -146,11 +142,12 @@ class Number extends Field implements FieldInterface
      * ACF setting. Appears before the input.
      *
      * @param string $prepend
+     * @return $this
      */
     public function setPrepend($prepend)
     {
 
-        $this->setSetting('prepend', $prepend);
+        return $this->setSetting('prepend', $prepend);
 
     }
 
@@ -158,11 +155,12 @@ class Number extends Field implements FieldInterface
      * ACF setting.
      *
      * @param int $step
+     * @return $this
      */
     public function setStep($step)
     {
 
-        $this->setSetting('step', $step);
+        return $this->setSetting('step', $step);
 
     }
 

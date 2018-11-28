@@ -77,7 +77,8 @@ class Item
     /**
      * Allows you to set multiple settings at once.
      *
-     * @param $settings
+     * @param $setting
+     * @return $this
      */
     public function setSettings($settings)
     {
@@ -88,23 +89,28 @@ class Item
 
         }
 
+        return $this;
+
     }
 
     /**
      * @param $name
      * @param $value
+     * @return $this
      */
     public function setSetting($name, $value)
     {
 
-        $classVars = ['key', 'label', 'name', 'type'];
+        $class_vars = ['key', 'label', 'name', 'type'];
 
         // Make sure to keep any crucial setting class vars up to date
-        if (in_array($name, $classVars)) {
+        if (in_array($name, $class_vars)) {
             $this->{$name} = $value;
         }
 
         $this->settings[$name] = $value;
+
+        return $this;
 
     }
 
@@ -150,11 +156,14 @@ class Item
 
     /**
      * @param $key
+     * @return $this
      */
     public function setParentBrickKey($key)
     {
 
         $this->parentBrickKey = $key;
+
+        return $this;
 
     }
 
@@ -170,11 +179,14 @@ class Item
 
     /**
      * @param $name
+     * @return $this
      */
     public function setParentBrickName($name)
     {
 
         $this->parentBrickName = $name;
+
+        return $this;
 
     }
 
@@ -206,41 +218,53 @@ class Item
 
     /**
      * @param $prefix
+     * @return $this
      */
     public function prefixKey($prefix)
     {
 
         $this->key = $prefix . $this->key;
 
+        return $this;
+
     }
 
     /**
      * @param string $prefix
+     * @return $this
      */
     public function prefixLabel($prefix)
     {
 
         $this->label = $prefix . $this->label;
 
+        return $this;
+
     }
 
     /**
      * @param string $prefix
+     * @return $this
      */
     public function prefixName($prefix)
     {
 
         $this->name = $prefix . $this->name;
 
+        return $this;
+
     }
 
     /**
      * @param string $suffix
+     * @return $this
      */
     public function suffixLabel($suffix)
     {
 
         $this->label .= $suffix;
+
+        return $this;
 
     }
 
@@ -271,11 +295,14 @@ class Item
 
     /**
      * @param string $key
+     * @return $this
      */
     public function setKey($key)
     {
 
         $this->key = $key;
+
+        return $this;
 
     }
 

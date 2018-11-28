@@ -18,6 +18,8 @@ use Fewbricks\ACF\FieldWithImages;
 class Image extends FieldWithImages implements FieldInterface
 {
 
+    const MY_TYPE = 'image';
+
     /**
      * @return mixed The value of the ACF setting "preview_size". Returns the default ACF value "thumbnail" if none has been
      * set using Fewbricks.
@@ -41,25 +43,16 @@ class Image extends FieldWithImages implements FieldInterface
     }
 
     /**
-     * @return string The ACF type that ultimately decides what kind of field instances of this class is.
-     */
-    public function getType()
-    {
-
-        return 'image';
-
-    }
-
-    /**
      * ACF setting. Shown when entering data
      *
      * @param string $previewSize The name of a defined image size. For example "thumbnail", "medium", "large" or any
      *                            custom image size.
+     * @return $this
      */
     public function setPreviewSize($previewSize)
     {
 
-        $this->setSetting('preview_size', $previewSize);
+        return $this->setSetting('preview_size', $previewSize);
 
     }
 
@@ -67,11 +60,12 @@ class Image extends FieldWithImages implements FieldInterface
      * ACF setting. Specify the returned value on front end.
      *
      * @param string $returnFormat "array", "url" or "id"
+     * @return $this
      */
     public function setReturnFormat($returnFormat)
     {
 
-        $this->setSetting('return_format', $returnFormat);
+        return $this->setSetting('return_format', $returnFormat);
 
     }
 

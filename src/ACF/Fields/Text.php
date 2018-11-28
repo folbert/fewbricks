@@ -18,7 +18,7 @@ use Fewbricks\ACF\FieldInterface;
 class Text extends Field implements FieldInterface
 {
 
-    protected static $myType = 'text';
+    const MY_TYPE = 'text';
 
     /**
      * @return mixed The value of the ACF setting "append". Returns the default ACF value "" if none has been
@@ -61,16 +61,6 @@ class Text extends Field implements FieldInterface
     {
 
         return $this->getSetting('prepend', '');
-
-    }
-
-    /**
-     * @return string The ACF type that ultimately decides what kind of field instances of this class is.
-     */
-    public function getType()
-    {
-
-        return 'text';
 
     }
 

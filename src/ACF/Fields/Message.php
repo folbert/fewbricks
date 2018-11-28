@@ -18,6 +18,8 @@ use Fewbricks\ACF\FieldInterface;
 class Message extends Field implements FieldInterface
 {
 
+    const MY_TYPE = 'message';
+
     /**
      * @return mixed The value of the ACF setting "esc_html". Returns the default ACF value "false" if none has been
      * set using Fewbricks.
@@ -52,34 +54,26 @@ class Message extends Field implements FieldInterface
     }
 
     /**
-     * @return string The ACF type that ultimately decides what kind of field instances of this class is.
-     */
-    public function getType()
-    {
-
-        return 'message';
-
-    }
-
-    /**
      * ACF setting. Allow HTML markup to display as visible text instead of rendering.
      *
      * @param boolean $escapeHtml
+     * @return $this
      */
     public function setEscapeHtml($escapeHtml)
     {
 
-        $this->setSetting('esc_html', $escapeHtml);
+        return $this->setSetting('esc_html', $escapeHtml);
 
     }
 
     /**
      * @param $message
+     * @return $this
      */
     public function setMessage($message)
     {
 
-        $this->setSetting('message', $message);
+        return $this->setSetting('message', $message);
 
     }
 
@@ -88,11 +82,12 @@ class Message extends Field implements FieldInterface
      *
      * @param string $newLines "wpautop" (automatically add paragraphs), "br" (automatically add <br>) or "" (no
      *                         formatting)
+     * @return $this
      */
     public function setNewLines($newLines)
     {
 
-        $this->setSetting('new_lines', $newLines);
+        return $this->setSetting('new_lines', $newLines);
 
     }
 

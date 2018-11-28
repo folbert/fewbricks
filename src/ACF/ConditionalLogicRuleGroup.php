@@ -12,6 +12,7 @@ class ConditionalLogicRuleGroup extends RuleGroup
 
     /**
      * @param Rule $rule
+     * @return $this
      */
     public function addRule(Rule $rule)
     {
@@ -21,6 +22,8 @@ class ConditionalLogicRuleGroup extends RuleGroup
         }
 
         parent::addRule($rule);
+
+        return $this;
 
     }
 

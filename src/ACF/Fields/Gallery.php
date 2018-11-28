@@ -18,6 +18,8 @@ use Fewbricks\ACF\FieldWithImages;
 class Gallery extends FieldWithImages implements FieldInterface
 {
 
+    const MY_TYPE = 'gallery';
+
     /**
      * @return mixed The value of the ACF setting "insert". Returns the default ACF value "append" if none has been
      * set using Fewbricks.
@@ -52,24 +54,15 @@ class Gallery extends FieldWithImages implements FieldInterface
     }
 
     /**
-     * @return string The ACF type that ultimately decides what kind of field instances of this class is.
-     */
-    public function getType()
-    {
-
-        return 'gallery';
-
-    }
-
-    /**
      * ACF setting. Specify where new attachments are added
      *
      * @param string $insert "append" or "prepend"
+     * @return $this
      */
     public function setInsert($insert)
     {
 
-        $this->setSetting('insert', $insert);
+        return $this->setSetting('insert', $insert);
 
     }
 
@@ -77,11 +70,12 @@ class Gallery extends FieldWithImages implements FieldInterface
      * ACF setting maximum selection.
      *
      * @param int $max
+     * @return $this
      */
     public function setMax($max)
     {
 
-        $this->setSetting('max', $max);
+        return $this->setSetting('max', $max);
 
     }
 
@@ -89,11 +83,12 @@ class Gallery extends FieldWithImages implements FieldInterface
      * ACF setting minimum selection.
      *
      * @param int $min
+     * @return $this
      */
     public function setMin($min)
     {
 
-        $this->setSetting('min', $min);
+        return $this->setSetting('min', $min);
 
     }
 
