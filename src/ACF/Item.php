@@ -54,9 +54,9 @@ class Item
     /**
      * Field constructor.
      *
-     * @param string $label    The label of the field
-     * @param string $name     The name of the field
-     * @param string $key      The key of the field. Must be unique across the entire app
+     * @param string $label The label of the field
+     * @param string $name The name of the field
+     * @param string $key The key of the field. Must be unique across the entire app
      */
     public function __construct($label, $name, $key)
     {
@@ -64,12 +64,12 @@ class Item
         // Lets keep these crucial settings as class vars to make them easier
         // and nicer to access.
         $this->label = $label;
-        $this->name  = $name;
-        $this->key   = $key;
+        $this->name = $name;
+        $this->key = $key;
 
         $this->originalKey = $key;
 
-        $this->parentBrickKey  = false;
+        $this->parentBrickKey = false;
         $this->parentBrickName = false;
 
     }
@@ -77,7 +77,7 @@ class Item
     /**
      * Allows you to set multiple settings at once.
      *
-     * @param $setting
+     * @param $settings
      * @return $this
      */
     public function setSettings($settings)
@@ -196,8 +196,8 @@ class Item
      * Any default values that are set by ACF and that has not been overridden
      * in this instance will return the $defaultValue
      *
-     * @param string $name         The name of the setting to get
-     * @param bool   $defaultValue Value to return if setting is not set
+     * @param string $name The name of the setting to get
+     * @param bool $defaultValue Value to return if setting is not set
      *
      * @return mixed $defaultValue if value was not found, otherwise the value
      */
@@ -274,10 +274,10 @@ class Item
     public function toAcfArray()
     {
 
-        $settings          = $this->settings;
-        $settings['key']   = $this->getKey();
+        $settings = $this->settings;
+        $settings['key'] = $this->getKey();
         $settings['label'] = $this->label;
-        $settings['name']  = $this->name;
+        $settings['name'] = $this->name;
 
         return $settings;
 
@@ -303,6 +303,16 @@ class Item
         $this->key = $key;
 
         return $this;
+
+    }
+
+    /**
+     * @param $label
+     */
+    public function setLabel($label)
+    {
+
+        $this->label = $label;
 
     }
 

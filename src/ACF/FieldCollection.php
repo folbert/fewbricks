@@ -16,12 +16,12 @@ class FieldCollection extends Collection implements FieldCollectionInterface
     /**
      * @var array
      */
-    protected $arguments;
+    private $arguments;
 
     /**
      * @var string
      */
-    protected $base_key;
+    private $base_key;
 
     /**
      * String to prefix labels of all the fields in the collection with.
@@ -81,6 +81,17 @@ class FieldCollection extends Collection implements FieldCollectionInterface
         $this->addFields($brick->getFields());
 
         return $this;
+
+    }
+
+    /**
+     * @param array $bricks
+     */
+    public function addBricks(array $bricks) {
+
+        foreach($bricks AS $brick) {
+            $this->addBrick($brick);
+        }
 
     }
 
@@ -433,14 +444,14 @@ class FieldCollection extends Collection implements FieldCollectionInterface
 
     /**
      * @param string $name
-     * @param null $defaultValue Value to return if arg is not set
+     * @param null $default_value Value to return if arg is not set
      *
      * @return mixed|null
      */
-    public function getArgument(string $name, $defaultValue = null)
+    public function getArgument(string $name, $default_value = null)
     {
 
-        return (isset($this->arguments[$name]) ? $this->arguments[$name] : $defaultValue);
+        return (isset($this->arguments[$name]) ? $this->arguments[$name] : $default_value);
 
     }
 
@@ -571,12 +582,12 @@ class FieldCollection extends Collection implements FieldCollectionInterface
      * @param array $arguments
      * @return $this
      */
-    public function setArguments(array $arguments)
+    public function addArguments(array $arguments)
     {
 
         foreach ($arguments as $name => $value) {
 
-            $this->setArgument($name, $value);
+            $this->addArgument($name, $value);
 
         }
 
@@ -589,7 +600,7 @@ class FieldCollection extends Collection implements FieldCollectionInterface
      * @param mixed $value
      * @return $this
      */
-    public function setArgument($name, $value)
+    public function addArgument($name, $value)
     {
 
         $this->arguments[$name] = $value;

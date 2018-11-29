@@ -1,63 +1,26 @@
 ---
 layout: default
 title: Field Groups 
-nav_order: 4
+nav_order: 40
 permalink: /field-groups/
 ---
 
 # Field Groups
 
-## Example code
-Let's dive right in to some code and create an empty field group by using some inline code. Note that we are using
-chaining/fluent notation but you can just as well use the more standard way of creating variables and working with
-them.
-
-```php
-<?php
-
-use Fewbricks\ACF\FieldGroup;
-use Fewbricks\ACF\FieldGroupLocationRuleGroup;
-use Fewbricks\ACF\Rule;
-
-(new FieldGroup('Demo field group 1', '1801042233a'))
-
-  // Set where the field group should be visible
-  ->addLocationRuleGroup(
-    // Display if post type is 'fewbricks_demo_pg' and the post id is 747...
-    (new FieldGroupLocationRuleGroup())
-      ->addRule(new Rule('post_type', '==', 'fewbricks_demo_pg'))
-      ->addRule(new Rule('post', '==', '747'))
-  )
-  ->addLocationRuleGroup(
-    // ...or if post type is 'fewbricks_demo_pg2'
-    (new FieldGroupLocationRuleGroup())
-      ->addRule(new Rule('post_type', '==', 'fewbricks_demo_pg2'))
-  )
-    
-  // Hide everything that ACF can hide on the edit screen
-  ->setHideOnScreen('all')
-    
-  // ... but show the permalink
-  ->setShowOnScreen('permalink')
-    
-  // Show the field group at the top
-  ->setMenuOrder(1)
-    
-  // You can also set any ACF setting by using this generic function
-  ->setSetting('position', 'side')
-    
-  // Pass arbitrary arguments. Makes no sense when dealing with FieldGroup
-  // directly but if you have created a class for a field group, this can
-  // be a great way to tell the instance how to behave.
-  ->setArgument('argument_name', 'argument_value')
-  ->setArguments([
-    'another_argument_name' => 'another_argument_value',
-    'yet_another_argument_name' => 'yet_another_argument_value',
-  ])
-    
-  // Finally, register the field group
-  ->register();
-```
+## Settings
+In our FieldGroup class we have implemented functions for setting and getting all the settings that are available at
+ the time of writing this (ACF v.5.7.7). There is also the generic functions `setSetting()` and `getSetting()` which 
+ allows you to use any new settings that ACF introduces without having to wait for Fewbricks to be updated with new 
+ getters and setters.
+ 
+ The function names are camelCase versions of ACFs snake_case names. So for example the setting "label_placement" is 
+ set by calling `setLabelPlacement('left')`. Note that in some cases the text in the label for an ACF does not 
+ directly tell you what the ACF setting is called. The easiest way to find out what the setting is called is by 
+ using the filter [fewbricks/dev_tools/show_fields_info](/filters/dev_tools--show_fields_info/). This will display 
+ what each setting is actually named by ACF and from that you can quickly calculate what the correspinding function 
+ name is called.
+ 
+ ## ---
 
 In most cases, `addField()`, `addFields()` and `addBrick()` (which we will talk more about in general in the
 [Bricks-section](doc:bricks) ) will probably do what you need.

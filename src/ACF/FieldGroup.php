@@ -431,7 +431,7 @@ class FieldGroup extends FieldCollection implements FieldGroupInterface
      * @return $this
      */
 
-    public function setDisplayInFewbricksDevTools(bool $display)
+    public function setShowInFewbricksDevTools(bool $display)
     {
 
         return $this->setSetting(DevTools::getSettingsNameForDisplayingAcfArray(), $display);

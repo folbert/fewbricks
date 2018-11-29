@@ -19,19 +19,11 @@ class RuleGroup
 
     /**
      * RuleGroup constructor.
-     *
-     * @param array $rules An array of objects of the class Fewbricks\Rule
      */
-    public function __construct(array $rules = [])
+    public function __construct()
     {
 
         $this->rules = new RuleCollection();
-
-        foreach ($rules AS $rule) {
-
-            $this->addRule($rule);
-
-        }
 
     }
 
@@ -39,7 +31,7 @@ class RuleGroup
      * @param Rule $rule
      * @return $this
      */
-    public function addRule(Rule $rule)
+    protected function addRule(Rule $rule)
     {
 
         $this->rules->addItem($rule);

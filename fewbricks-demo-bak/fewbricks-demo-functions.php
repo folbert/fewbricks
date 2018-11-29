@@ -71,8 +71,8 @@ if (defined('FEWBRICKS_ENV') && FEWBRICKS_ENV === 'production' && file_exists(He
         ->setHideOnScreen('all')
         ->setShowOnScreen('permalink')
         ->setMenuOrder(100)
-        ->setArgument('argument_name', 'argument_value')
-        ->setArguments([
+        ->addArgument('argument_name', 'argument_value')
+        ->addArguments([
             'another_argument_name' => 'another_argument_value',
             'yet_another_argument_name' => 'yet_another_argument_value',
         ])
@@ -108,12 +108,12 @@ if (defined('FEWBRICKS_ENV') && FEWBRICKS_ENV === 'production' && file_exists(He
         ->addBrick(
             (new HeadlineAndText('headline_and_text_2', 'br1801060137b'))
                 ->setFieldLabelsprefix('Headline and text 2 - ')
-                ->setArgument('show_badge', true)
+                ->addArgument('show_badge', true)
         )
         ->addBrickToBeginning(
             (new HeadlineAndText('headline_and_text_3', 'br1002121421a'))
                 ->setFieldLabelsprefix('Headline and text 3 - ')
-                ->setArgument('show_badge', true)
+                ->addArgument('show_badge', true)
         )
         ->addBrickBeforeByName(
             (new Wysiwyg('wysiwyg_1', 'br1712282146a'))

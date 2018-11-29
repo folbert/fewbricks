@@ -33,7 +33,7 @@ class HeadlineAndText extends ProjectBrick
 
         $this->addBrick(
             (new Headline('headline', '1801060149a'))
-                ->setArgument('show_badge', $this->getArgument('show_badge', false))
+                ->addArgument('show_badge', $this->getArgument('show_badge', false))
         );
 
         $this->addField(new Textarea('Text', 'text', '1801060126b'));

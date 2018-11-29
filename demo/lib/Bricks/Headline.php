@@ -27,8 +27,7 @@ class Headline extends Brick {
 
         $text = new Text('Text', 'text', '1811272243a');
         $text->setRequired(true);
-        $text->setPlaceholder('A placeholder');
-        $text->setDefaultValue('My neat headline text');
+        $text->setPlaceholder('Enter a great headline here');
         $this->addField($text);
 
     }

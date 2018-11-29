@@ -3,7 +3,7 @@ parent: Filters
 layout: default
 title: dev-tools/show_fields_info
 nav_order: 3
-permalink: /filters/show_fields_info/
+permalink: /filters/dev_tools--show_fields_info/
 ---
 
 # Filter - show_fields_info

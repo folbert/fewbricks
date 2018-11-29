@@ -11,14 +11,14 @@ class ConditionalLogicRuleGroup extends RuleGroup
 {
 
     /**
-     * @param Rule $rule
+     * @param ConditionalLogicRule $rule
      * @return $this
      */
-    public function addRule(Rule $rule)
+    public function addConditionalLogicRule(ConditionalLogicRule $rule)
     {
 
         if (!($rule instanceof ConditionalLogicRule)) {
-            wp_die('You can only add instances of ConditionalLogicRule to instances of ConditionalLogicRuleGroup');
+            wp_die('You can only add instances of ConditionalLogicRule to ConditionalLogicRuleGroup');
         }
 
         parent::addRule($rule);
@@ -26,6 +26,5 @@ class ConditionalLogicRuleGroup extends RuleGroup
         return $this;
 
     }
-
 
 }

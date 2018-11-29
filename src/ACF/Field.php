@@ -51,19 +51,6 @@ class Field extends Item
     }
 
     /**
-     * @param $type
-     * @return $this
-     */
-    public function setType($type)
-    {
-
-        $this->type = $type;
-
-        return $this;
-
-    }
-
-    /**
      */
     public function clearConditionalLogic()
     {
@@ -237,11 +224,11 @@ class Field extends Item
     }
 
     /**
-     * @param boolean $wrapper ACF setting. An array of attributes given to the
-     *                         field element in the backend.
+     * @param array $wrapper ACF setting. An array of attributes given to the field element in the backend.
+     * Indexes in the array can be 'width', 'class' and 'id'.
      * @return $this
      */
-    public function setWrapper($wrapper)
+    public function setWrapper(array $wrapper)
     {
 
         // Make sure all indexes are set.
