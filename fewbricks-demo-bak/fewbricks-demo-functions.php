@@ -86,13 +86,13 @@ if (defined('FEWBRICKS_ENV') && FEWBRICKS_ENV === 'production' && file_exists(He
             new Text('Text 5', 'text_5', '1801050012e'),
             new Text('Text 6', 'text_6', '1801050012f'),
         ])
-        ->addFieldBeforeByName(new Text('Text 7', 'text_7', '1801050012g'), 'text_3')
-        ->addFieldsBeforeByName([
+        ->addFieldBeforeFieldByName(new Text('Text 7', 'text_7', '1801050012g'), 'text_3')
+        ->addFieldsBeforeFieldByName([
             new Text('Text 8', 'text_8', '1801050012h'),
             new Text('Text 9', 'text_9', '1801050012i'),
         ], 'text_1')
-        ->addFieldAfterByName(new Text('Text 10', 'text_10', '1801050012j'), 'text_9')
-        ->addFieldsAfterByName([
+        ->addFieldAfterFieldByName(new Text('Text 10', 'text_10', '1801050012j'), 'text_9')
+        ->addFieldsAfterFieldByName([
             new Text('Text 11', 'text_11', '1801050012k'),
             new Text('Text 12', 'text_12', '1801050012l'),
         ], 'text_5')
@@ -103,26 +103,26 @@ if (defined('FEWBRICKS_ENV') && FEWBRICKS_ENV === 'production' && file_exists(He
         ->addFieldSetting('1801050012h', 'default_value', 'Default value for Text 8')
         ->addBrick(
             (new HeadlineAndText('headline_and_text_1', 'br1801060137a'))
-                ->setFieldLabelsprefix('Headline and text 1 - ')
+                ->setFieldLabelsPrefix('Headline and text 1 - ')
         )
         ->addBrick(
             (new HeadlineAndText('headline_and_text_2', 'br1801060137b'))
-                ->setFieldLabelsprefix('Headline and text 2 - ')
+                ->setFieldLabelsPrefix('Headline and text 2 - ')
                 ->addArgument('show_badge', true)
         )
         ->addBrickToBeginning(
             (new HeadlineAndText('headline_and_text_3', 'br1002121421a'))
-                ->setFieldLabelsprefix('Headline and text 3 - ')
+                ->setFieldLabelsPrefix('Headline and text 3 - ')
                 ->addArgument('show_badge', true)
         )
         ->addBrickBeforeByName(
             (new Wysiwyg('wysiwyg_1', 'br1712282146a'))
-                ->setFieldLabelsprefix('WYSIWYG 1 - '),
+                ->setFieldLabelsPrefix('WYSIWYG 1 - '),
             'text_10'
         )
-        ->addBrickAfterByName(
+        ->addBrickAfterFieldByName(
             (new Wysiwyg('wysiwyg2', 'br1712282227u'))
-                ->setFieldLabelsprefix('WYSIWYG 2 - ')
+                ->setFieldLabelsPrefix('WYSIWYG 2 - ')
                 ->addFieldSetting('1712282148a', 'delay', true),  // Setting ACF setting late in the process
             'text_3'
         )
@@ -134,11 +134,11 @@ if (defined('FEWBRICKS_ENV') && FEWBRICKS_ENV === 'production' && file_exists(He
     (new FieldGroup('Field group with bricks', 'fg1712282142a'))
         ->addBrick(
             (new Wysiwyg('wysiwyg_1', 'br1712282146a'))
-                ->setFieldLabelsprefix('WYSIWYG 1 - ')
+                ->setFieldLabelsPrefix('WYSIWYG 1 - ')
         )
         ->addBrick(
             (new Wysiwyg('wysiwyg2', 'br1712282227u'))
-                ->setFieldLabelsprefix('WYSIWYG 2 - ')
+                ->setFieldLabelsPrefix('WYSIWYG 2 - ')
                 ->addFieldSetting('1712282148a', 'delay', true) // Setting ACf setting late in the process
         )
         ->addLocationRuleGroup(

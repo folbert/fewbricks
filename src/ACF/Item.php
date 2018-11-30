@@ -75,6 +75,16 @@ class Item
     }
 
     /**
+     * @param $original_key
+     */
+    protected function setOriginalKey($original_key)
+    {
+
+        $this->originalKey = $original_key;
+
+    }
+
+    /**
      * Allows you to set multiple settings at once.
      *
      * @param $settings
@@ -101,10 +111,10 @@ class Item
     public function setSetting($name, $value)
     {
 
-        $class_vars = ['key', 'label', 'name', 'type'];
+        $class_property_names = ['key', 'label', 'name', 'type'];
 
-        // Make sure to keep any crucial setting class vars up to date
-        if (in_array($name, $class_vars)) {
+        // Make sure to keep any class property names up to date
+        if (in_array($name, $class_property_names)) {
             $this->{$name} = $value;
         }
 

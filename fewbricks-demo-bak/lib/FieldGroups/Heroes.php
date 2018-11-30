@@ -48,7 +48,7 @@ class Heroes extends FieldGroup
                         ->setMessage('Lorem ipsum dolor')
                 )
                 ->addFieldCollection(new Background())
-                ->addFieldBeforeByName(new Text('Headline', 'headline', '1712272054a'), 'message')
+                ->addFieldBeforeFieldByName(new Text('Headline', 'headline', '1712272054a'), 'message')
         );
 
         $this->addField($flexibleContent);

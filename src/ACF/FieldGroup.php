@@ -95,6 +95,7 @@ class FieldGroup extends FieldCollection implements FieldGroupInterface
 
     /**
      * @param FieldGroupLocationRuleGroup[] $rule_groups
+     * @return $this
      */
     public function addLocationRuleGroups(array $rule_groups)
     {
@@ -247,14 +248,7 @@ class FieldGroup extends FieldCollection implements FieldGroupInterface
     public function getKey()
     {
 
-        $key = $this->key;
-
-        // Lets keep in order with how ACF gives keys to field groups and prepend with "group_"
-        if (substr($key, 0, 6) !== 'group_') {
-            $key = 'group_' . $key;
-        }
-
-        return $key;
+        return $this->key;
 
     }
 
@@ -359,9 +353,9 @@ class FieldGroup extends FieldCollection implements FieldGroupInterface
 
     /**
      * Called just before sending field to ACF. This way you can add this function to your own classes extending
-     * this class and write any last-minute custom logic to execute right before senfing the field group to ACF.
+     * this class and write any last-minute custom logic to execute right before sending the field group to ACF.
      */
-    private function prepareForRegistration()
+    public function prepareForRegistration()
     {
 
     }
@@ -589,7 +583,7 @@ class FieldGroup extends FieldCollection implements FieldGroupInterface
     {
 
         return array_merge($this->settings, [
-            'key' => $this->getKey(),
+            'key' => Helper::maybePrefixFieldGroupKey($this->getKey()),
             'title' => $this->getTitle(),
             'location' => $this->location_rule_groups->toArray(),
             'fields' => parent::toAcfArray(),

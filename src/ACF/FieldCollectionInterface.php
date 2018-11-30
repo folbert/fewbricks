@@ -9,21 +9,19 @@ interface FieldCollectionInterface
 
     public function addBrick(Brick $brick);
 
-    public function addBrickAfterByName(Brick $brick, string $fieldNameToAddAfter);
+    public function addBrickAfterFieldByName(Brick $brick, string $fieldNameToAddAfter);
 
-    public function addBrickBeforeByName(Brick $brick, string $fieldNameToAddBefore);
+    public function addBrickBeforeFieldByName(Brick $brick, string $fieldNameToAddBefore);
 
     public function addBrickToBeginning(Brick $brick);
 
     public function addField(Field $field);
 
-    public function addFieldAfterByName(Field $field, string $fieldNameToAddAfter);
+    public function addFieldAfterFieldByName(Field $field, string $fieldNameToAddAfter);
 
-    public function addFieldBeforeByName(Field $field, string $fieldNameToAddBefore);
+    public function addFieldBeforeFieldByName(Field $field, string $fieldNameToAddBefore);
 
     public function addFieldCollection(FieldCollection $fieldCollection);
-
-    public function addFieldSetting(string $fieldKey, string $settingsName, $settingsValue);
 
     public function addFieldToBeginning(Field $field);
 
@@ -42,5 +40,9 @@ interface FieldCollectionInterface
     public function removeFieldsByName(array $fieldNames);
 
     public function removeFieldsByKey(array $keys);
+
+    public function replaceFieldByKey(Field $new_field, string $key_of_field_to_replace);
+
+    public function replaceFieldByName(Field $new_field, string $name_of_field_to_replace);
 
 }

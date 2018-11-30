@@ -87,7 +87,7 @@ class FieldWithLayouts extends Field
     public function getLayout($key)
     {
 
-        return $this->layouts->getItem($key);
+        return $this->layouts->getItemByKey($key);
 
     }
 

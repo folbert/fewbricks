@@ -38,44 +38,48 @@ menu.
 For an extensive collection of demo code, please see
 [https://github.com/folbert/fewbricks/tree/fewbricks2/demo](https://github.com/folbert/fewbricks/tree/fewbricks2/demo).
 
+To allow better readability on smaller screens, I have not indented the chained functions. This also avoids the tab 
+vs. spaces debate :)
+
 ### Create some fields
 {: .no_toc }
-
 
 ```php
 <?php
 
-$favourite_character =
-    (new Select('Who is your favourite character?', 'favourite_character', '1811262140b'))
-    ->setChoices([
-        'roland' => 'Roland Deschain',
-        'jake' => 'Jake Chambers',
-        'susan' => 'Susan Delgado',
-        'eddie' => 'Eddie Dean',
-        'oy' => 'Oy',
-        'other' => 'Other',
-    ])
-    ->setAllowNull(false)
-    ->setRequired(true)
-    ->prefixLabel('Please answer this question: '); // Fewbricks feature
+$favourite_character = (new Select('Who is your favourite character?', 'favourite_character', '1811262140b'))
+->setChoices([
+    'roland' => 'Roland Deschain',
+    'jake' => 'Jake Chambers',
+    'susan' => 'Susan Delgado',
+    'eddie' => 'Eddie Dean',
+    'oy' => 'Oy',
+    'other' => 'Other',
+])
+->setAllowNull(false)
+->setRequired(true)
+// Fewbricks feature allowing you to prefix the label.
+->prefixLabel('Please answer this question: ');
 
-$other_favourite_character =
-    (new Text('My favourite character is none of the above but:',
-        'other_favourite_character', '1811262140a'))
-    ->addConditionalLogicRuleGroup
-        (
-            (new ConditionalLogicRuleGroup())
-            ->addConditionalLogicRule(new ConditionalLogicRule('1811262140b', '==', 'other'))
+$other_favourite_character = (new Text('My favourite character is none of the above but:', 'other_favourite_character',
+'1811262140a'))
+->addConditionalLogicRuleGroup
+(
+    (new ConditionalLogicRuleGroup())
+        ->addConditionalLogicRule(
+            // Onlu dusplay this field if the field with key "1811262140b" is set to "other".
+            new ConditionalLogicRule('1811262140b', '==', 'other')
         )
-    ->setRequired(true)
-    ->setPlaceholder('Maybe Randall Flagg?');
+)
+->setRequired(true)
+->setPlaceholder('Maybe Randall Flagg?');
 
 $motivation = (new Wysiwyg('Please motivate', 'motivation', '1811292147a'))
-    ->setInstructions('Feel free to add a motivation as to why your favourite characters is the one you stated above.')
-    ->setDelay(true)
-    ->setMediaUpload(false)
-    ->setTabs('visual')
-    ->setWrapper(['id' => 'favourite_character_motivation']);
+->setInstructions('Feel free to add a motivation as to why your favourite characters is the one you stated above.')
+->setDelay(true)
+->setMediaUpload(false)
+->setTabs('visual')
+->setWrapper(['id' => 'favourite_character_motivation']);
 ```
 
 ### Create a field group and add fields to it
@@ -84,38 +88,37 @@ $motivation = (new Wysiwyg('Please motivate', 'motivation', '1811292147a'))
 ```php
 <?php
 
-(new FieldGroup('Dark Tower Contest', '1811252128a'))
-    ->addLocationRuleGroup(
-        (new FieldGroupLocationRuleGroup())
-            ->addFieldGroupLocationRule(
-                new FieldGroupLocationRule('post_type', '==', 'post') // When editing a post)
-            )
-    )// ...or ...
-    ->addLocationRuleGroup(
-        (new FieldGroupLocationRuleGroup())
-            ->addFieldGroupLocationRule(
-                new FieldGroupLocationRule('post_type', '==', 'page') // When editing a page
-            )
-            ->addFieldGroupLocationRule(
-                new FieldGroupLocationRule('user_role', '==', 'editor') // And the user is an editor
-            )
-    )
-    ->setShowInFewbricksDevTools(true)
-    ->setHideOnScreen('all')
-    ->setShowOnScreen('permalink')
-    ->addField($favourite_character)
-    ->addField($other_favourite_character)
-    ->addFields([
-        $motivation,
-        (new Email('Enter your e-mail for a chance to win!', 'e_mail', '1811281100a'))
-            ->setRequired(true)
-    ])
-    ->addBrick(
-        (new ImageAndText('image_and_name', '1811290826a')) // What's this now? Read on to find out!
-            ->setArgument('text_label', 'Name')
-            ->setArgument('text_name', 'name')
-    )
-    ->register();
+(new FieldGroup('Main content', '1811252128a'))
+// Tell the field group when it should show up
+->addLocationRuleGroup(
+    (new FieldGroupLocationRuleGroup())
+        ->addFieldGroupLocationRule(
+        // When editing a post
+            new FieldGroupLocationRule('post_type', '==', 'post')
+        )
+)
+// Hide everything on screen that ACF can hide...
+->setHideOnScreen('all')
+// ...but show the permalink
+->setShowOnScreen('permalink')
+// Add a single field or...
+->addField($favourite_character)
+// ...add multiple fields.
+->addFields([
+    $other_favourite_character,
+    $motivation,
+    // Create an inline field
+    (new Email('Enter your e-mail for a chance to win!', 'e_mail', '1811281100a'))
+        ->setRequired(true)
+])
+// What's a brick you wonder? Read under Bricks for more info
+->addBrick(
+    (new ImageAndText('image_and_name', '1811290826a'))
+        ->addArgument('text_label', 'Name')
+        ->addArgument('text_name', 'name')
+)
+// Finish up by registering the field group to ACF.
+->register();
 
 ```
 

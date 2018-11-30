@@ -28,7 +28,8 @@ class Helper
     public static function dd($var)
     {
 
-        dump($var);die();
+        dump($var);
+        die();
 
     }
 
@@ -47,7 +48,7 @@ class Helper
 
     /**
      * @param string $original_key
-     * @param array  $acf_array_items
+     * @param array $acf_array_items
      *
      * @return bool|string
      */
@@ -72,7 +73,8 @@ class Helper
     }
 
     /**
-     * If $key does not exist in $array, $default_value will be returned. Otherwise the value of $array[$key] will be returned
+     * If $key does not exist in $array, $default_value will be returned. Otherwise the value of $array[$key] will be
+     * returned
      *
      * @param $array
      * @param $key
@@ -138,7 +140,7 @@ class Helper
     public static function initDebug()
     {
 
-        if(DevTools::isActivated()) {
+        if (DevTools::isActivated()) {
             DevTools::run(DevTools::getDisplayFilterValue());
         }
 
@@ -182,6 +184,7 @@ class Helper
         return $outcome;
 
     }
+
     /**
      * @return string
      */
@@ -192,13 +195,6 @@ class Helper
 
     }
 
-    public static function getFewbricksInstallPath()
-    {
-
-        //return __FILE__
-
-    }
-
     /**
      * @return string
      */
@@ -206,6 +202,40 @@ class Helper
     {
 
         return plugins_url('fewbricks') . '/assets';
+
+    }
+
+    /**
+     * @param $field_key
+     * @return string
+     */
+    public static function maybePrefixFieldKey($field_key)
+    {
+
+        // Lets make sure that the key is ok for ACF
+        // https://www.advancedcustomfields.com/resources/register-fields-via-php/#field-settings
+        if (substr($field_key, 0, 6) !== 'field_') {
+            $field_key = 'field_' . $field_key;
+        }
+
+        return $field_key;
+
+    }
+
+    /**
+     * @param $field_group_key
+     * @return string
+     */
+    public static function maybePrefixFieldGroupKey($field_group_key)
+    {
+
+        // Lets keep in order with how ACF gives keys to field groups and prepend with "group_"
+        // https://www.advancedcustomfields.com/resources/register-fields-via-php/
+        if (substr($field_group_key, 0, 6) !== 'group_') {
+            $field_group_key = 'group_' . $field_group_key;
+        }
+
+        return $field_group_key;
 
     }
 

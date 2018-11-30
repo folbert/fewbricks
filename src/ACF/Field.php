@@ -3,6 +3,7 @@
 namespace Fewbricks\ACF;
 
 use Fewbricks\DevTools;
+use Fewbricks\Helper;
 
 /**
  * Class Field
@@ -141,15 +142,7 @@ class Field extends Item
     public function getKey()
     {
 
-        $key = $this->key;
-
-        // Lets make sure that the key is ok for ACF
-        // https://www.advancedcustomfields.com/resources/register-fields-via-php/#field-settings
-        if (substr($key, 0, 6) !== 'field_') {
-            $key = 'field_' . $key;
-        }
-
-        return $key;
+        return $this->key;
 
     }
 
@@ -252,7 +245,11 @@ class Field extends Item
     public function toAcfArray(array $extraSettings = [])
     {
 
-        $settings = array_merge(parent::toAcfArray(), [
+        $settings = parent::toAcfArray();
+
+        $settings['key'] = Helper::maybePrefixFieldKey($settings['key']);
+
+        $settings = array_merge($settings, [
             'fewbricks__original_key' => $this->getOriginalKey(),
             'fewbricks__brick_key' => $this->getParentBrickKey(),
             'fewbricks__brick_name' => $this->getParentBrickName(),
