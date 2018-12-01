@@ -1,6 +1,6 @@
 <?php
 
-namespace Fewbricks\ACF\Fields\PublicAddOns;
+namespace Fewbricks\ACF\Fields\Extensions;
 
 use Fewbricks\ACF\Field;
 

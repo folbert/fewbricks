@@ -7,7 +7,7 @@ permalink: /faq/
 
 # FAQ
 
-### What's up with the weird strings like "1811302108a"?
+## What's up with the weird strings like "1811302108a"?
 Those strings are keys that ACF uses. When creating fields and field groups using ACFs GUI, ACF takes care of 
 creating those keys for you. Since the keys must be fixed and can not be changed on each load, we have to create 
 those keys for ACF when using Fewbricks. 
@@ -29,3 +29,21 @@ fields that are reused like they are in for example bricks.
 See [ACFs documentation on `acf_add_local_field_group()`](https://www.advancedcustomfields
 .com/resources/register-fields-via-php/#group-settings). It states that you must append field group keys with 
 "group_" and keys for fields must start with "field_". Fewbricks takes care of that for you if you don't do it yourself.
+
+## Why isn't Fewbricks in the WoprdPress Plugin Directory?
+I submitted Fewbricks1 to WordPress in april 2016 but it was rejected. This is the main point copied from the 
+rejection mail: 
+
+"At this time, we are not accepting this sort of plugin as we don’t feel frameworks, boilerplates, and libraries are 
+appropriate for the Plugins Directory.
+ 
+We do generally require that plugins be useful in and of themselves (even if only being a portal to an external 
+service). And while there are many benefits to frameworks and libraries, without plugin dependency support in core or
+ the directory, it becomes another level of hassle for users."
+ 
+The complete mail and my thoughts on it are available at [https://github
+.com/folbert/fewbricks/issues/2#issuecomment-208723764](https://github.com/folbert/fewbricks/issues/2#issuecomment-208723764). 
+
+## Where's the clone field?
+It wouldn't make any sense including the clone field in Fewbricks since that fields only purpose is to clone fields 
+which is exactly what Fewbricks allow you to do programmatically. 

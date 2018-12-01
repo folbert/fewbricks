@@ -18,7 +18,7 @@ use Fewbricks\ACF\FieldInterface;
 class Number extends Field implements FieldInterface
 {
 
-    const MY_TYPE = 'number';
+    const TYPE = 'number';
 
     /**
      * @return mixed The value of the ACF setting "append". Returns the default ACF value "" if none has been

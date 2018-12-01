@@ -18,6 +18,6 @@ use Fewbricks\ACF\FieldInterface;
 class Email extends Field implements FieldInterface
 {
 
-    const MY_TYPE = 'email';
+    const TYPE = 'email';
 
 }

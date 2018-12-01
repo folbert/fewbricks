@@ -18,7 +18,7 @@ use Fewbricks\ACF\FieldWithImages;
 class Image extends FieldWithImages implements FieldInterface
 {
 
-    const MY_TYPE = 'image';
+    const TYPE = 'image';
 
     /**
      * @return mixed The value of the ACF setting "preview_size". Returns the default ACF value "thumbnail" if none has been

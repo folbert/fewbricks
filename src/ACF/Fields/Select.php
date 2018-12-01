@@ -18,7 +18,7 @@ use Fewbricks\ACF\FieldWithChoices;
 class Select extends FieldWithChoices implements FieldInterface
 {
 
-    const MY_TYPE = 'select';
+    const TYPE = 'select';
 
     /**
      * @return mixed The value of the ACF setting "ajax". Returns the default ACF value false if none has been

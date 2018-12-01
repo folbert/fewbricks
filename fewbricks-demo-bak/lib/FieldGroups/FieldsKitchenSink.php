@@ -148,7 +148,7 @@ class FieldsKitchenSink extends FieldGroup implements FieldGroupInterface
         // Commented out because this will require a valid Google Maps api key to function
         //$this->addField(new FAFields\GoogleMap('Google Map', 'google_map', '1711172321r'));
 
-        $this->addField(new FAFields\PublicAddOns\FewbricksHidden('Fewbricks Hidden',
+        $this->addField(new FAFields\Extensions\FewbricksHidden('Fewbricks Hidden',
             'fd_fewbricks_hidden', '1711172043u'));
 
         // -----

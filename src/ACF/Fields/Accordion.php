@@ -16,7 +16,7 @@ use Fewbricks\ACF\FieldInterface;
 class Accordion extends Field implements FieldInterface
 {
 
-    const MY_TYPE = 'accordion';
+    const TYPE = 'accordion';
 
     /**
      * @return mixed The value of the ACF setting "endpoint". Returns the default ACF value "false" if none has been

@@ -15,7 +15,7 @@ use Fewbricks\ACF\FieldWithFields;
 class Layout extends FieldWithFields implements FieldInterface
 {
 
-    const MY_TYPE = 'layout';
+    const TYPE = 'layout';
 
     /**
      * @return mixed The value of the ACF setting "display". Returns the default ACF value "block" if none has been

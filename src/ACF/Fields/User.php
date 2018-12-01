@@ -18,7 +18,7 @@ use Fewbricks\ACF\FieldInterface;
 class User extends Field implements FieldInterface
 {
 
-    const MY_TYPE = 'user';
+    const TYPE = 'user';
 
     /**
      * @return mixed The value of the ACF setting "allow_null". Returns the default ACF value false if none has been

@@ -18,7 +18,7 @@ use Fewbricks\ACF\FieldInterface;
 class Tab extends Field implements FieldInterface
 {
 
-    const MY_TYPE = 'tab';
+    const TYPE = 'tab';
 
     /**
      * @return mixed The value of the ACF setting "". Returns the default ACF value "" if none has been

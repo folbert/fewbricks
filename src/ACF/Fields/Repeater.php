@@ -15,7 +15,7 @@ use Fewbricks\Helper;
 class Repeater extends FieldWithFields implements FieldInterface
 {
 
-    const MY_TYPE = 'repeater';
+    const TYPE = 'repeater';
 
     /**
      * @param $acfArray

@@ -18,7 +18,7 @@ use Fewbricks\ACF\FieldWithChoices;
 class Radio extends FieldWithChoices implements FieldInterface
 {
 
-    const MY_TYPE = 'radio';
+    const TYPE = 'radio';
 
     /**
      * @return mixed The value of the ACF setting "layout". Returns the default ACF value "vertical" if none has been

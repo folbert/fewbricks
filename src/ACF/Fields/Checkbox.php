@@ -18,7 +18,7 @@ use Fewbricks\ACF\FieldWithChoices;
 class Checkbox extends FieldWithChoices implements FieldInterface
 {
 
-    const MY_TYPE = 'checkbox';
+    const TYPE = 'checkbox';
 
     /**
      * @return mixed The value of the ACF setting "allow_custom". Returns the default ACF value "0" if none has been

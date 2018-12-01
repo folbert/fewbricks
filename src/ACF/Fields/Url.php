@@ -18,7 +18,7 @@ use Fewbricks\ACF\FieldInterface;
 class Url extends Field implements FieldInterface
 {
 
-    const MY_TYPE = 'url';
+    const TYPE = 'url';
 
     /**
      * @return mixed The value of the ACF setting "placeholder". Returns the default ACF value "" if none has been

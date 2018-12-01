@@ -18,7 +18,7 @@ use Fewbricks\ACF\FieldInterface;
 class DateTimePicker extends DateTimeField implements FieldInterface
 {
 
-    const MY_TYPE = 'date_time_picker';
+    const TYPE = 'date_time_picker';
 
     /**
      * @return mixed The value of the ACF setting "display_format". Returns the default ACF value "d/m/Y g:i a" if none

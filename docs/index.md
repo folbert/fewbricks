@@ -47,6 +47,9 @@ vs. spaces debate :)
 ```php
 <?php
 
+// Not including namespaces to save some space in the demo code
+// but most classes resides under Fewbricks\ACF\
+
 $favourite_character = (new Select('Who is your favourite character?', 'favourite_character', '1811262140b'))
 ->setChoices([
     'roland' => 'Roland Deschain',
@@ -122,9 +125,9 @@ $motivation = (new Wysiwyg('Please motivate', 'motivation', '1811292147a'))
 
 ```
 
-## Why does Fewbricks exist?
+## Main concepts
  
-### Portability and re-usability.
+### Portability and re-usability
 {: .no_toc }
 Almost all web sites have a couple of building blocks (modules or "bricks") in common. This can, for example, be 
 "Page hero", "Plain text", "Image with text to the right", "Image with text to the left", "Image", "YouTube-video"
@@ -133,7 +136,7 @@ instead of storing settings in the database as ACF does out of the box, we can r
 without setting them up every time we set up a new site. Yes, ACF does come with export functionality and ability to
 generate PHP code but it is still, IMHO, cumbersome to cherry-pick bricks for each project.
  
-### Flexible ACF.
+### Flexible ACF
 {: .no_toc }
 This is probably the most important, and also the original, reason as to why this system was created. 
 Since, in Fewbricks, all ACF-fields are set up using code, we can reuse fields and even other bricks across multiple 
@@ -164,5 +167,5 @@ Easier to see which fields belong to a brick. Instead of having to switch betwee
 named a specific field, you can have it all in one brick class file.
 
 ## Legal
-Fewbricks is released under GPLv3 and its developers are in no way associated with Advanced Custom Fields. But we are
-very grateful to Elliot Condon for creating ACF.
+Fewbricks is released under GPLv3 and its developers are not associated with Advanced Custom Fields. But we are
+very grateful to Elliot Condon for creating it.

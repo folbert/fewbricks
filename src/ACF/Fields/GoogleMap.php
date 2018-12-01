@@ -18,7 +18,7 @@ use Fewbricks\ACF\FieldInterface;
 class GoogleMap extends Field implements FieldInterface
 {
 
-    const MY_TYPE = 'google_map';
+    const TYPE = 'google_map';
 
     /**
      * @return mixed The value of the ACF setting "center_lat". Returns the default ACF value "-37.81411" if none has

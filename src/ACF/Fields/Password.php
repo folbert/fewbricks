@@ -18,7 +18,7 @@ use Fewbricks\ACF\FieldInterface;
 class Password extends Field implements FieldInterface
 {
 
-    const MY_TYPE = 'password';
+    const TYPE = 'password';
 
     /**
      * @return mixed The value of the ACF setting "append". Returns the default ACF value "" if none has been

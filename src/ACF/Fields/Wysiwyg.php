@@ -18,7 +18,7 @@ use Fewbricks\ACF\FieldInterface;
 class Wysiwyg extends Field implements FieldInterface
 {
 
-    const MY_TYPE = 'wysiwyg';
+    const TYPE = 'wysiwyg';
 
     /**
      * @return mixed The value of the ACF setting "delay". Returns the default ACF value "0" if none has been set

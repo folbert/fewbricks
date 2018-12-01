@@ -18,6 +18,6 @@ use Fewbricks\ACF\FieldInterface;
 class ColorPicker extends Field implements FieldInterface
 {
 
-    const MY_TYPE = 'color_picker';
+    const TYPE = 'color_picker';
 
 }

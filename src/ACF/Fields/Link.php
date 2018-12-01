@@ -18,7 +18,7 @@ use Fewbricks\ACF\FieldInterface;
 class Link extends Field implements FieldInterface
 {
 
-    const MY_TYPE = 'link';
+    const TYPE = 'link';
 
     /**
      * @return mixed The value of the ACF setting "return_format". Returns the default ACF value "array" if none has

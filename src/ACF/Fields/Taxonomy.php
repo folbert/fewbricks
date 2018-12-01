@@ -18,7 +18,7 @@ use Fewbricks\ACF\FieldInterface;
 class Taxonomy extends Field implements FieldInterface
 {
 
-    const MY_TYPE = 'taxonomy';
+    const TYPE = 'taxonomy';
 
     /**
      * @return mixed The value of the ACF setting "add_term". Returns the default ACF value true if none has been

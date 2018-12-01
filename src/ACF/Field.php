@@ -35,7 +35,7 @@ class Field extends Item
 
         parent::__construct($label, $name, $key);
 
-        $this->type = $this::MY_TYPE;
+        $this->type = $this::TYPE;
 
         $this->clearConditionalLogic();
 

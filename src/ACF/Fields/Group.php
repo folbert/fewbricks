@@ -14,7 +14,7 @@ use Fewbricks\ACF\FieldWithFields;
 class Group extends FieldWithFields implements FieldInterface
 {
 
-    const MY_TYPE = 'group';
+    const TYPE = 'group';
 
     /**
      * @return mixed The value of the ACF setting "layout". Returns the default ACF value "block" if none has been

@@ -18,7 +18,7 @@ use Fewbricks\ACF\FieldInterface;
 class PostObject extends Field implements FieldInterface
 {
 
-    const MY_TYPE = 'post_object';
+    const TYPE = 'post_object';
 
     /**
      * @return mixed The value of the ACF setting "allow_null". Returns the default ACF value false if none has been

@@ -18,7 +18,7 @@ use Fewbricks\ACF\FieldInterface;
 class Message extends Field implements FieldInterface
 {
 
-    const MY_TYPE = 'message';
+    const TYPE = 'message';
 
     /**
      * @return mixed The value of the ACF setting "esc_html". Returns the default ACF value "false" if none has been

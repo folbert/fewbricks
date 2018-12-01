@@ -18,7 +18,7 @@ use Fewbricks\ACF\FieldInterface;
 class PageLink extends Field implements FieldInterface
 {
 
-    const MY_TYPE = 'page_link';
+    const TYPE = 'page_link';
 
     /**
      * @return mixed The value of the ACF setting "allow_archives". Returns the default ACF value true if none has been

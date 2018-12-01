@@ -18,7 +18,7 @@ use Fewbricks\ACF\FieldInterface;
 class Oembed extends Field implements FieldInterface
 {
 
-    const MY_TYPE = 'oembed';
+    const TYPE = 'oembed';
 
     /**
      * @return mixed The value of the ACF setting "height". Returns the default ACF value "" if none has been

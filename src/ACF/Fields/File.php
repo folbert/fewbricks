@@ -18,7 +18,7 @@ use Fewbricks\ACF\FieldInterface;
 class File extends Field implements FieldInterface
 {
 
-    const MY_TYPE = 'file';
+    const TYPE = 'file';
 
     /**
      * @return mixed The value of the ACF setting "library". Returns the default ACF value "all" if none has been

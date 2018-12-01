@@ -18,7 +18,7 @@ use Fewbricks\ACF\FieldInterface;
 class Relationship extends Field implements FieldInterface
 {
 
-    const MY_TYPE = 'relationship';
+    const TYPE = 'relationship';
 
     /**
      * @return mixed The value of the ACF setting "elements". Returns the default ACF value of an empty array if none

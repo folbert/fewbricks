@@ -18,7 +18,7 @@ use Fewbricks\ACF\FieldInterface;
 class Range extends Field implements FieldInterface
 {
 
-    const MY_TYPE = 'range';
+    const TYPE = 'range';
 
     /**
      * @return mixed The value of the ACF setting "append". Returns the default ACF value "" if none has been

@@ -18,7 +18,7 @@ use Fewbricks\ACF\FieldWithChoices;
 class ButtonGroup extends FieldWithChoices implements FieldInterface
 {
 
-    const MY_TYPE = 'button_group';
+    const TYPE = 'button_group';
 
     /**
      * @return mixed The value of the ACF setting "layout". Returns the default ACF value "horizontal" if none has been

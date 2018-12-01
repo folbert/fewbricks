@@ -14,7 +14,7 @@ use Fewbricks\ACF\FieldWithLayouts;
 class FlexibleContent extends FieldWithLayouts implements FieldInterface
 {
 
-    const MY_TYPE = 'flexible_content';
+    const TYPE = 'flexible_content';
 
     /**
      * @return mixed The value of the ACF setting "max". Returns the default ACF value "" if none has been

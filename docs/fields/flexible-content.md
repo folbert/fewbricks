@@ -2,7 +2,7 @@
 parent: Fields
 layout: default
 title: Flexible Content 
-nav_order: 2
+nav_order: 20
 permalink: /fields/flexible-content/
 ---
 

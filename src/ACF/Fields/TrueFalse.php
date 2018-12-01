@@ -18,7 +18,7 @@ use Fewbricks\ACF\FieldInterface;
 class TrueFalse extends Field implements FieldInterface
 {
 
-    const MY_TYPE = 'true_false';
+    const TYPE = 'true_false';
 
     /**
      * @return mixed The value of the ACF setting "default_value". Returns the default ACF value false" if none has been

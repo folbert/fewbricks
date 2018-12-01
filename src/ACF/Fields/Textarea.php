@@ -18,7 +18,7 @@ use Fewbricks\ACF\FieldInterface;
 class Textarea extends Field implements FieldInterface
 {
 
-    const MY_TYPE = 'textarea';
+    const TYPE = 'textarea';
 
     /**
      * @return mixed The value of the ACF setting "maxlength". Returns the default ACF value "" if none has been

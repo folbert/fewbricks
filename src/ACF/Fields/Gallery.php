@@ -18,7 +18,7 @@ use Fewbricks\ACF\FieldWithImages;
 class Gallery extends FieldWithImages implements FieldInterface
 {
 
-    const MY_TYPE = 'gallery';
+    const TYPE = 'gallery';
 
     /**
      * @return mixed The value of the ACF setting "insert". Returns the default ACF value "append" if none has been
