@@ -14,6 +14,7 @@ use Fewbricks\ACF\FieldGroupLocationRuleGroup;
 use Fewbricks\ACF\Fields\Email;
 use Fewbricks\ACF\Fields\Extensions\AcfCodeField;
 use Fewbricks\ACF\Fields\Extensions\DynamicYearSelect;
+use Fewbricks\ACF\Fields\Extensions\Table;
 use Fewbricks\ACF\Fields\Select;
 use Fewbricks\ACF\Fields\Text;
 use Fewbricks\ACF\Fields\Wysiwyg;
@@ -85,6 +86,7 @@ $motivation = (new Wysiwyg('Please motivate', 'motivation', '1811292147a'))
                 'relative_year' => '2',
             ]),
         (new AcfCodeField('Code', 'code', '1812012332a'))->setMode('application/x-httpd-php')->setPlaceholder('Placehålder')->setDefaultValue('Default value'),
+        (new Table('Table', 'table', '1812012354a'))
     ])
     // What's a brick you wonder? Read under Bricks for more info
     ->addBrick(
