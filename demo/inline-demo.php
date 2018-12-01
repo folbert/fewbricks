@@ -72,7 +72,16 @@ $motivation = (new Wysiwyg('Please motivate', 'motivation', '1811292147a'))
         $motivation,
         // Create an inline field
         (new Email('Enter your e-mail for a chance to win!', 'e_mail', '1811281100a'))
-            ->setRequired(true)
+            ->setRequired(true),
+        (new DynamicYearSelect('Select a year', 'year', '1812012249a'))
+            ->setNewestYear([
+                'method' => 'relative',
+                'relative_year' => '20',
+            ])
+            ->setOldestYear([
+                'method' => 'relative',
+                'relative_year' => '2',
+            ])
     ])
     // What's a brick you wonder? Read under Bricks for more info
     ->addBrick(

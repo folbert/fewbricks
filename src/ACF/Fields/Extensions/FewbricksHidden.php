@@ -17,6 +17,6 @@ use Fewbricks\ACF\Field;
 class FewbricksHidden extends Field
 {
 
-    const MY_TYPE = 'fewbricks_hidden';
+    const TYPE = 'fewbricks_hidden';
 
 }
