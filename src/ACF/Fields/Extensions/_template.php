@@ -7,9 +7,16 @@
 // Make sure to set your own namespace here
 //namespace Your\Namespaces;
 
+// Select the correct parent below
 use Fewbricks\ACF\Field;
+//use Fewbricks\ACF\DateTimeField
+//use Fewbricks\ACF\FieldWithChoices
+//use Fewbricks\ACF\FieldWithFields
+//use Fewbricks\ACF\FieldWithImages
+//use Fewbricks\ACF\FieldWithLayouts
 
 // Replace NameOfField with CamelCase version of the value of TYPE below.
+// Select the correct parent to extend
 class NameOfField extends Field
 {
 

@@ -6,6 +6,10 @@ permalink: /faq/
 ---
 
 # FAQ
+{: .no_toc }
+
+- TOC
+{:toc}
 
 ## What's up with the weird strings like "1811302108a"?
 Those strings are keys that ACF uses. When creating fields and field groups using ACFs GUI, ACF takes care of 
@@ -30,7 +34,7 @@ See [ACFs documentation on `acf_add_local_field_group()`](https://www.advancedcu
 .com/resources/register-fields-via-php/#group-settings). It states that you must append field group keys with 
 "group_" and keys for fields must start with "field_". Fewbricks takes care of that for you if you don't do it yourself.
 
-## Why isn't Fewbricks in the WoprdPress Plugin Directory?
+## Why isn't Fewbricks in the WordPress Plugin Directory?
 I submitted Fewbricks1 to WordPress in april 2016 but it was rejected. This is the main point copied from the 
 rejection mail: 
 

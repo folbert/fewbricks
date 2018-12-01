@@ -126,9 +126,10 @@ for more on keys.
 In Fewbricks FieldGroup class we have implemented getters and setters for all the ACF settings that are available at the
 time of writing this (ACF v.5.7.7). You can also use the generic functions `setSetting()` and `getSetting()` to set 
 and get any new settings that ACF introduces without having to wait for Fewbricks to be updated with new getters and 
-setters. Yes, you can use those generic functions instead of Fewbricks settings-specific functions as well if you 
-want but having for example `setLabelPlacement()` popping up if your editor handles auto complete is way easier than 
-having to remember every settings name like in Fewbricks 1.
+setters. This also applies to settings that are introduced by any extension that you install. Yes, you can use those 
+generic functions instead of Fewbricks settings-specific functions as well if you want but having for example 
+`setLabelPlacement()` popping up if your editor handles auto complete is way easier than having to remember every 
+settings name like in Fewbricks 1.
  
 The function names are camelCaseVersions of ACFs snake_case_names. So for example the setting "label_placement" is 
 set by calling `setLabelPlacement('value')` and "Description" is set by `setDescription()`. Most of the times you will
@@ -140,7 +141,7 @@ which corresponds to `setMenuOrder()` in Fewbricks. The easiest way to find out 
 using the filter [fewbricks/dev_tools/show_fields_info](/filters/dev_tools--show_fields_info/). This will display what 
 each setting is actually stored as by ACF.
 
-## More functions
+## Fewbricks functions
 Besides setting and getting all the ACF settings, the following functions are available for you to interact with field 
 groups. For info on which arguments to pass to each function, please refer to each functions docblock or body in the 
 code.
