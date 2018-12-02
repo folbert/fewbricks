@@ -8,7 +8,7 @@ permalink: /fields/
 
 # Fields
 All field types that are available in ACF are available in Fewbricks. With one exception; the field type Clone. 
-Check the [FAZ](/faq/) on why.
+Check the [FAQ](/faq/) on why.
 
 ## Create a field instance
 ```php

@@ -2,7 +2,7 @@
 parent: Filters
 layout: default
 title: templater/brick_views_file_name_structure
-nav_order: 9
+nav_order: 90
 permalink: /filters/templater--brick-views-file-name-structure/
 ---
 

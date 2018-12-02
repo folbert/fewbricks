@@ -14,12 +14,8 @@ class ImageAndText extends Brick
     public function setFields()
     {
 
-        $text = (new Text('Text', $this->getArgument('text_name', 'text'), '1811292152a'))
+        $text = (new Text('Text', 'text', '1811292152a'))
             ->setRequired(true);
-
-        if(false !== ($text_label = $this->getArgument('text_label', false))) {
-            $text->setLabel($text_label);
-        }
 
         $image = (new Image('Image', 'image', '1811272243a'))
             ->setRequired(true)

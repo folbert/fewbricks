@@ -11,6 +11,8 @@ permalink: /bricks/
 When added to a field group or another brick, bricks are just a collection of fields which will be added just like 
 they would if you used `addField()` or `addFields()`.
 
+## Templates
+
 ## getBrickHtml()
 If you want to use 
 
