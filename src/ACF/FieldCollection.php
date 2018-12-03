@@ -97,7 +97,7 @@ class FieldCollection extends Collection implements FieldCollectionInterface
     private function prepareBrickForAdd(Brick &$brick)
     {
 
-        $brick->setFields();
+        $brick->setup();
         $brick->prepareForAcfArray();
 
     }

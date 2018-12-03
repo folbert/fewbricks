@@ -32,26 +32,6 @@ add_filter('fewbricks/exporter/auto_write_php_code_file', function () {
 add_filter('fewbricks/exporter/display_php_file_written_message', '__return_true');
 
 /**
- * Add some options pages for us to add field groups to later on
- */
-acf_add_options_page([
-    'page_title' => 'Fewbricks Demo Options',
-    'menu_slug' => 'fewbricks-demo-options',
-]);
-
-acf_add_options_sub_page([
-    'page_title' => 'Global texts and data',
-    'menu_slug' => 'fewbricks-demo-options--global-texts',
-    'parent_slug' => 'fewbricks-demo-options',
-]);
-
-acf_add_options_sub_page([
-    'page_title' => 'Developer settings',
-    'pmenu_slug' => 'fewbricks-demo-options--developer-settings',
-    'parent_slug' => 'fewbricks-demo-options',
-]);
-
-/**
  * Simple autoloader
  */
 spl_autoload_register(function ($class) {

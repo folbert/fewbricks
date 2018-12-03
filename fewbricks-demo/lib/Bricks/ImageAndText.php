@@ -11,7 +11,7 @@ class ImageAndText extends Brick
     /**
      *
      */
-    public function setFields()
+    public function setup()
     {
 
         $text = (new Text('Text', 'text', '1811292152a'))

@@ -10,6 +10,6 @@ namespace Fewbricks;
 interface BrickInterface
 {
 
-    public function setFields();
+    public function setup();
 
 }

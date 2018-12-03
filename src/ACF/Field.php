@@ -236,13 +236,13 @@ class Field extends Item
     }
 
     /**
-     * @param array $extraSettings Any extra settings that you want to apply at the last minute. Be careful not to set
+     * @param array $extra_settings Any extra settings that you want to apply at the last minute. Be careful not to set
      *                             crucial settings like "key" and "conditional_logic" here. We will not remove any
      *                             such items from the array in case you really want to set them,
      *
      * @return array
      */
-    public function toAcfArray(array $extraSettings = [])
+    public function toAcfArray(array $extra_settings = [])
     {
 
         $settings = parent::toAcfArray();
@@ -262,7 +262,7 @@ class Field extends Item
 
         }
 
-        $settings = array_merge($settings, $extraSettings);
+        $settings = array_merge($settings, $extra_settings);
 
         return $settings;
 

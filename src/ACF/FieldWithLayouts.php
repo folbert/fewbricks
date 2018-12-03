@@ -23,14 +23,15 @@ class FieldWithLayouts extends Field
      * @param string $label
      * @param string $name
      * @param string $key
-     * @param array  $settings
+     * @param array $settings
      */
     public function __construct(
         $label,
         $name,
         $key,
         array $settings = []
-    ) {
+    )
+    {
 
         parent::__construct($label, $name, $key, $settings);
 
@@ -40,7 +41,8 @@ class FieldWithLayouts extends Field
     }
 
     /**
-     * @param Layout $layout
+     * @param $layout
+     * @return $this
      */
     public function addLayout($layout)
     {
@@ -48,24 +50,6 @@ class FieldWithLayouts extends Field
         $this->layouts->addItem($layout, $layout->getKey());
 
         return $this;
-
-    }
-
-    /**
-     * @param array $extraSettings Any extra settings that you want to apply at the last minute. Be careful not to set
-     *                             crucial settings like "key" and "conditional_logic" here. We will not remove any
-     *                             such items from the array in case you really want to set them,
-     *
-     * @return array
-     */
-    public function toAcfArray(array $extraSettings = [])
-    {
-
-        $settings = parent::toAcfArray($extraSettings);
-
-        $settings['layouts'] = $this->layouts->toAcfArray();
-
-        return $settings;
 
     }
 
@@ -122,6 +106,24 @@ class FieldWithLayouts extends Field
     {
 
         return $this->setSetting('button_label', $buttonLabel);
+
+    }
+
+    /**
+     * @param array $extra_settings Any extra settings that you want to apply at the last minute. Be careful not to set
+     * such items from the array in case you really want to set them, crucial settings like "key" and
+     * "conditional_logic" here.
+     *
+     * @return array
+     */
+    public function toAcfArray(array $extra_settings = [])
+    {
+
+        $settings = parent::toAcfArray($extra_settings);
+
+        $settings['layouts'] = $this->layouts->toAcfArray();
+
+        return $settings;
 
     }
 

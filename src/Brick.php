@@ -216,11 +216,11 @@ class Brick extends FieldCollection implements BrickInterface
     }
 
     /**
-     * @param string $data_name The first parameter to pass to ACFs get_field-function. This value may be changed
-     *                                          inside the function depending on the values of other parameters.
+     * @param string $field_name The first parameter to pass to ACFs get_field-function. This value may be changed
+     * inside the function depending on the values of other parameters.
      * @param bool $post_id Second parameter to pass to ACFs get_field-function
      * @param bool $format_value Third parameter to pass to ACFs get_field-function
-     * @param bool $prepend_current_objects_name If the current objects name should be prepended to $dataName
+     * @param bool $prepend_current_objects_name If the current objects name should be prepended to $data_name
      * @param bool $get_from_sub_field
      *
      * @return bool|mixed|null
@@ -228,26 +228,22 @@ class Brick extends FieldCollection implements BrickInterface
      * @link https://www.advancedcustomfields.com/resources/get_sub_field/
      * @link https://www.advancedcustomfields.com/resources/get_field/
      */
-    protected function getFieldValue(
-        $data_name,
-        $post_id = false,
-        $format_value = true,
-        $prepend_current_objects_name = true,
-        $get_from_sub_field = false
+    protected function getFieldValue($field_name, $post_id = false, $format_value = true,
+                                     $prepend_current_objects_name = true, $get_from_sub_field = false
     )
     {
 
         if ($prepend_current_objects_name) {
 
-            if (substr($data_name, 0, 1) !== '_') {
-                $data_name = '_' . $data_name;
+            if (substr($field_name, 0, 1) !== '_') {
+                $field_name = '_' . $field_name;
             }
 
-            $name = $this->name . $data_name;
+            $name = $this->name . $field_name;
 
         } else {
 
-            $name = $data_name;
+            $name = $field_name;
 
         }
 
@@ -452,10 +448,9 @@ class Brick extends FieldCollection implements BrickInterface
     /**
      * This function, which is empty on purpose, will automatically be called when instantiating a brick class. You can
      * uses this fact by overriding it in your own Brick classes and adding code for adding your own fields or bricks
-     * or whatever you want. By keeping an empty function here, you don't have to implement an empty function
-     * yourself if you, for some reason, want to create a brick that does not have any fields.
+     * or whatever you want.
      */
-    public function setFields()
+    public function setup()
     {
 
     }

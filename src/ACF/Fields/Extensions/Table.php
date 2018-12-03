@@ -52,10 +52,10 @@ class Table extends Field
     }
 
     /**
-     * @param array $extraSettings
+     * @param array $extra_settings
      * @return array
      */
-    public function toAcfArray(array $extraSettings = [])
+    public function toAcfArray(array $extra_settings = [])
     {
 
         // Fix since the field does not check if indexes are set before using the value.
@@ -67,7 +67,7 @@ class Table extends Field
             $this->setUseHeader(0);
         }
 
-        return parent::toAcfArray($extraSettings);
+        return parent::toAcfArray($extra_settings);
 
     }
 

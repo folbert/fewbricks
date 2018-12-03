@@ -17,3 +17,5 @@ they would if you used `addField()` or `addFields()`.
 If you want to use 
 
 ## getHtml()
+
+## setup() called on every instance

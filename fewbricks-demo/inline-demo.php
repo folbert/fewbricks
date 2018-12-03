@@ -12,9 +12,6 @@ use Fewbricks\ACF\FieldGroup;
 use Fewbricks\ACF\FieldGroupLocationRule;
 use Fewbricks\ACF\FieldGroupLocationRuleGroup;
 use Fewbricks\ACF\Fields\Email;
-use Fewbricks\ACF\Fields\Extensions\AcfCodeField;
-use Fewbricks\ACF\Fields\Extensions\DynamicYearSelect;
-use Fewbricks\ACF\Fields\Extensions\Table;
 use Fewbricks\ACF\Fields\Select;
 use Fewbricks\ACF\Fields\Text;
 use Fewbricks\ACF\Fields\Wysiwyg;
@@ -60,7 +57,7 @@ $motivation = (new Wysiwyg('Please motivate', 'motivation', '1811292147a'))
         (new FieldGroupLocationRuleGroup())
             ->addFieldGroupLocationRule(
             // When editing a post
-                new FieldGroupLocationRule('post_type', '==', 'post')
+                new FieldGroupLocationRule('post_type', '==', 'fewbricks_demo_pg')
             )
     )
     // Hide everything on screen that ACF can hide...
@@ -76,17 +73,6 @@ $motivation = (new Wysiwyg('Please motivate', 'motivation', '1811292147a'))
         // Create an inline field
         (new Email('Enter your e-mail for a chance to win!', 'e_mail', '1811281100a'))
             ->setRequired(true),
-        (new DynamicYearSelect('Select a year', 'year', '1812012249a'))
-            ->setNewestYear([
-                'method' => 'relative',
-                'relative_year' => '20',
-            ])
-            ->setOldestYear([
-                'method' => 'relative',
-                'relative_year' => '2',
-            ]),
-        (new AcfCodeField('Code', 'code', '1812012332a'))->setMode('application/x-httpd-php')->setPlaceholder('Placehålder')->setDefaultValue('Default value'),
-        (new Table('Table', 'table', '1812012354a'))
     ])
     // What's a brick you wonder? Read under Bricks for more info
     ->addBrick(

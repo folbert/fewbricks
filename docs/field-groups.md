@@ -115,7 +115,7 @@ class FooterGlobalTexts extends FieldGroup
 
 ```
 
-Then you could create and register the field group by calling `(new FooterGlobalTexts('Global texts', '1812010004a''))
+Then you could create and register the field group by calling `(new FooterGlobalTexts('Global texts', '1812010004a'')
 ->setup()`.
 
 ## Keys

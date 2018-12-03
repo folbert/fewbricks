@@ -11,7 +11,7 @@ class Headline extends Brick {
     /**
      *
      */
-    public function setFields()
+    public function setup()
     {
 
         $level = new Select('Headline level', 'level', '1811272226a');

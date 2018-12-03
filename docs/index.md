@@ -59,9 +59,10 @@ class ImageAndText extends Brick
 {
 
     /**
-     * Set the fields that the Brick is made up of
+     * Set the fields that the Brick is made up of.
+     * The setup function is automatically called by the parent Brick class.
      */
-    public function setFields()
+    public function setup()
     {
         
         $text = (new Text('Text', 'the_text', '1811292152a'))
