@@ -35,7 +35,7 @@ class FieldWithFields extends Field implements FieldCollectionInterface
 
         parent::__construct($label, $name, $key, $settings);
 
-        $this->fields = new FieldCollection();
+        $this->fields = new SubFieldCollection();
         $this->fields->setBaseKey($key);
 
     }
