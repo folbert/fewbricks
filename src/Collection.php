@@ -62,7 +62,7 @@ class Collection
     public function addItemAfterItemByKey($item, $key_to_add_after, $key_of_new_item = null)
     {
 
-        if (false !== ($position_to_add_after = $this->getItemIndex($key_to_add_after))) {
+        if (false !== ($position_to_add_after = $this->getItemPositionForKey($key_to_add_after))) {
 
             if (is_null($key_of_new_item)) {
                 $newItem = [$item];
@@ -94,7 +94,7 @@ class Collection
     public function addItemBeforeItemByKey($item, $key_of_field_to_add_before, $key_of_new_item = null)
     {
 
-        if (false !== ($position_to_add_before = $this->getItemIndex($key_of_field_to_add_before))) {
+        if (false !== ($position_to_add_before = $this->getItemPositionForKey($key_of_field_to_add_before))) {
 
             if (is_null($key_of_new_item)) {
                 $newItem = [$item];
@@ -169,26 +169,26 @@ class Collection
     }
 
     /**
-     * @param string $keyToSearchFor
+     * @param string $key_to_search_for
      * @return bool|int
      */
-    public function getItemIndex($keyToSearchFor)
+    public function getItemPositionForKey($key_to_search_for)
     {
 
         $position = false;
 
-        $positionTracker = 0;
+        $position_tracker = 0;
 
         foreach ($this->items AS $key => $item) {
 
-            if ($key === $keyToSearchFor) {
+            if ($key === $key_to_search_for) {
 
-                $position = $positionTracker;
+                $position = $position_tracker;
                 break;
 
             }
 
-            $positionTracker++;
+            $position_tracker++;
 
         }
 

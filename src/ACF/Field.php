@@ -247,7 +247,7 @@ class Field extends Item
 
         $settings = parent::toAcfArray();
 
-        $settings['key'] = Helper::maybePrefixFieldKey($settings['key']);
+        $settings['key'] = Helper::getValidFieldKey($settings['key']);
 
         $settings = array_merge($settings, [
             'fewbricks__original_key' => $this->getOriginalKey(),

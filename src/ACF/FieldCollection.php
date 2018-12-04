@@ -694,7 +694,7 @@ class FieldCollection extends Collection implements FieldCollectionInterface
                         if($target_field_object !== false) {
 
                             $conditional_logic_groups[$conditional_logic_group_key][$conditional_logic_item_key]['field']
-                                = Helper::maybePrefixFieldKey($target_field_object->getKey());
+                                = Helper::getValidFieldKey($target_field_object->getKey());
 
                         }
 

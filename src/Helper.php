@@ -209,7 +209,7 @@ class Helper
      * @param $field_key
      * @return string
      */
-    public static function maybePrefixFieldKey($field_key)
+    public static function getValidFieldKey($field_key)
     {
 
         // Lets make sure that the key is ok for ACF
@@ -226,7 +226,7 @@ class Helper
      * @param $field_group_key
      * @return string
      */
-    public static function maybePrefixFieldGroupKey($field_group_key)
+    public static function getValidFieldGroupKey($field_group_key)
     {
 
         // Lets keep in order with how ACF gives keys to field groups and prepend with "group_"

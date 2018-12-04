@@ -583,7 +583,7 @@ class FieldGroup extends FieldCollection implements FieldGroupInterface
     {
 
         return array_merge($this->settings, [
-            'key' => Helper::maybePrefixFieldGroupKey($this->getKey()),
+            'key' => Helper::getValidFieldGroupKey($this->getKey()),
             'title' => $this->getTitle(),
             'location' => $this->location_rule_groups->toArray(),
             'fields' => parent::toAcfArray(),
