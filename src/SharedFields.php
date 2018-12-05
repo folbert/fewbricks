@@ -9,7 +9,7 @@ use Fewbricks\ACF\FieldCollection;
  *
  * @package Fewbricks
  */
-class SharedFields extends FieldCollection
+class XSharedFields extends FieldCollection
 {
 
     public function __construct(array $arguments = [])

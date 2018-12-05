@@ -18,6 +18,11 @@ class Item
     protected $key;
 
     /**
+     * @var
+     */
+    protected $keyPrefix;
+
+    /**
      * @var string
      */
     protected $label;
@@ -66,6 +71,7 @@ class Item
         $this->label = $label;
         $this->name = $name;
         $this->key = $key;
+        $this->keyPrefix = '';
 
         $this->originalKey = $key;
 
@@ -279,22 +285,7 @@ class Item
     }
 
     /**
-     * @return array
-     */
-    public function toAcfArray()
-    {
-
-        $settings = $this->settings;
-        $settings['key'] = $this->getKey();
-        $settings['label'] = $this->label;
-        $settings['name'] = $this->name;
-
-        return $settings;
-
-    }
-
-    /**
-     * @return string The key of the field
+     * @return string
      */
     public function getKey()
     {
@@ -323,6 +314,52 @@ class Item
     {
 
         $this->label = $label;
+
+    }
+
+    /**
+     * Empty to allow overriding but not requiring implementing in every field.
+     */
+    protected function prepareForAcfArray()
+    {
+
+    }
+
+    /**
+     * @param string $key_prefix
+     * @return string
+     */
+    private function getFinalKey($key_prefix = '')
+    {
+
+        if(!empty($key_prefix)) {
+            $key_prefix .= '_';
+        }
+
+        $parent_brick_key = $this->getParentBrickKey();
+        if(!empty($parent_brick_key)) {
+            $key_prefix .= $parent_brick_key . '_';
+        }
+
+        return $key_prefix . $this->getKey();
+
+    }
+
+    /**
+     * @param string $key_prefix
+     * @return array
+     */
+    public function toAcfArray(string $key_prefix = '')
+    {
+
+        $this->prepareForAcfArray();
+
+        $settings = $this->settings;
+        $settings['key'] =  $this->getFinalKey($key_prefix);
+        $settings['label'] = $this->label;
+        $settings['name'] = $this->name;
+
+        return $settings;
 
     }
 

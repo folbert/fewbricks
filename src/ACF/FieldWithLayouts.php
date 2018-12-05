@@ -35,8 +35,7 @@ class FieldWithLayouts extends Field
 
         parent::__construct($label, $name, $key, $settings);
 
-        $this->layouts = new LayoutCollection();
-        $this->layouts->setBaseKey($key);
+        $this->layouts = new LayoutCollection($key);
 
     }
 
@@ -110,18 +109,16 @@ class FieldWithLayouts extends Field
     }
 
     /**
-     * @param array $extra_settings Any extra settings that you want to apply at the last minute. Be careful not to set
-     * such items from the array in case you really want to set them, crucial settings like "key" and
-     * "conditional_logic" here.
+     * @param string $key_prefix
      *
      * @return array
      */
-    public function toAcfArray(array $extra_settings = [])
+    public function toAcfArray(string $key_prefix = '')
     {
 
-        $settings = parent::toAcfArray($extra_settings);
+        $settings = parent::toAcfArray($key_prefix);
 
-        $settings['layouts'] = $this->layouts->toAcfArray();
+        $settings['layouts'] = $this->layouts->toAcfArray($settings['key']);
 
         return $settings;
 

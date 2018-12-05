@@ -236,16 +236,14 @@ class Field extends Item
     }
 
     /**
-     * @param array $extra_settings Any extra settings that you want to apply at the last minute. Be careful not to set
-     *                             crucial settings like "key" and "conditional_logic" here. We will not remove any
-     *                             such items from the array in case you really want to set them,
+     * @param string $key_prefix
      *
      * @return array
      */
-    public function toAcfArray(array $extra_settings = [])
+    public function toAcfArray(string $key_prefix = '')
     {
 
-        $settings = parent::toAcfArray();
+        $settings = parent::toAcfArray($key_prefix);
 
         $settings['key'] = Helper::getValidFieldKey($settings['key']);
 
@@ -261,8 +259,6 @@ class Field extends Item
             $settings['conditional_logic'] = $this->conditionalLogicRuleGroups->toArray();
 
         }
-
-        $settings = array_merge($settings, $extra_settings);
 
         return $settings;
 

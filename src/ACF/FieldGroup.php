@@ -43,11 +43,6 @@ class FieldGroup extends FieldCollection implements FieldGroupInterface
     private $title;
 
     /**
-     * @var string
-     */
-    private $key;
-
-    /**
      * @var RuleGroupCollection
      */
     private $location_rule_groups;
@@ -72,11 +67,10 @@ class FieldGroup extends FieldCollection implements FieldGroupInterface
         // Let's keep these crucial settings as class vars to enable nicer
         // and more OOP-oriented access
         $this->title = $title;
-        $this->key = $key;
         $this->settings = [];
         $this->clearLocationRuleGroups();
 
-        parent::__construct();
+        parent::__construct($key);
 
     }
 
@@ -243,16 +237,6 @@ class FieldGroup extends FieldCollection implements FieldGroupInterface
     }
 
     /**
-     * @return string
-     */
-    public function getKey()
-    {
-
-        return $this->key;
-
-    }
-
-    /**
      * ACF Setting
      *
      * @return bool|mixed
@@ -371,7 +355,7 @@ class FieldGroup extends FieldCollection implements FieldGroupInterface
 
         $this->prepareForRegistration();
 
-        $acf_settings_array = $this->toAcfArray();
+        $acf_settings_array = $this->toAcfArray($this->getKey());
 
         Exporter::maybeStoreSimpleFieldGroupData($acf_settings_array['title'], $acf_settings_array['key']);
         Exporter::maybeStoreFieldGroupAcfSettings($acf_settings_array);
@@ -577,16 +561,17 @@ class FieldGroup extends FieldCollection implements FieldGroupInterface
     }
 
     /**
+     * @param string $key_prefix
      * @return array
      */
-    public function toAcfArray()
+    public function toAcfArray(string $key_prefix = '')
     {
 
         return array_merge($this->settings, [
             'key' => Helper::getValidFieldGroupKey($this->getKey()),
             'title' => $this->getTitle(),
             'location' => $this->location_rule_groups->toArray(),
-            'fields' => parent::toAcfArray(),
+            'fields' => parent::toAcfArray($key_prefix),
         ]);
 
     }

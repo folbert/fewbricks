@@ -17,44 +17,47 @@ class FieldCollection extends Collection implements FieldCollectionInterface
     /**
      * @var array
      */
-    private $arguments;
+    protected $arguments;
 
     /**
      * @var string
      */
-    private $base_key;
+    protected $base_key;
+
+    protected $key;
 
     /**
      * String to prefix labels of all the fields in the collection with.
      * @var string
      */
-    private $field_labels_prefix;
+    protected $field_labels_prefix;
 
     /**
      * String to suffix labels of all the fields in the collection with.
      * @var string
      */
-    private $field_labels_suffix;
+    protected $field_labels_suffix;
 
     /**
      * String to prefix field names of all the fields in the collection with.
      * @var string
      */
-    private $field_names_prefix;
+    protected $field_names_prefix;
 
     /**
      * @var boolean
      */
-    private $prepared_for_acf_array;
+    protected $prepared_for_acf_array;
 
     /**
      * FieldCollection constructor.
      *
      * @param array $arguments
      */
-    public function __construct(array $arguments = [])
+    public function __construct(string $key, array $arguments = [])
     {
 
+        $this->key = $key;
         $this->arguments = $arguments;
         $this->field_names_prefix = '';
         $this->field_labels_prefix = '';
@@ -88,6 +91,13 @@ class FieldCollection extends Collection implements FieldCollectionInterface
         foreach ($bricks AS $brick) {
             $this->addBrick($brick);
         }
+
+    }
+
+    public function getKey()
+    {
+
+        return $this->key;
 
     }
 
@@ -460,7 +470,7 @@ class FieldCollection extends Collection implements FieldCollectionInterface
      * @param string $name
      * @return $this
      */
-    public function removeBrickByName($name)
+    public function removeBrickByName(string $name)
     {
 
         /** @var Field $field */
@@ -497,7 +507,7 @@ class FieldCollection extends Collection implements FieldCollectionInterface
      * @param string $key
      * @return $this
      */
-    public function removeFieldByKey($key)
+    public function removeFieldByKey(string $key)
     {
 
         $this->removeItem($key);
@@ -533,7 +543,7 @@ class FieldCollection extends Collection implements FieldCollectionInterface
      * @param string $fieldName The name of a field. Not the key, not the label, the name.
      * @return $this
      */
-    public function removeFieldByName($fieldName)
+    public function removeFieldByName(string $fieldName)
     {
 
         /** @var Field $field */
@@ -573,7 +583,7 @@ class FieldCollection extends Collection implements FieldCollectionInterface
      * @param mixed $value
      * @return $this
      */
-    public function addArgument($name, $value)
+    public function addArgument(string $name, $value)
     {
 
         $this->arguments[$name] = $value;
@@ -609,31 +619,6 @@ class FieldCollection extends Collection implements FieldCollectionInterface
         $this->field_names_prefix = $prefix;
 
         return $this;
-
-    }
-
-    /**
-     * @return array An array that ACF can work with.
-     */
-    public function toAcfArray()
-    {
-
-        $this->prepareForAcfArray();
-
-        $acf_array = [];
-
-        /** @var Field $field */
-        foreach ($this->items AS $field) {
-
-            $field->prefixKey($this->getBaseKey() . '_');
-
-            $acf_array[] = $field->toAcfArray();
-
-        }
-
-        $acf_array = $this->prepareFieldsConditionalLogic($acf_array);
-
-        return $acf_array;
 
     }
 
@@ -739,6 +724,41 @@ class FieldCollection extends Collection implements FieldCollectionInterface
         $this->removeFieldByName($name_of_field_to_replace);
 
         return $this;
+
+    }
+
+    protected function validateItem($item)
+    {
+
+        $valid = true;
+
+        $this->validateKey($item->getKey(), $item);
+
+        return $valid;
+
+    }
+
+    /**
+     * @param string $key_prefix
+     * @return array An array that ACF can work with.
+     */
+    public function toAcfArray(string $key_prefix = '')
+    {
+
+        $this->prepareForAcfArray();
+
+        $acf_array = [];
+
+        /** @var Field $field */
+        foreach ($this->items AS $field) {
+
+            $acf_array[] = $field->toAcfArray($key_prefix);
+
+        }
+
+        $acf_array = $this->prepareFieldsConditionalLogic($acf_array);
+
+        return $acf_array;
 
     }
 

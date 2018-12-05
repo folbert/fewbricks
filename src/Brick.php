@@ -4,6 +4,7 @@ namespace Fewbricks;
 
 use Fewbricks\ACF\Field;
 use Fewbricks\ACF\FieldCollection;
+use Fewbricks\ACF\Item;
 
 /**
  * Class Brick
@@ -39,18 +40,13 @@ class Brick extends FieldCollection implements BrickInterface
     protected $name;
 
     /**
-     * @var string
-     */
-    private $key;
-
-    /**
      * @var int What post id we should get field from.
      */
     private $post_id_to_get_field_from;
 
     /**
      * @param string $name Name to use when fetching data for the brick.
-     * @param string $key This value must be unique system wide. See the documentation for motre info on this.
+     * @param string $key This value must be unique system wide. See the documentation for more info on this.
      * Note that it only needs to be set when registering the brick to a field group, layout etc. There's no need to
      * pass it when called from the frontend to print the brick.
      * @param array $arguments Arbitrary arguments you want to pass to a brick instance to be used within your brick
@@ -59,16 +55,25 @@ class Brick extends FieldCollection implements BrickInterface
     public function __construct($name, $key = '', $arguments = [])
     {
 
-        $this->key = $key;
         $this->name = $name;
-
         $this->data = [];
         $this->is_layout = false;
         $this->is_option = false;
         $this->is_sub_field = false;
         $this->post_id_to_get_field_from = false;
 
-        parent::__construct($arguments);
+        parent::__construct($key, $arguments);
+
+    }
+
+    /**
+     * @param Item $item
+     */
+    protected function finalizeItem($item)
+    {
+
+        $item->setParentBrickKey($this->getKey());
+        $item->setParentBrickName($this->getName());
 
     }
 
@@ -80,24 +85,9 @@ class Brick extends FieldCollection implements BrickInterface
     public function addField(Field $field)
     {
 
-        $field->prefixKey($this->getKey() . '_');
-        $field->prefixName($this->getName() . '_');
-        $field->setParentBrickKey($this->getKey());
-        $field->setParentBrickName($this->getName());
-
         parent::addField($field);
 
         return $this;
-
-    }
-
-    /**
-     * @return string
-     */
-    public function getKey()
-    {
-
-        return $this->key;
 
     }
 
@@ -452,16 +442,6 @@ class Brick extends FieldCollection implements BrickInterface
      */
     public function setup()
     {
-
-    }
-
-    /**
-     * @return array
-     */
-    public function toAcfArray()
-    {
-
-        return parent::toAcfArray();
 
     }
 
