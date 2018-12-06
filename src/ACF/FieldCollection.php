@@ -15,6 +15,11 @@ class FieldCollection extends Collection implements FieldCollectionInterface
 {
 
     /**
+     * @var
+     */
+    private $acf_array;
+
+    /**
      * @var array
      */
     protected $arguments;
@@ -22,8 +27,6 @@ class FieldCollection extends Collection implements FieldCollectionInterface
     /**
      * @var string
      */
-    protected $base_key;
-
     protected $key;
 
     /**
@@ -52,6 +55,7 @@ class FieldCollection extends Collection implements FieldCollectionInterface
     /**
      * FieldCollection constructor.
      *
+     * @param string $key
      * @param array $arguments
      */
     public function __construct(string $key, array $arguments = [])
@@ -63,6 +67,7 @@ class FieldCollection extends Collection implements FieldCollectionInterface
         $this->field_labels_prefix = '';
         $this->field_labels_suffix = '';
         $this->prepared_for_acf_array = false;
+        $this->acf_array = false;
 
         parent::__construct();
 
@@ -454,7 +459,7 @@ class FieldCollection extends Collection implements FieldCollectionInterface
         /** @var Field $field */
         foreach ($this->items AS $fieldKey => $field) {
 
-            if ($field->getParentBrickKey() === $key) {
+            if ($field->getParentType() === 'brick' && $field->getParentKey() === $key) {
                 $this->removeItem($fieldKey);
             }
 
@@ -476,7 +481,7 @@ class FieldCollection extends Collection implements FieldCollectionInterface
         /** @var Field $field */
         foreach ($this->items AS $fieldKey => $field) {
 
-            if ($field->getParentBrickName() === $name) {
+            if ($field->getParentType() === 'brick' && $field->getParentName() === $name) {
                 $this->removeItem($fieldKey);
             }
 
@@ -592,6 +597,55 @@ class FieldCollection extends Collection implements FieldCollectionInterface
 
     }
 
+
+    /**
+     * @param string $key
+     * @param array $acf_array
+     * @return bool
+     */
+    public function getFieldByOriginalKeyFromAcfArray(string $key, array $acf_array) {
+
+        $found_field = false;
+
+        foreach($acf_array AS $acf_array_key => $field_settings) {
+
+            if($field_settings['fewbricks__original_key'] == $key) {
+
+                $found_field = $field_settings;
+                break;
+
+            }
+
+        }
+
+        return $found_field;
+
+    }
+
+    /**
+     * @param string $key
+     * @return Field|bool
+     */
+    public function getFieldByOriginalKeyFromObjects(string $key) {
+
+        $found_field = false;
+
+        /** @var Field $field */
+        foreach($this->items AS $field) {
+
+            if($field->getOriginalKey() === $key) {
+
+                $found_field = $field;
+                break;
+
+            }
+
+        }
+
+        return $found_field;
+
+    }
+
     /**
      * Set a string that will be prefixed to the labels of the fields that are added to this field group.
      *
@@ -623,32 +677,10 @@ class FieldCollection extends Collection implements FieldCollectionInterface
     }
 
     /**
-     * @return mixed
+     * @param array $acf_array
+     * @return array
      */
-    public function getBaseKey()
-    {
-
-        return $this->base_key;
-
-    }
-
-    /**
-     * @param string $base_key
-     * @return $this
-     */
-    public function setBaseKey($base_key)
-    {
-
-        $this->base_key = $base_key;
-
-        return $this;
-
-    }
-
-    /**
-     * @return mixed
-     */
-    private function prepareFieldsConditionalLogic($acf_array)
+    private function prepareFieldsConditionalLogic(array $acf_array)
     {
 
         // Conditional logic for ACF is made up of a three-levelled array where the first level is the entire logic,
@@ -674,12 +706,12 @@ class FieldCollection extends Collection implements FieldCollectionInterface
                         $target_field_key
                             = $conditional_logic_groups[$conditional_logic_group_key][$conditional_logic_item_key]['field'];
 
-                        $target_field_object = $this->getItemByKey($target_field_key);
+                        $target_field_settings = $this->getFieldByOriginalKeyFromAcfArray($target_field_key, $acf_array);
 
-                        if($target_field_object !== false) {
+                        if($target_field_settings !== false) {
 
                             $conditional_logic_groups[$conditional_logic_group_key][$conditional_logic_item_key]['field']
-                                = Helper::getValidFieldKey($target_field_object->getKey());
+                                = $target_field_settings['key'];
 
                         }
 

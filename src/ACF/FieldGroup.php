@@ -191,16 +191,6 @@ class FieldGroup extends FieldCollection implements FieldGroupInterface
     }
 
     /**
-     * @return string
-     */
-    public function getBaseKey()
-    {
-
-        return $this->getKey();
-
-    }
-
-    /**
      * ACF setting
      *
      * @return bool|mixed

@@ -167,7 +167,7 @@ class Collection
     }
 
     /**
-     * @param Item $item
+     * @param Field $item
      * @return bool
      */
     protected function validateItem($item)
@@ -184,15 +184,15 @@ class Collection
     public function getItemByKey($key)
     {
 
-        $item = false;
+        $found_item = false;
 
         if (isset($this->items[$key])) {
 
-            $item = $this->items[$key];
+            $found_item = $this->items[$key];
 
         }
 
-        return $item;
+        return $found_item;
 
     }
 

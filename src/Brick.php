@@ -67,13 +67,12 @@ class Brick extends FieldCollection implements BrickInterface
     }
 
     /**
-     * @param Item $item
+     * @param Field $item
      */
     protected function finalizeItem($item)
     {
 
-        $item->setParentBrickKey($this->getKey());
-        $item->setParentBrickName($this->getName());
+        $item->setParentInfo($this->getKey(), 'brick', $this->getName());
 
     }
 
@@ -98,16 +97,6 @@ class Brick extends FieldCollection implements BrickInterface
     {
 
         return $this->name;
-
-    }
-
-    /**
-     * @return string
-     */
-    public function getBaseKey()
-    {
-
-        return $this->getKey();
 
     }
 

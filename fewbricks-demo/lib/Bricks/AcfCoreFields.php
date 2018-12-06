@@ -47,7 +47,59 @@ class AcfCoreFields extends Brick
     public function setup()
     {
 
-// ----------------
+        $this->addField(new Text('Text', 'fd_text', '18120621210a'));
+
+        // Showing how to set field settings after the field has been created
+        $button_group = new ButtonGroup('Button Group', 'fd_button_group', '1711172249u');
+        $button_group->setChoices([
+            'red' => 'Red',
+            'black' => 'Black',
+            'green' => 'Green',
+        ])
+            ->setSetting('required', true)
+            ->setDefaultValue('black');
+
+        $this->addField($button_group);
+
+        $this->addField(
+            (new Message('Testing conditional logic', 'fd_testing_conditional_logic', '1711202201x'))
+                ->setMessage('This should only be shown if the checkbox _below_is checked or if the button group is set
+                to "Black"')
+                ->addConditionalLogicRuleGroup(
+                    (new ConditionalLogicRuleGroup())
+                        ->addConditionalLogicRule(
+                            new ConditionalLogicRule('1711192022y', '==', '1')
+                        )
+                )
+                ->addConditionalLogicRuleGroup(
+                    (new ConditionalLogicRuleGroup())
+                        ->addConditionalLogicRule(
+                            new ConditionalLogicRule('1711172249u', '==', 'black')
+                        )
+                )
+        );
+
+        $this->addField(
+            (new TrueFalse('True/False', 'fd_true_false', '1711192022y'))
+                ->setMessage('Checking this field should trigger conditional logic displaying message fields above and below')
+        );
+
+        $this->addField(
+            (new Message('Testing conditional logic', 'fd_testing_conditional_statement', '1711202201a'))
+                ->setMessage('This should only be shown if the checkbox _above_ is checked and the button group isset to
+                 "Red"')
+                ->addConditionalLogicRuleGroup(
+                    (new ConditionalLogicRuleGroup())
+                        ->addConditionalLogicRule(
+                            new ConditionalLogicRule('1711192022y', '==', '1')
+                        )
+                        ->addConditionalLogicRule(
+                            new ConditionalLogicRule('1711172249u', '==', 'red')
+                        )
+                )
+        );
+
+        // ----------------
         // Flexible content
         $flexible_content = new FlexibleContent('Flexible content', 'fd_flexible_content', '1711231849a');
         $flexible_content->setButtonLabel('Fewbricks says: add layout');
@@ -61,13 +113,13 @@ class AcfCoreFields extends Brick
         $flexible_content->addLayout($layout);
 
         // Testing duplicate keys
-        $layout = new Layout('Text and image', 'fd_text_and_image', '1711231901i');
+        /*$layout = new Layout('Text and image', 'fd_text_and_image', '1711231901i');
         $layout->addField(new Text('Text', 'fd_text', '1711231901b'));
         $layout->addField(
             (new Image('Image', 'fd_image', '1711231901b'))
                 ->setPreviewSize('large')
         );
-        $flexible_content->addLayout($layout);
+        $flexible_content->addLayout($layout);*/
 
         $layout = new Layout('Testing brick', 'fd_testing_brick', '1812051452a');
         $layout->addBrick(new ImageAndText('brick_test', '1812051452u'));
@@ -107,26 +159,19 @@ class AcfCoreFields extends Brick
         // Repeater
         $repeater = new Repeater('Repeater', 'fd_repeater', '1711222156a');
 
-        $repeater->setButtonLabel('Fewbricks says: add row');
-        $repeater->setLayout('table');
-        $repeater->setCollapsed('1711222221a');
+        $repeater->setButtonLabel('Fewbricks says: add row')
+            ->setLayout('block')
+            ->setCollapsed('1712252216a');
 
         // Passing settings as fourth parameter
-        $repeater->addField(new Text('Repeater - Text', 'fd_repeater_text', '1711222221a',
-            ['required' => true]));
+        $repeater->addField(
+            (new Text('Repeater - Text', 'fd_repeater_text', '1711222221a'))
+                ->setRequired(true)
+        );
 
         $repeater->addField(new Image('Repeater - Image', 'fd_repeater_image', '1711222221b'));
-
         $repeater->addField(new Text('Repeater - Text 2', 'fd_repeater_text_2', '1712252216a'));
-
-        // This is of course a somewhat stupid usage of the functionality since we could simply
-        // not add the sub field to start with. But for demo purposes...
-        $subFieldsToRemove = $this->getArgument('remove_sub_fields', false);
-        if ($subFieldsToRemove !== false) {
-            foreach ($subFieldsToRemove AS $subFieldToRemove) {
-                $repeater->removeFieldByName($subFieldToRemove);
-            }
-        }
+        $repeater->addField(new Text('Repeater - Text 3', 'fd_repeater_text_3', '1812062132a'));
 
         $this->addField($repeater);
         // E.o. repeater
@@ -153,17 +198,6 @@ class AcfCoreFields extends Brick
 
         // The other fields are in alphabetical oder but lets start with a tab
         $this->addField(new Tab('Basic fields', 'fd_tab1', '1711192019a'));
-
-        // Showing how to set field settings after the field has been created
-        $button_group = new ButtonGroup('Button Group', 'fd_button_group', '1711172249u');
-        $button_group->setChoices([
-            'red' => 'Red',
-            'black' => 'Black',
-            'green' => 'Green',
-        ]);
-        $button_group->setSetting('required', true);
-        $button_group->setDefaultValue('black');
-        $this->addField($button_group);
 
         $this->addField(new Checkbox('Checkbox', 'fd_checkbox',
             '1711172310a', [
