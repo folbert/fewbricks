@@ -239,4 +239,41 @@ class Helper
 
     }
 
+    /**
+     * @param string $key
+     * @param array $acf_array
+     * @return bool
+     */
+    public static function getFieldByOriginalKeyFromAcfArray(string $key, array $acf_array) {
+
+        $found_field = false;
+
+        foreach($acf_array AS $acf_array_key => $field_settings) {
+
+            if($field_settings['fewbricks__original_key'] == $key) {
+
+                $found_field = $field_settings;
+
+            }
+
+            if($found_field === false) {
+
+                if(isset($field_settings['sub_fields']) && is_array($field_settings['sub_fields'])) {
+
+                    $found_field = self::getFieldByOriginalKeyFromAcfArray($key, $field_settings['sub_fields']);
+
+                } else if(isset($field_settings['layouts']) && is_array($field_settings['layouts'])) {
+
+                    $found_field = self::getFieldByOriginalKeyFromAcfArray($key, $field_settings['layouts']);
+
+                }
+
+            }
+
+        }
+
+        return $found_field;
+
+    }
+
 }

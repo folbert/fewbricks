@@ -25,4 +25,14 @@ add_action('fewbricks/init', function () {
         ->setup()
         ->register();
 
+    (new AllFields('All fields 2', '1812032255a'))
+        ->addLocationRuleGroup(
+            (new FieldGroupLocationRuleGroup())
+                ->addFieldGroupLocationRule(
+                    new FieldGroupLocationRule('post_type', '==', 'fewbricks_demo_pg2')
+                )
+        )
+        ->setup()
+        ->register();
+
 });

@@ -73,18 +73,15 @@ class AcfCodeField extends Field
     }
 
     /**
-     * @param array $extra_settings
-     * @return array
+     * This function is called right before field is turned into ACF array.
      */
-    public function toAcfArray(array $extra_settings = [])
+    protected function prepareForAcfArray()
     {
 
         // Fix since the field does not check if placeholder is set before using the value.
         if($this->getSetting('placeholder', false) === false) {
             $this->setPlaceholder('');
         }
-
-        return parent::toAcfArray($extra_settings);
 
     }
 

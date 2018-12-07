@@ -41,24 +41,6 @@ class Repeater extends FieldWithFields implements FieldInterface
     }
 
     /**
-     * @param array $extra_settings Any extra settings that you want to apply at the last minute. Be careful not to set
-     *                             crucial settings like "key" and "conditional_logic" here. We will not remove any
-     *                             such items from the array in case you really want to set them,
-     * case
-     *
-     * @return array|mixed
-     */
-    public function toAcfArray(array $extra_settings = [])
-    {
-        $acfArray = parent::toAcfArray($extra_settings);
-
-        $acfArray = $this->applyCollapsed($acfArray);
-
-        return $acfArray;
-
-    }
-
-    /**
      * @return mixed The value of the ACF setting "button_label". Returns the default ACF value of the translated
      * string of "Add row" if none has been set using Fewbricks.
      */
@@ -171,6 +153,23 @@ class Repeater extends FieldWithFields implements FieldInterface
     {
 
         return $this->setSetting('min', $min);
+
+    }
+
+    /**
+     * @param string $key_prefix
+     * case
+     *
+     * @return array|mixed
+     */
+    public function toAcfArray($key_prefix = '')
+    {
+
+        $acfArray = parent::toAcfArray($key_prefix);
+
+        $acfArray = $this->applyCollapsed($acfArray);
+
+        return $acfArray;
 
     }
 

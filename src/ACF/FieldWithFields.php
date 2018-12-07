@@ -35,8 +35,7 @@ class FieldWithFields extends Field implements FieldCollectionInterface
 
         parent::__construct($label, $name, $key, $settings);
 
-        $this->fields = new FieldCollection();
-        $this->fields->setBaseKey($key);
+        $this->fields = new SubFieldCollection($key);
 
     }
 
@@ -317,18 +316,16 @@ class FieldWithFields extends Field implements FieldCollectionInterface
     }
 
     /**
-     * @param array $extra_settings Any extra settings that you want to apply at the last minute. Be careful not to set
-     *                             crucial settings like "key" and "conditional_logic" here. We will not remove any
-     *                             such items from the array in case you really want to set them,
+     * @param string $key_prefix
      *
      * @return array
      */
-    public function toAcfArray(array $extra_settings = [])
+    public function toAcfArray($key_prefix = '')
     {
 
-        $settings = parent::toAcfArray($extra_settings);
+        $settings = parent::toAcfArray($key_prefix);
 
-        $settings['sub_fields'] = $this->fields->toAcfArray();
+        $settings['sub_fields'] = $this->fields->toAcfArray($settings['key']);
 
         return $settings;
 

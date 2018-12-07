@@ -29,11 +29,14 @@ class Collection
 
     /**
      * @param mixed $item
-     * @param null  $key
+     * @param null $key
      * @return $this
      */
     public function addItem($item, $key = null)
     {
+
+        $this->finalizeItem($item);
+        $this->validateItem($item);
 
         if (is_null($key)) {
 
@@ -41,11 +44,7 @@ class Collection
 
         } else {
 
-            if ($this->validateKey($item, $key)) {
-
-                $this->items[$key] = $item;
-
-            }
+            $this->items[$key] = $item;
 
         }
 
@@ -64,11 +63,13 @@ class Collection
 
         if (false !== ($position_to_add_after = $this->getItemPositionForKey($key_to_add_after))) {
 
+            $this->finalizeItem($item);
+            $this->validateItem($item);
+
             if (is_null($key_of_new_item)) {
                 $newItem = [$item];
             } else {
 
-                $this->validateKey($item, $key_of_new_item);
                 $newItem = [$key_of_new_item => $item];
 
             }
@@ -96,6 +97,9 @@ class Collection
 
         if (false !== ($position_to_add_before = $this->getItemPositionForKey($key_of_field_to_add_before))) {
 
+            $this->finalizeItem($item);
+            $this->validateItem($item);
+
             if (is_null($key_of_new_item)) {
                 $newItem = [$item];
             } else {
@@ -122,6 +126,9 @@ class Collection
     public function addItemToBeginning($item, $key_of_new_item = false)
     {
 
+        $this->finalizeItem($item);
+        $this->validateItem($item);
+
         if ($key_of_new_item === false) {
 
             array_unshift($this->items, $item);
@@ -143,9 +150,30 @@ class Collection
     public function addItemsToBeginning($items)
     {
 
+        foreach ($items AS $item) {
+            $this->finalizeItem($item);
+            $this->validateItem($item);
+        }
+
         $this->items = array_merge($items, $this->items);
 
         return $this;
+
+    }
+
+    protected function finalizeItem($item)
+    {
+
+    }
+
+    /**
+     * @param Field $item
+     * @return bool
+     */
+    protected function validateItem($item)
+    {
+
+        return true;
 
     }
 
@@ -156,15 +184,15 @@ class Collection
     public function getItemByKey($key)
     {
 
-        $item = false;
+        $found_item = false;
 
         if (isset($this->items[$key])) {
 
-            $item = $this->items[$key];
+            $found_item = $this->items[$key];
 
         }
 
-        return $item;
+        return $found_item;
 
     }
 
@@ -262,9 +290,9 @@ class Collection
     public function removeItemByFunctionValue($functionName, $value)
     {
 
-        foreach($this->items AS $itemKey => $item) {
+        foreach ($this->items AS $itemKey => $item) {
 
-            if($item->$functionName() === $value) {
+            if ($item->$functionName() === $value) {
                 $this->removeItem($itemKey);
             }
 
@@ -275,41 +303,52 @@ class Collection
     }
 
     /**
-     * @param mixed $item
-     * @param string $key
+     * Keys only need to be validated against keys in the same collection since fields in a collection
+     * always gets its key prefix from the field group.
+     * @param string $key_to_validate
+     * @param mixed $item_to_validate
      * @param bool $die_on_invalid
      * @return bool
      */
-    public function validateKey($item, $key, $die_on_invalid = true)
+    public function validateKey(string $key_to_validate, $item_to_validate, $die_on_invalid = true)
     {
 
         $key_is_valid = true;
 
-        if (isset($this->items[$key])) {
+        if (isset($this->items[$key_to_validate])) {
 
             $key_is_valid = false;
 
-            if($die_on_invalid) {
+            if ($die_on_invalid) {
 
                 $message = '';
 
-                if (method_exists($item, 'getLabel')) {
+                $message .= 'Error when attempting to register the item with the key "' . $key_to_validate . '"';
 
-                    $message .= 'Error when attempting to register the item with the key "' . $key . '" and label "'
-                        . $item->getLabel() . '". The key is already used by an item named "'
-                        . $this->items[$key]->getLabel() . '" and keys must be unique.';
+                if (method_exists($item_to_validate, 'getLabel')) {
+                    $message .= ' and label "' . $item_to_validate->getLabel() . '"';
+                }
 
-                } else {
+                $message .= '. ';
 
-                    $message .= 'Error when attempting to register the item with the key ' . $key;
+                $message .= 'The key is already in use';
+
+                $existing_item = $this->getItemByKey($key_to_validate);
+
+                if ($existing_item !== false && method_exists($existing_item, 'getLabel')) {
+
+                    $message .= ' by an item named
+                    "' . $existing_item->getLabel() . '" and keys must be unique';
 
                 }
 
+                $message .= '.';
+
                 $message
                     .= '<br><br>Pro-tip: create your keys manually by using the current date and time . So if you
-are creating a field at 09:59 on December 11 2017, the key might be "1712110959a" . Note the addition of an extra
+are creating a field at 15:00 on December 24 2019, the key might be "1912241500a". Note the addition of an extra
 character to ensure that ACF can use the key but also to make sure that if you create another key within the same
-minute, you can simply append some other "random" letter to that key like "1712110989x"';
+minute, you can simply append some other "random" letter to that key like "1912241500x"';
 
                 wp_die($message);
 
