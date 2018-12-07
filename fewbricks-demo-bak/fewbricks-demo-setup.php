@@ -16,7 +16,7 @@ namespace App\FewbricksDemo;
  * Feel free to modify or delete the function as you see fit.
  * The function assumes that you are using the namespace App\FewbricksDemo.
  */
-use Fewbricks\Helper;
+use Fewbricks\Helpers\Helper;
 
 require __DIR__ . '/fewbricks-demo-custom-post-types.php';
 

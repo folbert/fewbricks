@@ -6,6 +6,8 @@ namespace FewbricksDemo;
  * Check the documentation for info on filters
  */
 
+add_filter('fewbricks/dev_mode', '__return_true');
+
 add_filter('fewbricks/dev_tools/show_fields_info', '__return_true');
 
 add_filter('fewbricks/templater/brick_templates_base_path', function () {

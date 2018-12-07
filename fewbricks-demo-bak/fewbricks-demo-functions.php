@@ -19,7 +19,7 @@ use Fewbricks\ACF\FieldGroup;
 use Fewbricks\ACF\FieldGroupLocationRuleGroup;
 use Fewbricks\ACF\Fields\Text;
 use Fewbricks\ACF\Rule;
-use Fewbricks\Helper;
+use Fewbricks\Helpers\Helper;
 
 // The setup file deals with demo specific functionality so it was moved to own file to keep this file as focused on
 // Fewbricks as possible.

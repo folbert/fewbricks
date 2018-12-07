@@ -2,8 +2,9 @@
 
 namespace Fewbricks\ACF;
 
+use Fewbricks\Brick;
 use Fewbricks\DevTools;
-use Fewbricks\Helper;
+use Fewbricks\Helpers\Helper;
 
 /**
  * Class Field
@@ -47,17 +48,7 @@ class Field
     /**
      * @var string The key of the parent, if any, that this item is part of.
      */
-    private $parent_key;
-
-    /**
-     * @var string The name of the brick, if any, that this item is part of.
-     */
-    private $parent_name;
-
-    /**
-     * @var
-     */
-    private $parent_type;
+    private $parents;
 
     /**
      * The array that makes up the field.
@@ -90,9 +81,7 @@ class Field
         $this->key = $key;
         $this->key_prefix = '';
         $this->original_key = $key;
-        $this->parent_key = false;
-        $this->parent_name = false;
-        $this->parent_type = false;
+        $this->parents = [];
 
         $this->clearConditionalLogic();
 
@@ -168,45 +157,17 @@ class Field
 
     /**
      * @param string $key
-     * @param string $type
      * @param string $name
-     */
-    public function setParentInfo(string $key, string $type, string $name)
-    {
-
-        $this->setParentKey($key);
-        $this->setParentType($type);
-        $this->setParentName($name);
-
-    }
-
-    /**
-     * @param $key
-     */
-    public function setParentKey(string $key)
-    {
-
-        $this->parent_key = $key;
-
-    }
-
-    /**
-     * @param $name
-     */
-    private function setParentName(string $name)
-    {
-
-        $this->parent_name = $name;
-
-    }
-
-    /**
      * @param string $type
      */
-    private function setParentType(string $type)
+    public function addParent(string $key, string $name, string $type)
     {
 
-        $this->parent_type = $type;
+        $this->parents[] = [
+            'key' => $key,
+            'name' => $name,
+            'type' => $type,
+        ];
 
     }
 
@@ -370,12 +331,40 @@ class Field
             $key_prefix .= '_';
         }
 
-        $parent_key = $this->getParentKey();
-        if(!empty($parent_key) && $this->getParentType() === 'brick') {
-            $key_prefix .= $parent_key . '_';
+        $parents = $this->getParents(true);
+
+        foreach($parents AS $parent) {
+
+            if($parent['type'] === Brick::CLASS_ID_STRING) {
+                $key_prefix .= $parent['key'] . '_';
+            }
+
         }
 
+
         return Helper::getValidFieldKey($key_prefix . $this->getKey());
+
+    }
+
+    /**
+     * @return string
+     */
+    private function getFinalName()
+    {
+
+        $name_prefix = '';
+
+        $parents = $this->getParents(true);
+
+        foreach($parents AS $parent) {
+
+            if($parent['type'] === Brick::CLASS_ID_STRING) {
+                $name_prefix .= $parent['name'] . '_';
+            }
+
+        }
+
+        return $name_prefix . $this->name;
 
     }
 
@@ -466,34 +455,19 @@ class Field
     }
 
     /**
-     * @return string|boolean
+     * @param bool $reversed
+     * @return array
      */
-    public function getParentKey()
+    public function getParents(bool $reversed = false)
     {
 
-        return $this->parent_key;
+        $parents = $this->parents;
 
-    }
+        if($reversed) {
+            $parents = array_reverse($parents);
+        }
 
-
-
-    /**
-     * @return string|boolean
-     */
-    public function getParentName()
-    {
-
-        return $this->parent_name;
-
-    }
-
-    /**
-     * @return string|boolean
-     */
-    public function getParentType()
-    {
-
-        return $this->parent_type;
+        return $parents;
 
     }
 
@@ -597,12 +571,11 @@ class Field
         $settings['key'] =  $this->getFinalKey($key_prefix);
         $settings['label'] = $this->label;
         $settings['name'] = $this->name;
+        $settings['name'] = $this->getFinalName();
 
         $settings = array_merge($settings, [
             'fewbricks__original_key' => $this->getOriginalKey(),
-            'fewbricks__parent_key' => $this->getParentKey(),
-            'fewbricks__parent_type' => $this->getParentType(),
-            'fewbricks__parent_name' => $this->getParentName(),
+            'fewbricks__parents' => $this->getParents(),
             'type' => $this->getType(),
         ]);
 

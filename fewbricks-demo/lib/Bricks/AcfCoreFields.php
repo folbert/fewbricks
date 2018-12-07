@@ -48,6 +48,16 @@ class AcfCoreFields extends Brick
     {
 
         $this->addField(new Text('Text', 'fd_text', '18120621210a'));
+        $this->addField((new Text('Text', 'fd_text2', '18120621210o'))
+        ->addConditionalLogicRuleGroup(
+            (new ConditionalLogicRuleGroup())
+            ->addConditionalLogicRule(
+                new ConditionalLogicRule('18120621210a', '!=empty')
+            )
+        ));
+
+        $this->addBrick(new ImageAndText('imgtxt', '1812072139a'));
+        //$this->addBrick(new ImageAndText('imgtxt2', '1812072139b'));
 
         // Showing how to set field settings after the field has been created
         $button_group = new ButtonGroup('Button Group', 'fd_button_group', '1711172249u');
@@ -60,6 +70,26 @@ class AcfCoreFields extends Brick
             ->setDefaultValue('black');
 
         $this->addField($button_group);
+
+        // -----
+        // Group
+        $group = new Group('Group', 'fd_group', '1711232310a');
+
+        $group->addField(new Text('Text', 'fd_text', '1711232310b'));
+        $group->addField((new Select('Select', 'fd_select', '1711232310c'))
+            ->setChoices([
+                'one' => 'One',
+                'two' => 'Two',
+                'three' => 'Three',
+            ])
+        );
+
+        $group->addBrick(new ImageAndText('imgtxt', '1812072321a'));
+
+        $this->addField($group);
+
+        // E.o. group
+        // ----------
 
         $this->addField(
             (new Message('Testing conditional logic', 'fd_testing_conditional_logic', '1711202201x'))
@@ -298,24 +328,6 @@ class AcfCoreFields extends Brick
         // You wont be able to see this
         $this->addField(new FewbricksHidden('Fewbricks Hidden',
             'fd_fewbricks_hidden', '1711172043u'));
-
-        // -----
-        // Group
-        $group = new Group('Group', 'fd_group', '1711232310a');
-
-        $group->addField(new Text('Text', 'fd_text', '1711232310b'));
-        $group->addField((new Select('Select', 'fd_select', '1711232310c'))
-            ->setChoices([
-                'one' => 'One',
-                'two' => 'Two',
-                'three' => 'Three',
-            ])
-        );
-
-        $this->addField($group);
-
-        // E.o. group
-        // ----------
 
         $this->addField(new Image('Image', 'fd_image', '1711172323u'));
 

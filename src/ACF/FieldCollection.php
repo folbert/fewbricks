@@ -4,7 +4,6 @@ namespace Fewbricks\ACF;
 
 use Fewbricks\Brick;
 use Fewbricks\Collection;
-use Fewbricks\Helper;
 
 /**
  * Class FieldCollection
@@ -459,8 +458,13 @@ class FieldCollection extends Collection implements FieldCollectionInterface
         /** @var Field $field */
         foreach ($this->items AS $fieldKey => $field) {
 
-            if ($field->getParentType() === 'brick' && $field->getParentKey() === $key) {
-                $this->removeItem($fieldKey);
+            foreach($field->getParents() AS $parent_data) {
+
+                if ($parent_data['type'] === Brick::CLASS_ID_STRING && $parent_data['key'] === $key) {
+                    $this->removeItem($fieldKey);
+                    break;
+                }
+
             }
 
         }
@@ -481,8 +485,12 @@ class FieldCollection extends Collection implements FieldCollectionInterface
         /** @var Field $field */
         foreach ($this->items AS $fieldKey => $field) {
 
-            if ($field->getParentType() === 'brick' && $field->getParentName() === $name) {
-                $this->removeItem($fieldKey);
+            foreach($field->getParents() AS $parent_data) {
+
+                if ($parent_data['type'] === Brick::CLASS_ID_STRING && $parent_data['name'] === $name) {
+                    $this->removeItem($fieldKey);
+                }
+
             }
 
         }
@@ -678,17 +686,6 @@ class FieldCollection extends Collection implements FieldCollectionInterface
         $this->removeFieldByName($name_of_field_to_replace);
 
         return $this;
-
-    }
-
-    protected function validateItem($item)
-    {
-
-        $valid = true;
-
-        $this->validateKey($item->getKey(), $item);
-
-        return $valid;
 
     }
 

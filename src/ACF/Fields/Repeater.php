@@ -4,7 +4,7 @@ namespace Fewbricks\ACF\Fields;
 
 use Fewbricks\ACF\FieldInterface;
 use Fewbricks\ACF\FieldWithFields;
-use Fewbricks\Helper;
+use Fewbricks\Helpers\Helper;
 
 /**
  * Class Repeater

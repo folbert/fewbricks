@@ -58,6 +58,10 @@ use \Fewbricks\DevTools;
         } // End checking if acf settings arrays are empty
         ?>
 
+        <h2>Dev mode</h2>
+        <a href="<?php echo \Fewbricks\Helpers\Helper::getDocumentationUrl('filters/dev_mode/'); ?>" target="_blank">DevMode</a>
+        is <?php echo (\Fewbricks\Helpers\Filters::devModeIsEnabled() ? 'enabled' : 'disabled') ?>.
+
         <h2>Execution time</h2>
         <p>Execution time for everything using the action "fewbricks/init":<br>
             <?php echo DevTools::getExecutionTime();  ?> seconds.</p>
@@ -70,7 +74,7 @@ use \Fewbricks\DevTools;
             <li><a href="<?php echo admin_url('edit.php?post_type=acf-field-group&page=fewbricksdev'); ?>"
                    target="_blank">Fewbricks
                     admin page</a></li>
-            <li><a href="https://fewbricks2.folbert.com" target="_blank">Fewbricks2 Documentation</a></li>
+            <li><a href="<?php \Fewbricks\Helpers\Helper::getDocumentationUrl(); ?>" target="_blank">Fewbricks2 Documentation</a></li>
             <li><a href="https://github.com/folbert/fewbricks" target="_blank">Fewbricks on GitHub</a></li>
         </ul>
 

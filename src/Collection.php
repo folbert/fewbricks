@@ -44,6 +44,13 @@ class Collection
 
         } else {
 
+            if(isset($this->items[$key])) {
+
+                wp_die('Fewbricks says: trying to add an item with the key "' . $key . '". The key already exists for a field and keys
+                must be unique.');
+
+            }
+
             $this->items[$key] = $item;
 
         }
@@ -161,12 +168,19 @@ class Collection
 
     }
 
+    /**
+     * Empty function on purpose allowing child classes to overwrite it as needed and not having to implement it if not
+     * needed.
+     * @param $item
+     */
     protected function finalizeItem($item)
     {
 
     }
 
     /**
+     * Empty function on purpose allowing child classes to overwrite it as needed and not having to implement it if not
+     * needed.
      * @param Field $item
      * @return bool
      */
@@ -299,64 +313,6 @@ class Collection
         }
 
         return $this;
-
-    }
-
-    /**
-     * Keys only need to be validated against keys in the same collection since fields in a collection
-     * always gets its key prefix from the field group.
-     * @param string $key_to_validate
-     * @param mixed $item_to_validate
-     * @param bool $die_on_invalid
-     * @return bool
-     */
-    public function validateKey(string $key_to_validate, $item_to_validate, $die_on_invalid = true)
-    {
-
-        $key_is_valid = true;
-
-        if (isset($this->items[$key_to_validate])) {
-
-            $key_is_valid = false;
-
-            if ($die_on_invalid) {
-
-                $message = '';
-
-                $message .= 'Error when attempting to register the item with the key "' . $key_to_validate . '"';
-
-                if (method_exists($item_to_validate, 'getLabel')) {
-                    $message .= ' and label "' . $item_to_validate->getLabel() . '"';
-                }
-
-                $message .= '. ';
-
-                $message .= 'The key is already in use';
-
-                $existing_item = $this->getItemByKey($key_to_validate);
-
-                if ($existing_item !== false && method_exists($existing_item, 'getLabel')) {
-
-                    $message .= ' by an item named
-                    "' . $existing_item->getLabel() . '" and keys must be unique';
-
-                }
-
-                $message .= '.';
-
-                $message
-                    .= '<br><br>Pro-tip: create your keys manually by using the current date and time . So if you
-are creating a field at 15:00 on December 24 2019, the key might be "1912241500a". Note the addition of an extra
-character to ensure that ACF can use the key but also to make sure that if you create another key within the same
-minute, you can simply append some other "random" letter to that key like "1912241500x"';
-
-                wp_die($message);
-
-            }
-
-        }
-
-        return $key_is_valid;
 
     }
 

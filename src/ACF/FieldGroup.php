@@ -4,7 +4,8 @@ namespace Fewbricks\ACF;
 
 use Fewbricks\DevTools;
 use Fewbricks\Exporter;
-use Fewbricks\Helper;
+use Fewbricks\Helpers\Helper;
+use Fewbricks\Helpers\Filters;
 
 /**
  * Class FieldGroup
@@ -583,7 +584,7 @@ class FieldGroup extends FieldCollection implements FieldGroupInterface
                         // Get the settings for the file.
                         $target_field_settings = Helper::getFieldByOriginalKeyFromAcfArray($target_field_key, $acf_array);
 
-                        if($target_field_settings !== false) {
+                        if ($target_field_settings !== false) {
 
                             // Swap the key set in the rule with the key that the field has been given by Fewbricks
                             // after prefixing keys of parent fields and field group to it.
@@ -601,11 +602,11 @@ class FieldGroup extends FieldCollection implements FieldGroupInterface
             }
 
             // Traverse down any child fields
-            if(isset($field_settings['sub_fields']) && is_array($field_settings['sub_fields'])) {
+            if (isset($field_settings['sub_fields']) && is_array($field_settings['sub_fields'])) {
 
                 $field_settings['sub_fields'] = $this->finalizeFieldsConditionalLogic($field_settings['sub_fields']);
 
-            } else if(isset($field_settings['layouts']) && is_array($field_settings['layouts'])) {
+            } else if (isset($field_settings['layouts']) && is_array($field_settings['layouts'])) {
 
                 $field_settings['layouts'] = $this->finalizeFieldsConditionalLogic($field_settings['layouts']);
 
@@ -626,6 +627,11 @@ class FieldGroup extends FieldCollection implements FieldGroupInterface
 
         $fields = parent::toAcfArray($key_prefix);
         $fields = $this->finalizeFieldsConditionalLogic($fields);
+
+        if (Filters::devModeIsEnabled()) {
+            Helper::validateFieldNames($fields);
+            Helper::validateUniqueKeys($fields);
+        }
 
         return array_merge($this->settings, [
             'key' => Helper::getValidFieldGroupKey($this->getKey()),

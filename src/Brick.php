@@ -14,6 +14,8 @@ use Fewbricks\ACF\Item;
 class Brick extends FieldCollection implements BrickInterface
 {
 
+    public const CLASS_ID_STRING = 'brick';
+
     /**
      * @var array
      */
@@ -72,21 +74,7 @@ class Brick extends FieldCollection implements BrickInterface
     protected function finalizeItem($item)
     {
 
-        $item->setParentInfo($this->getKey(), 'brick', $this->getName());
-
-    }
-
-    /**
-     * Add a field to the brick.
-     * @param Field $field
-     * @return $this
-     */
-    public function addField(Field $field)
-    {
-
-        parent::addField($field);
-
-        return $this;
+        $item->addParent($this->getKey(), $this->getName(), self::CLASS_ID_STRING);
 
     }
 

@@ -2,7 +2,7 @@
 parent: Filters
 layout: default
 title: dev_tools/display
-nav_order: 2
+nav_order: 20
 permalink: /filters/dev-tools--display/
 ---
 

@@ -2,6 +2,8 @@
 
 namespace Fewbricks;
 
+use Fewbricks\Helpers\Helper;
+
 /**
  * Class Admin
  *
