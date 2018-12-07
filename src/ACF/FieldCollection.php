@@ -597,31 +597,6 @@ class FieldCollection extends Collection implements FieldCollectionInterface
 
     }
 
-
-    /**
-     * @param string $key
-     * @param array $acf_array
-     * @return bool
-     */
-    public function getFieldByOriginalKeyFromAcfArray(string $key, array $acf_array) {
-
-        $found_field = false;
-
-        foreach($acf_array AS $acf_array_key => $field_settings) {
-
-            if($field_settings['fewbricks__original_key'] == $key) {
-
-                $found_field = $field_settings;
-                break;
-
-            }
-
-        }
-
-        return $found_field;
-
-    }
-
     /**
      * @param string $key
      * @return Field|bool
@@ -673,59 +648,6 @@ class FieldCollection extends Collection implements FieldCollectionInterface
         $this->field_names_prefix = $prefix;
 
         return $this;
-
-    }
-
-    /**
-     * @param array $acf_array
-     * @return array
-     */
-    private function prepareFieldsConditionalLogic(array $acf_array)
-    {
-
-        // Conditional logic for ACF is made up of a three-levelled array where the first level is the entire logic,
-        // the second level are groups (whose relations are OR) and the third level are items (whose relations are AND).
-
-        foreach ($acf_array AS $field_settings_key => $field_settings) {
-
-            // Do the field have conditional logic
-            if (isset($field_settings['conditional_logic']) &&
-                is_array($field_settings['conditional_logic'])
-            ) {
-
-                $conditional_logic_groups = $field_settings['conditional_logic'];
-
-                // Traverse down the conditional logic array
-                foreach ($conditional_logic_groups AS $conditional_logic_group_key => $conditional_logic_group_value) {
-
-                    foreach (
-                        $conditional_logic_groups[$conditional_logic_group_key] AS
-                        $conditional_logic_item_key => $conditional_logic_item_value
-                    ) {
-
-                        $target_field_key
-                            = $conditional_logic_groups[$conditional_logic_group_key][$conditional_logic_item_key]['field'];
-
-                        $target_field_settings = $this->getFieldByOriginalKeyFromAcfArray($target_field_key, $acf_array);
-
-                        if($target_field_settings !== false) {
-
-                            $conditional_logic_groups[$conditional_logic_group_key][$conditional_logic_item_key]['field']
-                                = $target_field_settings['key'];
-
-                        }
-
-                    }
-
-                }
-
-                $acf_array[$field_settings_key]['conditional_logic'] = $conditional_logic_groups;
-
-            }
-
-        }
-
-        return $acf_array;
 
     }
 
@@ -787,8 +709,6 @@ class FieldCollection extends Collection implements FieldCollectionInterface
             $acf_array[] = $field->toAcfArray($key_prefix);
 
         }
-
-        $acf_array = $this->prepareFieldsConditionalLogic($acf_array);
 
         return $acf_array;
 

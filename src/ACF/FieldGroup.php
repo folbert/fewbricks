@@ -509,10 +509,9 @@ class FieldGroup extends FieldCollection implements FieldGroupInterface
      * @see FieldGroup::setHideOnScreen()
      *
      * @param string|array $element_names One or many of the values of the following: 'permalink', 'the_content',
-     *                                   'excerpt', 'custom_fields', 'discussion', 'comments', 'revisions', 'slug',
-     *                                   'author', 'format', 'page_attributes', 'featured_image', 'categories', 'tags',
-     *                                   'send-trackbacks', 'all'. Note 'all' which will show all elements that
-     *                                   ar possible to hide.
+     * 'excerpt', 'custom_fields', 'discussion', 'comments', 'revisions', 'slug', 'author', 'format', 'page_attributes',
+     * 'featured_image', 'categories', 'tags', 'send-trackbacks', 'all'. Note 'all' which will show all elements that
+     *  are possible to hide.
      * @return $this
      */
     public function setShowOnScreen($element_names)
@@ -551,17 +550,88 @@ class FieldGroup extends FieldCollection implements FieldGroupInterface
     }
 
     /**
+     * @param array $acf_array
+     * @return array
+     */
+    private function finalizeFieldsConditionalLogic(array $acf_array)
+    {
+
+        // Conditional logic for ACF is made up of a three-levelled array where the first level is the entire logic,
+        // the second level are groups (whose relations are OR) and the third level are items (whose relations are AND).
+
+        foreach ($acf_array AS $field_settings_key => $field_settings) {
+
+            // If the field has conditional logic
+            if (isset($field_settings['conditional_logic']) &&
+                is_array($field_settings['conditional_logic'])
+            ) {
+
+                $conditional_logic_groups = $field_settings['conditional_logic'];
+
+                // Traverse down the conditional logic array
+                foreach ($conditional_logic_groups AS $conditional_logic_group_key => $conditional_logic_group_value) {
+
+                    foreach (
+                        $conditional_logic_groups[$conditional_logic_group_key] AS
+                        $conditional_logic_item_key => $conditional_logic_item_value
+                    ) {
+
+                        // Retrieve the key for the field to check
+                        $target_field_key
+                            = $conditional_logic_groups[$conditional_logic_group_key][$conditional_logic_item_key]['field'];
+
+                        // Get the settings for the file.
+                        $target_field_settings = Helper::getFieldByOriginalKeyFromAcfArray($target_field_key, $acf_array);
+
+                        if($target_field_settings !== false) {
+
+                            // Swap the key set in the rule with the key that the field has been given by Fewbricks
+                            // after prefixing keys of parent fields and field group to it.
+                            $conditional_logic_groups[$conditional_logic_group_key][$conditional_logic_item_key]['field']
+                                = $target_field_settings['key'];
+
+                        }
+
+                    }
+
+                }
+
+                $acf_array[$field_settings_key]['conditional_logic'] = $conditional_logic_groups;
+
+            }
+
+            // Traverse down any child fields
+            if(isset($field_settings['sub_fields']) && is_array($field_settings['sub_fields'])) {
+
+                $field_settings['sub_fields'] = $this->finalizeFieldsConditionalLogic($field_settings['sub_fields']);
+
+            } else if(isset($field_settings['layouts']) && is_array($field_settings['layouts'])) {
+
+                $field_settings['layouts'] = $this->finalizeFieldsConditionalLogic($field_settings['layouts']);
+
+            }
+
+        }
+
+        return $acf_array;
+
+    }
+
+    /**
      * @param string $key_prefix
      * @return array
      */
     public function toAcfArray(string $key_prefix = '')
     {
 
+        $fields = parent::toAcfArray($key_prefix);
+        $fields = $this->finalizeFieldsConditionalLogic($fields);
+
         return array_merge($this->settings, [
             'key' => Helper::getValidFieldGroupKey($this->getKey()),
             'title' => $this->getTitle(),
             'location' => $this->location_rule_groups->toArray(),
-            'fields' => parent::toAcfArray($key_prefix),
+            'fields' => $fields,
         ]);
 
     }

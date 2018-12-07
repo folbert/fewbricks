@@ -99,6 +99,18 @@ class AcfCoreFields extends Brick
                 )
         );
 
+        $this->addField(
+            (new Message('Testing conditional logic', 'fd_testing_conditional_statement', '1812072101a'))
+                ->setMessage('This should only be set if a text field in the flexible content below is set to "banana"')
+                ->addConditionalLogicRuleGroup(
+                    (new ConditionalLogicRuleGroup())
+                        ->addConditionalLogicRule(
+                            new ConditionalLogicRule('1711231901b', '==', 'banana')
+                        )
+                )
+            ->setDisplayInFewbricksDevTools(true)
+        );
+
         // ----------------
         // Flexible content
         $flexible_content = new FlexibleContent('Flexible content', 'fd_flexible_content', '1711231849a');
