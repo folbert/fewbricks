@@ -4,9 +4,9 @@ namespace FewbricksDemo\Bricks;
 
 use Fewbricks\ACF\Fields\Select;
 use Fewbricks\ACF\Fields\Text;
-use Fewbricks\BrickTemplater;
 
-class Headline extends Brick {
+class Headline extends Brick
+{
 
     /**
      *
@@ -20,14 +20,16 @@ class Headline extends Brick {
             '2' => '2',
             '3' => '3',
             '4' => '4',
-        ]);
-        $level->setAllowNull(false);
-        $level->setRequired(true);
+        ])
+            ->setAllowNull(false)
+            ->setRequired(true);
+
         $this->addField($level);
 
         $text = new Text('Text', 'text', '1811272243a');
-        $text->setRequired(true);
-        $text->setPlaceholder('Enter a great headline here');
+        $text->setRequired(true)
+            ->setPlaceholder('Enter a great headline here');
+
         $this->addField($text);
 
     }

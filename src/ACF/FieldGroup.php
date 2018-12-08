@@ -46,7 +46,7 @@ class FieldGroup extends FieldCollection implements FieldGroupInterface
     /**
      * @var RuleGroupCollection
      */
-    private $location_rule_groups;
+    private $locationRuleGroups;
 
     /**
      * The array that actually makes up the field group since it holds all the
@@ -79,25 +79,25 @@ class FieldGroup extends FieldCollection implements FieldGroupInterface
      * @param FieldGroupLocationRuleGroup $rule_group
      * @return $this
      */
-    public function addLocationRuleGroup(FieldGroupLocationRuleGroup $rule_group)
+    public function addLocationRuleGroup($rule_group)
     {
 
-        $this->location_rule_groups->addItem($rule_group);
+        $this->locationRuleGroups->addItem($rule_group);
 
         return $this;
 
     }
 
     /**
-     * @param FieldGroupLocationRuleGroup[] $rule_groups
+     * @param FieldGroupLocationRuleGroup[] $ruleGroups
      * @return $this
      */
-    public function addLocationRuleGroups(array $rule_groups)
+    public function addLocationRuleGroups(array $ruleGroups)
     {
 
-        foreach ($rule_groups AS $rule_group) {
+        foreach ($ruleGroups AS $ruleGroup) {
 
-            $this->addLocationRuleGroup($rule_group);
+            $this->addLocationRuleGroup($ruleGroup);
 
         }
 
@@ -110,7 +110,7 @@ class FieldGroup extends FieldCollection implements FieldGroupInterface
     public function clearLocationRuleGroups()
     {
 
-        $this->location_rule_groups = new RuleGroupCollection();
+        $this->locationRuleGroups = new RuleGroupCollection();
 
         return $this;
 
@@ -123,59 +123,59 @@ class FieldGroup extends FieldCollection implements FieldGroupInterface
      *
      * Possible values in the array: see FieldGroup::HIDE_ON_SCREEN_ITEMS
      *
-     * @param array $hide_on_screen Array with items from FieldGroup::HIDE_ON_SCREEN_ITEMS to hide on the screen or
+     * @param array $hideOnScreen Array with items from FieldGroup::HIDE_ON_SCREEN_ITEMS to hide on the screen or
      *                              "all" to hide all.
      *
-     * @param array $show_on_screen Fewbricks addition. Enables you to define which fields should be visible on screen.
+     * @param array $showOnScreen Fewbricks addition. Enables you to define which fields should be visible on screen.
      *                              This will create an array with all the items that ACF supports hiding and then
      *                              remove the items that you have set in $showOnScreen. Passing a non-empty value here
      *                              will make the function ignore the $hideOnScreen variable completely. Possible
      *                              values: items from FieldGroup::HIDE_ON_SCREEN_ITEMS or "all" to show all.
      */
-    private function doSetHideOnScreen($hide_on_screen, $show_on_screen = [])
+    private function doSetHideOnScreen(array $hideOnScreen, array $showOnScreen = [])
     {
 
-        $current_values = $this->getHideOnScreenSetting();
+        $currentValues = $this->getHideOnScreenSetting();
 
-        if (!empty($show_on_screen)) {
+        if (!empty($showOnScreen)) {
 
             // If the user want to show all...
-            if ($show_on_screen === 'all') {
+            if ($showOnScreen[0] === 'all') {
 
                 // ...we should hide nothing
-                $hide_on_screen = [];
+                $hideOnScreen = [];
 
             } else {
 
                 // Make sure we have an array
-                if (!is_array($show_on_screen)) {
-                    $show_on_screen = [$show_on_screen];
+                if (!is_array($showOnScreen)) {
+                    $showOnScreen = [$showOnScreen];
                 }
 
-                $hide_on_screen = array_diff($current_values, $show_on_screen);
+                $hideOnScreen = array_diff($currentValues, $showOnScreen);
 
             }
 
         } else {
 
             // If the user want to hide all
-            if ($hide_on_screen === 'all') {
+            if ($hideOnScreen[0] === 'all') {
 
-                $hide_on_screen = self::HIDE_ON_SCREEN_ITEMS;
+                $hideOnScreen = self::HIDE_ON_SCREEN_ITEMS;
 
             } else {
 
-                if (!is_array($hide_on_screen)) {
-                    $hide_on_screen = [$hide_on_screen];
+                if (!is_array($hideOnScreen)) {
+                    $hideOnScreen = [$hideOnScreen];
                 }
 
-                $hide_on_screen = array_merge($current_values, $hide_on_screen);
+                $hideOnScreen = array_merge($currentValues, $hideOnScreen);
 
             }
 
         }
 
-        $this->setSetting('hide_on_screen', $hide_on_screen);
+        $this->setSetting('hide_on_screen', $hideOnScreen);
 
     }
 
@@ -245,7 +245,7 @@ class FieldGroup extends FieldCollection implements FieldGroupInterface
     public function getLocationRuleGroups()
     {
 
-        return $this->location_rule_groups;
+        return $this->locationRuleGroups;
 
     }
 
@@ -277,14 +277,14 @@ class FieldGroup extends FieldCollection implements FieldGroupInterface
      * Get the value of a specific setting.
      *
      * @param string $name The name of the setting
-     * @param bool $default_value The value to return if the setting does not exist
+     * @param bool $defaultValue The value to return if the setting does not exist
      *
      * @return bool|mixed
      */
-    public function getSetting($name, $default_value = false)
+    public function getSetting(string $name, $defaultValue = false)
     {
 
-        $value = $default_value;
+        $value = $defaultValue;
 
         if (isset($this->settings[$name])) {
             $value = $this->settings[$name];
@@ -338,23 +338,23 @@ class FieldGroup extends FieldCollection implements FieldGroupInterface
     /**
      * In order to keep in sync with ACFs namings, we have this function to call publicly. And then use doRegister()
      * to actually register.
-     * @param bool $unset_after_added_to_acf
+     * @param bool $unsetAfterAddedToAcf
      * @return FieldGroup
      */
-    public function register($unset_after_added_to_acf = true)
+    public function register(bool $unsetAfterAddedToAcf = true)
     {
 
         $this->prepareForRegistration();
 
-        $acf_settings_array = $this->toAcfArray($this->getKey());
+        $acfSettingsArray = $this->toAcfArray($this->getKey());
 
-        Exporter::maybeStoreSimpleFieldGroupData($acf_settings_array['title'], $acf_settings_array['key']);
-        Exporter::maybeStoreFieldGroupAcfSettings($acf_settings_array);
-        DevTools::maybeStoreAcfSettingsArrayForDevDisplay($acf_settings_array);
+        Exporter::maybeStoreSimpleFieldGroupData($acfSettingsArray['title'], $acfSettingsArray['key']);
+        Exporter::maybeStoreFieldGroupAcfSettings($acfSettingsArray);
+        DevTools::maybeStoreAcfSettingsArrayForDevDisplay($acfSettingsArray);
 
-        acf_add_local_field_group($acf_settings_array);
+        acf_add_local_field_group($acfSettingsArray);
 
-        if ($unset_after_added_to_acf) {
+        if ($unsetAfterAddedToAcf) {
 
             // Lets clear up some space
             unset($this->settings);
@@ -396,14 +396,14 @@ class FieldGroup extends FieldCollection implements FieldGroupInterface
     }
 
     /**
-     * @param bool $display
+     * @param bool $show
      * @return $this
      */
 
-    public function setShowInFewbricksDevTools(bool $display)
+    public function setShowInFewbricksDevTools(bool $show)
     {
 
-        return $this->setSetting(DevTools::getSettingsNameForDisplayingAcfArray(), $display);
+        return $this->setSetting(DevTools::getSettingsNameForDisplayingAcfArray(), $show);
 
     }
 
@@ -412,17 +412,21 @@ class FieldGroup extends FieldCollection implements FieldGroupInterface
      *
      * @see FieldGroup::doSetHideOnScreen()
      *
-     * @param string|array $element_names One or many of the values of the following: 'permalink', 'the_content',
+     * @param string|array $elementNames One or many of the values of the following: 'permalink', 'the_content',
      *                                   'excerpt', 'custom_fields', 'discussion', 'comments', 'revisions', 'slug',
      *                                   'author', 'format', 'page_attributes', 'featured_image', 'categories', 'tags',
      *                                   'send-trackbacks', 'all'. Note 'all' which will show all elements that
      *                                   are possible to hide.
      * @return $this
      */
-    public function setHideOnScreen($element_names)
+    public function setHideOnScreen($elementNames)
     {
 
-        $this->doSetHideOnScreen($element_names);
+        if(!is_array($elementNames)) {
+            $elementNames = [$elementNames];
+        }
+
+        $this->doSetHideOnScreen($elementNames);
 
         return $this;
 
@@ -431,39 +435,39 @@ class FieldGroup extends FieldCollection implements FieldGroupInterface
     /**
      * ACF Setting. Determines where field instructions are placed in relation to fields.
      *
-     * @param string $instruction_placement 'label' (Below labels) or 'field' (Below fields)
+     * @param string $instructionPlacement 'label' (Below labels) or 'field' (Below fields)
      * @return $this
      */
-    public function setInstructionPlacement($instruction_placement)
+    public function setInstructionPlacement($instructionPlacement)
     {
 
-        return $this->setSetting('instruction_placement', $instruction_placement);
+        return $this->setSetting('instruction_placement', $instructionPlacement);
 
     }
 
     /**
      * ACF Setting. Determines where field labels are placed in relation to fields. Defaults to 'top'.
      *
-     * @param string $label_placement 'top' (Above fields) or 'left' (Beside fields)
+     * @param string $labelPlacement 'top' (Above fields) or 'left' (Beside fields)
      * @return $this
      */
-    public function setLabelPlacement($label_placement)
+    public function setLabelPlacement($labelPlacement)
     {
 
-        return $this->setSetting('label_placement', $label_placement);
+        return $this->setSetting('label_placement', $labelPlacement);
 
     }
 
     /**
      * ACF setting. Field groups are shown in order from lowest to highest.
      *
-     * @param int $menu_order
+     * @param int $menuOrder
      * @return $this
      */
-    public function setMenuOrder($menu_order)
+    public function setMenuOrder($menuOrder)
     {
 
-        return $this->setSetting('menu_order', $menu_order);
+        return $this->setSetting('menu_order', $menuOrder);
 
     }
 
@@ -484,17 +488,17 @@ class FieldGroup extends FieldCollection implements FieldGroupInterface
      * Enables you to add values to the settings directly. So if ACF adds new settings, you don't have to wait for
      * Fewbricks to add functions for you to be able to set them.
      *
-     * @param $name
-     * @param $value
+     * @param string $name
+     * @param mixed $value
      * @return $this
      */
-    public function setSetting($name, $value)
+    public function setSetting(string $name, $value)
     {
 
-        $crucialSettings = ['key', 'title'];
+        $classPropertyNames = ['key', 'title'];
 
-        // Make sure to keep any crucial setting class vars up to date
-        if (in_array($name, $crucialSettings)) {
+        // Make sure to keep any property names up to date
+        if (in_array($name, $classPropertyNames)) {
             $this->{$name} = $value;
         }
 
@@ -509,16 +513,20 @@ class FieldGroup extends FieldCollection implements FieldGroupInterface
      *
      * @see FieldGroup::setHideOnScreen()
      *
-     * @param string|array $element_names One or many of the values of the following: 'permalink', 'the_content',
+     * @param string|array $elementNames One or many of the values of the following: 'permalink', 'the_content',
      * 'excerpt', 'custom_fields', 'discussion', 'comments', 'revisions', 'slug', 'author', 'format', 'page_attributes',
      * 'featured_image', 'categories', 'tags', 'send-trackbacks', 'all'. Note 'all' which will show all elements that
      *  are possible to hide.
      * @return $this
      */
-    public function setShowOnScreen($element_names)
+    public function setShowOnScreen($elementNames)
     {
 
-        $this->doSetHideOnScreen([], $element_names);
+        if(!is_array($elementNames)) {
+            $elementNames = [$elementNames];
+        }
+
+        $this->doSetHideOnScreen([], $elementNames);
 
         return $this;
 
@@ -551,45 +559,45 @@ class FieldGroup extends FieldCollection implements FieldGroupInterface
     }
 
     /**
-     * @param array $acf_array
+     * @param array $acfArray
      * @return array
      */
-    private function finalizeFieldsConditionalLogic(array $acf_array)
+    private function finalizeFieldsConditionalLogic(array $acfArray)
     {
 
         // Conditional logic for ACF is made up of a three-levelled array where the first level is the entire logic,
         // the second level are groups (whose relations are OR) and the third level are items (whose relations are AND).
 
-        foreach ($acf_array AS $field_settings_key => $field_settings) {
+        foreach ($acfArray AS $fieldSettingsKey => $fieldSettings) {
 
             // If the field has conditional logic
-            if (isset($field_settings['conditional_logic']) &&
-                is_array($field_settings['conditional_logic'])
+            if (isset($fieldSettings['conditional_logic']) &&
+                is_array($fieldSettings['conditional_logic'])
             ) {
 
-                $conditional_logic_groups = $field_settings['conditional_logic'];
+                $conditionalLogicGroups = $fieldSettings['conditional_logic'];
 
                 // Traverse down the conditional logic array
-                foreach ($conditional_logic_groups AS $conditional_logic_group_key => $conditional_logic_group_value) {
+                foreach ($conditionalLogicGroups AS $conditionalLogicGroupKey => $conditionalLogicGroupValue) {
 
                     foreach (
-                        $conditional_logic_groups[$conditional_logic_group_key] AS
-                        $conditional_logic_item_key => $conditional_logic_item_value
+                        $conditionalLogicGroups[$conditionalLogicGroupKey] AS
+                        $conditionalLogicItemKey => $conditionalLogicItemValue
                     ) {
 
                         // Retrieve the key for the field to check
-                        $target_field_key
-                            = $conditional_logic_groups[$conditional_logic_group_key][$conditional_logic_item_key]['field'];
+                        $targetFieldKey
+                            = $conditionalLogicGroups[$conditionalLogicGroupKey][$conditionalLogicItemKey]['field'];
 
                         // Get the settings for the file.
-                        $target_field_settings = Helper::getFieldByOriginalKeyFromAcfArray($target_field_key, $acf_array);
+                        $targetFieldSettings = Helper::getFieldByOriginalKeyFromAcfArray($targetFieldKey, $acfArray);
 
-                        if ($target_field_settings !== false) {
+                        if ($targetFieldSettings !== false) {
 
                             // Swap the key set in the rule with the key that the field has been given by Fewbricks
                             // after prefixing keys of parent fields and field group to it.
-                            $conditional_logic_groups[$conditional_logic_group_key][$conditional_logic_item_key]['field']
-                                = $target_field_settings['key'];
+                            $conditionalLogicGroups[$conditionalLogicGroupKey][$conditionalLogicItemKey]['field']
+                                = $targetFieldSettings['key'];
 
                         }
 
@@ -597,35 +605,35 @@ class FieldGroup extends FieldCollection implements FieldGroupInterface
 
                 }
 
-                $acf_array[$field_settings_key]['conditional_logic'] = $conditional_logic_groups;
+                $acfArray[$fieldSettingsKey]['conditional_logic'] = $conditionalLogicGroups;
 
             }
 
             // Traverse down any child fields
-            if (isset($field_settings['sub_fields']) && is_array($field_settings['sub_fields'])) {
+            if (isset($fieldSettings['sub_fields']) && is_array($fieldSettings['sub_fields'])) {
 
-                $field_settings['sub_fields'] = $this->finalizeFieldsConditionalLogic($field_settings['sub_fields']);
+                $fieldSettings['sub_fields'] = $this->finalizeFieldsConditionalLogic($fieldSettings['sub_fields']);
 
-            } else if (isset($field_settings['layouts']) && is_array($field_settings['layouts'])) {
+            } else if (isset($fieldSettings['layouts']) && is_array($fieldSettings['layouts'])) {
 
-                $field_settings['layouts'] = $this->finalizeFieldsConditionalLogic($field_settings['layouts']);
+                $fieldSettings['layouts'] = $this->finalizeFieldsConditionalLogic($fieldSettings['layouts']);
 
             }
 
         }
 
-        return $acf_array;
+        return $acfArray;
 
     }
 
     /**
-     * @param string $key_prefix
+     * @param string $keyPrefix
      * @return array
      */
-    public function toAcfArray(string $key_prefix = '')
+    public function toAcfArray(string $keyPrefix = '')
     {
 
-        $fields = parent::toAcfArray($key_prefix);
+        $fields = parent::toAcfArray($keyPrefix);
         $fields = $this->finalizeFieldsConditionalLogic($fields);
 
         if (Filters::devModeIsEnabled()) {
@@ -636,7 +644,7 @@ class FieldGroup extends FieldCollection implements FieldGroupInterface
         return array_merge($this->settings, [
             'key' => Helper::getValidFieldGroupKey($this->getKey()),
             'title' => $this->getTitle(),
-            'location' => $this->location_rule_groups->toArray(),
+            'location' => $this->locationRuleGroups->toArray(),
             'fields' => $fields,
         ]);
 

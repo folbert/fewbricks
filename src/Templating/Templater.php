@@ -14,7 +14,7 @@ class Templater
     /**
      * @var string|bool
      */
-    protected $template_file_path;
+    protected $templateFilePath;
 
     /**
      * @var array Settings to be passed to the template and all layouts
@@ -24,20 +24,20 @@ class Templater
     /**
      * @var
      */
-    protected $layout_files;
+    protected $layoutFiles;
 
     /**
      * Templater constructor.
-     * @param array $get_html_arguments
-     * @param array $layout_files
-     * @param string $template_file_path
+     * @param array $getHtmlArguments
+     * @param array $layoutFiles
+     * @param string $templateFilePath
      */
-    public function __construct(array $get_html_arguments, array $layout_files, $template_file_path)
+    public function __construct(array $getHtmlArguments, array $layoutFiles, string $templateFilePath)
     {
 
-        $this->template_file_path = $template_file_path;
-        $this->addSettings($get_html_arguments);
-        $this->addLayouts($layout_files);
+        $this->templateFilePath = $templateFilePath;
+        $this->addSettings($getHtmlArguments);
+        $this->addLayouts($layoutFiles);
 
     }
 
@@ -45,13 +45,13 @@ class Templater
      * Add a single layout to the brick. String with the name of the layout (without .php).
      * Use the filter fewbricks/templater/brick_layouts_base_path to set the path to the layout file.
      *
-     * @param string $layout_file_name
+     * @param string $layoutFileName
      * @return $this
      */
-    public function addLayout($layout_file_name)
+    public function addLayout($layoutFileName)
     {
 
-        $this->layout_files[$layout_file_name] = $layout_file_name;
+        $this->layoutFiles[$layoutFileName] = $layoutFileName;
 
         return $this;
 
@@ -87,11 +87,11 @@ class Templater
      * Get a value from previously sent "get HTML argument".
      *
      * @param string $name
-     * @param mixed $default_value Value to return if the settings has not been set
+     * @param mixed $defaultValue Value to return if the settings has not been set
      *
      * @return bool
      */
-    public function getSettings($name, $default_value = false)
+    public function getSettings($name, $defaultValue = false)
     {
 
         if (isset($this->settings[$name])) {
@@ -100,7 +100,7 @@ class Templater
 
         } else {
 
-            $outcome = $default_value;
+            $outcome = $defaultValue;
 
         }
 
@@ -131,8 +131,8 @@ class Templater
     public function addSettings(array $settings)
     {
 
-        foreach ($settings AS $settings_name => $settings_value) {
-            $this->addSetting($settings_name, $settings_value);
+        foreach ($settings AS $settingsName => $settingsValue) {
+            $this->addSetting($settingsName, $settingsValue);
         }
 
         return $this;

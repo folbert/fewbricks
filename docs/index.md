@@ -113,7 +113,7 @@ use Fewbricks\ACF\Fields\Select;
 use Fewbricks\ACF\Fields\Text;
 use Fewbricks\ACF\Fields\Wysiwyg;
 
-$favourite_character = (new Select('Who is your favourite character?', 'favourite_character', '1811262140b'))
+$favouriteCharacter = (new Select('Who is your favourite character?', 'favourite_character', '1811262140b'))
 ->setChoices([
     'roland' => 'Roland Deschain',
     'jake' => 'Jake Chambers',
@@ -127,7 +127,7 @@ $favourite_character = (new Select('Who is your favourite character?', 'favourit
 // Fewbricks feature allowing you to prefix the label.
 ->prefixLabel('Please answer this question: ');
 
-$other_favourite_character = (new Text('My favourite character is none of the above but:', 'other_favourite_character',
+$otherFavouriteCharacter = (new Text('My favourite character is none of the above but:', 'other_favourite_character',
 '1811262140a'))
 ->addConditionalLogicRuleGroup
 (
@@ -176,10 +176,10 @@ use FewbricksDemo\Bricks\ImageAndText;
 // ...but show the permalink
 ->setShowOnScreen('permalink')
 // Add a single field or...
-->addField($favourite_character)
+->addField($favouriteCharacter)
 // ...add multiple fields.
 ->addFields([
-    $other_favourite_character,
+    $otherFavouriteCharacter,
     $motivation,
     // Create an inline field
     (new Email('Enter your e-mail for a chance to win!', 'e_mail', '1811281100a'))

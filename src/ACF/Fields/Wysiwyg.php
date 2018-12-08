@@ -80,13 +80,13 @@ class Wysiwyg extends Field implements FieldInterface
     /**
      * ACF setting.
      *
-     * @param boolean $showMediaUploadButtons Boolean indicating whether buttons should be shown or not.
+     * @param boolean $mediaUpload Boolean indicating whether buttons should be shown or not.
      * @return $this
      */
-    public function setMediaUpload($showMediaUploadButtons)
+    public function setMediaUpload($mediaUpload)
     {
 
-        return $this->setSetting('media_upload', $showMediaUploadButtons);
+        return $this->setSetting('media_upload', $mediaUpload);
 
     }
 

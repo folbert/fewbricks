@@ -49,19 +49,19 @@ class AcfCoreFields extends Brick
 
         $this->addField(new Text('Text', 'fd_text', '18120621210a'));
         $this->addField((new Text('Text', 'fd_text2', '18120621210o'))
-        ->addConditionalLogicRuleGroup(
-            (new ConditionalLogicRuleGroup())
-            ->addConditionalLogicRule(
-                new ConditionalLogicRule('18120621210a', '!=empty')
-            )
-        ));
+            ->addConditionalLogicRuleGroup(
+                (new ConditionalLogicRuleGroup())
+                    ->addConditionalLogicRule(
+                        new ConditionalLogicRule('18120621210a', '!=empty')
+                    )
+            ));
 
         $this->addBrick(new ImageAndText('imgtxt', '1812072139a'));
         //$this->addBrick(new ImageAndText('imgtxt2', '1812072139b'));
 
         // Showing how to set field settings after the field has been created
-        $button_group = new ButtonGroup('Button Group', 'fd_button_group', '1711172249u');
-        $button_group->setChoices([
+        $buttonGroup = new ButtonGroup('Button Group', 'fd_button_group', '1711172249u');
+        $buttonGroup->setChoices([
             'red' => 'Red',
             'black' => 'Black',
             'green' => 'Green',
@@ -69,7 +69,7 @@ class AcfCoreFields extends Brick
             ->setSetting('required', true)
             ->setDefaultValue('black');
 
-        $this->addField($button_group);
+        $this->addField($buttonGroup);
 
         // -----
         // Group
@@ -138,13 +138,13 @@ class AcfCoreFields extends Brick
                             new ConditionalLogicRule('1711231901b', '==', 'banana')
                         )
                 )
-            ->setDisplayInFewbricksDevTools(true)
+                ->setDisplayInFewbricksDevTools(true)
         );
 
         // ----------------
         // Flexible content
-        $flexible_content = new FlexibleContent('Flexible content', 'fd_flexible_content', '1711231849a');
-        $flexible_content->setButtonLabel('Fewbricks says: add layout');
+        $flexibleContent = new FlexibleContent('Flexible content', 'fd_flexible_content', '1711231849a');
+        $flexibleContent->setButtonLabel('Fewbricks says: add layout');
 
         $layout = new Layout('Text and image', 'fd_text_and_image', '1711231901a');
         $layout->addField(new Text('Text', 'fd_text', '1711231901b'));
@@ -152,7 +152,7 @@ class AcfCoreFields extends Brick
             (new Image('Image', 'fd_image', '1711231901c'))
                 ->setPreviewSize('thumbnail')
         );
-        $flexible_content->addLayout($layout);
+        $flexibleContent->addLayout($layout);
 
         // Testing duplicate keys
         /*$layout = new Layout('Text and image', 'fd_text_and_image', '1711231901i');
@@ -165,35 +165,37 @@ class AcfCoreFields extends Brick
 
         $layout = new Layout('Testing brick', 'fd_testing_brick', '1812051452a');
         $layout->addBrick(new ImageAndText('brick_test', '1812051452u'));
-        $flexible_content->addLayout($layout);
+        $flexibleContent->addLayout($layout);
 
         $layout = new Layout('Text and select', 'fd_text_and_select', '1711231907a');
-        $layout->addField(new Text('Text', 'fd_text', '1711231907b'));
-        $layout->addField(new Select('Select', 'fd_select', '1711231907c', [
-            'choices' => [
-                'option1' => 'Option 1',
-                'option2' => 'Option 2',
-            ],
-        ]));
-        $flexible_content->addLayout($layout);
+        $layout->addField(new Text('Text', 'fd_text', '1711231907b'))
+            ->addField(
+                (new Select('Select', 'fd_select', '1711231907c'))
+                    ->setChoices([
+                        'option1' => 'Option 1',
+                        'option2' => 'Option 2',
+                    ])
+            );
+
+        $flexibleContent->addLayout($layout);
 
         $layout = new Layout('Single image', 'fd_single_image', '1712252217a');
         $layout->addField(new Image('Image', 'fd_image', '1712252218i'));
-        $flexible_content->addLayout($layout);
+        $flexibleContent->addLayout($layout);
 
         // This is of course a somewhat stupid usage of the functionality since we could simply
         // not add the sub field to start with. But for demo purposes...
         $layoutsToRemove = $this->getArgument('remove_layouts', false);
         if ($layoutsToRemove !== false) {
             foreach ($layoutsToRemove AS $layoutToRemove) {
-                $flexible_content->removeLayout($layoutToRemove);
+                $flexibleContent->removeLayout($layoutToRemove);
             }
 
-            $flexible_content->setInstructions('This flexible content have had some layouts removed.');
+            $flexibleContent->setInstructions('This flexible content have had some layouts removed.');
 
         }
 
-        $this->addField($flexible_content);
+        $this->addField($flexibleContent);
         // E.o. flexible content
         // ---------------------
 
@@ -222,7 +224,8 @@ class AcfCoreFields extends Brick
 
     }
 
-    function t() {
+    function t()
+    {
 
         $this->addField(
             (new Accordion('Accordion', 'accordion', '1712252132a'))
@@ -241,15 +244,15 @@ class AcfCoreFields extends Brick
         // The other fields are in alphabetical oder but lets start with a tab
         $this->addField(new Tab('Basic fields', 'fd_tab1', '1711192019a'));
 
-        $this->addField(new Checkbox('Checkbox', 'fd_checkbox',
-            '1711172310a', [
-                'choices' => [
+        $this->addField(
+            (new Checkbox('Checkbox', 'fd_checkbox', '1711172310a'))
+                ->setChoices([
                     'one' => 'One',
                     'two' => 'Two',
                     'three' => 'Three',
-                ],
-                'allow_custom' => true,
-            ]));
+                ])
+                ->setAllowCustom(true)
+        );
 
         $this->addField(new ColorPicker('Color Picker', 'fd_color_picker',
             '1711172313u'));
@@ -260,9 +263,10 @@ class AcfCoreFields extends Brick
         $this->addField(new DateTimePicker('Date Time Picker',
             'fd_date_time_picker', '1711172314u'));
 
-        $this->addField(new Email('E-mail', 'fd_email', '1801022310a', [
-            'wrapper' => ['class' => 'fewbricks_demo_wrapper'],
-        ]));
+        $this->addField(
+            (new Email('E-mail', 'fd_email', '1801022310a'))
+                ->setWrapper(['class' => 'fewbricks_demo_wrapper'])
+        );
 
         // Two fields of the same type
         $this->addField(new File('File', 'fd_file', '1711172319o'));
@@ -270,8 +274,8 @@ class AcfCoreFields extends Brick
 
         // ----------------
         // Flexible content
-        $flexible_content = new FlexibleContent('Flexible content', 'fd_flexible_content', '1711231849a');
-        $flexible_content->setButtonLabel('Fewbricks says: add layout');
+        $flexibleContent = new FlexibleContent('Flexible content', 'fd_flexible_content', '1711231849a');
+        $flexibleContent->setButtonLabel('Fewbricks says: add layout');
 
         $layout = new Layout('Text and image', 'fd_text_and_image', '1711231901a');
         $layout->addField(new Text('Text', 'fd_text', '1711231901b'));
@@ -279,7 +283,7 @@ class AcfCoreFields extends Brick
             (new Image('Image', 'fd_image', '1711231901c'))
                 ->setPreviewSize('thumbnail')
         );
-        $flexible_content->addLayout($layout);
+        $flexibleContent->addLayout($layout);
 
         // Testing duplicate keys
         /*$l = new Layout('Text and image', 'fd_text_and_image', '1711231901i');
@@ -292,31 +296,32 @@ class AcfCoreFields extends Brick
 
         $layout = new Layout('Text and select', 'fd_text_and_select', '1711231907a');
         $layout->addField(new Text('Text', 'fd_text', '1711231907b'));
-        $layout->addField(new Select('Select', 'fd_select', '1711231907c', [
-            'choices' => [
-                'option1' => 'Option 1',
-                'option2' => 'Option 2',
-            ],
-        ]));
-        $flexible_content->addLayout($layout);
+        $layout->addField(
+            (new Select('Select', 'fd_select', '1711231907c'))
+                ->setChoices([
+                    'option1' => 'Option 1',
+                    'option2' => 'Option 2',
+                ])
+        );
+        $flexibleContent->addLayout($layout);
 
         $layout = new Layout('Single image', 'fd_single_image', '1712252217a');
         $layout->addField(new Image('Image', 'fd_image', '1712252218i'));
-        $flexible_content->addLayout($layout);
+        $flexibleContent->addLayout($layout);
 
         // This is of course a somewhat stupid usage of the functionality since we could simply
         // not add the sub field to start with. But for demo purposes...
         $layoutsToRemove = $this->getArgument('remove_layouts', false);
         if ($layoutsToRemove !== false) {
             foreach ($layoutsToRemove AS $layoutToRemove) {
-                $flexible_content->removeLayout($layoutToRemove);
+                $flexibleContent->removeLayout($layoutToRemove);
             }
 
-            $flexible_content->setInstructions('This flexible content have had some layouts removed.');
+            $flexibleContent->setInstructions('This flexible content have had some layouts removed.');
 
         }
 
-        $this->addField($flexible_content);
+        $this->addField($flexibleContent);
         // E.o. flexible content
         // ---------------------
 
@@ -333,9 +338,10 @@ class AcfCoreFields extends Brick
 
         $this->addField(new Link('Link', 'fd_link', '1711172323g'));
 
-        $this->addField(new Message('Message', 'fd_message', '1711172324c', [
-            'message' => 'Lorem ipsum dolor sit amet.',
-        ]));
+        $this->addField(
+            (new Message('Message', 'fd_message', '1711172324c'))
+                ->setMessage('The man in black fled across the desert')
+        );
 
         $this->addField(new Number('Number', 'fd_number', '1711172324u'));
 
@@ -408,8 +414,11 @@ class AcfCoreFields extends Brick
         $this->addField((new User('User', 'fd_user', '1711192032u'))
             ->setRole(['administrator', 'contributor']));
 
-        $this->addField(new Wysiwyg('Wysiwyg', 'fd_wysiwyg', '1711172249i',
-            ['media_upload' => false, 'delay' => true]));
+        $this->addField(
+            (new Wysiwyg('Wysiwyg', 'fd_wysiwyg', '1711172249i'))
+                ->setMediaUpload(false)
+                ->setDelay(true)
+        );
 
         // Showing off another tab
         $this->addField(new Tab('Another tab', 'fd_tab2', '1811212230a'));

@@ -31,11 +31,11 @@ class Fewbricks
      * Makes sure that all requirements are met and if not, displays an error message
      * indicating what the problem is.
      *
-     * @param bool $display_message
+     * @param bool $displayMessage
      *
      * @return bool Whether or not the requirements are met.
      */
-    private static function checkRequirements($display_message = true)
+    private static function checkRequirements(bool $displayMessage = true)
     {
 
         $message = false;
@@ -55,7 +55,7 @@ class Fewbricks
 
         }
 
-        if ($display_message && $message !== false) {
+        if ($displayMessage && $message !== false) {
 
             add_action('admin_notices', function () use ($message) {
                 echo '<div class="notice notice-warning"><p>' . $message . '</p></div>';

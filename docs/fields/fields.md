@@ -58,17 +58,17 @@ You apply conditional logic like this:
 ```php
 <?php
 
-(new Fewbricks\ACF\Fields\Text('A text field', 'text', '1801060035a'))
-  ->addConditionalLogicRuleGroup(
-    (new ConditionalLogicRuleGroup())
-        ->addRule(new ConditionalLogicRule('1711192022y', '==', '1'))
-        // ...and...
-        ->addRule(new ConditionalLogicRule('1711192022z', '==', '2'))
-  ) // ...or...
-  ->addConditionalLogicRuleGroup(
-    (new ConditionalLogicRuleGroup())
-      ->addRule(new ConditionalLogicRule('1711172249u', '==', 'black'))
-  );
+$textField
+->addConditionalLogicRuleGroup(
+(new ConditionalLogicRuleGroup())
+    ->addRule(new ConditionalLogicRule('1711192022y', '==', '1'))
+    // ...and...
+    ->addRule(new ConditionalLogicRule('1711192022z', '==', '2'))
+) // ...or...
+->addConditionalLogicRuleGroup(
+(new ConditionalLogicRuleGroup())
+  ->addRule(new ConditionalLogicRule('1711172249u', '==', 'black'))
+);
 ```
 
 The relation between rule groups is _or_ and the relation between rules within a group is _and_. So the code above 

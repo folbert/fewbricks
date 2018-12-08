@@ -10,13 +10,13 @@ class AcfCodeField extends Field
     const TYPE = 'acf_code_field';
 
     /**
-     * @param $value Possible values: 'htmlmixed', 'javascript', 'text/html', 'css', 'application/x-httpd-php'
+     * @param $mode string Possible values: 'htmlmixed', 'javascript', 'text/html', 'css', 'application/x-httpd-php'
      * @return $this
      */
-    public function setMode($value)
+    public function setMode($mode)
     {
 
-        return $this->setSetting('mode', $value);
+        return $this->setSetting('mode', $mode);
 
     }
 
@@ -32,13 +32,13 @@ class AcfCodeField extends Field
     }
 
     /**
-     * @param $value
+     * @param $theme
      * @return $this
      */
-    public function setTheme($value)
+    public function setTheme($theme)
     {
 
-        return $this->setSetting('theme', $value);
+        return $this->setSetting('theme', $theme);
 
     }
 

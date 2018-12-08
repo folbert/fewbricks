@@ -17,7 +17,7 @@ class Field
     /**
      * @var RuleGroupCollection
      */
-    private $conditional_logic_rule_groups;
+    private $conditionalLogicRuleGroups;
 
     /**
      * @var string The key required by ACF. Must be unique across the site.
@@ -27,7 +27,7 @@ class Field
     /**
      * @var
      */
-    protected $key_prefix;
+    protected $keyPrefix;
 
     /**
      * @var string
@@ -43,7 +43,7 @@ class Field
      * @var string|boolean A place to store the original key before we merge it
      * with parent field groups, bricks etc.
      */
-    protected $original_key;
+    protected $originalKey;
 
     /**
      * @var string The key of the parent, if any, that this item is part of.
@@ -70,17 +70,16 @@ class Field
      * @param string $name The name of the field
      * @param string $key The key of the field. Must be unique across the entire app
      */
-    public function __construct($label, $name, $key)
+    public function __construct(string $label, string $name, string $key)
     {
 
-        // Lets keep these crucial settings as class vars to make them easier
-        // and nicer to access.
-        $this->type = $this::TYPE;
+        // Lets keep these crucial settings as class vars to make them easier and nicer to access.
+        $this->type = static::TYPE;
         $this->label = $label;
         $this->name = $name;
         $this->key = $key;
-        $this->key_prefix = '';
-        $this->original_key = $key;
+        $this->keyPrefix = '';
+        $this->originalKey = $key;
         $this->parents = [];
 
         $this->clearConditionalLogic();
@@ -88,8 +87,7 @@ class Field
     }
 
     /**
-     * @param mixed $defaultValue ACF setting. A default value used by ACF if no
-     *                            value has yet been saved.
+     * @param mixed $defaultValue ACF setting. A default value used by ACF if no value has yet been saved.
      * @return $this
      */
     public function setDefaultValue($defaultValue)
@@ -111,8 +109,7 @@ class Field
     }
 
     /**
-     * @param string $instructions ACF setting. Instructions for authors.
-     *                             Shown when submitting data
+     * @param string $instructions ACF setting. Instructions for authors. Shown when submitting data
      * @return $this
      */
     public function setInstructions($instructions)
@@ -126,7 +123,7 @@ class Field
      * @param string $key
      * @return $this
      */
-    public function setKey($key)
+    public function setKey(string $key)
     {
 
         $this->key = $key;
@@ -138,7 +135,7 @@ class Field
     /**
      * @param $label
      */
-    public function setLabel($label)
+    public function setLabel(string $label)
     {
 
         $this->label = $label;
@@ -146,12 +143,12 @@ class Field
     }
 
     /**
-     * @param $original_key
+     * @param $originalKey
      */
-    protected function setOriginalKey($original_key)
+    protected function setOriginalKey(string $originalKey)
     {
 
-        $this->original_key = $original_key;
+        $this->originalKey = $originalKey;
 
     }
 
@@ -172,8 +169,7 @@ class Field
     }
 
     /**
-     * @param boolean $required ACF setting. Whether or not the field value
-     *                              is required. If not set, false is used.
+     * @param bool $required ACF setting. Whether or not the field value is required. If not set, false is used.
      * @return $this
      */
     public function setRequired($required)
@@ -207,10 +203,10 @@ class Field
     /**
      * Allows you to set multiple settings at once.
      *
-     * @param $settings
+     * @param array $settings
      * @return $this
      */
-    public function setSettings($settings)
+    public function setSettings(array $settings)
     {
 
         foreach ($settings AS $name => $value) {
@@ -224,17 +220,17 @@ class Field
     }
 
     /**
-     * @param $name
-     * @param $value
+     * @param string $name
+     * @param mixed $value
      * @return $this
      */
-    public function setSetting($name, $value)
+    public function setSetting(string $name, $value)
     {
 
-        $class_property_names = ['key', 'label', 'name', 'type'];
+        $classPropertyNames = ['key', 'label', 'name', 'type'];
 
         // Make sure to keep any class property names up to date
-        if (in_array($name, $class_property_names)) {
+        if (in_array($name, $classPropertyNames)) {
             $this->{$name} = $value;
         }
 
@@ -245,14 +241,13 @@ class Field
     }
 
 
-
-
     /**
+     * @return $this
      */
     public function clearConditionalLogic()
     {
 
-        $this->conditional_logic_rule_groups = new RuleGroupCollection();
+        $this->conditionalLogicRuleGroups = new RuleGroupCollection();
 
         return $this;
 
@@ -282,7 +277,7 @@ class Field
     public function addConditionalLogicRuleGroup($ruleGroup)
     {
 
-        $this->conditional_logic_rule_groups->addItem($ruleGroup);
+        $this->conditionalLogicRuleGroups->addItem($ruleGroup);
 
         return $this;
 
@@ -290,7 +285,7 @@ class Field
 
     /**
      * @return mixed The value of the ACF setting "conditional_logic". Returns the default ACF value "false" if none
-     *     has been set using Fewbricks.
+     * has been set using Fewbricks.
      */
     public function getConditionalLogic()
     {
@@ -302,10 +297,10 @@ class Field
     /**
      * @return RuleGroupCollection
      */
-    public function getConditionalLogicrulegroups()
+    public function getConditionalLogicRuleGroups()
     {
 
-        return $this->conditional_logic_rule_groups;
+        return $this->conditionalLogicRuleGroups;
 
     }
 
@@ -321,14 +316,14 @@ class Field
     }
 
     /**
-     * @param string $key_prefix
+     * @param string $keyPrefix
      * @return string
      */
-    private function getFinalKey($key_prefix = '')
+    private function getFinalKey(string $keyPrefix = '')
     {
 
-        if(!empty($key_prefix)) {
-            $key_prefix .= '_';
+        if(!empty($keyPrefix)) {
+            $keyPrefix .= '_';
         }
 
         $parents = $this->getParents(true);
@@ -336,13 +331,13 @@ class Field
         foreach($parents AS $parent) {
 
             if($parent['type'] === Brick::CLASS_ID_STRING) {
-                $key_prefix .= $parent['key'] . '_';
+                $keyPrefix .= $parent['key'] . '_';
             }
 
         }
 
 
-        return Helper::getValidFieldKey($key_prefix . $this->getKey());
+        return Helper::getValidFieldKey($keyPrefix . $this->getKey());
 
     }
 
@@ -352,19 +347,19 @@ class Field
     private function getFinalName()
     {
 
-        $name_prefix = '';
+        $namePrefix = '';
 
         $parents = $this->getParents(true);
 
         foreach($parents AS $parent) {
 
             if($parent['type'] === Brick::CLASS_ID_STRING) {
-                $name_prefix .= $parent['name'] . '_';
+                $namePrefix .= $parent['name'] . '_';
             }
 
         }
 
-        return $name_prefix . $this->name;
+        return $namePrefix . $this->name;
 
     }
 
@@ -450,7 +445,7 @@ class Field
     public function getOriginalKey()
     {
 
-        return $this->original_key;
+        return $this->originalKey;
 
     }
 
@@ -478,11 +473,11 @@ class Field
      * in this instance will return the $defaultValue
      *
      * @param string $name The name of the setting to get
-     * @param bool $defaultValue Value to return if setting is not set
+     * @param mixed $defaultValue Value to return if setting is not set
      *
      * @return mixed $defaultValue if value was not found, otherwise the value
      */
-    public function getSetting($name, $defaultValue = false)
+    public function getSetting(string $name, $defaultValue = false)
     {
 
         $value = $defaultValue;
@@ -498,10 +493,10 @@ class Field
     }
 
     /**
-     * @param $prefix
+     * @param string $prefix
      * @return $this
      */
-    public function prefixKey($prefix)
+    public function prefixKey(string $prefix)
     {
 
         $this->key = $prefix . $this->key;
@@ -514,7 +509,7 @@ class Field
      * @param string $prefix
      * @return $this
      */
-    public function prefixLabel($prefix)
+    public function prefixLabel(string $prefix)
     {
 
         $this->label = $prefix . $this->label;
@@ -527,7 +522,7 @@ class Field
      * @param string $prefix
      * @return $this
      */
-    public function prefixName($prefix)
+    public function prefixName(string $prefix)
     {
 
         $this->name = $prefix . $this->name;
@@ -540,7 +535,7 @@ class Field
      * @param string $suffix
      * @return $this
      */
-    public function suffixLabel($suffix)
+    public function suffixLabel(string $suffix)
     {
 
         $this->label .= $suffix;
@@ -558,17 +553,17 @@ class Field
     }
 
     /**
-     * @param string $key_prefix
+     * @param string $keyPrefix
      *
      * @return array
      */
-    public function toAcfArray(string $key_prefix = '')
+    public function toAcfArray(string $keyPrefix = '')
     {
 
         $this->prepareForAcfArray();
 
         $settings = $this->settings;
-        $settings['key'] =  $this->getFinalKey($key_prefix);
+        $settings['key'] =  $this->getFinalKey($keyPrefix);
         $settings['label'] = $this->label;
         $settings['name'] = $this->name;
         $settings['name'] = $this->getFinalName();
@@ -579,9 +574,9 @@ class Field
             'type' => $this->getType(),
         ]);
 
-        if (!$this->conditional_logic_rule_groups->isEmpty()) {
+        if (!$this->conditionalLogicRuleGroups->isEmpty()) {
 
-            $settings['conditional_logic'] = $this->conditional_logic_rule_groups->toArray();
+            $settings['conditional_logic'] = $this->conditionalLogicRuleGroups->toArray();
 
         }
 

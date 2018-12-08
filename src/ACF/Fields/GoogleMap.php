@@ -104,7 +104,7 @@ class GoogleMap extends Field implements FieldInterface
     }
 
     /**
-     * ACF setting. Customize teh map height.
+     * ACF setting. Customize the map height.
      *
      * @param int $height Height in px (without "px")
      * @return $this

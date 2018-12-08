@@ -28,7 +28,7 @@ class FieldWithImages extends Field
     public function getMaxHeight()
     {
 
-        $this->getSetting('max_height', 0);
+        return $this->getSetting('max_height', 0);
 
     }
 
@@ -153,17 +153,17 @@ class FieldWithImages extends Field
     /**
      * ACF setting. Don't use or pass an empty value for all types.
      *
-     * @param array $mime_types Max file size in MB
+     * @param array $mimeTypes Max file size in MB
      * @return $this
      */
-    public function setMimeTypes($mime_types)
+    public function setMimeTypes($mimeTypes)
     {
 
-        if (is_array($mime_types)) {
-            $mime_types = implode(', ', $mime_types);
+        if (is_array($mimeTypes)) {
+            $mimeTypes = implode(', ', $mimeTypes);
         }
 
-        return $this->setSetting('mime_types', $mime_types);
+        return $this->setSetting('mime_types', $mimeTypes);
 
     }
 

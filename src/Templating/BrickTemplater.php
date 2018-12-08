@@ -16,19 +16,18 @@ class BrickTemplater extends Templater
      * @param Brick $brick An instance of the brick that you want to create HTML for.
      * @param array $settings Any arguments that you need to pass to the brick on runtime. Available as
      * $this->getHtmlArguments
-     * @param mixed $layout_files Array or string with the file name(s) (without .php) of any layouts that you want to
+     * @param mixed $layoutFiles Array or string with the file name(s) (without .php) of any layouts that you want to
      * wrap the brick in. Use the filter fewbricks/templater/brick_layouts_base_path to change the base path of the
      * brick
      * layout files.
-     * @param string|bool $template_file_path Set to a string to specify a special template file for this instance.
+     * @param string|bool $templateFilePath Set to a string to specify a special template file for this instance.
      */
-    public function __construct(Brick $brick, array $settings = [], array $layout_files = [],
-                                $template_file_path = false)
+    public function __construct($brick, array $settings = [], array $layoutFiles = [], $templateFilePath = false)
     {
 
         $this->brick = $brick;
 
-        parent::__construct($settings, $layout_files, $template_file_path);
+        parent::__construct($settings, $layoutFiles, $templateFilePath);
 
     }
 
@@ -53,16 +52,16 @@ class BrickTemplater extends Templater
     private function getBrickHtml()
     {
 
-        $template_file_path = $this->template_file_path;
+        $templateFilePath = $this->templateFilePath;
 
         // If no brick template has been specified directly on this instance of BrickTemplater
-        if (empty($template_file_path)) {
+        if (empty($templateFilePath)) {
 
-            $brick_templates_base_path = Helper::getBrickTemplatesBasePath($this->brick);
+            $brickTemplatesBasePath = Helper::getBrickTemplatesBasePath($this->brick);
 
-            if ($brick_templates_base_path !== false) {
+            if ($brickTemplatesBasePath !== false) {
 
-                $template_file_path = $brick_templates_base_path . '/' . Helper::getBrickTemplateFileName($this->brick);
+                $templateFilePath = $brickTemplatesBasePath . '/' . Helper::getBrickTemplateFileName($this->brick);
 
             } else {
 
@@ -81,7 +80,7 @@ to tell Brick::getBrickTemplateHtml() where to look for brick template files.');
         ob_start();
 
         /** @noinspection PhpIncludeInspection */
-        include $template_file_path;
+        include $templateFilePath;
 
         return ob_get_clean();
 
@@ -91,23 +90,23 @@ to tell Brick::getBrickTemplateHtml() where to look for brick template files.');
      * @param $html
      * @return false|string
      */
-    protected function getLayoutedHtml($html) {
+    protected function getLayoutedHtml(string $html) {
 
         if (
-            false !== ($layouts_base_path = Helper::getBrickLayoutsBasePath()) &&
-            !empty($this->layout_files)
+            false !== ($layoutsBasePath = Helper::getBrickLayoutsBasePath()) &&
+            !empty($this->layoutFiles)
         ) {
 
             // Data to pass to the layout file
             $brick = $this->brick;
             $settings = $this->settings;
 
-            foreach ($this->layout_files AS $layout) {
+            foreach ($this->layoutFiles AS $layout) {
 
                 ob_start();
 
                 /** @noinspection PhpIncludeInspection */
-                include $layouts_base_path . '/' . $layout . Helper::getViewFilesNameStructure() . '.php';
+                include $layoutsBasePath . '/' . $layout . Helper::getViewFilesNameStructure() . '.php';
 
                 $html = ob_get_clean();
 

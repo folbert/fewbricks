@@ -1,6 +1,8 @@
 <?php
 
 /**
+ * Don't place your custom file in the Fewbricks plugin directory! You must move it to a place that
+ * won't be altered when updating plugins or core.
  * Don't forget to activate the plugin for the extensions for which you are creating the class!
  */
 
@@ -58,7 +60,7 @@ class NameOfField extends Field
 
         // replace NameOfSetting above with the PascalCase version of what the setting is called in the field.
         // Replace name_of_setting with what the setting is called in the field
-        // default_value_as_defined_by_the_field should be whatever teh field defines to be the
+        // default_value_as_defined_by_the_field should be whatever the field defines to be the
         // default value if nothing has been set. This will not affect anything when creating
         // the field but will help if you want to get the setting without it ever having been set.
         return $this->getSetting('name_of_setting', 'default_value_as_defined_by_the_field');

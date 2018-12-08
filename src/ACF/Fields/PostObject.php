@@ -107,7 +107,7 @@ class PostObject extends Field implements FieldInterface
      * @param array $postType Array with post type names.
      * @return $this
      */
-    public function setPostType(array $postType)
+    public function setPostType($postType)
     {
 
         return $this->setSetting('post_type', $postType);
@@ -128,13 +128,13 @@ class PostObject extends Field implements FieldInterface
     }
 
     /**
-     * ACF setting. Set which terms post objects available in teh drop down must belong to.
+     * ACF setting. Set which terms post objects available in the drop down must belong to.
      *
      * @param array $taxonomy        An array where each item is made up of "taxonomy:term". For example
      *                               ["category:uncategorized"]
      * @return $this
      */
-    public function setTaxonomy(array $taxonomy)
+    public function setTaxonomy($taxonomy)
     {
 
         return $this->setSetting('taxonomy', $taxonomy);

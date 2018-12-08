@@ -87,7 +87,7 @@ class User extends Field implements FieldInterface
      *                         all) to be able to choose from al roles.
      * @return $this
      */
-    public function setRole(array $role)
+    public function setRole($role)
     {
 
         return $this->setSetting('role', $role);

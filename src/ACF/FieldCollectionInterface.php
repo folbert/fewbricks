@@ -7,23 +7,23 @@ use Fewbricks\Brick;
 interface FieldCollectionInterface
 {
 
-    public function addBrick(Brick $brick);
+    public function addBrick($brick);
 
-    public function addBrickAfterFieldByName(Brick $brick, string $fieldNameToAddAfter);
+    public function addBrickAfterFieldByName($brick, string $fieldNameToAddAfter);
 
-    public function addBrickBeforeFieldByName(Brick $brick, string $fieldNameToAddBefore);
+    public function addBrickBeforeFieldByName($brick, string $fieldNameToAddBefore);
 
-    public function addBrickToBeginning(Brick $brick);
+    public function addBrickToBeginning($brick);
 
-    public function addField(Field $field);
+    public function addField($field);
 
-    public function addFieldAfterFieldByName(Field $field, string $fieldNameToAddAfter);
+    public function addFieldAfterFieldByName($field, string $fieldNameToAddAfter);
 
-    public function addFieldBeforeFieldByName(Field $field, string $fieldNameToAddBefore);
+    public function addFieldBeforeFieldByName($field, string $fieldNameToAddBefore);
 
-    public function addFieldCollection(FieldCollection $fieldCollection);
+    public function addFieldCollection($fieldCollection);
 
-    public function addFieldToBeginning(Field $field);
+    public function addFieldToBeginning($field);
 
     public function addFields($fields);
 
@@ -41,8 +41,8 @@ interface FieldCollectionInterface
 
     public function removeFieldsByKey(array $keys);
 
-    public function replaceFieldByKey(Field $new_field, string $key_of_field_to_replace);
+    public function replaceFieldByKey($newField, string $keyOfFieldToReplace);
 
-    public function replaceFieldByName(Field $new_field, string $name_of_field_to_replace);
+    public function replaceFieldByName($newField, string $nameOfFieldToReplace);
 
 }

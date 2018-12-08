@@ -30,10 +30,10 @@ use \Fewbricks\DevTools;
 
             <?php
 
-            foreach (DevTools::getAcfSettingsArrays() AS $acf_settings_array) {
+            foreach (DevTools::getAcfSettingsArrays() AS $acfSettingsArray) {
 
                 ?>
-                <h3 class="fewbricks-dev-tools__section-sub-title"><?php echo DevTools::getTitleFromAcfArray($acf_settings_array);
+                <h3 class="fewbricks-dev-tools__section-sub-title"><?php echo DevTools::getTitleFromAcfArray($acfSettingsArray);
                 ?></h3>
 
                 <?php
@@ -41,10 +41,10 @@ use \Fewbricks\DevTools;
                 ob_start();
 
                 if (function_exists('dump')) {
-                    dump($acf_settings_array);
+                    dump($acfSettingsArray);
                 } else {
                     echo '<pre class="fdt-pre">';
-                    print_r($acf_settings_array);
+                    print_r($acfSettingsArray);
                     echo '</pre>';
                 }
 

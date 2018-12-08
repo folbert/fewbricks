@@ -61,30 +61,30 @@ class Collection
 
     /**
      * @param Field $item
-     * @param string $key_to_add_after
-     * @param null $key_of_new_item
+     * @param string $keyToAddAfter
+     * @param null|string $keyOfNewItem
      * @return $this
      */
-    public function addItemAfterItemByKey($item, $key_to_add_after, $key_of_new_item = null)
+    public function addItemAfterItemByKey($item, string $keyToAddAfter, $keyOfNewItem = null)
     {
 
-        if (false !== ($position_to_add_after = $this->getItemPositionForKey($key_to_add_after))) {
+        if (false !== ($positionToAddAfter = $this->getPositionForItemByKey($keyToAddAfter))) {
 
             $this->finalizeItem($item);
             $this->validateItem($item);
 
-            if (is_null($key_of_new_item)) {
+            if (is_null($keyOfNewItem)) {
                 $newItem = [$item];
             } else {
 
-                $newItem = [$key_of_new_item => $item];
+                $newItem = [$keyOfNewItem => $item];
 
             }
 
             $this->items = array_merge(
-                array_slice($this->items, 0, ($position_to_add_after + 1)),
+                array_slice($this->items, 0, ($positionToAddAfter + 1)),
                 $newItem,
-                array_slice($this->items, ($position_to_add_after + 1))
+                array_slice($this->items, ($positionToAddAfter + 1))
             );
 
         }
@@ -95,28 +95,28 @@ class Collection
 
     /**
      * @param Field $item
-     * @param string $key_of_field_to_add_before
-     * @param null $key_of_new_item
+     * @param string $keyOfFieldToAddBefore
+     * @param null|string $keyOfNewItem
      * @return $this
      */
-    public function addItemBeforeItemByKey($item, $key_of_field_to_add_before, $key_of_new_item = null)
+    public function addItemBeforeItemByKey($item, string $keyOfFieldToAddBefore, $keyOfNewItem = null)
     {
 
-        if (false !== ($position_to_add_before = $this->getItemPositionForKey($key_of_field_to_add_before))) {
+        if (false !== ($positionToAddBefore = $this->getPositionForItemByKey($keyOfFieldToAddBefore))) {
 
             $this->finalizeItem($item);
             $this->validateItem($item);
 
-            if (is_null($key_of_new_item)) {
+            if (is_null($keyOfNewItem)) {
                 $newItem = [$item];
             } else {
-                $newItem = [$key_of_new_item => $item];
+                $newItem = [$keyOfNewItem => $item];
             }
 
             $this->items = array_merge(
-                array_slice($this->items, 0, $position_to_add_before),
+                array_slice($this->items, 0, $positionToAddBefore),
                 $newItem,
-                array_slice($this->items, $position_to_add_before)
+                array_slice($this->items, $positionToAddBefore)
             );
 
         }
@@ -127,22 +127,22 @@ class Collection
 
     /**
      * @param mixed $item
-     * @param bool $key_of_new_item
+     * @param bool $keyOfNewItem
      * @return $this
      */
-    public function addItemToBeginning($item, $key_of_new_item = false)
+    public function addItemToBeginning($item, $keyOfNewItem = false)
     {
 
         $this->finalizeItem($item);
         $this->validateItem($item);
 
-        if ($key_of_new_item === false) {
+        if ($keyOfNewItem === false) {
 
             array_unshift($this->items, $item);
 
         } else {
 
-            $this->items = array_merge([$key_of_new_item => $item], $this->items);
+            $this->items = array_merge([$keyOfNewItem => $item], $this->items);
 
         }
 
@@ -151,10 +151,10 @@ class Collection
     }
 
     /**
-     * @param $items
+     * @param array $items
      * @return $this
      */
-    public function addItemsToBeginning($items)
+    public function addItemsToBeginning(array $items)
     {
 
         foreach ($items AS $item) {
@@ -178,6 +178,7 @@ class Collection
 
     }
 
+    /** @noinspection PhpUnusedParameterInspection */
     /**
      * Empty function on purpose allowing child classes to overwrite it as needed and not having to implement it if not
      * needed.
@@ -195,42 +196,42 @@ class Collection
      * @param $key
      * @return mixed
      */
-    public function getItemByKey($key)
+    public function getItemByKey(string $key)
     {
 
-        $found_item = false;
+        $foundItem = false;
 
         if (isset($this->items[$key])) {
 
-            $found_item = $this->items[$key];
+            $foundItem = $this->items[$key];
 
         }
 
-        return $found_item;
+        return $foundItem;
 
     }
 
     /**
-     * @param string $key_to_search_for
+     * @param string $keyToSearchFor
      * @return bool|int
      */
-    public function getItemPositionForKey($key_to_search_for)
+    public function getPositionForItemByKey(string $keyToSearchFor)
     {
 
         $position = false;
 
-        $position_tracker = 0;
+        $positionTracker = 0;
 
         foreach ($this->items AS $key => $item) {
 
-            if ($key === $key_to_search_for) {
+            if ($key === $keyToSearchFor) {
 
-                $position = $position_tracker;
+                $position = $positionTracker;
                 break;
 
             }
 
-            $position_tracker++;
+            $positionTracker++;
 
         }
 

@@ -34,15 +34,15 @@
 
                         } else {
 
-                            $textarea_content = '';
+                            $textareaContent = '';
 
                             foreach ($fieldGroupCodes AS $fieldGroupKey => $data) {
 
-                                $textarea_content .= esc_textarea($data[1]);
+                                $textareaContent .= esc_textarea($data[1]);
 
                             }
 
-                            echo '<textarea readonly class="fewbricks__export-textarea">' . $textarea_content
+                            echo '<textarea readonly class="fewbricks__export-textarea">' . $textareaContent
                                  . '</textarea>';
 
                         }

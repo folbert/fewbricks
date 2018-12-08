@@ -31,7 +31,7 @@ class RuleGroup
      * @param Rule $rule
      * @return $this
      */
-    protected function addRule(Rule $rule)
+    protected function addRule($rule)
     {
 
         $this->rules->addItem($rule);

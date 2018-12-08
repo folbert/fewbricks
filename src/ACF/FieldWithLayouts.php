@@ -23,24 +23,18 @@ class FieldWithLayouts extends Field
      * @param string $label
      * @param string $name
      * @param string $key
-     * @param array $settings
      */
-    public function __construct(
-        $label,
-        $name,
-        $key,
-        array $settings = []
-    )
+    public function __construct($label, $name, $key)
     {
 
-        parent::__construct($label, $name, $key, $settings);
+        parent::__construct($label, $name, $key);
 
         $this->layouts = new LayoutCollection($key);
 
     }
 
     /**
-     * @param $layout
+     * @param Layout $layout
      * @return $this
      */
     public function addLayout($layout)
@@ -64,10 +58,10 @@ class FieldWithLayouts extends Field
     }
 
     /**
-     * @param int $key
+     * @param string $key
      * @return mixed
      */
-    public function getLayout($key)
+    public function getLayout(string $key)
     {
 
         return $this->layouts->getItemByKey($key);
@@ -85,10 +79,10 @@ class FieldWithLayouts extends Field
     }
 
     /**
-     * @param int $name
+     * @param string $name
      * @return $this
      */
-    public function removeLayout($name)
+    public function removeLayout(string $name)
     {
 
         $this->layouts->removeFieldByName($name);
@@ -98,7 +92,7 @@ class FieldWithLayouts extends Field
     }
 
     /**
-     * @param $buttonLabel
+     * @param string $buttonLabel
      * @return $this
      */
     public function setButtonLabel($buttonLabel)
@@ -109,14 +103,14 @@ class FieldWithLayouts extends Field
     }
 
     /**
-     * @param string $key_prefix
+     * @param string $keyPrefix
      *
      * @return array
      */
-    public function toAcfArray(string $key_prefix = '')
+    public function toAcfArray(string $keyPrefix = '')
     {
 
-        $settings = parent::toAcfArray($key_prefix);
+        $settings = parent::toAcfArray($keyPrefix);
 
         $settings['layouts'] = $this->layouts->toAcfArray($settings['key']);
 

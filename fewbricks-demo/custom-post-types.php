@@ -150,9 +150,9 @@ if (!function_exists('registerFewbricksCustomPostTypes')) {
     // Force demo post types to use our template
     add_filter('template_include', function ($template) {
 
-        $post_type = get_post_type();
+        $postType = get_post_type();
 
-        if ($post_type === 'fewbricks_demo_pg' or $post_type === 'fewbricks_demo_pg2') {
+        if ($postType === 'fewbricks_demo_pg' or $postType === 'fewbricks_demo_pg2') {
             $template = __DIR__ . '/views/page-templates/demo-page-template.php';
         }
 

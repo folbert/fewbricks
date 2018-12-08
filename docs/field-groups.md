@@ -20,7 +20,7 @@ Note that you should strive to use the action 'fewbricks/init' to start off all 
 add_action('fewbricks/init', function() {
     
 // Instantiate a field group with a title and a key. More on keys below. 
-$dark_tower_contest_field_group = (new FieldGroup('Dark Tower Contest', '1811252128a'))
+$darkTowerContestFieldGroup = (new FieldGroup('Dark Tower Contest', '1811252128a'))
 // Tell the field group where it should show up
 ->addLocationRuleGroup( 
     (new FieldGroupLocationRuleGroup())
@@ -45,10 +45,10 @@ $dark_tower_contest_field_group = (new FieldGroup('Dark Tower Contest', '1811252
 // Hide everything that ACF can hide
 ->setHideOnScreen('all')
 // Assuming we have some fields stored in variables. See under Fields for more info
-->addField($some_field)
+->addField($someField)
 ->addFields([
-    $some_other_field,
-    $yet_another_field,
+    $someOtherField,
+    $yetAnotherField,
     // Creating a field on the fly
     (new \Fewbricks\ACF\Fields\Text('A text field', 'a_text_field', '1811302037a'))
 ])
@@ -69,7 +69,7 @@ group like so:
 ```php
 <?php
 
-$dark_tower_contest_field_group->register();
+$darkTowerContestFieldGroup->register();
 
 ```
 

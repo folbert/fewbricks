@@ -49,7 +49,7 @@ class FieldWithChoices extends Field
      * @param bool $allowNull
      * @return $this
      */
-    public function setAllowNull(bool $allowNull)
+    public function setAllowNull($allowNull)
     {
 
         return $this->setSetting('allow_null', $allowNull);
@@ -63,7 +63,7 @@ class FieldWithChoices extends Field
      * @param array $choices Associative array with options. Key will be name and value will be value.
      * @return $this
      */
-    public function setChoices(array $choices)
+    public function setChoices($choices)
     {
 
         return $this->setSetting('choices', $choices);
@@ -76,7 +76,7 @@ class FieldWithChoices extends Field
      * @param $returnFormat "value", "label" or "array" (for both)
      * @return $this
      */
-    public function setReturnFormat(string $returnFormat)
+    public function setReturnFormat($returnFormat)
     {
 
         return $this->setSetting('return_format', $returnFormat);

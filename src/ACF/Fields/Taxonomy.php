@@ -100,13 +100,13 @@ class Taxonomy extends Field implements FieldInterface
     /**
      * ACF setting. Set if new terms can be added whilst editing.
      *
-     * @param boolean $add_term
+     * @param boolean $addTerm
      * @return $this
      */
-    public function setAddTerm($add_term)
+    public function setAddTerm($addTerm)
     {
 
-        return $this->setSetting('add_term', $add_term);
+        return $this->setSetting('add_term', $addTerm);
 
     }
 

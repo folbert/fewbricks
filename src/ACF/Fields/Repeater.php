@@ -157,15 +157,15 @@ class Repeater extends FieldWithFields implements FieldInterface
     }
 
     /**
-     * @param string $key_prefix
+     * @param string $keyPrefix
      * case
      *
      * @return array|mixed
      */
-    public function toAcfArray($key_prefix = '')
+    public function toAcfArray(string $keyPrefix = '')
     {
 
-        $acfArray = parent::toAcfArray($key_prefix);
+        $acfArray = parent::toAcfArray($keyPrefix);
 
         $acfArray = $this->applyCollapsed($acfArray);
 

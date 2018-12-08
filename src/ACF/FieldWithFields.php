@@ -23,17 +23,11 @@ class FieldWithFields extends Field implements FieldCollectionInterface
      * @param string $label
      * @param string $name
      * @param string $key
-     * @param array $settings
      */
-    public function __construct(
-        $label,
-        $name,
-        $key,
-        array $settings = []
-    )
+    public function __construct($label, $name, $key)
     {
 
-        parent::__construct($label, $name, $key, $settings);
+        parent::__construct($label, $name, $key);
 
         $this->fields = new SubFieldCollection($key);
 
@@ -43,7 +37,7 @@ class FieldWithFields extends Field implements FieldCollectionInterface
      * @param Brick $brick
      * @return $this
      */
-    public function addBrick(Brick $brick)
+    public function addBrick($brick)
     {
 
         $this->fields->addBrick($brick);
@@ -57,7 +51,7 @@ class FieldWithFields extends Field implements FieldCollectionInterface
      * @param string $fieldNameToAddAfter
      * @return $this
      */
-    public function addBrickAfterFieldByName(Brick $brick, string $fieldNameToAddAfter)
+    public function addBrickAfterFieldByName($brick, string $fieldNameToAddAfter)
     {
 
         $this->fields->addBrickAfterFieldByName($brick, $fieldNameToAddAfter);
@@ -71,7 +65,7 @@ class FieldWithFields extends Field implements FieldCollectionInterface
      * @param string $fieldNameToAddBefore
      * @return $this
      */
-    public function addBrickBeforeFieldByName(Brick $brick, string $fieldNameToAddBefore)
+    public function addBrickBeforeFieldByName($brick, string $fieldNameToAddBefore)
     {
 
         $this->fields->addBrickBeforeFieldByName($brick, $fieldNameToAddBefore);
@@ -84,7 +78,7 @@ class FieldWithFields extends Field implements FieldCollectionInterface
      * @param Brick $brick
      * @return $this
      */
-    public function addBrickToBeginning(Brick $brick)
+    public function addBrickToBeginning($brick)
     {
 
         $this->fields->addBrickToBeginning($brick);
@@ -97,7 +91,7 @@ class FieldWithFields extends Field implements FieldCollectionInterface
      * @param Field $field
      * @return $this
      */
-    public function addField(Field $field)
+    public function addField($field)
     {
 
         $this->fields->addField($field);
@@ -111,7 +105,7 @@ class FieldWithFields extends Field implements FieldCollectionInterface
      * @param string $fieldNameToAddAfter
      * @return $this
      */
-    public function addFieldAfterFieldByName(Field $field, string $fieldNameToAddAfter)
+    public function addFieldAfterFieldByName($field, string $fieldNameToAddAfter)
     {
 
         $this->fields->addFieldAfterFieldByName($field, $fieldNameToAddAfter);
@@ -125,7 +119,7 @@ class FieldWithFields extends Field implements FieldCollectionInterface
      * @param string $fieldNameToAddBefore
      * @return $this
      */
-    public function addFieldBeforeFieldByName(Field $field, string $fieldNameToAddBefore)
+    public function addFieldBeforeFieldByName($field, string $fieldNameToAddBefore)
     {
 
         $this->fields->addFieldBeforeFieldByName($field, $fieldNameToAddBefore);
@@ -138,7 +132,7 @@ class FieldWithFields extends Field implements FieldCollectionInterface
      * @param FieldCollection $fieldCollection
      * @return $this
      */
-    public function addFieldCollection(FieldCollection $fieldCollection)
+    public function addFieldCollection($fieldCollection)
     {
 
         $this->fields->addFieldCollection($fieldCollection);
@@ -152,7 +146,7 @@ class FieldWithFields extends Field implements FieldCollectionInterface
      * @param Field $field
      * @return $this
      */
-    public function addFieldToBeginning(Field $field)
+    public function addFieldToBeginning($field)
     {
 
         $this->fields->addFieldToBeginning($field);
@@ -162,7 +156,7 @@ class FieldWithFields extends Field implements FieldCollectionInterface
     }
 
     /**
-     * @param FieldCollection|array $fields
+     * @param FieldCollection|Field[] $fields
      * @return $this
      */
     public function addFields($fields)
@@ -175,7 +169,7 @@ class FieldWithFields extends Field implements FieldCollectionInterface
     }
 
     /**
-     * @param FieldCollection|array $fields
+     * @param FieldCollection|Field[] $fields
      * @return $this
      */
     public function addFieldsToBeginning($fields)
@@ -213,7 +207,7 @@ class FieldWithFields extends Field implements FieldCollectionInterface
      * @param string $key
      * @return $this
      */
-    public function removeBrickByKey($key)
+    public function removeBrickByKey(string $key)
     {
 
         $this->fields->removeBrickByKey($key);
@@ -226,7 +220,7 @@ class FieldWithFields extends Field implements FieldCollectionInterface
      * @param string $name
      * @return $this
      */
-    public function removeBrickByName($name)
+    public function removeBrickByName(string $name)
     {
 
         $this->fields->removeBrickByName($name);
@@ -239,7 +233,7 @@ class FieldWithFields extends Field implements FieldCollectionInterface
      * @param string $key
      * @return $this
      */
-    public function removeFieldByKey($key)
+    public function removeFieldByKey(string $key)
     {
 
         $this->fields->removeFieldByKey($key);
@@ -252,7 +246,7 @@ class FieldWithFields extends Field implements FieldCollectionInterface
      * @param string $name
      * @return $this
      */
-    public function removeFieldByName($name)
+    public function removeFieldByName(string $name)
     {
 
         $this->fields->removeFieldByName($name);
@@ -288,42 +282,41 @@ class FieldWithFields extends Field implements FieldCollectionInterface
     }
 
     /**
-     * @param $key_of_field_to_replace
-     * @param $new_field
+     * @param Field $newField
+     * @param string $keyOfFieldToReplace
      * @return $this
      */
-    public function replaceFieldByKey(Field $new_field, string $key_of_field_to_replace)
+    public function replaceFieldByKey($newField, string $keyOfFieldToReplace)
     {
 
-        $this->fields->replaceFieldByKey($new_field, $key_of_field_to_replace);
+        $this->fields->replaceFieldByKey($newField, $keyOfFieldToReplace);
 
         return $this;
 
     }
 
     /**
-     * @param $name_of_field_to_replace
-     * @param $new_field
+     * @param Field $newField
+     * @param string $nameOfFieldToReplace
      * @return $this
      */
-    public function replaceFieldByName(Field $new_field, string $name_of_field_to_replace)
+    public function replaceFieldByName($newField, string $nameOfFieldToReplace)
     {
 
-        $this->fields->replaceFieldByName($new_field, $name_of_field_to_replace);
+        $this->fields->replaceFieldByName($newField, $nameOfFieldToReplace);
 
         return $this;
 
     }
 
     /**
-     * @param string $key_prefix
-     *
+     * @param string $keyPrefix
      * @return array
      */
-    public function toAcfArray($key_prefix = '')
+    public function toAcfArray(string $keyPrefix = '')
     {
 
-        $settings = parent::toAcfArray($key_prefix);
+        $settings = parent::toAcfArray($keyPrefix);
 
         $settings['sub_fields'] = $this->fields->toAcfArray($settings['key']);
 

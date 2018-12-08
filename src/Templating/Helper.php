@@ -2,6 +2,8 @@
 
 namespace Fewbricks\Templating;
 
+use Fewbricks\Brick;
+
 /**
  * Class Helper
  * @package Fewbricks\Templating
@@ -10,7 +12,7 @@ class Helper
 {
 
     /**
-     * @return mixed|void
+     * @return mixed
      */
     public static function getBrickLayoutsBasePath()
     {
@@ -20,36 +22,36 @@ class Helper
     }
 
     /**
-     * @param $brick_object
+     * @param $brickObject
      *
      * @return mixed
      */
-    public static function getBrickTemplateFileName($brick_object)
+    public static function getBrickTemplateFileName($brickObject)
     {
 
-        $namespaced_pieces = explode('\\', get_class($brick_object));
-        $class_name = array_pop($namespaced_pieces);
+        $namespacedPieces = explode('\\', get_class($brickObject));
+        $className = array_pop($namespacedPieces);
 
         // Turn CamelCaseFileNames to dashed-versions. (ClassName -> class-name)
-        $dashed_class_name = preg_replace('/([A-Z]+)/', "-$1", lcfirst($class_name));
+        $dashedClassName = preg_replace('/([A-Z]+)/', "-$1", lcfirst($className));
 
-        $default_file_name = strtolower($dashed_class_name);
-        $default_file_name .= apply_filters('fewbricks/templater/brick_views_file_name_structure', '.view');
-        $default_file_name .= '.php';
+        $defaultFileName = strtolower($dashedClassName);
+        $defaultFileName .= apply_filters('fewbricks/templater/brick_views_file_name_structure', '.view');
+        $defaultFileName .= '.php';
 
-        return apply_filters('fewbricks/templater/brick_template_file_name', $default_file_name, $brick_object);
+        return apply_filters('fewbricks/templater/brick_template_file_name', $defaultFileName, $brickObject);
 
     }
 
     /**
-     * @param object $brick_object
+     * @param Brick $brickObject
      *
-     * @return mixed|void
+     * @return mixed
      */
-    public static function getBrickTemplatesBasePath($brick_object)
+    public static function getBrickTemplatesBasePath($brickObject)
     {
 
-        return apply_filters('fewbricks/templater/brick_templates_base_path', false, $brick_object);
+        return apply_filters('fewbricks/templater/brick_templates_base_path', false, $brickObject);
 
     }
 
@@ -62,6 +64,5 @@ class Helper
         return apply_filters('fewbricks/templater/brick_views_file_name_structure', '.view');
 
     }
-
 
 }

@@ -15,7 +15,7 @@ class Filters {
     }
 
     /**
-     * @return mixed|void
+     * @return bool
      */
     public static function fieldSnitchIsEnabled()
     {

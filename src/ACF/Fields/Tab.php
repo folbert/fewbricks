@@ -45,13 +45,13 @@ class Tab extends Field implements FieldInterface
     /**
      * ACF setting. Set if this field should be used as an end-point and start a new group of tabs
      *
-     * @param boolean $endPoint
+     * @param boolean $endpoint
      * @return $this
      */
-    public function setEndpoint($endPoint)
+    public function setEndpoint($endpoint)
     {
 
-        return $this->setSetting('endpoint', $endPoint);
+        return $this->setSetting('endpoint', $endpoint);
 
     }
 

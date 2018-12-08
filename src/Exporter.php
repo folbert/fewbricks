@@ -8,21 +8,21 @@ class Exporter
 {
 
     /**
-     * @param $field_group_title
-     * @param $field_group_id
+     * @param string $fieldGroupTitle
+     * @param string $fieldGroupKey
      */
-    public static function maybeStoreSimpleFieldGroupData($field_group_title, $field_group_id)
+    public static function maybeStoreSimpleFieldGroupData(string $fieldGroupTitle, string $fieldGroupKey)
     {
 
         if (Helper::pageIsFewbricksAdminPage()) {
 
-            global $simple_field_groups_data;
+            global $simpleFieldGroupsData;
 
-            if (!is_array($simple_field_groups_data)) {
-                $simple_field_groups_data = [];
+            if (!is_array($simpleFieldGroupsData)) {
+                $simpleFieldGroupsData = [];
             }
 
-            $simple_field_groups_data[$field_group_id] = $field_group_title;
+            $simpleFieldGroupsData[$fieldGroupKey] = $fieldGroupTitle;
 
         }
 
@@ -34,11 +34,11 @@ class Exporter
     public static function maybeWriteToPhpCodeFile()
     {
 
-        $code_to_write = '';
+        $codeToWrite = '';
 
-        $target_file = self::getAutoWritePhpCodeFile();
+        $targetFile = self::getAutoWritePhpCodeFile();
 
-        if ($target_file !== false) {
+        if ($targetFile !== false) {
 
             $codes = self::getFieldGroupsPhpCodes();
 
@@ -46,15 +46,15 @@ class Exporter
 
                 foreach ($codes AS $code) {
 
-                    $code_to_write .= $code[1];
+                    $codeToWrite .= $code[1];
 
                 }
 
             }
 
-            if (!empty($code_to_write)) {
+            if (!empty($codeToWrite)) {
 
-                file_put_contents($target_file, "<?php\r\r" . $code_to_write);
+                file_put_contents($targetFile, "<?php\r\r" . $codeToWrite);
 
                 if (self::displayPhpFileWrittenMessage()) {
 
@@ -62,7 +62,7 @@ class Exporter
 
                         $message = '<div class="notice notice-info">';
                         $message .= '<p>' . sprintf(__('PHP code written to <code>%s</code>', 'fewbricks'),
-                                Helper::getAutoWritePhpCodeFile()) . '</p>';
+                                self::getAutoWritePhpCodeFile()) . '</p>';
                         $message .= '</div>';
 
                         echo $message;
@@ -78,62 +78,62 @@ class Exporter
     }
 
     /**
-     * @param mixed|boolean $field_group_keys An array with the keys of the field groups you want to get. Pass false to
+     * @param mixed|boolean $fieldGroupKeys An array with the keys of the field groups you want to get. Pass false to
      *                                      retrieve all stored field groups.
      *
      * @return array
      */
-    public static function getFieldGroupsPhpCodes($field_group_keys = false)
+    public static function getFieldGroupsPhpCodes($fieldGroupKeys = false)
     {
 
         $codes = [];
 
-        $stored_settings = self::getStoredFieldGroupsAcfSettings();
+        $storedSettings = self::getStoredFieldGroupsAcfSettings();
 
-        if (!empty($stored_settings)) {
+        if (!empty($storedSettings)) {
 
-            if ($field_group_keys === false) {
-                $field_group_keys = array_keys($stored_settings);
+            if ($fieldGroupKeys === false) {
+                $fieldGroupKeys = array_keys($storedSettings);
             }
 
             // Taken from class-acf-admin-tool-export.php
-            $str_replace  = [
+            $strReplace  = [
                 "  "         => "\t",
                 "'!!__(!!\'" => "__('",
                 "!!\', !!\'" => "', '",
                 "!!\')!!'"   => "')",
                 "array ("    => "array(",
             ];
-            $preg_replace = [
+            $pregReplace = [
                 '/([\t\r\n]+?)array/' => 'array',
                 '/[0-9]+ => array/'   => 'array',
             ];
 
             // Loop the keys the caller has requested
-            foreach ($field_group_keys AS $field_group_key) {
+            foreach ($fieldGroupKeys AS $fieldGroupKey) {
 
-                if (isset($stored_settings[$field_group_key])) {
+                if (isset($storedSettings[$fieldGroupKey])) {
 
-                    $settings_code = var_export($stored_settings[$field_group_key], true);
-
-                    // From ACF
-                    $settings_code = str_replace(array_keys($str_replace), array_values($str_replace), $settings_code);
+                    $settingsCode = var_export($storedSettings[$fieldGroupKey], true);
 
                     // From ACF
-                    $settings_code = preg_replace(array_keys($preg_replace), array_values($preg_replace), $settings_code);
+                    $settingsCode = str_replace(array_keys($strReplace), array_values($strReplace), $settingsCode);
+
+                    // From ACF
+                    $settingsCode = preg_replace(array_keys($pregReplace), array_values($pregReplace), $settingsCode);
 
                     $code = "//-------------\r";
-                    $code .= "// Start of field group \"" . $stored_settings[$field_group_key]['title'] . "\"\r";
+                    $code .= "// Start of field group \"" . $storedSettings[$fieldGroupKey]['title'] . "\"\r";
                     $code .= "//-------------\r\r";
 
                     $code .= "if( function_exists('acf_add_local_field_group') ) {\r\n";
                     $code .= "  acf_add_local_field_group(\r\n";
-                    $code .= "\t" . $settings_code;
+                    $code .= "\t" . $settingsCode;
                     $code .= "  );\r\n";
                     $code .= '}';
 
                     $code .= "\r//-------------\r";
-                    $code .= "// End of field group \"" . $stored_settings[$field_group_key]['title'] . "\"\r";
+                    $code .= "// End of field group \"" . $storedSettings[$fieldGroupKey]['title'] . "\"\r";
                     $code .= "//-------------\r\r";
 
                 } else {
@@ -142,7 +142,7 @@ class Exporter
 
                 }
 
-                $codes[$field_group_key] = [$stored_settings[$field_group_key]['title'], $code];
+                $codes[$fieldGroupKey] = [$storedSettings[$fieldGroupKey]['title'], $code];
 
             }
 
@@ -172,24 +172,24 @@ class Exporter
 
         if (Exporter::exportToJsonTriggered()) {
 
-            $field_groups = Exporter::getStoredFieldGroupsAcfSettings();
+            $fieldGroups = Exporter::getStoredFieldGroupsAcfSettings();
 
-            if (!empty($field_groups)) {
+            if (!empty($fieldGroups)) {
 
                 // construct JSON
-                foreach ($field_groups as $field_group) {
+                foreach ($fieldGroups as $fieldGroup) {
 
                     // prepare for export
-                    $field_group = acf_prepare_field_group_for_export($field_group);
+                    $fieldGroup = acf_prepare_field_group_for_export($fieldGroup);
 
                     // add to json array
-                    $data[] = $field_group;
+                    $data[] = $fieldGroup;
 
                 }
 
-                $file_name = 'fewbricks-acf-export-' . date('Y-m-d') . '.json';
+                $fileName = 'fewbricks-acf-export-' . date('Y-m-d') . '.json';
                 header("Content-Description: File Transfer");
-                header("Content-Disposition: attachment; filename={$file_name}");
+                header("Content-Disposition: attachment; filename={$fileName}");
                 header("Content-Type: application/json; charset=utf-8");
 
                 echo acf_json_encode($data);
@@ -220,16 +220,16 @@ class Exporter
     public static function getStoredFieldGroupsAcfSettings()
     {
 
-        global $field_groups_acf_settings;
+        global $fieldGroupsAcfSettings;
 
-        return $field_groups_acf_settings;
+        return $fieldGroupsAcfSettings;
 
     }
 
     /**
-     * @param $field_group_acf_settings
+     * @param array $fieldGroupAcfSettings
      */
-    public static function maybeStoreFieldGroupAcfSettings($field_group_acf_settings)
+    public static function maybeStoreFieldGroupAcfSettings(array $fieldGroupAcfSettings)
     {
 
         if (
@@ -237,12 +237,12 @@ class Exporter
                 (self::generatePhpCodeTriggered() || self::exportToJsonTriggered())
                 && isset($_GET['fewbricks_selected_field_groups_for_export'])
                 && is_array($_GET['fewbricks_selected_field_groups_for_export'])
-                && in_array($field_group_acf_settings['key'], $_GET['fewbricks_selected_field_groups_for_export'])
+                && in_array($fieldGroupAcfSettings['key'], $_GET['fewbricks_selected_field_groups_for_export'])
             )
             || self::getAutoWritePhpCodeFile() !== false
         ) {
 
-            self::storeFieldGroupAcfSettings($field_group_acf_settings);
+            self::storeFieldGroupAcfSettings($fieldGroupAcfSettings);
 
         }
 
@@ -274,18 +274,18 @@ class Exporter
     }
 
     /**
-     * @param array $field_group_acf_settings
+     * @param array $fieldGroupAcfSettings
      */
-    public static function storeFieldGroupAcfSettings($field_group_acf_settings)
+    public static function storeFieldGroupAcfSettings(array $fieldGroupAcfSettings)
     {
 
-        global $field_groups_acf_settings;
+        global $fieldGroupsAcfSettings;
 
-        if (!is_array($field_groups_acf_settings)) {
-            $field_groups_acf_settings = [];
+        if (!is_array($fieldGroupsAcfSettings)) {
+            $fieldGroupsAcfSettings = [];
         }
 
-        $field_groups_acf_settings[$field_group_acf_settings['key']] = $field_group_acf_settings;
+        $fieldGroupsAcfSettings[$fieldGroupAcfSettings['key']] = $fieldGroupAcfSettings;
 
     }
 
@@ -295,13 +295,13 @@ class Exporter
     public static function getStoredSimpleFieldGroupData()
     {
 
-        global $simple_field_groups_data;
+        global $simpleFieldGroupsData;
 
-        if (!is_array($simple_field_groups_data)) {
-            $simple_field_groups_data = [];
+        if (!is_array($simpleFieldGroupsData)) {
+            $simpleFieldGroupsData = [];
         }
 
-        return $simple_field_groups_data;
+        return $simpleFieldGroupsData;
 
     }
 

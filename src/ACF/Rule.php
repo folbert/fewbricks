@@ -28,9 +28,9 @@ class Rule
     /**
      * Rule constructor.
      *
-     * @param $param
-     * @param $operator
-     * @param $value
+     * @param string $param
+     * @param string $operator
+     * @param string|null $value
      */
     public function __construct($param, $operator, $value = null)
     {
@@ -42,8 +42,7 @@ class Rule
     }
 
     /**
-     * @return mixed
-     * @return $this
+     * @return string
      */
     public function getOperator()
     {
@@ -53,7 +52,7 @@ class Rule
     }
 
     /**
-     * @param $operator
+     * @param string $operator
      * @return $this
      */
     public function setOperator(string $operator)
@@ -76,7 +75,7 @@ class Rule
     }
 
     /**
-     * @param $param
+     * @param string $param
      * @return $this
      */
     public function setParam($param)
@@ -99,7 +98,7 @@ class Rule
     }
 
     /**
-     * @param $value
+     * @param string $value
      * @return $this
      */
     public function setValue($value)

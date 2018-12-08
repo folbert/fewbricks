@@ -29,9 +29,9 @@ for the field or field group that you want to display.
 
 ```php
 <?php
-$field_group = new \Fewbricks\ACF\FieldGroup('A field group', '1811262137a');
-$field_group->setDisplayInFewbricksDevTools(true);
-$field_group->register();
+$fieldGroup = new \Fewbricks\ACF\FieldGroup('A field group', '1811262137a');
+$fieldGroup->setDisplayInFewbricksDevTools(true);
+$fieldGroup->register();
 ```
 
 If you are using FDT to display ACF arrays, please know that Fewbricks is checking if `dump()` is available and if it

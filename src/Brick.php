@@ -4,7 +4,6 @@ namespace Fewbricks;
 
 use Fewbricks\ACF\Field;
 use Fewbricks\ACF\FieldCollection;
-use Fewbricks\ACF\Item;
 
 /**
  * Class Brick
@@ -24,17 +23,17 @@ class Brick extends FieldCollection implements BrickInterface
     /**
      * @var bool True if the brick is a layout for flexible content
      */
-    protected $is_layout;
+    protected $isLayout;
 
     /**
      * @var bool True if the brick belongs to an ACF options page.
      */
-    protected $is_option;
+    protected $isOption;
 
     /**
      * @var bool True if the brick is a sub field for a repeater
      */
-    protected $is_sub_field;
+    protected $isSubField;
 
     /**
      * @var string
@@ -44,7 +43,7 @@ class Brick extends FieldCollection implements BrickInterface
     /**
      * @var int What post id we should get field from.
      */
-    private $post_id_to_get_field_from;
+    private $postIdToGetFieldFrom;
 
     /**
      * @param string $name Name to use when fetching data for the brick.
@@ -54,15 +53,15 @@ class Brick extends FieldCollection implements BrickInterface
      * @param array $arguments Arbitrary arguments you want to pass to a brick instance to be used within your brick
      * class. This base class does not take any of those arguments into consideration.
      */
-    public function __construct($name, $key = '', $arguments = [])
+    public function __construct(string $name, string $key = '', array $arguments = [])
     {
 
         $this->name = $name;
         $this->data = [];
-        $this->is_layout = false;
-        $this->is_option = false;
-        $this->is_sub_field = false;
-        $this->post_id_to_get_field_from = false;
+        $this->isLayout = false;
+        $this->isOption = false;
+        $this->isSubField = false;
+        $this->postIdToGetFieldFrom = false;
 
         parent::__construct($key, $arguments);
 
@@ -93,35 +92,35 @@ class Brick extends FieldCollection implements BrickInterface
      * name and whether it is a layout, sub field or option down to the new instance. You can ovveride if the child
      * should be a layout, sub field or option by passing any of the arguments to this function.
      *
-     * @param string $class_name
-     * @param string $brick_name
-     * @param bool $is_layout If the child brick is a layout.
-     * @param bool $is_sub_field If the child brick is a sub field
-     * @param bool $is_option If the child brick is an option. All field swill be fetched using ACFs "option"
+     * @param string $className
+     * @param string $brickName
+     * @param bool $isLayout If the child brick is a layout.
+     * @param bool $isSubField If the child brick is a sub field
+     * @param bool $isOption If the child brick is an option. All field swill be fetched using ACFs "option"
      * argument.
      *
      * @return object An instance of the class passed as $className with the name of $brick_name prepended with the
      * name of the current brick.
      */
-    public function getChildBrick($class_name, $brick_name, $is_layout = false, $is_sub_field = false,
-                                  $is_option = false)
+    public function getChildBrick(string $className, string $brickName, bool $isLayout = false,
+                                  bool $isSubField = false, bool $isOption = false)
     {
 
         // If no special case has been forced on the function call...
-        if ($is_layout === false && $is_sub_field === false && $is_option === false) {
+        if ($isLayout === false && $isSubField === false && $isOption === false) {
 
             // ...let the calling (parent) object decide
-            $is_layout = $this->is_layout;
-            $is_sub_field = $this->is_sub_field;
-            $is_option = $this->is_option;
-            $brick_name = $this->name . '_' . $brick_name;
+            $isLayout = $this->isLayout;
+            $isSubField = $this->isSubField;
+            $isOption = $this->isOption;
+            $brickName = $this->name . '_' . $brickName;
 
         }
 
-        return (new $class_name($brick_name))
-            ->setIsLayout($is_layout)
-            ->setIsSubField($is_sub_field)
-            ->setIsOption($is_option);
+        return (new $className($brickName))
+            ->setIsLayout($isLayout)
+            ->setIsSubField($isSubField)
+            ->setIsOption($isOption);
 
     }
 
@@ -136,10 +135,20 @@ class Brick extends FieldCollection implements BrickInterface
     }
 
     /**
+     * @return array
+     */
+    public function getViewData()
+    {
+
+        return [];
+
+    }
+
+    /**
      * @param array $data
      * @return $this
      */
-    public function setData($data)
+    public function setData(array $data)
     {
 
         $this->data = $data;
@@ -155,25 +164,25 @@ class Brick extends FieldCollection implements BrickInterface
      * in in the returned array: ['field_name_1', 'field_name_2', ['field_name_3' => 'name_to_save_as']]
      * Does not support passing extra arguments to getFieldValue().
      *
-     * @param array $field_names
+     * @param array $fieldNames
      *
      * @return array
      */
-    public function getFieldValues(array $field_names)
+    public function getFieldValues(array $fieldNames)
     {
 
         $values = [];
 
-        foreach ($field_names AS $field_name) {
+        foreach ($fieldNames AS $fieldName) {
 
-            if (is_array($field_name)) {
+            if (is_array($fieldName)) {
 
-                $key = key($field_name);
-                $values[$field_name[$key]] = $this->getFieldValue($key);
+                $key = key($fieldName);
+                $values[$fieldName[$key]] = $this->getFieldValue($key);
 
             } else {
 
-                $values[$field_name] = $this->getFieldValue($field_name);
+                $values[$fieldName] = $this->getFieldValue($fieldName);
 
             }
         }
@@ -183,49 +192,49 @@ class Brick extends FieldCollection implements BrickInterface
     }
 
     /**
-     * @param string $field_name The first parameter to pass to ACFs get_field-function. This value may be changed
+     * @param string $fieldName The first parameter to pass to ACFs get_field-function. This value may be changed
      * inside the function depending on the values of other parameters.
-     * @param bool $post_id Second parameter to pass to ACFs get_field-function
-     * @param bool $format_value Third parameter to pass to ACFs get_field-function
-     * @param bool $prepend_current_objects_name If the current objects name should be prepended to $data_name
-     * @param bool $get_from_sub_field
+     * @param bool $postId Second parameter to pass to ACFs get_field-function
+     * @param bool $formatValue Third parameter to pass to ACFs get_field-function
+     * @param bool $prependCurrentObjectsName If the current objects name should be prepended to $data_name
+     * @param bool $getFromSubField
      *
      * @return bool|mixed|null
      *
      * @link https://www.advancedcustomfields.com/resources/get_sub_field/
      * @link https://www.advancedcustomfields.com/resources/get_field/
      */
-    protected function getFieldValue($field_name, $post_id = false, $format_value = true,
-                                     $prepend_current_objects_name = true, $get_from_sub_field = false
+    protected function getFieldValue(string $fieldName, $postId = false, $formatValue = true,
+                                     bool $prependCurrentObjectsName = true, bool $getFromSubField = false
     )
     {
 
-        if ($prepend_current_objects_name) {
+        if ($prependCurrentObjectsName) {
 
-            if (substr($field_name, 0, 1) !== '_') {
-                $field_name = '_' . $field_name;
+            if (substr($fieldName, 0, 1) !== '_') {
+                $fieldName = '_' . $fieldName;
             }
 
-            $name = $this->name . $field_name;
+            $name = $this->name . $fieldName;
 
         } else {
 
-            $name = $field_name;
+            $name = $fieldName;
 
         }
 
-        if ($post_id === false && $this->post_id_to_get_field_from !== false) {
-            $post_id = $this->post_id_to_get_field_from;
+        if ($postId === false && $this->postIdToGetFieldFrom !== false) {
+            $postId = $this->postIdToGetFieldFrom;
         }
 
-        $data_value = null;
+        $dataValue = null;
 
         // Do we have some manually set data?
         if ($this->data !== false && array_key_exists($name, $this->data)) {
 
-            $data_value = $this->data[$name];
+            $dataValue = $this->data[$name];
 
-        } else if ($post_id === false && ($get_from_sub_field || $this->is_layout || $this->is_sub_field)) {
+        } else if ($postId === false && ($getFromSubField || $this->isLayout || $this->isSubField)) {
 
             // We should get data using acf functions and we are dealing with layout or sub field
 
@@ -242,9 +251,9 @@ class Brick extends FieldCollection implements BrickInterface
             } else {*/
             // Not ACF option
 
-            if (null !== ($value = get_sub_field($name, $format_value))) {
+            if (null !== ($value = get_sub_field($name, $formatValue))) {
 
-                $data_value = $value;
+                $dataValue = $value;
 
             }
 
@@ -253,23 +262,23 @@ class Brick extends FieldCollection implements BrickInterface
         } else {
             // ACF data which is not a layout or sub field
 
-            if ($this->is_option === true) {
+            if ($this->isOption === true) {
 
-                if (null !== ($value = get_field($name, 'options', $format_value))) {
+                if (null !== ($value = get_field($name, 'options', $formatValue))) {
 
-                    $data_value = $value;
+                    $dataValue = $value;
 
                 }
 
-            } else if (null !== ($value = get_field($name, $post_id, $format_value))) {
+            } else if (null !== ($value = get_field($name, $postId, $formatValue))) {
 
-                $data_value = $value;
+                $dataValue = $value;
 
             }
 
         }
 
-        return $data_value;
+        return $dataValue;
 
     }
 
@@ -279,7 +288,7 @@ class Brick extends FieldCollection implements BrickInterface
     public function getIsLayout()
     {
 
-        return $this->is_layout;
+        return $this->isLayout;
 
     }
 
@@ -290,7 +299,7 @@ class Brick extends FieldCollection implements BrickInterface
     public function setIsLayout($isLayout)
     {
 
-        $this->is_layout = $isLayout;
+        $this->isLayout = $isLayout;
 
         return $this;
 
@@ -302,18 +311,18 @@ class Brick extends FieldCollection implements BrickInterface
     public function getIsOption()
     {
 
-        return $this->is_option;
+        return $this->isOption;
 
     }
 
     /**
-     * @param $is_option
+     * @param $isOption
      * @return $this
      */
-    public function setIsOption($is_option)
+    public function setIsOption($isOption)
     {
 
-        $this->is_option = $is_option;
+        $this->isOption = $isOption;
 
         return $this;
 
@@ -325,19 +334,19 @@ class Brick extends FieldCollection implements BrickInterface
     public function getIsSubField()
     {
 
-        return $this->is_sub_field;
+        return $this->isSubField;
 
     }
 
     /**
-     * @param $is_sub_field
+     * @param $isSubField
      *
      * @return $this
      */
-    public function setIsSubField($is_sub_field)
+    public function setIsSubField($isSubField)
     {
 
-        $this->is_sub_field = $is_sub_field;
+        $this->isSubField = $isSubField;
 
         return $this;
 
@@ -349,7 +358,7 @@ class Brick extends FieldCollection implements BrickInterface
     public function getPostIdToGetFieldFrom()
     {
 
-        return $this->post_id_to_get_field_from;
+        return $this->postIdToGetFieldFrom;
 
     }
 
@@ -360,13 +369,13 @@ class Brick extends FieldCollection implements BrickInterface
      *
      * @link http://www.advancedcustomfields.com/resources/get_field/
      *
-     * @param $post_id
+     * @param $postId
      * @return $this
      */
-    public function setPostIdToGetFieldFrom($post_id)
+    public function setPostIdToGetFieldFrom($postId)
     {
 
-        $this->post_id_to_get_field_from = $post_id;
+        $this->postIdToGetFieldFrom = $postId;
 
         return $this;
 
@@ -376,35 +385,35 @@ class Brick extends FieldCollection implements BrickInterface
      * Checks if the brick has a layout with the name that you pass to the function. Returns true if it does, false if
      * not.
      *
-     * @param string $brick_layout_name
+     * @param string $brickLayoutName
      *
      * @return boolean True if the brick has a layout with the passed name, false if not.
      */
-    public function hasBrickLayout($brick_layout_name)
+    /*public function hasBrickLayout($brickLayoutName)
     {
 
-        return in_array($brick_layout_name, $this->brick_layouts);
+        return in_array($brickLayoutName, $this->brickLayouts);
 
-    }
+    }*/
 
     /**
      * Use this to set custom data for the brick.
      *
-     * @param string $item_name The name of the item.
+     * @param string $itemName The name of the item.
      * @param mixed $value The value of the item.
-     * @param bool $group_name Use this if you want to create groups of data.
+     * @param bool $groupName Use this if you want to create groups of data.
      * @return $this
      */
-    public function setDataItem($item_name, $value, $group_name = false)
+    public function setDataItem($itemName, $value, $groupName = false)
     {
 
-        if ($group_name === false) {
+        if ($groupName === false) {
 
-            $this->data[$item_name] = $value;
+            $this->data[$itemName] = $value;
 
         } else {
 
-            $this->data[$group_name][$item_name] = $value;
+            $this->data[$groupName][$itemName] = $value;
 
         }
 

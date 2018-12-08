@@ -92,43 +92,43 @@ class File extends Field implements FieldInterface
     /**
      * ACF setting. Restrict which files can be uploaded.
      *
-     * @param int $max_size Max file size in MB
+     * @param int $maxSize Max file size in MB
      * @return $this
      */
-    public function setMaxSize($max_size)
+    public function setMaxSize($maxSize)
     {
 
-        return $this->setSetting('max_size', $max_size);
+        return $this->setSetting('max_size', $maxSize);
 
     }
 
     /**
      * ACF setting. Don't use or pass an empty value for all types.
      *
-     * @param string|array $mime_types Comma separated string or array
+     * @param string|array $mimeTypes Comma separated string or array
      * @return $this
      */
-    public function setMimeTypes($mime_types)
+    public function setMimeTypes($mimeTypes)
     {
 
-        if (is_array($mime_types)) {
-            $mime_types = implode(', ', $mime_types);
+        if (is_array($mimeTypes)) {
+            $mimeTypes = implode(', ', $mimeTypes);
         }
 
-        return $this->setSetting('mime_types', $mime_types);
+        return $this->setSetting('mime_types', $mimeTypes);
 
     }
 
     /**
      * ACF setting. Restrict which files can be uploaded.
      *
-     * @param int $min_size Minimum file size in MB
+     * @param int $minSize Minimum file size in MB
      * @return $this
      */
-    public function setMinSize($min_size)
+    public function setMinSize($minSize)
     {
 
-        return $this->setSetting('min_size', $min_size);
+        return $this->setSetting('min_size', $minSize);
 
     }
 

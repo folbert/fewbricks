@@ -30,6 +30,7 @@ spl_autoload_register(function ($class) {
         // First item will always be "Febwricks" and we dont need that when building the path
         // Yes, by not checking of the file exists, we do get ugly error messages.
         // But we save some execution time by not checking if the file exists first.
+        /** @noinspection PhpIncludeInspection */
         include __DIR__ . '/src/' . implode('/', array_slice($namespaceParts, 1)) . '.php';
 
     }
