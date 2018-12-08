@@ -3,6 +3,7 @@
 namespace Fewbricks;
 
 use Fewbricks\ACF\Field;
+use Fewbricks\Helpers\Helper;
 
 /**
  * Class Collection
@@ -46,8 +47,8 @@ class Collection
 
             if(isset($this->items[$key])) {
 
-                wp_die('Fewbricks says: trying to add an item with the key "' . $key . '". The key already exists for a field and keys
-                must be unique.');
+                Helper::fewbricksDie('Fewbricks says: trying to add an item with the key "' . $key . '".
+                The key already exists for a field and keys must be unique.');
 
             }
 

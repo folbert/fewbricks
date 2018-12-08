@@ -2,6 +2,8 @@
 
 namespace Fewbricks\ACF;
 
+use Fewbricks\Helpers\Helper;
+
 /**
  * Class FieldGroupLocationRuleGroup
  *
@@ -18,7 +20,7 @@ class FieldGroupLocationRuleGroup extends RuleGroup
     {
 
         if (!($rule instanceof FieldGroupLocationRule)) {
-            wp_die('You can only add instances of FieldGroupLocationRule to FieldGroupLocationRuleGroup');
+            Helper::fewbricksDie('You can only add instances of FieldGroupLocationRule to FieldGroupLocationRuleGroup');
         }
 
         parent::addRule($rule);

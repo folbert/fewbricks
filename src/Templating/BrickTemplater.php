@@ -65,8 +65,8 @@ class BrickTemplater extends Templater
 
             } else {
 
-                wp_die('Please make sure that you have used the filter <code>fewbricks/templater/brick_templates_base_path</code>
-to tell Brick::getBrickTemplateHtml() where to look for brick template files.');
+                \Fewbricks\Helpers\Helper::fewbricksDie(('Please make sure that you have used the filter <code>fewbricks/templater/brick_templates_base_path</code>
+to tell Brick::getBrickTemplateHtml() where to look for brick template files.'));
 
             }
 

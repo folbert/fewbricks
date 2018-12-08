@@ -2,6 +2,8 @@
 
 namespace Fewbricks\ACF;
 
+use Fewbricks\Helpers\Helper;
+
 /**
  * Class ConditionalLogicRuleGroup
  *
@@ -18,7 +20,7 @@ class ConditionalLogicRuleGroup extends RuleGroup
     {
 
         if (!($rule instanceof ConditionalLogicRule)) {
-            wp_die('You can only add instances of ConditionalLogicRule to ConditionalLogicRuleGroup');
+            Helper::fewbricksDie('You can only add instances of ConditionalLogicRule to ConditionalLogicRuleGroup');
         }
 
         parent::addRule($rule);

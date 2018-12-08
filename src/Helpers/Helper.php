@@ -291,7 +291,7 @@ class Helper
 
             if (strlen($field['name']) > 255) {
 
-                wp_die('Fewbricks found a field whose field name exceeds 255 characters which will render the field useless. This is due to restrictions in the database scheme created by WordPress where a meta_key value in the _postmeta table can be no longer than 255 characters.');
+                self::fewbricksDie('Fewbricks found a field whose field name exceeds 255 characters which will render the field useless. This is due to restrictions in the database scheme created by WordPress where a meta_key value in the _postmeta table can be no longer than 255 characters.');
 
             }
 
@@ -370,7 +370,7 @@ class Helper
     character to ensure that ACF can use the key but also to make sure that if you create another key within the same
     minute, you can simply append some other "random" letter to that key like "1912241500x"';
 
-            wp_die($message);
+            self::fewbricksDie($message);
 
         }
 
@@ -468,6 +468,20 @@ class Helper
     public static function getDocumentationUrl(string $path = '') {
 
         return 'https://fewbricks2.folbert.com/' . $path;
+
+    }
+
+    /**
+     * @param $message
+     */
+    public static function fewbricksDie($message)
+    {
+
+        if(function_exists('wp_die')) {
+            wp_die($message);
+        } else {
+            die($message);
+        }
 
     }
 
