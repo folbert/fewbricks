@@ -7,17 +7,26 @@ permalink: /getting-started/
 
 # Getting started
 
+## Meeting the requirments
+Make sure that your setup meets the [requirements](/requirements/).
+
 ## Installing
 Fewbricks can be installed either by using Composer or doing an old fashioned manual install. Regardless of which o
 the ways you choose, there are some common steps to be taken after the initial install so make sure you don't miss 
 the instructions below the manual installation steps.
 
 ### Install using Composer
-Fewbricks is available on Packagist at [https://packagist.org/packages/folbert/fewbricks](https://packagist
+Note that even if you are installing Fewbricks this way, you still need to make sure that Fewbricks Hidden Field for 
+ACF is installed and activated. You can get Hidden from [Packagist](https://packagist.org/packages/folbert/acf-fewbricks-hidden).
+
+Fewbricks is available at Packagist at [https://packagist.org/packages/folbert/fewbricks](https://packagist
 .org/packages/folbert/fewbricks). Please see the link to find which version is the latest and which one you want to 
 tell Composer to require.
 
-`composer require folbert/fewbricks:2.0`
+Requiring 2.0 looks like this:
+```bash
+composer require folbert/fewbricks:2.0
+```
 
 The repository type of the package is "wordpress-plugin" which may be good to know since you will want Fewbricks to
 end up in the plugins directory and not in the default vendor directory for Composer packages. If you want to get
@@ -26,25 +35,25 @@ recommend using [Bedrock](https://roots.io/bedrock/) from the team behind [Roots
 
 ### Install manually
 1. If you are installing Fewbricks the good old manual way, you must first install the plugin [Fewbricks Hidden field
-for ACF](https://github.com/folbert/acf-fewbricks-hidden) and make sure that its folder is named "acf-fewbricks-hidden
-. So head on over to GitHub and get the zip with the [https://github.com/folbert/acf-hidden/releases](latest version
-of that plugin).
+for ACF](https://github.com/folbert/acf-fewbricks-hidden) and make sure that its folder is named 
+"acf-fewbricks-hidden". So head on over to GitHub and get the zip with the [https://github
+.com/folbert/acf-hidden/releases](latest version of Fewbricks Hidden Field).
 2. Download the latest [release of Fewbricks](https://github.com/folbert/fewbricks/releases).
-3. Unzip and upload the two plugins (or upload the zips using the upload feature in the WordPress plugins admin area).
+3. Install and Hidden and Fewbricks like you would any other WordPress plugin.
 
-### After initial install
+## After initial install
 Note that these steps does not have to be done on each update of Fewbricks, only the first time you install it.
 
 Activate the newly installed plugins Fewbricks and Fewbricks Hidden Field for ACF like you would any other WordPress
 plugin.
 
-In the admin-area, you should now see new post types "Fewbricks Demo Pages Type 1" and "Fewbricks Demo pages Type 2".
-This is because Fewbricks comes with a bunch of demo code for you to use as you want.
-
 ### Running demo code
-If this is your first time running Fewbricks2, you may want to check out the demo code to see what you can do with it
-. In the fewbricks-folder in plugins, you will find a folder named "demo". Copy that folder to, for example, your 
-themes folder. Then require the init.php-file  
+If this is your first time running Fewbricks2, you may want to check out the demo code to see what you can do with 
+what you just installed. In the fewbricks-folder in plugins, you will find a folder named "fewbricks-demo". Copy or 
+move that folder to, for example, your themes folder. Then require the init.php-file found in the folder you just copied.
+
+You should now, if all has gone as planned, see the post types "Fewbricks Demo Pages Type 1" and "Fewbricks Demo 
+pages Type 2" in the admin area.
 
 @todo Describe action fewbricks/init
 

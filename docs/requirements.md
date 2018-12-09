@@ -11,11 +11,11 @@ permalink: /requirements/
 
 - WordPress :)
 
-- [https://www.advancedcustomfields.com](Advanced Custom Fields 5+ PRO)
+- [Advanced Custom Fields PRO 5](https://www.advancedcustomfields.com)
 
-- [https://github.com/folbert/acf-fewbricks-hidden](Fewbricks Hidden Field for Advanced Custom Fields). This allows us
-to store settings in a brick. For example how many columns a multi column brick should have. Automatically installed if
- you use Composer to install Fewbricks.
+- Fewbricks Hidden Field for Advanced Custom Fields. This allows us to store settings for a brick. Install either 
+from [Packagist](https://packagist.org/packages/folbert/acf-fewbricks-hidden) using Composer or teh good old standard
+ WordPress way by [downloading it from GitHub](https://github.com/folbert/acf-fewbricks-hidden).
 
 - Some experience with ACF and knowledge about what a field, field group etc is is recommended and that can all be read
-up on in the [https://www.advancedcustomfields.com/resources](documentation for ACF).
+up on in the [documentation for ACF](https://www.advancedcustomfields.com/resources).
