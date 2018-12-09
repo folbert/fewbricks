@@ -23,12 +23,12 @@
         "documentation": "https://fewbrick2.folbert.com",
         "issues": "https://github.com/folbert/fewbricks/issues"
     },
+    "require": {
+        "php": ">=7.1"
+    },
     "autoload": {
         "psr-4": {
             "Fewbricks\\": "src/"
         }
-    },
-    "require": {
-        "php": ">=7.1"
     }
 }

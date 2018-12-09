@@ -1,0 +1,7 @@
+<phpunit colors="true">
+    <testsuites>
+        <testsuite name="fields">
+            <directory>tests/ACF/Fields</directory>
+        </testsuite>
+    </testsuites>
+</phpunit>
