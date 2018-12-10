@@ -47,100 +47,11 @@ class AcfCoreFields extends Brick
     public function setup()
     {
 
-        $this->addField((new Text('Text', 'fd_text', '18120621210a'))
-        ->setAppend('appended'));
-        $this->addField((new Text('Text', 'fd_text2', '18120621210o'))
-            ->addConditionalLogicRuleGroup(
-                (new ConditionalLogicRuleGroup())
-                    ->addConditionalLogicRule(
-                        new ConditionalLogicRule('18120621210a', '!=empty')
-                    )
-            ));
+        $this->addField((new Message('', 'brick_message', '1812102244b'))
+            ->setMessage('Image and text below is from Brick "ImageAndText'));
 
         $this->addBrick(new ImageAndText('imgtxt', '1812072139a'));
-        //$this->addBrick(new ImageAndText('imgtxt2', '1812072139b'));
-
-        // Showing how to set field settings after the field has been created
-        $buttonGroup = new ButtonGroup('Button Group', 'fd_button_group', '1711172249u');
-        $buttonGroup->setChoices([
-            'red' => 'Red',
-            'black' => 'Black',
-            'green' => 'Green',
-        ])
-            ->setSetting('required', true)
-            ->setDefaultValue('black');
-
-        $this->addField($buttonGroup);
-
-        // -----
-        // Group
-        $group = new Group('Group', 'fd_group', '1711232310a');
-
-        $group->addField(new Text('Text', 'fd_text', '1711232310b'));
-        $group->addField((new Select('Select', 'fd_select', '1711232310c'))
-            ->setChoices([
-                'one' => 'One',
-                'two' => 'Two',
-                'three' => 'Three',
-            ])
-        );
-
-        $group->addBrick(new ImageAndText('imgtxt', '1812072321a'));
-
-        $this->addField($group);
-
-        // E.o. group
-        // ----------
-
-        $this->addField(
-            (new Message('Testing conditional logic', 'fd_testing_conditional_logic', '1711202201x'))
-                ->setMessage('This should only be shown if the checkbox _below_is checked or if the button group is set
-                to "Black"')
-                ->addConditionalLogicRuleGroup(
-                    (new ConditionalLogicRuleGroup())
-                        ->addConditionalLogicRule(
-                            new ConditionalLogicRule('1711192022y', '==', '1')
-                        )
-                )
-                ->addConditionalLogicRuleGroup(
-                    (new ConditionalLogicRuleGroup())
-                        ->addConditionalLogicRule(
-                            new ConditionalLogicRule('1711172249u', '==', 'black')
-                        )
-                )
-        );
-
-        $this->addField(
-            (new TrueFalse('True/False', 'fd_true_false', '1711192022y'))
-                ->setMessage('Checking this field should trigger conditional logic displaying message fields above and below')
-        );
-
-        $this->addField(
-            (new Message('Testing conditional logic', 'fd_testing_conditional_statement', '1711202201a'))
-                ->setMessage('This should only be shown if the checkbox _above_ is checked and the button group isset to
-                 "Red"')
-                ->addConditionalLogicRuleGroup(
-                    (new ConditionalLogicRuleGroup())
-                        ->addConditionalLogicRule(
-                            new ConditionalLogicRule('1711192022y', '==', '1')
-                        )
-                        ->addConditionalLogicRule(
-                            new ConditionalLogicRule('1711172249u', '==', 'red')
-                        )
-                )
-        );
-
-        $this->addField(
-            (new Message('Testing conditional logic', 'fd_testing_conditional_statement', '1812072101a'))
-                ->setMessage('This should only be set if a text field in the flexible content below is set to "banana"')
-                ->addConditionalLogicRuleGroup(
-                    (new ConditionalLogicRuleGroup())
-                        ->addConditionalLogicRule(
-                            new ConditionalLogicRule('1711231901b', '==', 'banana')
-                        )
-                )
-                ->setDisplayInFewbricksDevTools(true)
-        );
+        $this->addBrick(new ImageAndText('imgtxt2', '1812072139b'));
 
         // ----------------
         // Flexible content
@@ -156,13 +67,13 @@ class AcfCoreFields extends Brick
         $flexibleContent->addLayout($layout);
 
         // Testing duplicate keys
-        /*$layout = new Layout('Text and image', 'fd_text_and_image', '1711231901i');
-        $layout->addField(new Text('Text', 'fd_text', '1711231901b'));
+        $layout = new Layout('Text and image2', 'fd_text_and_image2', '1711231901o');
+        $layout->addField(new Text('Text', 'fd_text2', '1711231901b'));
         $layout->addField(
-            (new Image('Image', 'fd_image', '1711231901b'))
+            (new Image('Image', 'fd_image2', '1711231901c'))
                 ->setPreviewSize('large')
         );
-        $flexible_content->addLayout($layout);*/
+        $flexibleContent->addLayout($layout);
 
         $layout = new Layout('Testing brick', 'fd_testing_brick', '1812051452a');
         $layout->addBrick(new ImageAndText('brick_test', '1812051452u'));
@@ -222,11 +133,100 @@ class AcfCoreFields extends Brick
         // E.o. repeater
         // -------------
 
+        // -----
+        // Group
+        $group = new Group('Group', 'fd_group', '1711232310a');
 
-    }
+        $group->addField(new Text('Text', 'fd_text', '1711232310b'));
+        $group->addField((new Select('Select', 'fd_select', '1711232310c'))
+            ->setChoices([
+                'one' => 'One',
+                'two' => 'Two',
+                'three' => 'Three',
+            ])
+        );
 
-    function t()
-    {
+        $group->addField((new Message('', 'group_brick_message', '1812102244a'))
+        ->setMessage('Image and text below is from Brick "ImageAndText'));
+
+        $group->addBrick(new ImageAndText('imgtxt', '1812072321a'));
+
+        $this->addField($group);
+
+        // E.o. group
+        // ----------
+
+        $this->addField((new Text('Text', 'fd_text', '18120621210a'))
+        ->setAppend('appended'));
+        $this->addField((new Text('Text', 'fd_text2', '18120621210o'))
+            ->addConditionalLogicRuleGroup(
+                (new ConditionalLogicRuleGroup())
+                    ->addConditionalLogicRule(
+                        new ConditionalLogicRule('18120621210a', '!=empty')
+                    )
+            ));
+
+        // Showing how to set field settings after the field has been created
+        $buttonGroup = new ButtonGroup('Button Group', 'fd_button_group', '1711172249u');
+        $buttonGroup->setChoices([
+            'red' => 'Red',
+            'black' => 'Black',
+            'green' => 'Green',
+        ])
+            ->setSetting('required', true)
+            ->setDefaultValue('black');
+
+        $this->addField($buttonGroup);
+
+        $this->addField(
+            (new Message('Testing conditional logic', 'fd_testing_conditional_logic', '1711202201x'))
+                ->setMessage('This should only be shown if the checkbox _below_is checked or if the button group is set
+                to "Black"')
+                ->addConditionalLogicRuleGroup(
+                    (new ConditionalLogicRuleGroup())
+                        ->addConditionalLogicRule(
+                            new ConditionalLogicRule('1711192022y', '==', '1')
+                        )
+                )
+                ->addConditionalLogicRuleGroup(
+                    (new ConditionalLogicRuleGroup())
+                        ->addConditionalLogicRule(
+                            new ConditionalLogicRule('1711172249u', '==', 'black')
+                        )
+                )
+        );
+
+        $this->addField(
+            (new TrueFalse('True/False', 'fd_true_false', '1711192022y'))
+                ->setMessage('Checking this field should trigger conditional logic displaying message fields above and below')
+        );
+
+        $this->addField(
+            (new Message('Testing conditional logic', 'fd_testing_conditional_statement', '1711202201a'))
+                ->setMessage('This should only be shown if the checkbox _above_ is checked and the button group isset to
+                 "Red"')
+                ->addConditionalLogicRuleGroup(
+                    (new ConditionalLogicRuleGroup())
+                        ->addConditionalLogicRule(
+                            new ConditionalLogicRule('1711192022y', '==', '1')
+                        )
+                        ->addConditionalLogicRule(
+                            new ConditionalLogicRule('1711172249u', '==', 'red')
+                        )
+                )
+        );
+
+        $this->addField(
+            (new Message('Testing conditional logic', 'fd_testing_conditional_statement', '1812072101a'))
+                ->setMessage('This should only be set if a text field in the flexible content below is set to "banana"')
+                ->addConditionalLogicRuleGroup(
+                    (new ConditionalLogicRuleGroup())
+                        ->addConditionalLogicRule(
+                            new ConditionalLogicRule('1711231901b', '==', 'banana')
+                        )
+                )
+                ->setDisplayInFewbricksDevTools(true)
+        );
 
         $this->addField(
             (new Accordion('Accordion', 'accordion', '1712252132a'))
@@ -273,59 +273,6 @@ class AcfCoreFields extends Brick
         $this->addField(new File('File', 'fd_file', '1711172319o'));
         $this->addField(new File('File 2', 'fd_file_2', '1711172319p'));
 
-        // ----------------
-        // Flexible content
-        $flexibleContent = new FlexibleContent('Flexible content', 'fd_flexible_content', '1711231849a');
-        $flexibleContent->setButtonLabel('Fewbricks says: add layout');
-
-        $layout = new Layout('Text and image', 'fd_text_and_image', '1711231901a');
-        $layout->addField(new Text('Text', 'fd_text', '1711231901b'));
-        $layout->addField(
-            (new Image('Image', 'fd_image', '1711231901c'))
-                ->setPreviewSize('thumbnail')
-        );
-        $flexibleContent->addLayout($layout);
-
-        // Testing duplicate keys
-        /*$l = new Layout('Text and image', 'fd_text_and_image', '1711231901i');
-        $l->addSubField(new Text('Text', 'fd_text', '1711231901b'));
-        $l->addSubField(
-            (new Image('Image', 'fd_image', '1711231901b'))
-                ->setPreviewSize('large')
-        );
-        $fc->addLayout($l);*/
-
-        $layout = new Layout('Text and select', 'fd_text_and_select', '1711231907a');
-        $layout->addField(new Text('Text', 'fd_text', '1711231907b'));
-        $layout->addField(
-            (new Select('Select', 'fd_select', '1711231907c'))
-                ->setChoices([
-                    'option1' => 'Option 1',
-                    'option2' => 'Option 2',
-                ])
-        );
-        $flexibleContent->addLayout($layout);
-
-        $layout = new Layout('Single image', 'fd_single_image', '1712252217a');
-        $layout->addField(new Image('Image', 'fd_image', '1712252218i'));
-        $flexibleContent->addLayout($layout);
-
-        // This is of course a somewhat stupid usage of the functionality since we could simply
-        // not add the sub field to start with. But for demo purposes...
-        $layoutsToRemove = $this->getArgument('remove_layouts', false);
-        if ($layoutsToRemove !== false) {
-            foreach ($layoutsToRemove AS $layoutToRemove) {
-                $flexibleContent->removeLayout($layoutToRemove);
-            }
-
-            $flexibleContent->setInstructions('This flexible content have had some layouts removed.');
-
-        }
-
-        $this->addField($flexibleContent);
-        // E.o. flexible content
-        // ---------------------
-
         $this->addField(new Gallery('Gallery', 'fd_gallery', '1711172320y'));
 
         // Commented out because this will require a valid Google Maps api key to function
@@ -371,44 +318,6 @@ class AcfCoreFields extends Brick
         $this->addField(new Textarea('Textarea', 'fd_textarea', '1711172249b'));
 
         $this->addField(new TimePicker('Time Picker', 'fd_time_picker', '1711192022a'));
-
-        $this->addField(
-            (new Message('Testing conditional logic', 'fd_testing_conditional_logic', '1711202201x'))
-                ->setMessage('This should only be shown if the checkbox _below_is checked or if the button group is set
-                to "Black"')
-                ->addConditionalLogicRuleGroup(
-                    (new ConditionalLogicRuleGroup())
-                        ->addConditionalLogicRule(
-                            new ConditionalLogicRule('1711192022y', '==', '1')
-                        )
-                )
-                ->addConditionalLogicRuleGroup(
-                    (new ConditionalLogicRuleGroup())
-                        ->addConditionalLogicRule(
-                            new ConditionalLogicRule('1711172249u', '==', 'black')
-                        )
-                )
-        );
-
-        $this->addField(
-            (new TrueFalse('True/False', 'fd_true_false', '1711192022y'))
-                ->setMessage('Checking this field should trigger conditional logic displaying message fields above and below')
-        );
-
-        $this->addField(
-            (new Message('Testing conditional logic', 'fd_testing_conditional_statement', '1711202201a'))
-                ->setMessage('This should only be shown if the checkbox _above_ is checked and the button group isset to
-                 "Red"')
-                ->addConditionalLogicRuleGroup(
-                    (new ConditionalLogicRuleGroup())
-                        ->addConditionalLogicRule(
-                            new ConditionalLogicRule('1711192022y', '==', '1')
-                        )
-                        ->addConditionalLogicRule(
-                            new ConditionalLogicRule('1711172249u', '==', 'red')
-                        )
-                )
-        );
 
         $this->addField(new Url('URL', 'fd_url', '1711192031i'));
 

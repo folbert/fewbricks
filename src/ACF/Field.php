@@ -301,6 +301,20 @@ class Field
             $keyPrefix .= '_';
         }
 
+        $keyPrefix .= $this->getKeyPrefixFromParents();
+
+        return Helper::getValidFieldKey($keyPrefix . $this->getKey());
+
+    }
+
+    /**
+     * @return string
+     */
+    public function getKeyPrefixFromParents()
+    {
+
+        $keyPrefix = '';
+
         $parents = $this->getParents(true);
 
         foreach($parents AS $parent) {
@@ -311,8 +325,7 @@ class Field
 
         }
 
-
-        return Helper::getValidFieldKey($keyPrefix . $this->getKey());
+        return $keyPrefix;
 
     }
 

@@ -45,14 +45,35 @@ class Collection
 
         } else {
 
-            if(isset($this->items[$key])) {
+            $tmpKey = $item->getKeyPrefixFromParents() . $key;
 
-                Helper::fewbricksDie('Fewbricks says: trying to add an item with the key "' . $key . '".
-                The key already exists for a field and keys must be unique.');
+            // If parents are not empty, we are dealing with an item that will get parents keys prepended to its own
+            // and if the key is still non unique after that, it will be caught by the field group.
+            if(isset($this->items[$tmpKey])) {
+
+                $message = 'Fewbricks says: trying to add an item with the key "' . $key . '". The key already exists
+                for a field and keys must be unique.';
+
+                if(!empty($item->getParents())) {
+
+                    $message .= '<p>If the field with the key resides in a Brick, please note that the reason for
+                    duplicate keys can be that you have created two instances of the Brick using the same key. Below is
+                    a list of keys of parents which includes Bricks.<ul>';
+
+
+                    foreach($item->getParents() AS $parent) {
+                        $message .= '<li>' . $parent['key'] . ' - ' . $parent['name'] . ' - ' . $parent['type'];
+                    }
+
+                    $message .= '</ul>';
+
+                }
+
+                Helper::fewbricksDie($message);
 
             }
 
-            $this->items[$key] = $item;
+            $this->items[$tmpKey] = $item;
 
         }
 
