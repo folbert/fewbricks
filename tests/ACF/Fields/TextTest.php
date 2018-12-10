@@ -9,36 +9,41 @@
 namespace Fewbricks\Tests\ACF\Fields;
 
 use Fewbricks\ACF\Fields\Text;
-use PHPUnit\Framework\TestCase;
+use Fewbricks\Tests\ACF\Field;
+use Fewbricks\Tests\FieldHelper;
+use Fewbricks\Tests\Helper;
 
-final class TextTest extends TestCase
+final class TextTest extends Field
 {
+
+    const CLASS_NAME = 'Fewbricks\ACF\Fields\Text';
 
     public function testClassExists()
     {
-        $this->assertTrue(class_exists('Fewbricks\ACF\Fields\Text'));
+        $this->assertTrue(class_exists(self::CLASS_NAME));
     }
 
+    /**
+     *
+     */
     public function testAcfArray()
     {
 
-        $textField = new Text('A text field', 'name_of_the_text_field_et87giu', '1812092118a');
-        $textField->setRequired(true);
+        $settings = [
+            'test__key_prefix' => '1812092118b',
+            'label' => 'A text field',
+            'name' => 'name_of_the_text_field_et87giu',
+            'key' => '1812092118a',
+            'required' => true,
+        ];
+
+        $textField = FieldHelper::getCompleteFieldObject(self::CLASS_NAME, $settings);
 
         $this->assertEquals(
-            [
-                'key' => 'field_1812092118b_1812092118a',
-                'label' => 'A text field',
-                'name' => 'name_of_the_text_field_et87giu',
-                'fewbricks__original_key' => '1812092118a',
-                'fewbricks__parents' => [],
-                'type' => 'text',
-                'required' => true,
-            ],
-            $textField->toAcfArray('1812092118b')
+            FieldHelper::getExpectedFieldValues($textField, $settings),
+            $textField->toAcfArray($settings['test__key_prefix'])
         );
 
     }
-
 
 }
