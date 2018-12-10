@@ -120,29 +120,6 @@ class Field
     }
 
     /**
-     * @param string $key
-     * @return $this
-     */
-    public function setKey(string $key)
-    {
-
-        $this->key = $key;
-
-        return $this;
-
-    }
-
-    /**
-     * @param $label
-     */
-    public function setLabel(string $label)
-    {
-
-        $this->label = $label;
-
-    }
-
-    /**
      * @param $originalKey
      */
     protected function setOriginalKey(string $originalKey)
@@ -197,8 +174,6 @@ class Field
         return $this->setSetting('wrapper', $wrapper);
 
     }
-
-
 
     /**
      * Allows you to set multiple settings at once.

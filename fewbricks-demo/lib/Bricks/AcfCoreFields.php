@@ -47,7 +47,8 @@ class AcfCoreFields extends Brick
     public function setup()
     {
 
-        $this->addField(new Text('Text', 'fd_text', '18120621210a'));
+        $this->addField((new Text('Text', 'fd_text', '18120621210a'))
+        ->setAppend('appended'));
         $this->addField((new Text('Text', 'fd_text2', '18120621210o'))
             ->addConditionalLogicRuleGroup(
                 (new ConditionalLogicRuleGroup())

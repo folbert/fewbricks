@@ -21,7 +21,7 @@ class FieldHelper {
      * @param array $settings
      * @return mixed
      */
-    public static function getCompleteFieldObject(string $class, array $settings)
+    public static function getCompleteFieldObject(string $class, array $settings, $testObject)
     {
 
         $constructorArgsNames = ['label', 'name', 'key'];
@@ -35,7 +35,7 @@ class FieldHelper {
 
         $textField = FieldHelper::createFieldObject($class, $constructorArgs);
 
-        Helper::applySettings($textField, $settings);
+        Helper::applySettings($textField, $settings, $testObject);
 
         return $textField;
 
