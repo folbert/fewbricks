@@ -15,34 +15,24 @@ if (!defined('ABSPATH')) {
     exit;
 }
 
-$composerAutoloadFilePath = __DIR__ . '/vendor/autoload.php';
+// Lets use a custom autoload regardless of if Fewbricks has been installed using Composer or not.
+spl_autoload_register(function ($class) {
 
-if(file_exists($composerAutoloadFilePath)) {
+    $namespaceParts = explode('\\', $class);
 
-    require_once $composerAutoloadFilePath;
+    // Make sure that we are dealing with something in the Fewbricks namespace
+    if (count($namespaceParts) > 1
+        && $namespaceParts[0] === 'Fewbricks'
+    ) {
 
-} else {
+        // First item will always be "Febwricks" and we don't need that when building the path
+        // Yes, by not checking of the file exists, we do get ugly error messages but we save some execution time.
+        /** @noinspection PhpIncludeInspection */
+        include __DIR__ . '/src/' . implode('/', array_slice($namespaceParts, 1)) . '.php';
 
-    spl_autoload_register(function ($class) {
+    }
 
-        $namespaceParts = explode('\\', $class);
-
-        // Make sure that we are dealing with something in the Fewbricks namespace
-        if (count($namespaceParts) > 1
-            && $namespaceParts[0] === 'Fewbricks'
-        ) {
-
-            // First item will always be "Febwricks" and we dont need that when building the path
-            // Yes, by not checking of the file exists, we do get ugly error messages.
-            // But we save some execution time by not checking if the file exists first.
-            /** @noinspection PhpIncludeInspection */
-            include __DIR__ . '/src/' . implode('/', array_slice($namespaceParts, 1)) . '.php';
-
-        }
-
-    });
-
-}
+});
 
 add_action('acf/init', function () {
     \Fewbricks\Fewbricks::run();
