@@ -3,6 +3,7 @@
 namespace Fewbricks;
 
 use Fewbricks\ACF\Field;
+use Fewbricks\Exceptions\DuplicateKeyException;
 use Fewbricks\Helpers\Helper;
 
 /**
@@ -69,7 +70,7 @@ class Collection
 
                 }
 
-                Helper::fewbricksDie($message);
+                Helper::fewbricksDie($message, DuplicateKeyException::class);
 
             }
 

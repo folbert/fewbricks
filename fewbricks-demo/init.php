@@ -14,7 +14,7 @@ add_action('fewbricks/init', function () {
 
     //require_once 'inline-demo.php';
 
-    //(new FooterGlobalTexts('Footer', '1811292313a'))->setup();
+    //(new FooterGlobalTexts('Footer', '1811292313a'))->setUp();
 
     (new AllFields('All fields', '1812032255a'))
         ->addLocationRuleGroup(

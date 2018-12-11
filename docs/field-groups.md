@@ -146,9 +146,9 @@ Besides setting and getting all the ACF settings, the following functions are av
 groups. For info on which arguments to pass to each function, please refer to each functions docblock or body in the 
 code.
 
-`addBrick()` and `addBricks()` - read more about Bricks under [Bricks](/bricks/).
+`addBrick()` - read more about Bricks under [Bricks](/bricks/).
 
-`addField()` and `addFields` - add fields to the field group. More on that under [Fields](/fields/).
+`addField()` - add fields to the field group. More on that under [Fields](/fields/).
 
 `addBrickBeforeByName()` and `addBrickAfterFieldByName()` - add a Brick before/after an existing field by sending 
 the name of the field to add before/after.

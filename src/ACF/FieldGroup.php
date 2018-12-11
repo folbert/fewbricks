@@ -89,23 +89,6 @@ class FieldGroup extends FieldCollection implements FieldGroupInterface
     }
 
     /**
-     * @param FieldGroupLocationRuleGroup[] $ruleGroups
-     * @return $this
-     */
-    public function addLocationRuleGroups(array $ruleGroups)
-    {
-
-        foreach ($ruleGroups AS $ruleGroup) {
-
-            $this->addLocationRuleGroup($ruleGroup);
-
-        }
-
-        return $this;
-
-    }
-
-    /**
      */
     public function clearLocationRuleGroups()
     {

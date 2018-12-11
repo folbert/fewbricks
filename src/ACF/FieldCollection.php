@@ -87,18 +87,6 @@ class FieldCollection extends Collection implements FieldCollectionInterface
     }
 
     /**
-     * @param array $bricks
-     */
-    public function addBricks(array $bricks)
-    {
-
-        foreach ($bricks AS $brick) {
-            $this->addBrick($brick);
-        }
-
-    }
-
-    /**
      * @return string
      */
     public function getKey()
@@ -114,7 +102,7 @@ class FieldCollection extends Collection implements FieldCollectionInterface
     private function prepareBrickForAdd(&$brick)
     {
 
-        $brick->setup();
+        $brick->setUp();
         $brick->prepareForAcfArray();
 
     }
