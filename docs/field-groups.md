@@ -89,7 +89,7 @@ use FewbricksDemo\Bricks\Headline;
 class FooterGlobalTexts extends FieldGroup
 {
 
-    public function setup()
+    public function setUp()
     {
 
         $this->addBrick(
@@ -116,7 +116,7 @@ class FooterGlobalTexts extends FieldGroup
 ```
 
 Then you could create and register the field group by calling `(new FooterGlobalTexts('Global texts', '1812010004a'')
-->setup()`.
+->setUp()`.
 
 ## Keys
 The second argument when creating a field group is a key that must be unique across the site. Check [the FAQ](/faq/) 

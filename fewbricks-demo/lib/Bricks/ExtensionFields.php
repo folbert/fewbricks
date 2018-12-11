@@ -12,7 +12,7 @@ class ExtensionFields extends Brick
     /**
      *
      */
-    public function setup()
+    public function setUp()
     {
 
         if (class_exists('acf_field_dynamic_year_select')) {

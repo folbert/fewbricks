@@ -18,4 +18,4 @@ If you want to use
 
 ## getHtml()
 
-## setup() called on every instance
+## setUp() called on every instance

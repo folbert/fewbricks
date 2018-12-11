@@ -44,7 +44,7 @@ class AcfCoreFields extends Brick
     /**
      *
      */
-    public function setup()
+    public function setUp()
     {
 
         $this->addField((new Message('', 'brick_message', '1812102244b'))

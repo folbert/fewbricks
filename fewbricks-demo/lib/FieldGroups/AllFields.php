@@ -9,7 +9,7 @@ use FewbricksDemo\Bricks\ExtensionFields;
 class AllFields extends FieldGroup
 {
 
-    public function setup()
+    public function setUp()
     {
 
         $this->addBrick(new AcfCoreFields('core_fields', '1812032253a'));

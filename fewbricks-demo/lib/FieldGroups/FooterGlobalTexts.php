@@ -10,7 +10,7 @@ use FewbricksDemo\Bricks\Headline;
 class FooterGlobalTexts extends FieldGroup
 {
 
-    public function setup()
+    public function setUp()
     {
 
         $this->addBrick(

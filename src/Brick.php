@@ -426,7 +426,7 @@ class Brick extends FieldCollection implements BrickInterface
      * uses this fact by overriding it in your own Brick classes and adding code for adding your own fields or bricks
      * or whatever you want.
      */
-    public function setup()
+    public function setUp()
     {
 
     }
