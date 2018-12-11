@@ -10,7 +10,7 @@ class Filters {
     public static function devModeIsEnabled()
     {
 
-        return apply_filters('fewbricks/dev_mode', false);
+        return \apply_filters('fewbricks/dev_mode', false);
 
     }
 
