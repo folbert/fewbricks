@@ -152,7 +152,7 @@ class FieldGroup extends FieldCollection implements FieldGroupInterface
                     $hideOnScreen = [$hideOnScreen];
                 }
 
-                $hideOnScreen = array_merge($currentValues, $hideOnScreen);
+                //$hideOnScreen = array_merge($currentValues, $hideOnScreen);
 
             }
 
