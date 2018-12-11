@@ -465,7 +465,8 @@ class Helper
      * @param $path
      * @return string
      */
-    public static function getDocumentationUrl(string $path = '') {
+    public static function getDocumentationUrl(string $path = '')
+    {
 
         return 'https://fewbricks2.folbert.com/' . $path;
 
@@ -473,11 +474,21 @@ class Helper
 
     /**
      * @param $message
+     * @param bool $testExceptionClass
+     * @return mixed
      */
-    public static function fewbricksDie($message)
+    public static function fewbricksDie($message, $testExceptionClass = false)
     {
 
-        if(function_exists('wp_die')) {
+        if (defined('FEWBRICKS_UNIT_TESTING') && FEWBRICKS_UNIT_TESTING === true) {
+
+            if($testExceptionClass === false) {
+                $testExceptionClass = \RuntimeException::class;
+            }
+
+            throw new $testExceptionClass($message);
+
+        } else if (function_exists('wp_die')) {
             wp_die($message);
         } else {
             die($message);
