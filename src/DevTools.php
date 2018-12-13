@@ -14,7 +14,7 @@ class DevTools
     /**
      *
      */
-    private const SETTINGS_NAME_FOR_DISPLAYING_ACF_ARRAY = 'fewbricks__display_in_dev_tools';
+    public const SETTINGS_NAME_FOR_DISPLAYING_ACF_ARRAY = 'fewbricks__display_in_dev_tools';
 
     /**
      * @var array
@@ -236,16 +236,6 @@ class DevTools
     {
 
         return apply_filters('fewbricks/dev_tools/acf_arrays/keys', false);
-
-    }
-
-    /**
-     * @return string
-     */
-    public static function getSettingsNameForDisplayingAcfArray()
-    {
-
-        return self::SETTINGS_NAME_FOR_DISPLAYING_ACF_ARRAY;
 
     }
 

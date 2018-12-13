@@ -104,7 +104,7 @@ class Field
     public function setDisplayInFewbricksDevTools(bool $display)
     {
 
-        return $this->setSetting(DevTools::getSettingsNameForDisplayingAcfArray(), $display);
+        return $this->setSetting(DevTools::SETTINGS_NAME_FOR_DISPLAYING_ACF_ARRAY, $display);
 
     }
 

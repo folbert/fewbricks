@@ -11,47 +11,37 @@ namespace Fewbricks\Tests\ACF;
 use Fewbricks\ACF\FieldGroup;
 use Fewbricks\ACF\FieldGroupLocationRule;
 use Fewbricks\ACF\FieldGroupLocationRuleGroup;
-use Fewbricks\ACF\Fields\Image;
 use Fewbricks\ACF\Fields\Text;
+use Fewbricks\ACF\RuleGroupCollection;
 use Fewbricks\Exceptions\DuplicateKeyException;
 use Fewbricks\Tests\ImageAndTextBrick;
-use FewbricksDemo\Bricks\ImageAndText;
 use PHPUnit\Framework\TestCase;
 
 final class FieldGroupTest extends TestCase
 {
-
-    private const CLASS_NAME = 'Fewbricks\ACF\FieldGroup';
 
     /**
      *
      */
     public function testClassExists()
     {
-        $this->assertTrue(class_exists(self::CLASS_NAME));
+        $this->assertTrue(class_exists('Fewbricks\ACF\FieldGroup'));
     }
 
     /**
      *
      */
-    public function testBaseSettings()
+    public function testSetTitle()
     {
 
         $title = 'A test field group';
-        $key = '1812110742a';
 
-        $fieldGroup = new FieldGroup($title, $key);
+        $fieldGroup = new FieldGroup($title, '');
 
-        $acfArray = $fieldGroup->toAcfArray();
-        // Remove indexes that are outside the scope of this test
-        unset($acfArray['fields']);
-
-        $this->assertEquals([
+        $this->assertArraySubset([
             'title' => $title,
-            'key' => 'group_' . $key,
-            'location' => [],
         ],
-            $acfArray
+            $fieldGroup->toAcfArray()
         );
 
     }
@@ -59,10 +49,57 @@ final class FieldGroupTest extends TestCase
     /**
      *
      */
-    public function testLocation()
+    public function testGetTitle()
+    {
+
+        $title = 'A test field group';
+
+        $fieldGroup = new FieldGroup($title, '');
+
+        $this->assertEquals($title, $fieldGroup->getTitle());
+
+    }
+
+    /**
+     *
+     */
+    public function testSetKey()
+    {
+
+        $key = '1812110742a';
+
+        $fieldGroup = new FieldGroup('', $key);
+
+        $this->assertArraySubset([
+            'key' => 'group_' . $key,
+        ],
+            $fieldGroup->toAcfArray()
+        );
+
+    }
+
+    /**
+     *
+     */
+    public function testGetKey()
+    {
+
+        $key = '1812110742a';
+
+        $fieldGroup = new FieldGroup('', $key);
+
+        $this->assertEquals($key, $fieldGroup->getKey());
+
+    }
+
+    /**
+     *
+     */
+    public function testAddLocationRules()
     {
 
         $fieldGroup = new FieldGroup('', '');
+
         $fieldGroup->addLocationRuleGroup(
             (new FieldGroupLocationRuleGroup())
                 ->addFieldGroupLocationRule(
@@ -72,6 +109,7 @@ final class FieldGroupTest extends TestCase
                     new FieldGroupLocationRule('post_type', '==', 'page')
                 )
         );
+
         $fieldGroup->addLocationRuleGroup(
             (new FieldGroupLocationRuleGroup())
                 ->addFieldGroupLocationRule(
@@ -103,6 +141,56 @@ final class FieldGroupTest extends TestCase
             ]
         ],
             $acfArray['location']
+        );
+
+    }
+
+    public function testGetLocationRuleGroups()
+    {
+
+        $fieldGroup = new FieldGroup('', '');
+
+        $fieldGroup->addLocationRuleGroup(
+            (new FieldGroupLocationRuleGroup())
+                ->addFieldGroupLocationRule(
+                    new FieldGroupLocationRule('post_type', '==', 'post')
+                )
+                ->addFieldGroupLocationRule(
+                    new FieldGroupLocationRule('post_type', '==', 'page')
+                )
+        );
+
+        $fieldGroup->addLocationRuleGroup(
+            (new FieldGroupLocationRuleGroup())
+                ->addFieldGroupLocationRule(
+                    new FieldGroupLocationRule('user_role', '!=', 'administrator')
+                )
+        );
+
+        $this->assertInstanceOf(RuleGroupCollection::class, $fieldGroup->getLocationRuleGroups());
+
+        $this->assertEquals([
+            [
+                [
+                    'param' => 'post_type',
+                    'operator' => '==',
+                    'value' => 'post',
+                ],
+                [
+                    'param' => 'post_type',
+                    'operator' => '==',
+                    'value' => 'page',
+                ]
+            ],
+            [
+                [
+                    'param' => 'user_role',
+                    'operator' => '!=',
+                    'value' => 'administrator',
+                ]
+            ]
+        ],
+            $fieldGroup->getLocationRuleGroups()->toArray()
         );
 
     }
@@ -403,7 +491,7 @@ final class FieldGroupTest extends TestCase
 
     }
 
-    public function testAddingBricks()
+    public function testAddBrick()
     {
 
         $fieldGroup = new FieldGroup('', '1812112150a');
@@ -503,12 +591,12 @@ final class FieldGroupTest extends TestCase
         $fieldGroup = new FieldGroup('', '');
 
         $fieldGroup->addField(
-            new Text('Second text field', 'second_text_field', '1812112259a')
+            new Text('Text field 2', 'text_field_2', '1812112259a')
         );
 
         $fieldGroup->addFieldBeforeFieldByName(
-            new Text('First text field', 'first_text_field', '1812112259b'),
-            'second_text_field'
+            new Text('Text field 1', 'text_field_1', '1812112259b'),
+            'text_field_2'
         );
 
         $acfArray = $fieldGroup->toAcfArray();
@@ -516,17 +604,73 @@ final class FieldGroupTest extends TestCase
         $this->assertEquals([
             [
                 'key' => 'field_1812112259b',
-                'label' => 'First text field',
-                'name' => 'first_text_field',
+                'label' => 'Text field 1',
+                'name' => 'text_field_1',
                 'fewbricks__original_key' => '1812112259b',
                 'fewbricks__parents' => [],
                 'type' => 'text',
             ],
             [
                 'key' => 'field_1812112259a',
-                'label' => 'Second text field',
-                'name' => 'second_text_field',
+                'label' => 'Text field 2',
+                'name' => 'text_field_2',
                 'fewbricks__original_key' => '1812112259a',
+                'fewbricks__parents' => [],
+                'type' => 'text',
+            ],
+        ], $acfArray['fields']);
+
+    }
+
+    /**
+     *
+     */
+    public function testReplaceFieldByKey()
+    {
+
+        $fieldGroup = new FieldGroup('', '');
+
+        $fieldGroup->addField(
+            new Text('Text field 1', 'text_field_1', '1812112259a')
+        );
+
+        $fieldGroup->addField(
+            new Text('Text field 2', 'text_field_2', '1812112259b')
+        );
+
+        $fieldGroup->addField(
+            new Text('Text field 3', 'text_field_3', '1812112259c')
+        );
+
+        $fieldGroup->replaceFieldByKey(
+            new Text('Text field 4', 'text_field_4', '1812112259d'),
+            '1812112259b'
+        );
+
+        $acfArray = $fieldGroup->toAcfArray();
+
+        $this->assertEquals([
+            [
+                'key' => 'field_1812112259a',
+                'label' => 'Text field 1',
+                'name' => 'text_field_1',
+                'fewbricks__original_key' => '1812112259a',
+                'fewbricks__parents' => [],
+                'type' => 'text',
+            ],
+            [
+                'key' => 'field_1812112259d',
+                'label' => 'Text field 4',
+                'name' => 'text_field_4',
+                'fewbricks__original_key' => '1812112259d',
+                'fewbricks__parents' => [],
+                'type' => 'text',
+            ],
+            [
+                'key' => 'field_1812112259c',
+                'label' => 'Text field 3',
+                'name' => 'text_field_3',
+                'fewbricks__original_key' => '1812112259c',
                 'fewbricks__parents' => [],
                 'type' => 'text',
             ],
@@ -540,16 +684,16 @@ final class FieldGroupTest extends TestCase
         $fieldGroup = new FieldGroup('', '');
 
         $fieldGroup->addField(
-            new Text('First text field', 'first_text_field', '1812112259a')
+            new Text('Text field 1', 'text_field_1', '1812112259a')
         );
 
         $fieldGroup->addField(
-            new Text('Third text field', 'third_text_field', '1812112259b')
+            new Text('Text field 3', 'text_field_3', '1812112259b')
         );
 
         $fieldGroup->addFieldAfterFieldByName(
-            new Text('Second text field', 'second_text_field', '1812112259c'),
-            'first_text_field'
+            new Text('Text field 2', 'text_field_2', '1812112259c'),
+            'text_field_1'
         );
 
         $acfArray = $fieldGroup->toAcfArray();
@@ -557,24 +701,24 @@ final class FieldGroupTest extends TestCase
         $this->assertEquals([
             [
                 'key' => 'field_1812112259a',
-                'label' => 'First text field',
-                'name' => 'first_text_field',
+                'label' => 'Text field 1',
+                'name' => 'text_field_1',
                 'fewbricks__original_key' => '1812112259a',
                 'fewbricks__parents' => [],
                 'type' => 'text',
             ],
             [
                 'key' => 'field_1812112259c',
-                'label' => 'Second text field',
-                'name' => 'second_text_field',
+                'label' => 'Text field 2',
+                'name' => 'text_field_2',
                 'fewbricks__original_key' => '1812112259c',
                 'fewbricks__parents' => [],
                 'type' => 'text',
             ],
             [
                 'key' => 'field_1812112259b',
-                'label' => 'Third text field',
-                'name' => 'third_text_field',
+                'label' => 'Text field 3',
+                'name' => 'text_field_3',
                 'fewbricks__original_key' => '1812112259b',
                 'fewbricks__parents' => [],
                 'type' => 'text',
@@ -720,5 +864,277 @@ final class FieldGroupTest extends TestCase
         ], $fieldGroup->toAcfArray()['hide_on_screen']);
 
     }
+
+    public function testSetActive()
+    {
+
+        $fieldGroup = new FieldGroup('', '');
+
+        $fieldGroup->setActive(false);
+        $this->assertEquals(false, $fieldGroup->getActive());
+
+        $fieldGroup->setActive(true);
+        $this->assertEquals(true, $fieldGroup->getActive());
+
+    }
+
+    public function testSetDescription()
+    {
+
+        $description = 'A description dy9823dgod';
+
+        $fieldGroup = new FieldGroup('', '');
+
+        $fieldGroup->setDescription($description);
+
+        $this->assertEquals($description, $fieldGroup->getDescription());
+
+    }
+
+    public function testSetInstructionPlacement()
+    {
+
+        // Its ok to send any value
+        $instructionPlacement = 'banana';
+
+        $fieldGroup = new FieldGroup('', '');
+
+        $fieldGroup->setInstructionPlacement($instructionPlacement);
+
+        $this->assertEquals($instructionPlacement, $fieldGroup->getInstructionPlacement());
+
+    }
+
+    public function testSetLabelPlacement()
+    {
+
+        // Its ok to send any value
+        $labelPlacement = 'orange';
+
+        $fieldGroup = new FieldGroup('', '');
+
+        $fieldGroup->setLabelPlacement($labelPlacement);
+
+        $this->assertEquals($labelPlacement, $fieldGroup->getLabelPlacement());
+
+    }
+
+    public function testSetMenuOrder()
+    {
+
+        // Its ok to send any value
+        $menuOrder = 10;
+
+        $fieldGroup = new FieldGroup('', '');
+
+        $fieldGroup->setMenuOrder($menuOrder);
+
+        $this->assertEquals($menuOrder, $fieldGroup->getMenuOrder());
+
+    }
+
+    public function testSetPosition()
+    {
+
+        // Its ok to send any value
+        $position = 'pear';
+
+        $fieldGroup = new FieldGroup('', '');
+
+        $fieldGroup->setPosition($position);
+
+        $this->assertEquals($position, $fieldGroup->getPosition());
+
+    }
+
+    public function testSetSetting()
+    {
+
+        // Its ok to send any value
+        $settingName = 'pear';
+        $settingValue = 'kiwi';
+
+        $fieldGroup = new FieldGroup('', '');
+
+        $fieldGroup->setSetting($settingName, $settingValue);
+
+        $this->assertEquals($settingValue, $fieldGroup->getSetting($settingName));
+
+    }
+
+    public function testGetSettingDefaultValue()
+    {
+
+        $settingName = 'setting_name_d9dg';
+        $defaultValue = 'default_value_jd98ydoh';
+
+        $fieldGroup = new FieldGroup('', '');
+
+        $this->assertEquals($defaultValue, $fieldGroup->getSetting($settingName, $defaultValue));
+
+    }
+
+    public function testGetSettings()
+    {
+
+        $settings = [
+            'setting_name_1' => 'setting_value_1',
+            'setting_name_2' => 'setting_value_2',
+        ];
+
+        $fieldGroup = new FieldGroup('', '');
+
+        $fieldGroup->setSetting('setting_name_1', $settings['setting_name_1']);
+        $fieldGroup->setSetting('setting_name_2', $settings['setting_name_2']);
+
+        $this->assertEquals($settings, $fieldGroup->getSettings());
+
+    }
+
+    public function testSetStyle()
+    {
+
+        // Its ok to send any value
+        $style = 'dover_calais';
+
+        $fieldGroup = new FieldGroup('', '');
+
+        $fieldGroup->setStyle($style);
+
+        $this->assertEquals($style, $fieldGroup->getStyle());
+
+    }
+
+    public function testSetFieldLabelPrefix()
+    {
+
+        $labelPrefix = 'A prefix dg78iku-';
+
+        $fieldGroup = new FieldGroup('', '');
+
+        $fieldGroup->addField(new Text('Text field', 'text_field', '1812132221a'));
+        $fieldGroup->addField(new Text('Text field 2', 'text_field_2', '1812132221b'));
+
+        $fieldGroup->setFieldLabelsPrefix($labelPrefix);
+
+        $this->assertArraySubset(
+            [
+                [
+                    'label' => $labelPrefix . 'Text field',
+                ],
+                [
+                    'label' => $labelPrefix . 'Text field 2',
+                ]
+            ],
+            $fieldGroup->toAcfArray()['fields']
+        );
+
+    }
+
+    public function testSetFieldLabelSuffix()
+    {
+
+        $labelSuffix = '-A suffix g78fi';
+
+        $fieldGroup = new FieldGroup('', '');
+
+        $fieldGroup->addField(new Text('Text field', 'text_field', '1812132221a'));
+        $fieldGroup->addField(new Text('Text field 2', 'text_field_2', '1812132221b'));
+
+        $fieldGroup->setFieldLabelsSuffix($labelSuffix);
+
+        $this->assertArraySubset(
+            [
+                [
+                    'label' => 'Text field' . $labelSuffix,
+                ],
+                [
+                    'label' => 'Text field 2' . $labelSuffix,
+                ]
+            ],
+            $fieldGroup->toAcfArray()['fields']
+        );
+
+    }
+
+    /**
+     *
+     */
+    public function testRegister()
+    {
+
+        $fieldGroup = new FieldGroup('A field group', '1812132149a');
+
+        $fieldGroup->addField(new Text('Text field 1', 'text_field_1', '1812132204a'));
+        $fieldGroup->setShowInFewbricksDevTools(true);
+        $fieldGroup->setSetting('setting_1_name', 'setting_1_value');
+        $fieldGroup->setMenuOrder(78);
+        $fieldGroup->setPosition('the_position_dgigk');
+        $fieldGroup->setLabelPlacement('the_label_placement_y8yo');
+        $fieldGroup->setDescription('Description d98sgl');
+        $fieldGroup->setInstructionPlacement('Instruction placement dh8gol');
+        $fieldGroup->setActive(false);
+        $fieldGroup->setHideOnScreen('all');
+        $fieldGroup->setShowOnScreen('slug');
+        $fieldGroup->setStyle('dover_calais');
+        $fieldGroup->setTitle('A new title dy8ohl');
+
+        $this->assertEquals([
+            'key' => 'group_1812132149a',
+            'title' => 'A new title dy8ohl',
+            'location' => [],
+            'fewbricks__display_in_dev_tools' => true,
+            'setting_1_name' => 'setting_1_value',
+            'menu_order' => 78,
+            'position' => 'the_position_dgigk',
+            'label_placement' => 'the_label_placement_y8yo',
+            'description' => 'Description d98sgl',
+            'instruction_placement' => 'Instruction placement dh8gol',
+            'active' => false,
+            'hide_on_screen' => [],
+            'style' => 'dover_calais',
+            'hide_on_screen' => [
+                0 => 'permalink',
+                1 => 'the_content',
+                2 => 'excerpt',
+                3 => 'custom_fields',
+                4 => 'discussion',
+                5 => 'comments',
+                6 => 'revisions',
+                8 => 'author',
+                9 => 'format',
+                10 => 'page_attributes',
+                11 => 'featured_image',
+                12 => 'categories',
+                13 => 'tags',
+                14 => 'send-trackbacks',
+            ],
+            'fields' => [
+                [
+                    'key' => 'field_1812132204a',
+                    'label' => 'Text field 1',
+                    'name' => 'text_field_1',
+                    'fewbricks__original_key' => '1812132204a',
+                    'fewbricks__parents' => [],
+                    'type' => 'text',
+                ]
+            ],
+        ],
+            $fieldGroup->register(false)->toAcfArray()
+        );
+
+    }
+
+    public function testSetShowInFewbricksDevTools()
+    {
+
+        $fieldGroup = new FieldGroup('', '');
+
+        $fieldGroup->setShowInFewbricksDevTools(true);
+
+        $this->assertEquals(true, $fieldGroup->getShowInFewbricksDevTools());
+
+    }
+
 
 }

@@ -69,7 +69,7 @@ class FieldGroup extends FieldCollection implements FieldGroupInterface
         // and more OOP-oriented access
         $this->title = $title;
         $this->settings = [];
-        $this->clearLocationRuleGroups();
+        $this->initLocationRuleGroups();
 
         parent::__construct($key);
 
@@ -85,6 +85,16 @@ class FieldGroup extends FieldCollection implements FieldGroupInterface
         $this->locationRuleGroups->addItem($rule_group);
 
         return $this;
+
+    }
+
+    /**
+     *
+     */
+    private function initLocationRuleGroups()
+    {
+
+        $this->clearLocationRuleGroups();
 
     }
 
@@ -114,8 +124,9 @@ class FieldGroup extends FieldCollection implements FieldGroupInterface
      *                              remove the items that you have set in $showOnScreen. Passing a non-empty value here
      *                              will make the function ignore the $hideOnScreen variable completely. Possible
      *                              values: items from FieldGroup::HIDE_ON_SCREEN_ITEMS or "all" to show all.
+     * @param bool $mergeWithCurrent
      */
-    private function doSetHideOnScreen(array $hideOnScreen, array $showOnScreen = [])
+    private function doSetHideOnScreen(array $hideOnScreen, array $showOnScreen = [], $mergeWithCurrent = false)
     {
 
         $currentValues = $this->getHideOnScreenSetting();
@@ -152,7 +163,9 @@ class FieldGroup extends FieldCollection implements FieldGroupInterface
                     $hideOnScreen = [$hideOnScreen];
                 }
 
-                //$hideOnScreen = array_merge($currentValues, $hideOnScreen);
+                if($mergeWithCurrent) {
+                    $hideOnScreen = array_merge($currentValues, $hideOnScreen);
+                }
 
             }
 
@@ -382,11 +395,20 @@ class FieldGroup extends FieldCollection implements FieldGroupInterface
      * @param bool $show
      * @return $this
      */
-
     public function setShowInFewbricksDevTools(bool $show)
     {
 
-        return $this->setSetting(DevTools::getSettingsNameForDisplayingAcfArray(), $show);
+        return $this->setSetting(DevTools::SETTINGS_NAME_FOR_DISPLAYING_ACF_ARRAY, $show);
+
+    }
+
+    /**
+     * @return bool|mixed
+     */
+    public function getShowInFewbricksDevTools()
+    {
+
+        return $this->getSetting(DevTools::SETTINGS_NAME_FOR_DISPLAYING_ACF_ARRAY, false);
 
     }
 
@@ -396,20 +418,21 @@ class FieldGroup extends FieldCollection implements FieldGroupInterface
      * @see FieldGroup::doSetHideOnScreen()
      *
      * @param string|array $elementNames One or many of the values of the following: 'permalink', 'the_content',
-     *                                   'excerpt', 'custom_fields', 'discussion', 'comments', 'revisions', 'slug',
-     *                                   'author', 'format', 'page_attributes', 'featured_image', 'categories', 'tags',
-     *                                   'send-trackbacks', 'all'. Note 'all' which will show all elements that
-     *                                   are possible to hide.
+     * 'excerpt', 'custom_fields', 'discussion', 'comments', 'revisions', 'slug', 'author', 'format', 'page_attributes',
+     * 'featured_image', 'categories', 'tags', 'send-trackbacks', 'all'. Note 'all' which will hide all elements that
+     * are possible to hide.
+     * @param bool $mergeWithCurrent Set to true if you want to keep hiding the field already hidden. False means that
+     * you will only hide the ones sent.
      * @return $this
      */
-    public function setHideOnScreen($elementNames)
+    public function setHideOnScreen($elementNames, $mergeWithCurrent = false)
     {
 
         if(!is_array($elementNames)) {
             $elementNames = [$elementNames];
         }
 
-        $this->doSetHideOnScreen($elementNames);
+        $this->doSetHideOnScreen($elementNames, [], $mergeWithCurrent);
 
         return $this;
 

@@ -635,6 +635,21 @@ class FieldCollection extends Collection implements FieldCollectionInterface
     }
 
     /**
+     * Set a string that will be suffixed to the labels of the fields that are added to this field group.
+     *
+     * @param $prefix
+     * @return $this
+     */
+    public function setFieldLabelsSuffix(string $suffix)
+    {
+
+        $this->fieldLabelsSuffix = $suffix;
+
+        return $this;
+
+    }
+
+    /**
      * Set a string that will be prefixed to the names of the fields that are added to this field group.
      *
      * @param string $prefix
