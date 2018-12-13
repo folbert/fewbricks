@@ -395,7 +395,7 @@ class FieldGroup extends FieldCollection implements FieldGroupInterface
      * @param bool $show
      * @return $this
      */
-    public function setShowInFewbricksDevTools(bool $show)
+    public function setDisplayInFewbricksDevTools(bool $show)
     {
 
         return $this->setSetting(DevTools::SETTINGS_NAME_FOR_DISPLAYING_ACF_ARRAY, $show);
@@ -405,7 +405,7 @@ class FieldGroup extends FieldCollection implements FieldGroupInterface
     /**
      * @return bool|mixed
      */
-    public function getShowInFewbricksDevTools()
+    public function getDisplayInFewbricksDevTools()
     {
 
         return $this->getSetting(DevTools::SETTINGS_NAME_FOR_DISPLAYING_ACF_ARRAY, false);

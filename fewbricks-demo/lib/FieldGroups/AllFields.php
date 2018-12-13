@@ -16,7 +16,7 @@ class AllFields extends FieldGroup
         $this->addBrick(new ExtensionFields('extension_fields', '1812032312a'));
 
         $this->setMenuOrder(10)
-            ->setShowInFewbricksDevTools(true)
+            ->setDisplayInFewbricksDevTools(true)
             ->setHideOnScreen('all');
 
         return $this;

@@ -109,6 +109,16 @@ class Field
     }
 
     /**
+     * @return $this
+     */
+    public function getDisplayInFewbricksDevTools()
+    {
+
+        return $this->getSetting(DevTools::SETTINGS_NAME_FOR_DISPLAYING_ACF_ARRAY, false);
+
+    }
+
+    /**
      * @param string $instructions ACF setting. Instructions for authors. Shown when submitting data
      * @return $this
      */

@@ -1066,7 +1066,7 @@ final class FieldGroupTest extends TestCase
         $fieldGroup = new FieldGroup('A field group', '1812132149a');
 
         $fieldGroup->addField(new Text('Text field 1', 'text_field_1', '1812132204a'));
-        $fieldGroup->setShowInFewbricksDevTools(true);
+        $fieldGroup->setDisplayInFewbricksDevTools(true);
         $fieldGroup->setSetting('setting_1_name', 'setting_1_value');
         $fieldGroup->setMenuOrder(78);
         $fieldGroup->setPosition('the_position_dgigk');
@@ -1130,9 +1130,9 @@ final class FieldGroupTest extends TestCase
 
         $fieldGroup = new FieldGroup('', '');
 
-        $fieldGroup->setShowInFewbricksDevTools(true);
+        $fieldGroup->setDisplayInFewbricksDevTools(true);
 
-        $this->assertEquals(true, $fieldGroup->getShowInFewbricksDevTools());
+        $this->assertEquals(true, $fieldGroup->getDisplayInFewbricksDevTools());
 
     }
 

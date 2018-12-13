@@ -26,7 +26,7 @@ class FooterGlobalTexts extends FieldGroup
         );
 
         $this->setMenuOrder(20)
-            ->setShowInFewbricksDevTools(true)
+            ->setDisplayInFewbricksDevTools(true)
             ->setStyle('seamless')
             ->register();
 
