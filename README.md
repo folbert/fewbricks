@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/folbert/fewbricks.svg?branch=2.x)](https://travis-ci.org/folbert/fewbricks)
+
 # Fewbricks 2
 
 Please see [this issue](https://github.com/folbert/fewbricks/issues/2#issuecomment-208723764) on why Fewbricks is not in
