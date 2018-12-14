@@ -13,7 +13,7 @@ use Fewbricks\ACF\FieldCollection;
 class Brick extends FieldCollection implements BrickInterface
 {
 
-    public const CLASS_ID_STRING = 'brick';
+    const CLASS_ID_STRING = 'brick';
 
     /**
      * @var array
