@@ -24,7 +24,7 @@
         "issues": "https://github.com/folbert/fewbricks/issues"
     },
     "require": {
-        "php": ">=7.1"
+        "php": ">=7.0"
     },
     "autoload": {
         "psr-4": {
