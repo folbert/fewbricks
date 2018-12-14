@@ -66,8 +66,9 @@ use \Fewbricks\DevTools;
         <p>Execution time for everything using the action "fewbricks/init":<br>
             <?php echo DevTools::getExecutionTime();  ?> seconds.</p>
 
-        <h2>Fewbricks version</h2>
-        <span><?php echo \Fewbricks\Fewbricks::getVersion(); ?></span>
+        <h2>Versions</h2>
+        <b>Fewbricks:</b> <span><?php echo \Fewbricks\Fewbricks::getVersion(); ?></span><br>
+        <b>PHP:</b> <span><?php echo \Fewbricks\Helpers\Helper::getPhpVersion(); ?></span>
 
         <h2>Misc</h2>
         <ul>

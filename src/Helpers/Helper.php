@@ -282,6 +282,16 @@ class Helper
     }
 
     /**
+     * @return string
+     */
+    public static function getPhpVersion()
+    {
+
+        return phpversion();
+
+    }
+
+    /**
      * @param $fields
      */
     public static function validateFieldNames($fields)
