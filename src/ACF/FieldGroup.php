@@ -19,7 +19,7 @@ class FieldGroup extends FieldCollection implements FieldGroupInterface
     /**
      * The items that ACF supports hiding as of v5.6.5
      */
-    private const HIDE_ON_SCREEN_ITEMS
+    const HIDE_ON_SCREEN_ITEMS
         = [
             'permalink',
             'the_content',
