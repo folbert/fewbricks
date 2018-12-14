@@ -14,7 +14,7 @@ class DevTools
     /**
      *
      */
-    public const SETTINGS_NAME_FOR_DISPLAYING_ACF_ARRAY = 'fewbricks__display_in_dev_tools';
+    const SETTINGS_NAME_FOR_DISPLAYING_ACF_ARRAY = 'fewbricks__display_in_dev_tools';
 
     /**
      * @var array
