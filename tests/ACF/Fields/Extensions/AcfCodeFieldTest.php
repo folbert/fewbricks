@@ -43,6 +43,8 @@ final class AcfCodeFieldTest extends Field
 
         $textField = FieldHelper::getCompleteFieldObject(self::CLASS_NAME, $settings, $this);
 
+        $settings['placeholder'] = ''; // Due to implementation fix for this field type
+
         $this->assertEquals(
             FieldHelper::getExpectedFieldValues($textField, $settings),
             $textField->toAcfArray($settings['test__key_prefix'])

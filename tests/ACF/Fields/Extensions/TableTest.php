@@ -43,6 +43,10 @@ final class TableTest extends Field
 
         $textField = FieldHelper::getCompleteFieldObject(self::CLASS_NAME, $settings, $this);
 
+        // Due to implementation fixes for this field type
+        $settings['use_caption'] = 2;
+        $settings['use_header'] = false;
+
         $this->assertEquals(
             FieldHelper::getExpectedFieldValues($textField, $settings),
             $textField->toAcfArray($settings['test__key_prefix'])

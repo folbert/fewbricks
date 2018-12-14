@@ -43,6 +43,8 @@ final class FlexibleContentTest extends Field
 
         $textField = FieldHelper::getCompleteFieldObject(self::CLASS_NAME, $settings, $this);
 
+        $settings['layouts'] = [];
+
         $this->assertEquals(
             FieldHelper::getExpectedFieldValues($textField, $settings),
             $textField->toAcfArray($settings['test__key_prefix'])

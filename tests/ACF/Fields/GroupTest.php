@@ -43,6 +43,8 @@ final class GroupTest extends Field
 
         $textField = FieldHelper::getCompleteFieldObject(self::CLASS_NAME, $settings, $this);
 
+        $settings['sub_fields'] = [];
+
         $this->assertEquals(
             FieldHelper::getExpectedFieldValues($textField, $settings),
             $textField->toAcfArray($settings['test__key_prefix'])
