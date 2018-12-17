@@ -11,8 +11,8 @@ class FieldWithChoices extends Field
 {
 
     /**
-     * @return mixed The value of the ACF setting "allow_null". Returns the default ACF value of an empty array if none has
-     * been set using Fewbricks.
+     * @return mixed The value of the ACF setting "allow_null". Returns the default ACF value false if none has been
+     * set using Fewbricks.
      */
     public function getAllowNull()
     {

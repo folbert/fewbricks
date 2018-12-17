@@ -8,6 +8,7 @@
 
 namespace Fewbricks\Tests\ACF\Fields;
 
+use Fewbricks\ACF\Fields\Accordion;
 use Fewbricks\Tests\ACF\Field;
 use Fewbricks\Tests\FieldHelper;
 
@@ -41,12 +42,56 @@ final class AccordionTest extends Field
             // These wil be set using setters on the field object
         ];
 
-        $textField = FieldHelper::getCompleteFieldObject(self::CLASS_NAME, $settings, $this);
+        $field = FieldHelper::getCompleteFieldObject(self::CLASS_NAME, $settings, $this);
 
         $this->assertEquals(
-            FieldHelper::getExpectedFieldValues($textField, $settings),
-            $textField->toAcfArray($settings['test__key_prefix'])
+            FieldHelper::getExpectedFieldValues($field, $settings),
+            $field->toAcfArray($settings['test__key_prefix'])
         );
+
+    }
+
+    public function testSetEndpoint()
+    {
+
+        $field = new Accordion('', '', '');
+
+        $field->setEndpoint(true);
+
+        $this->assertEquals(true, $field->getEndpoint());
+
+        $field->setEndpoint(false);
+
+        $this->assertEquals(false, $field->getEndpoint());
+
+    }
+
+    public function testSetMultiExpand()
+    {
+
+        $field = new Accordion('', '', '');
+
+        $field->setMultiExpand(true);
+
+        $this->assertEquals(true, $field->getMultiExpand());
+
+        $field->setMultiExpand(false);
+
+        $this->assertEquals(false, $field->getMultiExpand());
+
+    }
+
+    public function testSetOpen()
+    {
+
+        $field = new Accordion('', '', '');
+
+        // Default
+        $this->assertEquals('', $field->getOpen());
+
+        $field->setOpen(true);
+
+        $this->assertEquals(true, $field->getOpen());
 
     }
 
