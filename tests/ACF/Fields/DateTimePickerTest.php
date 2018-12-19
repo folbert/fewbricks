@@ -8,6 +8,7 @@
 
 namespace Fewbricks\Tests\ACF\Fields;
 
+use Fewbricks\ACF\Fields\DateTimePicker;
 use Fewbricks\Tests\ACF\Field;
 use Fewbricks\Tests\FieldHelper;
 
@@ -41,12 +42,44 @@ final class DateTimePickerTest extends Field
             // These wil be set using setters on the field object
         ];
 
-        $textField = FieldHelper::getCompleteFieldObject(self::CLASS_NAME, $settings, $this);
+        $field = FieldHelper::getCompleteFieldObject(self::CLASS_NAME, $settings, $this);
 
         $this->assertEquals(
-            FieldHelper::getExpectedFieldValues($textField, $settings),
-            $textField->toAcfArray($settings['test__key_prefix'])
+            FieldHelper::getExpectedFieldValues($field, $settings),
+            $field->toAcfArray($settings['test__key_prefix'])
         );
+
+    }
+
+    /**
+     *
+     */
+    public function testSetAndGetDisplayFormat()
+    {
+
+        $field = new DateTimePicker('', '', '');
+
+        $this->assertEquals($field->getDisplayFormat(), 'd/m/Y g:i a');
+
+        $field->setDisplayFormat('loremdy98oi');
+
+        $this->assertEquals($field->getDisplayFormat(), 'loremdy98oi');
+
+    }
+
+    /**
+     *
+     */
+    public function testSetAndGetReturnFormat()
+    {
+
+        $field = new DateTimePicker('', '', '');
+
+        $this->assertEquals($field->getReturnFormat(), 'd/m/Y g:i a');
+
+        $field->setReturnFormat('dn8odhil');
+
+        $this->assertEquals($field->getReturnFormat(), 'dn8odhil');
 
     }
 

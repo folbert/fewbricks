@@ -51,7 +51,7 @@ final class AccordionTest extends Field
 
     }
 
-    public function testSetEndpoint()
+    public function testSetAndGetEndpoint()
     {
 
         $field = new Accordion('', '', '');
@@ -66,7 +66,7 @@ final class AccordionTest extends Field
 
     }
 
-    public function testSetMultiExpand()
+    public function testSetAndGetMultiExpand()
     {
 
         $field = new Accordion('', '', '');
@@ -81,7 +81,7 @@ final class AccordionTest extends Field
 
     }
 
-    public function testSetOpen()
+    public function testSetAndGetOpen()
     {
 
         $field = new Accordion('', '', '');

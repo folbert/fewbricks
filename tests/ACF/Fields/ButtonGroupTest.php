@@ -51,7 +51,7 @@ final class ButtonGroupTest extends Field
 
     }
 
-    public function testSetLayout()
+    public function testSetAndGetLayout()
     {
 
         $field = new ButtonGroup('', '', '');
@@ -64,7 +64,7 @@ final class ButtonGroupTest extends Field
 
     }
 
-    public function testSetAllowNull()
+    public function testSetAndGetAllowNull()
     {
 
         $field = new ButtonGroup('', '', '');
@@ -77,7 +77,7 @@ final class ButtonGroupTest extends Field
 
     }
 
-    public function testSetChoices()
+    public function testSetAndGetChoices()
     {
 
         $field = new ButtonGroup('', '', '');
@@ -95,7 +95,7 @@ final class ButtonGroupTest extends Field
 
     }
 
-    public function testSetReturnFormat()
+    public function testSetAndGetReturnFormat()
     {
 
         $field = new ButtonGroup('', '', '');

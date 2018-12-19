@@ -8,6 +8,7 @@
 
 namespace Fewbricks\Tests\ACF\Fields;
 
+use Fewbricks\ACF\Fields\Checkbox;
 use Fewbricks\Tests\ACF\Field;
 use Fewbricks\Tests\FieldHelper;
 
@@ -41,12 +42,60 @@ final class CheckboxTest extends Field
             // These wil be set using setters on the field object
         ];
 
-        $textField = FieldHelper::getCompleteFieldObject(self::CLASS_NAME, $settings, $this);
+        $field = FieldHelper::getCompleteFieldObject(self::CLASS_NAME, $settings, $this);
 
         $this->assertEquals(
-            FieldHelper::getExpectedFieldValues($textField, $settings),
-            $textField->toAcfArray($settings['test__key_prefix'])
+            FieldHelper::getExpectedFieldValues($field, $settings),
+            $field->toAcfArray($settings['test__key_prefix'])
         );
+
+    }
+
+    /**
+     *
+     */
+    public function testSetAndGetAllowCustom()
+    {
+
+        $field = new Checkbox('', '', '');
+
+        $this->assertEquals($field->getAllowCustom(), false);
+
+        $field->setAllowCustom(true);
+
+        $this->assertEquals($field->getAllowCustom(), true);
+
+    }
+
+    /**
+     *
+     */
+    public function testSetAndGetSaveCustom()
+    {
+
+        $field = new Checkbox('', '', '');
+
+        $this->assertEquals($field->getSaveCustom(), false);
+
+        $field->setSaveCustom(true);
+
+        $this->assertEquals($field->getSaveCustom(), true);
+
+    }
+
+    /**
+     *
+     */
+    public function testSetAndGetToggle()
+    {
+
+        $field = new Checkbox('', '', '');
+
+        $this->assertEquals($field->getToggle(), false);
+
+        $field->setToggle(true);
+
+        $this->assertEquals($field->getToggle(), true);
 
     }
 

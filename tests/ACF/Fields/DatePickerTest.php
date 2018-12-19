@@ -8,10 +8,11 @@
 
 namespace Fewbricks\Tests\ACF\Fields;
 
+use Fewbricks\ACF\Fields\DatePicker;
 use Fewbricks\Tests\ACF\Field;
 use Fewbricks\Tests\FieldHelper;
 
-final class DatePickerTestTest extends Field
+final class DatePickerTest extends Field
 {
 
     // Will be used when creating the field object for this test
@@ -47,6 +48,38 @@ final class DatePickerTestTest extends Field
             FieldHelper::getExpectedFieldValues($textField, $settings),
             $textField->toAcfArray($settings['test__key_prefix'])
         );
+
+    }
+
+    /**
+     *
+     */
+    public function testSetAndGetDisplayFormat()
+    {
+
+        $field = new DatePicker('', '', '');
+
+        $this->assertEquals($field->getDisplayFormat(), 'd/m/Y');
+
+        $field->setDisplayFormat('loremdy98oi');
+
+        $this->assertEquals($field->getDisplayFormat(), 'loremdy98oi');
+
+    }
+
+    /**
+     *
+     */
+    public function testSetAndGetReturnFormat()
+    {
+
+        $field = new DatePicker('', '', '');
+
+        $this->assertEquals($field->getReturnFormat(), 'd/m/Y');
+
+        $field->setReturnFormat('dn8odhil');
+
+        $this->assertEquals($field->getReturnFormat(), 'dn8odhil');
 
     }
 

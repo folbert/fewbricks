@@ -21,7 +21,7 @@ class Checkbox extends FieldWithChoices implements FieldInterface
     const TYPE = 'checkbox';
 
     /**
-     * @return mixed The value of the ACF setting "allow_custom". Returns the default ACF value "0" if none has been
+     * @return mixed The value of the ACF setting "allow_custom". Returns the default ACF value false if none has been
      * set using Fewbricks.
      */
     public function getAllowCustom()
@@ -32,7 +32,7 @@ class Checkbox extends FieldWithChoices implements FieldInterface
     }
 
     /**
-     * @return mixed The value of the ACF setting "save_custom". Returns the default ACF value "0" if none has been
+     * @return mixed The value of the ACF setting "save_custom". Returns the default ACF value false if none has been
      * set using Fewbricks.
      */
     public function getSaveCustom()
@@ -43,7 +43,7 @@ class Checkbox extends FieldWithChoices implements FieldInterface
     }
 
     /**
-     * @return mixed The value of the ACF setting "toggle". Returns the default ACF value "false" if none has been
+     * @return mixed The value of the ACF setting "toggle". Returns the default ACF value false if none has been
      * set using Fewbricks.
      */
     public function getToggle()

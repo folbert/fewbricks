@@ -52,4 +52,11 @@ final class FlexibleContentTest extends Field
 
     }
 
+    public function testTest()
+    {
+
+        $this->assertEquals(true, false);
+
+    }
+
 }

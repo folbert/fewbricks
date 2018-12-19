@@ -20,6 +20,9 @@ final class TextTest extends Field
         $this->assertTrue(class_exists(self::CLASS_NAME));
     }
 
+    /**
+     *
+     */
     public function testGetLabel()
     {
 
@@ -31,6 +34,9 @@ final class TextTest extends Field
 
     }
 
+    /**
+     *
+     */
     public function testGetName()
     {
 

@@ -11,7 +11,7 @@ namespace Fewbricks\Tests\ACF\Fields;
 use Fewbricks\Tests\ACF\Field;
 use Fewbricks\Tests\FieldHelper;
 
-final class ColorPickerTestTest extends Field
+final class ColorPickerTest extends Field
 {
 
     // Will be used when creating the field object for this test
