@@ -43,7 +43,7 @@ class PageLink extends Field implements FieldInterface
     }
 
     /**
-     * @return mixed The value of the ACF setting "". Returns the default ACF value "" if none has been
+     * @return mixed The value of the ACF setting "". Returns the default ACF value [] if none has been
      * set using Fewbricks.
      */
     public function getPostType()
@@ -54,7 +54,7 @@ class PageLink extends Field implements FieldInterface
     }
 
     /**
-     * @return mixed The value of the ACF setting "post_type". Returns the default ACF value of an empty array if none
+     * @return mixed The value of the ACF setting "taxonomy". Returns the default ACF value of an empty array if none
      * has been set using Fewbricks.
      */
     public function getTaxonomy()
@@ -100,6 +100,19 @@ class PageLink extends Field implements FieldInterface
     {
 
         return $this->setSetting('post_type', $postType);
+
+    }
+
+    /**
+     * ACF setting.
+     *
+     * @param mixed $taxonomy Array with post type names
+     * @return $this
+     */
+    public function setTaxonomy(array $taxonomy)
+    {
+
+        return $this->setSetting('taxonomy', $taxonomy);
 
     }
 

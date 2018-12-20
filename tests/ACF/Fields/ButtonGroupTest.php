@@ -56,11 +56,11 @@ final class ButtonGroupTest extends Field
 
         $field = new ButtonGroup('', '', '');
 
-        // Default
-        $this->assertEquals($field->getLayout(), 'horizontal');
+        $this->assertEquals('horizontal', $field->getLayout());
 
         $field->setLayout('ye8dgol');
-        $this->assertEquals($field->getLayout(), 'ye8dgol');
+
+        $this->assertEquals('ye8dgol', $field->getLayout());
 
     }
 
@@ -69,11 +69,11 @@ final class ButtonGroupTest extends Field
 
         $field = new ButtonGroup('', '', '');
 
-        $this->assertEquals($field->getAllowNull(), false);
+        $this->assertEquals(false, $field->getAllowNull());
 
         $field->setAllowNull(true);
 
-        $this->assertEquals($field->getAllowNull(), true);
+        $this->assertEquals(true, $field->getAllowNull());
 
     }
 
@@ -82,7 +82,7 @@ final class ButtonGroupTest extends Field
 
         $field = new ButtonGroup('', '', '');
 
-        $this->assertEquals($field->getChoices(), []);
+        $this->assertEquals([], $field->getChoices());
 
         $choices = [
             'a' => 'An a',
@@ -91,7 +91,7 @@ final class ButtonGroupTest extends Field
 
         $field->setChoices($choices);
 
-        $this->assertEquals($field->getChoices(), $choices);
+        $this->assertEquals($choices, $field->getChoices());
 
     }
 
@@ -100,11 +100,11 @@ final class ButtonGroupTest extends Field
 
         $field = new ButtonGroup('', '', '');
 
-        $this->assertEquals($field->getReturnFormat(), 'value');
+        $this->assertEquals('value', $field->getReturnFormat());
 
         $field->setReturnFormat('raw');
 
-        $this->assertEquals($field->getReturnFormat(), 'raw');
+        $this->assertEquals('raw', $field->getReturnFormat());
 
     }
 

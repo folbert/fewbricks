@@ -41,13 +41,13 @@ final class AcfCodeFieldTest extends Field
             // These wil be set using setters on the field object
         ];
 
-        $textField = FieldHelper::getCompleteFieldObject(self::CLASS_NAME, $settings, $this);
+        $field = FieldHelper::getCompleteFieldObject(self::CLASS_NAME, $settings, $this);
 
         $settings['placeholder'] = ''; // Due to implementation fix for this field type
 
         $this->assertEquals(
-            FieldHelper::getExpectedFieldValues($textField, $settings),
-            $textField->toAcfArray($settings['test__key_prefix'])
+            FieldHelper::getExpectedFieldValues($field, $settings),
+            $field->toAcfArray($settings['test__key_prefix'])
         );
 
     }

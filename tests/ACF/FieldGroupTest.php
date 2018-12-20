@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: bjorn.folbert
- * Date: 2018-12-09
- * Time: 16:13
- */
 
 namespace Fewbricks\Tests\ACF;
 

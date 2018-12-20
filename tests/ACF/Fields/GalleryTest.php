@@ -59,11 +59,11 @@ final class GalleryTest extends Field
 
         $field = new Gallery('', '', '');
 
-        $this->assertEquals($field->getInsert(), 'append');
+        $this->assertEquals('append', $field->getInsert());
 
         $field->setInsert('prepend');
 
-        $this->assertEquals($field->getInsert(), 'prepend');
+        $this->assertEquals('prepend', $field->getInsert());
 
     }
 
@@ -75,11 +75,11 @@ final class GalleryTest extends Field
 
         $field = new Gallery('', '', '');
 
-        $this->assertEquals($field->getMax(), 0);
+        $this->assertEquals(0, $field->getMax());
 
         $field->setMax(78);
 
-        $this->assertEquals($field->getMax(), 78);
+        $this->assertEquals(78, $field->getMax());
 
     }
 
@@ -91,11 +91,11 @@ final class GalleryTest extends Field
 
         $field = new Gallery('', '', '');
 
-        $this->assertEquals($field->getMin(), 0);
+        $this->assertEquals(0, $field->getMin());
 
         $field->setMin(78);
 
-        $this->assertEquals($field->getMin(), 78);
+        $this->assertEquals(78, $field->getMin());
 
     }
 

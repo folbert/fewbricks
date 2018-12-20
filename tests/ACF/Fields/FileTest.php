@@ -59,11 +59,11 @@ final class FileTest extends Field
 
         $field = new File('', '', '');
 
-        $this->assertEquals($field->getLibrary(), 'all');
+        $this->assertEquals('all', $field->getLibrary());
 
         $field->setLibrary('some_library');
 
-        $this->assertEquals($field->getLibrary(), 'some_library');
+        $this->assertEquals('some_library', $field->getLibrary());
 
     }
 
@@ -75,11 +75,11 @@ final class FileTest extends Field
 
         $field = new File('', '', '');
 
-        $this->assertEquals($field->getMaxSize(), 0);
+        $this->assertEquals(0, $field->getMaxSize());
 
         $field->setMaxSize(100);
 
-        $this->assertEquals($field->getMaxSize(), 100);
+        $this->assertEquals(100, $field->getMaxSize());
 
     }
 
@@ -91,15 +91,15 @@ final class FileTest extends Field
 
         $field = new File('', '', '');
 
-        $this->assertEquals($field->getMimeTypes(), '');
+        $this->assertEquals('', $field->getMimeTypes());
 
         $field->setMimeTypes('apple, banana');
 
-        $this->assertEquals($field->getMimeTypes(), 'apple, banana');
+        $this->assertEquals('apple, banana', $field->getMimeTypes());
 
         $field->setMimeTypes(['orange', 'pear']);
 
-        $this->assertEquals($field->getMimeTypes(), 'orange, pear');
+        $this->assertEquals('orange, pear', $field->getMimeTypes());
 
     }
 
@@ -111,11 +111,11 @@ final class FileTest extends Field
 
         $field = new File('', '', '');
 
-        $this->assertEquals($field->getMinSize(), 0);
+        $this->assertEquals(0, $field->getMinSize());
 
         $field->setMinSize(100);
 
-        $this->assertEquals($field->getMinSize(), 100);
+        $this->assertEquals(100, $field->getMinSize());
 
     }
 
@@ -127,11 +127,11 @@ final class FileTest extends Field
 
         $field = new File('', '', '');
 
-        $this->assertEquals($field->getReturnFormat(), 'array');
+        $this->assertEquals('array', $field->getReturnFormat());
 
         $field->setReturnFormat('object');
 
-        $this->assertEquals($field->getReturnFormat(), 'object');
+        $this->assertEquals('object', $field->getReturnFormat());
 
     }
 

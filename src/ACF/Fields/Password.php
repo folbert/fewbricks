@@ -27,7 +27,7 @@ class Password extends Field implements FieldInterface
     public function getAppend()
     {
 
-        return $this->setSetting('append', '');
+        return $this->getSetting('append', '');
 
     }
 

@@ -73,7 +73,7 @@ class Select extends FieldWithChoices implements FieldInterface
     public function setMultiple($multiple)
     {
 
-        return $this->getSetting('multiple', $multiple);
+        return $this->setSetting('multiple', $multiple);
 
     }
 

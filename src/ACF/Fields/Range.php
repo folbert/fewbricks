@@ -49,7 +49,7 @@ class Range extends Field implements FieldInterface
     public function getMin()
     {
 
-        return $this->setSetting('min', '');
+        return $this->getSetting('min', '');
 
     }
 
@@ -60,7 +60,7 @@ class Range extends Field implements FieldInterface
     public function getPrepend()
     {
 
-        return $this->setSetting('prepend', '');
+        return $this->getSetting('prepend', '');
 
     }
 
@@ -71,7 +71,7 @@ class Range extends Field implements FieldInterface
     public function getStep()
     {
 
-        return $this->setSetting('step', '');
+        return $this->getSetting('step', '');
 
     }
 

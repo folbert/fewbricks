@@ -61,11 +61,11 @@ final class GroupTest extends Field
 
         $field = new Group('', '', '');
 
-        $this->assertEquals($field->getLayout(), 'block');
+        $this->assertEquals('block', $field->getLayout());
 
         $field->setLayout('table');
 
-        $this->assertEquals($field->getLayout(), 'table');
+        $this->assertEquals('table', $field->getLayout());
 
     }
 

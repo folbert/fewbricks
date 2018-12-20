@@ -8,6 +8,7 @@
 
 namespace Fewbricks\Tests\ACF\Fields;
 
+use Fewbricks\ACF\Fields\Password;
 use Fewbricks\Tests\ACF\Field;
 use Fewbricks\Tests\FieldHelper;
 
@@ -41,12 +42,60 @@ final class PasswordTest extends Field
             // These wil be set using setters on the field object
         ];
 
-        $textField = FieldHelper::getCompleteFieldObject(self::CLASS_NAME, $settings, $this);
+        $field = FieldHelper::getCompleteFieldObject(self::CLASS_NAME, $settings, $this);
 
         $this->assertEquals(
-            FieldHelper::getExpectedFieldValues($textField, $settings),
-            $textField->toAcfArray($settings['test__key_prefix'])
+            FieldHelper::getExpectedFieldValues($field, $settings),
+            $field->toAcfArray($settings['test__key_prefix'])
         );
+
+    }
+
+    /**
+     *
+     */
+    public function testSetAndGetAppend()
+    {
+
+        $field = new Password('', '', '');
+
+        $this->assertEquals('', $field->getAppend());
+
+        $field->setAppend('f389gols');
+
+        $this->assertEquals('f389gols', $field->getAppend());
+
+    }
+
+    /**
+     *
+     */
+    public function testSetAndGetPlaceholder()
+    {
+
+        $field = new Password('', '', '');
+
+        $this->assertEquals('', $field->getPlaceholder());
+
+        $field->setPlaceholder('ffqo8dwgil');
+
+        $this->assertEquals('ffqo8dwgil', $field->getPlaceholder());
+
+    }
+
+    /**
+     *
+     */
+    public function testSetAndGetPrepend()
+    {
+
+        $field = new Password('', '', '');
+
+        $this->assertEquals('', $field->getPrepend());
+
+        $field->setPrepend('f23fwogil');
+
+        $this->assertEquals('f23fwogil', $field->getPrepend());
 
     }
 

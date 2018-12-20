@@ -8,6 +8,7 @@
 
 namespace Fewbricks\Tests\ACF\Fields;
 
+use Fewbricks\ACF\Fields\Message;
 use Fewbricks\Tests\ACF\Field;
 use Fewbricks\Tests\FieldHelper;
 
@@ -41,12 +42,60 @@ final class MessageTest extends Field
             // These wil be set using setters on the field object
         ];
 
-        $textField = FieldHelper::getCompleteFieldObject(self::CLASS_NAME, $settings, $this);
+        $field = FieldHelper::getCompleteFieldObject(self::CLASS_NAME, $settings, $this);
 
         $this->assertEquals(
-            FieldHelper::getExpectedFieldValues($textField, $settings),
-            $textField->toAcfArray($settings['test__key_prefix'])
+            FieldHelper::getExpectedFieldValues($field, $settings),
+            $field->toAcfArray($settings['test__key_prefix'])
         );
+
+    }
+
+    /**
+     *
+     */
+    public function testSetAndGetEscHtml()
+    {
+
+        $field = new Message('', '', '');
+
+        $this->assertEquals(false, $field->getEscHtml());
+
+        $field->setEscHtml(true);
+
+        $this->assertEquals(true, $field->getEscHtml());
+
+    }
+
+    /**
+     *
+     */
+    public function testSetAndGetMessage()
+    {
+
+        $field = new Message('', '', '');
+
+        $this->assertEquals('', $field->getMessage());
+
+        $field->setMessage('a message uiojio');
+
+        $this->assertEquals('a message uiojio', $field->getMessage());
+
+    }
+
+    /**
+     *
+     */
+    public function testSetAndGetNewLines()
+    {
+
+        $field = new Message('', '', '');
+
+        $this->assertEquals('wpautop', $field->getNewLines());
+
+        $field->setNewLines('none');
+
+        $this->assertEquals('none', $field->getNewLines());
 
     }
 

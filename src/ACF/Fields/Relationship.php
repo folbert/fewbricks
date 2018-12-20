@@ -88,7 +88,7 @@ class Relationship extends Field implements FieldInterface
     }
 
     /**
-     * @return mixed The value of the ACF setting "taxonomy". Returns the default ACF value of an empty array  if none
+     * @return mixed The value of the ACF setting "taxonomy". Returns the default ACF value of an empty array if none
      * has been set using Fewbricks.
      */
     public function getTaxonomy()

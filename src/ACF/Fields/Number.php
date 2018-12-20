@@ -35,10 +35,10 @@ class Number extends Field implements FieldInterface
      * @return mixed The value of the ACF setting "maximum_value". Returns the default ACF value "" if none has been
      * set using Fewbricks.
      */
-    public function getMaximumValue()
+    public function getMax()
     {
 
-        return $this->getSetting('maximum_value', '');
+        return $this->getSetting('max', '');
 
     }
 
@@ -46,10 +46,10 @@ class Number extends Field implements FieldInterface
      * @return mixed The value of the ACF setting "minimum_value". Returns the default ACF value "" if none has been
      * set using Fewbricks.
      */
-    public function getMinimumValue()
+    public function getMin()
     {
 
-        return $this->getSetting('minimum_value', '');
+        return $this->getSetting('min', '');
 
     }
 
@@ -102,26 +102,26 @@ class Number extends Field implements FieldInterface
     /**
      * ACF setting.
      *
-     * @param int $maximumValue
+     * @param int $max
      * @return $this
      */
-    public function setMaximumValue($maximumValue)
+    public function setMax($max)
     {
 
-        return $this->setSetting('max', $maximumValue);
+        return $this->setSetting('max', $max);
 
     }
 
     /**
      * ACF setting.
      *
-     * @param int $minimumValue
+     * @param int $min
      * @return $this
      */
-    public function setMinimumValue($minimumValue)
+    public function setMin($min)
     {
 
-        return $this->setSetting('min', $minimumValue);
+        return $this->setSetting('min', $min);
 
     }
 

@@ -59,11 +59,11 @@ final class GoogleMapTest extends Field
 
         $field = new GoogleMap('', '', '');
 
-        $this->assertEquals($field->getCenterLat(), '-37.81411');
+        $this->assertEquals('-37.81411', $field->getCenterLat());
 
         $field->setCenterLat('23.2767');
 
-        $this->assertEquals($field->getCenterLat(), '23.2767');
+        $this->assertEquals('23.2767', $field->getCenterLat());
 
     }
 
@@ -75,11 +75,11 @@ final class GoogleMapTest extends Field
 
         $field = new GoogleMap('', '', '');
 
-        $this->assertEquals($field->getCenterLng(), '144.96328');
+        $this->assertEquals('144.96328', $field->getCenterLng());
 
         $field->setCenterLng('127.456');
 
-        $this->assertEquals($field->getCenterLng(), '127.456');
+        $this->assertEquals('127.456', $field->getCenterLng());
 
     }
 
@@ -91,11 +91,11 @@ final class GoogleMapTest extends Field
 
         $field = new GoogleMap('', '', '');
 
-        $this->assertEquals($field->getHeight(), '400');
+        $this->assertEquals('400', $field->getHeight());
 
         $field->setHeight('250');
 
-        $this->assertEquals($field->getHeight(), '250');
+        $this->assertEquals('250', $field->getHeight());
 
     }
 
@@ -107,11 +107,11 @@ final class GoogleMapTest extends Field
 
         $field = new GoogleMap('', '', '');
 
-        $this->assertEquals($field->getZoom(), '14');
+        $this->assertEquals('14', $field->getZoom());
 
-        $field->setHeight('3');
+        $field->setZoom('3');
 
-        $this->assertEquals($field->getHeight(), '3');
+        $this->assertEquals('3', $field->getZoom());
 
     }
 

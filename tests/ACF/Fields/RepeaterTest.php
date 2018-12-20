@@ -8,6 +8,7 @@
 
 namespace Fewbricks\Tests\ACF\Fields;
 
+use Fewbricks\ACF\Fields\Repeater;
 use Fewbricks\Tests\ACF\Field;
 use Fewbricks\Tests\FieldHelper;
 
@@ -41,14 +42,94 @@ final class RepeaterTest extends Field
             // These wil be set using setters on the field object
         ];
 
-        $textField = FieldHelper::getCompleteFieldObject(self::CLASS_NAME, $settings, $this);
+        $field = FieldHelper::getCompleteFieldObject(self::CLASS_NAME, $settings, $this);
 
         $settings['sub_fields'] = [];
 
         $this->assertEquals(
-            FieldHelper::getExpectedFieldValues($textField, $settings),
-            $textField->toAcfArray($settings['test__key_prefix'])
+            FieldHelper::getExpectedFieldValues($field, $settings),
+            $field->toAcfArray($settings['test__key_prefix'])
         );
+
+    }
+
+    /**
+     *
+     */
+    public function testSetAndGetButtonLabel()
+    {
+
+        $field = new Repeater('', '', '');
+
+        $this->assertEquals('', $field->getButtonLabel());
+
+        $field->setButtonLabel('Press the button');
+
+        $this->assertEquals('Press the button', $field->getButtonLabel());
+
+    }
+
+    /**
+     *
+     */
+    public function testSetAndGetCollapsed()
+    {
+
+        $field = new Repeater('', '', '');
+
+        $this->assertEquals('', $field->getCollapsed());
+
+        $field->setCollapsed('dg98gol');
+
+        $this->assertEquals('dg98gol', $field->getCollapsed());
+
+    }
+
+    /**
+     *
+     */
+    public function testSetAndGetLayout()
+    {
+
+        $field = new Repeater('', '', '');
+
+        $this->assertEquals('table', $field->getLayout());
+
+        $field->setLayout('row');
+
+        $this->assertEquals('row', $field->getLayout());
+
+    }
+
+    /**
+     *
+     */
+    public function testSetAndGetMax()
+    {
+
+        $field = new Repeater('', '', '');
+
+        $this->assertEquals(0, $field->getMax());
+
+        $field->setMax(45);
+
+        $this->assertEquals(45, $field->getMax());
+
+    }
+
+    /**
+     *
+     */
+    public function testSetAndGetMin()
+    {
+
+        $field = new Repeater('', '', '');
+
+        $this->assertEquals(0, $field->getMin());
+
+        $field->setMin(67);
+
+        $this->assertEquals(67, $field->getMin());
 
     }
 

@@ -28,9 +28,9 @@ final class TextTest extends Field
 
         $label = 'A label dh8hoil';
 
-        $textField = new Text($label, 'text', '1812132258a');
+        $field = new Text($label, 'text', '1812132258a');
 
-        $this->assertEquals($label, $textField->getLabel());
+        $this->assertEquals($label, $field->getLabel());
 
     }
 
@@ -42,9 +42,9 @@ final class TextTest extends Field
 
         $name = 'A name hsg78fik';
 
-        $textField = new Text('Text', $name, '1812132258a');
+        $field = new Text('Text', $name, '1812132258a');
 
-        $this->assertEquals($name, $textField->getName());
+        $this->assertEquals($name, $field->getName());
 
     }
 
@@ -53,9 +53,9 @@ final class TextTest extends Field
 
         $key = '1812132258a';
 
-        $textField = new Text('Text', 'text', '1812132258a');
+        $field = new Text('Text', 'text', '1812132258a');
 
-        $this->assertEquals($key, $textField->getKey());
+        $this->assertEquals($key, $field->getKey());
 
     }
 
@@ -64,10 +64,10 @@ final class TextTest extends Field
 
         $defaultValue = 'nb89godlbl.';
 
-        $textField = new Text('Text', 'text', '1812132258a');
-        $textField->setDefaultValue($defaultValue);
+        $field = new Text('Text', 'text', '1812132258a');
+        $field->setDefaultValue($defaultValue);
 
-        $this->assertEquals($defaultValue, $textField->getDefaultValue());
+        $this->assertEquals($defaultValue, $field->getDefaultValue());
 
     }
 
@@ -76,10 +76,10 @@ final class TextTest extends Field
 
         $instructions = 'nb89godlbl.';
 
-        $textField = new Text('Text', 'text', '1812132258a');
-        $textField->setInstructions($instructions);
+        $field = new Text('Text', 'text', '1812132258a');
+        $field->setInstructions($instructions);
 
-        $this->assertEquals($instructions, $textField->getInstructions());
+        $this->assertEquals($instructions, $field->getInstructions());
 
     }
 
@@ -88,10 +88,10 @@ final class TextTest extends Field
 
         $required = true;
 
-        $textField = new Text('Text', 'text', '1812132258a');
-        $textField->setRequired($required);
+        $field = new Text('Text', 'text', '1812132258a');
+        $field->setRequired($required);
 
-        $this->assertEquals($required, $textField->getRequired());
+        $this->assertEquals($required, $field->getRequired());
 
     }
 
@@ -101,10 +101,10 @@ final class TextTest extends Field
         $settingName = 'name_dg9go';
         $settingValue = 'dn98dgol';
 
-        $textField = new Text('Text', 'text', '1812132258a');
-        $textField->setSetting($settingName, $settingValue);
+        $field = new Text('Text', 'text', '1812132258a');
+        $field->setSetting($settingName, $settingValue);
 
-        $this->assertEquals($settingValue, $textField->getSetting($settingName));
+        $this->assertEquals($settingValue, $field->getSetting($settingName));
 
     }
 
@@ -113,9 +113,9 @@ final class TextTest extends Field
 
         $defaultValue = 'dh89gdwewo';
 
-        $textField = new Text('Text', 'text', '1812132258a');
+        $field = new Text('Text', 'text', '1812132258a');
 
-        $this->assertEquals($defaultValue, $textField->getSetting('setting_dhd08gol', $defaultValue));
+        $this->assertEquals($defaultValue, $field->getSetting('setting_dhd08gol', $defaultValue));
 
     }
 
@@ -124,10 +124,10 @@ final class TextTest extends Field
 
         $display = true;
 
-        $textField = new Text('Text', 'text', '1812132258a');
-        $textField->setDisplayInFewbricksDevTools($display);
+        $field = new Text('Text', 'text', '1812132258a');
+        $field->setDisplayInFewbricksDevTools($display);
 
-        $this->assertEquals($display, $textField->getDisplayInFewbricksDevTools());
+        $this->assertEquals($display, $field->getDisplayInFewbricksDevTools());
 
     }
 
@@ -140,10 +140,10 @@ final class TextTest extends Field
             'width' => '108',
         ];
 
-        $textField = new Text('Text', 'text', '1812132258a');
-        $textField->setWrapper($wrapper);
+        $field = new Text('Text', 'text', '1812132258a');
+        $field->setWrapper($wrapper);
 
-        $this->assertEquals($wrapper, $textField->getWrapper());
+        $this->assertEquals($wrapper, $field->getWrapper());
 
     }
 
@@ -152,10 +152,10 @@ final class TextTest extends Field
 
         $append = 'Append ts9tgo';
 
-        $textField = new Text('Text', 'text', '1812132258a');
-        $textField->setAppend($append);
+        $field = new Text('Text', 'text', '1812132258a');
+        $field->setAppend($append);
 
-        $this->assertEquals($append, $textField->getAppend());
+        $this->assertEquals($append, $field->getAppend());
 
     }
 
@@ -164,10 +164,10 @@ final class TextTest extends Field
 
         $maxLength = 89;
 
-        $textField = new Text('Text', 'text', '1812132258a');
-        $textField->setMaxlength($maxLength);
+        $field = new Text('Text', 'text', '1812132258a');
+        $field->setMaxlength($maxLength);
 
-        $this->assertEquals($maxLength, $textField->getMaxlength());
+        $this->assertEquals($maxLength, $field->getMaxlength());
 
     }
 
@@ -176,10 +176,10 @@ final class TextTest extends Field
 
         $placeholder = 'Placeholder s9togl';
 
-        $textField = new Text('Text', 'text', '1812132258a');
-        $textField->setPlaceholder($placeholder);
+        $field = new Text('Text', 'text', '1812132258a');
+        $field->setPlaceholder($placeholder);
 
-        $this->assertEquals($placeholder, $textField->getPlaceholder());
+        $this->assertEquals($placeholder, $field->getPlaceholder());
 
     }
 
@@ -188,10 +188,10 @@ final class TextTest extends Field
 
         $prepend = 'Prepend s9d232';
 
-        $textField = new Text('Text', 'text', '1812132258a');
-        $textField->setPrepend($prepend);
+        $field = new Text('Text', 'text', '1812132258a');
+        $field->setPrepend($prepend);
 
-        $this->assertEquals($prepend, $textField->getPrepend());
+        $this->assertEquals($prepend, $field->getPrepend());
 
     }
 
@@ -225,26 +225,26 @@ final class TextTest extends Field
             'prepend' => 'Text field prepend',
         ];
 
-        $textField = FieldHelper::getCompleteFieldObject(self::CLASS_NAME, $settings, $this);
+        $field = FieldHelper::getCompleteFieldObject(self::CLASS_NAME, $settings, $this);
 
         $expectedArray = [];
 
         // Common to all fields
-        $textField->setSetting('custom_setting', 'custom_setting_value');
+        $field->setSetting('custom_setting', 'custom_setting_value');
         $expectedArray['custom_setting'] = 'custom_setting_value';
 
-        $textField->setSettings([
+        $field->setSettings([
             'custom_setting2' => 'custom_setting_value2',
             'custom_setting3' => 'custom_setting_value3',
         ]);
         $expectedArray['custom_setting2'] = 'custom_setting_value2';
         $expectedArray['custom_setting3'] = 'custom_setting_value3';
 
-        $textField->setDisplayInFewbricksDevTools(true);
+        $field->setDisplayInFewbricksDevTools(true);
         $expectedArray['fewbricks__display_in_dev_tools'] = true;
 
         $expectedArray = array_merge(
-            FieldHelper::getExpectedFieldValues($textField, $settings),
+            FieldHelper::getExpectedFieldValues($field, $settings),
             $expectedArray
         );
 
@@ -252,7 +252,7 @@ final class TextTest extends Field
 
         $this->assertEquals(
             $expectedArray,
-            $textField->toAcfArray($settings['test__key_prefix'])
+            $field->toAcfArray($settings['test__key_prefix'])
         );
 
     }

@@ -84,7 +84,7 @@ class PostObject extends Field implements FieldInterface
     public function setAllowNull($allowNull)
     {
 
-        return $this->setSetting('null', $allowNull);
+        return $this->setSetting('allow_null', $allowNull);
 
     }
 

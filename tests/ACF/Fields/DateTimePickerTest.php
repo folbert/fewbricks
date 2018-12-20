@@ -59,11 +59,11 @@ final class DateTimePickerTest extends Field
 
         $field = new DateTimePicker('', '', '');
 
-        $this->assertEquals($field->getDisplayFormat(), 'd/m/Y g:i a');
+        $this->assertEquals('d/m/Y g:i a', $field->getDisplayFormat());
 
         $field->setDisplayFormat('loremdy98oi');
 
-        $this->assertEquals($field->getDisplayFormat(), 'loremdy98oi');
+        $this->assertEquals('loremdy98oi', $field->getDisplayFormat());
 
     }
 
@@ -75,11 +75,11 @@ final class DateTimePickerTest extends Field
 
         $field = new DateTimePicker('', '', '');
 
-        $this->assertEquals($field->getReturnFormat(), 'd/m/Y g:i a');
+        $this->assertEquals('d/m/Y g:i a', $field->getReturnFormat());
 
         $field->setReturnFormat('dn8odhil');
 
-        $this->assertEquals($field->getReturnFormat(), 'dn8odhil');
+        $this->assertEquals('dn8odhil', $field->getReturnFormat());
 
     }
 

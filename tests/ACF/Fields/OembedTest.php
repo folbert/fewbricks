@@ -8,6 +8,7 @@
 
 namespace Fewbricks\Tests\ACF\Fields;
 
+use Fewbricks\ACF\Fields\Oembed;
 use Fewbricks\Tests\ACF\Field;
 use Fewbricks\Tests\FieldHelper;
 
@@ -41,12 +42,44 @@ final class OembedTest extends Field
             // These wil be set using setters on the field object
         ];
 
-        $textField = FieldHelper::getCompleteFieldObject(self::CLASS_NAME, $settings, $this);
+        $field = FieldHelper::getCompleteFieldObject(self::CLASS_NAME, $settings, $this);
 
         $this->assertEquals(
-            FieldHelper::getExpectedFieldValues($textField, $settings),
-            $textField->toAcfArray($settings['test__key_prefix'])
+            FieldHelper::getExpectedFieldValues($field, $settings),
+            $field->toAcfArray($settings['test__key_prefix'])
         );
+
+    }
+
+    /**
+     *
+     */
+    public function testSetAndGetHeight()
+    {
+
+        $field = new Oembed('', '', '');
+
+        $this->assertEquals('', $field->getHeight());
+
+        $field->setHeight(189);
+
+        $this->assertEquals(189, $field->getHeight());
+
+    }
+
+    /**
+     *
+     */
+    public function testSetAndGetWidth()
+    {
+
+        $field = new Oembed('', '', '');
+
+        $this->assertEquals('', $field->getWidth());
+
+        $field->setWidth(189);
+
+        $this->assertEquals(189, $field->getWidth());
 
     }
 

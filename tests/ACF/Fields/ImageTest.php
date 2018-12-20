@@ -75,11 +75,11 @@ final class ImageTest extends Field
 
         $field = new Image('', '', '');
 
-        $this->assertEquals($field->getReturnFormat(), 'array');
+        $this->assertEquals('array', $field->getReturnFormat());
 
         $field->setReturnFormat('object');
 
-        $this->assertEquals($field->getReturnFormat(), 'object');
+        $this->assertEquals('object', $field->getReturnFormat());
 
     }
 

@@ -41,8 +41,8 @@ class Repeater extends FieldWithFields implements FieldInterface
     }
 
     /**
-     * @return mixed The value of the ACF setting "button_label". Returns the default ACF value of the translated
-     * string of "Add row" if none has been set using Fewbricks.
+     * @return mixed The value of the ACF setting "button_label". Returns the default ACF value "" if none
+     * has been set using Fewbricks.
      */
     public function getButtonLabel()
     {
@@ -74,7 +74,7 @@ class Repeater extends FieldWithFields implements FieldInterface
     }
 
     /**
-     * @return mixed The value of the ACF setting "m0". Returns the default ACF value "" if none has been
+     * @return mixed The value of the ACF setting "m0". Returns the default ACF value 0 if none has been
      * set using Fewbricks.
      */
     public function getMax()

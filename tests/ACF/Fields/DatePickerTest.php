@@ -42,11 +42,11 @@ final class DatePickerTest extends Field
             // These wil be set using setters on the field object
         ];
 
-        $textField = FieldHelper::getCompleteFieldObject(self::CLASS_NAME, $settings, $this);
+        $field = FieldHelper::getCompleteFieldObject(self::CLASS_NAME, $settings, $this);
 
         $this->assertEquals(
-            FieldHelper::getExpectedFieldValues($textField, $settings),
-            $textField->toAcfArray($settings['test__key_prefix'])
+            FieldHelper::getExpectedFieldValues($field, $settings),
+            $field->toAcfArray($settings['test__key_prefix'])
         );
 
     }
@@ -75,11 +75,11 @@ final class DatePickerTest extends Field
 
         $field = new DatePicker('', '', '');
 
-        $this->assertEquals($field->getReturnFormat(), 'd/m/Y');
+        $this->assertEquals('d/m/Y', $field->getReturnFormat());
 
         $field->setReturnFormat('dn8odhil');
 
-        $this->assertEquals($field->getReturnFormat(), 'dn8odhil');
+        $this->assertEquals('dn8odhil', $field->getReturnFormat());
 
     }
 

@@ -8,6 +8,7 @@
 
 namespace Fewbricks\Tests\ACF\Fields;
 
+use Fewbricks\ACF\Fields\Select;
 use Fewbricks\Tests\ACF\Field;
 use Fewbricks\Tests\FieldHelper;
 
@@ -47,12 +48,60 @@ final class SelectTest extends Field
             ]
         ];
 
-        $textField = FieldHelper::getCompleteFieldObject(self::CLASS_NAME, $settings, $this);
+        $field = FieldHelper::getCompleteFieldObject(self::CLASS_NAME, $settings, $this);
 
         $this->assertEquals(
-            FieldHelper::getExpectedFieldValues($textField, $settings),
-            $textField->toAcfArray($settings['test__key_prefix'])
+            FieldHelper::getExpectedFieldValues($field, $settings),
+            $field->toAcfArray($settings['test__key_prefix'])
         );
+
+    }
+
+    /**
+     *
+     */
+    public function testSetAndGetAjax()
+    {
+
+        $field = new Select('', '', '');
+
+        $this->assertEquals(false, $field->getAjax());
+
+        $field->setAjax(true);
+
+        $this->assertEquals(true, $field->getAjax());
+
+    }
+
+    /**
+     *
+     */
+    public function testSetAndGetMultiple()
+    {
+
+        $field = new Select('', '', '');
+
+        $this->assertEquals(false, $field->getMultiple());
+
+        $field->setMultiple(true);
+
+        $this->assertEquals(true, $field->getMultiple());
+
+    }
+
+    /**
+     *
+     */
+    public function testSetAndGetUi()
+    {
+
+        $field = new Select('', '', '');
+
+        $this->assertEquals(false, $field->getUi());
+
+        $field->setUi(true);
+
+        $this->assertEquals(true, $field->getUi());
 
     }
 

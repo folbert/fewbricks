@@ -59,11 +59,11 @@ final class CheckboxTest extends Field
 
         $field = new Checkbox('', '', '');
 
-        $this->assertEquals($field->getAllowCustom(), false);
+        $this->assertEquals(false, $field->getAllowCustom());
 
         $field->setAllowCustom(true);
 
-        $this->assertEquals($field->getAllowCustom(), true);
+        $this->assertEquals(true, $field->getAllowCustom());
 
     }
 
@@ -75,11 +75,11 @@ final class CheckboxTest extends Field
 
         $field = new Checkbox('', '', '');
 
-        $this->assertEquals($field->getSaveCustom(), false);
+        $this->assertEquals(false, $field->getSaveCustom());
 
         $field->setSaveCustom(true);
 
-        $this->assertEquals($field->getSaveCustom(), true);
+        $this->assertEquals(true, $field->getSaveCustom());
 
     }
 
@@ -91,11 +91,11 @@ final class CheckboxTest extends Field
 
         $field = new Checkbox('', '', '');
 
-        $this->assertEquals($field->getToggle(), false);
+        $this->assertEquals(false, $field->getToggle());
 
         $field->setToggle(true);
 
-        $this->assertEquals($field->getToggle(), true);
+        $this->assertEquals(true, $field->getToggle());
 
     }
 

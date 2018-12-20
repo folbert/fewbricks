@@ -27,7 +27,7 @@ class Message extends Field implements FieldInterface
     public function getEscHtml()
     {
 
-        return $this->getSetting('esc_html', 0);
+        return $this->getSetting('esc_html', false);
 
     }
 
@@ -59,7 +59,7 @@ class Message extends Field implements FieldInterface
      * @param boolean $escapeHtml
      * @return $this
      */
-    public function setEscapeHtml($escapeHtml)
+    public function setEscHtml($escapeHtml)
     {
 
         return $this->setSetting('esc_html', $escapeHtml);
