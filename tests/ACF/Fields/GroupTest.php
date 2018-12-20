@@ -8,6 +8,7 @@
 
 namespace Fewbricks\Tests\ACF\Fields;
 
+use Fewbricks\ACF\Fields\Group;
 use Fewbricks\Tests\ACF\Field;
 use Fewbricks\Tests\FieldHelper;
 
@@ -41,14 +42,30 @@ final class GroupTest extends Field
             // These wil be set using setters on the field object
         ];
 
-        $textField = FieldHelper::getCompleteFieldObject(self::CLASS_NAME, $settings, $this);
+        $field = FieldHelper::getCompleteFieldObject(self::CLASS_NAME, $settings, $this);
 
         $settings['sub_fields'] = [];
 
         $this->assertEquals(
-            FieldHelper::getExpectedFieldValues($textField, $settings),
-            $textField->toAcfArray($settings['test__key_prefix'])
+            FieldHelper::getExpectedFieldValues($field, $settings),
+            $field->toAcfArray($settings['test__key_prefix'])
         );
+
+    }
+
+    /**
+     *
+     */
+    public function testSetAndGetLayout()
+    {
+
+        $field = new Group('', '', '');
+
+        $this->assertEquals($field->getLayout(), 'block');
+
+        $field->setLayout('table');
+
+        $this->assertEquals($field->getLayout(), 'table');
 
     }
 

@@ -8,6 +8,7 @@
 
 namespace Fewbricks\Tests\ACF\Fields;
 
+use Fewbricks\ACF\Fields\Image;
 use Fewbricks\Tests\ACF\Field;
 use Fewbricks\Tests\FieldHelper;
 
@@ -41,12 +42,44 @@ final class ImageTest extends Field
             // These wil be set using setters on the field object
         ];
 
-        $textField = FieldHelper::getCompleteFieldObject(self::CLASS_NAME, $settings, $this);
+        $field = FieldHelper::getCompleteFieldObject(self::CLASS_NAME, $settings, $this);
 
         $this->assertEquals(
-            FieldHelper::getExpectedFieldValues($textField, $settings),
-            $textField->toAcfArray($settings['test__key_prefix'])
+            FieldHelper::getExpectedFieldValues($field, $settings),
+            $field->toAcfArray($settings['test__key_prefix'])
         );
+
+    }
+
+    /**
+     *
+     */
+    public function testSetAndGetPreviewSize()
+    {
+
+        $field = new Image('', '', '');
+
+        $this->assertEquals($field->getPreviewSize(), 'thumbnail');
+
+        $field->setPreviewSize('full');
+
+        $this->assertEquals($field->getPreviewSize(), 'full');
+
+    }
+
+    /**
+     *
+     */
+    public function testSetAndGetReturnFormat()
+    {
+
+        $field = new Image('', '', '');
+
+        $this->assertEquals($field->getReturnFormat(), 'array');
+
+        $field->setReturnFormat('object');
+
+        $this->assertEquals($field->getReturnFormat(), 'object');
 
     }
 
