@@ -60,7 +60,7 @@ class Textarea extends Field implements FieldInterface
     public function getRows()
     {
 
-        return $this->getSetting('rows', 8);
+        return $this->getSetting('rows', '');
 
     }
 

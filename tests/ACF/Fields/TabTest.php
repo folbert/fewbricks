@@ -8,6 +8,7 @@
 
 namespace Fewbricks\Tests\ACF\Fields;
 
+use Fewbricks\ACF\Fields\Tab;
 use Fewbricks\Tests\ACF\Field;
 use Fewbricks\Tests\FieldHelper;
 
@@ -47,6 +48,38 @@ final class TabTest extends Field
             FieldHelper::getExpectedFieldValues($field, $settings),
             $field->toAcfArray($settings['test__key_prefix'])
         );
+
+    }
+
+    /**
+     *
+     */
+    public function testSetAndGetEndpoint()
+    {
+
+        $field = new Tab('', '', '');
+
+        $this->assertEquals(false, $field->getEndpoint());
+
+        $field->setEndpoint(true);
+
+        $this->assertEquals(true, $field->getEndpoint());
+
+    }
+
+    /**
+     *
+     */
+    public function testSetAndGetPlacement()
+    {
+
+        $field = new Tab('', '', '');
+
+        $this->assertEquals('top', $field->getPlacement());
+
+        $field->setPlacement('dh8iogsol');
+
+        $this->assertEquals('dh8iogsol', $field->getPlacement());
 
     }
 

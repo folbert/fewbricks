@@ -8,6 +8,7 @@
 
 namespace Fewbricks\Tests\ACF\Fields;
 
+use Fewbricks\ACF\Fields\Textarea;
 use Fewbricks\Tests\ACF\Field;
 use Fewbricks\Tests\FieldHelper;
 
@@ -47,6 +48,70 @@ final class TextareaTest extends Field
             FieldHelper::getExpectedFieldValues($field, $settings),
             $field->toAcfArray($settings['test__key_prefix'])
         );
+
+    }
+
+    /**
+     *
+     */
+    public function testSetAndGetMaxlength()
+    {
+
+        $field = new Textarea('', '', '');
+
+        $this->assertEquals('', $field->getMaxlength());
+
+        $field->setMaxlength(89);
+
+        $this->assertEquals(89, $field->getMaxlength());
+
+    }
+
+    /**
+     *
+     */
+    public function testSetAndGetNewLines()
+    {
+
+        $field = new Textarea('', '', '');
+
+        $this->assertEquals('', $field->getNewLines());
+
+        $field->setNewLines('wpautopjjlk');
+
+        $this->assertEquals('wpautopjjlk', $field->getNewLines());
+
+    }
+
+    /**
+     *
+     */
+    public function testSetAndGetPlaceholder()
+    {
+
+        $field = new Textarea('', '', '');
+
+        $this->assertEquals('', $field->getPlaceholder());
+
+        $field->setPlaceholder('sjohsishiho');
+
+        $this->assertEquals('sjohsishiho', $field->getPlaceholder());
+
+    }
+
+    /**
+     *
+     */
+    public function testSetAndGetRows()
+    {
+
+        $field = new Textarea('', '', '');
+
+        $this->assertEquals('', $field->getRows());
+
+        $field->setRows(10);
+
+        $this->assertEquals(10, $field->getRows());
 
     }
 

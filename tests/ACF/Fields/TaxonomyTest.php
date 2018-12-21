@@ -8,6 +8,7 @@
 
 namespace Fewbricks\Tests\ACF\Fields;
 
+use Fewbricks\ACF\Fields\Taxonomy;
 use Fewbricks\Tests\ACF\Field;
 use Fewbricks\Tests\FieldHelper;
 
@@ -47,6 +48,118 @@ final class TaxonomyTest extends Field
             FieldHelper::getExpectedFieldValues($field, $settings),
             $field->toAcfArray($settings['test__key_prefix'])
         );
+
+    }
+
+    /**
+     *
+     */
+    public function testSetAndGetAddTerm()
+    {
+
+        $field = new Taxonomy('', '', '');
+
+        $this->assertEquals(true, $field->getAddTerm());
+
+        $field->setAddTerm(false);
+
+        $this->assertEquals(false, $field->getAddTerm());
+
+    }
+
+    /**
+     *
+     */
+    public function testSetAndGetAllowNull()
+    {
+
+        $field = new Taxonomy('', '', '');
+
+        $this->assertEquals(false, $field->getAllowNull());
+
+        $field->setAllowNull(true);
+
+        $this->assertEquals(true, $field->getAllowNull());
+
+    }
+
+    /**
+     *
+     */
+    public function testSetAndGetFieldType()
+    {
+
+        $field = new Taxonomy('', '', '');
+
+        $this->assertEquals('checkbox', $field->getFieldType());
+
+        $field->setFieldType('radio');
+
+        $this->assertEquals('radio', $field->getFieldType());
+
+    }
+
+    /**
+     *
+     */
+    public function testSetAndGetLoadTerms()
+    {
+
+        $field = new Taxonomy('', '', '');
+
+        $this->assertEquals(false, $field->getLoadTerms());
+
+        $field->setLoadTerms(true);
+
+        $this->assertEquals(true, $field->getLoadTerms());
+
+    }
+
+    /**
+     *
+     */
+    public function testSetAndGetReturnFormat()
+    {
+
+        $field = new Taxonomy('', '', '');
+
+        $this->assertEquals('id', $field->getReturnFormat());
+
+        $field->setReturnFormat(false);
+
+        $this->assertEquals(false, $field->getReturnFormat());
+
+    }
+
+    /**
+     *
+     */
+    public function testSetAndGetSaveTerms()
+    {
+
+        $field = new Taxonomy('', '', '');
+
+        $this->assertEquals(false, $field->getSaveTerms());
+
+        $field->setSaveTerms(true);
+
+        $this->assertEquals(true, $field->getSaveTerms());
+
+    }
+
+    /**
+     *
+     */
+    public function testSetAndGetTaxonomy()
+    {
+
+        $field = new Taxonomy('', '', '');
+
+        $this->assertEquals('category', $field->getTaxonomy());
+
+        $field->setAddTerm('custom_category_yd98goi');
+
+        $this->assertEquals('custom_category_yd98goi', $field->getAddTerm());
 
     }
 
