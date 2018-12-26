@@ -23,20 +23,20 @@ class DynamicYearSelect extends Field
      * 'year_step'                => 1,
      * 'order_by' => 'chronological',
      * 'current_year' => array(
-     * 'allow' => false,
-     * 'label' => 'Current'
+     *  'allow' => false,
+     *  'label' => 'Current'
      * ),
      * 'oldest_year'            => array(
-     * 'method'        => 'relative',
-     * 'exact_year'    => date('Y'),
-     * 'relative_year' => 20,
-     * 'relative_year_direction' => 'before'
+     *  'method'        => 'relative',
+     *  'exact_year'    => date('Y'),
+     *  'relative_year' => 20,
+     *  'relative_year_direction' => 'before'
      * ),
      * 'newest_year'            => array(
-     * 'method'        => 'exact',
-     * 'exact_year'    => date('Y'),
-     * 'relative_year' => 20,
-     * 'relative_year_direction' => 'after'
+     *  'method'        => 'exact',
+     *  'exact_year'    => date('Y'),
+     *  'relative_year' => 20,
+     *  'relative_year_direction' => 'after'
      * )
      */
 
@@ -51,7 +51,7 @@ class DynamicYearSelect extends Field
         // Make sure all indexes are set.
         $currentYear = array_merge([
             'allow' => false,
-            'current' => 'Current',
+            'label' => 'Current',
         ], $currentYear);
 
         return $this->setSetting('current_year', $currentYear);

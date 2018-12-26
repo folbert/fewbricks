@@ -54,6 +54,28 @@ class TrueFalse extends Field implements FieldInterface
     }
 
     /**
+     * @return mixed The value of the ACF setting "ui_off_text". Returns the default ACF value "" if none has been
+     * set using Fewbricks.
+     */
+    public function getUiOffText()
+    {
+
+        return $this->getSetting('ui_off_text', '');
+
+    }
+
+    /**
+     * @return mixed The value of the ACF setting "ui_off_text". Returns the default ACF value "" if none has been
+     * set using Fewbricks.
+     */
+    public function getUiOnText()
+    {
+
+        return $this->getSetting('ui_on_text', '');
+
+    }
+
+    /**
      * @param string $message
      * @return $this
      */
@@ -72,6 +94,28 @@ class TrueFalse extends Field implements FieldInterface
     {
 
         return $this->setSetting('ui', $ui);
+
+    }
+
+    /**
+     * @param $ui_off_text
+     * @return $this
+     */
+    public function setUiOffText($ui_off_text)
+    {
+
+        return $this->setSetting('ui_off_text', $ui_off_text);
+
+    }
+
+    /**
+     * @param $ui_on_text
+     * @return $this
+     */
+    public function setUiOnText($ui_on_text)
+    {
+
+        return $this->setSetting('ui_on_text', $ui_on_text);
 
     }
 

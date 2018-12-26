@@ -35,12 +35,16 @@ have fields that go a couple of levels deep (for example a brick in a flexible f
  solution is to shorten the field and/or brick names.
 
 ## Key
-Check the [FAQ](/faq/) for info on the site wide unique keys 
+Check the [FAQ](/faq/) for info on the site wide unique keys.
 
 ## ACF settings
-All settings for fields that are available in ACF is possible to set in Fewbricks. No exceptions here. Our goal is to 
-keep Fewbricks' code up to date with one get- and one set-function for each setting. The way the functions are named 
-follow the same rules as described for [Field Groups](/field-groups/#acf-settings).
+All settings for fields that are available in ACF is possible to set in Fewbricks. Our goal is to keep Fewbricks' code
+up to date with one get- and one set-function for each setting. The way the functions are named follow the same rules
+ as described for [Field Groups](/field-groups/#acf-settings) with functions named setSettingsName() and
+ getSettingsName().
+ 
+The code does not do any checks to make sure that values being sent to the setter functions are correct. This is since
+ACF may suddenly allow for some new value which Fewbricks should accept without the code having to be updated. 
 
 ### Quick example
 

@@ -8,6 +8,7 @@
 
 namespace Fewbricks\Tests\ACF\Fields;
 
+use Fewbricks\ACF\Fields\Wysiwyg;
 use Fewbricks\Tests\ACF\Field;
 use Fewbricks\Tests\FieldHelper;
 
@@ -49,5 +50,70 @@ final class WysiwygTest extends Field
         );
 
     }
+
+    /**
+     *
+     */
+    public function testSetAndGetDelay()
+    {
+
+        $field = new Wysiwyg('', '', '');
+
+        $this->assertEquals(false, $field->getDelay());
+
+        $field->setDelay(true);
+
+        $this->assertEquals(true, $field->getDelay());
+
+    }
+
+    /**
+     *
+     */
+    public function testSetAndGetMediaUpload()
+    {
+
+        $field = new Wysiwyg('', '', '');
+
+        $this->assertEquals(true, $field->getMediaUpload());
+
+        $field->setDelay(false);
+
+        $this->assertEquals(true, $field->getMediaUpload());
+
+    }
+
+    /**
+     *
+     */
+    public function testSetAndGetTabs()
+    {
+
+        $field = new Wysiwyg('', '', '');
+
+        $this->assertEquals('all', $field->getTabs());
+
+        $field->setTabs('visualdh89ogl');
+
+        $this->assertEquals('visualdh89ogl', $field->getTabs());
+
+    }
+
+    /**
+     *
+     */
+    public function testSetAndGetToolbar()
+    {
+
+        $field = new Wysiwyg('', '', '');
+
+        $this->assertEquals('full', $field->getToolbar());
+
+        $field->setToolbar('r87sfi');
+
+        $this->assertEquals('r87sfi', $field->getToolbar());
+
+    }
+
 
 }

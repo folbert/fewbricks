@@ -43,6 +43,17 @@ class User extends Field implements FieldInterface
     }
 
     /**
+     * @return mixed The value of the ACF setting "return_format". Returns the default ACF value "array" if none has
+     * been set using Fewbricks.
+     */
+    public function getReturnFormat()
+    {
+
+        return $this->getSetting('return_format', 'array');
+
+    }
+
+    /**
      * @return mixed The value of the ACF setting "role". Returns the default ACF value "" if none has been
      * set using Fewbricks.
      */
@@ -82,9 +93,22 @@ class User extends Field implements FieldInterface
     /**
      * ACF setting.
      *
+     * @param string $returnFormat
+     * @return $this
+     */
+    public function setReturnFormat($returnFormat)
+    {
+
+        return $this->setSetting('return_format', $returnFormat);
+
+    }
+
+    /**
+     * ACF setting.
+     *
      * @param array $role      Array with names of the user roles that the editor should be able to choose from.
      *                         For example: ['editor', 'author']. Send an empty array (or don't call the function at
-     *                         all) to be able to choose from al roles.
+     *                         all) to be able to choose from all roles.
      * @return $this
      */
     public function setRole($role)

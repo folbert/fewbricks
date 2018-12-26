@@ -48,7 +48,7 @@ class AcfCodeField extends Field
     public function getMode()
     {
 
-        return $this->getSetting('mode', 'monokai');
+        return $this->getSetting('mode', 'htmlmixed');
 
     }
 
@@ -68,7 +68,7 @@ class AcfCodeField extends Field
     public function getTheme()
     {
 
-        return $this->getSetting('theme', 'htmlmixed');
+        return $this->getSetting('theme', 'monokai');
 
     }
 

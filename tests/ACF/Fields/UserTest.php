@@ -8,6 +8,7 @@
 
 namespace Fewbricks\Tests\ACF\Fields;
 
+use Fewbricks\ACF\Fields\User;
 use Fewbricks\Tests\ACF\Field;
 use Fewbricks\Tests\FieldHelper;
 
@@ -47,6 +48,70 @@ final class UserTest extends Field
             FieldHelper::getExpectedFieldValues($field, $settings),
             $field->toAcfArray($settings['test__key_prefix'])
         );
+
+    }
+
+    /**
+     *
+     */
+    public function testSetAndGetAllowNull()
+    {
+
+        $field = new User('', '', '');
+
+        $this->assertEquals(false, $field->getAllowNull());
+
+        $field->setAllowNull(true);
+
+        $this->assertEquals(true, $field->getAllowNull());
+
+    }
+
+    /**
+     *
+     */
+    public function testSetAndGetMultiple()
+    {
+
+        $field = new User('', '', '');
+
+        $this->assertEquals(false, $field->getMultiple());
+
+        $field->setMultiple(true);
+
+        $this->assertEquals(true, $field->getMultiple());
+
+    }
+
+    /**
+     *
+     */
+    public function testSetAndGetReturnFormat()
+    {
+
+        $field = new User('', '', '');
+
+        $this->assertEquals('array', $field->getReturnFormat());
+
+        $field->setReturnFormat('object');
+
+        $this->assertEquals('object', $field->getReturnFormat());
+
+    }
+
+    /**
+     *
+     */
+    public function testSetAndGetRole()
+    {
+
+        $field = new User('', '', '');
+
+        $this->assertEquals('', $field->getRole());
+
+        $field->setRole(['administrator', 'author']);
+
+        $this->assertEquals(['administrator', 'author'], $field->getRole());
 
     }
 

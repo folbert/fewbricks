@@ -8,6 +8,7 @@
 
 namespace Fewbricks\Tests\ACF\Fields\Extensions;
 
+use Fewbricks\ACF\Fields\Extensions\DynamicYearSelect;
 use Fewbricks\Tests\ACF\Field;
 use Fewbricks\Tests\FieldHelper;
 
@@ -47,6 +48,118 @@ final class DynamicYearSelectTest extends Field
             FieldHelper::getExpectedFieldValues($field, $settings),
             $field->toAcfArray($settings['test__key_prefix'])
         );
+
+    }
+
+    /**
+     *
+     */
+    public function testSetAndGetCurrentYear()
+    {
+
+        $field = new DynamicYearSelect('', '', '');
+
+        $this->assertEquals([
+            'allow' => false,
+            'label' => 'Current',
+        ], $field->getCurrentYear());
+
+        $newValue = [
+            'allow' => true,
+            'label' => 'dhd89gol',
+        ];
+
+        $field->setCurrentYear($newValue);
+
+        $this->assertEquals($newValue, $field->getCurrentYear());
+
+    }
+
+    /**
+     *
+     */
+    public function testSetAndGetNewestYear()
+    {
+
+        $field = new DynamicYearSelect('', '', '');
+
+        $this->assertEquals([
+            'method' => 'exact',
+            'exact_year' => date('Y'),
+            'relative_year' => 20,
+            'relative_year_direction' => 'after'
+        ], $field->getNewestYear());
+
+        $newValue = [
+            'method' => 'exact',
+            'exact_year' => date('Y'),
+            'relative_year' =>24,
+            'relative_year_direction' => 'before'
+        ];
+
+        $field->setNewestYear($newValue);
+
+        $this->assertEquals($newValue, $field->getNewestYear());
+
+    }
+
+    /**
+     *
+     */
+    public function testSetAndGetOldestYear()
+    {
+
+        $field = new DynamicYearSelect('', '', '');
+
+        $this->assertEquals([
+            'method' => 'relative',
+            'exact_year' => date('Y'),
+            'relative_year' => 20,
+            'relative_year_direction' => 'before',
+        ], $field->getOldestYear());
+
+        $newValue = [
+            'method' => 'exact',
+            'exact_year' => date('Y'),
+            'relative_year' =>24,
+            'relative_year_direction' => 'after'
+        ];
+
+        $field->setOldestYear($newValue);
+
+        $this->assertEquals($newValue, $field->getOldestYear());
+
+    }
+
+    /**
+     *
+     */
+    public function testSetAndGetOrderBy()
+    {
+
+        $field = new DynamicYearSelect('', '', '');
+
+        $this->assertEquals('chronological', $field->getOrderBy());
+
+        $field->setOrderBy('rchronological');
+
+        $this->assertEquals('rchronological', $field->getOrderBy());
+
+    }
+
+    /**
+     *
+     */
+    public function testSetAndGetYearStep()
+    {
+
+        $field = new DynamicYearSelect('', '', '');
+
+        $this->assertEquals(1, $field->getYearStep());
+
+        $field->setYearStep(678);
+
+        $this->assertEquals(678, $field->getYearStep());
 
     }
 

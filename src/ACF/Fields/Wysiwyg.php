@@ -21,24 +21,24 @@ class Wysiwyg extends Field implements FieldInterface
     const TYPE = 'wysiwyg';
 
     /**
-     * @return mixed The value of the ACF setting "delay". Returns the default ACF value "0" if none has been set
+     * @return mixed The value of the ACF setting "delay". Returns the default ACF value false if none has been set
      * using Fewbricks.
      */
     public function getDelay()
     {
 
-        return $this->getSetting('delay', 0);
+        return $this->getSetting('delay', false);
 
     }
 
     /**
-     * @return mixed The value of the ACF setting "media_upload". Returns the default ACF value "1" if none has been set
+     * @return mixed The value of the ACF setting "media_upload". Returns the default ACF value true if none has been set
      * using Fewbricks.
      */
     public function getMediaUpload()
     {
 
-        return $this->getSetting('media_upload', 1);
+        return $this->getSetting('media_upload', true);
 
     }
 

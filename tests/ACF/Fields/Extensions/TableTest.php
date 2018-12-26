@@ -8,6 +8,7 @@
 
 namespace Fewbricks\Tests\ACF\Fields\Extensions;
 
+use Fewbricks\ACF\Fields\Extensions\Table;
 use Fewbricks\Tests\ACF\Field;
 use Fewbricks\Tests\FieldHelper;
 
@@ -51,6 +52,38 @@ final class TableTest extends Field
             FieldHelper::getExpectedFieldValues($field, $settings),
             $field->toAcfArray($settings['test__key_prefix'])
         );
+
+    }
+
+    /**
+     *
+     */
+    public function testSetAndGetUseCaption()
+    {
+
+        $field = new Table('', '', '');
+
+        $this->assertEquals(2, $field->getUseCaption());
+
+        $field->setUseCaption(1);
+
+        $this->assertEquals(1, $field->getUseCaption());
+
+    }
+
+    /**
+     *
+     */
+    public function testSetAndGetUseHeader()
+    {
+
+        $field = new Table('', '', '');
+
+        $this->assertEquals(0, $field->getUseHeader());
+
+        $field->setUseHeader(2);
+
+        $this->assertEquals(2, $field->getUseHeader());
 
     }
 

@@ -8,6 +8,7 @@
 
 namespace Fewbricks\Tests\ACF\Fields\Extensions;
 
+use Fewbricks\ACF\Fields\Extensions\AcfCodeField;
 use Fewbricks\Tests\ACF\Field;
 use Fewbricks\Tests\FieldHelper;
 
@@ -49,6 +50,54 @@ final class AcfCodeFieldTest extends Field
             FieldHelper::getExpectedFieldValues($field, $settings),
             $field->toAcfArray($settings['test__key_prefix'])
         );
+
+    }
+
+    /**
+     *
+     */
+    public function testSetAndGetMode()
+    {
+
+        $field = new AcfCodeField('', '', '');
+
+        $this->assertEquals('htmlmixed', $field->getMode());
+
+        $field->setMode('98wgois');
+
+        $this->assertEquals('98wgois', $field->getMode());
+
+    }
+
+    /**
+     *
+     */
+    public function testSetAndGetPlaceholder()
+    {
+
+        $field = new AcfCodeField('', '', '');
+
+        $this->assertEquals('', $field->getPlaceholder());
+
+        $field->setPlaceholder('dh89egoil');
+
+        $this->assertEquals('dh89egoil', $field->getPlaceholder());
+
+    }
+
+    /**
+     *
+     */
+    public function testSetAndGetTheme()
+    {
+
+        $field = new AcfCodeField('', '', '');
+
+        $this->assertEquals('monokai', $field->getTheme());
+
+        $field->setTheme('gd89ogoil');
+
+        $this->assertEquals('gd89ogoil', $field->getTheme());
 
     }
 

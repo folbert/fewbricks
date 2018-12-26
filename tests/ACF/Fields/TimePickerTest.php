@@ -8,6 +8,7 @@
 
 namespace Fewbricks\Tests\ACF\Fields;
 
+use Fewbricks\ACF\Fields\TimePicker;
 use Fewbricks\Tests\ACF\Field;
 use Fewbricks\Tests\FieldHelper;
 
@@ -47,6 +48,22 @@ final class TimePickerTest extends Field
             FieldHelper::getExpectedFieldValues($field, $settings),
             $field->toAcfArray($settings['test__key_prefix'])
         );
+
+    }
+
+    /**
+     * 
+     */
+    public function testSetAndGetDisplayFormat()
+    {
+
+        $field = new TimePicker('', '', '');
+
+        $this->assertEquals('g:i a', $field->getDisplayFormat());
+
+        $field->setDisplayFormat('sy89xgol');
+
+        $this->assertEquals('sy89xgol', $field->getDisplayFormat());
 
     }
 
