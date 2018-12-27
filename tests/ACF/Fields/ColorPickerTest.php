@@ -8,6 +8,7 @@
 
 namespace Fewbricks\Tests\ACF\Fields;
 
+use Fewbricks\ACF\Fields\ColorPicker;
 use Fewbricks\Tests\ACF\Field;
 use Fewbricks\Tests\FieldHelper;
 
@@ -47,6 +48,22 @@ final class ColorPickerTest extends Field
             FieldHelper::getExpectedFieldValues($field, $settings),
             $field->toAcfArray($settings['test__key_prefix'])
         );
+
+    }
+
+    /**
+     * 
+     */
+    public function testSetAndGetDefaultValue()
+    {
+
+        $field = new ColorPicker('', '', '');
+
+        $this->assertEquals('', $field->getDefaultValue());
+
+        $field->setDefaultValue('fgidgik');
+
+        $this->assertEquals('fgidgik', $field->getDefaultValue());
 
     }
 

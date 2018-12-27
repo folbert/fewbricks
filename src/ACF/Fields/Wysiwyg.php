@@ -21,24 +21,35 @@ class Wysiwyg extends Field implements FieldInterface
     const TYPE = 'wysiwyg';
 
     /**
-     * @return mixed The value of the ACF setting "delay". Returns the default ACF value false if none has been set
+     * @return mixed The value of the ACF setting "default_value". Returns the default ACF value "" if none has been set
+     * using Fewbricks.
+     */
+    public function getDefaultValue()
+    {
+
+        return $this->getSetting('default_value', '');
+
+    }
+
+    /**
+     * @return mixed The value of the ACF setting "delay". Returns the default ACF value 0 if none has been set
      * using Fewbricks.
      */
     public function getDelay()
     {
 
-        return $this->getSetting('delay', false);
+        return $this->getSetting('delay', 0);
 
     }
 
     /**
-     * @return mixed The value of the ACF setting "media_upload". Returns the default ACF value true if none has been set
+     * @return mixed The value of the ACF setting "media_upload". Returns the default ACF value 1 if none has been set
      * using Fewbricks.
      */
     public function getMediaUpload()
     {
 
-        return $this->getSetting('media_upload', true);
+        return $this->getSetting('media_upload', 1);
 
     }
 
@@ -61,6 +72,17 @@ class Wysiwyg extends Field implements FieldInterface
     {
 
         return $this->getSetting('toolbar', 'full');
+
+    }
+
+    /**
+     * @param mixed $defaultValue ACF setting. A default value used by ACF if no value has yet been saved.
+     * @return $this
+     */
+    public function setDefaultValue($defaultValue)
+    {
+
+        return $this->setSetting('default_value', $defaultValue);
 
     }
 

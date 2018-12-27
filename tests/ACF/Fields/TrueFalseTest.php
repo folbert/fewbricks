@@ -59,7 +59,7 @@ final class TrueFalseTest extends Field
 
         $field = new TrueFalse('', '', '');
 
-        $this->assertEquals('', $field->getDefaultValue());
+        $this->assertEquals(0, $field->getDefaultValue());
 
         $field->setDefaultValue('dh08dhdol');
 

@@ -87,6 +87,17 @@ class Field
     }
 
     /**
+     * @return mixed The value of the ACF setting "default_value". Returns the default ACF value "" if none has been set
+     * using Fewbricks.
+     */
+    public function getDefaultValue()
+    {
+
+        return $this->getSetting('default_value', '');
+
+    }
+
+    /**
      * @param mixed $defaultValue ACF setting. A default value used by ACF if no value has yet been saved.
      * @return $this
      */
@@ -269,13 +280,13 @@ class Field
     }
 
     /**
-     * @return mixed The value of the ACF setting "conditional_logic". Returns the default ACF value "false" if none
+     * @return mixed The value of the ACF setting "conditional_logic". Returns the default ACF value 0 if none
      * has been set using Fewbricks.
      */
     public function getConditionalLogic()
     {
 
-        return $this->getSetting('conditional_logic', false);
+        return $this->getSetting('conditional_logic', 0);
 
     }
 
@@ -286,17 +297,6 @@ class Field
     {
 
         return $this->conditionalLogicRuleGroups;
-
-    }
-
-    /**
-     * @return mixed The value of the ACF setting "default_value". Returns the default ACF value "" if none has been set
-     * using Fewbricks.
-     */
-    public function getDefaultValue()
-    {
-
-        return $this->getSetting('default_value', '');
 
     }
 
@@ -384,13 +384,13 @@ class Field
     }
 
     /**
-     * @return mixed The value of the ACF setting "required". Returns the default ACF value false if none has been set
+     * @return mixed The value of the ACF setting "required". Returns the default ACF value 0 if none has been set
      * using Fewbricks.
      */
     public function getRequired()
     {
 
-        return $this->getSetting('required', false);
+        return $this->getSetting('required', 0);
 
     }
 
@@ -448,15 +448,15 @@ class Field
     }
 
     /**
-     * @param bool $reversed
+     * @param bool $reverseOrder
      * @return array
      */
-    public function getParents(bool $reversed = false)
+    public function getParents(bool $reverseOrder = false)
     {
 
         $parents = $this->parents;
 
-        if($reversed) {
+        if($reverseOrder) {
             $parents = array_reverse($parents);
         }
 

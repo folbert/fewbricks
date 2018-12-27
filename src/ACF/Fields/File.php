@@ -32,7 +32,7 @@ class File extends Field implements FieldInterface
     }
 
     /**
-     * @return mixed The value of the ACF setting "max_size". Returns the default ACF value "0" if none has been
+     * @return mixed The value of the ACF setting "max_size". Returns the default ACF value 0 if none has been
      * set using Fewbricks.
      */
     public function getMaxSize()
@@ -54,7 +54,7 @@ class File extends Field implements FieldInterface
     }
 
     /**
-     * @return mixed The value of the ACF setting "min_size". Returns the default ACF value "0" if none has been
+     * @return mixed The value of the ACF setting "min_size". Returns the default ACF value 0 if none has been
      * set using Fewbricks.
      */
     public function getMinSize()

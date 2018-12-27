@@ -21,13 +21,13 @@ class Tab extends Field implements FieldInterface
     const TYPE = 'tab';
 
     /**
-     * @return mixed The value of the ACF setting "". Returns the default ACF value false if none has been
+     * @return mixed The value of the ACF setting "". Returns the default ACF value 0 if none has been
      * set using Fewbricks.
      */
     public function getEndpoint()
     {
 
-        return $this->getSetting('endpoint', false);
+        return $this->getSetting('endpoint', 0);
 
     }
 

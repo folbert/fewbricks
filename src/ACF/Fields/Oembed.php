@@ -21,7 +21,7 @@ class Oembed extends Field implements FieldInterface
     const TYPE = 'oembed';
 
     /**
-     * @return mixed The value of the ACF setting "height". Returns the default ACF value "" if none has been
+     * @return mixed The value of the ACF setting "height". Returns the default ACF value '' if none has been
      * set using Fewbricks.
      */
     public function getHeight()
@@ -32,7 +32,7 @@ class Oembed extends Field implements FieldInterface
     }
 
     /**
-     * @return mixed The value of the ACF setting "width". Returns the default ACF value "" if none has been
+     * @return mixed The value of the ACF setting "width". Returns the default ACF value '' if none has been
      * set using Fewbricks.
      */
     public function getWidth()

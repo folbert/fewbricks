@@ -23,7 +23,7 @@ class FlexibleContent extends FieldWithLayouts implements FieldInterface
     public function getMax()
     {
 
-        return $this->getSetting('max', 0);
+        return $this->getSetting('max', '');
 
     }
 
@@ -34,7 +34,7 @@ class FlexibleContent extends FieldWithLayouts implements FieldInterface
     public function getMin()
     {
 
-        return $this->getSetting('min', 0);
+        return $this->getSetting('min', '');
 
     }
 

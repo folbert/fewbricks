@@ -21,24 +21,24 @@ class User extends Field implements FieldInterface
     const TYPE = 'user';
 
     /**
-     * @return mixed The value of the ACF setting "allow_null". Returns the default ACF value false if none has been
+     * @return mixed The value of the ACF setting "allow_null". Returns the default ACF value 0 if none has been
      * set using Fewbricks.
      */
     public function getAllowNull()
     {
 
-        return $this->getSetting('allow_null', false);
+        return $this->getSetting('allow_null', 0);
 
     }
 
     /**
-     * @return mixed The value of the ACF setting "multiple". Returns the default ACF value false if none has been
+     * @return mixed The value of the ACF setting "multiple". Returns the default ACF value 0 if none has been
      * set using Fewbricks.
      */
     public function getMultiple()
     {
 
-        return $this->getSetting('multiple', false);
+        return $this->getSetting('multiple', 0);
 
     }
 
@@ -49,7 +49,7 @@ class User extends Field implements FieldInterface
     public function getReturnFormat()
     {
 
-        return $this->getSetting('return_format', 'array');
+        return $this->getSetting('return_format', 'array'); //
 
     }
 
@@ -60,7 +60,7 @@ class User extends Field implements FieldInterface
     public function getRole()
     {
 
-        return $this->getSetting('role', '');
+        return $this->getSetting('role', ''); //
 
     }
 

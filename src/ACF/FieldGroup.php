@@ -183,7 +183,7 @@ class FieldGroup extends FieldCollection implements FieldGroupInterface
     public function getActive()
     {
 
-        return $this->getSetting('active', true);
+        return $this->getSetting('active', 1);
 
     }
 
@@ -273,11 +273,11 @@ class FieldGroup extends FieldCollection implements FieldGroupInterface
      * Get the value of a specific setting.
      *
      * @param string $name The name of the setting
-     * @param bool $defaultValue The value to return if the setting does not exist
+     * @param mixed $defaultValue The value to return if the setting does not exist
      *
      * @return bool|mixed
      */
-    public function getSetting(string $name, $defaultValue = false)
+    public function getSetting(string $name, $defaultValue = 0)
     {
 
         $value = $defaultValue;

@@ -59,11 +59,27 @@ final class CheckboxTest extends Field
 
         $field = new Checkbox('', '', '');
 
-        $this->assertEquals(false, $field->getAllowCustom());
+        $this->assertEquals(0, $field->getAllowCustom());
 
         $field->setAllowCustom(true);
 
         $this->assertEquals(true, $field->getAllowCustom());
+
+    }
+
+    /**
+     *
+     */
+    public function testSetAndGetLayout()
+    {
+
+        $field = new Checkbox('', '', '');
+
+        $this->assertEquals('vertical', $field->getLayout());
+
+        $field->setLayout(true);
+
+        $this->assertEquals(true, $field->getLayout());
 
     }
 
@@ -75,7 +91,7 @@ final class CheckboxTest extends Field
 
         $field = new Checkbox('', '', '');
 
-        $this->assertEquals(false, $field->getSaveCustom());
+        $this->assertEquals(0, $field->getSaveCustom());
 
         $field->setSaveCustom(true);
 
@@ -91,7 +107,7 @@ final class CheckboxTest extends Field
 
         $field = new Checkbox('', '', '');
 
-        $this->assertEquals(false, $field->getToggle());
+        $this->assertEquals(0, $field->getToggle());
 
         $field->setToggle(true);
 

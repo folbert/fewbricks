@@ -21,6 +21,17 @@ class Url extends Field implements FieldInterface
     const TYPE = 'url';
 
     /**
+     * @return mixed The value of the ACF setting "default_value". Returns the default ACF value "" if none has been set
+     * using Fewbricks.
+     */
+    public function getDefaultValue()
+    {
+
+        return $this->getSetting('default_value', '');
+
+    }
+
+    /**
      * @return mixed The value of the ACF setting "placeholder". Returns the default ACF value "" if none has been
      * set using Fewbricks.
      */
@@ -28,6 +39,17 @@ class Url extends Field implements FieldInterface
     {
 
         return $this->getSetting('placeholder', '');
+
+    }
+
+    /**
+     * @param mixed $defaultValue ACF setting. A default value used by ACF if no value has yet been saved.
+     * @return $this
+     */
+    public function setDefaultValue($defaultValue)
+    {
+
+        return $this->setSetting('default_value', $defaultValue);
 
     }
 

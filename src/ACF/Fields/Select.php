@@ -21,35 +21,46 @@ class Select extends FieldWithChoices implements FieldInterface
     const TYPE = 'select';
 
     /**
-     * @return mixed The value of the ACF setting "ajax". Returns the default ACF value false if none has been
+     * @return mixed The value of the ACF setting "ajax". Returns the default ACF value 0 if none has been
      * set using Fewbricks.
      */
     public function getAjax()
     {
 
-        return $this->getSetting('ajax', false);
+        return $this->getSetting('ajax', 0);
 
     }
 
     /**
-     * @return mixed The value of the ACF setting "multiple". Returns the default ACF value false if none has been
+     * @return mixed The value of the ACF setting "allow_null". Returns the default ACF value 0 if none has been
+     * set using Fewbricks.
+     */
+    public function getAllowNull()
+    {
+
+        return $this->getSetting('allow_null', 0);
+
+    }
+
+    /**
+     * @return mixed The value of the ACF setting "multiple". Returns the default ACF value 0 if none has been
      * set using Fewbricks.
      */
     public function getMultiple()
     {
 
-        return $this->getSetting('multiple', false);
+        return $this->getSetting('multiple', 0);
 
     }
 
     /**
-     * @return mixed The value of the ACF setting "ui". Returns the default ACF value false if none has been
+     * @return mixed The value of the ACF setting "ui". Returns the default ACF value 0 if none has been
      * set using Fewbricks.
      */
     public function getUi()
     {
 
-        return $this->getSetting('ui', false);
+        return $this->getSetting('ui', 0);
 
     }
 
@@ -63,6 +74,20 @@ class Select extends FieldWithChoices implements FieldInterface
     {
 
         return $this->setSetting('ajax', $ajax);
+
+    }
+
+    /**
+     * ACF setting.
+     *
+     * @param bool $allowNull
+     * @return $this
+     */
+    public function setAllowNull($allowNull)
+    {
+
+        return $this->setSetting('allow_null', $allowNull);
+
 
     }
 

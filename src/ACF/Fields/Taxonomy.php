@@ -21,24 +21,24 @@ class Taxonomy extends Field implements FieldInterface
     const TYPE = 'taxonomy';
 
     /**
-     * @return mixed The value of the ACF setting "add_term". Returns the default ACF value true if none has been
+     * @return mixed The value of the ACF setting "add_term". Returns the default ACF value 1 if none has been
      * set using Fewbricks.
      */
     public function getAddTerm()
     {
 
-        return $this->getSetting('add_term', true);
+        return $this->getSetting('add_term', 1);
 
     }
 
     /**
-     * @return mixed The value of the ACF setting "allow_null". Returns the default ACF value false if none has been
+     * @return mixed The value of the ACF setting "allow_null". Returns the default ACF value 0 if none has been
      * set using Fewbricks.
      */
     public function getAllowNull()
     {
 
-        return $this->getSetting('allow_null', false);
+        return $this->getSetting('allow_null', 0);
 
     }
 
@@ -54,13 +54,13 @@ class Taxonomy extends Field implements FieldInterface
     }
 
     /**
-     * @return mixed The value of the ACF setting "load_terms". Returns the default ACF value false if none has been
+     * @return mixed The value of the ACF setting "load_terms". Returns the default ACF value 0 if none has been
      * set using Fewbricks.
      */
     public function getLoadTerms()
     {
 
-        return $this->getSetting('load_terms', false);
+        return $this->getSetting('load_terms', 0);
 
     }
 
@@ -76,13 +76,13 @@ class Taxonomy extends Field implements FieldInterface
     }
 
     /**
-     * @return mixed The value of the ACF setting "save_terms". Returns the default ACF value false if none has been
+     * @return mixed The value of the ACF setting "save_terms". Returns the default ACF value 0 if none has been
      * set using Fewbricks.
      */
     public function getSaveTerms()
     {
 
-        return $this->getSetting('save_terms', false);
+        return $this->getSetting('save_terms', 0);
 
     }
 

@@ -19,35 +19,35 @@ class Accordion extends Field implements FieldInterface
     const TYPE = 'accordion';
 
     /**
-     * @return mixed The value of the ACF setting "endpoint". Returns the default ACF value "false" if none has been
+     * @return mixed The value of the ACF setting "endpoint". Returns the default ACF value 0 if none has been
      * set using Fewbricks.
      */
     public function getEndpoint()
     {
 
-        return $this->getSetting('endpoint', false);
+        return $this->getSetting('endpoint', 0);
 
     }
 
     /**
-     * @return mixed The value of the ACF setting "multi_expand". Returns the default ACF value "false" if none has been
+     * @return mixed The value of the ACF setting "multi_expand". Returns the default ACF value 0 if none has been
      * set using Fewbricks.
      */
     public function getMultiExpand()
     {
 
-        return $this->getSetting('multi_expand', false);
+        return $this->getSetting('multi_expand', 0);
 
     }
 
     /**
-     * @return mixed The value of the ACF setting "open". Returns the default ACF value "" if none has been
+     * @return mixed The value of the ACF setting "open". Returns the default ACF value 0 if none has been
      * set using Fewbricks.
      */
     public function getOpen()
     {
 
-        return $this->getSetting('open', false);
+        return $this->getSetting('open', 0);
 
     }
 

@@ -56,9 +56,7 @@ final class AccordionTest extends Field
 
         $field = new Accordion('', '', '');
 
-        $field->setEndpoint(true);
-
-        $this->assertEquals(true, $field->getEndpoint());
+        $this->assertEquals(0, $field->getEndpoint());
 
         $field->setEndpoint(false);
 
@@ -71,9 +69,7 @@ final class AccordionTest extends Field
 
         $field = new Accordion('', '', '');
 
-        $field->setMultiExpand(true);
-
-        $this->assertEquals(true, $field->getMultiExpand());
+        $this->assertEquals(0, $field->getMultiExpand());
 
         $field->setMultiExpand(false);
 
@@ -87,7 +83,7 @@ final class AccordionTest extends Field
         $field = new Accordion('', '', '');
 
         // Default
-        $this->assertEquals('', $field->getOpen());
+        $this->assertEquals(0, $field->getOpen());
 
         $field->setOpen(true);
 

@@ -11,17 +11,6 @@ class FieldWithChoices extends Field
 {
 
     /**
-     * @return mixed The value of the ACF setting "allow_null". Returns the default ACF value false if none has been
-     * set using Fewbricks.
-     */
-    public function getAllowNull()
-    {
-
-        return $this->getSetting('allow_null', false);
-
-    }
-
-    /**
      * @return mixed The value of the ACF setting "choices". Returns the default ACF value of an empty array if none has
      * been set using Fewbricks.
      */
@@ -29,6 +18,17 @@ class FieldWithChoices extends Field
     {
 
         return $this->getSetting('choices', []);
+
+    }
+
+    /**
+     * @return mixed The value of the ACF setting "default_value". Returns the default ACF value "" if none has been set
+     * using Fewbricks.
+     */
+    public function getDefaultValue()
+    {
+
+        return $this->getSetting('default_value', '');
 
     }
 
@@ -46,20 +46,6 @@ class FieldWithChoices extends Field
     /**
      * ACF setting.
      *
-     * @param bool $allowNull
-     * @return $this
-     */
-    public function setAllowNull($allowNull)
-    {
-
-        return $this->setSetting('allow_null', $allowNull);
-
-
-    }
-
-    /**
-     * ACF setting.
-     *
      * @param array $choices Associative array with options. Key will be name and value will be value.
      * @return $this
      */
@@ -67,6 +53,17 @@ class FieldWithChoices extends Field
     {
 
         return $this->setSetting('choices', $choices);
+
+    }
+
+    /**
+     * @param mixed $defaultValue ACF setting. A default value used by ACF if no value has yet been saved.
+     * @return $this
+     */
+    public function setDefaultValue($defaultValue)
+    {
+
+        return $this->setSetting('default_value', $defaultValue);
 
     }
 

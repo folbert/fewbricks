@@ -21,35 +21,46 @@ class Checkbox extends FieldWithChoices implements FieldInterface
     const TYPE = 'checkbox';
 
     /**
-     * @return mixed The value of the ACF setting "allow_custom". Returns the default ACF value false if none has been
+     * @return mixed The value of the ACF setting "allow_custom". Returns the default ACF value 0 if none has been
      * set using Fewbricks.
      */
     public function getAllowCustom()
     {
 
-        return $this->getSetting('allow_custom', false);
+        return $this->getSetting('allow_custom', 0);
 
     }
 
     /**
-     * @return mixed The value of the ACF setting "save_custom". Returns the default ACF value false if none has been
+     * @return mixed The value of the ACF setting "allow_custom". Returns the default ACF value false if none has been
+     * set using Fewbricks.
+     */
+    public function getLayout()
+    {
+
+        return $this->getSetting('layout', 'vertical');
+
+    }
+
+    /**
+     * @return mixed The value of the ACF setting "save_custom". Returns the default ACF value 0 if none has been
      * set using Fewbricks.
      */
     public function getSaveCustom()
     {
 
-        return $this->getSetting('save_custom', false);
+        return $this->getSetting('save_custom', 0);
 
     }
 
     /**
-     * @return mixed The value of the ACF setting "toggle". Returns the default ACF value false if none has been
+     * @return mixed The value of the ACF setting "toggle". Returns the default ACF value 0 if none has been
      * set using Fewbricks.
      */
     public function getToggle()
     {
 
-        return $this->getSetting('toggle', false);
+        return $this->getSetting('toggle', 0);
 
     }
 

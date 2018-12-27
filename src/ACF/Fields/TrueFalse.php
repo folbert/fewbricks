@@ -21,13 +21,13 @@ class TrueFalse extends Field implements FieldInterface
     const TYPE = 'true_false';
 
     /**
-     * @return mixed The value of the ACF setting "default_value". Returns the default ACF value false" if none has been
+     * @return mixed The value of the ACF setting "default_value". Returns the default ACF value 0 if none has been
      * set using Fewbricks.
      */
     public function getDefaultValue()
     {
 
-        return $this->getSetting('default_value', false);
+        return $this->getSetting('default_value', 0);
 
     }
 
@@ -43,13 +43,13 @@ class TrueFalse extends Field implements FieldInterface
     }
 
     /**
-     * @return mixed The value of the ACF setting "ui". Returns the default ACF value false if none has been
+     * @return mixed The value of the ACF setting "ui". Returns the default ACF value 0 if none has been
      * set using Fewbricks.
      */
     public function getUi()
     {
 
-        return $this->getSetting('ui', false);
+        return $this->getSetting('ui', 0);
 
     }
 

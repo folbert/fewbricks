@@ -51,25 +51,12 @@ final class ButtonGroupTest extends Field
 
     }
 
-    public function testSetAndGetLayout()
-    {
-
-        $field = new ButtonGroup('', '', '');
-
-        $this->assertEquals('horizontal', $field->getLayout());
-
-        $field->setLayout('ye8dgol');
-
-        $this->assertEquals('ye8dgol', $field->getLayout());
-
-    }
-
     public function testSetAndGetAllowNull()
     {
 
         $field = new ButtonGroup('', '', '');
 
-        $this->assertEquals(false, $field->getAllowNull());
+        $this->assertEquals(0, $field->getAllowNull());
 
         $field->setAllowNull(true);
 
@@ -92,6 +79,19 @@ final class ButtonGroupTest extends Field
         $field->setChoices($choices);
 
         $this->assertEquals($choices, $field->getChoices());
+
+    }
+
+    public function testSetAndGetLayout()
+    {
+
+        $field = new ButtonGroup('', '', '');
+
+        $this->assertEquals('horizontal', $field->getLayout());
+
+        $field->setLayout('ye8dgol');
+
+        $this->assertEquals('ye8dgol', $field->getLayout());
 
     }
 

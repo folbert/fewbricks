@@ -21,13 +21,13 @@ class Message extends Field implements FieldInterface
     const TYPE = 'message';
 
     /**
-     * @return mixed The value of the ACF setting "esc_html". Returns the default ACF value "false" if none has been
+     * @return mixed The value of the ACF setting "esc_html". Returns the default ACF value 0 if none has been
      * set using Fewbricks.
      */
     public function getEscHtml()
     {
 
-        return $this->getSetting('esc_html', false);
+        return $this->getSetting('esc_html', 0);
 
     }
 

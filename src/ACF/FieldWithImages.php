@@ -22,7 +22,7 @@ class FieldWithImages extends Field
     }
 
     /**
-     * @return mixed The value of the ACF setting "max_height". Returns the default ACF value "0" if none has been
+     * @return mixed The value of the ACF setting "max_height". Returns the default ACF value 0 if none has been
      * set using Fewbricks.
      */
     public function getMaxHeight()
@@ -33,7 +33,7 @@ class FieldWithImages extends Field
     }
 
     /**
-     * @return mixed The value of the ACF setting "max_size". Returns the default ACF value "0" if none has been
+     * @return mixed The value of the ACF setting "max_size". Returns the default ACF value 0 if none has been
      * set using Fewbricks.
      */
     public function getMaxSize()
@@ -44,7 +44,7 @@ class FieldWithImages extends Field
     }
 
     /**
-     * @return mixed The value of the ACF setting "max_width". Returns the default ACF value "0" if none has been
+     * @return mixed The value of the ACF setting "max_width". Returns the default ACF value 0 if none has been
      * set using Fewbricks.
      */
     public function getMaxWidth()
@@ -66,7 +66,7 @@ class FieldWithImages extends Field
     }
 
     /**
-     * @return mixed The value of the ACF setting "min_height". Returns the default ACF value "0" if none has been
+     * @return mixed The value of the ACF setting "min_height". Returns the default ACF value 0 if none has been
      * set using Fewbricks.
      */
     public function getMinHeight()
@@ -77,7 +77,7 @@ class FieldWithImages extends Field
     }
 
     /**
-     * @return mixed The value of the ACF setting "min_size". Returns the default ACF value "0" if none has been
+     * @return mixed The value of the ACF setting "min_size". Returns the default ACF value 0 if none has been
      * set using Fewbricks.
      */
     public function getMinSize()
@@ -88,7 +88,7 @@ class FieldWithImages extends Field
     }
 
     /**
-     * @return mixed The value of the ACF setting "min_width". Returns the default ACF value "0" if none has been
+     * @return mixed The value of the ACF setting "min_width". Returns the default ACF value 0 if none has been
      * set using Fewbricks.
      */
     public function getMinWidth()

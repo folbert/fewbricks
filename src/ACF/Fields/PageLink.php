@@ -21,13 +21,24 @@ class PageLink extends Field implements FieldInterface
     const TYPE = 'page_link';
 
     /**
-     * @return mixed The value of the ACF setting "allow_archives". Returns the default ACF value true if none has been
+     * @return mixed The value of the ACF setting "allow_archives". Returns the default ACF value 1 if none has been
      * set using Fewbricks.
      */
     public function getAllowArchives()
     {
 
-        return $this->getSetting('allow_archives', true);
+        return $this->getSetting('allow_archives', 1);
+
+    }
+
+    /**
+     * @return mixed The value of the ACF setting "allow_null". Returns the default ACF value 0 if none has been
+     * set using Fewbricks.
+     */
+    public function getAllowNull()
+    {
+
+        return $this->getSetting('allow_null', 0);
 
     }
 
@@ -74,6 +85,19 @@ class PageLink extends Field implements FieldInterface
     {
 
         return $this->setSetting('allow_archives', $allowArchives);
+
+    }
+
+    /**
+     * ACF setting.
+     *
+     * @param boolean $allowNull
+     * @return $this
+     */
+    public function setAllowNull($allowNull)
+    {
+
+        return $this->setSetting('allow_null', $allowNull);
 
     }
 

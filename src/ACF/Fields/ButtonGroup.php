@@ -21,6 +21,17 @@ class ButtonGroup extends FieldWithChoices implements FieldInterface
     const TYPE = 'button_group';
 
     /**
+     * @return mixed The value of the ACF setting "allow_null". Returns the default ACF value 0 if none has been
+     * set using Fewbricks.
+     */
+    public function getAllowNull()
+    {
+
+        return $this->getSetting('allow_null', 0);
+
+    }
+
+    /**
      * @return mixed The value of the ACF setting "layout". Returns the default ACF value "horizontal" if none has been
      * set using Fewbricks.
      */
@@ -28,6 +39,20 @@ class ButtonGroup extends FieldWithChoices implements FieldInterface
     {
 
         return $this->getSetting('layout', 'horizontal');
+
+    }
+
+    /**
+     * ACF setting.
+     *
+     * @param bool $allowNull
+     * @return $this
+     */
+    public function setAllowNull($allowNull)
+    {
+
+        return $this->setSetting('allow_null', $allowNull);
+
 
     }
 

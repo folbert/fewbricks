@@ -21,24 +21,24 @@ class PostObject extends Field implements FieldInterface
     const TYPE = 'post_object';
 
     /**
-     * @return mixed The value of the ACF setting "allow_null". Returns the default ACF value false if none has been
+     * @return mixed The value of the ACF setting "allow_null". Returns the default ACF value 0 if none has been
      * set using Fewbricks.
      */
     public function getAllowNull()
     {
 
-        return $this->getSetting('allow_null', false);
+        return $this->getSetting('allow_null', 0);
 
     }
 
     /**
-     * @return mixed The value of the ACF setting multiple. Returns the default ACF value false if none has been
+     * @return mixed The value of the ACF setting multiple. Returns the default ACF value 0 if none has been
      * set using Fewbricks.
      */
     public function getMultiple()
     {
 
-        return $this->getSetting('multiple', false);
+        return $this->getSetting('multiple', 0);
 
     }
 
