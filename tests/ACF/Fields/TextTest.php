@@ -23,182 +23,6 @@ final class TextTest extends Field
     /**
      *
      */
-    public function testGetLabel()
-    {
-
-        $label = 'A label dh8hoil';
-
-        $field = new Text($label, 'text', '1812132258a');
-
-        $this->assertEquals($label, $field->getLabel());
-
-    }
-
-    /**
-     *
-     */
-    public function testGetName()
-    {
-
-        $name = 'A name hsg78fik';
-
-        $field = new Text('Text', $name, '1812132258a');
-
-        $this->assertEquals($name, $field->getName());
-
-    }
-
-    public function testGetKey()
-    {
-
-        $key = '1812132258a';
-
-        $field = new Text('Text', 'text', '1812132258a');
-
-        $this->assertEquals($key, $field->getKey());
-
-    }
-
-    public function testGetDefaultValue()
-    {
-
-        $defaultValue = 'nb89godlbl.';
-
-        $field = new Text('Text', 'text', '1812132258a');
-        $field->setDefaultValue($defaultValue);
-
-        $this->assertEquals($defaultValue, $field->getDefaultValue());
-
-    }
-
-    public function testGetInstructions()
-    {
-
-        $instructions = 'nb89godlbl.';
-
-        $field = new Text('Text', 'text', '1812132258a');
-        $field->setInstructions($instructions);
-
-        $this->assertEquals($instructions, $field->getInstructions());
-
-    }
-
-    public function testGetRequired()
-    {
-
-        $required = true;
-
-        $field = new Text('Text', 'text', '1812132258a');
-        $field->setRequired($required);
-
-        $this->assertEquals($required, $field->getRequired());
-
-    }
-
-    public function testGetSetting()
-    {
-
-        $settingName = 'name_dg9go';
-        $settingValue = 'dn98dgol';
-
-        $field = new Text('Text', 'text', '1812132258a');
-        $field->setSetting($settingName, $settingValue);
-
-        $this->assertEquals($settingValue, $field->getSetting($settingName));
-
-    }
-
-    public function testGetSettingDefaultValue()
-    {
-
-        $defaultValue = 'dh89gdwewo';
-
-        $field = new Text('Text', 'text', '1812132258a');
-
-        $this->assertEquals($defaultValue, $field->getSetting('setting_dhd08gol', $defaultValue));
-
-    }
-
-    public function testGetDisplayInFewbricksDevTools()
-    {
-
-        $display = true;
-
-        $field = new Text('Text', 'text', '1812132258a');
-        $field->setDisplayInFewbricksDevTools($display);
-
-        $this->assertEquals($display, $field->getDisplayInFewbricksDevTools());
-
-    }
-
-    public function testGetWrapper()
-    {
-
-        $wrapper = [
-            'id' => 'the id ohd39jil',
-            'class' => 'classd 89dgdol',
-            'width' => '108',
-        ];
-
-        $field = new Text('Text', 'text', '1812132258a');
-        $field->setWrapper($wrapper);
-
-        $this->assertEquals($wrapper, $field->getWrapper());
-
-    }
-
-    public function testGetAppend()
-    {
-
-        $append = 'Append ts9tgo';
-
-        $field = new Text('Text', 'text', '1812132258a');
-        $field->setAppend($append);
-
-        $this->assertEquals($append, $field->getAppend());
-
-    }
-
-    public function testGetMaxlength()
-    {
-
-        $maxLength = 89;
-
-        $field = new Text('Text', 'text', '1812132258a');
-        $field->setMaxlength($maxLength);
-
-        $this->assertEquals($maxLength, $field->getMaxlength());
-
-    }
-
-    public function testGetPlaceholder()
-    {
-
-        $placeholder = 'Placeholder s9togl';
-
-        $field = new Text('Text', 'text', '1812132258a');
-        $field->setPlaceholder($placeholder);
-
-        $this->assertEquals($placeholder, $field->getPlaceholder());
-
-    }
-
-    public function testGetPrepend()
-    {
-
-        $prepend = 'Prepend s9d232';
-
-        $field = new Text('Text', 'text', '1812132258a');
-        $field->setPrepend($prepend);
-
-        $this->assertEquals($prepend, $field->getPrepend());
-
-    }
-
-
-    /**
-     *
-     */
     public function testAcfArray()
     {
 
@@ -254,6 +78,66 @@ final class TextTest extends Field
             $expectedArray,
             $field->toAcfArray($settings['test__key_prefix'])
         );
+
+    }
+
+    public function testSetAndGetDefaultValue()
+    {
+
+        $defaultValue = 'nb89godlbl.';
+
+        $field = new Text('Text', 'text', '1812132258a');
+        $field->setDefaultValue($defaultValue);
+
+        $this->assertEquals($defaultValue, $field->getDefaultValue());
+
+    }
+
+    public function testSetAndGetAppend()
+    {
+
+        $append = 'Append ts9tgo';
+
+        $field = new Text('Text', 'text', '1812132258a');
+        $field->setAppend($append);
+
+        $this->assertEquals($append, $field->getAppend());
+
+    }
+
+    public function testSetAndGetMaxlength()
+    {
+
+        $maxLength = 89;
+
+        $field = new Text('Text', 'text', '1812132258a');
+        $field->setMaxlength($maxLength);
+
+        $this->assertEquals($maxLength, $field->getMaxlength());
+
+    }
+
+    public function testSetAndGetPlaceholder()
+    {
+
+        $placeholder = 'Placeholder s9togl';
+
+        $field = new Text('Text', 'text', '1812132258a');
+        $field->setPlaceholder($placeholder);
+
+        $this->assertEquals($placeholder, $field->getPlaceholder());
+
+    }
+
+    public function testSetAndGetPrepend()
+    {
+
+        $prepend = 'Prepend s9d232';
+
+        $field = new Text('Text', 'text', '1812132258a');
+        $field->setPrepend($prepend);
+
+        $this->assertEquals($prepend, $field->getPrepend());
 
     }
 

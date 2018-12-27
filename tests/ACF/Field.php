@@ -13,7 +13,126 @@ class Field extends TestCase
     /**
      *
      */
-    public function testAddingParent()
+    public function testGetLabel()
+    {
+
+        $label = 'A label dh8hoil';
+
+        $field = new Text($label, 'text', '1812132258a');
+
+        $this->assertEquals($label, $field->getLabel());
+
+    }
+
+    /**
+     *
+     */
+    public function testGetName()
+    {
+
+        $name = 'A name hsg78fik';
+
+        $field = new Text('Text', $name, '1812132258a');
+
+        $this->assertEquals($name, $field->getName());
+
+    }
+
+    public function testGetKey()
+    {
+
+        $key = '1812132258a';
+
+        $field = new Text('Text', 'text', '1812132258a');
+
+        $this->assertEquals($key, $field->getKey());
+
+    }
+
+    public function testSetAndGetInstructions()
+    {
+
+        $instructions = 'nb89godlbl.';
+
+        $field = new Text('Text', 'text', '1812132258a');
+
+        $field->setInstructions($instructions);
+
+        $this->assertEquals($instructions, $field->getInstructions());
+
+    }
+
+    public function testSetAndGetRequired()
+    {
+
+        $required = true;
+
+        $field = new Text('Text', 'text', '1812132258a');
+        $field->setRequired($required);
+
+        $this->assertEquals($required, $field->getRequired());
+
+    }
+
+    public function testSetAndGetSetting()
+    {
+
+        $settingName = 'name_dg9go';
+        $settingValue = 'dn98dgol';
+
+        $field = new Text('Text', 'text', '1812132258a');
+
+        $field->setSetting($settingName, $settingValue);
+
+        $this->assertEquals($settingValue, $field->getSetting($settingName));
+
+    }
+
+    public function testGetSettingDefaultValue()
+    {
+
+        $defaultValue = 'dh89gdwewo';
+
+        $field = new Text('Text', 'text', '1812132258a');
+
+        $this->assertEquals($defaultValue, $field->getSetting('setting_dhd08gol', $defaultValue));
+
+    }
+
+    public function testSetAndGetDisplayInFewbricksDevTools()
+    {
+
+        $display = true;
+
+        $field = new Text('Text', 'text', '1812132258a');
+
+        $field->setDisplayInFewbricksDevTools($display);
+
+        $this->assertEquals($display, $field->getDisplayInFewbricksDevTools());
+
+    }
+
+    public function testSetAndGetWrapper()
+    {
+
+        $wrapper = [
+            'id' => 'the id ohd39jil',
+            'class' => 'classd 89dgdol',
+            'width' => '108',
+        ];
+
+        $field = new Text('Text', 'text', '1812132258a');
+
+        $field->setWrapper($wrapper);
+
+        $this->assertEquals($wrapper, $field->getWrapper());
+
+    }
+
+    /**
+     *
+     */
+    public function testAddParent()
     {
 
         $textField = new Text('Text field with parent', 'text_field_with_parent', '1812102131b');
