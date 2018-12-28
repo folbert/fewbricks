@@ -9,10 +9,10 @@
 namespace Fewbricks\Tests\ACF\Fields;
 
 use Fewbricks\ACF\Fields\ButtonGroup;
-use Fewbricks\Tests\ACF\Field;
+use Fewbricks\Tests\ACF\FieldTest;
 use Fewbricks\Tests\FieldHelper;
 
-final class ButtonGroupTest extends Field
+final class ButtonGroupTest extends FieldTest
 {
 
     // Will be used when creating the field object for this test
@@ -79,6 +79,19 @@ final class ButtonGroupTest extends Field
         $field->setChoices($choices);
 
         $this->assertEquals($choices, $field->getChoices());
+
+    }
+
+    public function testSetAndGetDefaultValue()
+    {
+
+        $field = new ButtonGroup('', '', '');
+
+        $this->assertEquals('', $field->getDefaultValue());
+
+        $field->setDefaultValue('dhoshooil');
+
+        $this->assertEquals('dhoshooil', $field->getDefaultValue());
 
     }
 

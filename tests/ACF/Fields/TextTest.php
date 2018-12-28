@@ -3,10 +3,10 @@
 namespace Fewbricks\Tests\ACF\Fields;
 
 use Fewbricks\ACF\Fields\Text;
-use Fewbricks\Tests\ACF\Field;
+use Fewbricks\Tests\ACF\FieldTest;
 use Fewbricks\Tests\FieldHelper;
 
-final class TextTest extends Field
+final class TextTest extends FieldTest
 {
 
     // Will be used when creating the field object for this test
@@ -81,27 +81,33 @@ final class TextTest extends Field
 
     }
 
-    public function testSetAndGetDefaultValue()
-    {
-
-        $defaultValue = 'nb89godlbl.';
-
-        $field = new Text('Text', 'text', '1812132258a');
-        $field->setDefaultValue($defaultValue);
-
-        $this->assertEquals($defaultValue, $field->getDefaultValue());
-
-    }
-
     public function testSetAndGetAppend()
     {
 
         $append = 'Append ts9tgo';
 
         $field = new Text('Text', 'text', '1812132258a');
+
+        $this->assertEquals('', $field->getAppend());
+
         $field->setAppend($append);
 
         $this->assertEquals($append, $field->getAppend());
+
+    }
+
+    public function testSetAndGetDefaultValue()
+    {
+
+        $defaultValue = 'nb89godlbl.';
+
+        $field = new Text('Text', 'text', '1812132258a');
+
+        $this->assertEquals('', $field->getDefaultValue());
+
+        $field->setDefaultValue($defaultValue);
+
+        $this->assertEquals($defaultValue, $field->getDefaultValue());
 
     }
 
@@ -111,6 +117,9 @@ final class TextTest extends Field
         $maxLength = 89;
 
         $field = new Text('Text', 'text', '1812132258a');
+
+        $this->assertEquals('', $field->getMaxlength());
+
         $field->setMaxlength($maxLength);
 
         $this->assertEquals($maxLength, $field->getMaxlength());
@@ -123,6 +132,9 @@ final class TextTest extends Field
         $placeholder = 'Placeholder s9togl';
 
         $field = new Text('Text', 'text', '1812132258a');
+
+        $this->assertEquals('', $field->getPlaceholder());
+
         $field->setPlaceholder($placeholder);
 
         $this->assertEquals($placeholder, $field->getPlaceholder());
@@ -135,6 +147,9 @@ final class TextTest extends Field
         $prepend = 'Prepend s9d232';
 
         $field = new Text('Text', 'text', '1812132258a');
+
+        $this->assertEquals('', $field->getPrepend());
+
         $field->setPrepend($prepend);
 
         $this->assertEquals($prepend, $field->getPrepend());

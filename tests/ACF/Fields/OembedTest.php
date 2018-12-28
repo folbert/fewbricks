@@ -9,10 +9,10 @@
 namespace Fewbricks\Tests\ACF\Fields;
 
 use Fewbricks\ACF\Fields\Oembed;
-use Fewbricks\Tests\ACF\Field;
+use Fewbricks\Tests\ACF\FieldTest;
 use Fewbricks\Tests\FieldHelper;
 
-final class OembedTest extends Field
+final class OembedTest extends FieldTest
 {
 
     // Will be used when creating the field object for this test

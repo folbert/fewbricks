@@ -9,10 +9,10 @@
 namespace Fewbricks\Tests\ACF\Fields;
 
 use Fewbricks\ACF\Fields\Message;
-use Fewbricks\Tests\ACF\Field;
+use Fewbricks\Tests\ACF\FieldTest;
 use Fewbricks\Tests\FieldHelper;
 
-final class MessageTest extends Field
+final class MessageTest extends FieldTest
 {
 
     // Will be used when creating the field object for this test
@@ -59,7 +59,7 @@ final class MessageTest extends Field
 
         $field = new Message('', '', '');
 
-        $this->assertEquals(false, $field->getEscHtml());
+        $this->assertEquals(0, $field->getEscHtml());
 
         $field->setEscHtml(true);
 

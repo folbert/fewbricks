@@ -8,10 +8,10 @@
 
 namespace Fewbricks\Tests\ACF\Fields;
 
-use Fewbricks\Tests\ACF\Field;
+use Fewbricks\Tests\ACF\FieldTest;
 use Fewbricks\Tests\FieldHelper;
 
-final class FlexibleContentTest extends Field
+final class FlexibleContentTest extends FieldTest
 {
 
     // Will be used when creating the field object for this test

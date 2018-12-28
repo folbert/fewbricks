@@ -9,10 +9,10 @@
 namespace Fewbricks\Tests\ACF\Fields;
 
 use Fewbricks\ACF\Fields\User;
-use Fewbricks\Tests\ACF\Field;
+use Fewbricks\Tests\ACF\FieldTest;
 use Fewbricks\Tests\FieldHelper;
 
-final class UserTest extends Field
+final class UserTest extends FieldTest
 {
 
     // Will be used when creating the field object for this test
@@ -59,7 +59,7 @@ final class UserTest extends Field
 
         $field = new User('', '', '');
 
-        $this->assertEquals(false, $field->getAllowNull());
+        $this->assertEquals(0, $field->getAllowNull());
 
         $field->setAllowNull(true);
 
@@ -75,7 +75,7 @@ final class UserTest extends Field
 
         $field = new User('', '', '');
 
-        $this->assertEquals(false, $field->getMultiple());
+        $this->assertEquals(0, $field->getMultiple());
 
         $field->setMultiple(true);
 

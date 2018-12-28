@@ -9,10 +9,10 @@
 namespace Fewbricks\Tests\ACF\Fields;
 
 use Fewbricks\ACF\Fields\Number;
-use Fewbricks\Tests\ACF\Field;
+use Fewbricks\Tests\ACF\FieldTest;
 use Fewbricks\Tests\FieldHelper;
 
-final class NumberTest extends Field
+final class NumberTest extends FieldTest
 {
 
     // Will be used when creating the field object for this test
@@ -59,18 +59,34 @@ final class NumberTest extends Field
 
         $field = new Number('', '', '');
 
-        $this->assertEquals($field->getAppend(), '');
+        $this->assertEquals('', $field->getAppend());
 
         $field->setAppend('append kj jlk');
 
-        $this->assertEquals($field->getAppend(), 'append kj jlk');
+        $this->assertEquals('append kj jlk', $field->getAppend());
 
     }
 
     /**
      *
      */
-    public function testSetAndGetMaximumValue()
+    public function testSetAndGetDefaultValue()
+    {
+
+        $field = new Number('', '', '');
+
+        $this->assertEquals('', $field->getDefaultValue());
+
+        $field->setDefaultValue('h98goi');
+
+        $this->assertEquals('h98goi', $field->getDefaultValue());
+
+    }
+
+    /**
+     *
+     */
+    public function testSetAndGetMax()
     {
 
         $field = new Number('', '', '');
@@ -86,7 +102,7 @@ final class NumberTest extends Field
     /**
      *
      */
-    public function testSetAndGetMinimumValue()
+    public function testSetAndGetMin()
     {
 
         $field = new Number('', '', '');

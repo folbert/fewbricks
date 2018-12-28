@@ -21,46 +21,46 @@ class GoogleMap extends Field implements FieldInterface
     const TYPE = 'google_map';
 
     /**
-     * @return mixed The value of the ACF setting "center_lat". Returns the default ACF value "-37.81411" if none has
+     * @return mixed The value of the ACF setting "center_lat". Returns the default ACF value "" if none has
      * been set using Fewbricks.
      */
     public function getCenterLat()
     {
 
-        return $this->getSetting('center_lat', '-37.81411');
+        return $this->getSetting('center_lat', '');
 
     }
 
     /**
-     * @return mixed The value of the ACF setting "center_lng". Returns the default ACF value "144.96328'" if none has
+     * @return mixed The value of the ACF setting "center_lng". Returns the default ACF value "'" if none has
      * been set using Fewbricks.
      */
     public function getCenterLng()
     {
 
-        return $this->getSetting('center_lng', '144.96328');
+        return $this->getSetting('center_lng', '');
 
     }
 
     /**
-     * @return mixed The value of the ACF setting "height". Returns the default ACF value "400" if none has
+     * @return mixed The value of the ACF setting "height". Returns the default ACF value "" if none has
      * been set using Fewbricks.
      */
     public function getHeight()
     {
 
-        return $this->getSetting('height', '400');
+        return $this->getSetting('height', '');
 
     }
 
     /**
-     * @return mixed The value of the ACF setting "zoom". Returns the default ACF value "14" if none has
+     * @return mixed The value of the ACF setting "zoom". Returns the default ACF value "" if none has
      * been set using Fewbricks.
      */
     public function getZoom()
     {
 
-        return $this->getSetting('zoom', '14');
+        return $this->getSetting('zoom', '');
 
     }
 

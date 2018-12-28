@@ -9,10 +9,10 @@
 namespace Fewbricks\Tests\ACF\Fields;
 
 use Fewbricks\ACF\Fields\Range;
-use Fewbricks\Tests\ACF\Field;
+use Fewbricks\Tests\ACF\FieldTest;
 use Fewbricks\Tests\FieldHelper;
 
-final class RangeTest extends Field
+final class RangeTest extends FieldTest
 {
 
     // Will be used when creating the field object for this test
@@ -64,6 +64,22 @@ final class RangeTest extends Field
         $field->setAppend('dhde0oh');
 
         $this->assertEquals('dhde0oh', $field->getAppend());
+
+    }
+
+    /**
+     *
+     */
+    public function testSetAndGetDefaultValue()
+    {
+
+        $field = new Range('', '', '');
+
+        $this->assertEquals('', $field->getDefaultValue());
+
+        $field->setDefaultValue('hgo');
+
+        $this->assertEquals('hgo', $field->getDefaultValue());
 
     }
 

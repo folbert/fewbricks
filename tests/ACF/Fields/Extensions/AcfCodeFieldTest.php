@@ -9,10 +9,10 @@
 namespace Fewbricks\Tests\ACF\Fields\Extensions;
 
 use Fewbricks\ACF\Fields\Extensions\AcfCodeField;
-use Fewbricks\Tests\ACF\Field;
+use Fewbricks\Tests\ACF\FieldTest;
 use Fewbricks\Tests\FieldHelper;
 
-final class AcfCodeFieldTest extends Field
+final class AcfCodeFieldTest extends FieldTest
 {
 
     // Will be used when creating the field object for this test

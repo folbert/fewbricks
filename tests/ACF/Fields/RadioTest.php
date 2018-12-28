@@ -9,10 +9,10 @@
 namespace Fewbricks\Tests\ACF\Fields;
 
 use Fewbricks\ACF\Fields\Radio;
-use Fewbricks\Tests\ACF\Field;
+use Fewbricks\Tests\ACF\FieldTest;
 use Fewbricks\Tests\FieldHelper;
 
-final class RadioTest extends Field
+final class RadioTest extends FieldTest
 {
 
     // Will be used when creating the field object for this test
@@ -51,16 +51,94 @@ final class RadioTest extends Field
 
     }
 
-    public function testLayout()
+    public function testSetAndGetAllowNull()
     {
 
         $field = new Radio('', '', '');
 
-        $this->assertEquals($field->getLayout(), 'vertical');
+        $this->assertEquals(0, $field->getAllowNull());
+
+        $field->setAllowNull(true);
+
+        $this->assertEquals(true, $field->getAllowNull());
+
+    }
+
+    public function testSetAndGetChoices()
+    {
+
+        $field = new Radio('', '', '');
+
+        $this->assertEquals([], $field->getChoices());
+
+        $field->setChoices(['adhiu', '98goi']);
+
+        $this->assertEquals(['adhiu', '98goi'], $field->getChoices());
+
+    }
+
+    public function testSetAndGetDefaultValue()
+    {
+
+        $field = new Radio('', '', '');
+
+        $this->assertEquals('', $field->getDefaultValue());
+
+        $field->setDefaultValue('djhohsi');
+
+        $this->assertEquals('djhohsi', $field->getDefaultValue());
+
+    }
+
+    public function testSetAndGetLayout()
+    {
+
+        $field = new Radio('', '', '');
+
+        $this->assertEquals('vertical', $field->getLayout());
 
         $field->setLayout('horizontal');
 
-        $this->assertEquals($field->getLayout(), 'horizontal');
+        $this->assertEquals('horizontal', $field->getLayout());
+
+    }
+
+    public function testSetAndGetOtherChoice()
+    {
+
+        $field = new Radio('', '', '');
+
+        $this->assertEquals(0, $field->getOtherChoice());
+
+        $field->setOtherChoice(true);
+
+        $this->assertEquals(true, $field->getOtherChoice());
+
+    }
+
+    public function testSetAndGetReturnFormat()
+    {
+
+        $field = new Radio('', '', '');
+
+        $this->assertEquals('value', $field->getReturnFormat());
+
+        $field->setReturnFormat('dhiukl');
+
+        $this->assertEquals('dhiukl', $field->getReturnFormat());
+
+    }
+
+    public function testSetAndGetSaveOtherChoice()
+    {
+
+        $field = new Radio('', '', '');
+
+        $this->assertEquals(0, $field->getSaveOtherChoice());
+
+        $field->setSaveOtherChoice(true);
+
+        $this->assertEquals(true, $field->getSaveOtherChoice());
 
     }
 

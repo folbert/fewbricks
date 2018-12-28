@@ -9,10 +9,10 @@
 namespace Fewbricks\Tests\ACF\Fields;
 
 use Fewbricks\ACF\Fields\Gallery;
-use Fewbricks\Tests\ACF\Field;
+use Fewbricks\Tests\ACF\FieldTest;
 use Fewbricks\Tests\FieldHelper;
 
-final class GalleryTest extends Field
+final class GalleryTest extends FieldTest
 {
 
     // Will be used when creating the field object for this test
@@ -86,6 +86,54 @@ final class GalleryTest extends Field
     /**
      *
      */
+    public function testSetAndGetMaxHeight()
+    {
+
+        $field = new Gallery('', '', '');
+
+        $this->assertEquals(0, $field->getMaxHeight());
+
+        $field->setMaxHeight(78);
+
+        $this->assertEquals(78, $field->getMaxHeight());
+
+    }
+
+    /**
+     *
+     */
+    public function testSetAndGetMaxSize()
+    {
+
+        $field = new Gallery('', '', '');
+
+        $this->assertEquals(0, $field->getMaxSize());
+
+        $field->setMaxSize(78);
+
+        $this->assertEquals(78, $field->getMaxSize());
+
+    }
+
+    /**
+     *
+     */
+    public function testSetAndGetMaxWidth()
+    {
+
+        $field = new Gallery('', '', '');
+
+        $this->assertEquals(0, $field->getMaxWidth());
+
+        $field->setMaxWidth(78);
+
+        $this->assertEquals(78, $field->getMaxWidth());
+
+    }
+
+    /**
+     *
+     */
     public function testSetAndGetMin()
     {
 
@@ -96,6 +144,74 @@ final class GalleryTest extends Field
         $field->setMin(78);
 
         $this->assertEquals(78, $field->getMin());
+
+    }
+
+    /**
+     *
+     */
+    public function testSetAndGetMimeTypes()
+    {
+
+        $field = new Gallery('', '', '');
+
+        $this->assertEquals('', $field->getMimeTypes());
+
+        $field->setMimeTypes(['hggik', 'ohl/yuk']);
+
+        $this->assertEquals('hggik, ohl/yuk', $field->getMimeTypes());
+
+        $field->setMimeTypes('hggik, jdiohdo/g');
+
+        $this->assertEquals('hggik, jdiohdo/g', $field->getMimeTypes());
+
+    }
+
+    /**
+     *
+     */
+    public function testSetAndGetMinHeight()
+    {
+
+        $field = new Gallery('', '', '');
+
+        $this->assertEquals(0, $field->getMinHeight());
+
+        $field->setMinHeight(78);
+
+        $this->assertEquals(78, $field->getMinHeight());
+
+    }
+
+    /**
+     *
+     */
+    public function testSetAndGetMinSize()
+    {
+
+        $field = new Gallery('', '', '');
+
+        $this->assertEquals(0, $field->getMinSize());
+
+        $field->setMinSize(78);
+
+        $this->assertEquals(78, $field->getMinSize());
+
+    }
+
+    /**
+     *
+     */
+    public function testSetAndGetMinWidth()
+    {
+
+        $field = new Gallery('', '', '');
+
+        $this->assertEquals(0, $field->getMinWidth());
+
+        $field->setMinWidth(78);
+
+        $this->assertEquals(78, $field->getMinWidth());
 
     }
 

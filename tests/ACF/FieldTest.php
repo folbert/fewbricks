@@ -7,7 +7,7 @@ use Fewbricks\ACF\ConditionalLogicRuleGroup;
 use Fewbricks\ACF\Fields\Text;
 use PHPUnit\Framework\TestCase;
 
-class Field extends TestCase
+class FieldTest extends TestCase
 {
 
     /**

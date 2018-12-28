@@ -9,10 +9,10 @@
 namespace Fewbricks\Tests\ACF\Fields\Extensions;
 
 use Fewbricks\ACF\Fields\Extensions\Table;
-use Fewbricks\Tests\ACF\Field;
+use Fewbricks\Tests\ACF\FieldTest;
 use Fewbricks\Tests\FieldHelper;
 
-final class TableTest extends Field
+final class TableTest extends FieldTest
 {
 
     // Will be used when creating the field object for this test

@@ -9,10 +9,10 @@
 namespace Fewbricks\Tests\ACF\Fields;
 
 use Fewbricks\ACF\Fields\Checkbox;
-use Fewbricks\Tests\ACF\Field;
+use Fewbricks\Tests\ACF\FieldTest;
 use Fewbricks\Tests\FieldHelper;
 
-final class CheckboxTest extends Field
+final class CheckboxTest extends FieldTest
 {
 
     // Will be used when creating the field object for this test
@@ -70,6 +70,38 @@ final class CheckboxTest extends Field
     /**
      *
      */
+    public function testSetAndGetChoices()
+    {
+
+        $field = new Checkbox('', '', '');
+
+        $this->assertEquals([], $field->getChoices());
+
+        $field->setChoices(['duih', 'e89oh']);
+
+        $this->assertEquals(['duih', 'e89oh'], $field->getChoices());
+
+    }
+
+    /**
+     *
+     */
+    public function testSetAndGetDefaultValue()
+    {
+
+        $field = new Checkbox('', '', '');
+
+        $this->assertEquals('', $field->getDefaultValue());
+
+        $field->setDefaultValue('d89oi');
+
+        $this->assertEquals('d89oi', $field->getDefaultValue());
+
+    }
+
+    /**
+     *
+     */
     public function testSetAndGetLayout()
     {
 
@@ -80,6 +112,22 @@ final class CheckboxTest extends Field
         $field->setLayout(true);
 
         $this->assertEquals(true, $field->getLayout());
+
+    }
+
+    /**
+     *
+     */
+    public function testSetAndGetReturnFormat()
+    {
+
+        $field = new Checkbox('', '', '');
+
+        $this->assertEquals('value', $field->getReturnFormat());
+
+        $field->setReturnFormat('hd89goil');
+
+        $this->assertEquals('hd89goil', $field->getReturnFormat());
 
     }
 

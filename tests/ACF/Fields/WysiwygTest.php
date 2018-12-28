@@ -9,10 +9,10 @@
 namespace Fewbricks\Tests\ACF\Fields;
 
 use Fewbricks\ACF\Fields\Wysiwyg;
-use Fewbricks\Tests\ACF\Field;
+use Fewbricks\Tests\ACF\FieldTest;
 use Fewbricks\Tests\FieldHelper;
 
-final class WysiwygTest extends Field
+final class WysiwygTest extends FieldTest
 {
 
     // Will be used when creating the field object for this test
@@ -54,12 +54,28 @@ final class WysiwygTest extends Field
     /**
      *
      */
+    public function testSetAndGetDefaultValue()
+    {
+
+        $field = new Wysiwyg('', '', '');
+
+        $this->assertEquals('', $field->getDefaultValue());
+
+        $field->setDefaultValue('dg8igol');
+
+        $this->assertEquals('dg8igol', $field->getDefaultValue());
+
+    }
+
+    /**
+     *
+     */
     public function testSetAndGetDelay()
     {
 
         $field = new Wysiwyg('', '', '');
 
-        $this->assertEquals(false, $field->getDelay());
+        $this->assertEquals(0, $field->getDelay());
 
         $field->setDelay(true);
 
@@ -75,9 +91,9 @@ final class WysiwygTest extends Field
 
         $field = new Wysiwyg('', '', '');
 
-        $this->assertEquals(true, $field->getMediaUpload());
+        $this->assertEquals(1, $field->getMediaUpload());
 
-        $field->setDelay(false);
+        $field->setMediaUpload(false);
 
         $this->assertEquals(true, $field->getMediaUpload());
 
@@ -114,6 +130,5 @@ final class WysiwygTest extends Field
         $this->assertEquals('r87sfi', $field->getToolbar());
 
     }
-
 
 }

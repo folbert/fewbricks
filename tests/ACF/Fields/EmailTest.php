@@ -8,10 +8,11 @@
 
 namespace Fewbricks\Tests\ACF\Fields;
 
-use Fewbricks\Tests\ACF\Field;
+use Fewbricks\ACF\Fields\Email;
+use Fewbricks\Tests\ACF\FieldTest;
 use Fewbricks\Tests\FieldHelper;
 
-final class EmailTest extends Field
+final class EmailTest extends FieldTest
 {
 
     // Will be used when creating the field object for this test
@@ -47,6 +48,58 @@ final class EmailTest extends Field
             FieldHelper::getExpectedFieldValues($field, $settings),
             $field->toAcfArray($settings['test__key_prefix'])
         );
+
+    }
+
+    public function testSetAndGetAppend()
+    {
+
+        $field = new Email('', '', '');
+
+        $this->assertEquals('', $field->getAppend());
+
+        $field->setAppend('89goi');
+
+        $this->assertEquals('89goi', $field->getAppend());
+
+    }
+
+    public function testSetAndGetDefaultValue()
+    {
+
+        $field = new Email('', '', '');
+
+        $this->assertEquals('', $field->getDefaultValue());
+
+        $field->setDefaultValue('dh98go');
+
+        $this->assertEquals('dh98go', $field->getDefaultValue());
+
+    }
+
+    public function testSetAndGetPlaceholder()
+    {
+
+        $field = new Email('', '', '');
+
+        $this->assertEquals('', $field->getPlaceholder());
+
+        $field->setPlaceholder('t7tiu');
+
+        $this->assertEquals('t7tiu', $field->getPlaceholder());
+
+    }
+
+    public function testSetAndGetPrepend()
+    {
+
+        $field = new Email('', '', '');
+
+        $this->assertEquals('', $field->getPrepend());
+
+        $field->setPrepend('dt78ti');
+
+        $this->assertEquals('dt78ti', $field->getPrepend());
 
     }
 

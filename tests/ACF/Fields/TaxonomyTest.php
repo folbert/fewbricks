@@ -9,10 +9,10 @@
 namespace Fewbricks\Tests\ACF\Fields;
 
 use Fewbricks\ACF\Fields\Taxonomy;
-use Fewbricks\Tests\ACF\Field;
+use Fewbricks\Tests\ACF\FieldTest;
 use Fewbricks\Tests\FieldHelper;
 
-final class TaxonomyTest extends Field
+final class TaxonomyTest extends FieldTest
 {
 
     // Will be used when creating the field object for this test
@@ -59,7 +59,7 @@ final class TaxonomyTest extends Field
 
         $field = new Taxonomy('', '', '');
 
-        $this->assertEquals(true, $field->getAddTerm());
+        $this->assertEquals(1, $field->getAddTerm());
 
         $field->setAddTerm(false);
 
@@ -75,7 +75,7 @@ final class TaxonomyTest extends Field
 
         $field = new Taxonomy('', '', '');
 
-        $this->assertEquals(false, $field->getAllowNull());
+        $this->assertEquals(0, $field->getAllowNull());
 
         $field->setAllowNull(true);
 
@@ -107,7 +107,7 @@ final class TaxonomyTest extends Field
 
         $field = new Taxonomy('', '', '');
 
-        $this->assertEquals(false, $field->getLoadTerms());
+        $this->assertEquals(0, $field->getLoadTerms());
 
         $field->setLoadTerms(true);
 
@@ -139,7 +139,7 @@ final class TaxonomyTest extends Field
 
         $field = new Taxonomy('', '', '');
 
-        $this->assertEquals(false, $field->getSaveTerms());
+        $this->assertEquals(0, $field->getSaveTerms());
 
         $field->setSaveTerms(true);
 
@@ -157,9 +157,9 @@ final class TaxonomyTest extends Field
 
         $this->assertEquals('category', $field->getTaxonomy());
 
-        $field->setAddTerm('custom_category_yd98goi');
+        $field->setTaxonomy('custom_category_yd98goi');
 
-        $this->assertEquals('custom_category_yd98goi', $field->getAddTerm());
+        $this->assertEquals('custom_category_yd98goi', $field->getTaxonomy());
 
     }
 

@@ -9,10 +9,10 @@
 namespace Fewbricks\Tests\ACF\Fields;
 
 use Fewbricks\ACF\Fields\ColorPicker;
-use Fewbricks\Tests\ACF\Field;
+use Fewbricks\Tests\ACF\FieldTest;
 use Fewbricks\Tests\FieldHelper;
 
-final class ColorPickerTest extends Field
+final class ColorPickerTest extends FieldTest
 {
 
     // Will be used when creating the field object for this test
@@ -52,7 +52,7 @@ final class ColorPickerTest extends Field
     }
 
     /**
-     * 
+     *
      */
     public function testSetAndGetDefaultValue()
     {

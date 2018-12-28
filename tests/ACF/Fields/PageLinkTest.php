@@ -9,10 +9,10 @@
 namespace Fewbricks\Tests\ACF\Fields;
 
 use Fewbricks\ACF\Fields\PageLink;
-use Fewbricks\Tests\ACF\Field;
+use Fewbricks\Tests\ACF\FieldTest;
 use Fewbricks\Tests\FieldHelper;
 
-final class PageLinkTest extends Field
+final class PageLinkTest extends FieldTest
 {
 
     // Will be used when creating the field object for this test
@@ -54,12 +54,28 @@ final class PageLinkTest extends Field
     /**
      *
      */
+    public function testSetAndGetAllowNull()
+    {
+
+        $field = new PageLink('', '', '');
+
+        $this->assertEquals(0, $field->getAllowNull());
+
+        $field->setAllowNull(true);
+
+        $this->assertEquals(true, $field->getAllowNull());
+
+    }
+
+    /**
+     *
+     */
     public function testSetAndGetAllowArchives()
     {
 
         $field = new PageLink('', '', '');
 
-        $this->assertEquals(true, $field->getAllowArchives());
+        $this->assertEquals(1, $field->getAllowArchives());
 
         $field->setAllowArchives(false);
 
@@ -75,7 +91,7 @@ final class PageLinkTest extends Field
 
         $field = new PageLink('', '', '');
 
-        $this->assertEquals(false, $field->getMultiple());
+        $this->assertEquals(0, $field->getMultiple());
 
         $field->setMultiple(true);
 

@@ -9,10 +9,10 @@
 namespace Fewbricks\Tests\ACF\Fields;
 
 use Fewbricks\ACF\Fields\DateTimePicker;
-use Fewbricks\Tests\ACF\Field;
+use Fewbricks\Tests\ACF\FieldTest;
 use Fewbricks\Tests\FieldHelper;
 
-final class DateTimePickerTest extends Field
+final class DateTimePickerTest extends FieldTest
 {
 
     // Will be used when creating the field object for this test
@@ -64,6 +64,22 @@ final class DateTimePickerTest extends Field
         $field->setDisplayFormat('loremdy98oi');
 
         $this->assertEquals('loremdy98oi', $field->getDisplayFormat());
+
+    }
+
+    /**
+     *
+     */
+    public function testSetAndGetFirstDay()
+    {
+
+        $field = new DateTimePicker('', '', '');
+
+        $this->assertEquals(1, $field->getFirstDay());
+
+        $field->setFirstDay(2);
+
+        $this->assertEquals(2, $field->getFirstDay());
 
     }
 

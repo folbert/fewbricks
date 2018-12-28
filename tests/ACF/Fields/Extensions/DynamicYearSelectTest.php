@@ -9,10 +9,10 @@
 namespace Fewbricks\Tests\ACF\Fields\Extensions;
 
 use Fewbricks\ACF\Fields\Extensions\DynamicYearSelect;
-use Fewbricks\Tests\ACF\Field;
+use Fewbricks\Tests\ACF\FieldTest;
 use Fewbricks\Tests\FieldHelper;
 
-final class DynamicYearSelectTest extends Field
+final class DynamicYearSelectTest extends FieldTest
 {
 
     // Will be used when creating the field object for this test

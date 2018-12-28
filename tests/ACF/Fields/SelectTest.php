@@ -9,10 +9,10 @@
 namespace Fewbricks\Tests\ACF\Fields;
 
 use Fewbricks\ACF\Fields\Select;
-use Fewbricks\Tests\ACF\Field;
+use Fewbricks\Tests\ACF\FieldTest;
 use Fewbricks\Tests\FieldHelper;
 
-final class SelectTest extends Field
+final class SelectTest extends FieldTest
 {
 
     // Will be used when creating the field object for this test
@@ -65,11 +65,59 @@ final class SelectTest extends Field
 
         $field = new Select('', '', '');
 
-        $this->assertEquals(false, $field->getAjax());
+        $this->assertEquals(0, $field->getAjax());
 
         $field->setAjax(true);
 
         $this->assertEquals(true, $field->getAjax());
+
+    }
+
+    /**
+     *
+     */
+    public function testSetAndGetAllowNull()
+    {
+
+        $field = new Select('', '', '');
+
+        $this->assertEquals(0, $field->getAllowNull());
+
+        $field->setAllowNull(true);
+
+        $this->assertEquals(true, $field->getAllowNull());
+
+    }
+
+    /**
+     *
+     */
+    public function testSetAndGetChoices()
+    {
+
+        $field = new Select('', '', '');
+
+        $this->assertEquals([], $field->getChoices());
+
+        $field->setChoices(['sjoil', 'dgiuv']);
+
+        $this->assertEquals(['sjoil', 'dgiuv'], $field->getChoices());
+
+    }
+
+    /**
+     *
+     */
+    public function testSetAndGetDefaultValue()
+    {
+
+        $field = new Select('', '', '');
+
+        $this->assertEquals('', $field->getDefaultValue());
+
+        $field->setDefaultValue('hoihl');
+
+        $this->assertEquals('hoihl', $field->getDefaultValue());
 
     }
 
@@ -86,6 +134,22 @@ final class SelectTest extends Field
         $field->setMultiple(true);
 
         $this->assertEquals(true, $field->getMultiple());
+
+    }
+
+    /**
+     *
+     */
+    public function testSetAndGetReturnFormat()
+    {
+
+        $field = new Select('', '', '');
+
+        $this->assertEquals('value', $field->getReturnFormat());
+
+        $field->setReturnFormat('h98goil');
+
+        $this->assertEquals('h98goil', $field->getReturnFormat());
 
     }
 

@@ -9,10 +9,10 @@
 namespace Fewbricks\Tests\ACF\Fields;
 
 use Fewbricks\ACF\Fields\Textarea;
-use Fewbricks\Tests\ACF\Field;
+use Fewbricks\Tests\ACF\FieldTest;
 use Fewbricks\Tests\FieldHelper;
 
-final class TextareaTest extends Field
+final class TextareaTest extends FieldTest
 {
 
     // Will be used when creating the field object for this test
@@ -48,6 +48,22 @@ final class TextareaTest extends Field
             FieldHelper::getExpectedFieldValues($field, $settings),
             $field->toAcfArray($settings['test__key_prefix'])
         );
+
+    }
+
+    /**
+     *
+     */
+    public function testSetAndGetDefaultValue()
+    {
+
+        $field = new Textarea('', '', '');
+
+        $this->assertEquals('', $field->getDefaultValue());
+
+        $field->setDefaultValue('h8oigil');
+
+        $this->assertEquals('h8oigil', $field->getDefaultValue());
 
     }
 

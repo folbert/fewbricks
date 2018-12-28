@@ -9,10 +9,10 @@
 namespace Fewbricks\Tests\ACF\Fields;
 
 use Fewbricks\ACF\Fields\TimePicker;
-use Fewbricks\Tests\ACF\Field;
+use Fewbricks\Tests\ACF\FieldTest;
 use Fewbricks\Tests\FieldHelper;
 
-final class TimePickerTest extends Field
+final class TimePickerTest extends FieldTest
 {
 
     // Will be used when creating the field object for this test
@@ -64,6 +64,22 @@ final class TimePickerTest extends Field
         $field->setDisplayFormat('sy89xgol');
 
         $this->assertEquals('sy89xgol', $field->getDisplayFormat());
+
+    }
+
+    /**
+     *
+     */
+    public function testSetAndGetReturnFormat()
+    {
+
+        $field = new TimePicker('', '', '');
+
+        $this->assertEquals('g:i a', $field->getReturnFormat());
+
+        $field->setReturnFormat('sy89xgol');
+
+        $this->assertEquals('sy89xgol', $field->getReturnFormat());
 
     }
 

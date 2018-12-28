@@ -9,10 +9,10 @@
 namespace Fewbricks\Tests\ACF\Fields;
 
 use Fewbricks\ACF\Fields\GoogleMap;
-use Fewbricks\Tests\ACF\Field;
+use Fewbricks\Tests\ACF\FieldTest;
 use Fewbricks\Tests\FieldHelper;
 
-final class GoogleMapTest extends Field
+final class GoogleMapTest extends FieldTest
 {
 
     // Will be used when creating the field object for this test
@@ -59,7 +59,7 @@ final class GoogleMapTest extends Field
 
         $field = new GoogleMap('', '', '');
 
-        $this->assertEquals('-37.81411', $field->getCenterLat());
+        $this->assertEquals('', $field->getCenterLat());
 
         $field->setCenterLat('23.2767');
 
@@ -75,7 +75,7 @@ final class GoogleMapTest extends Field
 
         $field = new GoogleMap('', '', '');
 
-        $this->assertEquals('144.96328', $field->getCenterLng());
+        $this->assertEquals('', $field->getCenterLng());
 
         $field->setCenterLng('127.456');
 
@@ -91,7 +91,7 @@ final class GoogleMapTest extends Field
 
         $field = new GoogleMap('', '', '');
 
-        $this->assertEquals('400', $field->getHeight());
+        $this->assertEquals('', $field->getHeight());
 
         $field->setHeight('250');
 
@@ -107,7 +107,7 @@ final class GoogleMapTest extends Field
 
         $field = new GoogleMap('', '', '');
 
-        $this->assertEquals('14', $field->getZoom());
+        $this->assertEquals('', $field->getZoom());
 
         $field->setZoom('3');
 

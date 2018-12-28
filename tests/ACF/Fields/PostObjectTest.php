@@ -9,10 +9,10 @@
 namespace Fewbricks\Tests\ACF\Fields;
 
 use Fewbricks\ACF\Fields\PostObject;
-use Fewbricks\Tests\ACF\Field;
+use Fewbricks\Tests\ACF\FieldTest;
 use Fewbricks\Tests\FieldHelper;
 
-final class PostObjectTest extends Field
+final class PostObjectTest extends FieldTest
 {
 
     // Will be used when creating the field object for this test
@@ -59,7 +59,7 @@ final class PostObjectTest extends Field
 
         $field = new PostObject('', '', '');
 
-        $this->assertEquals(false, $field->getAllowNull());
+        $this->assertEquals(0, $field->getAllowNull());
 
         $field->setAllowNull(true);
 
@@ -75,7 +75,7 @@ final class PostObjectTest extends Field
 
         $field = new PostObject('', '', '');
 
-        $this->assertEquals(false, $field->getMultiple());
+        $this->assertEquals(0, $field->getMultiple());
 
         $field->setMultiple(true);
 

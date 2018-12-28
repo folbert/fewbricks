@@ -153,7 +153,7 @@ class FieldWithImages extends Field
     /**
      * ACF setting. Don't use or pass an empty value for all types.
      *
-     * @param array $mimeTypes Max file size in MB
+     * @param array|string $mimeTypes Comma separated string or array
      * @return $this
      */
     public function setMimeTypes($mimeTypes)

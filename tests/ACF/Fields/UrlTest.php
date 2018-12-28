@@ -9,10 +9,10 @@
 namespace Fewbricks\Tests\ACF\Fields;
 
 use Fewbricks\ACF\Fields\Url;
-use Fewbricks\Tests\ACF\Field;
+use Fewbricks\Tests\ACF\FieldTest;
 use Fewbricks\Tests\FieldHelper;
 
-final class UrlTest extends Field
+final class UrlTest extends FieldTest
 {
 
     // Will be used when creating the field object for this test
@@ -54,16 +54,32 @@ final class UrlTest extends Field
     /**
      *
      */
-    public function testSetAndGetPlaceholder()
+    public function testSetAndGetDefaultValue()
     {
 
         $field = new Url('', '', '');
 
         $this->assertEquals('', $field->getDefaultValue());
 
-        $field->setDefaultValue('dh8siohi');
+        $field->setDefaultValue('g87fiu');
 
-        $this->assertEquals('dh8siohi', $field->getDefaultValue());
+        $this->assertEquals('g87fiu', $field->getDefaultValue());
+
+    }
+
+    /**
+     *
+     */
+    public function testSetAndGetPlaceholder()
+    {
+
+        $field = new Url('', '', '');
+
+        $this->assertEquals('', $field->getPlaceholder());
+
+        $field->setPlaceholder('dh8siohi');
+
+        $this->assertEquals('dh8siohi', $field->getPlaceholder());
 
     }
 

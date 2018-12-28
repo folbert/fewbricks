@@ -9,10 +9,10 @@
 namespace Fewbricks\Tests\ACF\Fields;
 
 use Fewbricks\ACF\Fields\TrueFalse;
-use Fewbricks\Tests\ACF\Field;
+use Fewbricks\Tests\ACF\FieldTest;
 use Fewbricks\Tests\FieldHelper;
 
-final class TrueFalseTest extends Field
+final class TrueFalseTest extends FieldTest
 {
 
     // Will be used when creating the field object for this test
@@ -70,12 +70,28 @@ final class TrueFalseTest extends Field
     /**
      *
      */
+    public function testSetAndGetMessage()
+    {
+
+        $field = new TrueFalse('', '', '');
+
+        $this->assertEquals('', $field->getMessage());
+
+        $field->setMessage('hg78iu');
+
+        $this->assertEquals('hg78iu', $field->getMessage());
+
+    }
+
+    /**
+     *
+     */
     public function testSetAndGetUi()
     {
 
         $field = new TrueFalse('', '', '');
 
-        $this->assertEquals(false, $field->getUi());
+        $this->assertEquals(0, $field->getUi());
 
         $field->setUi(true);
 
