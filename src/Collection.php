@@ -216,17 +216,22 @@ class Collection
     }
 
     /**
-     * @param $key
+     * @param $keyToSearchFor
      * @return mixed
      */
-    public function getItemByKey(string $key)
+    public function getItemByKey(string $keyToSearchFor)
     {
 
         $foundItem = false;
 
-        if (isset($this->items[$key])) {
+        foreach($this->items AS $key => $item) {
 
-            $foundItem = $this->items[$key];
+            if($this->keySearchMatch($keyToSearchFor, $key, $item)) {
+
+                $foundItem = $item;
+                break;
+
+            }
 
         }
 
@@ -247,7 +252,7 @@ class Collection
 
         foreach ($this->items AS $key => $item) {
 
-            if ($key === $keyToSearchFor) {
+            if ($this->keySearchMatch($keyToSearchFor, $key, $item)) {
 
                 $position = $positionTracker;
                 break;
@@ -259,6 +264,18 @@ class Collection
         }
 
         return $position;
+
+    }
+
+    /**
+     * @param $keyToSearchFor
+     * @param $arrayKey
+     * @param $item
+     * @return bool
+     */
+    protected function keySearchMatch($keyToSearchFor, $arrayKey, $item) {
+
+        return $keyToSearchFor === $arrayKey;
 
     }
 
@@ -297,12 +314,27 @@ class Collection
     }
 
     /**
-     * @param $key
+     * @param $keyToSearchFor
      * @return bool
      */
-    public function keyExists($key)
+    public function keyExists($keyToSearchFor)
     {
-        return isset($this->items[$key]);
+
+        $keyExists = false;
+
+        foreach($this->items AS $key => $item) {
+
+            if($this->keySearchMatch($keyToSearchFor, $key, $item)) {
+
+                $keyExists = true;
+                break;
+
+            }
+
+        }
+
+        return $keyExists;
+
     }
 
     /**

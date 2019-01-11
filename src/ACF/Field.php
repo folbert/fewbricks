@@ -304,7 +304,7 @@ class Field
      * @param string $keyPrefix
      * @return string
      */
-    private function getFinalKey(string $keyPrefix = '')
+    public function getFinalKey(string $keyPrefix = '')
     {
 
         if(!empty($keyPrefix)) {
@@ -342,7 +342,7 @@ class Field
     /**
      * @return string
      */
-    private function getFinalName()
+    public function getFinalName()
     {
 
         $namePrefix = '';

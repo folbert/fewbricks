@@ -8,7 +8,7 @@ use Fewbricks\ACF\FieldGroupLocationRuleGroup;
 use Fewbricks\ACF\Fields\Text;
 use Fewbricks\ACF\RuleGroupCollection;
 use Fewbricks\Exceptions\DuplicateKeyException;
-use Fewbricks\Tests\ImageAndTextBrick;
+use Fewbricks\Tests\TextAndUrlBrick;
 use PHPUnit\Framework\TestCase;
 
 final class FieldGroupTest extends TestCase
@@ -298,15 +298,15 @@ final class FieldGroupTest extends TestCase
         );
 
         $fieldGroup->addBrick(
-            (new ImageAndTextBrick('image_n_text', '1812112239a'))
+            (new TextAndUrlBrick('image_n_text', '1812112239a'))
         );
 
         $fieldGroup->addBrick(
-            new ImageAndTextBrick('brick_to_be_removed_by_name', '1812112247a')
+            new TextAndUrlBrick('brick_to_be_removed_by_name', '1812112247a')
         );
 
         $fieldGroup->addBrick(
-            new ImageAndTextBrick('to_be_kept', '1812112248a')
+            new TextAndUrlBrick('to_be_kept', '1812112248a')
         );
 
         $fieldGroup->removeBrickByName('brick_to_be_removed_by_name');
@@ -324,10 +324,10 @@ final class FieldGroupTest extends TestCase
                     'type' => 'text',
                 ],
                 [
-                    'key' => 'field_1812112152b_1812112239a_1812112246a',
-                    'label' => 'A textarea',
-                    'name' => 'image_n_text_my_textarea',
-                    'fewbricks__original_key' => '1812112246a',
+                    'key' => 'field_1812112152b_1812112239a_imageandtextbrickfield_text_key',
+                    'label' => 'A text',
+                    'name' => 'image_n_text_my_text',
+                    'fewbricks__original_key' => 'imageandtextbrickfield_text_key',
                     'fewbricks__parents' => [
                         [
                             'key' => '1812112239a',
@@ -335,13 +335,13 @@ final class FieldGroupTest extends TestCase
                             'type' => 'brick',
                         ]
                     ],
-                    'type' => 'textarea',
+                    'type' => 'text',
                 ],
                 [
-                    'key' => 'field_1812112152b_1812112239a_1811122246a',
+                    'key' => 'field_1812112152b_1812112239a_imageandtextbrickfield_url_key',
                     'label' => 'The URL',
                     'name' => 'image_n_text_my_url',
-                    'fewbricks__original_key' => '1811122246a',
+                    'fewbricks__original_key' => 'imageandtextbrickfield_url_key',
                     'fewbricks__parents' => [
                         [
                             'key' => '1812112239a',
@@ -352,10 +352,10 @@ final class FieldGroupTest extends TestCase
                     'type' => 'url',
                 ],
                 [
-                    'key' => 'field_1812112152b_1812112248a_1812112246a',
-                    'label' => 'A textarea',
-                    'name' => 'to_be_kept_my_textarea',
-                    'fewbricks__original_key' => '1812112246a',
+                    'key' => 'field_1812112152b_1812112248a_imageandtextbrickfield_text_key',
+                    'label' => 'A text',
+                    'name' => 'to_be_kept_my_text',
+                    'fewbricks__original_key' => 'imageandtextbrickfield_text_key',
                     'fewbricks__parents' => [
                         [
                             'key' => '1812112248a',
@@ -363,13 +363,13 @@ final class FieldGroupTest extends TestCase
                             'type' => 'brick',
                         ]
                     ],
-                    'type' => 'textarea',
+                    'type' => 'text',
                 ],
                 [
-                    'key' => 'field_1812112152b_1812112248a_1811122246a',
+                    'key' => 'field_1812112152b_1812112248a_imageandtextbrickfield_url_key',
                     'label' => 'The URL',
                     'name' => 'to_be_kept_my_url',
-                    'fewbricks__original_key' => '1811122246a',
+                    'fewbricks__original_key' => 'imageandtextbrickfield_url_key',
                     'fewbricks__parents' => [
                         [
                             'key' => '1812112248a',
@@ -398,15 +398,15 @@ final class FieldGroupTest extends TestCase
         );
 
         $fieldGroup->addBrick(
-            (new ImageAndTextBrick('image_n_text', '1812112239a'))
+            (new TextAndUrlBrick('image_n_text', '1812112239a'))
         );
 
         $fieldGroup->addBrick(
-            new ImageAndTextBrick('to_be_removed_by_key', '1812112247b')
+            new TextAndUrlBrick('to_be_removed_by_key', '1812112247b')
         );
 
         $fieldGroup->addBrick(
-            new ImageAndTextBrick('to_be_kept', '1812112248a')
+            new TextAndUrlBrick('to_be_kept', '1812112248a')
         );
 
         $fieldGroup->removeBrickByKey('1812112247b');
@@ -424,10 +424,10 @@ final class FieldGroupTest extends TestCase
                     'type' => 'text',
                 ],
                 [
-                    'key' => 'field_1812112152b_1812112239a_1812112246a',
-                    'label' => 'A textarea',
-                    'name' => 'image_n_text_my_textarea',
-                    'fewbricks__original_key' => '1812112246a',
+                    'key' => 'field_1812112152b_1812112239a_imageandtextbrickfield_text_key',
+                    'label' => 'A text',
+                    'name' => 'image_n_text_my_text',
+                    'fewbricks__original_key' => 'imageandtextbrickfield_text_key',
                     'fewbricks__parents' => [
                         [
                             'key' => '1812112239a',
@@ -435,13 +435,13 @@ final class FieldGroupTest extends TestCase
                             'type' => 'brick',
                         ]
                     ],
-                    'type' => 'textarea',
+                    'type' => 'text',
                 ],
                 [
-                    'key' => 'field_1812112152b_1812112239a_1811122246a',
+                    'key' => 'field_1812112152b_1812112239a_imageandtextbrickfield_url_key',
                     'label' => 'The URL',
                     'name' => 'image_n_text_my_url',
-                    'fewbricks__original_key' => '1811122246a',
+                    'fewbricks__original_key' => 'imageandtextbrickfield_url_key',
                     'fewbricks__parents' => [
                         [
                             'key' => '1812112239a',
@@ -452,10 +452,10 @@ final class FieldGroupTest extends TestCase
                     'type' => 'url',
                 ],
                 [
-                    'key' => 'field_1812112152b_1812112248a_1812112246a',
-                    'label' => 'A textarea',
-                    'name' => 'to_be_kept_my_textarea',
-                    'fewbricks__original_key' => '1812112246a',
+                    'key' => 'field_1812112152b_1812112248a_imageandtextbrickfield_text_key',
+                    'label' => 'A text',
+                    'name' => 'to_be_kept_my_text',
+                    'fewbricks__original_key' => 'imageandtextbrickfield_text_key',
                     'fewbricks__parents' => [
                         [
                             'key' => '1812112248a',
@@ -463,13 +463,13 @@ final class FieldGroupTest extends TestCase
                             'type' => 'brick',
                         ]
                     ],
-                    'type' => 'textarea',
+                    'type' => 'text',
                 ],
                 [
-                    'key' => 'field_1812112152b_1812112248a_1811122246a',
+                    'key' => 'field_1812112152b_1812112248a_imageandtextbrickfield_url_key',
                     'label' => 'The URL',
                     'name' => 'to_be_kept_my_url',
-                    'fewbricks__original_key' => '1811122246a',
+                    'fewbricks__original_key' => 'imageandtextbrickfield_url_key',
                     'fewbricks__parents' => [
                         [
                             'key' => '1812112248a',
@@ -495,11 +495,11 @@ final class FieldGroupTest extends TestCase
         );
 
         $fieldGroup->addBrick(
-            (new ImageAndTextBrick('image_n_text', '1812112239a'))
+            (new TextAndUrlBrick('image_n_text', '1812112239a'))
         );
 
         $fieldGroup->addBrick(
-            new ImageAndTextBrick('to_be_kept', '1812112248a')
+            new TextAndUrlBrick('to_be_kept', '1812112248a')
         );
 
         $acfArray = $fieldGroup->toAcfArray('1812112152b');
@@ -515,10 +515,10 @@ final class FieldGroupTest extends TestCase
                     'type' => 'text',
                 ],
                 [
-                    'key' => 'field_1812112152b_1812112239a_1812112246a',
-                    'label' => 'A textarea',
-                    'name' => 'image_n_text_my_textarea',
-                    'fewbricks__original_key' => '1812112246a',
+                    'key' => 'field_1812112152b_1812112239a_imageandtextbrickfield_text_key',
+                    'label' => 'A text',
+                    'name' => 'image_n_text_my_text',
+                    'fewbricks__original_key' => 'imageandtextbrickfield_text_key',
                     'fewbricks__parents' => [
                         [
                             'key' => '1812112239a',
@@ -526,13 +526,13 @@ final class FieldGroupTest extends TestCase
                             'type' => 'brick',
                         ]
                     ],
-                    'type' => 'textarea',
+                    'type' => 'text',
                 ],
                 [
-                    'key' => 'field_1812112152b_1812112239a_1811122246a',
+                    'key' => 'field_1812112152b_1812112239a_imageandtextbrickfield_url_key',
                     'label' => 'The URL',
                     'name' => 'image_n_text_my_url',
-                    'fewbricks__original_key' => '1811122246a',
+                    'fewbricks__original_key' => 'imageandtextbrickfield_url_key',
                     'fewbricks__parents' => [
                         [
                             'key' => '1812112239a',
@@ -543,10 +543,10 @@ final class FieldGroupTest extends TestCase
                     'type' => 'url',
                 ],
                 [
-                    'key' => 'field_1812112152b_1812112248a_1812112246a',
-                    'label' => 'A textarea',
-                    'name' => 'to_be_kept_my_textarea',
-                    'fewbricks__original_key' => '1812112246a',
+                    'key' => 'field_1812112152b_1812112248a_imageandtextbrickfield_text_key',
+                    'label' => 'A text',
+                    'name' => 'to_be_kept_my_text',
+                    'fewbricks__original_key' => 'imageandtextbrickfield_text_key',
                     'fewbricks__parents' => [
                         [
                             'key' => '1812112248a',
@@ -554,13 +554,13 @@ final class FieldGroupTest extends TestCase
                             'type' => 'brick',
                         ]
                     ],
-                    'type' => 'textarea',
+                    'type' => 'text',
                 ],
                 [
-                    'key' => 'field_1812112152b_1812112248a_1811122246a',
+                    'key' => 'field_1812112152b_1812112248a_imageandtextbrickfield_url_key',
                     'label' => 'The URL',
                     'name' => 'to_be_kept_my_url',
-                    'fewbricks__original_key' => '1811122246a',
+                    'fewbricks__original_key' => 'imageandtextbrickfield_url_key',
                     'fewbricks__parents' => [
                         [
                             'key' => '1812112248a',

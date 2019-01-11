@@ -95,7 +95,7 @@ final class WysiwygTest extends FieldTest
 
         $field->setMediaUpload(false);
 
-        $this->assertEquals(true, $field->getMediaUpload());
+        $this->assertEquals(false, $field->getMediaUpload());
 
     }
 

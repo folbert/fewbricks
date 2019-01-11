@@ -253,10 +253,10 @@ class FieldCollection extends Collection implements FieldCollectionInterface
     }
 
     /**
-     * @param string $name
+     * @param string $nameToSearchFor
      * @return bool|mixed
      */
-    public function getFieldByName(string $name)
+    public function getFieldByName(string $nameToSearchFor)
     {
 
         $field = false;
@@ -265,11 +265,11 @@ class FieldCollection extends Collection implements FieldCollectionInterface
          * @var string $itemKey
          * @var Field $possibleField
          */
-        foreach ($this->items AS $itemKey => $possibleField) {
+        foreach ($this->items AS $possibleField) {
 
-            if ($possibleField->getName() === $name) {
+            if ($possibleField->getFinalName() === $nameToSearchFor) {
 
-                $field = parent::getItemByKey($itemKey);
+                $field = parent::getItemByKey($possibleField->getKey());
                 break;
 
             }
@@ -713,6 +713,18 @@ class FieldCollection extends Collection implements FieldCollectionInterface
         }
 
         return $acfArray;
+
+    }
+
+    /**
+     * @param $keyToSearchFor
+     * @param $arrayKey
+     * @param $item
+     * @return bool
+     */
+    protected function keySearchMatch($keyToSearchFor, $arrayKey, $item) {
+
+        return $item->getKey() === $keyToSearchFor;
 
     }
 
