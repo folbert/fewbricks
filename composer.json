@@ -24,7 +24,8 @@
         "issues": "https://github.com/folbert/fewbricks/issues"
     },
     "require": {
-        "php": ">=7.0"
+        "php": ">=7.0",
+        "folbert/acf-hidden": "1.5.1"
     },
     "autoload": {
         "psr-4": {
