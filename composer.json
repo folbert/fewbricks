@@ -25,7 +25,7 @@
     },
     "require": {
         "php": ">=7.0",
-        "folbert/acf-hidden": "1.5.1"
+        "folbert/acf-fewbricks-hidden": "1.2"
     },
     "autoload": {
         "psr-4": {
