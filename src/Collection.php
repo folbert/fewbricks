@@ -362,7 +362,7 @@ class Collection
 
         foreach ($this->items AS $itemKey => $item) {
 
-            if ($item->$functionName() === $value) {
+            if (method_exists($item, $functionName) && $item->$functionName() === $value) {
                 $this->removeItem($itemKey);
             }
 
