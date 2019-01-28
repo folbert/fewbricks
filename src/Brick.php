@@ -46,22 +46,27 @@ class Brick extends FieldCollection implements BrickInterface
     private $postIdToGetFieldFrom;
 
     /**
-     * @param string $name Name to use when fetching data for the brick.
      * @param string $key This value must be unique system wide. See the documentation for more info on this.
      * Note that it only needs to be set when registering the brick to a field group, layout etc. There's no need to
      * pass it when called from the frontend to print the brick.
+     * @param string|boolean $name Name to use when fetching data for the brick. Set to false to use constant NAME
      * @param array $arguments Arbitrary arguments you want to pass to a brick instance to be used within your brick
      * class. This base class does not take any of those arguments into consideration.
      */
-    public function __construct(string $name, string $key = '', array $arguments = [])
+    public function __construct(string $key = '', $name = false, array $arguments = [])
     {
 
-        $this->name = $name;
         $this->data = [];
         $this->isLayout = false;
         $this->isOption = false;
         $this->isSubField = false;
         $this->postIdToGetFieldFrom = false;
+
+        if($name === false) {
+            $this->name = static::NAME;
+        } else {
+            $this->name = $name;
+        }
 
         parent::__construct($key, $arguments);
 

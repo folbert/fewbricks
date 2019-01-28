@@ -50,8 +50,8 @@ class AcfCoreFields extends Brick
         $this->addField((new Message('', 'brick_message', '1812102244b'))
             ->setMessage('Image and text below is from Brick "ImageAndText'));
 
-        $this->addBrick(new ImageAndText('imgtxt', '1812072139a'));
-        $this->addBrick(new ImageAndText('imgtxt2', '1812072139b'));
+        $this->addBrick(new ImageAndText('1812072139a', 'imgtxt'));
+        $this->addBrick(new ImageAndText('1812072139b', 'imgtxt2'));
 
         // ----------------
         // Flexible content
@@ -76,7 +76,7 @@ class AcfCoreFields extends Brick
         $flexibleContent->addLayout($layout);
 
         $layout = new Layout('Testing brick', 'fd_testing_brick', '1812051452a');
-        $layout->addBrick(new ImageAndText('brick_test', '1812051452u'));
+        $layout->addBrick(new ImageAndText('1812051452u', 'brick_test'));
         $flexibleContent->addLayout($layout);
 
         $layout = new Layout('Text and select', 'fd_text_and_select', '1711231907a');
@@ -149,7 +149,7 @@ class AcfCoreFields extends Brick
         $group->addField((new Message('', 'group_brick_message', '1812102244a'))
         ->setMessage('Image and text below is from Brick "ImageAndText'));
 
-        $group->addBrick(new ImageAndText('imgtxt', '1812072321a'));
+        $group->addBrick(new ImageAndText('1812072321a', 'imgtxt'));
 
         $this->addField($group);
 

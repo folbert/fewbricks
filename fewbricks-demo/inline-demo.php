@@ -76,7 +76,7 @@ $motivation = (new Wysiwyg('Please motivate', 'motivation', '1811292147a'))
     ])
     // What's a brick you wonder? Read under Bricks for more info
     ->addBrick(
-        (new ImageAndText('image_and_name', '1811290826a'))
+        (new ImageAndText('1811290826a', 'image_and_name'))
             ->addArgument('text_label', 'Name')
             ->addArgument('text_name', 'name')
     )

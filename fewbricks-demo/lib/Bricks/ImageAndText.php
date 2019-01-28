@@ -8,6 +8,8 @@ use Fewbricks\ACF\Fields\Text;
 class ImageAndText extends Brick
 {
 
+    const NAME = 'image_and_text';
+
     /**
      *
      */

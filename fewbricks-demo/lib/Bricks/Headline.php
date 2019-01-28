@@ -8,6 +8,8 @@ use Fewbricks\ACF\Fields\Text;
 class Headline extends Brick
 {
 
+    const NAME = 'headline';
+
     /**
      *
      */
