@@ -10,6 +10,6 @@ namespace Fewbricks;
 interface BrickInterface
 {
 
-    public function setUp();
+    public function set_up();
 
 }

@@ -10,24 +10,24 @@ use FewbricksDemo\Bricks\Headline;
 class FooterGlobalTexts extends FieldGroup
 {
 
-    public function setUp()
+    public function set_up()
     {
 
-        $this->addBrick(
+        $this->add_brick(
             (new Headline('column_1_headline', '1811292314a'))
-            ->addArgument('label', 'Column 1 Headline')
+            ->add_argument('label', 'Column 1 Headline')
         );
 
-        $this->addLocationRuleGroup(
+        $this->add_location_rule_group(
             (new FieldGroupLocationRuleGroup())
             ->addFieldGroupLocationRule(
                 new FieldGroupLocationRule('options_page', '==', 'fewbricks-demo-options--global-texts')
             )
         );
 
-        $this->setMenuOrder(20)
-            ->setDisplayInFewbricksDevTools(true)
-            ->setStyle('seamless')
+        $this->set_menu_order(20)
+            ->set_display_in_fewbricks_dev_tools(true)
+            ->set_style('seamless')
             ->register();
 
     }

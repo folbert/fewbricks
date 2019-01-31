@@ -23,7 +23,7 @@ class FieldGroupLocationRuleGroup extends RuleGroup
             Helper::fewbricksDie('You can only add instances of FieldGroupLocationRule to FieldGroupLocationRuleGroup');
         }
 
-        parent::addRule($rule);
+        parent::add_rule($rule);
 
         return $this;
 

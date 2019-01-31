@@ -24,10 +24,10 @@ class PostObject extends Field implements FieldInterface
      * @return mixed The value of the ACF setting "allow_null". Returns the default ACF value 0 if none has been
      * set using Fewbricks.
      */
-    public function getAllowNull()
+    public function get_allow_null()
     {
 
-        return $this->getSetting('allow_null', 0);
+        return $this->get_setting('allow_null', 0);
 
     }
 
@@ -35,10 +35,10 @@ class PostObject extends Field implements FieldInterface
      * @return mixed The value of the ACF setting multiple. Returns the default ACF value 0 if none has been
      * set using Fewbricks.
      */
-    public function getMultiple()
+    public function get_multiple()
     {
 
-        return $this->getSetting('multiple', 0);
+        return $this->get_setting('multiple', 0);
 
     }
 
@@ -46,10 +46,10 @@ class PostObject extends Field implements FieldInterface
      * @return mixed The value of the ACF setting "post_type". Returns the default ACF value of an empty array if none
      * has been set using Fewbricks.
      */
-    public function getPostType()
+    public function get_post_type()
     {
 
-        return $this->getSetting('post_type', []);
+        return $this->get_setting('post_type', []);
 
     }
 
@@ -57,10 +57,10 @@ class PostObject extends Field implements FieldInterface
      * @return mixed The value of the ACF setting "return_format". Returns the default ACF value "object" if none has
      * been set using Fewbricks.
      */
-    public function getReturnFormat()
+    public function get_return_format()
     {
 
-        return $this->getSetting('return_format', 'object');
+        return $this->get_setting('return_format', 'object');
 
     }
 
@@ -68,10 +68,10 @@ class PostObject extends Field implements FieldInterface
      * @return mixed The value of the ACF setting "taxonomy". Returns the default ACF value of an empty array if none
      * has been set using Fewbricks.
      */
-    public function getTaxonomy()
+    public function get_taxonomy()
     {
 
-        return $this->getSetting('taxonomy', []);
+        return $this->get_setting('taxonomy', []);
 
     }
 
@@ -81,10 +81,10 @@ class PostObject extends Field implements FieldInterface
      * @param boolean $allowNull
      * @return $this
      */
-    public function setAllowNull($allowNull)
+    public function set_allow_null($allowNull)
     {
 
-        return $this->setSetting('allow_null', $allowNull);
+        return $this->set_setting('allow_null', $allowNull);
 
     }
 
@@ -94,10 +94,10 @@ class PostObject extends Field implements FieldInterface
      * @param boolean $multiple
      * @return $this
      */
-    public function setMultiple($multiple)
+    public function set_multiple($multiple)
     {
 
-        return $this->setSetting('multiple', $multiple);
+        return $this->set_setting('multiple', $multiple);
 
     }
 
@@ -107,10 +107,10 @@ class PostObject extends Field implements FieldInterface
      * @param array $postType Array with post type names.
      * @return $this
      */
-    public function setPostType($postType)
+    public function set_post_type($postType)
     {
 
-        return $this->setSetting('post_type', $postType);
+        return $this->set_setting('post_type', $postType);
 
     }
 
@@ -120,10 +120,10 @@ class PostObject extends Field implements FieldInterface
      * @param $returnFormat "object" for post object or "id" for post id.
      * @return $this
      */
-    public function setReturnFormat($returnFormat)
+    public function set_return_format($returnFormat)
     {
 
-        return $this->setSetting('return_format', $returnFormat);
+        return $this->set_setting('return_format', $returnFormat);
 
     }
 
@@ -134,10 +134,10 @@ class PostObject extends Field implements FieldInterface
      *                               ["category:uncategorized"]
      * @return $this
      */
-    public function setTaxonomy($taxonomy)
+    public function set_taxonomy($taxonomy)
     {
 
-        return $this->setSetting('taxonomy', $taxonomy);
+        return $this->set_setting('taxonomy', $taxonomy);
 
     }
 

@@ -50,7 +50,7 @@ final class GroupTest extends FieldTest
 
         $this->assertEquals(
             FieldHelper::getExpectedFieldValues($field, $settings),
-            $field->toAcfArray($settings['test__key_prefix'])
+            $field->to_acf_array($settings['test__key_prefix'])
         );
 
     }
@@ -63,11 +63,11 @@ final class GroupTest extends FieldTest
 
         $field = new Group('', '', '');
 
-        $this->assertEquals('block', $field->getLayout());
+        $this->assertEquals('block', $field->get_layout());
 
-        $field->setLayout('table');
+        $field->set_layout('table');
 
-        $this->assertEquals('table', $field->getLayout());
+        $this->assertEquals('table', $field->get_layout());
 
     }
 
@@ -76,11 +76,11 @@ final class GroupTest extends FieldTest
 
         $field = new Group('Label t78i', 'name_89yo', 'key_98o');
 
-        $brick1 = new TextAndUrlBrick('Image and text 1', 'brickkey_d7hl');
-        $brick2 = new TextAndUrlBrick('Image and text 2', 'brickkey_hih6');
+        $brick1 = new TextAndUrlBrick('brickkey_d7hl', 'image_and_text_1');
+        $brick2 = new TextAndUrlBrick('brickkey_hih6', 'image_and_text_2');
 
-        $field->addBrick($brick1);
-        $field->addBrick($brick2);
+        $field->add_brick($brick1);
+        $field->add_brick($brick2);
 
         $this->assertArraySubset([
             'sub_fields' => [
@@ -89,7 +89,7 @@ final class GroupTest extends FieldTest
                     'fewbricks__parents' => [
                         [
                             'key' => 'brickkey_d7hl',
-                            'name' => 'Image and text 1',
+                            'name' => 'image_and_text_1',
                             'type' => 'brick'
                         ],
                     ],
@@ -99,7 +99,7 @@ final class GroupTest extends FieldTest
                     'fewbricks__parents' => [
                         [
                             'key' => 'brickkey_d7hl',
-                            'name' => 'Image and text 1',
+                            'name' => 'image_and_text_1',
                             'type' => 'brick'
                         ],
                     ],
@@ -109,7 +109,7 @@ final class GroupTest extends FieldTest
                     'fewbricks__parents' => [
                         [
                             'key' => 'brickkey_hih6',
-                            'name' => 'Image and text 2',
+                            'name' => 'image_and_text_2',
                             'type' => 'brick'
                         ],
                     ],
@@ -119,13 +119,13 @@ final class GroupTest extends FieldTest
                     'fewbricks__parents' => [
                         [
                             'key' => 'brickkey_hih6',
-                            'name' => 'Image and text 2',
+                            'name' => 'image_and_text_2',
                             'type' => 'brick'
                         ],
                     ],
                 ]
             ]
-        ], $field->toAcfArray());
+        ], $field->to_acf_array());
 
     }
 
@@ -134,15 +134,15 @@ final class GroupTest extends FieldTest
 
         $field = new Group('Label t78i', 'name_89yo', 'key_98o');
 
-        $brick1 = new TextAndUrlBrick('image_and_text_brick_1', 'brickkey_d7hl');
-        $brick2 = new TextAndUrlBrick('image_and_text_brick_2', 'brickkey_hih6');
+        $brick1 = new TextAndUrlBrick('brickkey_d7hl', 'image_and_text_brick_1');
+        $brick2 = new TextAndUrlBrick('brickkey_hih6', 'image_and_text_brick_2');
 
-        $field->addBrick($brick1);
-        $field->addBrick($brick2);
+        $field->add_brick($brick1);
+        $field->add_brick($brick2);
 
-        $brick3 = new TextAndUrlBrick('image_and_text_brick_3', 'brickkey_dg4f');
+        $brick3 = new TextAndUrlBrick('brickkey_dg4f', 'image_and_text_brick_3');
 
-        $field->addBrickAfterFieldByName($brick3, 'image_and_text_brick_1_my_text');
+        $field->add_brick_after_field_by_name($brick3, 'image_and_text_brick_1_my_text');
 
         $this->assertArraySubset([
             'sub_fields' => [
@@ -207,7 +207,7 @@ final class GroupTest extends FieldTest
                     ],
                 ],
             ],
-        ], $field->toAcfArray());
+        ], $field->to_acf_array());
 
     }
 
@@ -216,12 +216,12 @@ final class GroupTest extends FieldTest
 
         $field = new Group('Label t78i', 'name_89yo', 'key_98o');
 
-        $field->addField(new Text('A text1', 'a_text_1', '1812291546a'));
-        $field->addField(new Text('A text2', 'a_text_2', '1812291546b'));
+        $field->add_field(new Text('A text1', 'a_text_1', '1812291546a'));
+        $field->add_field(new Text('A text2', 'a_text_2', '1812291546b'));
 
-        $brick = new TextAndUrlBrick('image_and_text_brick_3', 'brickkey_dg4f');
+        $brick = new TextAndUrlBrick('brickkey_dg4f', 'image_and_text_brick_3');
 
-        $field->addBrickBeforeFieldByName($brick, 'a_text_2');
+        $field->add_brick_before_field_by_name($brick, 'a_text_2');
 
         $this->assertArraySubset([
             'sub_fields' => [
@@ -252,7 +252,7 @@ final class GroupTest extends FieldTest
                     'key' => 'field_key_98o_1812291546b',
                 ],
             ],
-        ], $field->toAcfArray());
+        ], $field->to_acf_array());
 
     }
 

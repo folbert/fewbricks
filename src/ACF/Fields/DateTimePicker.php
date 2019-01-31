@@ -24,10 +24,10 @@ class DateTimePicker extends DateTimeField implements FieldInterface
      * @return mixed The value of the ACF setting "display_format". Returns the default ACF value "d/m/Y g:i a" if none
      * has been set using Fewbricks.
      */
-    public function getDisplayFormat()
+    public function get_display_format()
     {
 
-        return $this->getSetting('display_format', 'd/m/Y g:i a');
+        return $this->get_setting('display_format', 'd/m/Y g:i a');
 
     }
 
@@ -35,10 +35,10 @@ class DateTimePicker extends DateTimeField implements FieldInterface
      * @return mixed The value of the ACF setting "first_day" (Week Starts On). Returns the default ACF value "1" if none has been
      * set using Fewbricks.
      */
-    public function getFirstDay()
+    public function get_first_day()
     {
 
-        return $this->getSetting('first_day', 1);
+        return $this->get_setting('first_day', 1);
 
     }
 
@@ -46,10 +46,10 @@ class DateTimePicker extends DateTimeField implements FieldInterface
      * @return mixed The value of the ACF setting "return_format". Returns the default ACF value "d/m/Y g:i a" if none
      * has been set using Fewbricks.
      */
-    public function getReturnFormat()
+    public function get_return_format()
     {
 
-        return $this->getSetting('return_format', 'd/m/Y g:i a');
+        return $this->get_setting('return_format', 'd/m/Y g:i a');
 
     }
 
@@ -59,10 +59,10 @@ class DateTimePicker extends DateTimeField implements FieldInterface
      * @param int $firstDay Integer representing a day. 0 = Sunday, 1 = Monday etc.
      * @return $this
      */
-    public function setFirstDay($firstDay)
+    public function set_first_day($firstDay)
     {
 
-        return $this->setSetting('first_day', $firstDay);
+        return $this->set_setting('first_day', $firstDay);
 
     }
 

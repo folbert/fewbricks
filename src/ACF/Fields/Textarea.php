@@ -24,10 +24,10 @@ class Textarea extends Field implements FieldInterface
      * @return mixed The value of the ACF setting "default_value". Returns the default ACF value "" if none has been set
      * using Fewbricks.
      */
-    public function getDefaultValue()
+    public function get_default_value()
     {
 
-        return $this->getSetting('default_value', '');
+        return $this->get_setting('default_value', '');
 
     }
 
@@ -35,10 +35,10 @@ class Textarea extends Field implements FieldInterface
      * @return mixed The value of the ACF setting "maxlength". Returns the default ACF value "" if none has been
      * set using Fewbricks.
      */
-    public function getMaxlength()
+    public function get_maxlength()
     {
 
-        return $this->getSetting('maxlength', '');
+        return $this->get_setting('maxlength', '');
 
     }
 
@@ -46,10 +46,10 @@ class Textarea extends Field implements FieldInterface
      * @return mixed The value of the ACF setting "new_lines". Returns the default ACF value "" if none has been
      * set using Fewbricks.
      */
-    public function getNewLines()
+    public function get_new_lines()
     {
 
-        return $this->getSetting('new_lines', '');
+        return $this->get_setting('new_lines', '');
 
     }
 
@@ -57,10 +57,10 @@ class Textarea extends Field implements FieldInterface
      * @return mixed The value of the ACF setting "placeholder". Returns the default ACF value "" if none has been
      * set using Fewbricks.
      */
-    public function getPlaceholder()
+    public function get_placeholder()
     {
 
-        return $this->getSetting('placeholder', '');
+        return $this->get_setting('placeholder', '');
 
     }
 
@@ -68,10 +68,10 @@ class Textarea extends Field implements FieldInterface
      * @return mixed The value of the ACF setting "rows". Returns the default ACF value 8 if none has been
      * set using Fewbricks.
      */
-    public function getRows()
+    public function get_rows()
     {
 
-        return $this->getSetting('rows', '');
+        return $this->get_setting('rows', '');
 
     }
 
@@ -79,10 +79,10 @@ class Textarea extends Field implements FieldInterface
      * @param mixed $defaultValue ACF setting. A default value used by ACF if no value has yet been saved.
      * @return $this
      */
-    public function setDefaultValue($defaultValue)
+    public function set_default_value($defaultValue)
     {
 
-        return $this->setSetting('default_value', $defaultValue);
+        return $this->set_setting('default_value', $defaultValue);
 
     }
 
@@ -92,10 +92,10 @@ class Textarea extends Field implements FieldInterface
      * @param int $maxlength [sic]
      * @return $this
      */
-    public function setMaxlength($maxlength)
+    public function set_maxlength($maxlength)
     {
 
-        return $this->setSetting('maxlength', $maxlength);
+        return $this->set_setting('maxlength', $maxlength);
 
     }
 
@@ -105,10 +105,10 @@ class Textarea extends Field implements FieldInterface
      * @param string $newLines "wpautop", "br" or ""
      * @return $this
      */
-    public function setNewLines($newLines)
+    public function set_new_lines($newLines)
     {
 
-        return $this->setSetting('new_lines', $newLines);
+        return $this->set_setting('new_lines', $newLines);
 
     }
 
@@ -118,10 +118,10 @@ class Textarea extends Field implements FieldInterface
      * @param string $placeholder
      * @return $this
      */
-    public function setPlaceholder($placeholder)
+    public function set_placeholder($placeholder)
     {
 
-        return $this->setSetting('placeholder', $placeholder);
+        return $this->set_setting('placeholder', $placeholder);
 
     }
 
@@ -131,10 +131,10 @@ class Textarea extends Field implements FieldInterface
      * @param int $rows
      * @return $this
      */
-    public function setRows($rows)
+    public function set_rows($rows)
     {
 
-        return $this->setSetting('rows', $rows);
+        return $this->set_setting('rows', $rows);
 
     }
 

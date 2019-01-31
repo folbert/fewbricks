@@ -46,7 +46,7 @@ final class MessageTest extends FieldTest
 
         $this->assertEquals(
             FieldHelper::getExpectedFieldValues($field, $settings),
-            $field->toAcfArray($settings['test__key_prefix'])
+            $field->to_acf_array($settings['test__key_prefix'])
         );
 
     }
@@ -59,11 +59,11 @@ final class MessageTest extends FieldTest
 
         $field = new Message('', '', '');
 
-        $this->assertEquals(0, $field->getEscHtml());
+        $this->assertEquals(0, $field->get_esc_html());
 
-        $field->setEscHtml(true);
+        $field->set_esc_html(true);
 
-        $this->assertEquals(true, $field->getEscHtml());
+        $this->assertEquals(true, $field->get_esc_html());
 
     }
 
@@ -75,11 +75,11 @@ final class MessageTest extends FieldTest
 
         $field = new Message('', '', '');
 
-        $this->assertEquals('', $field->getMessage());
+        $this->assertEquals('', $field->get_message());
 
-        $field->setMessage('a message uiojio');
+        $field->set_message('a message uiojio');
 
-        $this->assertEquals('a message uiojio', $field->getMessage());
+        $this->assertEquals('a message uiojio', $field->get_message());
 
     }
 
@@ -91,11 +91,11 @@ final class MessageTest extends FieldTest
 
         $field = new Message('', '', '');
 
-        $this->assertEquals('wpautop', $field->getNewLines());
+        $this->assertEquals('wpautop', $field->get_new_lines());
 
-        $field->setNewLines('none');
+        $field->set_new_lines('none');
 
-        $this->assertEquals('none', $field->getNewLines());
+        $this->assertEquals('none', $field->get_new_lines());
 
     }
 

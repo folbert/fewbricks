@@ -24,10 +24,10 @@ class Url extends Field implements FieldInterface
      * @return mixed The value of the ACF setting "default_value". Returns the default ACF value "" if none has been set
      * using Fewbricks.
      */
-    public function getDefaultValue()
+    public function get_default_value()
     {
 
-        return $this->getSetting('default_value', '');
+        return $this->get_setting('default_value', '');
 
     }
 
@@ -35,10 +35,10 @@ class Url extends Field implements FieldInterface
      * @return mixed The value of the ACF setting "placeholder". Returns the default ACF value "" if none has been
      * set using Fewbricks.
      */
-    public function getPlaceholder()
+    public function get_placeholder()
     {
 
-        return $this->getSetting('placeholder', '');
+        return $this->get_setting('placeholder', '');
 
     }
 
@@ -46,10 +46,10 @@ class Url extends Field implements FieldInterface
      * @param mixed $defaultValue ACF setting. A default value used by ACF if no value has yet been saved.
      * @return $this
      */
-    public function setDefaultValue($defaultValue)
+    public function set_default_value($defaultValue)
     {
 
-        return $this->setSetting('default_value', $defaultValue);
+        return $this->set_setting('default_value', $defaultValue);
 
     }
 
@@ -59,10 +59,10 @@ class Url extends Field implements FieldInterface
      * @param string $placeholder
      * @return $this
      */
-    public function setPlaceholder($placeholder)
+    public function set_placeholder($placeholder)
     {
 
-        return $this->setSetting('placeholder', $placeholder);
+        return $this->set_setting('placeholder', $placeholder);
 
     }
 

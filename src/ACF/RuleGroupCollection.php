@@ -17,7 +17,7 @@ class RuleGroupCollection extends Collection
     /**
      * @return array An array that ACF can work with.
      */
-    public function toArray()
+    public function to_array()
     {
 
         $array = [];
@@ -25,7 +25,7 @@ class RuleGroupCollection extends Collection
         /** @var FieldGroupLocationRuleGroup $ruleGroup */
         foreach ($this->items AS $ruleGroup) {
 
-            $array[] = $ruleGroup->toAcfArray();
+            $array[] = $ruleGroup->to_acf_array();
 
         }
 

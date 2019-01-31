@@ -54,7 +54,7 @@ class FieldHelper {
         $expectedValues['key'] = 'field_' . $expectedValues['test__key_prefix'] . '_' . $settings['key'];
         $expectedValues['fewbricks__original_key'] = $settings['key'];
         $expectedValues['fewbricks__parents'] = [];
-        $expectedValues['type'] = $fieldObject->getType();
+        $expectedValues['type'] = $fieldObject->get_type();
 
         // We wont expect these indexes
         unset($expectedValues['test__key_prefix']);

@@ -17,10 +17,10 @@ class DateTimeField extends Field
      * @param string $displayFormat
      * @return $this
      */
-    public function setDisplayFormat($displayFormat)
+    public function set_display_format($displayFormat)
     {
 
-        return $this->setSetting('display_format', $displayFormat);
+        return $this->set_setting('display_format', $displayFormat);
 
     }
 
@@ -31,10 +31,10 @@ class DateTimeField extends Field
      * @param string $returnFormat
      * @return $this
      */
-    public function setReturnFormat($returnFormat)
+    public function set_return_format($returnFormat)
     {
 
-        return $this->setSetting('return_format', $returnFormat);
+        return $this->set_setting('return_format', $returnFormat);
 
     }
 

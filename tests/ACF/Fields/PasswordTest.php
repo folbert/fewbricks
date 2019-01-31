@@ -46,7 +46,7 @@ final class PasswordTest extends FieldTest
 
         $this->assertEquals(
             FieldHelper::getExpectedFieldValues($field, $settings),
-            $field->toAcfArray($settings['test__key_prefix'])
+            $field->to_acf_array($settings['test__key_prefix'])
         );
 
     }
@@ -59,11 +59,11 @@ final class PasswordTest extends FieldTest
 
         $field = new Password('', '', '');
 
-        $this->assertEquals('', $field->getAppend());
+        $this->assertEquals('', $field->get_append());
 
-        $field->setAppend('f389gols');
+        $field->set_append('f389gols');
 
-        $this->assertEquals('f389gols', $field->getAppend());
+        $this->assertEquals('f389gols', $field->get_append());
 
     }
 
@@ -75,11 +75,11 @@ final class PasswordTest extends FieldTest
 
         $field = new Password('', '', '');
 
-        $this->assertEquals('', $field->getPlaceholder());
+        $this->assertEquals('', $field->get_placeholder());
 
-        $field->setPlaceholder('ffqo8dwgil');
+        $field->set_placeholder('ffqo8dwgil');
 
-        $this->assertEquals('ffqo8dwgil', $field->getPlaceholder());
+        $this->assertEquals('ffqo8dwgil', $field->get_placeholder());
 
     }
 
@@ -91,11 +91,11 @@ final class PasswordTest extends FieldTest
 
         $field = new Password('', '', '');
 
-        $this->assertEquals('', $field->getPrepend());
+        $this->assertEquals('', $field->get_prepend());
 
-        $field->setPrepend('f23fwogil');
+        $field->set_prepend('f23fwogil');
 
-        $this->assertEquals('f23fwogil', $field->getPrepend());
+        $this->assertEquals('f23fwogil', $field->get_prepend());
 
     }
 

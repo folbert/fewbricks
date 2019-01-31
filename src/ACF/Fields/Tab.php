@@ -21,24 +21,24 @@ class Tab extends Field implements FieldInterface
     const TYPE = 'tab';
 
     /**
-     * @return mixed The value of the ACF setting "". Returns the default ACF value 0 if none has been
+     * @return mixed The value of the ACF setting "endpoint". Returns the default ACF value 0 if none has been
      * set using Fewbricks.
      */
-    public function getEndpoint()
+    public function get_endpoint()
     {
 
-        return $this->getSetting('endpoint', 0);
+        return $this->get_setting('endpoint', 0);
 
     }
 
     /**
-     * @return mixed The value of the ACF setting "". Returns the default ACF value "" if none has been
+     * @return mixed The value of the ACF setting "placement". Returns the default ACF value "top" if none has been
      * set using Fewbricks.
      */
-    public function getPlacement()
+    public function get_placement()
     {
 
-        return $this->getSetting('placement', 'top');
+        return $this->get_setting('placement', 'top');
 
     }
 
@@ -48,10 +48,10 @@ class Tab extends Field implements FieldInterface
      * @param boolean $endpoint
      * @return $this
      */
-    public function setEndpoint($endpoint)
+    public function set_endpoint($endpoint)
     {
 
-        return $this->setSetting('endpoint', $endpoint);
+        return $this->set_setting('endpoint', $endpoint);
 
     }
 
@@ -61,10 +61,10 @@ class Tab extends Field implements FieldInterface
      * @param string $placement "top" or "left"
      * @return $this
      */
-    public function setPlacement($placement)
+    public function set_placement($placement)
     {
 
-        return $this->setSetting('placement', $placement);
+        return $this->set_setting('placement', $placement);
 
     }
 

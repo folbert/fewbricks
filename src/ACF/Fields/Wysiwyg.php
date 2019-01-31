@@ -24,10 +24,10 @@ class Wysiwyg extends Field implements FieldInterface
      * @return mixed The value of the ACF setting "default_value". Returns the default ACF value "" if none has been set
      * using Fewbricks.
      */
-    public function getDefaultValue()
+    public function get_default_value()
     {
 
-        return $this->getSetting('default_value', '');
+        return $this->get_setting('default_value', '');
 
     }
 
@@ -35,10 +35,10 @@ class Wysiwyg extends Field implements FieldInterface
      * @return mixed The value of the ACF setting "delay". Returns the default ACF value 0 if none has been set
      * using Fewbricks.
      */
-    public function getDelay()
+    public function get_delay()
     {
 
-        return $this->getSetting('delay', 0);
+        return $this->get_setting('delay', 0);
 
     }
 
@@ -46,10 +46,10 @@ class Wysiwyg extends Field implements FieldInterface
      * @return mixed The value of the ACF setting "media_upload". Returns the default ACF value 1 if none has been set
      * using Fewbricks.
      */
-    public function getMediaUpload()
+    public function get_media_upload()
     {
 
-        return $this->getSetting('media_upload', 1);
+        return $this->get_setting('media_upload', 1);
 
     }
 
@@ -57,10 +57,10 @@ class Wysiwyg extends Field implements FieldInterface
      * @return mixed The value of the ACF setting "tabs". Returns the default ACF value "all" if none has been set using
      * Fewbricks.
      */
-    public function getTabs()
+    public function get_tabs()
     {
 
-        return $this->getSetting('tabs', 'all');
+        return $this->get_setting('tabs', 'all');
 
     }
 
@@ -68,10 +68,10 @@ class Wysiwyg extends Field implements FieldInterface
      * @return mixed The value of the ACF setting "toolbar". Returns the default ACF value "full" if none has been set
      * using Fewbricks.
      */
-    public function getToolbar()
+    public function get_toolbar()
     {
 
-        return $this->getSetting('toolbar', 'full');
+        return $this->get_setting('toolbar', 'full');
 
     }
 
@@ -79,10 +79,10 @@ class Wysiwyg extends Field implements FieldInterface
      * @param mixed $defaultValue ACF setting. A default value used by ACF if no value has yet been saved.
      * @return $this
      */
-    public function setDefaultValue($defaultValue)
+    public function set_default_value($defaultValue)
     {
 
-        return $this->setSetting('default_value', $defaultValue);
+        return $this->set_setting('default_value', $defaultValue);
 
     }
 
@@ -92,10 +92,10 @@ class Wysiwyg extends Field implements FieldInterface
      * @param boolean $delay
      * @return $this
      */
-    public function setDelay($delay)
+    public function set_delay($delay)
     {
 
-        return $this->setSetting('delay', $delay);
+        return $this->set_setting('delay', $delay);
 
     }
 
@@ -105,10 +105,10 @@ class Wysiwyg extends Field implements FieldInterface
      * @param boolean $mediaUpload Boolean indicating whether buttons should be shown or not.
      * @return $this
      */
-    public function setMediaUpload($mediaUpload)
+    public function set_media_upload($mediaUpload)
     {
 
-        return $this->setSetting('media_upload', $mediaUpload);
+        return $this->set_setting('media_upload', $mediaUpload);
 
     }
 
@@ -118,10 +118,10 @@ class Wysiwyg extends Field implements FieldInterface
      * @param string $tabs "visual", "text" or "all" (for both visual and text)
      * @return $this
      */
-    public function setTabs($tabs)
+    public function set_tabs($tabs)
     {
 
-        return $this->setSetting('tabs', $tabs);
+        return $this->set_setting('tabs', $tabs);
 
     }
 
@@ -133,10 +133,10 @@ class Wysiwyg extends Field implements FieldInterface
      * @param string $toolbar "full", "basic" or any custom value.
      * @return $this
      */
-    public function setToolbar($toolbar)
+    public function set_toolbar($toolbar)
     {
 
-        return $this->setSetting('toolbar', $toolbar);
+        return $this->set_setting('toolbar', $toolbar);
 
     }
 

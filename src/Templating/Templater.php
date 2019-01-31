@@ -91,7 +91,7 @@ class Templater
      *
      * @return bool
      */
-    public function getSettings($name, $defaultValue = false)
+    public function get_settings($name, $defaultValue = false)
     {
 
         if (isset($this->settings[$name])) {

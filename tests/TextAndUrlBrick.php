@@ -8,12 +8,12 @@ use Fewbricks\Brick;
 
 class TextAndUrlBrick extends Brick {
 
-    function setUp()
+    function set_up()
     {
 
-        $this->addField(new Text('A text', 'my_text', 'imageandtextbrickfield_text_key'));
+        $this->add_field(new Text('A text', 'my_text', 'imageandtextbrickfield_text_key'));
 
-        $this->addField(new Url('The URL', 'my_url', 'imageandtextbrickfield_url_key'));
+        $this->add_field(new Url('The URL', 'my_url', 'imageandtextbrickfield_url_key'));
 
     }
 

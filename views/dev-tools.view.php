@@ -60,7 +60,7 @@ use \Fewbricks\DevTools;
 
         <h2>Dev mode</h2>
         <a href="<?php echo \Fewbricks\Helpers\Helper::getDocumentationUrl('filters/dev_mode/'); ?>" target="_blank">DevMode</a>
-        is <?php echo (\Fewbricks\Helpers\Filters::devModeIsEnabled() ? 'enabled' : 'disabled') ?>.
+        is <?php echo (\Fewbricks\Helpers\Filters::dev_mode_is_enabled() ? 'enabled' : 'disabled') ?>.
 
         <h2>Execution time</h2>
         <p>Execution time for everything using the action "fewbricks/init":<br>

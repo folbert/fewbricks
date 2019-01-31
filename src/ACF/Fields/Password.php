@@ -24,10 +24,10 @@ class Password extends Field implements FieldInterface
      * @return mixed The value of the ACF setting "append". Returns the default ACF value "" if none has been
      * set using Fewbricks.
      */
-    public function getAppend()
+    public function get_append()
     {
 
-        return $this->getSetting('append', '');
+        return $this->get_setting('append', '');
 
     }
 
@@ -35,10 +35,10 @@ class Password extends Field implements FieldInterface
      * @return mixed The value of the ACF setting "placeholder". Returns the default ACF value "" if none has been
      * set using Fewbricks.
      */
-    public function getPlaceholder()
+    public function get_placeholder()
     {
 
-        return $this->getSetting('placeholder', '');
+        return $this->get_setting('placeholder', '');
 
     }
 
@@ -46,10 +46,10 @@ class Password extends Field implements FieldInterface
      * @return mixed The value of the ACF setting "prepend". Returns the default ACF value "" if none has been
      * set using Fewbricks.
      */
-    public function getPrepend()
+    public function get_prepend()
     {
 
-        return $this->getSetting('prepend', '');
+        return $this->get_setting('prepend', '');
 
     }
 
@@ -59,10 +59,10 @@ class Password extends Field implements FieldInterface
      * @param string $append Text to appear after the input.
      * @return $this
      */
-    public function setAppend($append)
+    public function set_append($append)
     {
 
-        return $this->setSetting('append', $append);
+        return $this->set_setting('append', $append);
 
     }
 
@@ -72,10 +72,10 @@ class Password extends Field implements FieldInterface
      * @param string $placeholder Text to appear within the input.
      * @return $this
      */
-    public function setPlaceholder($placeholder)
+    public function set_placeholder($placeholder)
     {
 
-        return $this->setSetting('placeholder', $placeholder);
+        return $this->set_setting('placeholder', $placeholder);
 
     }
 
@@ -85,10 +85,10 @@ class Password extends Field implements FieldInterface
      * @param string $prepend Text to appear before the input.
      * @return $this
      */
-    public function setPrepend($prepend)
+    public function set_prepend($prepend)
     {
 
-        return $this->setSetting('prepend', $prepend);
+        return $this->set_setting('prepend', $prepend);
 
     }
 

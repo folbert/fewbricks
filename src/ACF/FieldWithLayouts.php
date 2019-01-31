@@ -40,7 +40,7 @@ class FieldWithLayouts extends Field
     public function addLayout($layout)
     {
 
-        $this->layouts->addItem($layout, $layout->getKey());
+        $this->layouts->add_item($layout, $layout->get_key());
 
         return $this;
 
@@ -50,10 +50,10 @@ class FieldWithLayouts extends Field
      * @return mixed The value of the ACF setting "button_label". Returns the default ACF value "Add row" (or
      * translation thereof) if none has been set using Fewbricks.
      */
-    public function getButtonLabel()
+    public function get_button_label()
     {
 
-        return $this->getSetting('button_label', __('Add Row', 'acf'));
+        return $this->get_setting('button_label', __('Add Row', 'acf'));
 
     }
 
@@ -61,17 +61,17 @@ class FieldWithLayouts extends Field
      * @param string $key
      * @return mixed
      */
-    public function getLayout(string $key)
+    public function get_layout(string $key)
     {
 
-        return $this->layouts->getItemByKey($key);
+        return $this->layouts->get_item_by_key($key);
 
     }
 
     /**
      * @return LayoutCollection
      */
-    public function getLayouts()
+    public function get_layouts()
     {
 
         return $this->layouts;
@@ -85,7 +85,7 @@ class FieldWithLayouts extends Field
     public function removeLayout(string $name)
     {
 
-        $this->layouts->removeFieldByName($name);
+        $this->layouts->remove_field_by_name($name);
 
         return $this;
 
@@ -95,10 +95,10 @@ class FieldWithLayouts extends Field
      * @param string $buttonLabel
      * @return $this
      */
-    public function setButtonLabel($buttonLabel)
+    public function set_button_label($buttonLabel)
     {
 
-        return $this->setSetting('button_label', $buttonLabel);
+        return $this->set_setting('button_label', $buttonLabel);
 
     }
 
@@ -107,12 +107,12 @@ class FieldWithLayouts extends Field
      *
      * @return array
      */
-    public function toAcfArray(string $keyPrefix = '')
+    public function to_acf_array(string $keyPrefix = '')
     {
 
-        $settings = parent::toAcfArray($keyPrefix);
+        $settings = parent::to_acf_array($keyPrefix);
 
-        $settings['layouts'] = $this->layouts->toAcfArray($settings['key']);
+        $settings['layouts'] = $this->layouts->to_acf_array($settings['key']);
 
         return $settings;
 

@@ -82,7 +82,7 @@ class Field
         $this->originalKey = $key;
         $this->parents = [];
 
-        $this->clearConditionalLogic();
+        $this->clear_conditional_logic();
 
     }
 
@@ -90,10 +90,10 @@ class Field
      * @return mixed The value of the ACF setting "default_value". Returns the default ACF value "" if none has been set
      * using Fewbricks.
      */
-    public function getDefaultValue()
+    public function get_default_value()
     {
 
-        return $this->getSetting('default_value', '');
+        return $this->get_setting('default_value', '');
 
     }
 
@@ -101,10 +101,10 @@ class Field
      * @param mixed $defaultValue ACF setting. A default value used by ACF if no value has yet been saved.
      * @return $this
      */
-    public function setDefaultValue($defaultValue)
+    public function set_default_value($defaultValue)
     {
 
-        return $this->setSetting('default_value', $defaultValue);
+        return $this->set_setting('default_value', $defaultValue);
 
     }
 
@@ -112,20 +112,20 @@ class Field
      * @param bool $display
      * @return $this
      */
-    public function setDisplayInFewbricksDevTools(bool $display)
+    public function set_display_in_fewbricks_dev_tools(bool $display)
     {
 
-        return $this->setSetting(DevTools::SETTINGS_NAME_FOR_DISPLAYING_ACF_ARRAY, $display);
+        return $this->set_setting(DevTools::SETTINGS_NAME_FOR_DISPLAYING_ACF_ARRAY, $display);
 
     }
 
     /**
      * @return $this
      */
-    public function getDisplayInFewbricksDevTools()
+    public function get_display_in_fewbricks_dev_tools()
     {
 
-        return $this->getSetting(DevTools::SETTINGS_NAME_FOR_DISPLAYING_ACF_ARRAY, false);
+        return $this->get_setting(DevTools::SETTINGS_NAME_FOR_DISPLAYING_ACF_ARRAY, false);
 
     }
 
@@ -133,17 +133,17 @@ class Field
      * @param string $instructions ACF setting. Instructions for authors. Shown when submitting data
      * @return $this
      */
-    public function setInstructions($instructions)
+    public function set_instructions($instructions)
     {
 
-        return $this->setSetting('instructions', $instructions);
+        return $this->set_setting('instructions', $instructions);
 
     }
 
     /**
      * @param $originalKey
      */
-    protected function setOriginalKey(string $originalKey)
+    protected function set_original_key(string $originalKey)
     {
 
         $this->originalKey = $originalKey;
@@ -155,7 +155,7 @@ class Field
      * @param string $name
      * @param string $type
      */
-    public function addParent(string $key, string $name, string $type)
+    public function add_parent(string $key, string $name, string $type)
     {
 
         $this->parents[] = [
@@ -170,10 +170,10 @@ class Field
      * @param bool $required ACF setting. Whether or not the field value is required. If not set, false is used.
      * @return $this
      */
-    public function setRequired($required)
+    public function set_required($required)
     {
 
-        return $this->setSetting('required', $required);
+        return $this->set_setting('required', $required);
 
     }
 
@@ -182,7 +182,7 @@ class Field
      * Indexes in the array can be 'width', 'class' and 'id'.
      * @return $this
      */
-    public function setWrapper(array $wrapper)
+    public function set_wrapper(array $wrapper)
     {
 
         // Make sure all indexes are set.
@@ -192,7 +192,7 @@ class Field
             'id' => '',
         ], $wrapper);
 
-        return $this->setSetting('wrapper', $wrapper);
+        return $this->set_setting('wrapper', $wrapper);
 
     }
 
@@ -202,12 +202,12 @@ class Field
      * @param array $settings
      * @return $this
      */
-    public function setSettings(array $settings)
+    public function set_settings(array $settings)
     {
 
         foreach ($settings AS $name => $value) {
 
-            $this->setSetting($name, $value);
+            $this->set_setting($name, $value);
 
         }
 
@@ -220,7 +220,7 @@ class Field
      * @param mixed $value
      * @return $this
      */
-    public function setSetting(string $name, $value)
+    public function set_setting(string $name, $value)
     {
 
         $classPropertyNames = ['key', 'label', 'name', 'type'];
@@ -240,7 +240,7 @@ class Field
     /**
      * @return $this
      */
-    public function clearConditionalLogic()
+    public function clear_conditional_logic()
     {
 
         $this->conditionalLogicRuleGroups = new RuleGroupCollection();
@@ -253,12 +253,12 @@ class Field
      * @param ConditionalLogicRuleGroup[] $ruleGroups
      * @return $this
      */
-    public function addConditionalLogicRuleGroups($ruleGroups)
+    public function add_conditional_logic_rule_groups($ruleGroups)
     {
 
         foreach ($ruleGroups AS $ruleGroup) {
 
-            $this->addConditionalLogicRuleGroup($ruleGroup);
+            $this->add_conditional_logic_rule_group($ruleGroup);
 
         }
 
@@ -270,10 +270,10 @@ class Field
      * @param ConditionalLogicRuleGroup $ruleGroup
      * @return $this
      */
-    public function addConditionalLogicRuleGroup($ruleGroup)
+    public function add_conditional_logic_rule_group($ruleGroup)
     {
 
-        $this->conditionalLogicRuleGroups->addItem($ruleGroup);
+        $this->conditionalLogicRuleGroups->add_item($ruleGroup);
 
         return $this;
 
@@ -283,17 +283,17 @@ class Field
      * @return mixed The value of the ACF setting "conditional_logic". Returns the default ACF value 0 if none
      * has been set using Fewbricks.
      */
-    public function getConditionalLogic()
+    public function get_conditional_logic()
     {
 
-        return $this->getSetting('conditional_logic', 0);
+        return $this->get_setting('conditional_logic', 0);
 
     }
 
     /**
      * @return RuleGroupCollection
      */
-    public function getConditionalLogicRuleGroups()
+    public function get_conditional_logic_rule_groups()
     {
 
         return $this->conditionalLogicRuleGroups;
@@ -304,28 +304,28 @@ class Field
      * @param string $keyPrefix
      * @return string
      */
-    public function getFinalKey(string $keyPrefix = '')
+    public function get_final_key(string $keyPrefix = '')
     {
 
         if(!empty($keyPrefix)) {
             $keyPrefix .= '_';
         }
 
-        $keyPrefix .= $this->getKeyPrefixFromParents();
+        $keyPrefix .= $this->get_key_prefix_from_parents();
 
-        return Helper::getValidFieldKey($keyPrefix . $this->getKey());
+        return Helper::get_valid_field_key($keyPrefix . $this->get_key());
 
     }
 
     /**
      * @return string
      */
-    public function getKeyPrefixFromParents()
+    public function get_key_prefix_from_parents()
     {
 
         $keyPrefix = '';
 
-        $parents = $this->getParents(true);
+        $parents = $this->get_parents(true);
 
         foreach($parents AS $parent) {
 
@@ -342,12 +342,12 @@ class Field
     /**
      * @return string
      */
-    public function getFinalName()
+    public function get_final_name()
     {
 
         $namePrefix = '';
 
-        $parents = $this->getParents(true);
+        $parents = $this->get_parents(true);
 
         foreach($parents AS $parent) {
 
@@ -366,17 +366,17 @@ class Field
      * using
      * Fewbricks.
      */
-    public function getInstructions()
+    public function get_instructions()
     {
 
-        return $this->getSetting('instructions', '');
+        return $this->get_setting('instructions', '');
 
     }
 
     /**
      * @return string
      */
-    public function getKey()
+    public function get_key()
     {
 
         return $this->key;
@@ -387,17 +387,17 @@ class Field
      * @return mixed The value of the ACF setting "required". Returns the default ACF value 0 if none has been set
      * using Fewbricks.
      */
-    public function getRequired()
+    public function get_required()
     {
 
-        return $this->getSetting('required', 0);
+        return $this->get_setting('required', 0);
 
     }
 
     /**
      * @return string The ACF field type that this field is
      */
-    public function getType()
+    public function get_type()
     {
 
         return $this->type;
@@ -408,10 +408,10 @@ class Field
      * @return mixed The value of the ACF setting "wrapper". Returns the default ACF value if none has been set using
      * Fewbricks.
      */
-    public function getWrapper()
+    public function get_wrapper()
     {
 
-        return $this->getSetting('wrapper', []);
+        return $this->get_setting('wrapper', []);
 
     }
 
@@ -420,7 +420,7 @@ class Field
     /**
      * @return string
      */
-    public function getLabel()
+    public function get_label()
     {
 
         return $this->label;
@@ -430,7 +430,7 @@ class Field
     /**
      * @return string
      */
-    public function getName()
+    public function get_name()
     {
 
         return $this->name;
@@ -440,7 +440,7 @@ class Field
     /**
      * @return string
      */
-    public function getOriginalKey()
+    public function get_original_key()
     {
 
         return $this->originalKey;
@@ -451,7 +451,7 @@ class Field
      * @param bool $reverseOrder
      * @return array
      */
-    public function getParents(bool $reverseOrder = false)
+    public function get_parents(bool $reverseOrder = false)
     {
 
         $parents = $this->parents;
@@ -475,7 +475,7 @@ class Field
      *
      * @return mixed $defaultValue if value was not found, otherwise the value
      */
-    public function getSetting(string $name, $defaultValue = false)
+    public function get_setting(string $name, $defaultValue = false)
     {
 
         $value = $defaultValue;
@@ -494,7 +494,7 @@ class Field
      * @param string $prefix
      * @return $this
      */
-    public function prefixKey(string $prefix)
+    public function prefix_key(string $prefix)
     {
 
         $this->key = $prefix . $this->key;
@@ -507,7 +507,7 @@ class Field
      * @param string $prefix
      * @return $this
      */
-    public function prefixLabel(string $prefix)
+    public function prefix_label(string $prefix)
     {
 
         $this->label = $prefix . $this->label;
@@ -520,7 +520,7 @@ class Field
      * @param string $prefix
      * @return $this
      */
-    public function prefixName(string $prefix)
+    public function prefix_name(string $prefix)
     {
 
         $this->name = $prefix . $this->name;
@@ -533,7 +533,7 @@ class Field
      * @param string $suffix
      * @return $this
      */
-    public function suffixLabel(string $suffix)
+    public function suffix_label(string $suffix)
     {
 
         $this->label .= $suffix;
@@ -545,7 +545,7 @@ class Field
     /**
      * Empty to allow overriding but not requiring implementing in every field.
      */
-    protected function prepareForAcfArray()
+    protected function prepare_for_acf_array()
     {
 
     }
@@ -555,26 +555,26 @@ class Field
      *
      * @return array
      */
-    public function toAcfArray(string $keyPrefix = '')
+    public function to_acf_array(string $keyPrefix = '')
     {
 
-        $this->prepareForAcfArray();
+        $this->prepare_for_acf_array();
 
         $settings = $this->settings;
-        $settings['key'] =  $this->getFinalKey($keyPrefix);
+        $settings['key'] =  $this->get_final_key($keyPrefix);
         $settings['label'] = $this->label;
         $settings['name'] = $this->name;
-        $settings['name'] = $this->getFinalName();
+        $settings['name'] = $this->get_final_name();
 
         $settings = array_merge($settings, [
-            'fewbricks__original_key' => $this->getOriginalKey(),
-            'fewbricks__parents' => $this->getParents(),
-            'type' => $this->getType(),
+            'fewbricks__original_key' => $this->get_original_key(),
+            'fewbricks__parents' => $this->get_parents(),
+            'type' => $this->get_type(),
         ]);
 
-        if (!$this->conditionalLogicRuleGroups->isEmpty()) {
+        if (!$this->conditionalLogicRuleGroups->is_empty()) {
 
-            $settings['conditional_logic'] = $this->conditionalLogicRuleGroups->toArray();
+            $settings['conditional_logic'] = $this->conditionalLogicRuleGroups->to_array();
 
         }
 

@@ -212,7 +212,7 @@ class Helper
      * @param string $fieldKey
      * @return string
      */
-    public static function getValidFieldKey(string $fieldKey)
+    public static function get_valid_field_key(string $fieldKey)
     {
 
         // Lets make sure that the key is ok for ACF
@@ -230,7 +230,7 @@ class Helper
      * @param $fieldGroupKey
      * @return string
      */
-    public static function getValidFieldGroupKey(string $fieldGroupKey)
+    public static function get_valid_field_group_key(string $fieldGroupKey)
     {
 
         // Lets keep in order with how ACF gives keys to field groups and prepend with "group_"
@@ -294,7 +294,7 @@ class Helper
     /**
      * @param $fields
      */
-    public static function validateFieldNames($fields)
+    public static function validate_field_names($fields)
     {
 
         foreach ($fields AS $field) {
@@ -306,9 +306,9 @@ class Helper
             }
 
             if (isset($field['sub_fields']) && !empty($field['sub_fields'])) {
-                self::validateFieldNames($field['sub_fields']);
+                self::validate_field_names($field['sub_fields']);
             } elseif (isset($field['layouts']) && !empty($field['layouts'])) {
-                self::validateFieldNames($field['layouts']);
+                self::validate_field_names($field['layouts']);
             }
 
         }
@@ -322,7 +322,7 @@ class Helper
      * @param bool $dieOnInvalid
      * @return bool
      */
-    public static function validateUniqueKeys(array $fields, $dieOnInvalid = true)
+    public static function validate_unique_keys(array $fields, $dieOnInvalid = true)
     {
 
         $flattenedAcfArray = self::getFlattenedAcfArray($fields);

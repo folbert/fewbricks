@@ -31,10 +31,10 @@ class RuleGroup
      * @param Rule $rule
      * @return $this
      */
-    protected function addRule($rule)
+    protected function add_rule($rule)
     {
 
-        $this->rules->addItem($rule);
+        $this->rules->add_item($rule);
 
         return $this;
 
@@ -43,10 +43,10 @@ class RuleGroup
     /**
      * @return array An array that ACF can work with.
      */
-    public function toAcfArray()
+    public function to_acf_array()
     {
 
-        return $this->rules->toAcfArray();
+        return $this->rules->to_acf_array();
 
     }
 

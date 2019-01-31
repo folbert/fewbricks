@@ -46,7 +46,7 @@ final class UrlTest extends FieldTest
 
         $this->assertEquals(
             FieldHelper::getExpectedFieldValues($field, $settings),
-            $field->toAcfArray($settings['test__key_prefix'])
+            $field->to_acf_array($settings['test__key_prefix'])
         );
 
     }
@@ -59,11 +59,11 @@ final class UrlTest extends FieldTest
 
         $field = new Url('', '', '');
 
-        $this->assertEquals('', $field->getDefaultValue());
+        $this->assertEquals('', $field->get_default_value());
 
-        $field->setDefaultValue('g87fiu');
+        $field->set_default_value('g87fiu');
 
-        $this->assertEquals('g87fiu', $field->getDefaultValue());
+        $this->assertEquals('g87fiu', $field->get_default_value());
 
     }
 
@@ -75,11 +75,11 @@ final class UrlTest extends FieldTest
 
         $field = new Url('', '', '');
 
-        $this->assertEquals('', $field->getPlaceholder());
+        $this->assertEquals('', $field->get_placeholder());
 
-        $field->setPlaceholder('dh8siohi');
+        $field->set_placeholder('dh8siohi');
 
-        $this->assertEquals('dh8siohi', $field->getPlaceholder());
+        $this->assertEquals('dh8siohi', $field->get_placeholder());
 
     }
 

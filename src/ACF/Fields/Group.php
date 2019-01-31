@@ -20,10 +20,10 @@ class Group extends FieldWithFields implements FieldInterface
      * @return mixed The value of the ACF setting "layout". Returns the default ACF value "block" if none has been
      * set using Fewbricks.
      */
-    public function getLayout()
+    public function get_layout()
     {
 
-        return $this->getSetting('layout', 'block');
+        return $this->get_setting('layout', 'block');
 
     }
 
@@ -33,10 +33,10 @@ class Group extends FieldWithFields implements FieldInterface
      * @param string $layout "block", "table" or "row"
      * @return $this
      */
-    public function setLayout($layout)
+    public function set_layout($layout)
     {
 
-        return $this->setSetting('layout', $layout);
+        return $this->set_setting('layout', $layout);
 
     }
 

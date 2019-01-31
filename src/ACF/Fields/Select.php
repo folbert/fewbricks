@@ -24,10 +24,10 @@ class Select extends FieldWithChoices implements FieldInterface
      * @return mixed The value of the ACF setting "ajax". Returns the default ACF value 0 if none has been
      * set using Fewbricks.
      */
-    public function getAjax()
+    public function get_ajax()
     {
 
-        return $this->getSetting('ajax', 0);
+        return $this->get_setting('ajax', 0);
 
     }
 
@@ -35,10 +35,10 @@ class Select extends FieldWithChoices implements FieldInterface
      * @return mixed The value of the ACF setting "allow_null". Returns the default ACF value 0 if none has been
      * set using Fewbricks.
      */
-    public function getAllowNull()
+    public function get_allow_null()
     {
 
-        return $this->getSetting('allow_null', 0);
+        return $this->get_setting('allow_null', 0);
 
     }
 
@@ -46,10 +46,10 @@ class Select extends FieldWithChoices implements FieldInterface
      * @return mixed The value of the ACF setting "multiple". Returns the default ACF value 0 if none has been
      * set using Fewbricks.
      */
-    public function getMultiple()
+    public function get_multiple()
     {
 
-        return $this->getSetting('multiple', 0);
+        return $this->get_setting('multiple', 0);
 
     }
 
@@ -57,10 +57,10 @@ class Select extends FieldWithChoices implements FieldInterface
      * @return mixed The value of the ACF setting "ui". Returns the default ACF value 0 if none has been
      * set using Fewbricks.
      */
-    public function getUi()
+    public function get_ui()
     {
 
-        return $this->getSetting('ui', 0);
+        return $this->get_setting('ui', 0);
 
     }
 
@@ -70,10 +70,10 @@ class Select extends FieldWithChoices implements FieldInterface
      * @param bool $ajax
      * @return $this
      */
-    public function setAjax($ajax)
+    public function set_ajax($ajax)
     {
 
-        return $this->setSetting('ajax', $ajax);
+        return $this->set_setting('ajax', $ajax);
 
     }
 
@@ -83,10 +83,10 @@ class Select extends FieldWithChoices implements FieldInterface
      * @param bool $allowNull
      * @return $this
      */
-    public function setAllowNull($allowNull)
+    public function set_allow_null($allowNull)
     {
 
-        return $this->setSetting('allow_null', $allowNull);
+        return $this->set_setting('allow_null', $allowNull);
 
 
     }
@@ -95,10 +95,10 @@ class Select extends FieldWithChoices implements FieldInterface
      * @param bool $multiple
      * @return $this
      */
-    public function setMultiple($multiple)
+    public function set_multiple($multiple)
     {
 
-        return $this->setSetting('multiple', $multiple);
+        return $this->set_setting('multiple', $multiple);
 
     }
 
@@ -108,10 +108,10 @@ class Select extends FieldWithChoices implements FieldInterface
      * @param boolean $ui
      * @return $this
      */
-    public function setUi($ui)
+    public function set_ui($ui)
     {
 
-        return $this->setSetting('ui', $ui);
+        return $this->set_setting('ui', $ui);
 
     }
 

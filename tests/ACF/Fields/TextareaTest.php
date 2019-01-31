@@ -46,7 +46,7 @@ final class TextareaTest extends FieldTest
 
         $this->assertEquals(
             FieldHelper::getExpectedFieldValues($field, $settings),
-            $field->toAcfArray($settings['test__key_prefix'])
+            $field->to_acf_array($settings['test__key_prefix'])
         );
 
     }
@@ -59,11 +59,11 @@ final class TextareaTest extends FieldTest
 
         $field = new Textarea('', '', '');
 
-        $this->assertEquals('', $field->getDefaultValue());
+        $this->assertEquals('', $field->get_default_value());
 
-        $field->setDefaultValue('h8oigil');
+        $field->set_default_value('h8oigil');
 
-        $this->assertEquals('h8oigil', $field->getDefaultValue());
+        $this->assertEquals('h8oigil', $field->get_default_value());
 
     }
 
@@ -75,11 +75,11 @@ final class TextareaTest extends FieldTest
 
         $field = new Textarea('', '', '');
 
-        $this->assertEquals('', $field->getMaxlength());
+        $this->assertEquals('', $field->get_maxlength());
 
-        $field->setMaxlength(89);
+        $field->set_maxlength(89);
 
-        $this->assertEquals(89, $field->getMaxlength());
+        $this->assertEquals(89, $field->get_maxlength());
 
     }
 
@@ -91,11 +91,11 @@ final class TextareaTest extends FieldTest
 
         $field = new Textarea('', '', '');
 
-        $this->assertEquals('', $field->getNewLines());
+        $this->assertEquals('', $field->get_new_lines());
 
-        $field->setNewLines('wpautopjjlk');
+        $field->set_new_lines('wpautopjjlk');
 
-        $this->assertEquals('wpautopjjlk', $field->getNewLines());
+        $this->assertEquals('wpautopjjlk', $field->get_new_lines());
 
     }
 
@@ -107,11 +107,11 @@ final class TextareaTest extends FieldTest
 
         $field = new Textarea('', '', '');
 
-        $this->assertEquals('', $field->getPlaceholder());
+        $this->assertEquals('', $field->get_placeholder());
 
-        $field->setPlaceholder('sjohsishiho');
+        $field->set_placeholder('sjohsishiho');
 
-        $this->assertEquals('sjohsishiho', $field->getPlaceholder());
+        $this->assertEquals('sjohsishiho', $field->get_placeholder());
 
     }
 
@@ -123,11 +123,11 @@ final class TextareaTest extends FieldTest
 
         $field = new Textarea('', '', '');
 
-        $this->assertEquals('', $field->getRows());
+        $this->assertEquals('', $field->get_rows());
 
-        $field->setRows(10);
+        $field->set_rows(10);
 
-        $this->assertEquals(10, $field->getRows());
+        $this->assertEquals(10, $field->get_rows());
 
     }
 

@@ -78,14 +78,14 @@ class Brick extends FieldCollection implements BrickInterface
     protected function finalizeItem($item)
     {
 
-        $item->addParent($this->getKey(), $this->getName(), self::CLASS_ID_STRING);
+        $item->add_parent($this->get_key(), $this->get_name(), self::CLASS_ID_STRING);
 
     }
 
     /**
      * @return string
      */
-    public function getName()
+    public function get_name()
     {
 
         return $this->name;
@@ -431,7 +431,7 @@ class Brick extends FieldCollection implements BrickInterface
      * uses this fact by overriding it in your own Brick classes and adding code for adding your own fields or bricks
      * or whatever you want.
      */
-    public function setUp()
+    public function set_up()
     {
 
     }

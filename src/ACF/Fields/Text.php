@@ -24,10 +24,10 @@ class Text extends Field implements FieldInterface
      * @return mixed The value of the ACF setting "append". Returns the default ACF value "" if none has been
      * set using Fewbricks.
      */
-    public function getAppend()
+    public function get_append()
     {
 
-        return $this->getSetting('append', '');
+        return $this->get_setting('append', '');
 
     }
 
@@ -35,10 +35,10 @@ class Text extends Field implements FieldInterface
      * @return mixed The value of the ACF setting "default_value". Returns the default ACF value "" if none has been set
      * using Fewbricks.
      */
-    public function getDefaultValue()
+    public function get_default_value()
     {
 
-        return $this->getSetting('default_value', '');
+        return $this->get_setting('default_value', '');
 
     }
 
@@ -46,10 +46,10 @@ class Text extends Field implements FieldInterface
      * @return mixed The value of the ACF setting "maxlength". Returns the default ACF value "" if none has been
      * set using Fewbricks.
      */
-    public function getMaxlength()
+    public function get_maxlength()
     {
 
-        return $this->getSetting('maxlength', '');
+        return $this->get_setting('maxlength', '');
 
     }
 
@@ -57,10 +57,10 @@ class Text extends Field implements FieldInterface
      * @return mixed The value of the ACF setting "placeholder". Returns the default ACF value "" if none has been
      * set using Fewbricks.
      */
-    public function getPlaceholder()
+    public function get_placeholder()
     {
 
-        return $this->getSetting('placeholder', '');
+        return $this->get_setting('placeholder', '');
 
     }
 
@@ -68,10 +68,10 @@ class Text extends Field implements FieldInterface
      * @return mixed The value of the ACF setting "prepend". Returns the default ACF value "" if none has been
      * set using Fewbricks.
      */
-    public function getPrepend()
+    public function get_prepend()
     {
 
-        return $this->getSetting('prepend', '');
+        return $this->get_setting('prepend', '');
 
     }
 
@@ -81,10 +81,10 @@ class Text extends Field implements FieldInterface
      * @param string $append Text to appear after the input.
      * @return $this
      */
-    public function setAppend($append)
+    public function set_append($append)
     {
 
-        return $this->setSetting('append', $append);
+        return $this->set_setting('append', $append);
 
     }
 
@@ -92,10 +92,10 @@ class Text extends Field implements FieldInterface
      * @param mixed $defaultValue ACF setting. A default value used by ACF if no value has yet been saved.
      * @return $this
      */
-    public function setDefaultValue($defaultValue)
+    public function set_default_value($defaultValue)
     {
 
-        return $this->setSetting('default_value', $defaultValue);
+        return $this->set_setting('default_value', $defaultValue);
 
     }
 
@@ -105,10 +105,10 @@ class Text extends Field implements FieldInterface
      * @param int $maxlength [sic]
      * @return $this
      */
-    public function setMaxlength($maxlength)
+    public function set_maxlength($maxlength)
     {
 
-        return $this->setSetting('maxlength', $maxlength);
+        return $this->set_setting('maxlength', $maxlength);
 
     }
 
@@ -118,10 +118,10 @@ class Text extends Field implements FieldInterface
      * @param string $placeholder
      * @return $this
      */
-    public function setPlaceholder($placeholder)
+    public function set_placeholder($placeholder)
     {
 
-        return $this->setSetting('placeholder', $placeholder);
+        return $this->set_setting('placeholder', $placeholder);
 
     }
 
@@ -131,10 +131,10 @@ class Text extends Field implements FieldInterface
      * @param string $prepend Text to appear before the input.
      * @return $this
      */
-    public function setPrepend($prepend)
+    public function set_prepend($prepend)
     {
 
-        return $this->setSetting('prepend', $prepend);
+        return $this->set_setting('prepend', $prepend);
 
     }
 

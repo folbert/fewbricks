@@ -46,7 +46,7 @@ final class ImageTest extends FieldTest
 
         $this->assertEquals(
             FieldHelper::getExpectedFieldValues($field, $settings),
-            $field->toAcfArray($settings['test__key_prefix'])
+            $field->to_acf_array($settings['test__key_prefix'])
         );
 
     }
@@ -59,11 +59,11 @@ final class ImageTest extends FieldTest
 
         $field = new Image('', '', '');
 
-        $this->assertEquals('all', $field->getLibrary());
+        $this->assertEquals('all', $field->get_library());
 
-        $field->setLibrary('hiho');
+        $field->set_library('hiho');
 
-        $this->assertEquals('hiho', $field->getLibrary());
+        $this->assertEquals('hiho', $field->get_library());
 
     }
 
@@ -91,11 +91,11 @@ final class ImageTest extends FieldTest
 
         $field = new Image('', '', '');
 
-        $this->assertEquals(0, $field->getMaxSize());
+        $this->assertEquals(0, $field->get_max_size());
 
-        $field->setMaxSize(67);
+        $field->set_max_size(67);
 
-        $this->assertEquals(67, $field->getMaxSize());
+        $this->assertEquals(67, $field->get_max_size());
 
     }
 
@@ -123,15 +123,15 @@ final class ImageTest extends FieldTest
 
         $field = new Image('', '', '');
 
-        $this->assertEquals('', $field->getMimeTypes());
+        $this->assertEquals('', $field->get_mime_types());
 
-        $field->setMimeTypes(['hggik', 'ohl/yuk']);
+        $field->set_mime_types(['hggik', 'ohl/yuk']);
 
-        $this->assertEquals('hggik, ohl/yuk', $field->getMimeTypes());
+        $this->assertEquals('hggik, ohl/yuk', $field->get_mime_types());
 
-        $field->setMimeTypes('hggik, jdiohdo/g');
+        $field->set_mime_types('hggik, jdiohdo/g');
 
-        $this->assertEquals('hggik, jdiohdo/g', $field->getMimeTypes());
+        $this->assertEquals('hggik, jdiohdo/g', $field->get_mime_types());
 
     }
 
@@ -159,11 +159,11 @@ final class ImageTest extends FieldTest
 
         $field = new Image('', '', '');
 
-        $this->assertEquals(0, $field->getMinSize());
+        $this->assertEquals(0, $field->get_min_size());
 
-        $field->setMinSize(67);
+        $field->set_min_size(67);
 
-        $this->assertEquals(67, $field->getMinSize());
+        $this->assertEquals(67, $field->get_min_size());
 
     }
 
@@ -191,11 +191,11 @@ final class ImageTest extends FieldTest
 
         $field = new Image('', '', '');
 
-        $this->assertEquals($field->getPreviewSize(), 'thumbnail');
+        $this->assertEquals($field->get_preview_size(), 'thumbnail');
 
-        $field->setPreviewSize('full');
+        $field->set_preview_size('full');
 
-        $this->assertEquals($field->getPreviewSize(), 'full');
+        $this->assertEquals($field->get_preview_size(), 'full');
 
     }
 
@@ -207,11 +207,11 @@ final class ImageTest extends FieldTest
 
         $field = new Image('', '', '');
 
-        $this->assertEquals('array', $field->getReturnFormat());
+        $this->assertEquals('array', $field->get_return_format());
 
-        $field->setReturnFormat('object');
+        $field->set_return_format('object');
 
-        $this->assertEquals('object', $field->getReturnFormat());
+        $this->assertEquals('object', $field->get_return_format());
 
     }
 

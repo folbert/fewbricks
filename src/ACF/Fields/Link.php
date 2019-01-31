@@ -24,10 +24,10 @@ class Link extends Field implements FieldInterface
      * @return mixed The value of the ACF setting "return_format". Returns the default ACF value "array" if none has
      * been set using Fewbricks.
      */
-    public function getReturnFormat()
+    public function get_return_format()
     {
 
-        return $this->getSetting('return_format', 'array');
+        return $this->get_setting('return_format', 'array');
 
     }
 
@@ -37,10 +37,10 @@ class Link extends Field implements FieldInterface
      * @param string $returnFormat "array" or "url"
      * @return $this
      */
-    public function setReturnFormat($returnFormat)
+    public function set_return_format($returnFormat)
     {
 
-        return $this->setSetting('return_format', $returnFormat);
+        return $this->set_setting('return_format', $returnFormat);
 
     }
 

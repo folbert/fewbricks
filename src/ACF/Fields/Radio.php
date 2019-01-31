@@ -24,10 +24,10 @@ class Radio extends FieldWithChoices implements FieldInterface
      * @return mixed The value of the ACF setting "allow_null". Returns the default ACF value false if none has been
      * set using Fewbricks.
      */
-    public function getAllowNull()
+    public function get_allow_null()
     {
 
-        return $this->getSetting('allow_null', 0);
+        return $this->get_setting('allow_null', 0);
 
     }
 
@@ -35,10 +35,10 @@ class Radio extends FieldWithChoices implements FieldInterface
      * @return mixed The value of the ACF setting "layout". Returns the default ACF value "vertical" if none has been
      * set using Fewbricks.
      */
-    public function getLayout()
+    public function get_layout()
     {
 
-        return $this->getSetting('layout', 'vertical');
+        return $this->get_setting('layout', 'vertical');
 
     }
 
@@ -46,10 +46,10 @@ class Radio extends FieldWithChoices implements FieldInterface
      * @return mixed The value of the ACF setting "other_choice". Returns the default ACF value false if none has been
      * set using Fewbricks.
      */
-    public function getOtherChoice()
+    public function get_other_choice()
     {
 
-        return $this->getSetting('other_choice', 0);
+        return $this->get_setting('other_choice', 0);
 
     }
 
@@ -57,10 +57,10 @@ class Radio extends FieldWithChoices implements FieldInterface
      * @return mixed The value of the ACF setting "save_other_choice". Returns the default ACF value false if none has
      * been set using Fewbricks.
      */
-    public function getSaveOtherChoice()
+    public function get_save_other_choice()
     {
 
-        return $this->getSetting('save_other_choice', 0);
+        return $this->get_setting('save_other_choice', 0);
 
     }
 
@@ -70,10 +70,10 @@ class Radio extends FieldWithChoices implements FieldInterface
      * @param bool $allowNull
      * @return $this
      */
-    public function setAllowNull($allowNull)
+    public function set_allow_null($allowNull)
     {
 
-        return $this->setSetting('allow_null', $allowNull);
+        return $this->set_setting('allow_null', $allowNull);
 
 
     }
@@ -84,10 +84,10 @@ class Radio extends FieldWithChoices implements FieldInterface
      * @param string $layout "vertical" or "horizontal".
      * @return $this
      */
-    public function setLayout($layout)
+    public function set_layout($layout)
     {
 
-        return $this->setSetting('layout', $layout);
+        return $this->set_setting('layout', $layout);
 
     }
 
@@ -97,10 +97,10 @@ class Radio extends FieldWithChoices implements FieldInterface
      * @param mixed $otherChoice
      * @return $this
      */
-    public function setOtherChoice($otherChoice)
+    public function set_other_choice($otherChoice)
     {
 
-        return $this->setSetting('other_choice', $otherChoice);
+        return $this->set_setting('other_choice', $otherChoice);
 
     }
 
@@ -110,10 +110,10 @@ class Radio extends FieldWithChoices implements FieldInterface
      * @param mixed $saveOtherChoice
      * @return $this
      */
-    public function setSaveOtherChoice($saveOtherChoice)
+    public function set_save_other_choice($saveOtherChoice)
     {
 
-        return $this->setSetting('save_other_choice', $saveOtherChoice);
+        return $this->set_setting('save_other_choice', $saveOtherChoice);
 
     }
 

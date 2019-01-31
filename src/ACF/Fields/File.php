@@ -24,10 +24,10 @@ class File extends Field implements FieldInterface
      * @return mixed The value of the ACF setting "library". Returns the default ACF value "all" if none has been
      * set using Fewbricks.
      */
-    public function getLibrary()
+    public function get_library()
     {
 
-        return $this->getSetting('library', 'all');
+        return $this->get_setting('library', 'all');
 
     }
 
@@ -35,10 +35,10 @@ class File extends Field implements FieldInterface
      * @return mixed The value of the ACF setting "max_size". Returns the default ACF value 0 if none has been
      * set using Fewbricks.
      */
-    public function getMaxSize()
+    public function get_max_size()
     {
 
-        return $this->getSetting('max_size', 0);
+        return $this->get_setting('max_size', 0);
 
     }
 
@@ -46,10 +46,10 @@ class File extends Field implements FieldInterface
      * @return mixed The value of the ACF setting "mime_types". Returns the default ACF value "" if none has been
      * set using Fewbricks.
      */
-    public function getMimeTypes()
+    public function get_mime_types()
     {
 
-        return $this->getSetting('mime_types', '');
+        return $this->get_setting('mime_types', '');
 
     }
 
@@ -57,10 +57,10 @@ class File extends Field implements FieldInterface
      * @return mixed The value of the ACF setting "min_size". Returns the default ACF value 0 if none has been
      * set using Fewbricks.
      */
-    public function getMinSize()
+    public function get_min_size()
     {
 
-        return $this->getSetting('min_size', 0);
+        return $this->get_setting('min_size', 0);
 
     }
 
@@ -69,10 +69,10 @@ class File extends Field implements FieldInterface
      * been
      * set using Fewbricks.
      */
-    public function getReturnFormat()
+    public function get_return_format()
     {
 
-        return $this->getSetting('return_format', 'array');
+        return $this->get_setting('return_format', 'array');
 
     }
 
@@ -82,10 +82,10 @@ class File extends Field implements FieldInterface
      * @param string $library "all" or "uploadedTo"
      * @return $this
      */
-    public function setLibrary($library)
+    public function set_library($library)
     {
 
-        return $this->setSetting('library', $library);
+        return $this->set_setting('library', $library);
 
     }
 
@@ -95,10 +95,10 @@ class File extends Field implements FieldInterface
      * @param int $maxSize Max file size in MB
      * @return $this
      */
-    public function setMaxSize($maxSize)
+    public function set_max_size($maxSize)
     {
 
-        return $this->setSetting('max_size', $maxSize);
+        return $this->set_setting('max_size', $maxSize);
 
     }
 
@@ -108,14 +108,14 @@ class File extends Field implements FieldInterface
      * @param string|array $mimeTypes Comma separated string or array
      * @return $this
      */
-    public function setMimeTypes($mimeTypes)
+    public function set_mime_types($mimeTypes)
     {
 
         if (is_array($mimeTypes)) {
             $mimeTypes = implode(', ', $mimeTypes);
         }
 
-        return $this->setSetting('mime_types', $mimeTypes);
+        return $this->set_setting('mime_types', $mimeTypes);
 
     }
 
@@ -125,10 +125,10 @@ class File extends Field implements FieldInterface
      * @param int $minSize Minimum file size in MB
      * @return $this
      */
-    public function setMinSize($minSize)
+    public function set_min_size($minSize)
     {
 
-        return $this->setSetting('min_size', $minSize);
+        return $this->set_setting('min_size', $minSize);
 
     }
 
@@ -138,10 +138,10 @@ class File extends Field implements FieldInterface
      * @param string $returnFormat "array", "url" or "id"
      * @return $this
      */
-    public function setReturnFormat($returnFormat)
+    public function set_return_format($returnFormat)
     {
 
-        return $this->setSetting('return_format', $returnFormat);
+        return $this->set_setting('return_format', $returnFormat);
 
     }
 

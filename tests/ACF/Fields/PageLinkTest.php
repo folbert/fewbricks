@@ -46,7 +46,7 @@ final class PageLinkTest extends FieldTest
 
         $this->assertEquals(
             FieldHelper::getExpectedFieldValues($field, $settings),
-            $field->toAcfArray($settings['test__key_prefix'])
+            $field->to_acf_array($settings['test__key_prefix'])
         );
 
     }
@@ -59,11 +59,11 @@ final class PageLinkTest extends FieldTest
 
         $field = new PageLink('', '', '');
 
-        $this->assertEquals(0, $field->getAllowNull());
+        $this->assertEquals(0, $field->get_allow_null());
 
-        $field->setAllowNull(true);
+        $field->set_allow_null(true);
 
-        $this->assertEquals(true, $field->getAllowNull());
+        $this->assertEquals(true, $field->get_allow_null());
 
     }
 
@@ -75,11 +75,11 @@ final class PageLinkTest extends FieldTest
 
         $field = new PageLink('', '', '');
 
-        $this->assertEquals(1, $field->getAllowArchives());
+        $this->assertEquals(1, $field->get_allow_archives());
 
-        $field->setAllowArchives(false);
+        $field->set_allow_archives(false);
 
-        $this->assertEquals(false, $field->getAllowArchives());
+        $this->assertEquals(false, $field->get_allow_archives());
 
     }
 
@@ -91,11 +91,11 @@ final class PageLinkTest extends FieldTest
 
         $field = new PageLink('', '', '');
 
-        $this->assertEquals(0, $field->getMultiple());
+        $this->assertEquals(0, $field->get_multiple());
 
-        $field->setMultiple(true);
+        $field->set_multiple(true);
 
-        $this->assertEquals(true, $field->getMultiple());
+        $this->assertEquals(true, $field->get_multiple());
 
     }
 
@@ -107,11 +107,11 @@ final class PageLinkTest extends FieldTest
 
         $field = new PageLink('', '', '');
 
-        $this->assertEquals([], $field->getPostType());
+        $this->assertEquals([], $field->get_post_type());
 
-        $field->setPostType(['post', 'page']);
+        $field->set_post_type(['post', 'page']);
 
-        $this->assertEquals(['post', 'page'], $field->getPostType());
+        $this->assertEquals(['post', 'page'], $field->get_post_type());
 
     }
 
@@ -123,11 +123,11 @@ final class PageLinkTest extends FieldTest
 
         $field = new PageLink('', '', '');
 
-        $this->assertEquals([], $field->getTaxonomy());
+        $this->assertEquals([], $field->get_taxonomy());
 
-        $field->setTaxonomy(['post', 'page']);
+        $field->set_taxonomy(['post', 'page']);
 
-        $this->assertEquals(['post', 'page'], $field->getTaxonomy());
+        $this->assertEquals(['post', 'page'], $field->get_taxonomy());
 
     }
 

@@ -24,10 +24,10 @@ class Image extends FieldWithImages implements FieldInterface
      * @return mixed The value of the ACF setting "preview_size". Returns the default ACF value "thumbnail" if none has been
      * set using Fewbricks.
      */
-    public function getPreviewSize()
+    public function get_preview_size()
     {
 
-        return $this->getSetting('preview_size', 'thumbnail');
+        return $this->get_setting('preview_size', 'thumbnail');
 
     }
 
@@ -35,10 +35,10 @@ class Image extends FieldWithImages implements FieldInterface
      * @return mixed The value of the ACF setting "return_format". Returns the default ACF value "array" if none has been
      * set using Fewbricks.
      */
-    public function getReturnFormat()
+    public function get_return_format()
     {
 
-        return $this->getSetting('return_format', 'array');
+        return $this->get_setting('return_format', 'array');
 
     }
 
@@ -49,10 +49,10 @@ class Image extends FieldWithImages implements FieldInterface
      *                            custom image size.
      * @return $this
      */
-    public function setPreviewSize($previewSize)
+    public function set_preview_size($previewSize)
     {
 
-        return $this->setSetting('preview_size', $previewSize);
+        return $this->set_setting('preview_size', $previewSize);
 
     }
 
@@ -62,10 +62,10 @@ class Image extends FieldWithImages implements FieldInterface
      * @param string $returnFormat "array", "url" or "id"
      * @return $this
      */
-    public function setReturnFormat($returnFormat)
+    public function set_return_format($returnFormat)
     {
 
-        return $this->setSetting('return_format', $returnFormat);
+        return $this->set_setting('return_format', $returnFormat);
 
     }
 

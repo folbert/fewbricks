@@ -33,14 +33,14 @@ class BrickTemplater extends Templater
 
     /**
      * Returns HTML for the brick wrapped in any layouts that have been specified for the brick. Acts as a wrapper
-     * for getLayoutedHtml()
+     * for get_layoutedHtml()
      *
      * @return string
      */
     public function getHtml()
     {
 
-        return $this->getLayoutedHtml($this->getBrickHtml());
+        return $this->get_layoutedHtml($this->getBrickHtml());
 
     }
 
@@ -90,7 +90,7 @@ to tell Brick::getBrickTemplateHtml() where to look for brick template files.'))
      * @param $html
      * @return false|string
      */
-    protected function getLayoutedHtml(string $html) {
+    protected function get_layoutedHtml(string $html) {
 
         if (
             false !== ($layoutsBasePath = Helper::getBrickLayoutsBasePath()) &&

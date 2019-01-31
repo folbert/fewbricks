@@ -24,10 +24,10 @@ class ButtonGroup extends FieldWithChoices implements FieldInterface
      * @return mixed The value of the ACF setting "allow_null". Returns the default ACF value 0 if none has been
      * set using Fewbricks.
      */
-    public function getAllowNull()
+    public function get_allow_null()
     {
 
-        return $this->getSetting('allow_null', 0);
+        return $this->get_setting('allow_null', 0);
 
     }
 
@@ -35,10 +35,10 @@ class ButtonGroup extends FieldWithChoices implements FieldInterface
      * @return mixed The value of the ACF setting "layout". Returns the default ACF value "horizontal" if none has been
      * set using Fewbricks.
      */
-    public function getLayout()
+    public function get_layout()
     {
 
-        return $this->getSetting('layout', 'horizontal');
+        return $this->get_setting('layout', 'horizontal');
 
     }
 
@@ -48,10 +48,10 @@ class ButtonGroup extends FieldWithChoices implements FieldInterface
      * @param bool $allowNull
      * @return $this
      */
-    public function setAllowNull($allowNull)
+    public function set_allow_null($allowNull)
     {
 
-        return $this->setSetting('allow_null', $allowNull);
+        return $this->set_setting('allow_null', $allowNull);
 
 
     }
@@ -62,10 +62,10 @@ class ButtonGroup extends FieldWithChoices implements FieldInterface
      * @param string $layout "horizontal" or "vertical"
      * @return $this
      */
-    public function setLayout($layout)
+    public function set_layout($layout)
     {
 
-        return $this->setSetting('layout', $layout);
+        return $this->set_setting('layout', $layout);
 
     }
 

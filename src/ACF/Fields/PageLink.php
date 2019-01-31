@@ -24,10 +24,10 @@ class PageLink extends Field implements FieldInterface
      * @return mixed The value of the ACF setting "allow_archives". Returns the default ACF value 1 if none has been
      * set using Fewbricks.
      */
-    public function getAllowArchives()
+    public function get_allow_archives()
     {
 
-        return $this->getSetting('allow_archives', 1);
+        return $this->get_setting('allow_archives', 1);
 
     }
 
@@ -35,10 +35,10 @@ class PageLink extends Field implements FieldInterface
      * @return mixed The value of the ACF setting "allow_null". Returns the default ACF value 0 if none has been
      * set using Fewbricks.
      */
-    public function getAllowNull()
+    public function get_allow_null()
     {
 
-        return $this->getSetting('allow_null', 0);
+        return $this->get_setting('allow_null', 0);
 
     }
 
@@ -46,10 +46,10 @@ class PageLink extends Field implements FieldInterface
      * @return mixed The value of the ACF setting "multiple". Returns the default ACF value 0 if none has been
      * set using Fewbricks.
      */
-    public function getMultiple()
+    public function get_multiple()
     {
 
-        return $this->getSetting('multiple', 0);
+        return $this->get_setting('multiple', 0);
 
     }
 
@@ -57,10 +57,10 @@ class PageLink extends Field implements FieldInterface
      * @return mixed The value of the ACF setting "". Returns the default ACF value [] if none has been
      * set using Fewbricks.
      */
-    public function getPostType()
+    public function get_post_type()
     {
 
-        return $this->getSetting('post_type', []);
+        return $this->get_setting('post_type', []);
 
     }
 
@@ -68,10 +68,10 @@ class PageLink extends Field implements FieldInterface
      * @return mixed The value of the ACF setting "taxonomy". Returns the default ACF value of an empty array if none
      * has been set using Fewbricks.
      */
-    public function getTaxonomy()
+    public function get_taxonomy()
     {
 
-        return $this->getSetting('taxonomy', []);
+        return $this->get_setting('taxonomy', []);
 
     }
 
@@ -81,10 +81,10 @@ class PageLink extends Field implements FieldInterface
      * @param mixed $allowArchives
      * @return $this
      */
-    public function setAllowArchives($allowArchives)
+    public function set_allow_archives($allowArchives)
     {
 
-        return $this->setSetting('allow_archives', $allowArchives);
+        return $this->set_setting('allow_archives', $allowArchives);
 
     }
 
@@ -94,10 +94,10 @@ class PageLink extends Field implements FieldInterface
      * @param boolean $allowNull
      * @return $this
      */
-    public function setAllowNull($allowNull)
+    public function set_allow_null($allowNull)
     {
 
-        return $this->setSetting('allow_null', $allowNull);
+        return $this->set_setting('allow_null', $allowNull);
 
     }
 
@@ -107,10 +107,10 @@ class PageLink extends Field implements FieldInterface
      * @param mixed $multiple
      * @return $this
      */
-    public function setMultiple(bool $multiple)
+    public function set_multiple(bool $multiple)
     {
 
-        return $this->setSetting('multiple', $multiple);
+        return $this->set_setting('multiple', $multiple);
 
     }
 
@@ -120,10 +120,10 @@ class PageLink extends Field implements FieldInterface
      * @param mixed $postType Array with post type names
      * @return $this
      */
-    public function setPostType(array $postType)
+    public function set_post_type(array $postType)
     {
 
-        return $this->setSetting('post_type', $postType);
+        return $this->set_setting('post_type', $postType);
 
     }
 
@@ -133,10 +133,10 @@ class PageLink extends Field implements FieldInterface
      * @param mixed $taxonomy Array with post type names
      * @return $this
      */
-    public function setTaxonomy(array $taxonomy)
+    public function set_taxonomy(array $taxonomy)
     {
 
-        return $this->setSetting('taxonomy', $taxonomy);
+        return $this->set_setting('taxonomy', $taxonomy);
 
     }
 

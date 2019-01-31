@@ -16,7 +16,7 @@ by Fewbricks, you will need to write some custom code for it to work with Fewbri
 
 Note that some extensions are not testing if settings are set before using their names as indexes in arrays which will cause fatal errors. Check the code for [AcfCodeField](https://github
 .com/folbert/fewbricks/tree/2.x/src/ACF/Fields/Extensions/AcfCodeField.php) on how we fix that by implementing the 
-`toAcfArray`-function in the field class.
+`to_acf_array`-function in the field class.
  
 
 

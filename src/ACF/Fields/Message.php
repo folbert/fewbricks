@@ -24,10 +24,10 @@ class Message extends Field implements FieldInterface
      * @return mixed The value of the ACF setting "esc_html". Returns the default ACF value 0 if none has been
      * set using Fewbricks.
      */
-    public function getEscHtml()
+    public function get_esc_html()
     {
 
-        return $this->getSetting('esc_html', 0);
+        return $this->get_setting('esc_html', 0);
 
     }
 
@@ -35,10 +35,10 @@ class Message extends Field implements FieldInterface
      * @return mixed The value of the ACF setting "message". Returns the default ACF value "" if none has been
      * set using Fewbricks.
      */
-    public function getMessage()
+    public function get_message()
     {
 
-        return $this->getSetting('message', '');
+        return $this->get_setting('message', '');
 
     }
 
@@ -46,10 +46,10 @@ class Message extends Field implements FieldInterface
      * @return mixed The value of the ACF setting "new_lines". Returns the default ACF value "wpautop" if none has been
      * set using Fewbricks.
      */
-    public function getNewLines()
+    public function get_new_lines()
     {
 
-        return $this->getSetting('new_lines', 'wpautop');
+        return $this->get_setting('new_lines', 'wpautop');
 
     }
 
@@ -59,10 +59,10 @@ class Message extends Field implements FieldInterface
      * @param boolean $escapeHtml
      * @return $this
      */
-    public function setEscHtml($escapeHtml)
+    public function set_esc_html($escapeHtml)
     {
 
-        return $this->setSetting('esc_html', $escapeHtml);
+        return $this->set_setting('esc_html', $escapeHtml);
 
     }
 
@@ -70,10 +70,10 @@ class Message extends Field implements FieldInterface
      * @param $message
      * @return $this
      */
-    public function setMessage($message)
+    public function set_message($message)
     {
 
-        return $this->setSetting('message', $message);
+        return $this->set_setting('message', $message);
 
     }
 
@@ -84,10 +84,10 @@ class Message extends Field implements FieldInterface
      * formatting)
      * @return $this
      */
-    public function setNewLines($newLines)
+    public function set_new_lines($newLines)
     {
 
-        return $this->setSetting('new_lines', $newLines);
+        return $this->set_setting('new_lines', $newLines);
 
     }
 

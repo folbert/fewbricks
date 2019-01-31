@@ -14,26 +14,26 @@ add_action('fewbricks/init', function () {
 
     //require_once 'inline-demo.php';
 
-    //(new FooterGlobalTexts('Footer', '1811292313a'))->setUp();
+    //(new FooterGlobalTexts('Footer', '1811292313a'))->set_up();
 
     (new AllFields('All fields', '1812032255a'))
-        ->addLocationRuleGroup(
+        ->add_location_rule_group(
             (new FieldGroupLocationRuleGroup())
                 ->addFieldGroupLocationRule(
                     new FieldGroupLocationRule('post_type', '==', 'fewbricks_demo_pg2')
                 )
         )
-        ->setUp()
+        ->set_up()
         ->register();
 
     (new AllFields('All fields 2', '1812032255a'))
-        ->addLocationRuleGroup(
+        ->add_location_rule_group(
             (new FieldGroupLocationRuleGroup())
                 ->addFieldGroupLocationRule(
                     new FieldGroupLocationRule('post_type', '==', 'fewbricks_demo_pg2')
                 )
         )
-        ->setUp()
+        ->set_up()
         ->register();
 
 });

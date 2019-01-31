@@ -13,10 +13,10 @@ class Table extends Field
      * @param $useCaption 1 for "yes" or or 2 for "no"
      * @return $this
      */
-    public function setUseCaption($useCaption)
+    public function set_use_caption($useCaption)
     {
 
-        return $this->setSetting('use_caption', $useCaption);
+        return $this->set_setting('use_caption', $useCaption);
 
     }
 
@@ -24,46 +24,46 @@ class Table extends Field
      * @param $useHeader 0 for "optional", 1 for "yes" or or 2 for "no"
      * @return $this
      */
-    public function setUseHeader($useHeader)
+    public function set_use_header($useHeader)
     {
 
-        return $this->setSetting('use_header', $useHeader);
+        return $this->set_setting('use_header', $useHeader);
 
     }
 
     /**
      * @return mixed
      */
-    public function getUseCaption()
+    public function get_use_caption()
     {
 
-        return $this->getSetting('use_caption', 2);
+        return $this->get_setting('use_caption', 2);
 
     }
 
     /**
      * @return mixed
      */
-    public function getUseHeader()
+    public function get_use_header()
     {
 
-        return $this->getSetting('use_header', 0);
+        return $this->get_setting('use_header', 0);
 
     }
 
     /**
      * This function is called right before field is turned into ACF array.
      */
-    protected function prepareForAcfArray()
+    protected function prepare_for_acf_array()
     {
 
         // Fix since the field does not check if indexes are set before using the value.
-        if($this->getSetting('use_caption', false) === false) {
-            $this->setUseCaption(2);
+        if($this->get_setting('use_caption', false) === false) {
+            $this->set_use_caption(2);
         }
 
-        if($this->getSetting('use_header', false) === false) {
-            $this->setUseHeader(0);
+        if($this->get_setting('use_header', false) === false) {
+            $this->set_use_header(0);
         }
 
     }

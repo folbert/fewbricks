@@ -14,10 +14,10 @@ class FieldWithImages extends Field
      * @return mixed The value of the ACF setting "library". Returns the default ACF value "all" if none has been
      * set using Fewbricks.
      */
-    public function getLibrary()
+    public function get_library()
     {
 
-        return $this->getSetting('library', 'all');
+        return $this->get_setting('library', 'all');
 
     }
 
@@ -28,7 +28,7 @@ class FieldWithImages extends Field
     public function getMaxHeight()
     {
 
-        return $this->getSetting('max_height', 0);
+        return $this->get_setting('max_height', 0);
 
     }
 
@@ -36,10 +36,10 @@ class FieldWithImages extends Field
      * @return mixed The value of the ACF setting "max_size". Returns the default ACF value 0 if none has been
      * set using Fewbricks.
      */
-    public function getMaxSize()
+    public function get_max_size()
     {
 
-        return $this->getSetting('max_size', 0);
+        return $this->get_setting('max_size', 0);
 
     }
 
@@ -50,7 +50,7 @@ class FieldWithImages extends Field
     public function getMaxWidth()
     {
 
-        return $this->getSetting('max_width', 0);
+        return $this->get_setting('max_width', 0);
 
     }
 
@@ -58,10 +58,10 @@ class FieldWithImages extends Field
      * @return mixed The value of the ACF setting "mime_types". Returns the default ACF value "" if none has been
      * set using Fewbricks.
      */
-    public function getMimeTypes()
+    public function get_mime_types()
     {
 
-        return $this->getSetting('mime_types', '');
+        return $this->get_setting('mime_types', '');
 
     }
 
@@ -72,7 +72,7 @@ class FieldWithImages extends Field
     public function getMinHeight()
     {
 
-        return $this->getSetting('min_height', 0);
+        return $this->get_setting('min_height', 0);
 
     }
 
@@ -80,10 +80,10 @@ class FieldWithImages extends Field
      * @return mixed The value of the ACF setting "min_size". Returns the default ACF value 0 if none has been
      * set using Fewbricks.
      */
-    public function getMinSize()
+    public function get_min_size()
     {
 
-        return $this->getSetting('min_size', 0);
+        return $this->get_setting('min_size', 0);
 
     }
 
@@ -94,7 +94,7 @@ class FieldWithImages extends Field
     public function getMinWidth()
     {
 
-        return $this->getSetting('min_width', 0);
+        return $this->get_setting('min_width', 0);
 
     }
 
@@ -104,10 +104,10 @@ class FieldWithImages extends Field
      * @param $library "all" or "uploadedTo"
      * @return $this
      */
-    public function setLibrary($library)
+    public function set_library($library)
     {
 
-        return $this->setSetting('library', $library);
+        return $this->set_setting('library', $library);
 
     }
 
@@ -120,7 +120,7 @@ class FieldWithImages extends Field
     public function setMaxHeight($maxHeight)
     {
 
-        return $this->setSetting('max_height', $maxHeight);
+        return $this->set_setting('max_height', $maxHeight);
 
     }
 
@@ -130,10 +130,10 @@ class FieldWithImages extends Field
      * @param int $maxSize max size in MB (without "MB")
      * @return $this
      */
-    public function setMaxSize($maxSize)
+    public function set_max_size($maxSize)
     {
 
-        return $this->setSetting('max_size', $maxSize);
+        return $this->set_setting('max_size', $maxSize);
 
     }
 
@@ -146,7 +146,7 @@ class FieldWithImages extends Field
     public function setMaxWidth($maxWidth)
     {
 
-        return $this->setSetting('max_width', $maxWidth);
+        return $this->set_setting('max_width', $maxWidth);
 
     }
 
@@ -156,14 +156,14 @@ class FieldWithImages extends Field
      * @param array|string $mimeTypes Comma separated string or array
      * @return $this
      */
-    public function setMimeTypes($mimeTypes)
+    public function set_mime_types($mimeTypes)
     {
 
         if (is_array($mimeTypes)) {
             $mimeTypes = implode(', ', $mimeTypes);
         }
 
-        return $this->setSetting('mime_types', $mimeTypes);
+        return $this->set_setting('mime_types', $mimeTypes);
 
     }
 
@@ -176,7 +176,7 @@ class FieldWithImages extends Field
     public function setMinHeight($minHeight)
     {
 
-        return $this->setSetting('min_height', $minHeight);
+        return $this->set_setting('min_height', $minHeight);
 
     }
 
@@ -186,10 +186,10 @@ class FieldWithImages extends Field
      * @param int $minSize Min size in MB (without "MB")
      * @return $this
      */
-    public function setMinSize($minSize)
+    public function set_min_size($minSize)
     {
 
-        return $this->setSetting('min_size', $minSize);
+        return $this->set_setting('min_size', $minSize);
 
     }
 
@@ -202,7 +202,7 @@ class FieldWithImages extends Field
     public function setMinWidth($minWidth)
     {
 
-        return $this->setSetting('min_width', $minWidth);
+        return $this->set_setting('min_width', $minWidth);
 
     }
 

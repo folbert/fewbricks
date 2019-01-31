@@ -46,7 +46,7 @@ final class AccordionTest extends FieldTest
 
         $this->assertEquals(
             FieldHelper::getExpectedFieldValues($field, $settings),
-            $field->toAcfArray($settings['test__key_prefix'])
+            $field->to_acf_array($settings['test__key_prefix'])
         );
 
     }
@@ -56,11 +56,11 @@ final class AccordionTest extends FieldTest
 
         $field = new Accordion('', '', '');
 
-        $this->assertEquals(0, $field->getEndpoint());
+        $this->assertEquals(0, $field->get_endpoint());
 
-        $field->setEndpoint(false);
+        $field->set_endpoint(false);
 
-        $this->assertEquals(false, $field->getEndpoint());
+        $this->assertEquals(false, $field->get_endpoint());
 
     }
 
@@ -69,11 +69,11 @@ final class AccordionTest extends FieldTest
 
         $field = new Accordion('', '', '');
 
-        $this->assertEquals(0, $field->getMultiExpand());
+        $this->assertEquals(0, $field->get_multi_expand());
 
-        $field->setMultiExpand(false);
+        $field->set_multi_expand(false);
 
-        $this->assertEquals(false, $field->getMultiExpand());
+        $this->assertEquals(false, $field->get_multi_expand());
 
     }
 
@@ -83,11 +83,11 @@ final class AccordionTest extends FieldTest
         $field = new Accordion('', '', '');
 
         // Default
-        $this->assertEquals(0, $field->getOpen());
+        $this->assertEquals(0, $field->get_open());
 
         $field->setOpen(true);
 
-        $this->assertEquals(true, $field->getOpen());
+        $this->assertEquals(true, $field->get_open());
 
     }
 

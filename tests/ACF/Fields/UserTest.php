@@ -46,7 +46,7 @@ final class UserTest extends FieldTest
 
         $this->assertEquals(
             FieldHelper::getExpectedFieldValues($field, $settings),
-            $field->toAcfArray($settings['test__key_prefix'])
+            $field->to_acf_array($settings['test__key_prefix'])
         );
 
     }
@@ -59,11 +59,11 @@ final class UserTest extends FieldTest
 
         $field = new User('', '', '');
 
-        $this->assertEquals(0, $field->getAllowNull());
+        $this->assertEquals(0, $field->get_allow_null());
 
-        $field->setAllowNull(true);
+        $field->set_allow_null(true);
 
-        $this->assertEquals(true, $field->getAllowNull());
+        $this->assertEquals(true, $field->get_allow_null());
 
     }
 
@@ -75,11 +75,11 @@ final class UserTest extends FieldTest
 
         $field = new User('', '', '');
 
-        $this->assertEquals(0, $field->getMultiple());
+        $this->assertEquals(0, $field->get_multiple());
 
-        $field->setMultiple(true);
+        $field->set_multiple(true);
 
-        $this->assertEquals(true, $field->getMultiple());
+        $this->assertEquals(true, $field->get_multiple());
 
     }
 
@@ -91,11 +91,11 @@ final class UserTest extends FieldTest
 
         $field = new User('', '', '');
 
-        $this->assertEquals('array', $field->getReturnFormat());
+        $this->assertEquals('array', $field->get_return_format());
 
-        $field->setReturnFormat('object');
+        $field->set_return_format('object');
 
-        $this->assertEquals('object', $field->getReturnFormat());
+        $this->assertEquals('object', $field->get_return_format());
 
     }
 
@@ -107,11 +107,11 @@ final class UserTest extends FieldTest
 
         $field = new User('', '', '');
 
-        $this->assertEquals('', $field->getRole());
+        $this->assertEquals('', $field->get_role());
 
-        $field->setRole(['administrator', 'author']);
+        $field->set_role(['administrator', 'author']);
 
-        $this->assertEquals(['administrator', 'author'], $field->getRole());
+        $this->assertEquals(['administrator', 'author'], $field->get_role());
 
     }
 

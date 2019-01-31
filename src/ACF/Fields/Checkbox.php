@@ -24,10 +24,10 @@ class Checkbox extends FieldWithChoices implements FieldInterface
      * @return mixed The value of the ACF setting "allow_custom". Returns the default ACF value 0 if none has been
      * set using Fewbricks.
      */
-    public function getAllowCustom()
+    public function get_allow_custom()
     {
 
-        return $this->getSetting('allow_custom', 0);
+        return $this->get_setting('allow_custom', 0);
 
     }
 
@@ -35,10 +35,10 @@ class Checkbox extends FieldWithChoices implements FieldInterface
      * @return mixed The value of the ACF setting "allow_custom". Returns the default ACF value false if none has been
      * set using Fewbricks.
      */
-    public function getLayout()
+    public function get_layout()
     {
 
-        return $this->getSetting('layout', 'vertical');
+        return $this->get_setting('layout', 'vertical');
 
     }
 
@@ -46,10 +46,10 @@ class Checkbox extends FieldWithChoices implements FieldInterface
      * @return mixed The value of the ACF setting "save_custom". Returns the default ACF value 0 if none has been
      * set using Fewbricks.
      */
-    public function getSaveCustom()
+    public function get_save_custom()
     {
 
-        return $this->getSetting('save_custom', 0);
+        return $this->get_setting('save_custom', 0);
 
     }
 
@@ -57,10 +57,10 @@ class Checkbox extends FieldWithChoices implements FieldInterface
      * @return mixed The value of the ACF setting "toggle". Returns the default ACF value 0 if none has been
      * set using Fewbricks.
      */
-    public function getToggle()
+    public function get_toggle()
     {
 
-        return $this->getSetting('toggle', 0);
+        return $this->get_setting('toggle', 0);
 
     }
 
@@ -73,7 +73,7 @@ class Checkbox extends FieldWithChoices implements FieldInterface
     public function setAllowCustom($allowCustom)
     {
 
-        return $this->setSetting('allow_custom', $allowCustom);
+        return $this->set_setting('allow_custom', $allowCustom);
 
     }
 
@@ -83,10 +83,10 @@ class Checkbox extends FieldWithChoices implements FieldInterface
      * @param string $layout vertical or horizontal
      * @return $this
      */
-    public function setLayout($layout)
+    public function set_layout($layout)
     {
 
-        return $this->setSetting('layout', $layout);
+        return $this->set_setting('layout', $layout);
 
     }
 
@@ -96,10 +96,10 @@ class Checkbox extends FieldWithChoices implements FieldInterface
      * @param boolean $saveCustom
      * @return $this
      */
-    public function setSaveCustom($saveCustom)
+    public function set_save_custom($saveCustom)
     {
 
-        return $this->setSetting('save_custom', $saveCustom);
+        return $this->set_setting('save_custom', $saveCustom);
 
     }
 
@@ -109,10 +109,10 @@ class Checkbox extends FieldWithChoices implements FieldInterface
      * @param boolean $toggle
      * @return $this
      */
-    public function setToggle($toggle)
+    public function set_toggle($toggle)
     {
 
-        return $this->setSetting('toggle', $toggle);
+        return $this->set_setting('toggle', $toggle);
 
     }
 

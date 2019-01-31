@@ -48,7 +48,7 @@ final class AcfCodeFieldTest extends FieldTest
 
         $this->assertEquals(
             FieldHelper::getExpectedFieldValues($field, $settings),
-            $field->toAcfArray($settings['test__key_prefix'])
+            $field->to_acf_array($settings['test__key_prefix'])
         );
 
     }
@@ -56,16 +56,16 @@ final class AcfCodeFieldTest extends FieldTest
     /**
      *
      */
-    public function testSetAndGetMode()
+    public function testSetAndget_mode()
     {
 
         $field = new AcfCodeField('', '', '');
 
-        $this->assertEquals('htmlmixed', $field->getMode());
+        $this->assertEquals('htmlmixed', $field->get_mode());
 
-        $field->setMode('98wgois');
+        $field->set_mode('98wgois');
 
-        $this->assertEquals('98wgois', $field->getMode());
+        $this->assertEquals('98wgois', $field->get_mode());
 
     }
 
@@ -77,11 +77,11 @@ final class AcfCodeFieldTest extends FieldTest
 
         $field = new AcfCodeField('', '', '');
 
-        $this->assertEquals('', $field->getPlaceholder());
+        $this->assertEquals('', $field->get_placeholder());
 
-        $field->setPlaceholder('dh89egoil');
+        $field->set_placeholder('dh89egoil');
 
-        $this->assertEquals('dh89egoil', $field->getPlaceholder());
+        $this->assertEquals('dh89egoil', $field->get_placeholder());
 
     }
 
@@ -93,11 +93,11 @@ final class AcfCodeFieldTest extends FieldTest
 
         $field = new AcfCodeField('', '', '');
 
-        $this->assertEquals('monokai', $field->getTheme());
+        $this->assertEquals('monokai', $field->get_theme());
 
-        $field->setTheme('gd89ogoil');
+        $field->set_theme('gd89ogoil');
 
-        $this->assertEquals('gd89ogoil', $field->getTheme());
+        $this->assertEquals('gd89ogoil', $field->get_theme());
 
     }
 

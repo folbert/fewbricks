@@ -13,20 +13,20 @@ class ImageAndText extends Brick
     /**
      *
      */
-    public function setUp()
+    public function set_up()
     {
 
         $text = (new Text('Text', 'text', '1811292152a'))
-            ->setRequired(true);
+            ->set_required(true);
 
         $image = (new Image('Image', 'image', '1811272243a'))
-            ->setRequired(true)
+            ->set_required(true)
             ->setMinWidth(400)
             ->setMinHeight(400)
             ->setMaxWidth(1200)
             ->setMaxHeight(1200);
 
-        $this->addFields([$text, $image]);
+        $this->add_fields([$text, $image]);
 
     }
 

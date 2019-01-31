@@ -34,7 +34,7 @@ class Collection
      * @param null $key
      * @return $this
      */
-    public function addItem($item, $key = null)
+    public function add_item($item, $key = null)
     {
 
         $this->finalizeItem($item);
@@ -46,7 +46,7 @@ class Collection
 
         } else {
 
-            $tmpKey = $item->getKeyPrefixFromParents() . $key;
+            $tmpKey = $item->get_key_prefix_from_parents() . $key;
 
             // If parents are not empty, we are dealing with an item that will get parents keys prepended to its own
             // and if the key is still non unique after that, it will be caught by the field group.
@@ -55,14 +55,14 @@ class Collection
                 $message = 'Fewbricks says: trying to add an item with the key "' . $key . '". The key already exists
                 for a field and keys must be unique.';
 
-                if(!empty($item->getParents())) {
+                if(!empty($item->get_parents())) {
 
                     $message .= '<p>If the field with the key resides in a Brick, please note that the reason for
                     duplicate keys can be that you have created two instances of the Brick using the same key. Below is
                     a list of keys of parents which includes Bricks.<ul>';
 
 
-                    foreach($item->getParents() AS $parent) {
+                    foreach($item->get_parents() AS $parent) {
                         $message .= '<li>' . $parent['key'] . ' - ' . $parent['name'] . ' - ' . $parent['type'];
                     }
 
@@ -88,7 +88,7 @@ class Collection
      * @param null|string $keyOfNewItem
      * @return $this
      */
-    public function addItemAfterItemByKey($item, string $keyToAddAfter, $keyOfNewItem = null)
+    public function add_item_after_item_by_key($item, string $keyToAddAfter, $keyOfNewItem = null)
     {
 
         if (false !== ($positionToAddAfter = $this->getPositionForItemByKey($keyToAddAfter))) {
@@ -122,7 +122,7 @@ class Collection
      * @param null|string $keyOfNewItem
      * @return $this
      */
-    public function addItemBeforeItemByKey($item, string $keyOfFieldToAddBefore, $keyOfNewItem = null)
+    public function add_item_before_item_by_key($item, string $keyOfFieldToAddBefore, $keyOfNewItem = null)
     {
 
         if (false !== ($positionToAddBefore = $this->getPositionForItemByKey($keyOfFieldToAddBefore))) {
@@ -153,7 +153,7 @@ class Collection
      * @param bool $keyOfNewItem
      * @return $this
      */
-    public function addItemToBeginning($item, $keyOfNewItem = false)
+    public function add_item_to_beginning($item, $keyOfNewItem = false)
     {
 
         $this->finalizeItem($item);
@@ -177,7 +177,7 @@ class Collection
      * @param array $items
      * @return $this
      */
-    public function addItemsToBeginning(array $items)
+    public function add_items_to_beginning(array $items)
     {
 
         foreach ($items AS $item) {
@@ -219,14 +219,14 @@ class Collection
      * @param $keyToSearchFor
      * @return mixed
      */
-    public function getItemByKey(string $keyToSearchFor)
+    public function get_item_by_key(string $keyToSearchFor)
     {
 
         $foundItem = false;
 
         foreach($this->items AS $key => $item) {
 
-            if($this->keySearchMatch($keyToSearchFor, $key, $item)) {
+            if($this->key_search_match($keyToSearchFor, $key, $item)) {
 
                 $foundItem = $item;
                 break;
@@ -252,7 +252,7 @@ class Collection
 
         foreach ($this->items AS $key => $item) {
 
-            if ($this->keySearchMatch($keyToSearchFor, $key, $item)) {
+            if ($this->key_search_match($keyToSearchFor, $key, $item)) {
 
                 $position = $positionTracker;
                 break;
@@ -273,7 +273,7 @@ class Collection
      * @param $item
      * @return bool
      */
-    protected function keySearchMatch($keyToSearchFor, $arrayKey, $item) {
+    protected function key_search_match($keyToSearchFor, $arrayKey, $item) {
 
         return $keyToSearchFor === $arrayKey;
 
@@ -282,7 +282,7 @@ class Collection
     /**
      * @return mixed
      */
-    public function getItems()
+    public function get_items()
     {
 
         return $this->items;
@@ -308,7 +308,7 @@ class Collection
     /**
      * @return bool
      */
-    public function isEmpty()
+    public function is_empty()
     {
         return $this->getLength() === 0;
     }
@@ -324,7 +324,7 @@ class Collection
 
         foreach($this->items AS $key => $item) {
 
-            if($this->keySearchMatch($keyToSearchFor, $key, $item)) {
+            if($this->key_search_match($keyToSearchFor, $key, $item)) {
 
                 $keyExists = true;
                 break;
@@ -341,7 +341,7 @@ class Collection
      * @param $key
      * @return Collection
      */
-    public function removeItem($key)
+    public function remove_item($key)
     {
 
         if (isset($this->items[$key])) {
@@ -357,13 +357,13 @@ class Collection
      * @param mixed $value
      * @return $this
      */
-    public function removeItemByFunctionValue($functionName, $value)
+    public function remove_itemByFunctionValue($functionName, $value)
     {
 
         foreach ($this->items AS $itemKey => $item) {
 
             if (method_exists($item, $functionName) && $item->$functionName() === $value) {
-                $this->removeItem($itemKey);
+                $this->remove_item($itemKey);
             }
 
         }

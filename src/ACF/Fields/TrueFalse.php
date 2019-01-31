@@ -24,10 +24,10 @@ class TrueFalse extends Field implements FieldInterface
      * @return mixed The value of the ACF setting "default_value". Returns the default ACF value 0 if none has been
      * set using Fewbricks.
      */
-    public function getDefaultValue()
+    public function get_default_value()
     {
 
-        return $this->getSetting('default_value', 0);
+        return $this->get_setting('default_value', 0);
 
     }
 
@@ -35,10 +35,10 @@ class TrueFalse extends Field implements FieldInterface
      * @return mixed The value of the ACF setting "message". Returns the default ACF value "" if none has been
      * set using Fewbricks.
      */
-    public function getMessage()
+    public function get_message()
     {
 
-        return $this->getSetting('message', '');
+        return $this->get_setting('message', '');
 
     }
 
@@ -46,10 +46,10 @@ class TrueFalse extends Field implements FieldInterface
      * @return mixed The value of the ACF setting "ui". Returns the default ACF value 0 if none has been
      * set using Fewbricks.
      */
-    public function getUi()
+    public function get_ui()
     {
 
-        return $this->getSetting('ui', 0);
+        return $this->get_setting('ui', 0);
 
     }
 
@@ -57,10 +57,10 @@ class TrueFalse extends Field implements FieldInterface
      * @return mixed The value of the ACF setting "ui_off_text". Returns the default ACF value "" if none has been
      * set using Fewbricks.
      */
-    public function getUiOffText()
+    public function get_ui_off_text()
     {
 
-        return $this->getSetting('ui_off_text', '');
+        return $this->get_setting('ui_off_text', '');
 
     }
 
@@ -68,10 +68,10 @@ class TrueFalse extends Field implements FieldInterface
      * @return mixed The value of the ACF setting "ui_off_text". Returns the default ACF value "" if none has been
      * set using Fewbricks.
      */
-    public function getUiOnText()
+    public function get_ui_on_text()
     {
 
-        return $this->getSetting('ui_on_text', '');
+        return $this->get_setting('ui_on_text', '');
 
     }
 
@@ -79,10 +79,10 @@ class TrueFalse extends Field implements FieldInterface
      * @param string $message
      * @return $this
      */
-    public function setMessage($message)
+    public function set_message($message)
     {
 
-        return $this->setSetting('message', $message);
+        return $this->set_setting('message', $message);
 
     }
 
@@ -90,10 +90,10 @@ class TrueFalse extends Field implements FieldInterface
      * @param $ui
      * @return $this
      */
-    public function setUi($ui)
+    public function set_ui($ui)
     {
 
-        return $this->setSetting('ui', $ui);
+        return $this->set_setting('ui', $ui);
 
     }
 
@@ -101,10 +101,10 @@ class TrueFalse extends Field implements FieldInterface
      * @param $ui_off_text
      * @return $this
      */
-    public function setUiOffText($ui_off_text)
+    public function set_ui_off_text($ui_off_text)
     {
 
-        return $this->setSetting('ui_off_text', $ui_off_text);
+        return $this->set_setting('ui_off_text', $ui_off_text);
 
     }
 
@@ -112,10 +112,10 @@ class TrueFalse extends Field implements FieldInterface
      * @param $ui_on_text
      * @return $this
      */
-    public function setUiOnText($ui_on_text)
+    public function set_ui_on_text($ui_on_text)
     {
 
-        return $this->setSetting('ui_on_text', $ui_on_text);
+        return $this->set_setting('ui_on_text', $ui_on_text);
 
     }
 

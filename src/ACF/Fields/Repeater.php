@@ -22,12 +22,12 @@ class Repeater extends FieldWithFields implements FieldInterface
      *
      * @return mixed
      */
-    private function applyCollapsed($acfArray)
+    private function apply_collapsed($acfArray)
     {
 
-        if ($this->getSetting('collapsed', 0) != 0) {
+        if ($this->get_setting('collapsed', 0) != 0) {
 
-            $newKey = Helper::getNewKeyByOriginalKeyInAcfArray($this->getSetting('collapsed'),
+            $newKey = Helper::getNewKeyByOriginalKeyInAcfArray($this->get_setting('collapsed'),
                 $acfArray['sub_fields']);
 
             if ($newKey !== false) {
@@ -44,10 +44,10 @@ class Repeater extends FieldWithFields implements FieldInterface
      * @return mixed The value of the ACF setting "button_label". Returns the default ACF value "" if none
      * has been set using Fewbricks.
      */
-    public function getButtonLabel()
+    public function get_button_label()
     {
 
-        return $this->getSetting('button_label', '');
+        return $this->get_setting('button_label', '');
 
     }
 
@@ -55,10 +55,10 @@ class Repeater extends FieldWithFields implements FieldInterface
      * @return mixed The value of the ACF setting "collapsed". Returns the default ACF value "" if none has been
      * set using Fewbricks.
      */
-    public function getCollapsed()
+    public function get_collapsed()
     {
 
-        return $this->getSetting('collapsed', '');
+        return $this->get_setting('collapsed', '');
 
     }
 
@@ -66,10 +66,10 @@ class Repeater extends FieldWithFields implements FieldInterface
      * @return mixed The value of the ACF setting "layout". Returns the default ACF value "table" if none has been
      * set using Fewbricks.
      */
-    public function getLayout()
+    public function get_layout()
     {
 
-        return $this->getSetting('layout', 'table');
+        return $this->get_setting('layout', 'table');
 
     }
 
@@ -77,10 +77,10 @@ class Repeater extends FieldWithFields implements FieldInterface
      * @return mixed The value of the ACF setting "m0". Returns the default ACF value 0 if none has been
      * set using Fewbricks.
      */
-    public function getMax()
+    public function get_max()
     {
 
-        return $this->getSetting('max', 0);
+        return $this->get_setting('max', 0);
 
     }
 
@@ -88,10 +88,10 @@ class Repeater extends FieldWithFields implements FieldInterface
      * @return mixed The value of the ACF setting "min". Returns the default ACF value 0 if none has been
      * set using Fewbricks.
      */
-    public function getMin()
+    public function get_min()
     {
 
-        return $this->getSetting('min', 0);
+        return $this->get_setting('min', 0);
 
     }
 
@@ -99,10 +99,10 @@ class Repeater extends FieldWithFields implements FieldInterface
      * @param string $buttonLabel
      * @return $this
      */
-    public function setButtonLabel($buttonLabel)
+    public function set_button_label($buttonLabel)
     {
 
-        return $this->setSetting('button_label', $buttonLabel);
+        return $this->set_setting('button_label', $buttonLabel);
 
     }
 
@@ -112,10 +112,10 @@ class Repeater extends FieldWithFields implements FieldInterface
      * @param string $fieldKey
      * @return $this
      */
-    public function setCollapsed($fieldKey)
+    public function set_collapsed($fieldKey)
     {
 
-        return $this->setSetting('collapsed', $fieldKey);
+        return $this->set_setting('collapsed', $fieldKey);
 
     }
 
@@ -123,10 +123,10 @@ class Repeater extends FieldWithFields implements FieldInterface
      * @param string $layout table, block or row
      * @return $this
      */
-    public function setLayout($layout)
+    public function set_layout($layout)
     {
 
-        return $this->setSetting('layout', $layout);
+        return $this->set_setting('layout', $layout);
 
     }
 
@@ -136,10 +136,10 @@ class Repeater extends FieldWithFields implements FieldInterface
      * @param int $max
      * @return $this
      */
-    public function setMax($max)
+    public function set_max($max)
     {
 
-        return $this->setSetting('max', $max);
+        return $this->set_setting('max', $max);
 
     }
 
@@ -149,10 +149,10 @@ class Repeater extends FieldWithFields implements FieldInterface
      * @param int $min
      * @return $this
      */
-    public function setMin($min)
+    public function set_min($min)
     {
 
-        return $this->setSetting('min', $min);
+        return $this->set_setting('min', $min);
 
     }
 
@@ -162,12 +162,12 @@ class Repeater extends FieldWithFields implements FieldInterface
      *
      * @return array|mixed
      */
-    public function toAcfArray(string $keyPrefix = '')
+    public function to_acf_array(string $keyPrefix = '')
     {
 
-        $acfArray = parent::toAcfArray($keyPrefix);
+        $acfArray = parent::to_acf_array($keyPrefix);
 
-        $acfArray = $this->applyCollapsed($acfArray);
+        $acfArray = $this->apply_collapsed($acfArray);
 
         return $acfArray;
 

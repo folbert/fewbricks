@@ -46,7 +46,7 @@ final class TabTest extends FieldTest
 
         $this->assertEquals(
             FieldHelper::getExpectedFieldValues($field, $settings),
-            $field->toAcfArray($settings['test__key_prefix'])
+            $field->to_acf_array($settings['test__key_prefix'])
         );
 
     }
@@ -59,11 +59,11 @@ final class TabTest extends FieldTest
 
         $field = new Tab('', '', '');
 
-        $this->assertEquals(false, $field->getEndpoint());
+        $this->assertEquals(false, $field->get_endpoint());
 
-        $field->setEndpoint(true);
+        $field->set_endpoint(true);
 
-        $this->assertEquals(true, $field->getEndpoint());
+        $this->assertEquals(true, $field->get_endpoint());
 
     }
 
@@ -75,11 +75,11 @@ final class TabTest extends FieldTest
 
         $field = new Tab('', '', '');
 
-        $this->assertEquals('top', $field->getPlacement());
+        $this->assertEquals('top', $field->get_placement());
 
-        $field->setPlacement('dh8iogsol');
+        $field->set_placement('dh8iogsol');
 
-        $this->assertEquals('dh8iogsol', $field->getPlacement());
+        $this->assertEquals('dh8iogsol', $field->get_placement());
 
     }
 

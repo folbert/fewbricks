@@ -46,7 +46,7 @@ final class TaxonomyTest extends FieldTest
 
         $this->assertEquals(
             FieldHelper::getExpectedFieldValues($field, $settings),
-            $field->toAcfArray($settings['test__key_prefix'])
+            $field->to_acf_array($settings['test__key_prefix'])
         );
 
     }
@@ -59,11 +59,11 @@ final class TaxonomyTest extends FieldTest
 
         $field = new Taxonomy('', '', '');
 
-        $this->assertEquals(1, $field->getAddTerm());
+        $this->assertEquals(1, $field->get_add_term());
 
-        $field->setAddTerm(false);
+        $field->set_add_term(false);
 
-        $this->assertEquals(false, $field->getAddTerm());
+        $this->assertEquals(false, $field->get_add_term());
 
     }
 
@@ -75,11 +75,11 @@ final class TaxonomyTest extends FieldTest
 
         $field = new Taxonomy('', '', '');
 
-        $this->assertEquals(0, $field->getAllowNull());
+        $this->assertEquals(0, $field->get_allow_null());
 
-        $field->setAllowNull(true);
+        $field->set_allow_null(true);
 
-        $this->assertEquals(true, $field->getAllowNull());
+        $this->assertEquals(true, $field->get_allow_null());
 
     }
 
@@ -91,11 +91,11 @@ final class TaxonomyTest extends FieldTest
 
         $field = new Taxonomy('', '', '');
 
-        $this->assertEquals('checkbox', $field->getFieldType());
+        $this->assertEquals('checkbox', $field->get_field_type());
 
-        $field->setFieldType('radio');
+        $field->set_field_type('radio');
 
-        $this->assertEquals('radio', $field->getFieldType());
+        $this->assertEquals('radio', $field->get_field_type());
 
     }
 
@@ -107,11 +107,11 @@ final class TaxonomyTest extends FieldTest
 
         $field = new Taxonomy('', '', '');
 
-        $this->assertEquals(0, $field->getLoadTerms());
+        $this->assertEquals(0, $field->get_load_terms());
 
-        $field->setLoadTerms(true);
+        $field->set_load_terms(true);
 
-        $this->assertEquals(true, $field->getLoadTerms());
+        $this->assertEquals(true, $field->get_load_terms());
 
     }
 
@@ -123,11 +123,11 @@ final class TaxonomyTest extends FieldTest
 
         $field = new Taxonomy('', '', '');
 
-        $this->assertEquals('id', $field->getReturnFormat());
+        $this->assertEquals('id', $field->get_return_format());
 
-        $field->setReturnFormat(false);
+        $field->set_return_format(false);
 
-        $this->assertEquals(false, $field->getReturnFormat());
+        $this->assertEquals(false, $field->get_return_format());
 
     }
 
@@ -139,11 +139,11 @@ final class TaxonomyTest extends FieldTest
 
         $field = new Taxonomy('', '', '');
 
-        $this->assertEquals(0, $field->getSaveTerms());
+        $this->assertEquals(0, $field->get_save_terms());
 
-        $field->setSaveTerms(true);
+        $field->set_save_terms(true);
 
-        $this->assertEquals(true, $field->getSaveTerms());
+        $this->assertEquals(true, $field->get_save_terms());
 
     }
 
@@ -155,11 +155,11 @@ final class TaxonomyTest extends FieldTest
 
         $field = new Taxonomy('', '', '');
 
-        $this->assertEquals('category', $field->getTaxonomy());
+        $this->assertEquals('category', $field->get_taxonomy());
 
-        $field->setTaxonomy('custom_category_yd98goi');
+        $field->set_taxonomy('custom_category_yd98goi');
 
-        $this->assertEquals('custom_category_yd98goi', $field->getTaxonomy());
+        $this->assertEquals('custom_category_yd98goi', $field->get_taxonomy());
 
     }
 

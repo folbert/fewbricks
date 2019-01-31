@@ -30,7 +30,7 @@ for the field or field group that you want to display.
 ```php
 <?php
 $fieldGroup = new \Fewbricks\ACF\FieldGroup('A field group', '1811262137a');
-$fieldGroup->setDisplayInFewbricksDevTools(true);
+$fieldGroup->set_display_in_fewbricks_dev_tools(true);
 $fieldGroup->register();
 ```
 

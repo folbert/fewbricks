@@ -52,7 +52,7 @@ final class SelectTest extends FieldTest
 
         $this->assertEquals(
             FieldHelper::getExpectedFieldValues($field, $settings),
-            $field->toAcfArray($settings['test__key_prefix'])
+            $field->to_acf_array($settings['test__key_prefix'])
         );
 
     }
@@ -65,11 +65,11 @@ final class SelectTest extends FieldTest
 
         $field = new Select('', '', '');
 
-        $this->assertEquals(0, $field->getAjax());
+        $this->assertEquals(0, $field->get_ajax());
 
-        $field->setAjax(true);
+        $field->set_ajax(true);
 
-        $this->assertEquals(true, $field->getAjax());
+        $this->assertEquals(true, $field->get_ajax());
 
     }
 
@@ -81,11 +81,11 @@ final class SelectTest extends FieldTest
 
         $field = new Select('', '', '');
 
-        $this->assertEquals(0, $field->getAllowNull());
+        $this->assertEquals(0, $field->get_allow_null());
 
-        $field->setAllowNull(true);
+        $field->set_allow_null(true);
 
-        $this->assertEquals(true, $field->getAllowNull());
+        $this->assertEquals(true, $field->get_allow_null());
 
     }
 
@@ -99,7 +99,7 @@ final class SelectTest extends FieldTest
 
         $this->assertEquals([], $field->getChoices());
 
-        $field->setChoices(['sjoil', 'dgiuv']);
+        $field->set_choices(['sjoil', 'dgiuv']);
 
         $this->assertEquals(['sjoil', 'dgiuv'], $field->getChoices());
 
@@ -113,11 +113,11 @@ final class SelectTest extends FieldTest
 
         $field = new Select('', '', '');
 
-        $this->assertEquals('', $field->getDefaultValue());
+        $this->assertEquals('', $field->get_default_value());
 
-        $field->setDefaultValue('hoihl');
+        $field->set_default_value('hoihl');
 
-        $this->assertEquals('hoihl', $field->getDefaultValue());
+        $this->assertEquals('hoihl', $field->get_default_value());
 
     }
 
@@ -129,11 +129,11 @@ final class SelectTest extends FieldTest
 
         $field = new Select('', '', '');
 
-        $this->assertEquals(false, $field->getMultiple());
+        $this->assertEquals(false, $field->get_multiple());
 
-        $field->setMultiple(true);
+        $field->set_multiple(true);
 
-        $this->assertEquals(true, $field->getMultiple());
+        $this->assertEquals(true, $field->get_multiple());
 
     }
 
@@ -145,11 +145,11 @@ final class SelectTest extends FieldTest
 
         $field = new Select('', '', '');
 
-        $this->assertEquals('value', $field->getReturnFormat());
+        $this->assertEquals('value', $field->get_return_format());
 
-        $field->setReturnFormat('h98goil');
+        $field->set_return_format('h98goil');
 
-        $this->assertEquals('h98goil', $field->getReturnFormat());
+        $this->assertEquals('h98goil', $field->get_return_format());
 
     }
 
@@ -161,11 +161,11 @@ final class SelectTest extends FieldTest
 
         $field = new Select('', '', '');
 
-        $this->assertEquals(false, $field->getUi());
+        $this->assertEquals(false, $field->get_ui());
 
-        $field->setUi(true);
+        $field->set_ui(true);
 
-        $this->assertEquals(true, $field->getUi());
+        $this->assertEquals(true, $field->get_ui());
 
     }
 

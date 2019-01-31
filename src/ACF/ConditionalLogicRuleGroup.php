@@ -16,14 +16,14 @@ class ConditionalLogicRuleGroup extends RuleGroup
      * @param ConditionalLogicRule $rule
      * @return $this
      */
-    public function addConditionalLogicRule($rule)
+    public function add_conditional_logic_rule($rule)
     {
 
         if (!($rule instanceof ConditionalLogicRule)) {
             Helper::fewbricksDie('You can only add instances of ConditionalLogicRule to ConditionalLogicRuleGroup');
         }
 
-        parent::addRule($rule);
+        parent::add_rule($rule);
 
         return $this;
 

@@ -24,10 +24,10 @@ class Gallery extends FieldWithImages implements FieldInterface
      * @return mixed The value of the ACF setting "insert". Returns the default ACF value "append" if none has been
      * set using Fewbricks.
      */
-    public function getInsert()
+    public function get_insert()
     {
 
-        return $this->getSetting('insert', 'append');
+        return $this->get_setting('insert', 'append');
 
     }
 
@@ -35,10 +35,10 @@ class Gallery extends FieldWithImages implements FieldInterface
      * @return mixed The value of the ACF setting "max". Returns the default ACF value 0 if none has been
      * set using Fewbricks.
      */
-    public function getMax()
+    public function get_max()
     {
 
-        return $this->getSetting('max', 0);
+        return $this->get_setting('max', 0);
 
     }
 
@@ -46,10 +46,10 @@ class Gallery extends FieldWithImages implements FieldInterface
      * @return mixed The value of the ACF setting "min". Returns the default ACF value 0 if none has been
      * set using Fewbricks.
      */
-    public function getMin()
+    public function get_min()
     {
 
-        return $this->getSetting('min', 0);
+        return $this->get_setting('min', 0);
 
     }
 
@@ -59,10 +59,10 @@ class Gallery extends FieldWithImages implements FieldInterface
      * @param string $insert "append" or "prepend"
      * @return $this
      */
-    public function setInsert($insert)
+    public function set_insert($insert)
     {
 
-        return $this->setSetting('insert', $insert);
+        return $this->set_setting('insert', $insert);
 
     }
 
@@ -72,10 +72,10 @@ class Gallery extends FieldWithImages implements FieldInterface
      * @param int $max
      * @return $this
      */
-    public function setMax($max)
+    public function set_max($max)
     {
 
-        return $this->setSetting('max', $max);
+        return $this->set_setting('max', $max);
 
     }
 
@@ -85,10 +85,10 @@ class Gallery extends FieldWithImages implements FieldInterface
      * @param int $min
      * @return $this
      */
-    public function setMin($min)
+    public function set_min($min)
     {
 
-        return $this->setSetting('min', $min);
+        return $this->set_setting('min', $min);
 
     }
 

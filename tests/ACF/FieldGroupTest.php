@@ -35,7 +35,7 @@ final class FieldGroupTest extends TestCase
         $this->assertArraySubset([
             'title' => $title,
         ],
-            $fieldGroup->toAcfArray()
+            $fieldGroup->to_acf_array()
         );
 
     }
@@ -50,7 +50,7 @@ final class FieldGroupTest extends TestCase
 
         $fieldGroup = new FieldGroup($title, '');
 
-        $this->assertEquals($title, $fieldGroup->getTitle());
+        $this->assertEquals($title, $fieldGroup->get_title());
 
     }
 
@@ -67,7 +67,7 @@ final class FieldGroupTest extends TestCase
         $this->assertArraySubset([
             'key' => 'group_' . $key,
         ],
-            $fieldGroup->toAcfArray()
+            $fieldGroup->to_acf_array()
         );
 
     }
@@ -82,7 +82,7 @@ final class FieldGroupTest extends TestCase
 
         $fieldGroup = new FieldGroup('', $key);
 
-        $this->assertEquals($key, $fieldGroup->getKey());
+        $this->assertEquals($key, $fieldGroup->get_key());
 
     }
 
@@ -94,7 +94,7 @@ final class FieldGroupTest extends TestCase
 
         $fieldGroup = new FieldGroup('', '');
 
-        $fieldGroup->addLocationRuleGroup(
+        $fieldGroup->add_location_rule_group(
             (new FieldGroupLocationRuleGroup())
                 ->addFieldGroupLocationRule(
                     new FieldGroupLocationRule('post_type', '==', 'post')
@@ -104,14 +104,14 @@ final class FieldGroupTest extends TestCase
                 )
         );
 
-        $fieldGroup->addLocationRuleGroup(
+        $fieldGroup->add_location_rule_group(
             (new FieldGroupLocationRuleGroup())
                 ->addFieldGroupLocationRule(
                     new FieldGroupLocationRule('user_role', '!=', 'administrator')
                 )
         );
 
-        $acfArray = $fieldGroup->toAcfArray();
+        $acfArray = $fieldGroup->to_acf_array();
 
         $this->assertEquals([
             [
@@ -144,7 +144,7 @@ final class FieldGroupTest extends TestCase
 
         $fieldGroup = new FieldGroup('', '');
 
-        $fieldGroup->addLocationRuleGroup(
+        $fieldGroup->add_location_rule_group(
             (new FieldGroupLocationRuleGroup())
                 ->addFieldGroupLocationRule(
                     new FieldGroupLocationRule('post_type', '==', 'post')
@@ -154,14 +154,14 @@ final class FieldGroupTest extends TestCase
                 )
         );
 
-        $fieldGroup->addLocationRuleGroup(
+        $fieldGroup->add_location_rule_group(
             (new FieldGroupLocationRuleGroup())
                 ->addFieldGroupLocationRule(
                     new FieldGroupLocationRule('user_role', '!=', 'administrator')
                 )
         );
 
-        $this->assertInstanceOf(RuleGroupCollection::class, $fieldGroup->getLocationRuleGroups());
+        $this->assertInstanceOf(RuleGroupCollection::class, $fieldGroup->get_location_rule_groups());
 
         $this->assertEquals([
             [
@@ -184,7 +184,7 @@ final class FieldGroupTest extends TestCase
                 ]
             ]
         ],
-            $fieldGroup->getLocationRuleGroups()->toArray()
+            $fieldGroup->get_location_rule_groups()->to_array()
         );
 
     }
@@ -197,21 +197,21 @@ final class FieldGroupTest extends TestCase
 
         $fieldGroup = new FieldGroup('', '1812112150a');
 
-        $fieldGroup->addField(
+        $fieldGroup->add_field(
             (new Text('A textfield', 'a_textfield', '1812112152a'))
         );
 
-        $fieldGroup->addField(
+        $fieldGroup->add_field(
             (new Text('Text to be removed by key', 'removed_by_key', '1812112152d'))
         );
 
-        $fieldGroup->addField(
+        $fieldGroup->add_field(
             (new Text('Another textfield', 'another_textfield2000', '1812112152b'))
         );
 
-        $fieldGroup->removeFieldByKey('1812112152d');
+        $fieldGroup->remove_field_by_key('1812112152d');
 
-        $acfArray = $fieldGroup->toAcfArray('1812112152b');
+        $acfArray = $fieldGroup->to_acf_array('1812112152b');
 
         $this->assertEquals(
             [
@@ -245,21 +245,21 @@ final class FieldGroupTest extends TestCase
 
         $fieldGroup = new FieldGroup('', '1812112150a');
 
-        $fieldGroup->addField(
+        $fieldGroup->add_field(
             (new Text('A textfield', 'a_textfield', '1812112152a'))
         );
 
-        $fieldGroup->addField(
+        $fieldGroup->add_field(
             (new Text('Text to be removed by name', 'removed_by_name', '1812112152c'))
         );
 
-        $fieldGroup->addField(
+        $fieldGroup->add_field(
             (new Text('Another textfield', 'another_textfield2000', '1812112152b'))
         );
 
-        $fieldGroup->removeFieldByName('removed_by_name');
+        $fieldGroup->remove_field_by_name('removed_by_name');
 
-        $acfArray = $fieldGroup->toAcfArray('1812112152b');
+        $acfArray = $fieldGroup->to_acf_array('1812112152b');
 
         $this->assertEquals(
             [
@@ -293,25 +293,25 @@ final class FieldGroupTest extends TestCase
 
         $fieldGroup = new FieldGroup('', '1812112150a');
 
-        $fieldGroup->addField(
+        $fieldGroup->add_field(
             (new Text('A textfield', 'a_textfield', '1812112152a'))
         );
 
-        $fieldGroup->addBrick(
-            (new TextAndUrlBrick('image_n_text', '1812112239a'))
+        $fieldGroup->add_brick(
+            (new TextAndUrlBrick('1812112239a', 'image_n_text'))
         );
 
-        $fieldGroup->addBrick(
-            new TextAndUrlBrick('brick_to_be_removed_by_name', '1812112247a')
+        $fieldGroup->add_brick(
+            new TextAndUrlBrick('1812112247a', 'brick_to_be_removed_by_name')
         );
 
-        $fieldGroup->addBrick(
-            new TextAndUrlBrick('to_be_kept', '1812112248a')
+        $fieldGroup->add_brick(
+            new TextAndUrlBrick('1812112248a', 'to_be_kept')
         );
 
-        $fieldGroup->removeBrickByName('brick_to_be_removed_by_name');
+        $fieldGroup->remove_brick_by_name('brick_to_be_removed_by_name');
 
-        $acfArray = $fieldGroup->toAcfArray('1812112152b');
+        $acfArray = $fieldGroup->to_acf_array('1812112152b');
 
         $this->assertEquals(
             [
@@ -393,25 +393,25 @@ final class FieldGroupTest extends TestCase
 
         $fieldGroup = new FieldGroup('', '1812112150a');
 
-        $fieldGroup->addField(
+        $fieldGroup->add_field(
             (new Text('A textfield', 'a_textfield', '1812112152a'))
         );
 
-        $fieldGroup->addBrick(
-            (new TextAndUrlBrick('image_n_text', '1812112239a'))
+        $fieldGroup->add_brick(
+            (new TextAndUrlBrick('1812112239a', 'image_n_text'))
         );
 
-        $fieldGroup->addBrick(
-            new TextAndUrlBrick('to_be_removed_by_key', '1812112247b')
+        $fieldGroup->add_brick(
+            new TextAndUrlBrick('1812112247b', 'to_be_removed_by_key')
         );
 
-        $fieldGroup->addBrick(
-            new TextAndUrlBrick('to_be_kept', '1812112248a')
+        $fieldGroup->add_brick(
+            new TextAndUrlBrick('1812112248a', 'to_be_kept')
         );
 
-        $fieldGroup->removeBrickByKey('1812112247b');
+        $fieldGroup->remove_brick_by_key('1812112247b');
 
-        $acfArray = $fieldGroup->toAcfArray('1812112152b');
+        $acfArray = $fieldGroup->to_acf_array('1812112152b');
 
         $this->assertEquals(
             [
@@ -490,19 +490,19 @@ final class FieldGroupTest extends TestCase
 
         $fieldGroup = new FieldGroup('', '1812112150a');
 
-        $fieldGroup->addField(
+        $fieldGroup->add_field(
             (new Text('A textfield', 'a_textfield', '1812112152a'))
         );
 
-        $fieldGroup->addBrick(
-            (new TextAndUrlBrick('image_n_text', '1812112239a'))
+        $fieldGroup->add_brick(
+            (new TextAndUrlBrick('1812112239a', 'image_n_text'))
         );
 
-        $fieldGroup->addBrick(
-            new TextAndUrlBrick('to_be_kept', '1812112248a')
+        $fieldGroup->add_brick(
+            new TextAndUrlBrick('1812112248a', 'to_be_kept')
         );
 
-        $acfArray = $fieldGroup->toAcfArray('1812112152b');
+        $acfArray = $fieldGroup->to_acf_array('1812112152b');
 
         $this->assertEquals(
             [
@@ -584,16 +584,16 @@ final class FieldGroupTest extends TestCase
 
         $fieldGroup = new FieldGroup('', '');
 
-        $fieldGroup->addField(
+        $fieldGroup->add_field(
             new Text('Text field 2', 'text_field_2', '1812112259a')
         );
 
-        $fieldGroup->addFieldBeforeFieldByName(
+        $fieldGroup->add_field_before_field_by_name(
             new Text('Text field 1', 'text_field_1', '1812112259b'),
             'text_field_2'
         );
 
-        $acfArray = $fieldGroup->toAcfArray();
+        $acfArray = $fieldGroup->to_acf_array();
 
         $this->assertEquals([
             [
@@ -624,24 +624,24 @@ final class FieldGroupTest extends TestCase
 
         $fieldGroup = new FieldGroup('', '');
 
-        $fieldGroup->addField(
+        $fieldGroup->add_field(
             new Text('Text field 1', 'text_field_1', '1812112259a')
         );
 
-        $fieldGroup->addField(
+        $fieldGroup->add_field(
             new Text('Text field 2', 'text_field_2', '1812112259b')
         );
 
-        $fieldGroup->addField(
+        $fieldGroup->add_field(
             new Text('Text field 3', 'text_field_3', '1812112259c')
         );
 
-        $fieldGroup->replaceFieldByKey(
+        $fieldGroup->replace_field_by_key(
             new Text('Text field 4', 'text_field_4', '1812112259d'),
             '1812112259b'
         );
 
-        $acfArray = $fieldGroup->toAcfArray();
+        $acfArray = $fieldGroup->to_acf_array();
 
         $this->assertEquals([
             [
@@ -677,20 +677,20 @@ final class FieldGroupTest extends TestCase
 
         $fieldGroup = new FieldGroup('', '');
 
-        $fieldGroup->addField(
+        $fieldGroup->add_field(
             new Text('Text field 1', 'text_field_1', '1812112259a')
         );
 
-        $fieldGroup->addField(
+        $fieldGroup->add_field(
             new Text('Text field 3', 'text_field_3', '1812112259b')
         );
 
-        $fieldGroup->addFieldAfterFieldByName(
+        $fieldGroup->add_field_after_field_by_name(
             new Text('Text field 2', 'text_field_2', '1812112259c'),
             'text_field_1'
         );
 
-        $acfArray = $fieldGroup->toAcfArray();
+        $acfArray = $fieldGroup->to_acf_array();
 
         $this->assertEquals([
             [
@@ -731,11 +731,11 @@ final class FieldGroupTest extends TestCase
 
         $fieldGroup = new FieldGroup('', '1812112150a');
 
-        $fieldGroup->addField(
+        $fieldGroup->add_field(
             (new Text('A textfield', 'a_textfield', '1812112152a'))
         );
 
-        $fieldGroup->addField(
+        $fieldGroup->add_field(
             (new Text('Another textfield', 'another_textfield', '1812112152a'))
         );
 
@@ -749,7 +749,7 @@ final class FieldGroupTest extends TestCase
 
         $fieldGroup = new FieldGroup('', '');
 
-        $fieldGroup->setHideOnScreen('all');
+        $fieldGroup->set_hide_on_screen('all');
 
         $this->assertEquals([
             'permalink',
@@ -767,7 +767,7 @@ final class FieldGroupTest extends TestCase
             'categories',
             'tags',
             'send-trackbacks',
-        ], $fieldGroup->toAcfArray()['hide_on_screen']);
+        ], $fieldGroup->to_acf_array()['hide_on_screen']);
 
     }
 
@@ -779,12 +779,12 @@ final class FieldGroupTest extends TestCase
 
         $fieldGroup = new FieldGroup('', '');
 
-        $fieldGroup->setHideOnScreen('comments');
-        $fieldGroup->setHideOnScreen('slug'); // This is the one we will expect
+        $fieldGroup->set_hide_on_screen('comments');
+        $fieldGroup->set_hide_on_screen('slug'); // This is the one we will expect
 
         $this->assertEquals([
             'slug',
-        ], $fieldGroup->toAcfArray()['hide_on_screen']);
+        ], $fieldGroup->to_acf_array()['hide_on_screen']);
 
     }
 
@@ -796,14 +796,14 @@ final class FieldGroupTest extends TestCase
 
         $fieldGroup = new FieldGroup('', '');
 
-        $fieldGroup->setHideOnScreen('all');
-        $fieldGroup->setHideOnScreen(['comments', 'permalink', 'format']);
+        $fieldGroup->set_hide_on_screen('all');
+        $fieldGroup->set_hide_on_screen(['comments', 'permalink', 'format']);
 
         $this->assertEquals([
             'comments',
             'permalink',
             'format',
-        ], $fieldGroup->toAcfArray()['hide_on_screen']);
+        ], $fieldGroup->to_acf_array()['hide_on_screen']);
 
     }
 
@@ -815,11 +815,11 @@ final class FieldGroupTest extends TestCase
 
         $fieldGroup = new FieldGroup('', '');
 
-        $fieldGroup->setHideOnScreen('all');
-        $fieldGroup->setShowOnScreen('all');
+        $fieldGroup->set_hide_on_screen('all');
+        $fieldGroup->set_show_on_screen('all');
 
         $this->assertEquals([
-        ], $fieldGroup->toAcfArray()['hide_on_screen']);
+        ], $fieldGroup->to_acf_array()['hide_on_screen']);
 
     }
 
@@ -831,13 +831,13 @@ final class FieldGroupTest extends TestCase
 
         $fieldGroup = new FieldGroup('', '');
 
-        $fieldGroup->setHideOnScreen(['comments', 'permalink', 'format', 'page_attributes']);
-        $fieldGroup->setShowOnScreen(['format', 'page_attributes']);
+        $fieldGroup->set_hide_on_screen(['comments', 'permalink', 'format', 'page_attributes']);
+        $fieldGroup->set_show_on_screen(['format', 'page_attributes']);
 
         $this->assertEquals([
             'comments',
             'permalink',
-        ], $fieldGroup->toAcfArray()['hide_on_screen']);
+        ], $fieldGroup->to_acf_array()['hide_on_screen']);
 
     }
 
@@ -849,13 +849,13 @@ final class FieldGroupTest extends TestCase
 
         $fieldGroup = new FieldGroup('', '');
 
-        $fieldGroup->setHideOnScreen(['comments', 'permalink', 'format', 'page_attributes']);
-        $fieldGroup->setShowOnScreen(['format', 'page_attributes']);
+        $fieldGroup->set_hide_on_screen(['comments', 'permalink', 'format', 'page_attributes']);
+        $fieldGroup->set_show_on_screen(['format', 'page_attributes']);
 
         $this->assertEquals([
             'comments',
             'permalink',
-        ], $fieldGroup->toAcfArray()['hide_on_screen']);
+        ], $fieldGroup->to_acf_array()['hide_on_screen']);
 
     }
 
@@ -864,11 +864,11 @@ final class FieldGroupTest extends TestCase
 
         $fieldGroup = new FieldGroup('', '');
 
-        $fieldGroup->setActive(false);
-        $this->assertEquals(false, $fieldGroup->getActive());
+        $fieldGroup->set_active(false);
+        $this->assertEquals(false, $fieldGroup->get_active());
 
-        $fieldGroup->setActive(true);
-        $this->assertEquals(true, $fieldGroup->getActive());
+        $fieldGroup->set_active(true);
+        $this->assertEquals(true, $fieldGroup->get_active());
 
     }
 
@@ -879,9 +879,9 @@ final class FieldGroupTest extends TestCase
 
         $fieldGroup = new FieldGroup('', '');
 
-        $fieldGroup->setDescription($description);
+        $fieldGroup->set_description($description);
 
-        $this->assertEquals($description, $fieldGroup->getDescription());
+        $this->assertEquals($description, $fieldGroup->get_description());
 
     }
 
@@ -893,9 +893,9 @@ final class FieldGroupTest extends TestCase
 
         $fieldGroup = new FieldGroup('', '');
 
-        $fieldGroup->setInstructionPlacement($instructionPlacement);
+        $fieldGroup->set_instruction_placement($instructionPlacement);
 
-        $this->assertEquals($instructionPlacement, $fieldGroup->getInstructionPlacement());
+        $this->assertEquals($instructionPlacement, $fieldGroup->get_instruction_placement());
 
     }
 
@@ -907,9 +907,9 @@ final class FieldGroupTest extends TestCase
 
         $fieldGroup = new FieldGroup('', '');
 
-        $fieldGroup->setLabelPlacement($labelPlacement);
+        $fieldGroup->set_label_placement($labelPlacement);
 
-        $this->assertEquals($labelPlacement, $fieldGroup->getLabelPlacement());
+        $this->assertEquals($labelPlacement, $fieldGroup->get_label_placement());
 
     }
 
@@ -921,9 +921,9 @@ final class FieldGroupTest extends TestCase
 
         $fieldGroup = new FieldGroup('', '');
 
-        $fieldGroup->setMenuOrder($menuOrder);
+        $fieldGroup->set_menu_order($menuOrder);
 
-        $this->assertEquals($menuOrder, $fieldGroup->getMenuOrder());
+        $this->assertEquals($menuOrder, $fieldGroup->get_menu_order());
 
     }
 
@@ -935,13 +935,13 @@ final class FieldGroupTest extends TestCase
 
         $fieldGroup = new FieldGroup('', '');
 
-        $fieldGroup->setPosition($position);
+        $fieldGroup->set_position($position);
 
-        $this->assertEquals($position, $fieldGroup->getPosition());
+        $this->assertEquals($position, $fieldGroup->get_position());
 
     }
 
-    public function testSetSetting()
+    public function testset_setting()
     {
 
         // Its ok to send any value
@@ -950,9 +950,9 @@ final class FieldGroupTest extends TestCase
 
         $fieldGroup = new FieldGroup('', '');
 
-        $fieldGroup->setSetting($settingName, $settingValue);
+        $fieldGroup->set_setting($settingName, $settingValue);
 
-        $this->assertEquals($settingValue, $fieldGroup->getSetting($settingName));
+        $this->assertEquals($settingValue, $fieldGroup->get_setting($settingName));
 
     }
 
@@ -964,7 +964,7 @@ final class FieldGroupTest extends TestCase
 
         $fieldGroup = new FieldGroup('', '');
 
-        $this->assertEquals($defaultValue, $fieldGroup->getSetting($settingName, $defaultValue));
+        $this->assertEquals($defaultValue, $fieldGroup->get_setting($settingName, $defaultValue));
 
     }
 
@@ -978,10 +978,10 @@ final class FieldGroupTest extends TestCase
 
         $fieldGroup = new FieldGroup('', '');
 
-        $fieldGroup->setSetting('setting_name_1', $settings['setting_name_1']);
-        $fieldGroup->setSetting('setting_name_2', $settings['setting_name_2']);
+        $fieldGroup->set_setting('setting_name_1', $settings['setting_name_1']);
+        $fieldGroup->set_setting('setting_name_2', $settings['setting_name_2']);
 
-        $this->assertEquals($settings, $fieldGroup->getSettings());
+        $this->assertEquals($settings, $fieldGroup->get_settings());
 
     }
 
@@ -993,9 +993,9 @@ final class FieldGroupTest extends TestCase
 
         $fieldGroup = new FieldGroup('', '');
 
-        $fieldGroup->setStyle($style);
+        $fieldGroup->set_style($style);
 
-        $this->assertEquals($style, $fieldGroup->getStyle());
+        $this->assertEquals($style, $fieldGroup->get_style());
 
     }
 
@@ -1006,10 +1006,10 @@ final class FieldGroupTest extends TestCase
 
         $fieldGroup = new FieldGroup('', '');
 
-        $fieldGroup->addField(new Text('Text field', 'text_field', '1812132221a'));
-        $fieldGroup->addField(new Text('Text field 2', 'text_field_2', '1812132221b'));
+        $fieldGroup->add_field(new Text('Text field', 'text_field', '1812132221a'));
+        $fieldGroup->add_field(new Text('Text field 2', 'text_field_2', '1812132221b'));
 
-        $fieldGroup->setFieldLabelsPrefix($labelPrefix);
+        $fieldGroup->set_field_labels_prefix($labelPrefix);
 
         $this->assertArraySubset(
             [
@@ -1020,7 +1020,7 @@ final class FieldGroupTest extends TestCase
                     'label' => $labelPrefix . 'Text field 2',
                 ]
             ],
-            $fieldGroup->toAcfArray()['fields']
+            $fieldGroup->to_acf_array()['fields']
         );
 
     }
@@ -1032,10 +1032,10 @@ final class FieldGroupTest extends TestCase
 
         $fieldGroup = new FieldGroup('', '');
 
-        $fieldGroup->addField(new Text('Text field', 'text_field', '1812132221a'));
-        $fieldGroup->addField(new Text('Text field 2', 'text_field_2', '1812132221b'));
+        $fieldGroup->add_field(new Text('Text field', 'text_field', '1812132221a'));
+        $fieldGroup->add_field(new Text('Text field 2', 'text_field_2', '1812132221b'));
 
-        $fieldGroup->setFieldLabelsSuffix($labelSuffix);
+        $fieldGroup->set_field_labels_suffix($labelSuffix);
 
         $this->assertArraySubset(
             [
@@ -1046,7 +1046,7 @@ final class FieldGroupTest extends TestCase
                     'label' => 'Text field 2' . $labelSuffix,
                 ]
             ],
-            $fieldGroup->toAcfArray()['fields']
+            $fieldGroup->to_acf_array()['fields']
         );
 
     }
@@ -1059,19 +1059,19 @@ final class FieldGroupTest extends TestCase
 
         $fieldGroup = new FieldGroup('A field group', '1812132149a');
 
-        $fieldGroup->addField(new Text('Text field 1', 'text_field_1', '1812132204a'));
-        $fieldGroup->setDisplayInFewbricksDevTools(true);
-        $fieldGroup->setSetting('setting_1_name', 'setting_1_value');
-        $fieldGroup->setMenuOrder(78);
-        $fieldGroup->setPosition('the_position_dgigk');
-        $fieldGroup->setLabelPlacement('the_label_placement_y8yo');
-        $fieldGroup->setDescription('Description d98sgl');
-        $fieldGroup->setInstructionPlacement('Instruction placement dh8gol');
-        $fieldGroup->setActive(false);
-        $fieldGroup->setHideOnScreen('all');
-        $fieldGroup->setShowOnScreen('slug');
-        $fieldGroup->setStyle('dover_calais');
-        $fieldGroup->setTitle('A new title dy8ohl');
+        $fieldGroup->add_field(new Text('Text field 1', 'text_field_1', '1812132204a'));
+        $fieldGroup->set_display_in_fewbricks_dev_tools(true);
+        $fieldGroup->set_setting('setting_1_name', 'setting_1_value');
+        $fieldGroup->set_menu_order(78);
+        $fieldGroup->set_position('the_position_dgigk');
+        $fieldGroup->set_label_placement('the_label_placement_y8yo');
+        $fieldGroup->set_description('Description d98sgl');
+        $fieldGroup->set_instruction_placement('Instruction placement dh8gol');
+        $fieldGroup->set_active(false);
+        $fieldGroup->set_hide_on_screen('all');
+        $fieldGroup->set_show_on_screen('slug');
+        $fieldGroup->set_style('dover_calais');
+        $fieldGroup->set_title('A new title dy8ohl');
 
         $this->assertEquals([
             'key' => 'group_1812132149a',
@@ -1114,7 +1114,7 @@ final class FieldGroupTest extends TestCase
                 ]
             ],
         ],
-            $fieldGroup->register(false)->toAcfArray()
+            $fieldGroup->register(false)->to_acf_array()
         );
 
     }
@@ -1124,9 +1124,9 @@ final class FieldGroupTest extends TestCase
 
         $fieldGroup = new FieldGroup('', '');
 
-        $fieldGroup->setDisplayInFewbricksDevTools(true);
+        $fieldGroup->set_display_in_fewbricks_dev_tools(true);
 
-        $this->assertEquals(true, $fieldGroup->getDisplayInFewbricksDevTools());
+        $this->assertEquals(true, $fieldGroup->get_display_in_fewbricks_dev_tools());
 
     }
 

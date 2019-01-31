@@ -17,7 +17,7 @@ class FieldWithChoices extends Field
     public function getChoices()
     {
 
-        return $this->getSetting('choices', []);
+        return $this->get_setting('choices', []);
 
     }
 
@@ -25,10 +25,10 @@ class FieldWithChoices extends Field
      * @return mixed The value of the ACF setting "default_value". Returns the default ACF value "" if none has been set
      * using Fewbricks.
      */
-    public function getDefaultValue()
+    public function get_default_value()
     {
 
-        return $this->getSetting('default_value', '');
+        return $this->get_setting('default_value', '');
 
     }
 
@@ -36,10 +36,10 @@ class FieldWithChoices extends Field
      * @return mixed The value of the ACF setting "return_format". Returns the default ACF value "value" if none has
      * been set using Fewbricks.
      */
-    public function getReturnFormat()
+    public function get_return_format()
     {
 
-        return $this->getSetting('return_format', 'value');
+        return $this->get_setting('return_format', 'value');
 
     }
 
@@ -49,10 +49,10 @@ class FieldWithChoices extends Field
      * @param array $choices Associative array with options. Key will be name and value will be value.
      * @return $this
      */
-    public function setChoices($choices)
+    public function set_choices($choices)
     {
 
-        return $this->setSetting('choices', $choices);
+        return $this->set_setting('choices', $choices);
 
     }
 
@@ -60,10 +60,10 @@ class FieldWithChoices extends Field
      * @param mixed $defaultValue ACF setting. A default value used by ACF if no value has yet been saved.
      * @return $this
      */
-    public function setDefaultValue($defaultValue)
+    public function set_default_value($defaultValue)
     {
 
-        return $this->setSetting('default_value', $defaultValue);
+        return $this->set_setting('default_value', $defaultValue);
 
     }
 
@@ -73,10 +73,10 @@ class FieldWithChoices extends Field
      * @param $returnFormat "value", "label" or "array" (for both)
      * @return $this
      */
-    public function setReturnFormat($returnFormat)
+    public function set_return_format($returnFormat)
     {
 
-        return $this->setSetting('return_format', $returnFormat);
+        return $this->set_setting('return_format', $returnFormat);
 
     }
 

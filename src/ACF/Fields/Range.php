@@ -24,10 +24,10 @@ class Range extends Field implements FieldInterface
      * @return mixed The value of the ACF setting "append". Returns the default ACF value "" if none has been
      * set using Fewbricks.
      */
-    public function getAppend()
+    public function get_append()
     {
 
-        return $this->getSetting('append', '');
+        return $this->get_setting('append', '');
 
     }
 
@@ -35,10 +35,10 @@ class Range extends Field implements FieldInterface
      * @return mixed The value of the ACF setting "default_value". Returns the default ACF value "" if none has been set
      * using Fewbricks.
      */
-    public function getDefaultValue()
+    public function get_default_value()
     {
 
-        return $this->getSetting('default_value', '');
+        return $this->get_setting('default_value', '');
 
     }
 
@@ -46,10 +46,10 @@ class Range extends Field implements FieldInterface
      * @return mixed The value of the ACF setting "max". Returns the default ACF value "" if none has been
      * set using Fewbricks.
      */
-    public function getMax()
+    public function get_max()
     {
 
-        return $this->getSetting('max', '');
+        return $this->get_setting('max', '');
 
     }
 
@@ -57,10 +57,10 @@ class Range extends Field implements FieldInterface
      * @return mixed The value of the ACF setting "min". Returns the default ACF value "" if none has been
      * set using Fewbricks.
      */
-    public function getMin()
+    public function get_min()
     {
 
-        return $this->getSetting('min', '');
+        return $this->get_setting('min', '');
 
     }
 
@@ -68,10 +68,10 @@ class Range extends Field implements FieldInterface
      * @return mixed The value of the ACF setting "prepend". Returns the default ACF value "" if none has been
      * set using Fewbricks.
      */
-    public function getPrepend()
+    public function get_prepend()
     {
 
-        return $this->getSetting('prepend', '');
+        return $this->get_setting('prepend', '');
 
     }
 
@@ -79,10 +79,10 @@ class Range extends Field implements FieldInterface
      * @return mixed The value of the ACF setting "step". Returns the default ACF value "" if none has been
      * set using Fewbricks.
      */
-    public function getStep()
+    public function get_step()
     {
 
-        return $this->getSetting('step', '');
+        return $this->get_setting('step', '');
 
     }
 
@@ -92,10 +92,10 @@ class Range extends Field implements FieldInterface
      * @param string $append
      * @return $this
      */
-    public function setAppend($append)
+    public function set_append($append)
     {
 
-        return $this->setSetting('append', $append);
+        return $this->set_setting('append', $append);
 
     }
 
@@ -103,10 +103,10 @@ class Range extends Field implements FieldInterface
      * @param mixed $defaultValue ACF setting. A default value used by ACF if no value has yet been saved.
      * @return $this
      */
-    public function setDefaultValue($defaultValue)
+    public function set_default_value($defaultValue)
     {
 
-        return $this->setSetting('default_value', $defaultValue);
+        return $this->set_setting('default_value', $defaultValue);
 
     }
 
@@ -116,10 +116,10 @@ class Range extends Field implements FieldInterface
      * @param int $max
      * @return $this
      */
-    public function setMax($max)
+    public function set_max($max)
     {
 
-        return $this->setSetting('max', $max);
+        return $this->set_setting('max', $max);
 
     }
 
@@ -129,10 +129,10 @@ class Range extends Field implements FieldInterface
      * @param int $min
      * @return $this
      */
-    public function setMin($min)
+    public function set_min($min)
     {
 
-        return $this->setSetting('min', $min);
+        return $this->set_setting('min', $min);
 
     }
 
@@ -142,10 +142,10 @@ class Range extends Field implements FieldInterface
      * @param string $prepend
      * @return $this
      */
-    public function setPrepend($prepend)
+    public function set_prepend($prepend)
     {
 
-        return $this->setSetting('prepend', $prepend);
+        return $this->set_setting('prepend', $prepend);
 
     }
 
@@ -155,10 +155,10 @@ class Range extends Field implements FieldInterface
      * @param int $step
      * @return $this
      */
-    public function setStep($step)
+    public function set_step($step)
     {
 
-        return $this->setSetting('step', $step);
+        return $this->set_setting('step', $step);
 
     }
 

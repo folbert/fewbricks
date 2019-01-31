@@ -46,7 +46,7 @@ final class FileTest extends FieldTest
 
         $this->assertEquals(
             FieldHelper::getExpectedFieldValues($field, $settings),
-            $field->toAcfArray($settings['test__key_prefix'])
+            $field->to_acf_array($settings['test__key_prefix'])
         );
 
     }
@@ -59,11 +59,11 @@ final class FileTest extends FieldTest
 
         $field = new File('', '', '');
 
-        $this->assertEquals('all', $field->getLibrary());
+        $this->assertEquals('all', $field->get_library());
 
-        $field->setLibrary('some_library');
+        $field->set_library('some_library');
 
-        $this->assertEquals('some_library', $field->getLibrary());
+        $this->assertEquals('some_library', $field->get_library());
 
     }
 
@@ -75,11 +75,11 @@ final class FileTest extends FieldTest
 
         $field = new File('', '', '');
 
-        $this->assertEquals(0, $field->getMaxSize());
+        $this->assertEquals(0, $field->get_max_size());
 
-        $field->setMaxSize(100);
+        $field->set_max_size(100);
 
-        $this->assertEquals(100, $field->getMaxSize());
+        $this->assertEquals(100, $field->get_max_size());
 
     }
 
@@ -91,15 +91,15 @@ final class FileTest extends FieldTest
 
         $field = new File('', '', '');
 
-        $this->assertEquals('', $field->getMimeTypes());
+        $this->assertEquals('', $field->get_mime_types());
 
-        $field->setMimeTypes('apple, banana');
+        $field->set_mime_types('apple, banana');
 
-        $this->assertEquals('apple, banana', $field->getMimeTypes());
+        $this->assertEquals('apple, banana', $field->get_mime_types());
 
-        $field->setMimeTypes(['orange', 'pear']);
+        $field->set_mime_types(['orange', 'pear']);
 
-        $this->assertEquals('orange, pear', $field->getMimeTypes());
+        $this->assertEquals('orange, pear', $field->get_mime_types());
 
     }
 
@@ -111,11 +111,11 @@ final class FileTest extends FieldTest
 
         $field = new File('', '', '');
 
-        $this->assertEquals(0, $field->getMinSize());
+        $this->assertEquals(0, $field->get_min_size());
 
-        $field->setMinSize(100);
+        $field->set_min_size(100);
 
-        $this->assertEquals(100, $field->getMinSize());
+        $this->assertEquals(100, $field->get_min_size());
 
     }
 
@@ -127,11 +127,11 @@ final class FileTest extends FieldTest
 
         $field = new File('', '', '');
 
-        $this->assertEquals('array', $field->getReturnFormat());
+        $this->assertEquals('array', $field->get_return_format());
 
-        $field->setReturnFormat('object');
+        $field->set_return_format('object');
 
-        $this->assertEquals('object', $field->getReturnFormat());
+        $this->assertEquals('object', $field->get_return_format());
 
     }
 

@@ -85,12 +85,12 @@ The system was created for the following reasons:
 
 ## Notes on the code
 You may notice that there are multiple ways to for example set settings for a field. If you want to set teh default 
-value of a field, you can either use the function `setDefaultValue($value)` or the "master function" `setSetting
-('default_value', $value)`. OOP purists may have an issue with this and would want the setSetting function to be 
+value of a field, you can either use the function `set_default_value($value)` or the "master function" `set_setting
+('default_value', $value)`. OOP purists may have an issue with this and would want the set_setting function to be 
 `protected`. The reason for it being the way it is is to ensure that any new settings added by ACF can be used 
 before we've had a chance to update Fewbricks with new set-functions. For example if ACF were to add a setting 
 `custom_attributes` that could be applied to all fields. Instead of you having to wait for us to add the function 
-`setCustomAttributes($attributes)`, you can use `setSetting('custom_attributes', $value)`. And the reason for the set
+`setCustomAttributes($attributes)`, you can use `set_setting('custom_attributes', $value)`. And the reason for the set
  functions existing is that if your IDE autocompletes, you will get suggestions on which settings are available for a
   field instead of having to check the ACF code or websiet for which settings are available on a field. 
  
@@ -104,15 +104,15 @@ should show up, Fewbricks allows you to do the same. The code can look some thin
 ````php
 $fieldGroup = new FieldGroup();
 
-$fieldGroup->addLocationRuleGroup(
+$fieldGroup->add_location_rule_group(
     (new FieldGroupLocationRuleGroup())
-    ->addRule(new Rule('post_type', '==', 'fewbricks_demo_page'))
+    ->add_rule(new Rule('post_type', '==', 'fewbricks_demo_page'))
 );
 
-$fieldGroup->addLocationRuleGroup(
+$fieldGroup->add_location_rule_group(
     (new FieldGroupLocationRuleGroup())
-        ->addRule(new Rule('user_form', '==', 'edit'))
-        ->addRule(new Rule('user_role', '!=', 'subscriber'))
+        ->add_rule(new Rule('user_form', '==', 'edit'))
+        ->add_rule(new Rule('user_role', '!=', 'subscriber'))
 );
 ````
 
@@ -125,7 +125,7 @@ The above code would generate a rule that would have the field group be displaye
 
 ## Fields
 
-The functions for setting field settings corresponds to the name of the setting and not to the label of the setting the gui. For example the value set under "Return value" in the gui is actually named "return_format" in the code. So the function for setting that value is named `setReturnFormat()`
+The functions for setting field settings corresponds to the name of the setting and not to the label of the setting the gui. For example the value set under "Return value" in the gui is actually named "return_format" in the code. So the function for setting that value is named `set_return_format()`
 
 ## Filters
 

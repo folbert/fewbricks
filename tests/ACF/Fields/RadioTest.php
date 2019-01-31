@@ -46,7 +46,7 @@ final class RadioTest extends FieldTest
 
         $this->assertEquals(
             FieldHelper::getExpectedFieldValues($field, $settings),
-            $field->toAcfArray($settings['test__key_prefix'])
+            $field->to_acf_array($settings['test__key_prefix'])
         );
 
     }
@@ -56,11 +56,11 @@ final class RadioTest extends FieldTest
 
         $field = new Radio('', '', '');
 
-        $this->assertEquals(0, $field->getAllowNull());
+        $this->assertEquals(0, $field->get_allow_null());
 
-        $field->setAllowNull(true);
+        $field->set_allow_null(true);
 
-        $this->assertEquals(true, $field->getAllowNull());
+        $this->assertEquals(true, $field->get_allow_null());
 
     }
 
@@ -71,7 +71,7 @@ final class RadioTest extends FieldTest
 
         $this->assertEquals([], $field->getChoices());
 
-        $field->setChoices(['adhiu', '98goi']);
+        $field->set_choices(['adhiu', '98goi']);
 
         $this->assertEquals(['adhiu', '98goi'], $field->getChoices());
 
@@ -82,11 +82,11 @@ final class RadioTest extends FieldTest
 
         $field = new Radio('', '', '');
 
-        $this->assertEquals('', $field->getDefaultValue());
+        $this->assertEquals('', $field->get_default_value());
 
-        $field->setDefaultValue('djhohsi');
+        $field->set_default_value('djhohsi');
 
-        $this->assertEquals('djhohsi', $field->getDefaultValue());
+        $this->assertEquals('djhohsi', $field->get_default_value());
 
     }
 
@@ -95,11 +95,11 @@ final class RadioTest extends FieldTest
 
         $field = new Radio('', '', '');
 
-        $this->assertEquals('vertical', $field->getLayout());
+        $this->assertEquals('vertical', $field->get_layout());
 
-        $field->setLayout('horizontal');
+        $field->set_layout('horizontal');
 
-        $this->assertEquals('horizontal', $field->getLayout());
+        $this->assertEquals('horizontal', $field->get_layout());
 
     }
 
@@ -108,11 +108,11 @@ final class RadioTest extends FieldTest
 
         $field = new Radio('', '', '');
 
-        $this->assertEquals(0, $field->getOtherChoice());
+        $this->assertEquals(0, $field->get_other_choice());
 
-        $field->setOtherChoice(true);
+        $field->set_other_choice(true);
 
-        $this->assertEquals(true, $field->getOtherChoice());
+        $this->assertEquals(true, $field->get_other_choice());
 
     }
 
@@ -121,11 +121,11 @@ final class RadioTest extends FieldTest
 
         $field = new Radio('', '', '');
 
-        $this->assertEquals('value', $field->getReturnFormat());
+        $this->assertEquals('value', $field->get_return_format());
 
-        $field->setReturnFormat('dhiukl');
+        $field->set_return_format('dhiukl');
 
-        $this->assertEquals('dhiukl', $field->getReturnFormat());
+        $this->assertEquals('dhiukl', $field->get_return_format());
 
     }
 
@@ -134,11 +134,11 @@ final class RadioTest extends FieldTest
 
         $field = new Radio('', '', '');
 
-        $this->assertEquals(0, $field->getSaveOtherChoice());
+        $this->assertEquals(0, $field->get_save_other_choice());
 
-        $field->setSaveOtherChoice(true);
+        $field->set_save_other_choice(true);
 
-        $this->assertEquals(true, $field->getSaveOtherChoice());
+        $this->assertEquals(true, $field->get_save_other_choice());
 
     }
 

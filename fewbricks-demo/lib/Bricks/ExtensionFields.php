@@ -12,18 +12,18 @@ class ExtensionFields extends Brick
     /**
      *
      */
-    public function setUp()
+    public function set_up()
     {
 
         if (class_exists('acf_field_dynamic_year_select')) {
 
-            $this->addField(
+            $this->add_field(
                 (new DynamicYearSelect('Select a year', 'year', '1812012249a'))
-                    ->setNewestYear([
+                    ->set_newest_year([
                         'method' => 'relative',
                         'relative_year' => '20',
                     ])
-                    ->setOldestYear([
+                    ->set_oldest_year([
                         'method' => 'relative',
                         'relative_year' => '2',
                     ]));
@@ -32,18 +32,18 @@ class ExtensionFields extends Brick
 
         if (class_exists('acf_code_field')) {
 
-            $this->addField(
+            $this->add_field(
                 (new AcfCodeField('Code', 'code', '1812012332a'))
-                    ->setMode('application/x-httpd-php')
-                    ->setPlaceholder('Fill this!')
-                    ->setDefaultValue('<?php')
+                    ->set_mode('application/x-httpd-php')
+                    ->set_placeholder('Fill this!')
+                    ->set_default_value('<?php')
             );
 
         }
 
         if (class_exists('acf_field_dynamic_year_select')) {
 
-            $this->addField((new Table('Table', 'table', '1812012354a')));
+            $this->add_field((new Table('Table', 'table', '1812012354a')));
 
         }
 

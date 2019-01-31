@@ -46,7 +46,7 @@ final class GalleryTest extends FieldTest
 
         $this->assertEquals(
             FieldHelper::getExpectedFieldValues($field, $settings),
-            $field->toAcfArray($settings['test__key_prefix'])
+            $field->to_acf_array($settings['test__key_prefix'])
         );
 
     }
@@ -59,11 +59,11 @@ final class GalleryTest extends FieldTest
 
         $field = new Gallery('', '', '');
 
-        $this->assertEquals('append', $field->getInsert());
+        $this->assertEquals('append', $field->get_insert());
 
-        $field->setInsert('prepend');
+        $field->set_insert('prepend');
 
-        $this->assertEquals('prepend', $field->getInsert());
+        $this->assertEquals('prepend', $field->get_insert());
 
     }
 
@@ -75,11 +75,11 @@ final class GalleryTest extends FieldTest
 
         $field = new Gallery('', '', '');
 
-        $this->assertEquals(0, $field->getMax());
+        $this->assertEquals(0, $field->get_max());
 
-        $field->setMax(78);
+        $field->set_max(78);
 
-        $this->assertEquals(78, $field->getMax());
+        $this->assertEquals(78, $field->get_max());
 
     }
 
@@ -107,11 +107,11 @@ final class GalleryTest extends FieldTest
 
         $field = new Gallery('', '', '');
 
-        $this->assertEquals(0, $field->getMaxSize());
+        $this->assertEquals(0, $field->get_max_size());
 
-        $field->setMaxSize(78);
+        $field->set_max_size(78);
 
-        $this->assertEquals(78, $field->getMaxSize());
+        $this->assertEquals(78, $field->get_max_size());
 
     }
 
@@ -139,11 +139,11 @@ final class GalleryTest extends FieldTest
 
         $field = new Gallery('', '', '');
 
-        $this->assertEquals(0, $field->getMin());
+        $this->assertEquals(0, $field->get_min());
 
-        $field->setMin(78);
+        $field->set_min(78);
 
-        $this->assertEquals(78, $field->getMin());
+        $this->assertEquals(78, $field->get_min());
 
     }
 
@@ -155,15 +155,15 @@ final class GalleryTest extends FieldTest
 
         $field = new Gallery('', '', '');
 
-        $this->assertEquals('', $field->getMimeTypes());
+        $this->assertEquals('', $field->get_mime_types());
 
-        $field->setMimeTypes(['hggik', 'ohl/yuk']);
+        $field->set_mime_types(['hggik', 'ohl/yuk']);
 
-        $this->assertEquals('hggik, ohl/yuk', $field->getMimeTypes());
+        $this->assertEquals('hggik, ohl/yuk', $field->get_mime_types());
 
-        $field->setMimeTypes('hggik, jdiohdo/g');
+        $field->set_mime_types('hggik, jdiohdo/g');
 
-        $this->assertEquals('hggik, jdiohdo/g', $field->getMimeTypes());
+        $this->assertEquals('hggik, jdiohdo/g', $field->get_mime_types());
 
     }
 
@@ -191,11 +191,11 @@ final class GalleryTest extends FieldTest
 
         $field = new Gallery('', '', '');
 
-        $this->assertEquals(0, $field->getMinSize());
+        $this->assertEquals(0, $field->get_min_size());
 
-        $field->setMinSize(78);
+        $field->set_min_size(78);
 
-        $this->assertEquals(78, $field->getMinSize());
+        $this->assertEquals(78, $field->get_min_size());
 
     }
 

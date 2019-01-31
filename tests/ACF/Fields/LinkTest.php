@@ -46,7 +46,7 @@ final class LinkTest extends FieldTest
 
         $this->assertEquals(
             FieldHelper::getExpectedFieldValues($field, $settings),
-            $field->toAcfArray($settings['test__key_prefix'])
+            $field->to_acf_array($settings['test__key_prefix'])
         );
 
     }
@@ -59,11 +59,11 @@ final class LinkTest extends FieldTest
 
         $field = new Link('', '', '');
 
-        $this->assertEquals('array', $field->getReturnFormat());
+        $this->assertEquals('array', $field->get_return_format());
 
-        $field->setReturnFormat('object');
+        $field->set_return_format('object');
 
-        $this->assertEquals('object', $field->getReturnFormat());
+        $this->assertEquals('object', $field->get_return_format());
 
     }
 

@@ -34,14 +34,14 @@ class BackgroundColors extends SharedFields
     protected function applyFields()
     {
 
-        $this->addField(
+        $this->add_field(
             (new Select('Background color', 'background_color', '1712262153a'))
-                ->setChoices([
+                ->set_choices([
                     'blue'  => 'Blue',
                     'green' => 'Green',
                     'red'   => 'Red',
                 ])
-                ->setDefaultValue('green')
+                ->set_default_value('green')
         );
 
     }
@@ -75,9 +75,9 @@ class Background extends SharedFields
     protected function applyFields()
     {
 
-        $this->addField(new Image('Background Image', 'background_image', '1712262215a'));
+        $this->add_field(new Image('Background Image', 'background_image', '1712262215a'));
 
-        $this->addFieldCollection(new BackgroundColors());
+        $this->add_field_collection(new BackgroundColors());
 
     }
 
@@ -90,7 +90,7 @@ To use an instance of a shared fields, you can do something like this.
 <?php
 
 $brick = new Section('section', 'Section', '1801022216a');
-$brick->addFieldCollection(new Background());
+$brick->add_field_collection(new Background());
 ```
 
 And since we are dealing with a FieldCollection, you can do anything with the SharedFields instance that you can do

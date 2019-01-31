@@ -13,13 +13,13 @@ class ConditionalLogicRule extends Rule
     /**
      * @return array An array that ACF can work with.
      */
-    public function toAcfArray()
+    public function to_acf_array()
     {
 
         return [
-            'field' => $this->getParam(),
-            'operator' => $this->getOperator(),
-            'value' => $this->getValue()
+            'field' => $this->get_param(),
+            'operator' => $this->get_operator(),
+            'value' => $this->get_value()
         ];
 
     }

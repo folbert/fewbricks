@@ -46,7 +46,7 @@ final class DynamicYearSelectTest extends FieldTest
 
         $this->assertEquals(
             FieldHelper::getExpectedFieldValues($field, $settings),
-            $field->toAcfArray($settings['test__key_prefix'])
+            $field->to_acf_array($settings['test__key_prefix'])
         );
 
     }
@@ -62,16 +62,16 @@ final class DynamicYearSelectTest extends FieldTest
         $this->assertEquals([
             'allow' => false,
             'label' => 'Current',
-        ], $field->getCurrentYear());
+        ], $field->get_current_year());
 
         $newValue = [
             'allow' => true,
             'label' => 'dhd89gol',
         ];
 
-        $field->setCurrentYear($newValue);
+        $field->set_current_year($newValue);
 
-        $this->assertEquals($newValue, $field->getCurrentYear());
+        $this->assertEquals($newValue, $field->get_current_year());
 
     }
 
@@ -88,7 +88,7 @@ final class DynamicYearSelectTest extends FieldTest
             'exact_year' => date('Y'),
             'relative_year' => 20,
             'relative_year_direction' => 'after'
-        ], $field->getNewestYear());
+        ], $field->get_newest_year());
 
         $newValue = [
             'method' => 'exact',
@@ -97,9 +97,9 @@ final class DynamicYearSelectTest extends FieldTest
             'relative_year_direction' => 'before'
         ];
 
-        $field->setNewestYear($newValue);
+        $field->set_newest_year($newValue);
 
-        $this->assertEquals($newValue, $field->getNewestYear());
+        $this->assertEquals($newValue, $field->get_newest_year());
 
     }
 
@@ -116,7 +116,7 @@ final class DynamicYearSelectTest extends FieldTest
             'exact_year' => date('Y'),
             'relative_year' => 20,
             'relative_year_direction' => 'before',
-        ], $field->getOldestYear());
+        ], $field->get_oldest_year());
 
         $newValue = [
             'method' => 'exact',
@@ -125,9 +125,9 @@ final class DynamicYearSelectTest extends FieldTest
             'relative_year_direction' => 'after'
         ];
 
-        $field->setOldestYear($newValue);
+        $field->set_oldest_year($newValue);
 
-        $this->assertEquals($newValue, $field->getOldestYear());
+        $this->assertEquals($newValue, $field->get_oldest_year());
 
     }
 
@@ -139,11 +139,11 @@ final class DynamicYearSelectTest extends FieldTest
 
         $field = new DynamicYearSelect('', '', '');
 
-        $this->assertEquals('chronological', $field->getOrderBy());
+        $this->assertEquals('chronological', $field->get_order_by());
 
-        $field->setOrderBy('rchronological');
+        $field->set_order_by('rchronological');
 
-        $this->assertEquals('rchronological', $field->getOrderBy());
+        $this->assertEquals('rchronological', $field->get_order_by());
 
     }
 
@@ -155,11 +155,11 @@ final class DynamicYearSelectTest extends FieldTest
 
         $field = new DynamicYearSelect('', '', '');
 
-        $this->assertEquals(1, $field->getYearStep());
+        $this->assertEquals(1, $field->get_year_step());
 
-        $field->setYearStep(678);
+        $field->set_year_step(678);
 
-        $this->assertEquals(678, $field->getYearStep());
+        $this->assertEquals(678, $field->get_year_step());
 
     }
 

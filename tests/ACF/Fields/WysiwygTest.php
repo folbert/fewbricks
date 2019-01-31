@@ -46,7 +46,7 @@ final class WysiwygTest extends FieldTest
 
         $this->assertEquals(
             FieldHelper::getExpectedFieldValues($field, $settings),
-            $field->toAcfArray($settings['test__key_prefix'])
+            $field->to_acf_array($settings['test__key_prefix'])
         );
 
     }
@@ -59,11 +59,11 @@ final class WysiwygTest extends FieldTest
 
         $field = new Wysiwyg('', '', '');
 
-        $this->assertEquals('', $field->getDefaultValue());
+        $this->assertEquals('', $field->get_default_value());
 
-        $field->setDefaultValue('dg8igol');
+        $field->set_default_value('dg8igol');
 
-        $this->assertEquals('dg8igol', $field->getDefaultValue());
+        $this->assertEquals('dg8igol', $field->get_default_value());
 
     }
 
@@ -75,11 +75,11 @@ final class WysiwygTest extends FieldTest
 
         $field = new Wysiwyg('', '', '');
 
-        $this->assertEquals(0, $field->getDelay());
+        $this->assertEquals(0, $field->get_delay());
 
-        $field->setDelay(true);
+        $field->set_delay(true);
 
-        $this->assertEquals(true, $field->getDelay());
+        $this->assertEquals(true, $field->get_delay());
 
     }
 
@@ -91,11 +91,11 @@ final class WysiwygTest extends FieldTest
 
         $field = new Wysiwyg('', '', '');
 
-        $this->assertEquals(1, $field->getMediaUpload());
+        $this->assertEquals(1, $field->get_media_upload());
 
-        $field->setMediaUpload(false);
+        $field->set_media_upload(false);
 
-        $this->assertEquals(false, $field->getMediaUpload());
+        $this->assertEquals(false, $field->get_media_upload());
 
     }
 
@@ -107,11 +107,11 @@ final class WysiwygTest extends FieldTest
 
         $field = new Wysiwyg('', '', '');
 
-        $this->assertEquals('all', $field->getTabs());
+        $this->assertEquals('all', $field->get_tabs());
 
-        $field->setTabs('visualdh89ogl');
+        $field->set_tabs('visualdh89ogl');
 
-        $this->assertEquals('visualdh89ogl', $field->getTabs());
+        $this->assertEquals('visualdh89ogl', $field->get_tabs());
 
     }
 
@@ -123,11 +123,11 @@ final class WysiwygTest extends FieldTest
 
         $field = new Wysiwyg('', '', '');
 
-        $this->assertEquals('full', $field->getToolbar());
+        $this->assertEquals('full', $field->get_toolbar());
 
-        $field->setToolbar('r87sfi');
+        $field->set_toolbar('r87sfi');
 
-        $this->assertEquals('r87sfi', $field->getToolbar());
+        $this->assertEquals('r87sfi', $field->get_toolbar());
 
     }
 

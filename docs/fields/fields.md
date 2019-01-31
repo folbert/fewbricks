@@ -40,8 +40,8 @@ Check the [FAQ](/faq/) for info on the site wide unique keys.
 ## ACF settings
 All settings for fields that are available in ACF is possible to set in Fewbricks. Our goal is to keep Fewbricks' code
 up to date with one get- and one set-function for each setting. The way the functions are named follow the same rules
- as described for [Field Groups](/field-groups/#acf-settings) with functions named setSettingsName() and
- getSettingsName().
+ as described for [Field Groups](/field-groups/#acf-settings) with functions named set_settingsName() and
+ get_settingsName().
  
 The code does not do any checks to make sure that values being sent to the setter functions are correct. This is since
 ACF may suddenly allow for some new value which Fewbricks should accept without the code having to be updated. 
@@ -51,7 +51,7 @@ ACF may suddenly allow for some new value which Fewbricks should accept without 
 ```php
 <?php
 
-$textField->setDefaultValue('Some text');
+$textField->set_default_value('Some text');
 $textField->getMaxLength();
 
 ```
@@ -63,15 +63,15 @@ You apply conditional logic like this:
 <?php
 
 $textField
-->addConditionalLogicRuleGroup(
+->add_conditional_logic_rule_group(
 (new ConditionalLogicRuleGroup())
-    ->addRule(new ConditionalLogicRule('1711192022y', '==', '1'))
+    ->add_rule(new ConditionalLogicRule('1711192022y', '==', '1'))
     // ...and...
-    ->addRule(new ConditionalLogicRule('1711192022z', '==', '2'))
+    ->add_rule(new ConditionalLogicRule('1711192022z', '==', '2'))
 ) // ...or...
-->addConditionalLogicRuleGroup(
+->add_conditional_logic_rule_group(
 (new ConditionalLogicRuleGroup())
-  ->addRule(new ConditionalLogicRule('1711172249u', '==', 'black'))
+  ->add_rule(new ConditionalLogicRule('1711172249u', '==', 'black'))
 );
 ```
 

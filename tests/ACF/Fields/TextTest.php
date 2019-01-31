@@ -54,17 +54,17 @@ final class TextTest extends FieldTest
         $expectedArray = [];
 
         // Common to all fields
-        $field->setSetting('custom_setting', 'custom_setting_value');
+        $field->set_setting('custom_setting', 'custom_setting_value');
         $expectedArray['custom_setting'] = 'custom_setting_value';
 
-        $field->setSettings([
+        $field->set_settings([
             'custom_setting2' => 'custom_setting_value2',
             'custom_setting3' => 'custom_setting_value3',
         ]);
         $expectedArray['custom_setting2'] = 'custom_setting_value2';
         $expectedArray['custom_setting3'] = 'custom_setting_value3';
 
-        $field->setDisplayInFewbricksDevTools(true);
+        $field->set_display_in_fewbricks_dev_tools(true);
         $expectedArray['fewbricks__display_in_dev_tools'] = true;
 
         $expectedArray = array_merge(
@@ -76,7 +76,7 @@ final class TextTest extends FieldTest
 
         $this->assertEquals(
             $expectedArray,
-            $field->toAcfArray($settings['test__key_prefix'])
+            $field->to_acf_array($settings['test__key_prefix'])
         );
 
     }
@@ -88,11 +88,11 @@ final class TextTest extends FieldTest
 
         $field = new Text('Text', 'text', '1812132258a');
 
-        $this->assertEquals('', $field->getAppend());
+        $this->assertEquals('', $field->get_append());
 
-        $field->setAppend($append);
+        $field->set_append($append);
 
-        $this->assertEquals($append, $field->getAppend());
+        $this->assertEquals($append, $field->get_append());
 
     }
 
@@ -103,11 +103,11 @@ final class TextTest extends FieldTest
 
         $field = new Text('Text', 'text', '1812132258a');
 
-        $this->assertEquals('', $field->getDefaultValue());
+        $this->assertEquals('', $field->get_default_value());
 
-        $field->setDefaultValue($defaultValue);
+        $field->set_default_value($defaultValue);
 
-        $this->assertEquals($defaultValue, $field->getDefaultValue());
+        $this->assertEquals($defaultValue, $field->get_default_value());
 
     }
 
@@ -118,11 +118,11 @@ final class TextTest extends FieldTest
 
         $field = new Text('Text', 'text', '1812132258a');
 
-        $this->assertEquals('', $field->getMaxlength());
+        $this->assertEquals('', $field->get_maxlength());
 
-        $field->setMaxlength($maxLength);
+        $field->set_maxlength($maxLength);
 
-        $this->assertEquals($maxLength, $field->getMaxlength());
+        $this->assertEquals($maxLength, $field->get_maxlength());
 
     }
 
@@ -133,11 +133,11 @@ final class TextTest extends FieldTest
 
         $field = new Text('Text', 'text', '1812132258a');
 
-        $this->assertEquals('', $field->getPlaceholder());
+        $this->assertEquals('', $field->get_placeholder());
 
-        $field->setPlaceholder($placeholder);
+        $field->set_placeholder($placeholder);
 
-        $this->assertEquals($placeholder, $field->getPlaceholder());
+        $this->assertEquals($placeholder, $field->get_placeholder());
 
     }
 
@@ -148,11 +148,11 @@ final class TextTest extends FieldTest
 
         $field = new Text('Text', 'text', '1812132258a');
 
-        $this->assertEquals('', $field->getPrepend());
+        $this->assertEquals('', $field->get_prepend());
 
-        $field->setPrepend($prepend);
+        $field->set_prepend($prepend);
 
-        $this->assertEquals($prepend, $field->getPrepend());
+        $this->assertEquals($prepend, $field->get_prepend());
 
     }
 

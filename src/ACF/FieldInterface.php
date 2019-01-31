@@ -13,6 +13,6 @@ interface FieldInterface
     /*
      * @return string The name of the field type that ACF uses.
      */
-    public function getType();
+    public function get_type();
 
 }

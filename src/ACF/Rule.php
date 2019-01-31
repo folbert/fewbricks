@@ -44,7 +44,7 @@ class Rule
     /**
      * @return string
      */
-    public function getOperator()
+    public function get_operator()
     {
 
         return $this->operator;
@@ -55,7 +55,7 @@ class Rule
      * @param string $operator
      * @return $this
      */
-    public function setOperator(string $operator)
+    public function set_operator(string $operator)
     {
 
         $this->operator = $operator;
@@ -67,7 +67,7 @@ class Rule
     /**
      * @return mixed
      */
-    public function getParam()
+    public function get_param()
     {
 
         return $this->param;
@@ -78,7 +78,7 @@ class Rule
      * @param string $param
      * @return $this
      */
-    public function setParam($param)
+    public function set_param($param)
     {
 
         $this->param = $param;
@@ -90,7 +90,7 @@ class Rule
     /**
      * @return mixed
      */
-    public function getValue()
+    public function get_value()
     {
 
         return $this->value;
@@ -101,7 +101,7 @@ class Rule
      * @param string $value
      * @return $this
      */
-    public function setValue($value)
+    public function set_value($value)
     {
 
         $this->value = $value;
@@ -113,7 +113,7 @@ class Rule
     /**
      * @return array An array that ACF can work with.
      */
-    public function toAcfArray()
+    public function to_acf_array()
     {
 
         return ['param' => $this->param, 'operator' => $this->operator, 'value' => $this->value];

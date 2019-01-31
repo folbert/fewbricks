@@ -13,10 +13,10 @@ class AcfCodeField extends Field
      * @param $mode string Possible values: 'htmlmixed', 'javascript', 'text/html', 'css', 'application/x-httpd-php'
      * @return $this
      */
-    public function setMode($mode)
+    public function set_mode($mode)
     {
 
-        return $this->setSetting('mode', $mode);
+        return $this->set_setting('mode', $mode);
 
     }
 
@@ -24,10 +24,10 @@ class AcfCodeField extends Field
      * @param string $placeholder
      * @return $this
      */
-    public function setPlaceholder($placeholder)
+    public function set_placeholder($placeholder)
     {
 
-        return $this->setSetting('placeholder', $placeholder);
+        return $this->set_setting('placeholder', $placeholder);
 
     }
 
@@ -35,52 +35,52 @@ class AcfCodeField extends Field
      * @param $theme
      * @return $this
      */
-    public function setTheme($theme)
+    public function set_theme($theme)
     {
 
-        return $this->setSetting('theme', $theme);
+        return $this->set_setting('theme', $theme);
 
     }
 
     /**
      * @return mixed
      */
-    public function getMode()
+    public function get_mode()
     {
 
-        return $this->getSetting('mode', 'htmlmixed');
+        return $this->get_setting('mode', 'htmlmixed');
 
     }
 
     /**
      * @return mixed
      */
-    public function getPlaceholder()
+    public function get_placeholder()
     {
 
-        return $this->getSetting('placeholder', '');
+        return $this->get_setting('placeholder', '');
 
     }
 
     /**
      * @return mixed
      */
-    public function getTheme()
+    public function get_theme()
     {
 
-        return $this->getSetting('theme', 'monokai');
+        return $this->get_setting('theme', 'monokai');
 
     }
 
     /**
      * This function is called right before field is turned into ACF array.
      */
-    protected function prepareForAcfArray()
+    protected function prepare_for_acf_array()
     {
 
         // Fix since the field does not check if placeholder is set before using the value.
-        if($this->getSetting('placeholder', false) === false) {
-            $this->setPlaceholder('');
+        if($this->get_setting('placeholder', false) === false) {
+            $this->set_placeholder('');
         }
 
     }

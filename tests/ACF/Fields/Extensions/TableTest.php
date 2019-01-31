@@ -50,7 +50,7 @@ final class TableTest extends FieldTest
 
         $this->assertEquals(
             FieldHelper::getExpectedFieldValues($field, $settings),
-            $field->toAcfArray($settings['test__key_prefix'])
+            $field->to_acf_array($settings['test__key_prefix'])
         );
 
     }
@@ -63,11 +63,11 @@ final class TableTest extends FieldTest
 
         $field = new Table('', '', '');
 
-        $this->assertEquals(2, $field->getUseCaption());
+        $this->assertEquals(2, $field->get_use_caption());
 
-        $field->setUseCaption(1);
+        $field->set_use_caption(1);
 
-        $this->assertEquals(1, $field->getUseCaption());
+        $this->assertEquals(1, $field->get_use_caption());
 
     }
 
@@ -79,11 +79,11 @@ final class TableTest extends FieldTest
 
         $field = new Table('', '', '');
 
-        $this->assertEquals(0, $field->getUseHeader());
+        $this->assertEquals(0, $field->get_use_header());
 
-        $field->setUseHeader(2);
+        $field->set_use_header(2);
 
-        $this->assertEquals(2, $field->getUseHeader());
+        $this->assertEquals(2, $field->get_use_header());
 
     }
 

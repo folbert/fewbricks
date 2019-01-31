@@ -46,7 +46,7 @@ final class TimePickerTest extends FieldTest
 
         $this->assertEquals(
             FieldHelper::getExpectedFieldValues($field, $settings),
-            $field->toAcfArray($settings['test__key_prefix'])
+            $field->to_acf_array($settings['test__key_prefix'])
         );
 
     }
@@ -59,11 +59,11 @@ final class TimePickerTest extends FieldTest
 
         $field = new TimePicker('', '', '');
 
-        $this->assertEquals('g:i a', $field->getDisplayFormat());
+        $this->assertEquals('g:i a', $field->get_display_format());
 
-        $field->setDisplayFormat('sy89xgol');
+        $field->set_display_format('sy89xgol');
 
-        $this->assertEquals('sy89xgol', $field->getDisplayFormat());
+        $this->assertEquals('sy89xgol', $field->get_display_format());
 
     }
 
@@ -75,11 +75,11 @@ final class TimePickerTest extends FieldTest
 
         $field = new TimePicker('', '', '');
 
-        $this->assertEquals('g:i a', $field->getReturnFormat());
+        $this->assertEquals('g:i a', $field->get_return_format());
 
-        $field->setReturnFormat('sy89xgol');
+        $field->set_return_format('sy89xgol');
 
-        $this->assertEquals('sy89xgol', $field->getReturnFormat());
+        $this->assertEquals('sy89xgol', $field->get_return_format());
 
     }
 

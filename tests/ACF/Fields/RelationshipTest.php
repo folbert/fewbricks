@@ -46,7 +46,7 @@ final class RelationshipTest extends FieldTest
 
         $this->assertEquals(
             FieldHelper::getExpectedFieldValues($field, $settings),
-            $field->toAcfArray($settings['test__key_prefix'])
+            $field->to_acf_array($settings['test__key_prefix'])
         );
 
     }
@@ -59,11 +59,11 @@ final class RelationshipTest extends FieldTest
 
         $field = new Relationship('', '', '');
 
-        $this->assertEquals([], $field->getElements());
+        $this->assertEquals([], $field->get_elements());
 
-        $field->setElements(['one', '98gl']);
+        $field->set_elements(['one', '98gl']);
 
-        $this->assertEquals(['one', '98gl'], $field->getElements());
+        $this->assertEquals(['one', '98gl'], $field->get_elements());
 
     }
 
@@ -75,11 +75,11 @@ final class RelationshipTest extends FieldTest
 
         $field = new Relationship('', '', '');
 
-        $this->assertEquals(['search', 'post_type', 'taxonomy'], $field->getFilters());
+        $this->assertEquals(['search', 'post_type', 'taxonomy'], $field->get_filters());
 
-        $field->setFilters(['f23d', '98gl']);
+        $field->set_filters(['f23d', '98gl']);
 
-        $this->assertEquals(['f23d', '98gl'], $field->getFilters());
+        $this->assertEquals(['f23d', '98gl'], $field->get_filters());
 
     }
 
@@ -91,11 +91,11 @@ final class RelationshipTest extends FieldTest
 
         $field = new Relationship('', '', '');
 
-        $this->assertEquals(0, $field->getMax());
+        $this->assertEquals(0, $field->get_max());
 
-        $field->setMax(65);
+        $field->set_max(65);
 
-        $this->assertEquals(65, $field->getMax());
+        $this->assertEquals(65, $field->get_max());
 
     }
 
@@ -107,11 +107,11 @@ final class RelationshipTest extends FieldTest
 
         $field = new Relationship('', '', '');
 
-        $this->assertEquals(0, $field->getMin());
+        $this->assertEquals(0, $field->get_min());
 
-        $field->setMin(54);
+        $field->set_min(54);
 
-        $this->assertEquals(54, $field->getMin());
+        $this->assertEquals(54, $field->get_min());
 
     }
 
@@ -123,11 +123,11 @@ final class RelationshipTest extends FieldTest
 
         $field = new Relationship('', '', '');
 
-        $this->assertEquals([], $field->getPostType());
+        $this->assertEquals([], $field->get_post_type());
 
-        $field->setPostType(['fdd3q23d', '98gl']);
+        $field->set_post_type(['fdd3q23d', '98gl']);
 
-        $this->assertEquals(['fdd3q23d', '98gl'], $field->getPostType());
+        $this->assertEquals(['fdd3q23d', '98gl'], $field->get_post_type());
 
     }
 
@@ -139,11 +139,11 @@ final class RelationshipTest extends FieldTest
 
         $field = new Relationship('', '', '');
 
-        $this->assertEquals('object', $field->getReturnFormat());
+        $this->assertEquals('object', $field->get_return_format());
 
-        $field->setReturnFormat('array');
+        $field->set_return_format('array');
 
-        $this->assertEquals('array', $field->getReturnFormat());
+        $this->assertEquals('array', $field->get_return_format());
 
     }
 
@@ -155,11 +155,11 @@ final class RelationshipTest extends FieldTest
 
         $field = new Relationship('', '', '');
 
-        $this->assertEquals([], $field->getTaxonomy());
+        $this->assertEquals([], $field->get_taxonomy());
 
-        $field->setTaxonomy(['custom1', 'custom2']);
+        $field->set_taxonomy(['custom1', 'custom2']);
 
-        $this->assertEquals(['custom1', 'custom2'], $field->getTaxonomy());
+        $this->assertEquals(['custom1', 'custom2'], $field->get_taxonomy());
 
     }
 

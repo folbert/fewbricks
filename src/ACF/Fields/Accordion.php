@@ -22,10 +22,10 @@ class Accordion extends Field implements FieldInterface
      * @return mixed The value of the ACF setting "endpoint". Returns the default ACF value 0 if none has been
      * set using Fewbricks.
      */
-    public function getEndpoint()
+    public function get_endpoint()
     {
 
-        return $this->getSetting('endpoint', 0);
+        return $this->get_setting('endpoint', 0);
 
     }
 
@@ -33,10 +33,10 @@ class Accordion extends Field implements FieldInterface
      * @return mixed The value of the ACF setting "multi_expand". Returns the default ACF value 0 if none has been
      * set using Fewbricks.
      */
-    public function getMultiExpand()
+    public function get_multi_expand()
     {
 
-        return $this->getSetting('multi_expand', 0);
+        return $this->get_setting('multi_expand', 0);
 
     }
 
@@ -44,10 +44,10 @@ class Accordion extends Field implements FieldInterface
      * @return mixed The value of the ACF setting "open". Returns the default ACF value 0 if none has been
      * set using Fewbricks.
      */
-    public function getOpen()
+    public function get_open()
     {
 
-        return $this->getSetting('open', 0);
+        return $this->get_setting('open', 0);
 
     }
 
@@ -57,10 +57,10 @@ class Accordion extends Field implements FieldInterface
      * @param boolean $endPoint
      * @return $this
      */
-    public function setEndpoint($endPoint)
+    public function set_endpoint($endPoint)
     {
 
-        return $this->setSetting('endpoint', $endPoint);
+        return $this->set_setting('endpoint', $endPoint);
 
     }
 
@@ -70,10 +70,10 @@ class Accordion extends Field implements FieldInterface
      * @param boolean $multiExpand
      * @return $this
      */
-    public function setMultiExpand($multiExpand)
+    public function set_multi_expand($multiExpand)
     {
 
-        return $this->setSetting('multi_expand', $multiExpand);
+        return $this->set_setting('multi_expand', $multiExpand);
 
     }
 
@@ -86,7 +86,7 @@ class Accordion extends Field implements FieldInterface
     public function setOpen($open)
     {
 
-        return $this->setSetting('open', $open);
+        return $this->set_setting('open', $open);
 
     }
 

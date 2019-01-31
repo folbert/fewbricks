@@ -25,10 +25,10 @@ class TimePicker extends DateTimeField implements FieldInterface
      * been
      * set using Fewbricks.
      */
-    public function getDisplayFormat()
+    public function get_display_format()
     {
 
-        return $this->getSetting('display_format', 'g:i a');
+        return $this->get_setting('display_format', 'g:i a');
 
     }
 
@@ -37,10 +37,10 @@ class TimePicker extends DateTimeField implements FieldInterface
      * been
      * set using Fewbricks.
      */
-    public function getReturnFormat()
+    public function get_return_format()
     {
 
-        return $this->getSetting('return_format', 'g:i a');
+        return $this->get_setting('return_format', 'g:i a');
 
     }
 

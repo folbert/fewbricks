@@ -13,7 +13,7 @@ class Helper
     {
 
         // $settingsName = 'max_value' and $prepend = 'set' would become setMaxValue
-        return $prepend . str_replace('_', '', ucwords($settingsName, '_'));;
+        return $prepend . '_' . $settingsName; //str_replace('_', '', ucwords($settingsName, '_'));;
 
     }
 

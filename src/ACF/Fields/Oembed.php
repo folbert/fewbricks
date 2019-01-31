@@ -24,10 +24,10 @@ class Oembed extends Field implements FieldInterface
      * @return mixed The value of the ACF setting "height". Returns the default ACF value '' if none has been
      * set using Fewbricks.
      */
-    public function getHeight()
+    public function get_height()
     {
 
-        return $this->getSetting('height', '');
+        return $this->get_setting('height', '');
 
     }
 
@@ -35,10 +35,10 @@ class Oembed extends Field implements FieldInterface
      * @return mixed The value of the ACF setting "width". Returns the default ACF value '' if none has been
      * set using Fewbricks.
      */
-    public function getWidth()
+    public function get_width()
     {
 
-        return $this->getSetting('width', '');
+        return $this->get_setting('width', '');
 
     }
 
@@ -48,10 +48,10 @@ class Oembed extends Field implements FieldInterface
      * @param int $height Width in px (without "px")
      * @return $this
      */
-    public function setHeight($height)
+    public function set_height($height)
     {
 
-        return $this->setSetting('height', $height);
+        return $this->set_setting('height', $height);
 
     }
 
@@ -61,10 +61,10 @@ class Oembed extends Field implements FieldInterface
      * @param int $width Width in px (without "px")
      * @return $this
      */
-    public function setWidth($width)
+    public function set_width($width)
     {
 
-        return $this->setSetting('width', $width);
+        return $this->set_setting('width', $width);
 
     }
 

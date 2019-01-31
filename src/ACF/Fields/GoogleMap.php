@@ -24,10 +24,10 @@ class GoogleMap extends Field implements FieldInterface
      * @return mixed The value of the ACF setting "center_lat". Returns the default ACF value "" if none has
      * been set using Fewbricks.
      */
-    public function getCenterLat()
+    public function get_center_lat()
     {
 
-        return $this->getSetting('center_lat', '');
+        return $this->get_setting('center_lat', '');
 
     }
 
@@ -35,10 +35,10 @@ class GoogleMap extends Field implements FieldInterface
      * @return mixed The value of the ACF setting "center_lng". Returns the default ACF value "'" if none has
      * been set using Fewbricks.
      */
-    public function getCenterLng()
+    public function get_center_lng()
     {
 
-        return $this->getSetting('center_lng', '');
+        return $this->get_setting('center_lng', '');
 
     }
 
@@ -46,10 +46,10 @@ class GoogleMap extends Field implements FieldInterface
      * @return mixed The value of the ACF setting "height". Returns the default ACF value "" if none has
      * been set using Fewbricks.
      */
-    public function getHeight()
+    public function get_height()
     {
 
-        return $this->getSetting('height', '');
+        return $this->get_setting('height', '');
 
     }
 
@@ -57,10 +57,10 @@ class GoogleMap extends Field implements FieldInterface
      * @return mixed The value of the ACF setting "zoom". Returns the default ACF value "" if none has
      * been set using Fewbricks.
      */
-    public function getZoom()
+    public function get_zoom()
     {
 
-        return $this->getSetting('zoom', '');
+        return $this->get_setting('zoom', '');
 
     }
 
@@ -70,10 +70,10 @@ class GoogleMap extends Field implements FieldInterface
      * @param int $lat
      * @return $this
      */
-    public function setCenterLat($lat)
+    public function set_center_lat($lat)
     {
 
-        return $this->setSetting('center_lat', $lat);
+        return $this->set_setting('center_lat', $lat);
 
     }
 
@@ -83,10 +83,10 @@ class GoogleMap extends Field implements FieldInterface
      * @param int $lng
      * @return $this
      */
-    public function setCenterLng($lng)
+    public function set_center_lng($lng)
     {
 
-        return $this->setSetting('center_lng', $lng);
+        return $this->set_setting('center_lng', $lng);
 
     }
 
@@ -96,10 +96,10 @@ class GoogleMap extends Field implements FieldInterface
      * @param int $zoom
      * @return $this
      */
-    public function setZoom($zoom)
+    public function set_zoom($zoom)
     {
 
-        return $this->setSetting('zoom', $zoom);
+        return $this->set_setting('zoom', $zoom);
 
     }
 
@@ -109,10 +109,10 @@ class GoogleMap extends Field implements FieldInterface
      * @param int $height Height in px (without "px")
      * @return $this
      */
-    public function setHeight($height)
+    public function set_height($height)
     {
 
-        return $this->setSetting('height', $height);
+        return $this->set_setting('height', $height);
 
     }
 

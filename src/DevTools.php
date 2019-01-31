@@ -113,7 +113,7 @@ class DevTools
     /**
      * @param array $acfSettingsArray
      */
-    public static function maybeStoreAcfSettingsArrayForDevDisplay(array $acfSettingsArray)
+    public static function maybe_store_acf_settings_array_for_dev_display(array $acfSettingsArray)
     {
 
         if (self::isActivated()) {
@@ -141,7 +141,7 @@ class DevTools
 
                 foreach ($acfSettingsArray['fields'] AS $subField) {
 
-                    self::maybeStoreAcfSettingsArrayForDevDisplay($subField);
+                    self::maybe_store_acf_settings_array_for_dev_display($subField);
 
                 }
 

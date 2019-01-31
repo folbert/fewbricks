@@ -15,7 +15,7 @@ class RuleCollection extends Collection
     /**
      * @return array An array that ACF can work with.
      */
-    public function toAcfArray()
+    public function to_acf_array()
     {
 
         $array = [];
@@ -23,7 +23,7 @@ class RuleCollection extends Collection
         /** @var Rule $rule */
         foreach ($this->items AS $rule) {
 
-            $array[] = $rule->toAcfArray();
+            $array[] = $rule->to_acf_array();
 
         }
 

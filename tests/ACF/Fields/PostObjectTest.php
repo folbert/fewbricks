@@ -46,7 +46,7 @@ final class PostObjectTest extends FieldTest
 
         $this->assertEquals(
             FieldHelper::getExpectedFieldValues($field, $settings),
-            $field->toAcfArray($settings['test__key_prefix'])
+            $field->to_acf_array($settings['test__key_prefix'])
         );
 
     }
@@ -59,11 +59,11 @@ final class PostObjectTest extends FieldTest
 
         $field = new PostObject('', '', '');
 
-        $this->assertEquals(0, $field->getAllowNull());
+        $this->assertEquals(0, $field->get_allow_null());
 
-        $field->setAllowNull(true);
+        $field->set_allow_null(true);
 
-        $this->assertEquals(true, $field->getAllowNull());
+        $this->assertEquals(true, $field->get_allow_null());
 
     }
 
@@ -75,11 +75,11 @@ final class PostObjectTest extends FieldTest
 
         $field = new PostObject('', '', '');
 
-        $this->assertEquals(0, $field->getMultiple());
+        $this->assertEquals(0, $field->get_multiple());
 
-        $field->setMultiple(true);
+        $field->set_multiple(true);
 
-        $this->assertEquals(true, $field->getMultiple());
+        $this->assertEquals(true, $field->get_multiple());
 
     }
 
@@ -91,11 +91,11 @@ final class PostObjectTest extends FieldTest
 
         $field = new PostObject('', '', '');
 
-        $this->assertEquals([], $field->getPostType());
+        $this->assertEquals([], $field->get_post_type());
 
-        $field->setPostType(['page', 'custom']);
+        $field->set_post_type(['page', 'custom']);
 
-        $this->assertEquals(['page', 'custom'], $field->getPostType());
+        $this->assertEquals(['page', 'custom'], $field->get_post_type());
 
     }
 
@@ -107,11 +107,11 @@ final class PostObjectTest extends FieldTest
 
         $field = new PostObject('', '', '');
 
-        $this->assertEquals('object', $field->getReturnFormat());
+        $this->assertEquals('object', $field->get_return_format());
 
-        $field->setReturnFormat('array');
+        $field->set_return_format('array');
 
-        $this->assertEquals('array', $field->getReturnFormat());
+        $this->assertEquals('array', $field->get_return_format());
 
     }
 
@@ -123,11 +123,11 @@ final class PostObjectTest extends FieldTest
 
         $field = new PostObject('', '', '');
 
-        $this->assertEquals([], $field->getTaxonomy());
+        $this->assertEquals([], $field->get_taxonomy());
 
-        $field->setTaxonomy(['categories', 'custom']);
+        $field->set_taxonomy(['categories', 'custom']);
 
-        $this->assertEquals(['categories', 'custom'], $field->getTaxonomy());
+        $this->assertEquals(['categories', 'custom'], $field->get_taxonomy());
 
     }
 

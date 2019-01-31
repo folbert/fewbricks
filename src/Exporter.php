@@ -11,7 +11,7 @@ class Exporter
      * @param string $fieldGroupTitle
      * @param string $fieldGroupKey
      */
-    public static function maybeStoreSimpleFieldGroupData(string $fieldGroupTitle, string $fieldGroupKey)
+    public static function maybe_store_simple_field_group_data(string $fieldGroupTitle, string $fieldGroupKey)
     {
 
         if (Helper::pageIsFewbricksAdminPage()) {
@@ -229,7 +229,7 @@ class Exporter
     /**
      * @param array $fieldGroupAcfSettings
      */
-    public static function maybeStoreFieldGroupAcfSettings(array $fieldGroupAcfSettings)
+    public static function maybe_store_field_group_acf_settings(array $fieldGroupAcfSettings)
     {
 
         if (

@@ -46,7 +46,7 @@ final class CheckboxTest extends FieldTest
 
         $this->assertEquals(
             FieldHelper::getExpectedFieldValues($field, $settings),
-            $field->toAcfArray($settings['test__key_prefix'])
+            $field->to_acf_array($settings['test__key_prefix'])
         );
 
     }
@@ -59,11 +59,11 @@ final class CheckboxTest extends FieldTest
 
         $field = new Checkbox('', '', '');
 
-        $this->assertEquals(0, $field->getAllowCustom());
+        $this->assertEquals(0, $field->get_allow_custom());
 
         $field->setAllowCustom(true);
 
-        $this->assertEquals(true, $field->getAllowCustom());
+        $this->assertEquals(true, $field->get_allow_custom());
 
     }
 
@@ -77,7 +77,7 @@ final class CheckboxTest extends FieldTest
 
         $this->assertEquals([], $field->getChoices());
 
-        $field->setChoices(['duih', 'e89oh']);
+        $field->set_choices(['duih', 'e89oh']);
 
         $this->assertEquals(['duih', 'e89oh'], $field->getChoices());
 
@@ -91,11 +91,11 @@ final class CheckboxTest extends FieldTest
 
         $field = new Checkbox('', '', '');
 
-        $this->assertEquals('', $field->getDefaultValue());
+        $this->assertEquals('', $field->get_default_value());
 
-        $field->setDefaultValue('d89oi');
+        $field->set_default_value('d89oi');
 
-        $this->assertEquals('d89oi', $field->getDefaultValue());
+        $this->assertEquals('d89oi', $field->get_default_value());
 
     }
 
@@ -107,11 +107,11 @@ final class CheckboxTest extends FieldTest
 
         $field = new Checkbox('', '', '');
 
-        $this->assertEquals('vertical', $field->getLayout());
+        $this->assertEquals('vertical', $field->get_layout());
 
-        $field->setLayout(true);
+        $field->set_layout(true);
 
-        $this->assertEquals(true, $field->getLayout());
+        $this->assertEquals(true, $field->get_layout());
 
     }
 
@@ -123,11 +123,11 @@ final class CheckboxTest extends FieldTest
 
         $field = new Checkbox('', '', '');
 
-        $this->assertEquals('value', $field->getReturnFormat());
+        $this->assertEquals('value', $field->get_return_format());
 
-        $field->setReturnFormat('hd89goil');
+        $field->set_return_format('hd89goil');
 
-        $this->assertEquals('hd89goil', $field->getReturnFormat());
+        $this->assertEquals('hd89goil', $field->get_return_format());
 
     }
 
@@ -139,11 +139,11 @@ final class CheckboxTest extends FieldTest
 
         $field = new Checkbox('', '', '');
 
-        $this->assertEquals(0, $field->getSaveCustom());
+        $this->assertEquals(0, $field->get_save_custom());
 
-        $field->setSaveCustom(true);
+        $field->set_save_custom(true);
 
-        $this->assertEquals(true, $field->getSaveCustom());
+        $this->assertEquals(true, $field->get_save_custom());
 
     }
 
@@ -155,11 +155,11 @@ final class CheckboxTest extends FieldTest
 
         $field = new Checkbox('', '', '');
 
-        $this->assertEquals(0, $field->getToggle());
+        $this->assertEquals(0, $field->get_toggle());
 
-        $field->setToggle(true);
+        $field->set_toggle(true);
 
-        $this->assertEquals(true, $field->getToggle());
+        $this->assertEquals(true, $field->get_toggle());
 
     }
 

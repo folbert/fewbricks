@@ -45,7 +45,7 @@ class DynamicYearSelect extends Field
      * current year in the select box.
      * @return $this
      */
-    public function setCurrentYear(array $currentYear)
+    public function set_current_year(array $currentYear)
     {
 
         // Make sure all indexes are set.
@@ -54,7 +54,7 @@ class DynamicYearSelect extends Field
             'label' => 'Current',
         ], $currentYear);
 
-        return $this->setSetting('current_year', $currentYear);
+        return $this->set_setting('current_year', $currentYear);
 
     }
 
@@ -62,7 +62,7 @@ class DynamicYearSelect extends Field
      * @param array $newestYear
      * @return $this
      */
-    public function setNewestYear(array $newestYear)
+    public function set_newest_year(array $newestYear)
     {
 
         $newestYear = array_merge([
@@ -72,7 +72,7 @@ class DynamicYearSelect extends Field
             'relative_year_direction' => 'after',
         ], $newestYear);
 
-        return $this->setSetting('newest_year', $newestYear);
+        return $this->set_setting('newest_year', $newestYear);
 
     }
 
@@ -80,7 +80,7 @@ class DynamicYearSelect extends Field
      * @param array $oldestYear
      * @return $this
      */
-    public function setOldestYear(array $oldestYear)
+    public function set_oldest_year(array $oldestYear)
     {
 
         $oldestYear = array_merge([
@@ -90,7 +90,7 @@ class DynamicYearSelect extends Field
             'relative_year_direction' => 'before',
         ], $oldestYear);
 
-        return $this->setSetting('oldest_year', $oldestYear);
+        return $this->set_setting('oldest_year', $oldestYear);
 
     }
 
@@ -98,10 +98,10 @@ class DynamicYearSelect extends Field
      * @param $orderBy 'chronological' or 'rchronological' for reversed chronological.
      * @return $this
      */
-    public function setOrderBy($orderBy)
+    public function set_order_by($orderBy)
     {
 
-        return $this->setSetting('order_by', $orderBy);
+        return $this->set_setting('order_by', $orderBy);
 
     }
 
@@ -109,17 +109,17 @@ class DynamicYearSelect extends Field
      * @param $yearStep
      * @return $this
      */
-    public function setYearStep($yearStep)
+    public function set_year_step($yearStep)
     {
 
-        return $this->setSetting('year_step', $yearStep);
+        return $this->set_setting('year_step', $yearStep);
 
     }
 
     /**
      * @return array
      */
-    public function getCurrentYear()
+    public function get_current_year()
     {
 
         $defaultValue = [
@@ -127,14 +127,14 @@ class DynamicYearSelect extends Field
             'label' => 'Current',
         ];
 
-        return $this->getSetting('current_year', $defaultValue);
+        return $this->get_setting('current_year', $defaultValue);
 
     }
 
     /**
      * @return array
      */
-    public function getNewestYear()
+    public function get_newest_year()
     {
 
         $defaultValue = [
@@ -144,14 +144,14 @@ class DynamicYearSelect extends Field
             'relative_year_direction' => 'after'
         ];
 
-        return $this->getSetting('newest_year', $defaultValue);
+        return $this->get_setting('newest_year', $defaultValue);
 
     }
 
     /**
      * @return array
      */
-    public function getOldestYear()
+    public function get_oldest_year()
     {
 
         $defaultValue = [
@@ -161,27 +161,27 @@ class DynamicYearSelect extends Field
             'relative_year_direction' => 'before',
         ];
 
-        return $this->getSetting('oldest_year', $defaultValue);
+        return $this->get_setting('oldest_year', $defaultValue);
 
     }
 
     /**
      * @return int
      */
-    public function getOrderBy()
+    public function get_order_by()
     {
 
-        return $this->getSetting('order_by', 'chronological');
+        return $this->get_setting('order_by', 'chronological');
 
     }
 
     /**
      * @return int
      */
-    public function getYearStep()
+    public function get_year_step()
     {
 
-        return $this->getSetting('year_step', 1);
+        return $this->get_setting('year_step', 1);
 
     }
 

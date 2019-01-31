@@ -20,10 +20,10 @@ class FlexibleContent extends FieldWithLayouts implements FieldInterface
      * @return mixed The value of the ACF setting "max". Returns the default ACF value "" if none has been
      * set using Fewbricks.
      */
-    public function getMax()
+    public function get_max()
     {
 
-        return $this->getSetting('max', '');
+        return $this->get_setting('max', '');
 
     }
 
@@ -31,10 +31,10 @@ class FlexibleContent extends FieldWithLayouts implements FieldInterface
      * @return mixed The value of the ACF setting "min". Returns the default ACF value "" if none has been
      * set using Fewbricks.
      */
-    public function getMin()
+    public function get_min()
     {
 
-        return $this->getSetting('min', '');
+        return $this->get_setting('min', '');
 
     }
 
@@ -45,10 +45,10 @@ class FlexibleContent extends FieldWithLayouts implements FieldInterface
      *                        to an int and wants to unset it.
      * @return $this
      */
-    public function setMax($max)
+    public function set_max($max)
     {
 
-        return $this->setSetting('max', $max);
+        return $this->set_setting('max', $max);
 
     }
 
@@ -59,10 +59,10 @@ class FlexibleContent extends FieldWithLayouts implements FieldInterface
      *                        to an int and wants to unset it.
      * @return $this
      */
-    public function setMin($min)
+    public function set_min($min)
     {
 
-        return $this->setSetting('min', $min);
+        return $this->set_setting('min', $min);
 
     }
 

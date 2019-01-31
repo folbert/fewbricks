@@ -20,7 +20,7 @@ class FieldTest extends TestCase
 
         $field = new Text($label, 'text', '1812132258a');
 
-        $this->assertEquals($label, $field->getLabel());
+        $this->assertEquals($label, $field->get_label());
 
     }
 
@@ -34,7 +34,7 @@ class FieldTest extends TestCase
 
         $field = new Text('Text', $name, '1812132258a');
 
-        $this->assertEquals($name, $field->getName());
+        $this->assertEquals($name, $field->get_name());
 
     }
 
@@ -45,7 +45,7 @@ class FieldTest extends TestCase
 
         $field = new Text('Text', 'text', '1812132258a');
 
-        $this->assertEquals($key, $field->getKey());
+        $this->assertEquals($key, $field->get_key());
 
     }
 
@@ -56,9 +56,9 @@ class FieldTest extends TestCase
 
         $field = new Text('Text', 'text', '1812132258a');
 
-        $field->setInstructions($instructions);
+        $field->set_instructions($instructions);
 
-        $this->assertEquals($instructions, $field->getInstructions());
+        $this->assertEquals($instructions, $field->get_instructions());
 
     }
 
@@ -68,9 +68,9 @@ class FieldTest extends TestCase
         $required = true;
 
         $field = new Text('Text', 'text', '1812132258a');
-        $field->setRequired($required);
+        $field->set_required($required);
 
-        $this->assertEquals($required, $field->getRequired());
+        $this->assertEquals($required, $field->get_required());
 
     }
 
@@ -82,9 +82,9 @@ class FieldTest extends TestCase
 
         $field = new Text('Text', 'text', '1812132258a');
 
-        $field->setSetting($settingName, $settingValue);
+        $field->set_setting($settingName, $settingValue);
 
-        $this->assertEquals($settingValue, $field->getSetting($settingName));
+        $this->assertEquals($settingValue, $field->get_setting($settingName));
 
     }
 
@@ -95,7 +95,7 @@ class FieldTest extends TestCase
 
         $field = new Text('Text', 'text', '1812132258a');
 
-        $this->assertEquals($defaultValue, $field->getSetting('setting_dhd08gol', $defaultValue));
+        $this->assertEquals($defaultValue, $field->get_setting('setting_dhd08gol', $defaultValue));
 
     }
 
@@ -106,9 +106,9 @@ class FieldTest extends TestCase
 
         $field = new Text('Text', 'text', '1812132258a');
 
-        $field->setDisplayInFewbricksDevTools($display);
+        $field->set_display_in_fewbricks_dev_tools($display);
 
-        $this->assertEquals($display, $field->getDisplayInFewbricksDevTools());
+        $this->assertEquals($display, $field->get_display_in_fewbricks_dev_tools());
 
     }
 
@@ -123,9 +123,9 @@ class FieldTest extends TestCase
 
         $field = new Text('Text', 'text', '1812132258a');
 
-        $field->setWrapper($wrapper);
+        $field->set_wrapper($wrapper);
 
-        $this->assertEquals($wrapper, $field->getWrapper());
+        $this->assertEquals($wrapper, $field->get_wrapper());
 
     }
 
@@ -136,8 +136,8 @@ class FieldTest extends TestCase
     {
 
         $textField = new Text('Text field with parent', 'text_field_with_parent', '1812102131b');
-        $textField->addParent('parent1_key', 'parent1_name', 'Parent1Type');
-        $textField->addParent('parent2_key', 'parent2_name', 'Parent2Type');
+        $textField->add_parent('parent1_key', 'parent1_name', 'Parent1Type');
+        $textField->add_parent('parent2_key', 'parent2_name', 'Parent2Type');
 
         $this->assertEquals([
             [
@@ -151,7 +151,7 @@ class FieldTest extends TestCase
                 'type' => 'Parent2Type',
             ],
         ],
-            $textField->toAcfArray()['fewbricks__parents']
+            $textField->to_acf_array()['fewbricks__parents']
         );
 
     }
@@ -164,36 +164,36 @@ class FieldTest extends TestCase
 
         $textField = new Text('Text field with conditional logic', 'text_field_with_conditional_logic', '1812102131a');
 
-        $textField->addConditionalLogicRuleGroup(
+        $textField->add_conditional_logic_rule_group(
             (new ConditionalLogicRuleGroup())
-                ->addConditionalLogicRule(
+                ->add_conditional_logic_rule(
                     new ConditionalLogicRule('the_param', '==', 'the_value')
                 )
-                ->addConditionalLogicRule(
+                ->add_conditional_logic_rule(
                     new ConditionalLogicRule('the_param2', '==', 'the_value2')
                 )
         );
 
-        $textField->addConditionalLogicRuleGroup(
+        $textField->add_conditional_logic_rule_group(
             (new ConditionalLogicRuleGroup())
-                ->addConditionalLogicRule(
+                ->add_conditional_logic_rule(
                     new ConditionalLogicRule('the_param3', '==', 'the_value3')
                 )
-                ->addConditionalLogicRule(
+                ->add_conditional_logic_rule(
                     new ConditionalLogicRule('the_param4', '==', 'the_value4')
                 )
         );
 
-        $textField->addConditionalLogicRuleGroups([
+        $textField->add_conditional_logic_rule_groups([
                 (new ConditionalLogicRuleGroup())
-                    ->addConditionalLogicRule(
+                    ->add_conditional_logic_rule(
                         new ConditionalLogicRule('the_param5', '==', 'the_value5')
                     )
-                    ->addConditionalLogicRule(
+                    ->add_conditional_logic_rule(
                         new ConditionalLogicRule('the_param6', '!=', '')
                     ),
                 (new ConditionalLogicRuleGroup())
-                    ->addConditionalLogicRule(
+                    ->add_conditional_logic_rule(
                         new ConditionalLogicRule('the_param7', '==', 'the_value7')
                     )
             ]
@@ -245,7 +245,7 @@ class FieldTest extends TestCase
                 ],
             ],
         ],
-            $textField->toAcfArray()['conditional_logic']
+            $textField->to_acf_array()['conditional_logic']
         );
 
     }

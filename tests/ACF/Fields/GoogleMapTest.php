@@ -46,7 +46,7 @@ final class GoogleMapTest extends FieldTest
 
         $this->assertEquals(
             FieldHelper::getExpectedFieldValues($field, $settings),
-            $field->toAcfArray($settings['test__key_prefix'])
+            $field->to_acf_array($settings['test__key_prefix'])
         );
 
     }
@@ -59,11 +59,11 @@ final class GoogleMapTest extends FieldTest
 
         $field = new GoogleMap('', '', '');
 
-        $this->assertEquals('', $field->getCenterLat());
+        $this->assertEquals('', $field->get_center_lat());
 
-        $field->setCenterLat('23.2767');
+        $field->set_center_lat('23.2767');
 
-        $this->assertEquals('23.2767', $field->getCenterLat());
+        $this->assertEquals('23.2767', $field->get_center_lat());
 
     }
 
@@ -75,11 +75,11 @@ final class GoogleMapTest extends FieldTest
 
         $field = new GoogleMap('', '', '');
 
-        $this->assertEquals('', $field->getCenterLng());
+        $this->assertEquals('', $field->get_center_lng());
 
-        $field->setCenterLng('127.456');
+        $field->set_center_lng('127.456');
 
-        $this->assertEquals('127.456', $field->getCenterLng());
+        $this->assertEquals('127.456', $field->get_center_lng());
 
     }
 
@@ -91,11 +91,11 @@ final class GoogleMapTest extends FieldTest
 
         $field = new GoogleMap('', '', '');
 
-        $this->assertEquals('', $field->getHeight());
+        $this->assertEquals('', $field->get_height());
 
-        $field->setHeight('250');
+        $field->set_height('250');
 
-        $this->assertEquals('250', $field->getHeight());
+        $this->assertEquals('250', $field->get_height());
 
     }
 
@@ -107,11 +107,11 @@ final class GoogleMapTest extends FieldTest
 
         $field = new GoogleMap('', '', '');
 
-        $this->assertEquals('', $field->getZoom());
+        $this->assertEquals('', $field->get_zoom());
 
-        $field->setZoom('3');
+        $field->set_zoom('3');
 
-        $this->assertEquals('3', $field->getZoom());
+        $this->assertEquals('3', $field->get_zoom());
 
     }
 

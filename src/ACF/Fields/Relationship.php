@@ -24,10 +24,10 @@ class Relationship extends Field implements FieldInterface
      * @return mixed The value of the ACF setting "elements". Returns the default ACF value of an empty array if none
      * has been set using Fewbricks.
      */
-    public function getElements()
+    public function get_elements()
     {
 
-        return $this->getSetting('elements', []);
+        return $this->get_setting('elements', []);
 
     }
 
@@ -35,10 +35,10 @@ class Relationship extends Field implements FieldInterface
      * @return mixed The value of the ACF setting "filters". Returns the default ACF value ['search', 'post_type',
      * 'taxonomy] if none has been set using Fewbricks.
      */
-    public function getFilters()
+    public function get_filters()
     {
 
-        return $this->getSetting('filters', ['search', 'post_type', 'taxonomy']);
+        return $this->get_setting('filters', ['search', 'post_type', 'taxonomy']);
 
     }
 
@@ -46,10 +46,10 @@ class Relationship extends Field implements FieldInterface
      * @return mixed The value of the ACF setting "max". Returns the default ACF value 0 if none has been
      * set using Fewbricks.
      */
-    public function getMax()
+    public function get_max()
     {
 
-        return $this->getSetting('max', 0);
+        return $this->get_setting('max', 0);
 
     }
 
@@ -57,10 +57,10 @@ class Relationship extends Field implements FieldInterface
      * @return mixed The value of the ACF setting "min". Returns the default ACF value 0 if none has been
      * set using Fewbricks.
      */
-    public function getMin()
+    public function get_min()
     {
 
-        return $this->getSetting('min', 0);
+        return $this->get_setting('min', 0);
 
     }
 
@@ -68,10 +68,10 @@ class Relationship extends Field implements FieldInterface
      * @return mixed The value of the ACF setting "post_type". Returns the default ACF value of an empty array  if none
      * has been set using Fewbricks.
      */
-    public function getPostType()
+    public function get_post_type()
     {
 
-        return $this->getSetting('post_type', []);
+        return $this->get_setting('post_type', []);
 
     }
 
@@ -80,10 +80,10 @@ class Relationship extends Field implements FieldInterface
      * been
      * set using Fewbricks.
      */
-    public function getReturnFormat()
+    public function get_return_format()
     {
 
-        return $this->getSetting('return_format', 'object');
+        return $this->get_setting('return_format', 'object');
 
     }
 
@@ -91,10 +91,10 @@ class Relationship extends Field implements FieldInterface
      * @return mixed The value of the ACF setting "taxonomy". Returns the default ACF value of an empty array if none
      * has been set using Fewbricks.
      */
-    public function getTaxonomy()
+    public function get_taxonomy()
     {
 
-        return $this->getSetting('taxonomy', []);
+        return $this->get_setting('taxonomy', []);
 
     }
 
@@ -104,10 +104,10 @@ class Relationship extends Field implements FieldInterface
      * @param array $elements Name of elements to display
      * @return $this
      */
-    public function setElements($elements)
+    public function set_elements($elements)
     {
 
-        return $this->setSetting('elements', $elements);
+        return $this->set_setting('elements', $elements);
 
     }
 
@@ -118,10 +118,10 @@ class Relationship extends Field implements FieldInterface
      *                       "post_type", "taxonomy".
      * @return $this
      */
-    public function setFilters($filters)
+    public function set_filters($filters)
     {
 
-        return $this->setSetting('filters', $filters);
+        return $this->set_setting('filters', $filters);
 
     }
 
@@ -131,10 +131,10 @@ class Relationship extends Field implements FieldInterface
      * @param int $max
      * @return $this
      */
-    public function setMax($max)
+    public function set_max($max)
     {
 
-        return $this->setSetting('max', $max);
+        return $this->set_setting('max', $max);
 
     }
 
@@ -144,10 +144,10 @@ class Relationship extends Field implements FieldInterface
      * @param int $min
      * @return $this
      */
-    public function setMin($min)
+    public function set_min($min)
     {
 
-        return $this->setSetting('min', $min);
+        return $this->set_setting('min', $min);
 
     }
 
@@ -157,10 +157,10 @@ class Relationship extends Field implements FieldInterface
      * @param array $postType Array with post type names.
      * @return $this
      */
-    public function setPostType($postType)
+    public function set_post_type($postType)
     {
 
-        return $this->setSetting('post_type', $postType);
+        return $this->set_setting('post_type', $postType);
 
     }
 
@@ -170,10 +170,10 @@ class Relationship extends Field implements FieldInterface
      * @param string $returnFormat "object" or "id"
      * @return $this
      */
-    public function setReturnFormat($returnFormat)
+    public function set_return_format($returnFormat)
     {
 
-        return $this->setSetting('return_format', $returnFormat);
+        return $this->set_setting('return_format', $returnFormat);
 
     }
 
@@ -184,10 +184,10 @@ class Relationship extends Field implements FieldInterface
      *                               ["category:uncategorized"]
      * @return $this
      */
-    public function setTaxonomy($taxonomy)
+    public function set_taxonomy($taxonomy)
     {
 
-        return $this->setSetting('taxonomy', $taxonomy);
+        return $this->set_setting('taxonomy', $taxonomy);
 
     }
 

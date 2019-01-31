@@ -46,7 +46,7 @@ final class RangeTest extends FieldTest
 
         $this->assertEquals(
             FieldHelper::getExpectedFieldValues($field, $settings),
-            $field->toAcfArray($settings['test__key_prefix'])
+            $field->to_acf_array($settings['test__key_prefix'])
         );
 
     }
@@ -59,11 +59,11 @@ final class RangeTest extends FieldTest
 
         $field = new Range('', '', '');
 
-        $this->assertEquals('', $field->getAppend());
+        $this->assertEquals('', $field->get_append());
 
-        $field->setAppend('dhde0oh');
+        $field->set_append('dhde0oh');
 
-        $this->assertEquals('dhde0oh', $field->getAppend());
+        $this->assertEquals('dhde0oh', $field->get_append());
 
     }
 
@@ -75,11 +75,11 @@ final class RangeTest extends FieldTest
 
         $field = new Range('', '', '');
 
-        $this->assertEquals('', $field->getDefaultValue());
+        $this->assertEquals('', $field->get_default_value());
 
-        $field->setDefaultValue('hgo');
+        $field->set_default_value('hgo');
 
-        $this->assertEquals('hgo', $field->getDefaultValue());
+        $this->assertEquals('hgo', $field->get_default_value());
 
     }
 
@@ -91,11 +91,11 @@ final class RangeTest extends FieldTest
 
         $field = new Range('', '', '');
 
-        $this->assertEquals('', $field->getMax());
+        $this->assertEquals('', $field->get_max());
 
-        $field->setMax(10);
+        $field->set_max(10);
 
-        $this->assertEquals(10, $field->getMax());
+        $this->assertEquals(10, $field->get_max());
 
     }
 
@@ -107,11 +107,11 @@ final class RangeTest extends FieldTest
 
         $field = new Range('', '', '');
 
-        $this->assertEquals('', $field->getMin());
+        $this->assertEquals('', $field->get_min());
 
-        $field->setMin(79);
+        $field->set_min(79);
 
-        $this->assertEquals(79, $field->getMin());
+        $this->assertEquals(79, $field->get_min());
 
     }
 
@@ -123,11 +123,11 @@ final class RangeTest extends FieldTest
 
         $field = new Range('', '', '');
 
-        $this->assertEquals('', $field->getPrepend());
+        $this->assertEquals('', $field->get_prepend());
 
-        $field->setPrepend('d132d');
+        $field->set_prepend('d132d');
 
-        $this->assertEquals('d132d', $field->getPrepend());
+        $this->assertEquals('d132d', $field->get_prepend());
 
     }
 
@@ -139,11 +139,11 @@ final class RangeTest extends FieldTest
 
         $field = new Range('', '', '');
 
-        $this->assertEquals('', $field->getStep());
+        $this->assertEquals('', $field->get_step());
 
-        $field->setStep(67);
+        $field->set_step(67);
 
-        $this->assertEquals(67, $field->getStep());
+        $this->assertEquals(67, $field->get_step());
 
     }
 

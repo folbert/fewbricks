@@ -62,19 +62,19 @@ class ImageAndText extends Brick
      * Set the fields that the Brick is made up of.
      * The setup function is automatically called by the parent Brick class.
      */
-    public function setUp()
+    public function set_up()
     {
         
         $text = (new Text('Text', 'the_text', '1811292152a'))
-            ->setRequired(true);
+            ->set_required(true);
 
         $image = (new Image('Image', 'image', '1811272243a'))
-            ->setRequired(true)
+            ->set_required(true)
             ->setMinWidth(400)->setMinHeight(400)
             ->setMaxWidth(1200)->setMaxHeight(1200);
 
         // Add fields to the Brick
-        $this->addFields([$text, $image]);
+        $this->add_fields([$text, $image]);
 
     }
 
@@ -114,7 +114,7 @@ use Fewbricks\ACF\Fields\Text;
 use Fewbricks\ACF\Fields\Wysiwyg;
 
 $favouriteCharacter = (new Select('Who is your favourite character?', 'favourite_character', '1811262140b'))
-->setChoices([
+->set_choices([
     'roland' => 'Roland Deschain',
     'jake' => 'Jake Chambers',
     'susan' => 'Susan Delgado',
@@ -122,14 +122,14 @@ $favouriteCharacter = (new Select('Who is your favourite character?', 'favourite
     'oy' => 'Oy',
     'other' => 'Other',
 ])
-->setAllowNull(false)
-->setRequired(true)
+->set_allow_null(false)
+->set_required(true)
 // Fewbricks feature allowing you to prefix the label.
-->prefixLabel('Please answer this question: ');
+->prefix_label('Please answer this question: ');
 
 $otherFavouriteCharacter = (new Text('My favourite character is none of the above but:', 'other_favourite_character',
 '1811262140a'))
-->addConditionalLogicRuleGroup
+->add_conditional_logic_rule_group
 (
     (new ConditionalLogicRuleGroup())
         ->addConditionalLogicRule(
@@ -137,15 +137,15 @@ $otherFavouriteCharacter = (new Text('My favourite character is none of the abov
             new ConditionalLogicRule('1811262140b', '==', 'other')
         )
 )
-->setRequired(true)
-->setPlaceholder('Maybe Randall Flagg?');
+->set_required(true)
+->set_placeholder('Maybe Randall Flagg?');
 
 $motivation = (new Wysiwyg('Please motivate', 'motivation', '1811292147a'))
-->setInstructions('Feel free to add a motivation as to why your favourite characters is the one you stated above.')
-->setDelay(true)
-->setMediaUpload(false)
-->setTabs('visual')
-->setWrapper(['id' => 'favourite_character_motivation']);
+->set_instructions('Feel free to add a motivation as to why your favourite characters is the one you stated above.')
+->set_delay(true)
+->set_media_upload(false)
+->set_tabs('visual')
+->set_wrapper(['id' => 'favourite_character_motivation']);
 ```
 
 ### Create a field group and add our Brick and fields to it
@@ -164,7 +164,7 @@ use FewbricksDemo\Bricks\ImageAndText;
 
 (new FieldGroup('Main content', '1811252128a'))
 // Tell the field group when it should show up
-->addLocationRuleGroup(
+->add_location_rule_group(
     (new FieldGroupLocationRuleGroup())
         ->addFieldGroupLocationRule(
             // When editing a post
@@ -172,20 +172,20 @@ use FewbricksDemo\Bricks\ImageAndText;
         )
 )
 // Hide everything on screen that ACF can hide...
-->setHideOnScreen('all')
+->set_hide_on_screen('all')
 // ...but show the permalink
-->setShowOnScreen('permalink')
+->set_show_on_screen('permalink')
 // Add a single field or...
-->addField($favouriteCharacter)
+->add_field($favouriteCharacter)
 // ...add multiple fields.
-->addFields([
+->add_fields([
     $otherFavouriteCharacter,
     $motivation,
     // Create an inline field
     (new Email('Enter your e-mail for a chance to win!', 'e_mail', '1811281100a'))
-        ->setRequired(true)
+        ->set_required(true)
 ])
-->addBrick((new ImageAndText('image_and_name', '1811290826a')))
+->add_brick((new ImageAndText('image_and_name', '1811290826a')))
 // Finish up by registering the field group to ACF.
 ->register();
 

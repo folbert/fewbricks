@@ -46,7 +46,7 @@ final class ColorPickerTest extends FieldTest
 
         $this->assertEquals(
             FieldHelper::getExpectedFieldValues($field, $settings),
-            $field->toAcfArray($settings['test__key_prefix'])
+            $field->to_acf_array($settings['test__key_prefix'])
         );
 
     }
@@ -59,11 +59,11 @@ final class ColorPickerTest extends FieldTest
 
         $field = new ColorPicker('', '', '');
 
-        $this->assertEquals('', $field->getDefaultValue());
+        $this->assertEquals('', $field->get_default_value());
 
-        $field->setDefaultValue('fgidgik');
+        $field->set_default_value('fgidgik');
 
-        $this->assertEquals('fgidgik', $field->getDefaultValue());
+        $this->assertEquals('fgidgik', $field->get_default_value());
 
     }
 

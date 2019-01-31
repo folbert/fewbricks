@@ -46,7 +46,7 @@ final class OembedTest extends FieldTest
 
         $this->assertEquals(
             FieldHelper::getExpectedFieldValues($field, $settings),
-            $field->toAcfArray($settings['test__key_prefix'])
+            $field->to_acf_array($settings['test__key_prefix'])
         );
 
     }
@@ -59,11 +59,11 @@ final class OembedTest extends FieldTest
 
         $field = new Oembed('', '', '');
 
-        $this->assertEquals('', $field->getHeight());
+        $this->assertEquals('', $field->get_height());
 
-        $field->setHeight(189);
+        $field->set_height(189);
 
-        $this->assertEquals(189, $field->getHeight());
+        $this->assertEquals(189, $field->get_height());
 
     }
 
@@ -75,11 +75,11 @@ final class OembedTest extends FieldTest
 
         $field = new Oembed('', '', '');
 
-        $this->assertEquals('', $field->getWidth());
+        $this->assertEquals('', $field->get_width());
 
-        $field->setWidth(189);
+        $field->set_width(189);
 
-        $this->assertEquals(189, $field->getWidth());
+        $this->assertEquals(189, $field->get_width());
 
     }
 

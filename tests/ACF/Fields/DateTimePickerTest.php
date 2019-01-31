@@ -46,7 +46,7 @@ final class DateTimePickerTest extends FieldTest
 
         $this->assertEquals(
             FieldHelper::getExpectedFieldValues($field, $settings),
-            $field->toAcfArray($settings['test__key_prefix'])
+            $field->to_acf_array($settings['test__key_prefix'])
         );
 
     }
@@ -59,11 +59,11 @@ final class DateTimePickerTest extends FieldTest
 
         $field = new DateTimePicker('', '', '');
 
-        $this->assertEquals('d/m/Y g:i a', $field->getDisplayFormat());
+        $this->assertEquals('d/m/Y g:i a', $field->get_display_format());
 
-        $field->setDisplayFormat('loremdy98oi');
+        $field->set_display_format('loremdy98oi');
 
-        $this->assertEquals('loremdy98oi', $field->getDisplayFormat());
+        $this->assertEquals('loremdy98oi', $field->get_display_format());
 
     }
 
@@ -75,11 +75,11 @@ final class DateTimePickerTest extends FieldTest
 
         $field = new DateTimePicker('', '', '');
 
-        $this->assertEquals(1, $field->getFirstDay());
+        $this->assertEquals(1, $field->get_first_day());
 
-        $field->setFirstDay(2);
+        $field->set_first_day(2);
 
-        $this->assertEquals(2, $field->getFirstDay());
+        $this->assertEquals(2, $field->get_first_day());
 
     }
 
@@ -91,11 +91,11 @@ final class DateTimePickerTest extends FieldTest
 
         $field = new DateTimePicker('', '', '');
 
-        $this->assertEquals('d/m/Y g:i a', $field->getReturnFormat());
+        $this->assertEquals('d/m/Y g:i a', $field->get_return_format());
 
-        $field->setReturnFormat('dn8odhil');
+        $field->set_return_format('dn8odhil');
 
-        $this->assertEquals('dn8odhil', $field->getReturnFormat());
+        $this->assertEquals('dn8odhil', $field->get_return_format());
 
     }
 

@@ -48,7 +48,7 @@ final class RepeaterTest extends FieldTest
 
         $this->assertEquals(
             FieldHelper::getExpectedFieldValues($field, $settings),
-            $field->toAcfArray($settings['test__key_prefix'])
+            $field->to_acf_array($settings['test__key_prefix'])
         );
 
     }
@@ -61,11 +61,11 @@ final class RepeaterTest extends FieldTest
 
         $field = new Repeater('', '', '');
 
-        $this->assertEquals('', $field->getButtonLabel());
+        $this->assertEquals('', $field->get_button_label());
 
-        $field->setButtonLabel('Press the button');
+        $field->set_button_label('Press the button');
 
-        $this->assertEquals('Press the button', $field->getButtonLabel());
+        $this->assertEquals('Press the button', $field->get_button_label());
 
     }
 
@@ -77,11 +77,11 @@ final class RepeaterTest extends FieldTest
 
         $field = new Repeater('', '', '');
 
-        $this->assertEquals('', $field->getCollapsed());
+        $this->assertEquals('', $field->get_collapsed());
 
-        $field->setCollapsed('dg98gol');
+        $field->set_collapsed('dg98gol');
 
-        $this->assertEquals('dg98gol', $field->getCollapsed());
+        $this->assertEquals('dg98gol', $field->get_collapsed());
 
     }
 
@@ -93,11 +93,11 @@ final class RepeaterTest extends FieldTest
 
         $field = new Repeater('', '', '');
 
-        $this->assertEquals('table', $field->getLayout());
+        $this->assertEquals('table', $field->get_layout());
 
-        $field->setLayout('row');
+        $field->set_layout('row');
 
-        $this->assertEquals('row', $field->getLayout());
+        $this->assertEquals('row', $field->get_layout());
 
     }
 
@@ -109,11 +109,11 @@ final class RepeaterTest extends FieldTest
 
         $field = new Repeater('', '', '');
 
-        $this->assertEquals(0, $field->getMax());
+        $this->assertEquals(0, $field->get_max());
 
-        $field->setMax(45);
+        $field->set_max(45);
 
-        $this->assertEquals(45, $field->getMax());
+        $this->assertEquals(45, $field->get_max());
 
     }
 
@@ -125,11 +125,11 @@ final class RepeaterTest extends FieldTest
 
         $field = new Repeater('', '', '');
 
-        $this->assertEquals(0, $field->getMin());
+        $this->assertEquals(0, $field->get_min());
 
-        $field->setMin(67);
+        $field->set_min(67);
 
-        $this->assertEquals(67, $field->getMin());
+        $this->assertEquals(67, $field->get_min());
 
     }
 

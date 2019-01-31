@@ -21,10 +21,10 @@ class Layout extends FieldWithFields implements FieldInterface
      * @return mixed The value of the ACF setting "display". Returns the default ACF value "block" if none has been
      * set using Fewbricks.
      */
-    public function getDisplay()
+    public function get_display()
     {
 
-        return $this->getSetting('display', 'block');
+        return $this->get_setting('display', 'block');
 
     }
 
@@ -32,10 +32,10 @@ class Layout extends FieldWithFields implements FieldInterface
      * @return mixed The value of the ACF setting "max". Returns the default ACF value "" if none has been
      * set using Fewbricks.
      */
-    public function getMax()
+    public function get_max()
     {
 
-        return $this->getSetting('max', '');
+        return $this->get_setting('max', '');
 
     }
 
@@ -43,10 +43,10 @@ class Layout extends FieldWithFields implements FieldInterface
      * @return mixed The value of the ACF setting "min". Returns the default ACF value "" if none has been
      * set using Fewbricks.
      */
-    public function getMin()
+    public function get_min()
     {
 
-        return $this->getSetting('min', '');
+        return $this->get_setting('min', '');
 
     }
 
@@ -56,10 +56,10 @@ class Layout extends FieldWithFields implements FieldInterface
      * @param string $display table, block or row
      * @return $this
      */
-    public function setDisplay($display)
+    public function set_display($display)
     {
 
-        return $this->setSetting('display', $display);
+        return $this->set_setting('display', $display);
 
     }
 
@@ -70,10 +70,10 @@ class Layout extends FieldWithFields implements FieldInterface
      *                        to an int and wants to unset it.
      * @return $this
      */
-    public function setMax($max)
+    public function set_max($max)
     {
 
-        return $this->setSetting('max', $max);
+        return $this->set_setting('max', $max);
 
     }
 
@@ -84,10 +84,10 @@ class Layout extends FieldWithFields implements FieldInterface
      *                        to an int and wants to unset it.
      * @return $this
      */
-    public function setMin($min)
+    public function set_min($min)
     {
 
-        return $this->setSetting('min', $min);
+        return $this->set_setting('min', $min);
 
     }
 

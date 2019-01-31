@@ -46,7 +46,7 @@ final class NumberTest extends FieldTest
 
         $this->assertEquals(
             FieldHelper::getExpectedFieldValues($field, $settings),
-            $field->toAcfArray($settings['test__key_prefix'])
+            $field->to_acf_array($settings['test__key_prefix'])
         );
 
     }
@@ -59,11 +59,11 @@ final class NumberTest extends FieldTest
 
         $field = new Number('', '', '');
 
-        $this->assertEquals('', $field->getAppend());
+        $this->assertEquals('', $field->get_append());
 
-        $field->setAppend('append kj jlk');
+        $field->set_append('append kj jlk');
 
-        $this->assertEquals('append kj jlk', $field->getAppend());
+        $this->assertEquals('append kj jlk', $field->get_append());
 
     }
 
@@ -75,11 +75,11 @@ final class NumberTest extends FieldTest
 
         $field = new Number('', '', '');
 
-        $this->assertEquals('', $field->getDefaultValue());
+        $this->assertEquals('', $field->get_default_value());
 
-        $field->setDefaultValue('h98goi');
+        $field->set_default_value('h98goi');
 
-        $this->assertEquals('h98goi', $field->getDefaultValue());
+        $this->assertEquals('h98goi', $field->get_default_value());
 
     }
 
@@ -91,11 +91,11 @@ final class NumberTest extends FieldTest
 
         $field = new Number('', '', '');
 
-        $this->assertEquals('', $field->getMax());
+        $this->assertEquals('', $field->get_max());
 
-        $field->setMax('879');
+        $field->set_max('879');
 
-        $this->assertEquals('879', $field->getMax());
+        $this->assertEquals('879', $field->get_max());
 
     }
 
@@ -107,11 +107,11 @@ final class NumberTest extends FieldTest
 
         $field = new Number('', '', '');
 
-        $this->assertEquals('', $field->getMin());
+        $this->assertEquals('', $field->get_min());
 
-        $field->setMin('879');
+        $field->set_min('879');
 
-        $this->assertEquals('879', $field->getMin());
+        $this->assertEquals('879', $field->get_min());
 
     }
 
@@ -123,11 +123,11 @@ final class NumberTest extends FieldTest
 
         $field = new Number('', '', '');
 
-        $this->assertEquals('', $field->getPlaceholder());
+        $this->assertEquals('', $field->get_placeholder());
 
-        $field->setPlaceholder('placeholder uiuio');
+        $field->set_placeholder('placeholder uiuio');
 
-        $this->assertEquals('placeholder uiuio', $field->getPlaceholder());
+        $this->assertEquals('placeholder uiuio', $field->get_placeholder());
 
     }
 
@@ -139,11 +139,11 @@ final class NumberTest extends FieldTest
 
         $field = new Number('', '', '');
 
-        $this->assertEquals('', $field->getPrepend());
+        $this->assertEquals('', $field->get_prepend());
 
-        $field->setPrepend('prepend 8oupo');
+        $field->set_prepend('prepend 8oupo');
 
-        $this->assertEquals('prepend 8oupo', $field->getPrepend());
+        $this->assertEquals('prepend 8oupo', $field->get_prepend());
 
     }
 
@@ -155,11 +155,11 @@ final class NumberTest extends FieldTest
 
         $field = new Number('', '', '');
 
-        $this->assertEquals('', $field->getStep());
+        $this->assertEquals('', $field->get_step());
 
-        $field->setStep(10);
+        $field->set_step(10);
 
-        $this->assertEquals(10, $field->getStep());
+        $this->assertEquals(10, $field->get_step());
 
     }
 

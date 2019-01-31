@@ -31,7 +31,7 @@ class NameOfField extends Field
      * Taking care of the above is really all you have to do to have the field type up and running. But do yourself a
      * favour and add setters and getters for the field types settings below. Find out the names of the settings by
      * opening the v5-file in the extensions plugin folder and look at the $this->defaults array. If a setting has an
-     * array as a value, make sure to send an array with the same keys to $this->setSetting in the code below.
+     * array as a value, make sure to send an array with the same keys to $this->set_setting in the code below.
      * Note that you don't have to create functions for the settings that is available to all fields in ACF core like
      * label, name, instructions, required, conditional logic and wrapper. These will be made available via the parent
      * class.
@@ -46,9 +46,9 @@ class NameOfField extends Field
 
         // replace NameOfSetting above with the PascalCase version of what the setting is called in the field.
         // Replace name_of_setting below with what the setting is called in the field.
-        // The outcome of $this->>setSetting() is $this which we then return in order
+        // The outcome of $this->>set_setting() is $this which we then return in order
         // to allow for chaining.
-        return $this->setSetting('name_of_setting', $value);
+        return $this->set_setting('name_of_setting', $value);
 
     }*/
 
@@ -63,7 +63,7 @@ class NameOfField extends Field
         // default_value_as_defined_by_the_field should be whatever the field defines to be the
         // default value if nothing has been set. This will not affect anything when creating
         // the field but will help if you want to get the setting without it ever having been set.
-        return $this->getSetting('name_of_setting', 'default_value_as_defined_by_the_field');
+        return $this->get_setting('name_of_setting', 'default_value_as_defined_by_the_field');
 
     }*/
 

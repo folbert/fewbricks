@@ -46,7 +46,7 @@ final class EmailTest extends FieldTest
 
         $this->assertEquals(
             FieldHelper::getExpectedFieldValues($field, $settings),
-            $field->toAcfArray($settings['test__key_prefix'])
+            $field->to_acf_array($settings['test__key_prefix'])
         );
 
     }
@@ -56,11 +56,11 @@ final class EmailTest extends FieldTest
 
         $field = new Email('', '', '');
 
-        $this->assertEquals('', $field->getAppend());
+        $this->assertEquals('', $field->get_append());
 
-        $field->setAppend('89goi');
+        $field->set_append('89goi');
 
-        $this->assertEquals('89goi', $field->getAppend());
+        $this->assertEquals('89goi', $field->get_append());
 
     }
 
@@ -69,11 +69,11 @@ final class EmailTest extends FieldTest
 
         $field = new Email('', '', '');
 
-        $this->assertEquals('', $field->getDefaultValue());
+        $this->assertEquals('', $field->get_default_value());
 
-        $field->setDefaultValue('dh98go');
+        $field->set_default_value('dh98go');
 
-        $this->assertEquals('dh98go', $field->getDefaultValue());
+        $this->assertEquals('dh98go', $field->get_default_value());
 
     }
 
@@ -82,11 +82,11 @@ final class EmailTest extends FieldTest
 
         $field = new Email('', '', '');
 
-        $this->assertEquals('', $field->getPlaceholder());
+        $this->assertEquals('', $field->get_placeholder());
 
-        $field->setPlaceholder('t7tiu');
+        $field->set_placeholder('t7tiu');
 
-        $this->assertEquals('t7tiu', $field->getPlaceholder());
+        $this->assertEquals('t7tiu', $field->get_placeholder());
 
     }
 
@@ -95,11 +95,11 @@ final class EmailTest extends FieldTest
 
         $field = new Email('', '', '');
 
-        $this->assertEquals('', $field->getPrepend());
+        $this->assertEquals('', $field->get_prepend());
 
-        $field->setPrepend('dt78ti');
+        $field->set_prepend('dt78ti');
 
-        $this->assertEquals('dt78ti', $field->getPrepend());
+        $this->assertEquals('dt78ti', $field->get_prepend());
 
     }
 

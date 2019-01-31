@@ -13,26 +13,26 @@ class Headline extends Brick
     /**
      *
      */
-    public function setUp()
+    public function set_up()
     {
 
         $level = new Select('Headline level', 'level', '1811272226a');
-        $level->setChoices([
+        $level->set_choices([
             '1' => '1',
             '2' => '2',
             '3' => '3',
             '4' => '4',
         ])
-            ->setAllowNull(false)
-            ->setRequired(true);
+            ->set_allow_null(false)
+            ->set_required(true);
 
-        $this->addField($level);
+        $this->add_field($level);
 
         $text = new Text('Text', 'text', '1811272243a');
-        $text->setRequired(true)
-            ->setPlaceholder('Enter a great headline here');
+        $text->set_required(true)
+            ->set_placeholder('Enter a great headline here');
 
-        $this->addField($text);
+        $this->add_field($text);
 
     }
 

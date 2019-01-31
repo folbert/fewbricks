@@ -46,7 +46,7 @@ final class ButtonGroupTest extends FieldTest
 
         $this->assertEquals(
             FieldHelper::getExpectedFieldValues($field, $settings),
-            $field->toAcfArray($settings['test__key_prefix'])
+            $field->to_acf_array($settings['test__key_prefix'])
         );
 
     }
@@ -56,11 +56,11 @@ final class ButtonGroupTest extends FieldTest
 
         $field = new ButtonGroup('', '', '');
 
-        $this->assertEquals(0, $field->getAllowNull());
+        $this->assertEquals(0, $field->get_allow_null());
 
-        $field->setAllowNull(true);
+        $field->set_allow_null(true);
 
-        $this->assertEquals(true, $field->getAllowNull());
+        $this->assertEquals(true, $field->get_allow_null());
 
     }
 
@@ -76,7 +76,7 @@ final class ButtonGroupTest extends FieldTest
             'b' => 'A B',
         ];
 
-        $field->setChoices($choices);
+        $field->set_choices($choices);
 
         $this->assertEquals($choices, $field->getChoices());
 
@@ -87,11 +87,11 @@ final class ButtonGroupTest extends FieldTest
 
         $field = new ButtonGroup('', '', '');
 
-        $this->assertEquals('', $field->getDefaultValue());
+        $this->assertEquals('', $field->get_default_value());
 
-        $field->setDefaultValue('dhoshooil');
+        $field->set_default_value('dhoshooil');
 
-        $this->assertEquals('dhoshooil', $field->getDefaultValue());
+        $this->assertEquals('dhoshooil', $field->get_default_value());
 
     }
 
@@ -100,11 +100,11 @@ final class ButtonGroupTest extends FieldTest
 
         $field = new ButtonGroup('', '', '');
 
-        $this->assertEquals('horizontal', $field->getLayout());
+        $this->assertEquals('horizontal', $field->get_layout());
 
-        $field->setLayout('ye8dgol');
+        $field->set_layout('ye8dgol');
 
-        $this->assertEquals('ye8dgol', $field->getLayout());
+        $this->assertEquals('ye8dgol', $field->get_layout());
 
     }
 
@@ -113,11 +113,11 @@ final class ButtonGroupTest extends FieldTest
 
         $field = new ButtonGroup('', '', '');
 
-        $this->assertEquals('value', $field->getReturnFormat());
+        $this->assertEquals('value', $field->get_return_format());
 
-        $field->setReturnFormat('raw');
+        $field->set_return_format('raw');
 
-        $this->assertEquals('raw', $field->getReturnFormat());
+        $this->assertEquals('raw', $field->get_return_format());
 
     }
 

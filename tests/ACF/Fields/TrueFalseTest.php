@@ -46,7 +46,7 @@ final class TrueFalseTest extends FieldTest
 
         $this->assertEquals(
             FieldHelper::getExpectedFieldValues($field, $settings),
-            $field->toAcfArray($settings['test__key_prefix'])
+            $field->to_acf_array($settings['test__key_prefix'])
         );
 
     }
@@ -59,11 +59,11 @@ final class TrueFalseTest extends FieldTest
 
         $field = new TrueFalse('', '', '');
 
-        $this->assertEquals(0, $field->getDefaultValue());
+        $this->assertEquals(0, $field->get_default_value());
 
-        $field->setDefaultValue('dh08dhdol');
+        $field->set_default_value('dh08dhdol');
 
-        $this->assertEquals('dh08dhdol', $field->getDefaultValue());
+        $this->assertEquals('dh08dhdol', $field->get_default_value());
 
     }
 
@@ -75,11 +75,11 @@ final class TrueFalseTest extends FieldTest
 
         $field = new TrueFalse('', '', '');
 
-        $this->assertEquals('', $field->getMessage());
+        $this->assertEquals('', $field->get_message());
 
-        $field->setMessage('hg78iu');
+        $field->set_message('hg78iu');
 
-        $this->assertEquals('hg78iu', $field->getMessage());
+        $this->assertEquals('hg78iu', $field->get_message());
 
     }
 
@@ -91,11 +91,11 @@ final class TrueFalseTest extends FieldTest
 
         $field = new TrueFalse('', '', '');
 
-        $this->assertEquals(0, $field->getUi());
+        $this->assertEquals(0, $field->get_ui());
 
-        $field->setUi(true);
+        $field->set_ui(true);
 
-        $this->assertEquals(true, $field->getUi());
+        $this->assertEquals(true, $field->get_ui());
 
     }
 
@@ -107,11 +107,11 @@ final class TrueFalseTest extends FieldTest
 
         $field = new TrueFalse('', '', '');
 
-        $this->assertEquals('', $field->getUiOffText());
+        $this->assertEquals('', $field->get_ui_off_text());
 
-        $field->setUiOffText('fjoidjl');
+        $field->set_ui_off_text('fjoidjl');
 
-        $this->assertEquals('fjoidjl', $field->getUiOffText());
+        $this->assertEquals('fjoidjl', $field->get_ui_off_text());
 
     }
 
@@ -123,11 +123,11 @@ final class TrueFalseTest extends FieldTest
 
         $field = new TrueFalse('', '', '');
 
-        $this->assertEquals('', $field->getUiOnText());
+        $this->assertEquals('', $field->get_ui_on_text());
 
-        $field->setUiOnText('8shsoil');
+        $field->set_ui_on_text('8shsoil');
 
-        $this->assertEquals('8shsoil', $field->getUiOnText());
+        $this->assertEquals('8shsoil', $field->get_ui_on_text());
 
     }
 
