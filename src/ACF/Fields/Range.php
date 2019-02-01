@@ -100,13 +100,13 @@ class Range extends Field implements FieldInterface
     }
 
     /**
-     * @param mixed $defaultValue ACF setting. A default value used by ACF if no value has yet been saved.
+     * @param mixed $default_value ACF setting. A default value used by ACF if no value has yet been saved.
      * @return $this
      */
-    public function set_default_value($defaultValue)
+    public function set_default_value($default_value)
     {
 
-        return $this->set_setting('default_value', $defaultValue);
+        return $this->set_setting('default_value', $default_value);
 
     }
 

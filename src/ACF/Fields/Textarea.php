@@ -76,13 +76,13 @@ class Textarea extends Field implements FieldInterface
     }
 
     /**
-     * @param mixed $defaultValue ACF setting. A default value used by ACF if no value has yet been saved.
+     * @param mixed $default_value ACF setting. A default value used by ACF if no value has yet been saved.
      * @return $this
      */
-    public function set_default_value($defaultValue)
+    public function set_default_value($default_value)
     {
 
-        return $this->set_setting('default_value', $defaultValue);
+        return $this->set_setting('default_value', $default_value);
 
     }
 
@@ -102,13 +102,13 @@ class Textarea extends Field implements FieldInterface
     /**
      * ACF setting. Controls how new lines are rendered.
      *
-     * @param string $newLines "wpautop", "br" or ""
+     * @param string $new_lines "wpautop", "br" or ""
      * @return $this
      */
-    public function set_new_lines($newLines)
+    public function set_new_lines($new_lines)
     {
 
-        return $this->set_setting('new_lines', $newLines);
+        return $this->set_setting('new_lines', $new_lines);
 
     }
 

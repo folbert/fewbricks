@@ -76,13 +76,13 @@ class Wysiwyg extends Field implements FieldInterface
     }
 
     /**
-     * @param mixed $defaultValue ACF setting. A default value used by ACF if no value has yet been saved.
+     * @param mixed $default_value ACF setting. A default value used by ACF if no value has yet been saved.
      * @return $this
      */
-    public function set_default_value($defaultValue)
+    public function set_default_value($default_value)
     {
 
-        return $this->set_setting('default_value', $defaultValue);
+        return $this->set_setting('default_value', $default_value);
 
     }
 
@@ -102,13 +102,13 @@ class Wysiwyg extends Field implements FieldInterface
     /**
      * ACF setting.
      *
-     * @param boolean $mediaUpload Boolean indicating whether buttons should be shown or not.
+     * @param boolean $media_upload Boolean indicating whether buttons should be shown or not.
      * @return $this
      */
-    public function set_media_upload($mediaUpload)
+    public function set_media_upload($media_upload)
     {
 
-        return $this->set_setting('media_upload', $mediaUpload);
+        return $this->set_setting('media_upload', $media_upload);
 
     }
 

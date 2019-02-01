@@ -92,25 +92,25 @@ class FieldWithLayouts extends Field
     }
 
     /**
-     * @param string $buttonLabel
+     * @param string $button_label
      * @return $this
      */
-    public function set_button_label($buttonLabel)
+    public function set_button_label($button_label)
     {
 
-        return $this->set_setting('button_label', $buttonLabel);
+        return $this->set_setting('button_label', $button_label);
 
     }
 
     /**
-     * @param string $keyPrefix
+     * @param string $key_prefix
      *
      * @return array
      */
-    public function to_acf_array(string $keyPrefix = '')
+    public function to_acf_array(string $key_prefix = '')
     {
 
-        $settings = parent::to_acf_array($keyPrefix);
+        $settings = parent::to_acf_array($key_prefix);
 
         $settings['layouts'] = $this->layouts->to_acf_array($settings['key']);
 

@@ -114,95 +114,95 @@ class FieldWithImages extends Field
     /**
      * ACF setting. Restrict which images can be uploaded.
      *
-     * @param int $maxHeight max height in px (without "px")
+     * @param int $max_height max height in px (without "px")
      * @return $this
      */
-    public function set_max_height($maxHeight)
+    public function set_max_height($max_height)
     {
 
-        return $this->set_setting('max_height', $maxHeight);
+        return $this->set_setting('max_height', $max_height);
 
     }
 
     /**
      * ACF setting. Restrict which images can be uploaded.
      *
-     * @param int $maxSize max size in MB (without "MB")
+     * @param int $max_size max size in MB (without "MB")
      * @return $this
      */
-    public function set_max_size($maxSize)
+    public function set_max_size($max_size)
     {
 
-        return $this->set_setting('max_size', $maxSize);
+        return $this->set_setting('max_size', $max_size);
 
     }
 
     /**
      * ACF setting. Restrict which images can be uploaded.
      *
-     * @param int $maxWidth max width in px (without "px")
+     * @param int $max_width max width in px (without "px")
      * @return $this
      */
-    public function set_max_width($maxWidth)
+    public function set_max_width($max_width)
     {
 
-        return $this->set_setting('max_width', $maxWidth);
+        return $this->set_setting('max_width', $max_width);
 
     }
 
     /**
      * ACF setting. Don't use or pass an empty value for all types.
      *
-     * @param array|string $mimeTypes Comma separated string or array
+     * @param array|string $mime_types Comma separated string or array
      * @return $this
      */
-    public function set_mime_types($mimeTypes)
+    public function set_mime_types($mime_types)
     {
 
-        if (is_array($mimeTypes)) {
-            $mimeTypes = implode(', ', $mimeTypes);
+        if (is_array($mime_types)) {
+            $mime_types = implode(', ', $mime_types);
         }
 
-        return $this->set_setting('mime_types', $mimeTypes);
+        return $this->set_setting('mime_types', $mime_types);
 
     }
 
     /**
      * ACF setting. Restrict which images can be uploaded.
      *
-     * @param int $minHeight Min height in px (without "px")
+     * @param int $min_height Min height in px (without "px")
      * @return $this
      */
-    public function set_min_height($minHeight)
+    public function set_min_height($min_height)
     {
 
-        return $this->set_setting('min_height', $minHeight);
+        return $this->set_setting('min_height', $min_height);
 
     }
 
     /**
      * ACF setting. Restrict which images can be uploaded.
      *
-     * @param int $minSize Min size in MB (without "MB")
+     * @param int $min_size Min size in MB (without "MB")
      * @return $this
      */
-    public function set_min_size($minSize)
+    public function set_min_size($min_size)
     {
 
-        return $this->set_setting('min_size', $minSize);
+        return $this->set_setting('min_size', $min_size);
 
     }
 
     /**
      * ACF setting. Restrict which images can be uploaded.
      *
-     * @param int $minWidth Min width in px (without "px")
+     * @param int $min_width Min width in px (without "px")
      * @return $this
      */
-    public function set_min_width($minWidth)
+    public function set_min_width($min_width)
     {
 
-        return $this->set_setting('min_width', $minWidth);
+        return $this->set_setting('min_width', $min_width);
 
     }
 

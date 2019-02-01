@@ -56,13 +56,13 @@ class Message extends Field implements FieldInterface
     /**
      * ACF setting. Allow HTML markup to display as visible text instead of rendering.
      *
-     * @param boolean $escapeHtml
+     * @param boolean $escape_html
      * @return $this
      */
-    public function set_esc_html($escapeHtml)
+    public function set_esc_html($escape_html)
     {
 
-        return $this->set_setting('esc_html', $escapeHtml);
+        return $this->set_setting('esc_html', $escape_html);
 
     }
 
@@ -80,14 +80,14 @@ class Message extends Field implements FieldInterface
     /**
      * ACF setting. Controls how new lines are rendered.
      *
-     * @param string $newLines "wpautop" (automatically add paragraphs), "br" (automatically add <br>) or "" (no
+     * @param string $new_lines "wpautop" (automatically add paragraphs), "br" (automatically add <br>) or "" (no
      * formatting)
      * @return $this
      */
-    public function set_new_lines($newLines)
+    public function set_new_lines($new_lines)
     {
 
-        return $this->set_setting('new_lines', $newLines);
+        return $this->set_setting('new_lines', $new_lines);
 
     }
 

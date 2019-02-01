@@ -80,13 +80,13 @@ class Select extends FieldWithChoices implements FieldInterface
     /**
      * ACF setting.
      *
-     * @param bool $allowNull
+     * @param bool $allow_null
      * @return $this
      */
-    public function set_allow_null($allowNull)
+    public function set_allow_null($allow_null)
     {
 
-        return $this->set_setting('allow_null', $allowNull);
+        return $this->set_setting('allow_null', $allow_null);
 
 
     }

@@ -84,30 +84,30 @@ class Collection
 
     /**
      * @param Field $item
-     * @param string $keyToAddAfter
-     * @param null|string $keyOfNewItem
+     * @param string $key_to_add_after
+     * @param null|string $key_of_new_item
      * @return $this
      */
-    public function add_item_after_item_by_key($item, string $keyToAddAfter, $keyOfNewItem = null)
+    public function add_item_after_item_by_key($item, string $key_to_add_after, $key_of_new_item = null)
     {
 
-        if (false !== ($positionToAddAfter = $this->get_position_for_item_by_key($keyToAddAfter))) {
+        if (false !== ($position_to_add_after = $this->get_position_for_item_by_key($key_to_add_after))) {
 
             $this->finalize_item($item);
             $this->validate_item($item);
 
-            if (is_null($keyOfNewItem)) {
+            if (is_null($key_of_new_item)) {
                 $newItem = [$item];
             } else {
 
-                $newItem = [$keyOfNewItem => $item];
+                $newItem = [$key_of_new_item => $item];
 
             }
 
             $this->items = array_merge(
-                array_slice($this->items, 0, ($positionToAddAfter + 1)),
+                array_slice($this->items, 0, ($position_to_add_after + 1)),
                 $newItem,
-                array_slice($this->items, ($positionToAddAfter + 1))
+                array_slice($this->items, ($position_to_add_after + 1))
             );
 
         }
@@ -118,28 +118,28 @@ class Collection
 
     /**
      * @param Field $item
-     * @param string $keyOfFieldToAddBefore
-     * @param null|string $keyOfNewItem
+     * @param string $key_of_field_to_add_before
+     * @param null|string $key_of_new_item
      * @return $this
      */
-    public function add_item_before_item_by_key($item, string $keyOfFieldToAddBefore, $keyOfNewItem = null)
+    public function add_item_before_item_by_key($item, string $key_of_field_to_add_before, $key_of_new_item = null)
     {
 
-        if (false !== ($positionToAddBefore = $this->get_position_for_item_by_key($keyOfFieldToAddBefore))) {
+        if (false !== ($position_to_add_before = $this->get_position_for_item_by_key($key_of_field_to_add_before))) {
 
             $this->finalize_item($item);
             $this->validate_item($item);
 
-            if (is_null($keyOfNewItem)) {
-                $newItem = [$item];
+            if (is_null($key_of_new_item)) {
+                $new_item = [$item];
             } else {
-                $newItem = [$keyOfNewItem => $item];
+                $new_item = [$key_of_new_item => $item];
             }
 
             $this->items = array_merge(
-                array_slice($this->items, 0, $positionToAddBefore),
-                $newItem,
-                array_slice($this->items, $positionToAddBefore)
+                array_slice($this->items, 0, $position_to_add_before),
+                $new_item,
+                array_slice($this->items, $position_to_add_before)
             );
 
         }
@@ -150,22 +150,22 @@ class Collection
 
     /**
      * @param mixed $item
-     * @param bool $keyOfNewItem
+     * @param bool $key_of_new_item
      * @return $this
      */
-    public function add_item_to_beginning($item, $keyOfNewItem = false)
+    public function add_item_to_beginning($item, $key_of_new_item = false)
     {
 
         $this->finalize_item($item);
         $this->validate_item($item);
 
-        if ($keyOfNewItem === false) {
+        if ($key_of_new_item === false) {
 
             array_unshift($this->items, $item);
 
         } else {
 
-            $this->items = array_merge([$keyOfNewItem => $item], $this->items);
+            $this->items = array_merge([$key_of_new_item => $item], $this->items);
 
         }
 
@@ -216,50 +216,50 @@ class Collection
     }
 
     /**
-     * @param $keyToSearchFor
+     * @param $key_to_search_for
      * @return mixed
      */
-    public function get_item_by_key(string $keyToSearchFor)
+    public function get_item_by_key(string $key_to_search_for)
     {
 
-        $foundItem = false;
+        $found_item = false;
 
         foreach($this->items AS $key => $item) {
 
-            if($this->key_search_match($keyToSearchFor, $key, $item)) {
+            if($this->key_search_match($key_to_search_for, $key, $item)) {
 
-                $foundItem = $item;
+                $found_item = $item;
                 break;
 
             }
 
         }
 
-        return $foundItem;
+        return $found_item;
 
     }
 
     /**
-     * @param string $keyToSearchFor
+     * @param string $key_to_search_for
      * @return bool|int
      */
-    public function get_position_for_item_by_key(string $keyToSearchFor)
+    public function get_position_for_item_by_key(string $key_to_search_for)
     {
 
         $position = false;
 
-        $positionTracker = 0;
+        $position_tracker = 0;
 
         foreach ($this->items AS $key => $item) {
 
-            if ($this->key_search_match($keyToSearchFor, $key, $item)) {
+            if ($this->key_search_match($key_to_search_for, $key, $item)) {
 
-                $position = $positionTracker;
+                $position = $position_tracker;
                 break;
 
             }
 
-            $positionTracker++;
+            $position_tracker++;
 
         }
 
@@ -268,14 +268,14 @@ class Collection
     }
 
     /**
-     * @param $keyToSearchFor
-     * @param $arrayKey
+     * @param $key_to_search_for
+     * @param $array_key
      * @param $item
      * @return bool
      */
-    protected function key_search_match($keyToSearchFor, $arrayKey, $item) {
+    protected function key_search_match($key_to_search_for, $array_key, $item) {
 
-        return $keyToSearchFor === $arrayKey;
+        return $key_to_search_for === $array_key;
 
     }
 
@@ -314,17 +314,17 @@ class Collection
     }
 
     /**
-     * @param $keyToSearchFor
+     * @param $key_to_search_for
      * @return bool
      */
-    public function key_exists($keyToSearchFor)
+    public function key_exists($key_to_search_for)
     {
 
         $key_exists = false;
 
         foreach($this->items AS $key => $item) {
 
-            if($this->key_search_match($keyToSearchFor, $key, $item)) {
+            if($this->key_search_match($key_to_search_for, $key, $item)) {
 
                 $key_exists = true;
                 break;
@@ -353,17 +353,17 @@ class Collection
     }
 
     /**
-     * @param string $functionName
+     * @param string $function_name
      * @param mixed $value
      * @return $this
      */
-    public function remove_item_by_function_value($functionName, $value)
+    public function remove_item_by_function_value($function_name, $value)
     {
 
-        foreach ($this->items AS $itemKey => $item) {
+        foreach ($this->items AS $item_key => $item) {
 
-            if (method_exists($item, $functionName) && $item->$functionName() === $value) {
-                $this->remove_item($itemKey);
+            if (method_exists($item, $function_name) && $item->$function_name() === $value) {
+                $this->remove_item($item_key);
             }
 
         }

@@ -154,26 +154,26 @@ class Relationship extends Field implements FieldInterface
     /**
      * ACF setting. Set which post types to display in drop down.
      *
-     * @param array $postType Array with post type names.
+     * @param array $post_type Array with post type names.
      * @return $this
      */
-    public function set_post_type($postType)
+    public function set_post_type($post_type)
     {
 
-        return $this->set_setting('post_type', $postType);
+        return $this->set_setting('post_type', $post_type);
 
     }
 
     /**
      * ACF setting.
      *
-     * @param string $returnFormat "object" or "id"
+     * @param string $return_format "object" or "id"
      * @return $this
      */
-    public function set_return_format($returnFormat)
+    public function set_return_format($return_format)
     {
 
-        return $this->set_setting('return_format', $returnFormat);
+        return $this->set_setting('return_format', $return_format);
 
     }
 

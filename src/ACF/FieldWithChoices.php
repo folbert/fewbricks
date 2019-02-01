@@ -57,26 +57,26 @@ class FieldWithChoices extends Field
     }
 
     /**
-     * @param mixed $defaultValue ACF setting. A default value used by ACF if no value has yet been saved.
+     * @param mixed $default_value ACF setting. A default value used by ACF if no value has yet been saved.
      * @return $this
      */
-    public function set_default_value($defaultValue)
+    public function set_default_value($default_value)
     {
 
-        return $this->set_setting('default_value', $defaultValue);
+        return $this->set_setting('default_value', $default_value);
 
     }
 
     /**
      * ACF setting. Specify the returned value on front end.
      *
-     * @param $returnFormat "value", "label" or "array" (for both)
+     * @param $return_format "value", "label" or "array" (for both)
      * @return $this
      */
-    public function set_return_format($returnFormat)
+    public function set_return_format($return_format)
     {
 
-        return $this->set_setting('return_format', $returnFormat);
+        return $this->set_setting('return_format', $return_format);
 
     }
 

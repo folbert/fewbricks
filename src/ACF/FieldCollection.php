@@ -16,7 +16,7 @@ class FieldCollection extends Collection implements FieldCollectionInterface
     /**
      * @var
      */
-    private $acfArray;
+    private $acf_array;
 
     /**
      * @var array
@@ -32,24 +32,24 @@ class FieldCollection extends Collection implements FieldCollectionInterface
      * String to prefix labels of all the fields in the collection with.
      * @var string
      */
-    protected $fieldLabelsPrefix;
+    protected $field_labels_prefix;
 
     /**
      * String to suffix labels of all the fields in the collection with.
      * @var string
      */
-    protected $fieldLabelsSuffix;
+    protected $field_labels_suffix;
 
     /**
      * String to prefix field names of all the fields in the collection with.
      * @var string
      */
-    protected $fieldNamesPrefix;
+    protected $field_names_prefix;
 
     /**
      * @var boolean
      */
-    protected $preparedForAcfArray;
+    protected $prepared_for_acf_array;
 
     /**
      * FieldCollection constructor.
@@ -62,11 +62,11 @@ class FieldCollection extends Collection implements FieldCollectionInterface
 
         $this->key = $key;
         $this->arguments = $arguments;
-        $this->fieldNamesPrefix = '';
-        $this->fieldLabelsPrefix = '';
-        $this->fieldLabelsSuffix = '';
-        $this->preparedForAcfArray = false;
-        $this->acfArray = false;
+        $this->field_names_prefix = '';
+        $this->field_labels_prefix = '';
+        $this->field_labels_suffix = '';
+        $this->prepared_for_acf_array = false;
+        $this->acf_array = false;
 
         parent::__construct();
 
@@ -149,20 +149,20 @@ class FieldCollection extends Collection implements FieldCollectionInterface
     protected function prepare_for_acf_array()
     {
 
-        if (!$this->preparedForAcfArray) {
+        if (!$this->prepared_for_acf_array) {
 
             /** @var Field $field */
             foreach ($this->items AS &$field) {
 
-                $field->prefix_name($this->fieldNamesPrefix);
-                $field->prefix_label($this->fieldLabelsPrefix);
-                $field->suffix_label($this->fieldLabelsSuffix);
+                $field->prefix_name($this->field_names_prefix);
+                $field->prefix_label($this->field_labels_prefix);
+                $field->suffix_label($this->field_labels_suffix);
 
             }
 
         }
 
-        $this->preparedForAcfArray = true;
+        $this->prepared_for_acf_array = true;
 
     }
 
@@ -180,15 +180,15 @@ class FieldCollection extends Collection implements FieldCollectionInterface
     }
 
     /**
-     * @param FieldCollection $fieldCollection
+     * @param FieldCollection $field_collection
      * @return $this
      */
-    public function add_field_collection($fieldCollection)
+    public function add_field_collection($field_collection)
     {
 
-        $fieldCollection->prepare_for_acf_array();
+        $field_collection->prepare_for_acf_array();
 
-        $this->add_fields($fieldCollection->get_fields());
+        $this->add_fields($field_collection->get_fields());
 
         return $this;
 
@@ -196,15 +196,15 @@ class FieldCollection extends Collection implements FieldCollectionInterface
 
     /**
      * @param Brick $brick
-     * @param string $fieldNameToAddAfter
+     * @param string $field_name_to_add_after
      * @return $this
      */
-    public function add_brick_after_field_by_name($brick, string $fieldNameToAddAfter)
+    public function add_brick_after_field_by_name($brick, string $field_name_to_add_after)
     {
 
         $this->prepare_brick_for_add($brick);
 
-        $this->addFieldsAfterFieldByName($brick->get_fields(), $fieldNameToAddAfter);
+        $this->addFieldsAfterFieldByName($brick->get_fields(), $field_name_to_add_after);
 
         return $this;
 
@@ -212,10 +212,10 @@ class FieldCollection extends Collection implements FieldCollectionInterface
 
     /**
      * @param array $fields
-     * @param string $fieldNameToAddAfter
+     * @param string $field_name_to_add_after
      * @return $this
      */
-    public function addFieldsAfterFieldByName(array $fields, string $fieldNameToAddAfter)
+    public function addFieldsAfterFieldByName(array $fields, string $field_name_to_add_after)
     {
 
         // Reverse the array to add the fields in the desired order
@@ -223,7 +223,7 @@ class FieldCollection extends Collection implements FieldCollectionInterface
 
         foreach ($fields AS $field) {
 
-            $this->add_field_after_field_by_name($field, $fieldNameToAddAfter);
+            $this->add_field_after_field_by_name($field, $field_name_to_add_after);
 
         }
 
@@ -233,18 +233,18 @@ class FieldCollection extends Collection implements FieldCollectionInterface
 
     /**
      * @param Field $field
-     * @param string $fieldNameToAddAfter
+     * @param string $field_name_to_add_after
      * @return $this
      */
-    public function add_field_after_field_by_name($field, string $fieldNameToAddAfter)
+    public function add_field_after_field_by_name($field, string $field_name_to_add_after)
     {
 
-        /** @var Field $fieldToAddAfter */
-        $fieldToAddAfter = $this->get_field_by_name($fieldNameToAddAfter);
+        /** @var Field $field_to_add_after */
+        $field_to_add_after = $this->get_field_by_name($field_name_to_add_after);
 
-        if ($fieldToAddAfter !== false) {
+        if ($field_to_add_after !== false) {
 
-            parent::add_item_after_item_by_key($field, $fieldToAddAfter->get_key(), $field->get_key());
+            parent::add_item_after_item_by_key($field, $field_to_add_after->get_key(), $field->get_key());
 
         }
 
@@ -253,23 +253,23 @@ class FieldCollection extends Collection implements FieldCollectionInterface
     }
 
     /**
-     * @param string $nameToSearchFor
+     * @param string $name_to_search_for
      * @return bool|mixed
      */
-    public function get_field_by_name(string $nameToSearchFor)
+    public function get_field_by_name(string $name_to_search_for)
     {
 
         $field = false;
 
         /**
          * @var string $itemKey
-         * @var Field $possibleField
+         * @var Field $possible_field
          */
-        foreach ($this->items AS $possibleField) {
+        foreach ($this->items AS $possible_field) {
 
-            if ($possibleField->get_final_name() === $nameToSearchFor) {
+            if ($possible_field->get_final_name() === $name_to_search_for) {
 
-                $field = parent::get_item_by_key($possibleField->get_key());
+                $field = parent::get_item_by_key($possible_field->get_key());
                 break;
 
             }
@@ -282,15 +282,15 @@ class FieldCollection extends Collection implements FieldCollectionInterface
 
     /**
      * @param Brick $brick
-     * @param string $fieldNameToAddBefore
+     * @param string $field_name_to_add_before
      * @return $this
      */
-    public function add_brick_before_field_by_name($brick, string $fieldNameToAddBefore)
+    public function add_brick_before_field_by_name($brick, string $field_name_to_add_before)
     {
 
         $this->prepare_brick_for_add($brick);
 
-        $this->add_fields_before_field_by_name($brick->get_fields(), $fieldNameToAddBefore);
+        $this->add_fields_before_field_by_name($brick->get_fields(), $field_name_to_add_before);
 
         return $this;
 
@@ -312,15 +312,15 @@ class FieldCollection extends Collection implements FieldCollectionInterface
 
     /**
      * @param Field[] $fields
-     * @param string $fieldNameToAddBefore
+     * @param string $field_name_to_add_before
      * @return $this
      */
-    public function add_fields_before_field_by_name(array $fields, string $fieldNameToAddBefore)
+    public function add_fields_before_field_by_name(array $fields, string $field_name_to_add_before)
     {
 
         foreach ($fields AS $field) {
 
-            $this->add_field_before_field_by_name($field, $fieldNameToAddBefore);
+            $this->add_field_before_field_by_name($field, $field_name_to_add_before);
 
         }
 
@@ -330,18 +330,18 @@ class FieldCollection extends Collection implements FieldCollectionInterface
 
     /**
      * @param Field $field
-     * @param string $fieldNameToAddBefore
+     * @param string $field_name_to_add_before
      * @return $this
      */
-    public function add_field_before_field_by_name($field, string $fieldNameToAddBefore)
+    public function add_field_before_field_by_name($field, string $field_name_to_add_before)
     {
 
         /** @var Field $itemToAddAfter */
-        $fieldToAddBefore = $this->get_field_by_name($fieldNameToAddBefore);
+        $field_to_add_before = $this->get_field_by_name($field_name_to_add_before);
 
-        if ($fieldToAddBefore !== false) {
+        if ($field_to_add_before !== false) {
 
-            parent::add_item_before_item_by_key($field, $fieldToAddBefore->get_key(), $field->get_key());
+            parent::add_item_before_item_by_key($field, $field_to_add_before->get_key(), $field->get_key());
 
         }
 
@@ -374,16 +374,16 @@ class FieldCollection extends Collection implements FieldCollectionInterface
 
         if (is_array($fields)) {
 
-            $keyedFields = [];
+            $keyed_fields = [];
 
             /** @var Field $field */
             foreach ($fields AS $field) {
 
-                $keyedFields[$field->get_key()] = $field;
+                $keyed_fields[$field->get_key()] = $field;
 
             }
 
-            $this->add_items_to_beginning($keyedFields);
+            $this->add_items_to_beginning($keyed_fields);
 
         } else if ($fields instanceof FieldCollection) {
 
@@ -396,15 +396,15 @@ class FieldCollection extends Collection implements FieldCollectionInterface
     }
 
     /**
-     * @param FieldCollection $fieldCollection
+     * @param FieldCollection $field_collection
      * @return $this
      */
-    public function add_field_collection_to_beginning($fieldCollection)
+    public function add_field_collection_to_beginning($field_collection)
     {
 
-        $fieldCollection->prepare_for_acf_array();
+        $field_collection->prepare_for_acf_array();
 
-        $this->add_fields_to_beginning($fieldCollection->get_items());
+        $this->add_fields_to_beginning($field_collection->get_items());
 
         return $this;
 
@@ -446,12 +446,12 @@ class FieldCollection extends Collection implements FieldCollectionInterface
     {
 
         /** @var Field $field */
-        foreach ($this->items AS $fieldKey => $field) {
+        foreach ($this->items AS $field_key => $field) {
 
-            foreach($field->get_parents() AS $parentData) {
+            foreach($field->get_parents() AS $parent_data) {
 
-                if ($parentData['type'] === Brick::CLASS_ID_STRING && $parentData['key'] === $key) {
-                    $this->remove_item($fieldKey);
+                if ($parent_data['type'] === Brick::CLASS_ID_STRING && $parent_data['key'] === $key) {
+                    $this->remove_item($field_key);
                     break;
                 }
 
@@ -473,12 +473,12 @@ class FieldCollection extends Collection implements FieldCollectionInterface
     {
 
         /** @var Field $field */
-        foreach ($this->items AS $fieldKey => $field) {
+        foreach ($this->items AS $field_key => $field) {
 
-            foreach($field->get_parents() AS $parentData) {
+            foreach($field->get_parents() AS $parent_data) {
 
-                if ($parentData['type'] === Brick::CLASS_ID_STRING && $parentData['name'] === $name) {
-                    $this->remove_item($fieldKey);
+                if ($parent_data['type'] === Brick::CLASS_ID_STRING && $parent_data['name'] === $name) {
+                    $this->remove_item($field_key);
                 }
 
             }
@@ -523,15 +523,15 @@ class FieldCollection extends Collection implements FieldCollectionInterface
      * Remove a bunch of fields in one function call. Utilizes the function removeField. Note that the actual removal
      * of the field does not take place until the collection is finalized.
      *
-     * @param array $fieldNames Array of names of fields to remove.
+     * @param array $field_names Array of names of fields to remove.
      * @return $this
      */
-    public function remove_fields_by_name(array $fieldNames)
+    public function remove_fields_by_name(array $field_names)
     {
 
-        foreach ($fieldNames AS $fieldName) {
+        foreach ($field_names AS $field_name) {
 
-            $this->remove_field_by_name($fieldName);
+            $this->remove_field_by_name($field_name);
 
         }
 
@@ -543,16 +543,16 @@ class FieldCollection extends Collection implements FieldCollectionInterface
      * Removes a field from the collection. Note that the actual removal does not take place until the collection is
      * finalized.
      *
-     * @param string $fieldName The name of a field. Not the key, not the label, the name.
+     * @param string $field_name The name of a field. Not the key, not the label, the name.
      * @return $this
      */
-    public function remove_field_by_name(string $fieldName)
+    public function remove_field_by_name(string $field_name)
     {
 
         /** @var Field $field */
         foreach ($this->items AS $itemKey => $field) {
 
-            if ($field->get_name() === $fieldName) {
+            if ($field->get_name() === $field_name) {
 
                 parent::remove_item($itemKey);
 
@@ -601,21 +601,21 @@ class FieldCollection extends Collection implements FieldCollectionInterface
      */
     public function get_field_by_original_key_from_objects(string $key) {
 
-        $foundField = false;
+        $found_field = false;
 
         /** @var Field $field */
         foreach($this->items AS $field) {
 
             if($field->get_original_key() === $key) {
 
-                $foundField = $field;
+                $found_field = $field;
                 break;
 
             }
 
         }
 
-        return $foundField;
+        return $found_field;
 
     }
 
@@ -628,7 +628,7 @@ class FieldCollection extends Collection implements FieldCollectionInterface
     public function set_field_labels_prefix(string $prefix)
     {
 
-        $this->fieldLabelsPrefix = $prefix;
+        $this->field_labels_prefix = $prefix;
 
         return $this;
 
@@ -643,7 +643,7 @@ class FieldCollection extends Collection implements FieldCollectionInterface
     public function set_field_labels_suffix(string $suffix)
     {
 
-        $this->fieldLabelsSuffix = $suffix;
+        $this->field_labels_suffix = $suffix;
 
         return $this;
 
@@ -658,73 +658,73 @@ class FieldCollection extends Collection implements FieldCollectionInterface
     public function set_field_names_prefix(string $prefix)
     {
 
-        $this->fieldNamesPrefix = $prefix;
+        $this->field_names_prefix = $prefix;
 
         return $this;
 
     }
 
     /**
-     * @param $keyOfFieldToReplace
-     * @param $newField
+     * @param $key_of_field_to_replace
+     * @param $new_field
      * @return $this
      */
-    public function replace_field_by_key($newField, string $keyOfFieldToReplace)
+    public function replace_field_by_key($new_field, string $key_of_field_to_replace)
     {
 
-        $this->add_field_before_field_by_key($newField, $keyOfFieldToReplace);
-        $this->remove_field_by_key($keyOfFieldToReplace);
+        $this->add_field_before_field_by_key($new_field, $key_of_field_to_replace);
+        $this->remove_field_by_key($key_of_field_to_replace);
 
         return $this;
 
     }
 
     /**
-     * @param $nameOfFieldToReplace
-     * @param $newField
+     * @param $name_of_field_to_replace
+     * @param $new_field
      * @return $this
      */
-    public function replace_field_by_name($newField, string $nameOfFieldToReplace)
+    public function replace_field_by_name($new_field, string $name_of_field_to_replace)
     {
 
-        $this->add_field_before_field_by_name($newField, $nameOfFieldToReplace);
-        $this->remove_field_by_name($nameOfFieldToReplace);
+        $this->add_field_before_field_by_name($new_field, $name_of_field_to_replace);
+        $this->remove_field_by_name($name_of_field_to_replace);
 
         return $this;
 
     }
 
     /**
-     * @param string $keyPrefix
+     * @param string $key_prefix
      * @return array An array that ACF can work with.
      */
-    public function to_acf_array(string $keyPrefix = '')
+    public function to_acf_array(string $key_prefix = '')
     {
 
         $this->prepare_for_acf_array();
 
-        $acfArray = [];
+        $acf_array = [];
 
         /** @var Field $field */
         foreach ($this->items AS $field) {
 
-            $acfArray[] = $field->to_acf_array($keyPrefix);
+            $acf_array[] = $field->to_acf_array($key_prefix);
 
         }
 
-        return $acfArray;
+        return $acf_array;
 
     }
 
     /**
-     * @param $keyToSearchFor
-     * @param $arrayKey
+     * @param $key_to_search_for
+     * @param $array_key
      * @param $item
      * @return bool
      */
-    protected function key_search_match($keyToSearchFor, $arrayKey, $item) {
+    protected function key_search_match($key_to_search_for, $array_key, $item) {
 
-        return $item->get_key() === $keyToSearchFor;
+        return $item->get_key() === $key_to_search_for;
 
     }
 

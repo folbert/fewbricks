@@ -22,10 +22,10 @@ class RuleGroupCollection extends Collection
 
         $array = [];
 
-        /** @var FieldGroupLocationRuleGroup $ruleGroup */
-        foreach ($this->items AS $ruleGroup) {
+        /** @var FieldGroupLocationRuleGroup $rule_group */
+        foreach ($this->items AS $rule_group) {
 
-            $array[] = $ruleGroup->to_acf_array();
+            $array[] = $rule_group->to_acf_array();
 
         }
 

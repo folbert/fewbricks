@@ -92,56 +92,56 @@ class File extends Field implements FieldInterface
     /**
      * ACF setting. Restrict which files can be uploaded.
      *
-     * @param int $maxSize Max file size in MB
+     * @param int $max_size Max file size in MB
      * @return $this
      */
-    public function set_max_size($maxSize)
+    public function set_max_size($max_size)
     {
 
-        return $this->set_setting('max_size', $maxSize);
+        return $this->set_setting('max_size', $max_size);
 
     }
 
     /**
      * ACF setting. Don't use or pass an empty value for all types.
      *
-     * @param string|array $mimeTypes Comma separated string or array
+     * @param string|array $mime_types Comma separated string or array
      * @return $this
      */
-    public function set_mime_types($mimeTypes)
+    public function set_mime_types($mime_types)
     {
 
-        if (is_array($mimeTypes)) {
-            $mimeTypes = implode(', ', $mimeTypes);
+        if (is_array($mime_types)) {
+            $mime_types = implode(', ', $mime_types);
         }
 
-        return $this->set_setting('mime_types', $mimeTypes);
+        return $this->set_setting('mime_types', $mime_types);
 
     }
 
     /**
      * ACF setting. Restrict which files can be uploaded.
      *
-     * @param int $minSize Minimum file size in MB
+     * @param int $min_size Minimum file size in MB
      * @return $this
      */
-    public function set_min_size($minSize)
+    public function set_min_size($min_size)
     {
 
-        return $this->set_setting('min_size', $minSize);
+        return $this->set_setting('min_size', $min_size);
 
     }
 
     /**
      * ACF setting. Specify the returned value on front end.
      *
-     * @param string $returnFormat "array", "url" or "id"
+     * @param string $return_format "array", "url" or "id"
      * @return $this
      */
-    public function set_return_format($returnFormat)
+    public function set_return_format($return_format)
     {
 
-        return $this->set_setting('return_format', $returnFormat);
+        return $this->set_setting('return_format', $return_format);
 
     }
 

@@ -10,24 +10,24 @@ class Table extends Field
     const TYPE = 'table';
 
     /**
-     * @param $useCaption 1 for "yes" or or 2 for "no"
+     * @param $use_caption 1 for "yes" or or 2 for "no"
      * @return $this
      */
-    public function set_use_caption($useCaption)
+    public function set_use_caption($use_caption)
     {
 
-        return $this->set_setting('use_caption', $useCaption);
+        return $this->set_setting('use_caption', $use_caption);
 
     }
 
     /**
-     * @param $useHeader 0 for "optional", 1 for "yes" or or 2 for "no"
+     * @param $use_header 0 for "optional", 1 for "yes" or or 2 for "no"
      * @return $this
      */
-    public function set_use_header($useHeader)
+    public function set_use_header($use_header)
     {
 
-        return $this->set_setting('use_header', $useHeader);
+        return $this->set_setting('use_header', $use_header);
 
     }
 

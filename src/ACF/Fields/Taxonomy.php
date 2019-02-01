@@ -100,26 +100,26 @@ class Taxonomy extends Field implements FieldInterface
     /**
      * ACF setting. Set if new terms can be added whilst editing.
      *
-     * @param boolean $addTerm
+     * @param boolean $add_term
      * @return $this
      */
-    public function set_add_term($addTerm)
+    public function set_add_term($add_term)
     {
 
-        return $this->set_setting('add_term', $addTerm);
+        return $this->set_setting('add_term', $add_term);
 
     }
 
     /**
      * ACF settings.
      *
-     * @param $allowNull
+     * @param $allow_null
      * @return $this
      */
-    public function set_allow_null($allowNull)
+    public function set_allow_null($allow_null)
     {
 
-        return $this->set_setting('allow_null', $allowNull);
+        return $this->set_setting('allow_null', $allow_null);
 
     }
 
@@ -139,39 +139,39 @@ class Taxonomy extends Field implements FieldInterface
     /**
      * ACF settings. Set if value should be loaded from posts terms.
      *
-     * @param $loadTerms
+     * @param $load_terms
      * @return $this
      */
-    public function set_load_terms($loadTerms)
+    public function set_load_terms($load_terms)
     {
 
-        return $this->set_setting('load_terms', $loadTerms);
+        return $this->set_setting('load_terms', $load_terms);
 
     }
 
     /**
      * ACF setting.
      *
-     * @param string $returnFormat "object" or "id"
+     * @param string $return_format "object" or "id"
      * @return $this
      */
-    public function set_return_format($returnFormat)
+    public function set_return_format($return_format)
     {
 
-        return $this->set_setting('return_format', $returnFormat);
+        return $this->set_setting('return_format', $return_format);
 
     }
 
     /**
      * ACF setting. Set if selected terms should be connected to the post.
      *
-     * @param boolean $saveTerms
+     * @param boolean $save_terms
      * @return $this
      */
-    public function set_save_terms($saveTerms)
+    public function set_save_terms($save_terms)
     {
 
-        return $this->set_setting('save_terms', $saveTerms);
+        return $this->set_setting('save_terms', $save_terms);
 
     }
 

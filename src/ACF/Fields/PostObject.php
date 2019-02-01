@@ -78,13 +78,13 @@ class PostObject extends Field implements FieldInterface
     /**
      * ACF setting.
      *
-     * @param boolean $allowNull
+     * @param boolean $allow_null
      * @return $this
      */
-    public function set_allow_null($allowNull)
+    public function set_allow_null($allow_null)
     {
 
-        return $this->set_setting('allow_null', $allowNull);
+        return $this->set_setting('allow_null', $allow_null);
 
     }
 
@@ -104,26 +104,26 @@ class PostObject extends Field implements FieldInterface
     /**
      * ACF setting. Set which post types to display in drop down.
      *
-     * @param array $postType Array with post type names.
+     * @param array $post_type Array with post type names.
      * @return $this
      */
-    public function set_post_type($postType)
+    public function set_post_type($post_type)
     {
 
-        return $this->set_setting('post_type', $postType);
+        return $this->set_setting('post_type', $post_type);
 
     }
 
     /**
      * ACF setting.
      *
-     * @param $returnFormat "object" for post object or "id" for post id.
+     * @param $return_format "object" for post object or "id" for post id.
      * @return $this
      */
-    public function set_return_format($returnFormat)
+    public function set_return_format($return_format)
     {
 
-        return $this->set_setting('return_format', $returnFormat);
+        return $this->set_setting('return_format', $return_format);
 
     }
 

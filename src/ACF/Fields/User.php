@@ -67,13 +67,13 @@ class User extends Field implements FieldInterface
     /**
      * ACF setting.
      *
-     * @param boolean $allowNull
+     * @param boolean $allow_null
      * @return $this
      */
-    public function set_allow_null($allowNull)
+    public function set_allow_null($allow_null)
     {
 
-        return $this->set_setting('allow_null', $allowNull);
+        return $this->set_setting('allow_null', $allow_null);
 
     }
 
@@ -93,13 +93,13 @@ class User extends Field implements FieldInterface
     /**
      * ACF setting.
      *
-     * @param string $returnFormat
+     * @param string $return_format
      * @return $this
      */
-    public function set_return_format($returnFormat)
+    public function set_return_format($return_format)
     {
 
-        return $this->set_setting('return_format', $returnFormat);
+        return $this->set_setting('return_format', $return_format);
 
     }
 

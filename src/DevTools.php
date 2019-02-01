@@ -19,30 +19,30 @@ class DevTools
     /**
      * @var array
      */
-    private static $acfSettingsArrays = [];
+    private static $acf_settings_arrays = [];
 
     /**
      * @var int
      */
-    private static $executionTimerStart = 0;
+    private static $execution_timer_start = 0;
 
     /**
      * @var int
      */
-    private static $executionTimerEnd = 0;
+    private static $execution_timer_end = 0;
 
     /**
      * @var
      */
-    private static $startHeight;
+    private static $start_height;
 
     /**
-     * @param mixed $startHeight
+     * @param mixed $start_height
      */
-    public static function run($startHeight)
+    public static function run($start_height)
     {
 
-        self::set_start_height($startHeight);
+        self::set_start_height($start_height);
 
         self::inject_js();
         add_action('admin_enqueue_scripts', [self::class, 'enqueue_assets']);
@@ -51,18 +51,18 @@ class DevTools
     }
 
     /**
-     * @param $startHeight
+     * @param $start_height
      */
-    private static function set_start_height($startHeight)
+    private static function set_start_height($start_height)
     {
 
         if (isset($_GET['fewbricks-dev-tools-takeover'])) {
-            $startHeight = 100;
-        } else if ($startHeight === true) {
-            $startHeight = '"minimized"';
+            $start_height = 100;
+        } else if ($start_height === true) {
+            $start_height = '"minimized"';
         }
 
-        self::$startHeight = $startHeight;
+        self::$start_height = $start_height;
 
     }
 
@@ -76,7 +76,7 @@ class DevTools
 
             echo '<script>
               var fewbricksDevTools = {
-                startHeight: ' . DevTools::$startHeight . '
+                startHeight: ' . DevTools::$start_height . '
               };
             </script>';
 
@@ -111,35 +111,35 @@ class DevTools
     }
 
     /**
-     * @param array $acfSettingsArray
+     * @param array $acf_settings_array
      */
-    public static function maybe_store_acf_settings_array_for_dev_display(array $acfSettingsArray)
+    public static function maybe_store_acf_settings_array_for_dev_display(array $acf_settings_array)
     {
 
         if (self::is_activated()) {
 
-            $settingsKey = $acfSettingsArray['key'];
+            $settings_key = $acf_settings_array['key'];
 
             if (
                 (
-                    isset($acfSettingsArray[self::SETTINGS_NAME_FOR_DISPLAYING_ACF_ARRAY]) &&
-                    $acfSettingsArray[self::SETTINGS_NAME_FOR_DISPLAYING_ACF_ARRAY] === true
+                    isset($acf_settings_array[self::SETTINGS_NAME_FOR_DISPLAYING_ACF_ARRAY]) &&
+                    $acf_settings_array[self::SETTINGS_NAME_FOR_DISPLAYING_ACF_ARRAY] === true
                 ) ||
                 (
-                    (false !== ($filterValue = self::get_keys_to_display_settings_for())) &&
+                    (false !== ($filter_value = self::get_keys_to_display_settings_for())) &&
                     (
-                        $filterValue === true || // Not being false does not mean that it is true in this case
-                        ($filterValue === $settingsKey) ||
-                        (is_array($filterValue) && in_array($settingsKey, $filterValue))
+                        $filter_value === true || // Not being false does not mean that it is true in this case
+                        ($filter_value === $settings_key) ||
+                        (is_array($filter_value) && in_array($settings_key, $filter_value))
                     )
                 )
             ) {
 
-                self::$acfSettingsArrays[$settingsKey] = $acfSettingsArray;
+                self::$acf_settings_arrays[$settings_key] = $acf_settings_array;
 
-            } else if (isset($acfSettingsArray['fields']) && is_array($acfSettingsArray['fields'])) {
+            } else if (isset($acf_settings_array['fields']) && is_array($acf_settings_array['fields'])) {
 
-                foreach ($acfSettingsArray['fields'] AS $subField) {
+                foreach ($acf_settings_array['fields'] AS $subField) {
 
                     self::maybe_store_acf_settings_array_for_dev_display($subField);
 
@@ -157,16 +157,24 @@ class DevTools
     public static function get_filter_string()
     {
 
-        $filterValue = self::get_keys_to_display_settings_for();
+        $filter_value = self::get_keys_to_display_settings_for();
 
-        if (is_array($filterValue)) {
-            $string = '[' . implode(', ', $filterValue) . ']';
-        } elseif ($filterValue === true) {
+        if (is_array($filter_value)) {
+
+            $string = '[' . implode(', ', $filter_value) . ']';
+
+        } elseif ($filter_value === true) {
+
             $string = 'all field groups (since you sent "true")';
-        } elseif ($filterValue === false) {
+
+        } elseif ($filter_value === false) {
+
             $string = '';
+
         } else {
-            $string = '"' . (string)$filterValue . '"';
+
+            $string = '"' . (string)$filter_value . '"';
+
         }
 
         return $string;
@@ -179,7 +187,7 @@ class DevTools
     public static function get_acf_settings_arrays()
     {
 
-        return self::$acfSettingsArrays;
+        return self::$acf_settings_arrays;
 
     }
 
@@ -188,7 +196,7 @@ class DevTools
      */
     public static function start_execution_timer()
     {
-        self::$executionTimerStart = microtime(true);
+        self::$execution_timer_start = microtime(true);
     }
 
     /**
@@ -196,7 +204,7 @@ class DevTools
      */
     public static function end_execution_timer()
     {
-        self::$executionTimerEnd = microtime(true);
+        self::$execution_timer_end = microtime(true);
     }
 
     /**
@@ -205,7 +213,7 @@ class DevTools
     public static function get_execution_time()
     {
 
-        return round(self::$executionTimerEnd - self::$executionTimerStart, 4);
+        return round(self::$execution_timer_end - self::$execution_timer_start, 4);
 
     }
 

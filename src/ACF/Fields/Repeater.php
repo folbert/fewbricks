@@ -18,25 +18,25 @@ class Repeater extends FieldWithFields implements FieldInterface
     const TYPE = 'repeater';
 
     /**
-     * @param $acfArray
+     * @param $acf_array
      *
      * @return mixed
      */
-    private function apply_collapsed($acfArray)
+    private function apply_collapsed($acf_array)
     {
 
         if ($this->get_setting('collapsed', 0) != 0) {
 
-            $newKey = Helper::get_new_key_by_original_key_in_acf_array($this->get_setting('collapsed'),
-                $acfArray['sub_fields']);
+            $new_key = Helper::get_new_key_by_original_key_in_acf_array($this->get_setting('collapsed'),
+                $acf_array['sub_fields']);
 
-            if ($newKey !== false) {
-                $acfArray['collapsed'] = $newKey;
+            if ($new_key !== false) {
+                $acf_array['collapsed'] = $new_key;
             }
 
         }
 
-        return $acfArray;
+        return $acf_array;
 
     }
 
@@ -96,26 +96,26 @@ class Repeater extends FieldWithFields implements FieldInterface
     }
 
     /**
-     * @param string $buttonLabel
+     * @param string $button_label
      * @return $this
      */
-    public function set_button_label($buttonLabel)
+    public function set_button_label($button_label)
     {
 
-        return $this->set_setting('button_label', $buttonLabel);
+        return $this->set_setting('button_label', $button_label);
 
     }
 
     /**
      * Set a sub field to show when row is collapsed
      *
-     * @param string $fieldKey
+     * @param string $field_key
      * @return $this
      */
-    public function set_collapsed($fieldKey)
+    public function set_collapsed($field_key)
     {
 
-        return $this->set_setting('collapsed', $fieldKey);
+        return $this->set_setting('collapsed', $field_key);
 
     }
 
@@ -157,19 +157,19 @@ class Repeater extends FieldWithFields implements FieldInterface
     }
 
     /**
-     * @param string $keyPrefix
+     * @param string $key_prefix
      * case
      *
      * @return array|mixed
      */
-    public function to_acf_array(string $keyPrefix = '')
+    public function to_acf_array(string $key_prefix = '')
     {
 
-        $acfArray = parent::to_acf_array($keyPrefix);
+        $acf_array = parent::to_acf_array($key_prefix);
 
-        $acfArray = $this->apply_collapsed($acfArray);
+        $acf_array = $this->apply_collapsed($acf_array);
 
-        return $acfArray;
+        return $acf_array;
 
     }
 

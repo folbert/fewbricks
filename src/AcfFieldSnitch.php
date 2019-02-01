@@ -103,18 +103,18 @@ class AcfFieldSnitch
 
         add_action('admin_enqueue_scripts', function () {
 
-            $baseUrl = plugins_url() . '/fewbricks/assets';
+            $base_url = plugins_url() . '/fewbricks/assets';
 
             wp_enqueue_script(
                 'fewbricks-acf-field-snitch',
-                $baseUrl . '/scripts/acf-field-snitch.js',
+                $base_url . '/scripts/acf-field-snitch.js',
                 ['jquery'],
                 '1.0.0'
             );
 
             wp_enqueue_style(
                 'fewbricks-acf-field-snitch',
-                $baseUrl . '/styles/acf-field-snitch.css',
+                $base_url . '/styles/acf-field-snitch.css',
                 [],
                 '1.0.0'
             );

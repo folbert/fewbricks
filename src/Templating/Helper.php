@@ -22,36 +22,36 @@ class Helper
     }
 
     /**
-     * @param $brickObject
+     * @param $brick_object
      *
      * @return mixed
      */
-    public static function get_brick_template_file_name($brickObject)
+    public static function get_brick_template_file_name($brick_object)
     {
 
-        $namespacedPieces = explode('\\', get_class($brickObject));
-        $className = array_pop($namespacedPieces);
+        $namespaced_pieces = explode('\\', get_class($brick_object));
+        $class_name = array_pop($namespaced_pieces);
 
         // Turn CamelCaseFileNames to dashed-versions. (ClassName -> class-name)
-        $dashedClassName = preg_replace('/([A-Z]+)/', "-$1", lcfirst($className));
+        $dashed_class_name = preg_replace('/([A-Z]+)/', "-$1", lcfirst($class_name));
 
-        $defaultFileName = strtolower($dashedClassName);
-        $defaultFileName .= apply_filters('fewbricks/templater/brick_views_file_name_structure', '.view');
-        $defaultFileName .= '.php';
+        $default_file_name = strtolower($dashed_class_name);
+        $default_file_name .= apply_filters('fewbricks/templater/brick_views_file_name_structure', '.view');
+        $default_file_name .= '.php';
 
-        return apply_filters('fewbricks/templater/brick_template_file_name', $defaultFileName, $brickObject);
+        return apply_filters('fewbricks/templater/brick_template_file_name', $default_file_name, $brick_object);
 
     }
 
     /**
-     * @param Brick $brickObject
+     * @param Brick $brick_object
      *
      * @return mixed
      */
-    public static function get_brick_templates_base_path($brickObject)
+    public static function get_brick_templates_base_path($brick_object)
     {
 
-        return apply_filters('fewbricks/templater/brick_templates_base_path', false, $brickObject);
+        return apply_filters('fewbricks/templater/brick_templates_base_path', false, $brick_object);
 
     }
 

@@ -67,13 +67,13 @@ class Radio extends FieldWithChoices implements FieldInterface
     /**
      * ACF setting.
      *
-     * @param bool $allowNull
+     * @param bool $allow_null
      * @return $this
      */
-    public function set_allow_null($allowNull)
+    public function set_allow_null($allow_null)
     {
 
-        return $this->set_setting('allow_null', $allowNull);
+        return $this->set_setting('allow_null', $allow_null);
 
 
     }
@@ -94,26 +94,26 @@ class Radio extends FieldWithChoices implements FieldInterface
     /**
      * ACF setting.
      *
-     * @param mixed $otherChoice
+     * @param mixed $other_choice
      * @return $this
      */
-    public function set_other_choice($otherChoice)
+    public function set_other_choice($other_choice)
     {
 
-        return $this->set_setting('other_choice', $otherChoice);
+        return $this->set_setting('other_choice', $other_choice);
 
     }
 
     /**
      * ACF setting.
      *
-     * @param mixed $saveOtherChoice
+     * @param mixed $save_other_choice
      * @return $this
      */
-    public function set_save_other_choice($saveOtherChoice)
+    public function set_save_other_choice($save_other_choice)
     {
 
-        return $this->set_setting('save_other_choice', $saveOtherChoice);
+        return $this->set_setting('save_other_choice', $save_other_choice);
 
     }
 

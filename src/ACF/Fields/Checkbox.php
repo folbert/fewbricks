@@ -67,13 +67,13 @@ class Checkbox extends FieldWithChoices implements FieldInterface
     /**
      * ACF setting.
      *
-     * @param boolean $allowCustom
+     * @param boolean $allow_custom
      * @return $this
      */
-    public function setAllowCustom($allowCustom)
+    public function setAllowCustom($allow_custom)
     {
 
-        return $this->set_setting('allow_custom', $allowCustom);
+        return $this->set_setting('allow_custom', $allow_custom);
 
     }
 
@@ -93,13 +93,13 @@ class Checkbox extends FieldWithChoices implements FieldInterface
     /**
      * ACF setting.
      *
-     * @param boolean $saveCustom
+     * @param boolean $save_custom
      * @return $this
      */
-    public function set_save_custom($saveCustom)
+    public function set_save_custom($save_custom)
     {
 
-        return $this->set_setting('save_custom', $saveCustom);
+        return $this->set_setting('save_custom', $save_custom);
 
     }
 

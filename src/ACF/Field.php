@@ -17,7 +17,7 @@ class Field
     /**
      * @var RuleGroupCollection
      */
-    private $conditionalLogicRuleGroups;
+    private $conditional_logic_rule_groups;
 
     /**
      * @var string The key required by ACF. Must be unique across the site.
@@ -27,7 +27,7 @@ class Field
     /**
      * @var
      */
-    protected $keyPrefix;
+    protected $key_prefix;
 
     /**
      * @var string
@@ -43,7 +43,7 @@ class Field
      * @var string|boolean A place to store the original key before we merge it
      * with parent field groups, bricks etc.
      */
-    protected $originalKey;
+    protected $original_key;
 
     /**
      * @var string The key of the parent, if any, that this item is part of.
@@ -78,8 +78,8 @@ class Field
         $this->label = $label;
         $this->name = $name;
         $this->key = $key;
-        $this->keyPrefix = '';
-        $this->originalKey = $key;
+        $this->key_prefix = '';
+        $this->original_key = $key;
         $this->parents = [];
 
         $this->clear_conditional_logic();
@@ -98,13 +98,13 @@ class Field
     }
 
     /**
-     * @param mixed $defaultValue ACF setting. A default value used by ACF if no value has yet been saved.
+     * @param mixed $default_value ACF setting. A default value used by ACF if no value has yet been saved.
      * @return $this
      */
-    public function set_default_value($defaultValue)
+    public function set_default_value($default_value)
     {
 
-        return $this->set_setting('default_value', $defaultValue);
+        return $this->set_setting('default_value', $default_value);
 
     }
 
@@ -141,12 +141,12 @@ class Field
     }
 
     /**
-     * @param $originalKey
+     * @param $original_key
      */
-    protected function set_original_key(string $originalKey)
+    protected function set_original_key(string $original_key)
     {
 
-        $this->originalKey = $originalKey;
+        $this->original_key = $original_key;
 
     }
 
@@ -243,22 +243,22 @@ class Field
     public function clear_conditional_logic()
     {
 
-        $this->conditionalLogicRuleGroups = new RuleGroupCollection();
+        $this->conditional_logic_rule_groups = new RuleGroupCollection();
 
         return $this;
 
     }
 
     /**
-     * @param ConditionalLogicRuleGroup[] $ruleGroups
+     * @param ConditionalLogicRuleGroup[] $rule_groups
      * @return $this
      */
-    public function add_conditional_logic_rule_groups($ruleGroups)
+    public function add_conditional_logic_rule_groups($rule_groups)
     {
 
-        foreach ($ruleGroups AS $ruleGroup) {
+        foreach ($rule_groups AS $rule_group) {
 
-            $this->add_conditional_logic_rule_group($ruleGroup);
+            $this->add_conditional_logic_rule_group($rule_group);
 
         }
 
@@ -267,13 +267,13 @@ class Field
     }
 
     /**
-     * @param ConditionalLogicRuleGroup $ruleGroup
+     * @param ConditionalLogicRuleGroup $rule_group
      * @return $this
      */
-    public function add_conditional_logic_rule_group($ruleGroup)
+    public function add_conditional_logic_rule_group($rule_group)
     {
 
-        $this->conditionalLogicRuleGroups->add_item($ruleGroup);
+        $this->conditional_logic_rule_groups->add_item($rule_group);
 
         return $this;
 
@@ -293,27 +293,27 @@ class Field
     /**
      * @return RuleGroupCollection
      */
-    public function get_conditional_logic_rule_groups()
+    public function get_conditional_logicrulegroups()
     {
 
-        return $this->conditionalLogicRuleGroups;
+        return $this->conditional_logic_rule_groups;
 
     }
 
     /**
-     * @param string $keyPrefix
+     * @param string $key_prefix
      * @return string
      */
-    public function get_final_key(string $keyPrefix = '')
+    public function get_final_key(string $key_prefix = '')
     {
 
-        if(!empty($keyPrefix)) {
-            $keyPrefix .= '_';
+        if(!empty($key_prefix)) {
+            $key_prefix .= '_';
         }
 
-        $keyPrefix .= $this->get_key_prefix_from_parents();
+        $key_prefix .= $this->get_key_prefix_from_parents();
 
-        return Helper::get_valid_field_key($keyPrefix . $this->get_key());
+        return Helper::get_valid_field_key($key_prefix . $this->get_key());
 
     }
 
@@ -323,19 +323,19 @@ class Field
     public function get_key_prefix_from_parents()
     {
 
-        $keyPrefix = '';
+        $key_prefix = '';
 
         $parents = $this->get_parents(true);
 
         foreach($parents AS $parent) {
 
             if($parent['type'] === Brick::CLASS_ID_STRING) {
-                $keyPrefix .= $parent['key'] . '_';
+                $key_prefix .= $parent['key'] . '_';
             }
 
         }
 
-        return $keyPrefix;
+        return $key_prefix;
 
     }
 
@@ -345,19 +345,19 @@ class Field
     public function get_final_name()
     {
 
-        $namePrefix = '';
+        $name_prefix = '';
 
         $parents = $this->get_parents(true);
 
         foreach($parents AS $parent) {
 
             if($parent['type'] === Brick::CLASS_ID_STRING) {
-                $namePrefix .= $parent['name'] . '_';
+                $name_prefix .= $parent['name'] . '_';
             }
 
         }
 
-        return $namePrefix . $this->name;
+        return $name_prefix . $this->name;
 
     }
 
@@ -443,7 +443,7 @@ class Field
     public function get_original_key()
     {
 
-        return $this->originalKey;
+        return $this->original_key;
 
     }
 
@@ -471,14 +471,14 @@ class Field
      * in this instance will return the $defaultValue
      *
      * @param string $name The name of the setting to get
-     * @param mixed $defaultValue Value to return if setting is not set
+     * @param mixed $default_value Value to return if setting is not set
      *
      * @return mixed $defaultValue if value was not found, otherwise the value
      */
-    public function get_setting(string $name, $defaultValue = false)
+    public function get_setting(string $name, $default_value = false)
     {
 
-        $value = $defaultValue;
+        $value = $default_value;
 
         if (isset($this->settings[$name])) {
 
@@ -551,17 +551,17 @@ class Field
     }
 
     /**
-     * @param string $keyPrefix
+     * @param string $key_prefix
      *
      * @return array
      */
-    public function to_acf_array(string $keyPrefix = '')
+    public function to_acf_array(string $key_prefix = '')
     {
 
         $this->prepare_for_acf_array();
 
         $settings = $this->settings;
-        $settings['key'] =  $this->get_final_key($keyPrefix);
+        $settings['key'] =  $this->get_final_key($key_prefix);
         $settings['label'] = $this->label;
         $settings['name'] = $this->name;
         $settings['name'] = $this->get_final_name();
@@ -572,9 +572,9 @@ class Field
             'type' => $this->get_type(),
         ]);
 
-        if (!$this->conditionalLogicRuleGroups->is_empty()) {
+        if (!$this->conditional_logic_rule_groups->is_empty()) {
 
-            $settings['conditional_logic'] = $this->conditionalLogicRuleGroups->to_array();
+            $settings['conditional_logic'] = $this->conditional_logic_rule_groups->to_array();
 
         }
 

@@ -78,26 +78,26 @@ class PageLink extends Field implements FieldInterface
     /**
      * ACF setting.
      *
-     * @param mixed $allowArchives
+     * @param mixed $allow_archives
      * @return $this
      */
-    public function set_allow_archives($allowArchives)
+    public function set_allow_archives($allow_archives)
     {
 
-        return $this->set_setting('allow_archives', $allowArchives);
+        return $this->set_setting('allow_archives', $allow_archives);
 
     }
 
     /**
      * ACF setting.
      *
-     * @param boolean $allowNull
+     * @param boolean $allow_null
      * @return $this
      */
-    public function set_allow_null($allowNull)
+    public function set_allow_null($allow_null)
     {
 
-        return $this->set_setting('allow_null', $allowNull);
+        return $this->set_setting('allow_null', $allow_null);
 
     }
 
@@ -117,13 +117,13 @@ class PageLink extends Field implements FieldInterface
     /**
      * ACF setting.
      *
-     * @param mixed $postType Array with post type names
+     * @param mixed $post_type Array with post type names
      * @return $this
      */
-    public function set_post_type(array $postType)
+    public function set_post_type(array $post_type)
     {
 
-        return $this->set_setting('post_type', $postType);
+        return $this->set_setting('post_type', $post_type);
 
     }
 

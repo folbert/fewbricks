@@ -56,13 +56,13 @@ class DateTimePicker extends DateTimeField implements FieldInterface
     /**
      * ACF setting. Set the weekday that the week should start on.
      *
-     * @param int $firstDay Integer representing a day. 0 = Sunday, 1 = Monday etc.
+     * @param int $first_day Integer representing a day. 0 = Sunday, 1 = Monday etc.
      * @return $this
      */
-    public function set_first_day($firstDay)
+    public function set_first_day($first_day)
     {
 
-        return $this->set_setting('first_day', $firstDay);
+        return $this->set_setting('first_day', $first_day);
 
     }
 

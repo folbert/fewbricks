@@ -161,7 +161,7 @@ final class FieldGroupTest extends TestCase
                 )
         );
 
-        $this->assertInstanceOf(RuleGroupCollection::class, $fieldGroup->get_location_rule_groups());
+        $this->assertInstanceOf(RuleGroupCollection::class, $fieldGroup->get_location_rulegroups());
 
         $this->assertEquals([
             [
@@ -184,7 +184,7 @@ final class FieldGroupTest extends TestCase
                 ]
             ]
         ],
-            $fieldGroup->get_location_rule_groups()->to_array()
+            $fieldGroup->get_location_rulegroups()->to_array()
         );
 
     }

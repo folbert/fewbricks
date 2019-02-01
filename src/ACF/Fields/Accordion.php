@@ -54,26 +54,26 @@ class Accordion extends Field implements FieldInterface
     /**
      * ACF setting. Set if this field should be used as an end-point and start a new group of tabs
      *
-     * @param boolean $endPoint
+     * @param boolean $endpoint
      * @return $this
      */
-    public function set_endpoint($endPoint)
+    public function set_endpoint($endpoint)
     {
 
-        return $this->set_setting('endpoint', $endPoint);
+        return $this->set_setting('endpoint', $endpoint);
 
     }
 
     /**
      * ACF setting. Pass true to allow this accordion to open without closing others.
      *
-     * @param boolean $multiExpand
+     * @param boolean $multi_expand
      * @return $this
      */
-    public function set_multi_expand($multiExpand)
+    public function set_multi_expand($multi_expand)
     {
 
-        return $this->set_setting('multi_expand', $multiExpand);
+        return $this->set_setting('multi_expand', $multi_expand);
 
     }
 

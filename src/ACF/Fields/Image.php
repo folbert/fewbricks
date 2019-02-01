@@ -45,27 +45,27 @@ class Image extends FieldWithImages implements FieldInterface
     /**
      * ACF setting. Shown when entering data
      *
-     * @param string $previewSize The name of a defined image size. For example "thumbnail", "medium", "large" or any
+     * @param string $preview_size The name of a defined image size. For example "thumbnail", "medium", "large" or any
      *                            custom image size.
      * @return $this
      */
-    public function set_preview_size($previewSize)
+    public function set_preview_size($preview_size)
     {
 
-        return $this->set_setting('preview_size', $previewSize);
+        return $this->set_setting('preview_size', $preview_size);
 
     }
 
     /**
      * ACF setting. Specify the returned value on front end.
      *
-     * @param string $returnFormat "array", "url" or "id"
+     * @param string $return_format "array", "url" or "id"
      * @return $this
      */
-    public function set_return_format($returnFormat)
+    public function set_return_format($return_format)
     {
 
-        return $this->set_setting('return_format', $returnFormat);
+        return $this->set_setting('return_format', $return_format);
 
     }
 

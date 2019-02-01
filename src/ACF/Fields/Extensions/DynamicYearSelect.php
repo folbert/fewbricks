@@ -41,78 +41,78 @@ class DynamicYearSelect extends Field
      */
 
     /**
-     * @param $currentYear array with indexes 'allow' (boolean) and 'current' which should hold the text to display for
+     * @param $current_year array with indexes 'allow' (boolean) and 'current' which should hold the text to display for
      * current year in the select box.
      * @return $this
      */
-    public function set_current_year(array $currentYear)
+    public function set_current_year(array $current_year)
     {
 
         // Make sure all indexes are set.
-        $currentYear = array_merge([
+        $current_year = array_merge([
             'allow' => false,
             'label' => 'Current',
-        ], $currentYear);
+        ], $current_year);
 
-        return $this->set_setting('current_year', $currentYear);
+        return $this->set_setting('current_year', $current_year);
 
     }
 
     /**
-     * @param array $newestYear
+     * @param array $newest_year
      * @return $this
      */
-    public function set_newest_year(array $newestYear)
+    public function set_newest_year(array $newest_year)
     {
 
-        $newestYear = array_merge([
+        $newest_year = array_merge([
             'method' => 'exact',
             'exact_year' => date('Y'),
             'relative_year' => 20,
             'relative_year_direction' => 'after',
-        ], $newestYear);
+        ], $newest_year);
 
-        return $this->set_setting('newest_year', $newestYear);
+        return $this->set_setting('newest_year', $newest_year);
 
     }
 
     /**
-     * @param array $oldestYear
+     * @param array $oldest_year
      * @return $this
      */
-    public function set_oldest_year(array $oldestYear)
+    public function set_oldest_year(array $oldest_year)
     {
 
-        $oldestYear = array_merge([
+        $oldest_year = array_merge([
             'method' => 'relative',
             'exact_year' => date('Y'),
             'relative_year' => 20,
             'relative_year_direction' => 'before',
-        ], $oldestYear);
+        ], $oldest_year);
 
-        return $this->set_setting('oldest_year', $oldestYear);
-
-    }
-
-    /**
-     * @param $orderBy 'chronological' or 'rchronological' for reversed chronological.
-     * @return $this
-     */
-    public function set_order_by($orderBy)
-    {
-
-        return $this->set_setting('order_by', $orderBy);
+        return $this->set_setting('oldest_year', $oldest_year);
 
     }
 
     /**
-     * @param $yearStep
+     * @param $order_by 'chronological' or 'rchronological' for reversed chronological.
      * @return $this
      */
-    public function set_year_step($yearStep)
+    public function set_order_by($order_by)
     {
 
-        return $this->set_setting('year_step', $yearStep);
+        return $this->set_setting('order_by', $order_by);
+
+    }
+
+    /**
+     * @param $year_step
+     * @return $this
+     */
+    public function set_year_step($year_step)
+    {
+
+        return $this->set_setting('year_step', $year_step);
 
     }
 
@@ -122,12 +122,12 @@ class DynamicYearSelect extends Field
     public function get_current_year()
     {
 
-        $defaultValue = [
+        $default_value = [
             'allow' => false,
             'label' => 'Current',
         ];
 
-        return $this->get_setting('current_year', $defaultValue);
+        return $this->get_setting('current_year', $default_value);
 
     }
 
@@ -137,14 +137,14 @@ class DynamicYearSelect extends Field
     public function get_newest_year()
     {
 
-        $defaultValue = [
+        $default_value = [
             'method' => 'exact',
             'exact_year' => date('Y'),
             'relative_year' => 20,
             'relative_year_direction' => 'after'
         ];
 
-        return $this->get_setting('newest_year', $defaultValue);
+        return $this->get_setting('newest_year', $default_value);
 
     }
 
@@ -154,14 +154,14 @@ class DynamicYearSelect extends Field
     public function get_oldest_year()
     {
 
-        $defaultValue = [
+        $default_value = [
             'method' => 'relative',
             'exact_year' => date('Y'),
             'relative_year' => 20,
             'relative_year_direction' => 'before',
         ];
 
-        return $this->get_setting('oldest_year', $defaultValue);
+        return $this->get_setting('oldest_year', $default_value);
 
     }
 

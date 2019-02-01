@@ -51,21 +51,21 @@ class Helper
     }
 
     /**
-     * @param string $originalKey
-     * @param array $acfArrayItems
+     * @param string $original_key
+     * @param array $acf_array_items
      *
      * @return bool|string
      */
-    public static function get_new_key_by_original_key_in_acf_array(string $originalKey, array $acfArrayItems)
+    public static function get_new_key_by_original_key_in_acf_array(string $original_key, array $acf_array_items)
     {
 
         $outcome = false;
 
-        foreach ($acfArrayItems AS $acfArrayItem) {
+        foreach ($acf_array_items AS $acf_array_item) {
 
-            if ($acfArrayItem['fewbricks__original_key'] === $originalKey) {
+            if ($acf_array_item['fewbricks__original_key'] === $original_key) {
 
-                $outcome = $acfArrayItem['key'];
+                $outcome = $acf_array_item['key'];
                 break;
 
             }
@@ -82,14 +82,14 @@ class Helper
      *
      * @param array $array
      * @param string $key
-     * @param mixed $defaultValue
+     * @param mixed $default_value
      *
      * @return mixed
      */
-    public static function get_value_from_array(array $array, string $key, $defaultValue)
+    public static function get_value_from_array(array $array, string $key, $default_value)
     {
 
-        $outcome = $defaultValue;
+        $outcome = $default_value;
 
         if (isset($array[$key])) {
             $outcome = $array[$key];
@@ -145,7 +145,9 @@ class Helper
     {
 
         if (DevTools::is_activated()) {
+
             DevTools::run(DevTools::get_display_filter_value());
+
         }
 
         self::init_field_snitch();
@@ -211,67 +213,67 @@ class Helper
 
     /**
      * Makes sure that passed string starts with "field_"
-     * @param string $fieldKey
+     * @param string $field_key
      * @return string
      */
-    public static function get_valid_field_key(string $fieldKey)
+    public static function get_valid_field_key(string $field_key)
     {
 
         // Lets make sure that the key is ok for ACF
         // https://www.advancedcustomfields.com/resources/register-fields-via-php/#field-settings
-        if (substr($fieldKey, 0, 6) !== 'field_') {
-            $fieldKey = 'field_' . $fieldKey;
+        if (substr($field_key, 0, 6) !== 'field_') {
+            $field_key = 'field_' . $field_key;
         }
 
-        return $fieldKey;
+        return $field_key;
 
     }
 
     /**
      * Makes sure that passed string starts with "_group"
-     * @param $fieldGroupKey
+     * @param $field_group_key
      * @return string
      */
-    public static function get_valid_field_group_key(string $fieldGroupKey)
+    public static function get_valid_field_group_key(string $field_group_key)
     {
 
         // Lets keep in order with how ACF gives keys to field groups and prepend with "group_"
         // https://www.advancedcustomfields.com/resources/register-fields-via-php/
-        if (substr($fieldGroupKey, 0, 6) !== 'group_') {
-            $fieldGroupKey = 'group_' . $fieldGroupKey;
+        if (substr($field_group_key, 0, 6) !== 'group_') {
+            $field_group_key = 'group_' . $field_group_key;
         }
 
-        return $fieldGroupKey;
+        return $field_group_key;
 
     }
 
     /**
      * @param string $key
-     * @param array $acfArray
+     * @param array $acf_array
      * @return bool
      */
-    public static function get_field_by_original_key_from_acf_array(string $key, array $acfArray)
+    public static function get_field_by_original_key_from_acf_array(string $key, array $acf_array)
     {
 
-        $foundField = false;
+        $found_field = false;
 
-        foreach ($acfArray AS $acfArrayKey => $fieldSettings) {
+        foreach ($acf_array AS $acf_array_key => $field_settings) {
 
-            if ($fieldSettings['fewbricks__original_key'] == $key) {
+            if ($field_settings['fewbricks__original_key'] == $key) {
 
-                $foundField = $fieldSettings;
+                $found_field = $field_settings;
 
             }
 
-            if ($foundField === false) {
+            if ($found_field === false) {
 
-                if (isset($fieldSettings['sub_fields']) && is_array($fieldSettings['sub_fields'])) {
+                if (isset($field_settings['sub_fields']) && is_array($field_settings['sub_fields'])) {
 
-                    $foundField = self::get_field_by_original_key_from_acf_array($key, $fieldSettings['sub_fields']);
+                    $found_field = self::get_field_by_original_key_from_acf_array($key, $field_settings['sub_fields']);
 
-                } else if (isset($fieldSettings['layouts']) && is_array($fieldSettings['layouts'])) {
+                } else if (isset($field_settings['layouts']) && is_array($field_settings['layouts'])) {
 
-                    $foundField = self::get_field_by_original_key_from_acf_array($key, $fieldSettings['layouts']);
+                    $found_field = self::get_field_by_original_key_from_acf_array($key, $field_settings['layouts']);
 
                 }
 
@@ -279,7 +281,7 @@ class Helper
 
         }
 
-        return $foundField;
+        return $found_field;
 
     }
 
@@ -321,31 +323,32 @@ class Helper
      * Keys only need to be validated against keys in the same collection since fields in a collection
      * always gets its key prefix from the field group.
      * @param array $fields
-     * @param bool $dieOnInvalid
+     * @param bool $die_on_invalid
      * @return bool
      */
-    public static function validate_unique_keys(array $fields, $dieOnInvalid = true)
+    public static function validate_unique_keys(array $fields, $die_on_invalid = true)
     {
 
-        $flattenedAcfArray = self::get_flattened_acf_array($fields);
+        $flattened_acf_array = self::get_flattened_acf_array($fields);
 
-        $nonUniqueKey = self::get_non_unique_key($flattenedAcfArray);
+        $non_unique_key = self::get_non_unique_key($flattened_acf_array);
 
-        if ($nonUniqueKey !== false && $dieOnInvalid) {
+        if ($non_unique_key !== false && $die_on_invalid) {
 
-            $firstNonUnique = false;
-            $secondNonUnique = false;
-            foreach ($flattenedAcfArray AS $field) {
+            $first_non_unique = false;
+            $second_non_unique = false;
 
-                if ($field['key'] === $nonUniqueKey) {
+            foreach ($flattened_acf_array AS $field) {
 
-                    if ($firstNonUnique == false) {
+                if ($field['key'] === $non_unique_key) {
 
-                        $firstNonUnique = $field;
+                    if ($first_non_unique == false) {
+
+                        $first_non_unique = $field;
 
                     } else {
 
-                        $secondNonUnique = $field;
+                        $second_non_unique = $field;
                         break;
 
                     }
@@ -356,21 +359,21 @@ class Helper
 
             $message = '';
 
-            $message .= 'Error when attempting to register an item with the key "' . $secondNonUnique . '"';
+            $message .= 'Error when attempting to register an item with the key "' . $second_non_unique . '"';
 
-            if ($secondNonUnique !== false) {
-                $message .= ' and label "' . $secondNonUnique['label'] . '"';
-                $message .= ' and name "' . $secondNonUnique['name'] . '"';
+            if ($second_non_unique !== false) {
+                $message .= ' and label "' . $second_non_unique['label'] . '"';
+                $message .= ' and name "' . $second_non_unique['name'] . '"';
             }
 
             $message .= '. ';
 
             $message .= 'The key is already in use';
 
-            if ($firstNonUnique !== false) {
+            if ($first_non_unique !== false) {
 
-                $message .= ' by an item labeled "' . $firstNonUnique['label'] . '"';
-                $message .= ' and named "' . $firstNonUnique['name'] . '"';
+                $message .= ' by an item labeled "' . $first_non_unique['label'] . '"';
+                $message .= ' and named "' . $first_non_unique['name'] . '"';
 
             }
 
@@ -386,7 +389,7 @@ class Helper
 
         }
 
-        return ($nonUniqueKey === false);
+        return ($non_unique_key === false);
 
     }
 
@@ -398,16 +401,16 @@ class Helper
     private static function get_non_unique_key(array $fields)
     {
 
-        $nonUniqueKey = false;
+        $non_unique_key = false;
         $keys = [];
 
         foreach ($fields AS $field) {
 
-            $fieldKey = $field['key'];
+            $field_key = $field['key'];
 
-            if (isset($keys[$fieldKey])) {
+            if (isset($keys[$field_key])) {
 
-                $nonUniqueKey = $fieldKey;
+                $non_unique_key = $field_key;
                 break;
 
             }
@@ -416,25 +419,25 @@ class Helper
 
         }
 
-        return $nonUniqueKey;
+        return $non_unique_key;
 
     }
 
     /**
-     * @param array $acfArrayFields
+     * @param array $acf_array_fields
      * @return array
      */
-    public static function get_flattened_acf_array(array $acfArrayFields)
+    public static function get_flattened_acf_array(array $acf_array_fields)
     {
 
         $flattened = [];
 
-        foreach ($acfArrayFields AS $field) {
+        foreach ($acf_array_fields AS $field) {
 
             $flattened[] = $field;
 
-            if (false !== ($childFields = self::get_child_fields_array($field))) {
-                $flattened = array_merge($flattened, self::get_flattened_acf_array($childFields['fields']));
+            if (false !== ($child_fields = self::get_child_fields_array($field))) {
+                $flattened = array_merge($flattened, self::get_flattened_acf_array($child_fields['fields']));
             }
 
         }
@@ -445,26 +448,26 @@ class Helper
     }
 
     /**
-     * @param array $fieldArray
+     * @param array $field_array
      * @return array|bool
      */
-    public static function get_child_fields_array(array $fieldArray)
+    public static function get_child_fields_array(array $field_array)
     {
 
         $array = false;
 
-        if (isset($fieldArray['sub_fields']) && !empty($fieldArray['sub_fields'])) {
+        if (isset($field_array['sub_fields']) && !empty($field_array['sub_fields'])) {
 
             $array = [
                 'name' => 'sub_fields',
-                'fields' => $fieldArray['sub_fields'],
+                'fields' => $field_array['sub_fields'],
             ];
 
-        } elseif (isset($fieldArray['layouts']) && !empty($fieldArray['layouts'])) {
+        } elseif (isset($field_array['layouts']) && !empty($field_array['layouts'])) {
 
             $array = [
                 'name' => 'layouts',
-                'fields' => $fieldArray['layouts'],
+                'fields' => $field_array['layouts'],
             ];
 
         }
@@ -486,24 +489,28 @@ class Helper
 
     /**
      * @param $message
-     * @param bool $testExceptionClass
+     * @param bool $test_exception_class
      * @return mixed
      */
-    public static function fewbricks_die($message, $testExceptionClass = false)
+    public static function fewbricks_die($message, $test_exception_class = false)
     {
 
         if (defined('FEWBRICKS_UNIT_TESTING') && FEWBRICKS_UNIT_TESTING === true) {
 
-            if($testExceptionClass === false) {
-                $testExceptionClass = \RuntimeException::class;
+            if($test_exception_class === false) {
+                $test_exception_class = \RuntimeException::class;
             }
 
-            throw new $testExceptionClass($message);
+            throw new $test_exception_class($message);
 
         } else if (function_exists('wp_die')) {
+
             wp_die($message);
+
         } else {
+
             die($message);
+
         }
 
     }
