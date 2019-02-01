@@ -96,17 +96,17 @@ final class FieldGroupTest extends TestCase
 
         $fieldGroup->add_location_rule_group(
             (new FieldGroupLocationRuleGroup())
-                ->addFieldGroupLocationRule(
+                ->add_field_group_location_rule(
                     new FieldGroupLocationRule('post_type', '==', 'post')
                 )
-                ->addFieldGroupLocationRule(
+                ->add_field_group_location_rule(
                     new FieldGroupLocationRule('post_type', '==', 'page')
                 )
         );
 
         $fieldGroup->add_location_rule_group(
             (new FieldGroupLocationRuleGroup())
-                ->addFieldGroupLocationRule(
+                ->add_field_group_location_rule(
                     new FieldGroupLocationRule('user_role', '!=', 'administrator')
                 )
         );
@@ -146,17 +146,17 @@ final class FieldGroupTest extends TestCase
 
         $fieldGroup->add_location_rule_group(
             (new FieldGroupLocationRuleGroup())
-                ->addFieldGroupLocationRule(
+                ->add_field_group_location_rule(
                     new FieldGroupLocationRule('post_type', '==', 'post')
                 )
-                ->addFieldGroupLocationRule(
+                ->add_field_group_location_rule(
                     new FieldGroupLocationRule('post_type', '==', 'page')
                 )
         );
 
         $fieldGroup->add_location_rule_group(
             (new FieldGroupLocationRuleGroup())
-                ->addFieldGroupLocationRule(
+                ->add_field_group_location_rule(
                     new FieldGroupLocationRule('user_role', '!=', 'administrator')
                 )
         );

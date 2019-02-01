@@ -19,7 +19,7 @@ add_action('fewbricks/init', function () {
     (new AllFields('All fields', '1812032255a'))
         ->add_location_rule_group(
             (new FieldGroupLocationRuleGroup())
-                ->addFieldGroupLocationRule(
+                ->add_field_group_location_rule(
                     new FieldGroupLocationRule('post_type', '==', 'fewbricks_demo_pg2')
                 )
         )
@@ -29,7 +29,7 @@ add_action('fewbricks/init', function () {
     (new AllFields('All fields 2', '1812032255a'))
         ->add_location_rule_group(
             (new FieldGroupLocationRuleGroup())
-                ->addFieldGroupLocationRule(
+                ->add_field_group_location_rule(
                     new FieldGroupLocationRule('post_type', '==', 'fewbricks_demo_pg2')
                 )
         )

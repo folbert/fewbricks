@@ -24,18 +24,18 @@ $darkTowerContestFieldGroup = (new FieldGroup('Dark Tower Contest', '1811252128a
 // Tell the field group where it should show up
 ->add_location_rule_group( 
     (new FieldGroupLocationRuleGroup())
-        ->addFieldGroupLocationRule(
+        ->add_field_group_location_rule(
             // When editing a post
             new FieldGroupLocationRule('post_type', '==', 'post')
         )
 ) // ...or ...
 ->add_location_rule_group(
     (new FieldGroupLocationRuleGroup())
-        ->addFieldGroupLocationRule(
+        ->add_field_group_location_rule(
             // ...when editing a page...
             new FieldGroupLocationRule('post_type', '==', 'page')
         )
-        ->addFieldGroupLocationRule(
+        ->add_field_group_location_rule(
             // ...and the user is an editor.
             new FieldGroupLocationRule('user_role', '==', 'editor')
         )
@@ -99,7 +99,7 @@ class FooterGlobalTexts extends FieldGroup
 
         $this->add_location_rule_group(
             (new FieldGroupLocationRuleGroup())
-            ->addFieldGroupLocationRule(
+            ->add_field_group_location_rule(
                 new FieldGroupLocationRule('options_page', '==', 'fewbricks-demo-options--global-texts')
             )
         );

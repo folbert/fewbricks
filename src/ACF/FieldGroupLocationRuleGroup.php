@@ -16,7 +16,7 @@ class FieldGroupLocationRuleGroup extends RuleGroup
      * @param FieldGroupLocationRule $rule
      * @return $this
      */
-    public function addFieldGroupLocationRule($rule)
+    public function add_field_group_location_rule($rule)
     {
 
         if (!($rule instanceof FieldGroupLocationRule)) {

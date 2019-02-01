@@ -113,7 +113,7 @@ use Fewbricks\ACF\Fields\Select;
 use Fewbricks\ACF\Fields\Text;
 use Fewbricks\ACF\Fields\Wysiwyg;
 
-$favouriteCharacter = (new Select('Who is your favourite character?', 'favourite_character', '1811262140b'))
+$favourite_character = (new Select('Who is your favourite character?', 'favourite_character', '1811262140b'))
 ->set_choices([
     'roland' => 'Roland Deschain',
     'jake' => 'Jake Chambers',
@@ -127,12 +127,12 @@ $favouriteCharacter = (new Select('Who is your favourite character?', 'favourite
 // Fewbricks feature allowing you to prefix the label.
 ->prefix_label('Please answer this question: ');
 
-$otherFavouriteCharacter = (new Text('My favourite character is none of the above but:', 'other_favourite_character',
+$other_favourite_character = (new Text('My favourite character is none of the above but:', 'other_favourite_character',
 '1811262140a'))
 ->add_conditional_logic_rule_group
 (
     (new ConditionalLogicRuleGroup())
-        ->addConditionalLogicRule(
+        ->add_conditional_logic_rule(
             // Only display this field if the field with key "1811262140b" is set to "other".
             new ConditionalLogicRule('1811262140b', '==', 'other')
         )
@@ -166,7 +166,7 @@ use FewbricksDemo\Bricks\ImageAndText;
 // Tell the field group when it should show up
 ->add_location_rule_group(
     (new FieldGroupLocationRuleGroup())
-        ->addFieldGroupLocationRule(
+        ->add_field_group_location_rule(
             // When editing a post
             new FieldGroupLocationRule('post_type', '==', 'post')
         )
@@ -176,16 +176,16 @@ use FewbricksDemo\Bricks\ImageAndText;
 // ...but show the permalink
 ->set_show_on_screen('permalink')
 // Add a single field or...
-->add_field($favouriteCharacter)
+->add_field($favourite_character)
 // ...add multiple fields.
 ->add_fields([
-    $otherFavouriteCharacter,
+    $other_favourite_character,
     $motivation,
     // Create an inline field
     (new Email('Enter your e-mail for a chance to win!', 'e_mail', '1811281100a'))
         ->set_required(true)
 ])
-->add_brick((new ImageAndText('image_and_name', '1811290826a')))
+->add_brick((new ImageAndText('1811290826a', 'image_and_name')))
 // Finish up by registering the field group to ACF.
 ->register();
 

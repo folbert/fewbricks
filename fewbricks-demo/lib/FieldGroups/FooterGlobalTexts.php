@@ -20,7 +20,7 @@ class FooterGlobalTexts extends FieldGroup
 
         $this->add_location_rule_group(
             (new FieldGroupLocationRuleGroup())
-            ->addFieldGroupLocationRule(
+            ->add_field_group_location_rule(
                 new FieldGroupLocationRule('options_page', '==', 'fewbricks-demo-options--global-texts')
             )
         );
