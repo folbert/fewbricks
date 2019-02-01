@@ -64,7 +64,7 @@ class AcfCoreFields extends Brick
             (new Image('Image', 'fd_image', '1711231901c'))
                 ->set_preview_size('thumbnail')
         );
-        $flexibleContent->addLayout($layout);
+        $flexibleContent->add_layout($layout);
 
         // Testing duplicate keys
         $layout = new Layout('Text and image2', 'fd_text_and_image2', '1711231901o');
@@ -73,11 +73,11 @@ class AcfCoreFields extends Brick
             (new Image('Image', 'fd_image2', '1711231901c'))
                 ->set_preview_size('large')
         );
-        $flexibleContent->addLayout($layout);
+        $flexibleContent->add_layout($layout);
 
         $layout = new Layout('Testing brick', 'fd_testing_brick', '1812051452a');
         $layout->add_brick(new ImageAndText('1812051452u', 'brick_test'));
-        $flexibleContent->addLayout($layout);
+        $flexibleContent->add_layout($layout);
 
         $layout = new Layout('Text and select', 'fd_text_and_select', '1711231907a');
         $layout->add_field(new Text('Text', 'fd_text', '1711231907b'))
@@ -89,18 +89,18 @@ class AcfCoreFields extends Brick
                     ])
             );
 
-        $flexibleContent->addLayout($layout);
+        $flexibleContent->add_layout($layout);
 
         $layout = new Layout('Single image', 'fd_single_image', '1712252217a');
         $layout->add_field(new Image('Image', 'fd_image', '1712252218i'));
-        $flexibleContent->addLayout($layout);
+        $flexibleContent->add_layout($layout);
 
         // This is of course a somewhat stupid usage of the functionality since we could simply
         // not add the sub field to start with. But for demo purposes...
         $layoutsToRemove = $this->get_argument('remove_layouts', false);
         if ($layoutsToRemove !== false) {
             foreach ($layoutsToRemove AS $layoutToRemove) {
-                $flexibleContent->removeLayout($layoutToRemove);
+                $flexibleContent->remove_layout($layoutToRemove);
             }
 
             $flexibleContent->set_instructions('This flexible content have had some layouts removed.');
@@ -341,10 +341,10 @@ class AcfCoreFields extends Brick
     /**
      * @return array
      */
-    public function getViewData()
+    public function get_view_data()
     {
 
-        return $this->getFieldValues(['text', 'image']);
+        return $this->get_field_values(['text', 'image']);
 
     }
 

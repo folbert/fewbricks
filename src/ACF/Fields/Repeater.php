@@ -27,7 +27,7 @@ class Repeater extends FieldWithFields implements FieldInterface
 
         if ($this->get_setting('collapsed', 0) != 0) {
 
-            $newKey = Helper::getNewKeyByOriginalKeyInAcfArray($this->get_setting('collapsed'),
+            $newKey = Helper::get_new_key_by_original_key_in_acf_array($this->get_setting('collapsed'),
                 $acfArray['sub_fields']);
 
             if ($newKey !== false) {

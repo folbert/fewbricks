@@ -52,10 +52,10 @@ class ExtensionFields extends Brick
     /**
      * @return array
      */
-    public function getViewData()
+    public function get_view_data()
     {
 
-        return $this->getFieldValues(['text', 'image']);
+        return $this->get_field_values(['text', 'image']);
 
     }
 

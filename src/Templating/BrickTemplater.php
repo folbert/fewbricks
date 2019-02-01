@@ -33,14 +33,14 @@ class BrickTemplater extends Templater
 
     /**
      * Returns HTML for the brick wrapped in any layouts that have been specified for the brick. Acts as a wrapper
-     * for get_layoutedHtml()
+     * for get_layouted_html()
      *
      * @return string
      */
-    public function getHtml()
+    public function get_html()
     {
 
-        return $this->get_layoutedHtml($this->getBrickHtml());
+        return $this->get_layouted_html($this->get_brick_html());
 
     }
 
@@ -49,7 +49,7 @@ class BrickTemplater extends Templater
      *
      * @return string
      */
-    private function getBrickHtml()
+    private function get_brick_html()
     {
 
         $templateFilePath = $this->templateFilePath;
@@ -57,15 +57,15 @@ class BrickTemplater extends Templater
         // If no brick template has been specified directly on this instance of BrickTemplater
         if (empty($templateFilePath)) {
 
-            $brickTemplatesBasePath = Helper::getBrickTemplatesBasePath($this->brick);
+            $brickTemplatesBasePath = Helper::get_brick_templates_base_path($this->brick);
 
             if ($brickTemplatesBasePath !== false) {
 
-                $templateFilePath = $brickTemplatesBasePath . '/' . Helper::getBrickTemplateFileName($this->brick);
+                $templateFilePath = $brickTemplatesBasePath . '/' . Helper::get_brick_template_file_name($this->brick);
 
             } else {
 
-                \Fewbricks\Helpers\Helper::fewbricksDie(('Please make sure that you have used the filter <code>fewbricks/templater/brick_templates_base_path</code>
+                \Fewbricks\Helpers\Helper::fewbricks_die(('Please make sure that you have used the filter <code>fewbricks/templater/brick_templates_base_path</code>
 to tell Brick::getBrickTemplateHtml() where to look for brick template files.'));
 
             }
@@ -73,7 +73,7 @@ to tell Brick::getBrickTemplateHtml() where to look for brick template files.'))
         }
 
         // Data to be used in template
-        $data = $this->brick->getViewData();
+        $data = $this->brick->get_view_data();
         $brick = $this->brick;
         $settings = $this->settings;
 
@@ -90,10 +90,10 @@ to tell Brick::getBrickTemplateHtml() where to look for brick template files.'))
      * @param $html
      * @return false|string
      */
-    protected function get_layoutedHtml(string $html) {
+    protected function get_layouted_html(string $html) {
 
         if (
-            false !== ($layoutsBasePath = Helper::getBrickLayoutsBasePath()) &&
+            false !== ($layoutsBasePath = Helper::get_brick_layouts_base_path()) &&
             !empty($this->layoutFiles)
         ) {
 
@@ -106,7 +106,7 @@ to tell Brick::getBrickTemplateHtml() where to look for brick template files.'))
                 ob_start();
 
                 /** @noinspection PhpIncludeInspection */
-                include $layoutsBasePath . '/' . $layout . Helper::getViewFilesNameStructure() . '.php';
+                include $layoutsBasePath . '/' . $layout . Helper::get_view_files_name_structure() . '.php';
 
                 $html = ob_get_clean();
 

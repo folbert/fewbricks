@@ -14,7 +14,7 @@ class Exporter
     public static function maybe_store_simple_field_group_data(string $fieldGroupTitle, string $fieldGroupKey)
     {
 
-        if (Helper::pageIsFewbricksAdminPage()) {
+        if (Helper::page_is_fewbricks_admin_page()) {
 
             global $simpleFieldGroupsData;
 
@@ -31,16 +31,16 @@ class Exporter
     /**
      *
      */
-    public static function maybeWriteToPhpCodeFile()
+    public static function maybe_write_to_php_code_file()
     {
 
         $codeToWrite = '';
 
-        $targetFile = self::getAutoWritePhpCodeFile();
+        $targetFile = self::get_auto_write_php_code_file();
 
         if ($targetFile !== false) {
 
-            $codes = self::getFieldGroupsPhpCodes();
+            $codes = self::get_field_groups_php_codes();
 
             if (is_array($codes)) {
 
@@ -56,13 +56,13 @@ class Exporter
 
                 file_put_contents($targetFile, "<?php\r\r" . $codeToWrite);
 
-                if (self::displayPhpFileWrittenMessage()) {
+                if (self::display_php_file_written_message()) {
 
                     add_action('admin_notices', function () {
 
                         $message = '<div class="notice notice-info">';
                         $message .= '<p>' . sprintf(__('PHP code written to <code>%s</code>', 'fewbricks'),
-                                self::getAutoWritePhpCodeFile()) . '</p>';
+                                self::get_auto_write_php_code_file()) . '</p>';
                         $message .= '</div>';
 
                         echo $message;
@@ -83,12 +83,12 @@ class Exporter
      *
      * @return array
      */
-    public static function getFieldGroupsPhpCodes($fieldGroupKeys = false)
+    public static function get_field_groups_php_codes($fieldGroupKeys = false)
     {
 
         $codes = [];
 
-        $storedSettings = self::getStoredFieldGroupsAcfSettings();
+        $storedSettings = self::get_stored_field_groups_acf_settings();
 
         if (!empty($storedSettings)) {
 
@@ -155,7 +155,7 @@ class Exporter
     /**
      * @return mixed
      */
-    public static function displayPhpFileWrittenMessage()
+    public static function display_php_file_written_message()
     {
 
         return apply_filters('fewbricks/exporter/display_php_file_written_message', '__return_true');
@@ -165,14 +165,14 @@ class Exporter
     /**
      *
      */
-    public static function maybeExportJson()
+    public static function maybe_export_json()
     {
 
         $data = [];
 
-        if (Exporter::exportToJsonTriggered()) {
+        if (Exporter::export_to_json_triggered()) {
 
-            $fieldGroups = Exporter::getStoredFieldGroupsAcfSettings();
+            $fieldGroups = Exporter::get_stored_field_groups_acf_settings();
 
             if (!empty($fieldGroups)) {
 
@@ -204,10 +204,10 @@ class Exporter
     /**
      * @return bool
      */
-    public static function exportToJsonTriggered()
+    public static function export_to_json_triggered()
     {
 
-        return Helper::pageIsFewbricksAdminPage()
+        return Helper::page_is_fewbricks_admin_page()
             && isset($_GET['action'])
             && $_GET['action'] === 'fewbricks_export_json'
             && wp_verify_nonce($_GET['_wpnonce'], 'fewbricks_export_d89dtygodl');
@@ -217,7 +217,7 @@ class Exporter
     /**
      * @return mixed
      */
-    public static function getStoredFieldGroupsAcfSettings()
+    public static function get_stored_field_groups_acf_settings()
     {
 
         global $fieldGroupsAcfSettings;
@@ -234,15 +234,15 @@ class Exporter
 
         if (
             (
-                (self::generatePhpCodeTriggered() || self::exportToJsonTriggered())
+                (self::generate_php_code_triggered() || self::export_to_json_triggered())
                 && isset($_GET['fewbricks_selected_field_groups_for_export'])
                 && is_array($_GET['fewbricks_selected_field_groups_for_export'])
                 && in_array($fieldGroupAcfSettings['key'], $_GET['fewbricks_selected_field_groups_for_export'])
             )
-            || self::getAutoWritePhpCodeFile() !== false
+            || self::get_auto_write_php_code_file() !== false
         ) {
 
-            self::storeFieldGroupAcfSettings($fieldGroupAcfSettings);
+            self::store_field_group_acf_settings($fieldGroupAcfSettings);
 
         }
 
@@ -251,10 +251,10 @@ class Exporter
     /**
      * @return bool
      */
-    public static function generatePhpCodeTriggered()
+    public static function generate_php_code_triggered()
     {
 
-        return Helper::pageIsFewbricksAdminPage()
+        return Helper::page_is_fewbricks_admin_page()
             && isset($_GET['action'])
             && $_GET['action'] === 'fewbricks_generate_php'
             && isset($_GET['fewbricks_selected_field_groups_for_export'])
@@ -266,7 +266,7 @@ class Exporter
     /**
      * @return string|boolean False if no file should be used.
      */
-    public static function getAutoWritePhpCodeFile()
+    public static function get_auto_write_php_code_file()
     {
 
         return apply_filters('fewbricks/exporter/auto_write_php_code_file', false);
@@ -276,7 +276,7 @@ class Exporter
     /**
      * @param array $fieldGroupAcfSettings
      */
-    public static function storeFieldGroupAcfSettings(array $fieldGroupAcfSettings)
+    public static function store_field_group_acf_settings(array $fieldGroupAcfSettings)
     {
 
         global $fieldGroupsAcfSettings;
@@ -292,7 +292,7 @@ class Exporter
     /**
      * @return array
      */
-    public static function getStoredSimpleFieldGroupData()
+    public static function get_stored_simple_field_group_data()
     {
 
         global $simpleFieldGroupsData;

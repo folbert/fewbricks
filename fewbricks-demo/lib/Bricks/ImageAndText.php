@@ -21,10 +21,10 @@ class ImageAndText extends Brick
 
         $image = (new Image('Image', 'image', '1811272243a'))
             ->set_required(true)
-            ->setMinWidth(400)
-            ->setMinHeight(400)
-            ->setMaxWidth(1200)
-            ->setMaxHeight(1200);
+            ->set_min_width(400)
+            ->set_min_height(400)
+            ->set_max_width(1200)
+            ->set_max_height(1200);
 
         $this->add_fields([$text, $image]);
 
@@ -33,10 +33,10 @@ class ImageAndText extends Brick
     /**
      * @return array
      */
-    public function getViewData()
+    public function get_view_data()
     {
 
-        return $this->getFieldValues(['text', 'image']);
+        return $this->get_field_values(['text', 'image']);
 
     }
 

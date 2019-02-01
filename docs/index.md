@@ -70,8 +70,8 @@ class ImageAndText extends Brick
 
         $image = (new Image('Image', 'image', '1811272243a'))
             ->set_required(true)
-            ->setMinWidth(400)->setMinHeight(400)
-            ->setMaxWidth(1200)->setMaxHeight(1200);
+            ->set_min_width(400)->set_min_height(400)
+            ->set_max_width(1200)->set_max_height(1200);
 
         // Add fields to the Brick
         $this->add_fields([$text, $image]);
@@ -80,15 +80,15 @@ class ImageAndText extends Brick
 
     /**
      * If you are using Fewbricks built-in template engine, the Brick must have 
-     * a function called getViewData which returns an associative array with data from each field. 
+     * a function called get_view_data which returns an associative array with data from each field. 
      * @return array
      */
-    public function getViewData()
+    public function get_view_data()
     {
 
-        // getFieldValues is a Fewbricks function allowing you to pass multiple field names and get an
+        // get_field_values is a Fewbricks function allowing you to pass multiple field names and get an
         // associative array with the values of each field in return.
-        return $this->getFieldValues(['text', 'image']);
+        return $this->get_field_values(['text', 'image']);
 
     }
 

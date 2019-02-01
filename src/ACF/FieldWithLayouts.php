@@ -37,7 +37,7 @@ class FieldWithLayouts extends Field
      * @param Layout $layout
      * @return $this
      */
-    public function addLayout($layout)
+    public function add_layout($layout)
     {
 
         $this->layouts->add_item($layout, $layout->get_key());
@@ -82,7 +82,7 @@ class FieldWithLayouts extends Field
      * @param string $name
      * @return $this
      */
-    public function removeLayout(string $name)
+    public function remove_layout(string $name)
     {
 
         $this->layouts->remove_field_by_name($name);

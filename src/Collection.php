@@ -37,8 +37,8 @@ class Collection
     public function add_item($item, $key = null)
     {
 
-        $this->finalizeItem($item);
-        $this->validateItem($item);
+        $this->finalize_item($item);
+        $this->validate_item($item);
 
         if (is_null($key)) {
 
@@ -70,7 +70,7 @@ class Collection
 
                 }
 
-                Helper::fewbricksDie($message, DuplicateKeyException::class);
+                Helper::fewbricks_die($message, DuplicateKeyException::class);
 
             }
 
@@ -91,10 +91,10 @@ class Collection
     public function add_item_after_item_by_key($item, string $keyToAddAfter, $keyOfNewItem = null)
     {
 
-        if (false !== ($positionToAddAfter = $this->getPositionForItemByKey($keyToAddAfter))) {
+        if (false !== ($positionToAddAfter = $this->get_position_for_item_by_key($keyToAddAfter))) {
 
-            $this->finalizeItem($item);
-            $this->validateItem($item);
+            $this->finalize_item($item);
+            $this->validate_item($item);
 
             if (is_null($keyOfNewItem)) {
                 $newItem = [$item];
@@ -125,10 +125,10 @@ class Collection
     public function add_item_before_item_by_key($item, string $keyOfFieldToAddBefore, $keyOfNewItem = null)
     {
 
-        if (false !== ($positionToAddBefore = $this->getPositionForItemByKey($keyOfFieldToAddBefore))) {
+        if (false !== ($positionToAddBefore = $this->get_position_for_item_by_key($keyOfFieldToAddBefore))) {
 
-            $this->finalizeItem($item);
-            $this->validateItem($item);
+            $this->finalize_item($item);
+            $this->validate_item($item);
 
             if (is_null($keyOfNewItem)) {
                 $newItem = [$item];
@@ -156,8 +156,8 @@ class Collection
     public function add_item_to_beginning($item, $keyOfNewItem = false)
     {
 
-        $this->finalizeItem($item);
-        $this->validateItem($item);
+        $this->finalize_item($item);
+        $this->validate_item($item);
 
         if ($keyOfNewItem === false) {
 
@@ -181,8 +181,8 @@ class Collection
     {
 
         foreach ($items AS $item) {
-            $this->finalizeItem($item);
-            $this->validateItem($item);
+            $this->finalize_item($item);
+            $this->validate_item($item);
         }
 
         $this->items = array_merge($items, $this->items);
@@ -196,7 +196,7 @@ class Collection
      * needed.
      * @param $item
      */
-    protected function finalizeItem($item)
+    protected function finalize_item($item)
     {
 
     }
@@ -208,7 +208,7 @@ class Collection
      * @param Field $item
      * @return bool
      */
-    protected function validateItem($item)
+    protected function validate_item($item)
     {
 
         return true;
@@ -243,7 +243,7 @@ class Collection
      * @param string $keyToSearchFor
      * @return bool|int
      */
-    public function getPositionForItemByKey(string $keyToSearchFor)
+    public function get_position_for_item_by_key(string $keyToSearchFor)
     {
 
         $position = false;
@@ -317,23 +317,23 @@ class Collection
      * @param $keyToSearchFor
      * @return bool
      */
-    public function keyExists($keyToSearchFor)
+    public function key_exists($keyToSearchFor)
     {
 
-        $keyExists = false;
+        $key_exists = false;
 
         foreach($this->items AS $key => $item) {
 
             if($this->key_search_match($keyToSearchFor, $key, $item)) {
 
-                $keyExists = true;
+                $key_exists = true;
                 break;
 
             }
 
         }
 
-        return $keyExists;
+        return $key_exists;
 
     }
 
@@ -357,7 +357,7 @@ class Collection
      * @param mixed $value
      * @return $this
      */
-    public function remove_itemByFunctionValue($functionName, $value)
+    public function remove_item_by_function_value($functionName, $value)
     {
 
         foreach ($this->items AS $itemKey => $item) {

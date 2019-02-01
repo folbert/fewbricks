@@ -36,8 +36,8 @@ class Templater
     {
 
         $this->templateFilePath = $templateFilePath;
-        $this->addSettings($getHtmlArguments);
-        $this->addLayouts($layoutFiles);
+        $this->add_settings($getHtmlArguments);
+        $this->add_layouts($layoutFiles);
 
     }
 
@@ -48,7 +48,7 @@ class Templater
      * @param string $layoutFileName
      * @return $this
      */
-    public function addLayout($layoutFileName)
+    public function add_layout($layoutFileName)
     {
 
         $this->layoutFiles[$layoutFileName] = $layoutFileName;
@@ -62,18 +62,18 @@ class Templater
      * Use the filter
      * @return $this
      */
-    public function addLayouts($layouts)
+    public function add_layouts($layouts)
     {
 
         if (is_string($layouts)) {
 
-            $this->addLayout($layouts);
+            $this->add_layout($layouts);
 
         } else if (is_array($layouts)) {
 
             foreach ($layouts AS $layout) {
 
-                $this->addLayout($layout);
+                $this->add_layout($layout);
 
             }
 
@@ -114,7 +114,7 @@ class Templater
      * @param mixed $value
      * @return $this
      */
-    public function addSetting(string $name, $value)
+    public function add_setting(string $name, $value)
     {
 
         $this->settings[$name] = $value;
@@ -128,11 +128,11 @@ class Templater
      * @param array $settings
      * @return Templater
      */
-    public function addSettings(array $settings)
+    public function add_settings(array $settings)
     {
 
         foreach ($settings AS $settingsName => $settingsValue) {
-            $this->addSetting($settingsName, $settingsValue);
+            $this->add_setting($settingsName, $settingsValue);
         }
 
         return $this;

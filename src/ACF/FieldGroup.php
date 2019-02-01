@@ -596,7 +596,7 @@ class FieldGroup extends FieldCollection implements FieldGroupInterface
                             = $conditionalLogicGroups[$conditionalLogicGroupKey][$conditionalLogicItemKey]['field'];
 
                         // Get the settings for the file.
-                        $targetFieldSettings = Helper::getFieldByOriginalKeyFromAcfArray($targetFieldKey, $acfArray);
+                        $targetFieldSettings = Helper::get_field_by_original_key_from_acf_array($targetFieldKey, $acfArray);
 
                         if ($targetFieldSettings !== false) {
 

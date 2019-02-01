@@ -20,7 +20,7 @@ class ConditionalLogicRuleGroup extends RuleGroup
     {
 
         if (!($rule instanceof ConditionalLogicRule)) {
-            Helper::fewbricksDie('You can only add instances of ConditionalLogicRule to ConditionalLogicRuleGroup');
+            Helper::fewbricks_die('You can only add instances of ConditionalLogicRule to ConditionalLogicRuleGroup');
         }
 
         parent::add_rule($rule);

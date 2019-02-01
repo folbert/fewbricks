@@ -13,7 +13,7 @@ they would if you used `add_field()` or `add_fields()`.
 
 ## Templates
 
-## getBrickHtml()
+## get_brick_html()
 If you want to use 
 
 ## getHtml()

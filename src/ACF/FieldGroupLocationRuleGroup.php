@@ -20,7 +20,7 @@ class FieldGroupLocationRuleGroup extends RuleGroup
     {
 
         if (!($rule instanceof FieldGroupLocationRule)) {
-            Helper::fewbricksDie('You can only add instances of FieldGroupLocationRule to FieldGroupLocationRuleGroup');
+            Helper::fewbricks_die('You can only add instances of FieldGroupLocationRule to FieldGroupLocationRuleGroup');
         }
 
         parent::add_rule($rule);

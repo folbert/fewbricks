@@ -13,10 +13,12 @@ use Fewbricks\DevTools;
 class Helper
 {
 
+    const DOCUMENTATION_BASE_URL = 'https://fewbricks2.folbert.com/';
+
     /**
      * @return bool
      */
-    public static function acfIsActivated()
+    public static function acf_is_activated()
     {
 
         return class_exists('acf');
@@ -38,7 +40,7 @@ class Helper
     /**
      * @return bool
      */
-    public static function fewbricksHiddenIsActivated()
+    public static function fewbricks_hidden_is_activated()
     {
 
         // We must include this file here since we are calling is_plugin_active in an unusual place.
@@ -54,7 +56,7 @@ class Helper
      *
      * @return bool|string
      */
-    public static function getNewKeyByOriginalKeyInAcfArray(string $originalKey, array $acfArrayItems)
+    public static function get_new_key_by_original_key_in_acf_array(string $originalKey, array $acfArrayItems)
     {
 
         $outcome = false;
@@ -84,7 +86,7 @@ class Helper
      *
      * @return mixed
      */
-    public static function getValueFromArray(array $array, string $key, $defaultValue)
+    public static function get_value_from_array(array $array, string $key, $defaultValue)
     {
 
         $outcome = $defaultValue;
@@ -102,13 +104,13 @@ class Helper
      *
      * @return int
      */
-    public static function getInstalledVersionOrTimestamp()
+    public static function get_installed_version_or_timestamp()
     {
 
         $outcome = time();
 
-        if (!self::environmentIsFewbricksDev()) {
-            $outcome = self::getInstalledVersion();
+        if (!self::environment_is_fewbricks_dev()) {
+            $outcome = self::get_installed_version();
         }
 
         return $outcome;
@@ -118,7 +120,7 @@ class Helper
     /**
      * @return bool
      */
-    public static function environmentIsFewbricksDev()
+    public static function environment_is_fewbricks_dev()
     {
 
         return defined('FEWBRICKS_DEV') && FEWBRICKS_DEV == 'true';
@@ -126,10 +128,10 @@ class Helper
     }
 
     /**
-     * Use Fewbricks::getVersion to get the version of the files.
+     * Use Fewbricks::get_version to get the version of the files.
      * @return int
      */
-    public static function getInstalledVersion()
+    public static function get_installed_version()
     {
 
         return get_option('fewbricks-version', 0);
@@ -139,24 +141,24 @@ class Helper
     /**
      *
      */
-    public static function initDebug()
+    public static function init_debug()
     {
 
-        if (DevTools::isActivated()) {
-            DevTools::run(DevTools::getDisplayFilterValue());
+        if (DevTools::is_activated()) {
+            DevTools::run(DevTools::get_display_filter_value());
         }
 
-        self::initFieldSnitch();
+        self::init_field_snitch();
 
     }
 
     /**
      *
      */
-    public static function initFieldSnitch()
+    public static function init_field_snitch()
     {
 
-        if (Filters::fieldSnitchIsEnabled()) {
+        if (Filters::field_snitch_is_enabled()) {
 
             AcfFieldSnitch::init();
 
@@ -167,7 +169,7 @@ class Helper
     /**
      * @return bool
      */
-    public static function pageIsFewbricksAdminPage()
+    public static function page_is_fewbricks_admin_page()
     {
 
         $outcome = false;
@@ -190,7 +192,7 @@ class Helper
     /**
      * @return string
      */
-    public static function getFewbricksInstallUri()
+    public static function get_fewbricks_install_uri()
     {
 
         return plugins_url('fewbricks');
@@ -200,7 +202,7 @@ class Helper
     /**
      * @return string
      */
-    public static function getFewbricksAssetsBaseUri()
+    public static function get_fewbricks_assets_base_uri()
     {
 
         return plugins_url('fewbricks') . '/assets';
@@ -248,7 +250,7 @@ class Helper
      * @param array $acfArray
      * @return bool
      */
-    public static function getFieldByOriginalKeyFromAcfArray(string $key, array $acfArray)
+    public static function get_field_by_original_key_from_acf_array(string $key, array $acfArray)
     {
 
         $foundField = false;
@@ -265,11 +267,11 @@ class Helper
 
                 if (isset($fieldSettings['sub_fields']) && is_array($fieldSettings['sub_fields'])) {
 
-                    $foundField = self::getFieldByOriginalKeyFromAcfArray($key, $fieldSettings['sub_fields']);
+                    $foundField = self::get_field_by_original_key_from_acf_array($key, $fieldSettings['sub_fields']);
 
                 } else if (isset($fieldSettings['layouts']) && is_array($fieldSettings['layouts'])) {
 
-                    $foundField = self::getFieldByOriginalKeyFromAcfArray($key, $fieldSettings['layouts']);
+                    $foundField = self::get_field_by_original_key_from_acf_array($key, $fieldSettings['layouts']);
 
                 }
 
@@ -284,7 +286,7 @@ class Helper
     /**
      * @return string
      */
-    public static function getPhpVersion()
+    public static function get_php_version()
     {
 
         return phpversion();
@@ -301,7 +303,7 @@ class Helper
 
             if (strlen($field['name']) > 255) {
 
-                self::fewbricksDie('Fewbricks found a field whose field name exceeds 255 characters which will render the field useless. This is due to restrictions in the database scheme created by WordPress where a meta_key value in the _postmeta table can be no longer than 255 characters.');
+                self::fewbricks_die('Fewbricks found a field whose field name exceeds 255 characters which will render the field useless. This is due to restrictions in the database scheme created by WordPress where a meta_key value in the _postmeta table can be no longer than 255 characters.');
 
             }
 
@@ -325,9 +327,9 @@ class Helper
     public static function validate_unique_keys(array $fields, $dieOnInvalid = true)
     {
 
-        $flattenedAcfArray = self::getFlattenedAcfArray($fields);
+        $flattenedAcfArray = self::get_flattened_acf_array($fields);
 
-        $nonUniqueKey = self::getNonUniqueKey($flattenedAcfArray);
+        $nonUniqueKey = self::get_non_unique_key($flattenedAcfArray);
 
         if ($nonUniqueKey !== false && $dieOnInvalid) {
 
@@ -380,7 +382,7 @@ class Helper
     character to ensure that ACF can use the key but also to make sure that if you create another key within the same
     minute, you can simply append some other "random" letter to that key like "1912241500x"';
 
-            self::fewbricksDie($message);
+            self::fewbricks_die($message);
 
         }
 
@@ -393,7 +395,7 @@ class Helper
      * @return bool|string True if all keys are unique, a string with the first duplicate key found
      * if all keys are not unique.
      */
-    private static function getNonUniqueKey(array $fields)
+    private static function get_non_unique_key(array $fields)
     {
 
         $nonUniqueKey = false;
@@ -422,7 +424,7 @@ class Helper
      * @param array $acfArrayFields
      * @return array
      */
-    public static function getFlattenedAcfArray(array $acfArrayFields)
+    public static function get_flattened_acf_array(array $acfArrayFields)
     {
 
         $flattened = [];
@@ -431,8 +433,8 @@ class Helper
 
             $flattened[] = $field;
 
-            if (false !== ($childFields = self::getChildFieldsArray($field))) {
-                $flattened = array_merge($flattened, self::getFlattenedAcfArray($childFields['fields']));
+            if (false !== ($childFields = self::get_child_fields_array($field))) {
+                $flattened = array_merge($flattened, self::get_flattened_acf_array($childFields['fields']));
             }
 
         }
@@ -446,7 +448,7 @@ class Helper
      * @param array $fieldArray
      * @return array|bool
      */
-    public static function getChildFieldsArray(array $fieldArray)
+    public static function get_child_fields_array(array $fieldArray)
     {
 
         $array = false;
@@ -475,10 +477,10 @@ class Helper
      * @param $path
      * @return string
      */
-    public static function getDocumentationUrl(string $path = '')
+    public static function get_documentation_url(string $path = '')
     {
 
-        return 'https://fewbricks2.folbert.com/' . $path;
+        return self::DOCUMENTATION_BASE_URL . $path;
 
     }
 
@@ -487,7 +489,7 @@ class Helper
      * @param bool $testExceptionClass
      * @return mixed
      */
-    public static function fewbricksDie($message, $testExceptionClass = false)
+    public static function fewbricks_die($message, $testExceptionClass = false)
     {
 
         if (defined('FEWBRICKS_UNIT_TESTING') && FEWBRICKS_UNIT_TESTING === true) {

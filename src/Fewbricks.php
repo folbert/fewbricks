@@ -20,10 +20,10 @@ class Fewbricks
     /**
      *
      */
-    public static function addHooks()
+    public static function add_hooks()
     {
 
-        add_action('wp_loaded', __NAMESPACE__ . '\\Exporter::maybeWriteToPhpCodeFile');
+        add_action('wp_loaded', __NAMESPACE__ . '\\Exporter::maybe_write_to_php_code_file');
 
     }
 
@@ -35,18 +35,18 @@ class Fewbricks
      *
      * @return bool Whether or not the requirements are met.
      */
-    private static function checkRequirements(bool $displayMessage = true)
+    private static function check_requirements(bool $displayMessage = true)
     {
 
         $message = false;
 
-        if (!Helper::acfIsActivated()) {
+        if (!Helper::acf_is_activated()) {
 
             $message
                 = sprintf(__('You have activated the plugin "Fewbricks". In order to use it, please make sure that <a href="%1$s">Advanced Custom Fields 5 Pro</a> is installed and activated.',
                 'fewbricks'), 'http://www.advancedcustomfields.com/');
 
-        } else if (!Helper::fewbricksHiddenIsActivated()) {
+        } else if (!Helper::fewbricks_hidden_is_activated()) {
 
             $message
                 = sprintf(__('You have activated the plugin "Fewbricks". In order to use it, please make sure that %1$s is installed and activated.',
@@ -71,7 +71,7 @@ class Fewbricks
     /**
      *
      */
-    public static function displayNotices()
+    public static function display_notices()
     {
 
         $message = false;
@@ -89,7 +89,7 @@ class Fewbricks
     /**
      *
      */
-    public static function getVersion()
+    public static function get_version()
     {
 
         return self::FEWBRICKS_VERSION;
@@ -102,16 +102,16 @@ class Fewbricks
     private static function init()
     {
 
-        self::displayNotices();
+        self::display_notices();
 
         // More efficient to just start it than to first check if DevTools are enabled.
-        DevTools::startExecutionTimer();
+        DevTools::start_execution_timer();
 
         do_action('fewbricks/init');
 
-        DevTools::endExecutionTimer();
+        DevTools::end_execution_timer();
 
-        Helper::initDebug();
+        Helper::init_debug();
 
     }
 
@@ -124,17 +124,17 @@ class Fewbricks
         // Only perform requirement checks in admin system.
         // If any requirements are not met, this should be discovered by devs before pushing to production so let's save
         // some CPU cycles on the frontend by not running all the checks there.
-        if (!is_admin() || (is_admin() && self::checkRequirements())) {
+        if (!is_admin() || (is_admin() && self::check_requirements())) {
 
             self::init();
 
         }
 
         if (is_admin()) {
-            Admin::addHooks();
+            Admin::add_hooks();
         }
 
-        self::addHooks();
+        self::add_hooks();
 
     }
 

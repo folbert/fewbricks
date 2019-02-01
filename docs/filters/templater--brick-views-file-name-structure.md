@@ -12,7 +12,7 @@ You only need to care about this filter if you intend to use [Fewbricks simple t
 If you don't, you can ignore this.
 
 This filter allows you to define a string to add between the part of the file which is created in 
-Fewbricks\Templating\Helper::getBrickTemplateFileName() and the required file ending ".php".
+Fewbricks\Templating\Helper::get_brick_template_file_name() and the required file ending ".php".
 
 Defaults to ".view" to create the file name "image-and-text.view.php" for a brick whose class name is "ImageAndText".
 

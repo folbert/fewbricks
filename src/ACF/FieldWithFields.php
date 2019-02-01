@@ -186,7 +186,7 @@ class FieldWithFields extends Field implements FieldCollectionInterface
      *
      * @return mixed
      */
-    public function getField(string $key)
+    public function get_field(string $key)
     {
 
         return $this->fields->get_item_by_key($key);

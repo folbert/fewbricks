@@ -57,7 +57,7 @@ also get `$settings` which is the same that was sent to the template.
 
 ## Required functions in Brick classes
 
-### getViewData()
+### get_view_data()
 Must return an associative array with data to be used in the template and layouts.
 
 ## Related filters

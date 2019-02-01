@@ -42,10 +42,10 @@ class DevTools
     public static function run($startHeight)
     {
 
-        self::setStartHeight($startHeight);
+        self::set_start_height($startHeight);
 
-        self::injectJs();
-        add_action('admin_enqueue_scripts', [self::class, 'enqueueAssets']);
+        self::inject_js();
+        add_action('admin_enqueue_scripts', [self::class, 'enqueue_assets']);
         add_action('admin_footer', [self::class, 'display']);
 
     }
@@ -53,7 +53,7 @@ class DevTools
     /**
      * @param $startHeight
      */
-    private static function setStartHeight($startHeight)
+    private static function set_start_height($startHeight)
     {
 
         if (isset($_GET['fewbricks-dev-tools-takeover'])) {
@@ -69,7 +69,7 @@ class DevTools
     /**
      *
      */
-    private static function injectJs()
+    private static function inject_js()
     {
 
         add_action('admin_head', function () {
@@ -87,14 +87,14 @@ class DevTools
     /**
      *
      */
-    public static function enqueueAssets()
+    public static function enqueue_assets()
     {
 
-        wp_enqueue_script('fewbricks-dev-tools', Helper::getFewbricksAssetsBaseUri() . '/scripts/dev-tools.js',
-            [], Helper::getInstalledVersionOrTimestamp(), true);
+        wp_enqueue_script('fewbricks-dev-tools', Helper::get_fewbricks_assets_base_uri() . '/scripts/dev-tools.js',
+            [], Helper::get_installed_version_or_timestamp(), true);
 
-        wp_enqueue_style('fewbricks-dev-tools', Helper::getFewbricksAssetsBaseUri() . '/styles/dev-tools.css',
-            [], Helper::getInstalledVersionOrTimestamp(), false);
+        wp_enqueue_style('fewbricks-dev-tools', Helper::get_fewbricks_assets_base_uri() . '/styles/dev-tools.css',
+            [], Helper::get_installed_version_or_timestamp(), false);
 
     }
 
@@ -116,7 +116,7 @@ class DevTools
     public static function maybe_store_acf_settings_array_for_dev_display(array $acfSettingsArray)
     {
 
-        if (self::isActivated()) {
+        if (self::is_activated()) {
 
             $settingsKey = $acfSettingsArray['key'];
 
@@ -126,7 +126,7 @@ class DevTools
                     $acfSettingsArray[self::SETTINGS_NAME_FOR_DISPLAYING_ACF_ARRAY] === true
                 ) ||
                 (
-                    (false !== ($filterValue = self::getKeysToDisplaySettingsFor())) &&
+                    (false !== ($filterValue = self::get_keys_to_display_settings_for())) &&
                     (
                         $filterValue === true || // Not being false does not mean that it is true in this case
                         ($filterValue === $settingsKey) ||
@@ -154,10 +154,10 @@ class DevTools
     /**
      * @return string
      */
-    public static function getFilterString()
+    public static function get_filter_string()
     {
 
-        $filterValue = self::getKeysToDisplaySettingsFor();
+        $filterValue = self::get_keys_to_display_settings_for();
 
         if (is_array($filterValue)) {
             $string = '[' . implode(', ', $filterValue) . ']';
@@ -176,7 +176,7 @@ class DevTools
     /**
      * @return array
      */
-    public static function getAcfSettingsArrays()
+    public static function get_acf_settings_arrays()
     {
 
         return self::$acfSettingsArrays;
@@ -186,7 +186,7 @@ class DevTools
     /**
      *
      */
-    public static function startExecutionTimer()
+    public static function start_execution_timer()
     {
         self::$executionTimerStart = microtime(true);
     }
@@ -194,7 +194,7 @@ class DevTools
     /**
      *
      */
-    public static function endExecutionTimer()
+    public static function end_execution_timer()
     {
         self::$executionTimerEnd = microtime(true);
     }
@@ -202,7 +202,7 @@ class DevTools
     /**
      * @return int
      */
-    public static function getExecutionTime()
+    public static function get_execution_time()
     {
 
         return round(self::$executionTimerEnd - self::$executionTimerStart, 4);
@@ -212,17 +212,17 @@ class DevTools
     /**
      * @return mixed
      */
-    public static function isActivated()
+    public static function is_activated()
     {
 
-        return self::getDisplayFilterValue() !== false;
+        return self::get_display_filter_value() !== false;
 
     }
 
     /**
      * @return mixed
      */
-    public static function getDisplayFilterValue()
+    public static function get_display_filter_value()
     {
 
         return apply_filters('fewbricks/dev_tools/display', false);
@@ -232,7 +232,7 @@ class DevTools
     /**
      * @return mixed
      */
-    public static function getKeysToDisplaySettingsFor()
+    public static function get_keys_to_display_settings_for()
     {
 
         return apply_filters('fewbricks/dev_tools/acf_arrays/keys', false);
@@ -243,7 +243,7 @@ class DevTools
      * @param $acfSettingsArray
      * @return string
      */
-    public static function getTitleFromAcfArray(array $acfSettingsArray)
+    public static function get_title_from_acf_array(array $acfSettingsArray)
     {
 
         $title = '<i>unknown title</i>';

@@ -39,10 +39,10 @@ class Headline extends Brick
     /**
      * @return array
      */
-    public function getViewData()
+    public function get_view_data()
     {
 
-        return $this->getFieldValues(['level', 'text']);
+        return $this->get_field_values(['level', 'text']);
 
     }
 

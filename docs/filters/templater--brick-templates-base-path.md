@@ -33,9 +33,9 @@ specific bricks.
 ```php
 <?php
 
-add_filter('fewbricks/brick_templates_base_path', 'getBrickTemplatesBasePath', 10, 2);
+add_filter('fewbricks/brick_templates_base_path', 'get_brick_templates_base_path', 10, 2);
 
-function getBrickTemplatesBasePath($path, $brickInstance)
+function get_brick_templates_base_path($path, $brickInstance)
 {
 
   // Create your own path here

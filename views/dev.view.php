@@ -2,10 +2,10 @@
     <h1>Fewbricks</h1>
 
     <?php
-    if (\Fewbricks\Exporter::generatePhpCodeTriggered()) {
+    if (\Fewbricks\Exporter::generate_php_code_triggered()) {
 
         $fieldGroupCodes
-            = \Fewbricks\Exporter::getFieldGroupsPhpCodes($_GET['fewbricks_selected_field_groups_for_export']);
+            = \Fewbricks\Exporter::get_field_groups_php_codes($_GET['fewbricks_selected_field_groups_for_export']);
 
         if (!empty($fieldGroupCodes)) {
             ?>
@@ -84,7 +84,7 @@
 
                                 <?php
 
-                                $fieldGroupData = \Fewbricks\Exporter::getStoredSimpleFieldGroupData();
+                                $fieldGroupData = \Fewbricks\Exporter::get_stored_simple_field_group_data();
 
                                 if (!empty($fieldGroupData)) {
 

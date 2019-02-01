@@ -25,7 +25,7 @@ class FieldWithImages extends Field
      * @return mixed The value of the ACF setting "max_height". Returns the default ACF value 0 if none has been
      * set using Fewbricks.
      */
-    public function getMaxHeight()
+    public function get_max_height()
     {
 
         return $this->get_setting('max_height', 0);
@@ -47,7 +47,7 @@ class FieldWithImages extends Field
      * @return mixed The value of the ACF setting "max_width". Returns the default ACF value 0 if none has been
      * set using Fewbricks.
      */
-    public function getMaxWidth()
+    public function get_max_width()
     {
 
         return $this->get_setting('max_width', 0);
@@ -69,7 +69,7 @@ class FieldWithImages extends Field
      * @return mixed The value of the ACF setting "min_height". Returns the default ACF value 0 if none has been
      * set using Fewbricks.
      */
-    public function getMinHeight()
+    public function get_min_height()
     {
 
         return $this->get_setting('min_height', 0);
@@ -91,7 +91,7 @@ class FieldWithImages extends Field
      * @return mixed The value of the ACF setting "min_width". Returns the default ACF value 0 if none has been
      * set using Fewbricks.
      */
-    public function getMinWidth()
+    public function get_min_width()
     {
 
         return $this->get_setting('min_width', 0);
@@ -117,7 +117,7 @@ class FieldWithImages extends Field
      * @param int $maxHeight max height in px (without "px")
      * @return $this
      */
-    public function setMaxHeight($maxHeight)
+    public function set_max_height($maxHeight)
     {
 
         return $this->set_setting('max_height', $maxHeight);
@@ -143,7 +143,7 @@ class FieldWithImages extends Field
      * @param int $maxWidth max width in px (without "px")
      * @return $this
      */
-    public function setMaxWidth($maxWidth)
+    public function set_max_width($maxWidth)
     {
 
         return $this->set_setting('max_width', $maxWidth);
@@ -173,7 +173,7 @@ class FieldWithImages extends Field
      * @param int $minHeight Min height in px (without "px")
      * @return $this
      */
-    public function setMinHeight($minHeight)
+    public function set_min_height($minHeight)
     {
 
         return $this->set_setting('min_height', $minHeight);
@@ -199,7 +199,7 @@ class FieldWithImages extends Field
      * @param int $minWidth Min width in px (without "px")
      * @return $this
      */
-    public function setMinWidth($minWidth)
+    public function set_min_width($minWidth)
     {
 
         return $this->set_setting('min_width', $minWidth);

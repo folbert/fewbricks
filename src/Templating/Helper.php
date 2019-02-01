@@ -14,7 +14,7 @@ class Helper
     /**
      * @return mixed
      */
-    public static function getBrickLayoutsBasePath()
+    public static function get_brick_layouts_base_path()
     {
 
         return apply_filters('fewbricks/templater/brick_layouts_base_path', false);
@@ -26,7 +26,7 @@ class Helper
      *
      * @return mixed
      */
-    public static function getBrickTemplateFileName($brickObject)
+    public static function get_brick_template_file_name($brickObject)
     {
 
         $namespacedPieces = explode('\\', get_class($brickObject));
@@ -48,7 +48,7 @@ class Helper
      *
      * @return mixed
      */
-    public static function getBrickTemplatesBasePath($brickObject)
+    public static function get_brick_templates_base_path($brickObject)
     {
 
         return apply_filters('fewbricks/templater/brick_templates_base_path', false, $brickObject);
@@ -58,7 +58,7 @@ class Helper
     /**
      * @return mixed
      */
-    public static function getViewFilesNameStructure()
+    public static function get_view_files_name_structure()
     {
 
         return apply_filters('fewbricks/templater/brick_views_file_name_structure', '.view');

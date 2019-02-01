@@ -91,11 +91,11 @@ final class GalleryTest extends FieldTest
 
         $field = new Gallery('', '', '');
 
-        $this->assertEquals(0, $field->getMaxHeight());
+        $this->assertEquals(0, $field->get_max_height());
 
-        $field->setMaxHeight(78);
+        $field->set_max_height(78);
 
-        $this->assertEquals(78, $field->getMaxHeight());
+        $this->assertEquals(78, $field->get_max_height());
 
     }
 
@@ -123,11 +123,11 @@ final class GalleryTest extends FieldTest
 
         $field = new Gallery('', '', '');
 
-        $this->assertEquals(0, $field->getMaxWidth());
+        $this->assertEquals(0, $field->get_max_width());
 
-        $field->setMaxWidth(78);
+        $field->set_max_width(78);
 
-        $this->assertEquals(78, $field->getMaxWidth());
+        $this->assertEquals(78, $field->get_max_width());
 
     }
 
@@ -175,11 +175,11 @@ final class GalleryTest extends FieldTest
 
         $field = new Gallery('', '', '');
 
-        $this->assertEquals(0, $field->getMinHeight());
+        $this->assertEquals(0, $field->get_min_height());
 
-        $field->setMinHeight(78);
+        $field->set_min_height(78);
 
-        $this->assertEquals(78, $field->getMinHeight());
+        $this->assertEquals(78, $field->get_min_height());
 
     }
 
@@ -207,11 +207,11 @@ final class GalleryTest extends FieldTest
 
         $field = new Gallery('', '', '');
 
-        $this->assertEquals(0, $field->getMinWidth());
+        $this->assertEquals(0, $field->get_min_width());
 
-        $field->setMinWidth(78);
+        $field->set_min_width(78);
 
-        $this->assertEquals(78, $field->getMinWidth());
+        $this->assertEquals(78, $field->get_min_width());
 
     }
 
