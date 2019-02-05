@@ -4,6 +4,7 @@ namespace Fewbricks;
 
 use Fewbricks\ACF\Field;
 use Fewbricks\ACF\FieldCollection;
+use Fewbricks\ACF\RuleGroupCollection;
 
 /**
  * Class Brick
@@ -14,6 +15,11 @@ class Brick extends FieldCollection implements BrickInterface
 {
 
     const CLASS_ID_STRING = 'brick';
+
+    /**
+     * @var RuleGroupCollection
+     */
+    private $conditional_logic_rule_groups;
 
     /**
      * @var array
@@ -62,13 +68,27 @@ class Brick extends FieldCollection implements BrickInterface
         $this->is_sub_field = false;
         $this->post_id_to_get_field_from = false;
 
-        if($name === false) {
+        if ($name === false) {
             $this->name = static::NAME;
         } else {
             $this->name = $name;
         }
 
+        $this->clear_conditional_logic();
+
         parent::__construct($key, $arguments);
+
+    }
+
+    /**
+     * @return $this
+     */
+    public function clear_conditional_logic()
+    {
+
+        $this->conditional_logic_rule_groups = new RuleGroupCollection();
+
+        return $this;
 
     }
 
@@ -89,6 +109,36 @@ class Brick extends FieldCollection implements BrickInterface
     {
 
         return $this->name;
+
+    }
+
+    /**
+     * @param ConditionalLogicRuleGroup[] $rule_groups
+     * @return $this
+     */
+    public function add_conditional_logic_rule_groups($rule_groups)
+    {
+
+        foreach ($rule_groups AS $rule_group) {
+
+            $this->add_conditional_logic_rule_group($rule_group);
+
+        }
+
+        return $this;
+
+    }
+
+    /**
+     * @param ConditionalLogicRuleGroup $rule_group
+     * @return $this
+     */
+    public function add_conditional_logic_rule_group($rule_group)
+    {
+
+        $this->conditional_logic_rule_groups->add_item($rule_group);
+
+        return $this;
 
     }
 
@@ -433,6 +483,34 @@ class Brick extends FieldCollection implements BrickInterface
      */
     public function set_up()
     {
+
+    }
+
+    /**
+     *
+     */
+    protected function prepare_for_acf_array()
+    {
+
+        if(!$this->prepared_for_acf_array) {
+
+            if (!$this->conditional_logic_rule_groups->is_empty()) {
+
+                foreach ($this->items AS $field_index => $field) {
+
+                    foreach ($this->conditional_logic_rule_groups->get_items() AS $conditional_logic_rule_group) {
+
+                        $this->items[$field_index]->add_conditional_logic_rule_group($conditional_logic_rule_group);
+
+                    }
+
+                }
+
+            }
+
+            parent::prepare_for_acf_array();
+
+        }
 
     }
 
