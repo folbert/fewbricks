@@ -12,8 +12,8 @@ class AllFields extends FieldGroup
     public function set_up()
     {
 
-        $this->add_brick(new AcfCoreFields('core_fields', '1812032253a'));
-        $this->add_brick(new ExtensionFields('extension_fields', '1812032312a'));
+        $this->add_brick(new AcfCoreFields('1812032253a', 'core_fields'));
+        $this->add_brick(new ExtensionFields('1812032312a', 'extension_fields'));
 
         $this->set_menu_order(10)
             ->set_display_in_fewbricks_dev_tools(true)
