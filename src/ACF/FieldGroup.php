@@ -616,13 +616,21 @@ class FieldGroup extends FieldCollection implements FieldGroupInterface
             }
 
             // Traverse down any child fields
-            if (isset($field_settings['sub_fields']) && is_array($field_settings['sub_fields'])) {
+            //if (isset($field_settings['sub_fields']) && is_array($field_settings['sub_fields'])) {
+            if (isset($acf_array[$field_settings_key]['sub_fields']) &&
+                is_array($acf_array[$field_settings_key]['sub_fields'])) {
 
-                $field_settings['sub_fields'] = $this->finalize_fields_conditional_logic($field_settings['sub_fields']);
+                //$field_settings['sub_fields'] = $this->finalize_fields_conditional_logic($field_settings['sub_fields']);
+                $acf_array[$field_settings_key]['sub_fields'] =
+                    $this->finalize_fields_conditional_logic($acf_array[$field_settings_key]['sub_fields']);
 
-            } else if (isset($field_settings['layouts']) && is_array($field_settings['layouts'])) {
+                //} else if (isset($field_settings['layouts']) && is_array($field_settings['layouts'])) {
+            } else if (isset($acf_array[$field_settings_key]['layouts']) &&
+                is_array($acf_array[$field_settings_key]['layouts'])) {
 
-                $field_settings['layouts'] = $this->finalize_fields_conditional_logic($field_settings['layouts']);
+                //$field_settings['layouts'] = $this->finalize_fields_conditional_logic($field_settings['layouts']);
+                $acf_array[$field_settings_key]['layouts'] =
+                    $this->finalize_fields_conditional_logic($acf_array[$field_settings_key]['layouts']);
 
             }
 
