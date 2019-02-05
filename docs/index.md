@@ -227,8 +227,8 @@ modify the Brick by passing arguments.
 {: .no_toc }
 By having one template file for each Brick, figuring out where to edit the output of the brick becomes a breeze. Even if
  the brick is used in multiple places and loops, the HTML can be edited in one place. Fewbricks encourages you to 
- separate the logic and presentation by giving you access with a light weight template engine which you can replace 
- or extend if needed.
+ separate the logic and presentation by giving you access to a light weight template engine which you can replace 
+ or extend as needed.
 
 ### Code readability
 {: .no_toc }

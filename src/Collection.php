@@ -292,7 +292,7 @@ class Collection
     /**
      * @return array
      */
-    public function getKeys()
+    public function get_keys()
     {
         return array_keys($this->items);
     }
@@ -300,7 +300,7 @@ class Collection
     /**
      * @return int
      */
-    public function getLength()
+    public function get_length()
     {
         return count($this->items);
     }
@@ -310,7 +310,7 @@ class Collection
      */
     public function is_empty()
     {
-        return $this->getLength() === 0;
+        return $this->get_length() === 0;
     }
 
     /**
