@@ -69,7 +69,7 @@ final class ButtonGroupTest extends FieldTest
 
         $field = new ButtonGroup('', '', '');
 
-        $this->assertEquals([], $field->getChoices());
+        $this->assertEquals([], $field->get_choices());
 
         $choices = [
             'a' => 'An a',
@@ -78,7 +78,7 @@ final class ButtonGroupTest extends FieldTest
 
         $field->set_choices($choices);
 
-        $this->assertEquals($choices, $field->getChoices());
+        $this->assertEquals($choices, $field->get_choices());
 
     }
 

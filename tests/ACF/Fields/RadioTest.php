@@ -69,11 +69,11 @@ final class RadioTest extends FieldTest
 
         $field = new Radio('', '', '');
 
-        $this->assertEquals([], $field->getChoices());
+        $this->assertEquals([], $field->get_choices());
 
         $field->set_choices(['adhiu', '98goi']);
 
-        $this->assertEquals(['adhiu', '98goi'], $field->getChoices());
+        $this->assertEquals(['adhiu', '98goi'], $field->get_choices());
 
     }
 

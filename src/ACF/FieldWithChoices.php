@@ -14,7 +14,7 @@ class FieldWithChoices extends Field
      * @return mixed The value of the ACF setting "choices". Returns the default ACF value of an empty array if none has
      * been set using Fewbricks.
      */
-    public function getChoices()
+    public function get_choices()
     {
 
         return $this->get_setting('choices', []);

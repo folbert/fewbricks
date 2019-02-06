@@ -75,11 +75,11 @@ final class CheckboxTest extends FieldTest
 
         $field = new Checkbox('', '', '');
 
-        $this->assertEquals([], $field->getChoices());
+        $this->assertEquals([], $field->get_choices());
 
         $field->set_choices(['duih', 'e89oh']);
 
-        $this->assertEquals(['duih', 'e89oh'], $field->getChoices());
+        $this->assertEquals(['duih', 'e89oh'], $field->get_choices());
 
     }
 

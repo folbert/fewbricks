@@ -97,11 +97,11 @@ final class SelectTest extends FieldTest
 
         $field = new Select('', '', '');
 
-        $this->assertEquals([], $field->getChoices());
+        $this->assertEquals([], $field->get_choices());
 
         $field->set_choices(['sjoil', 'dgiuv']);
 
-        $this->assertEquals(['sjoil', 'dgiuv'], $field->getChoices());
+        $this->assertEquals(['sjoil', 'dgiuv'], $field->get_choices());
 
     }
 
