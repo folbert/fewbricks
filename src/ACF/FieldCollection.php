@@ -437,6 +437,19 @@ class FieldCollection extends Collection implements FieldCollectionInterface
     }
 
     /**
+     * @param string $argument_name
+     * @param mixed $argument_value
+     * @return FieldCollection
+     */
+    public function set_argument(string $argument_name, $argument_value)
+    {
+
+        $this->arguments[$argument_name] = $argument_value;
+        return $this;
+
+    }
+
+    /**
      * Removes all fields that came from the brick with the passed key.
      *
      * @param string $key
@@ -448,7 +461,7 @@ class FieldCollection extends Collection implements FieldCollectionInterface
         /** @var Field $field */
         foreach ($this->items AS $field_key => $field) {
 
-            foreach($field->get_parents() AS $parent_data) {
+            foreach ($field->get_parents() AS $parent_data) {
 
                 if ($parent_data['type'] === Brick::CLASS_ID_STRING && $parent_data['key'] === $key) {
                     $this->remove_item($field_key);
@@ -475,7 +488,7 @@ class FieldCollection extends Collection implements FieldCollectionInterface
         /** @var Field $field */
         foreach ($this->items AS $field_key => $field) {
 
-            foreach($field->get_parents() AS $parent_data) {
+            foreach ($field->get_parents() AS $parent_data) {
 
                 if ($parent_data['type'] === Brick::CLASS_ID_STRING && $parent_data['name'] === $name) {
                     $this->remove_item($field_key);
@@ -599,14 +612,15 @@ class FieldCollection extends Collection implements FieldCollectionInterface
      * @param string $key
      * @return Field|bool
      */
-    public function get_field_by_original_key_from_objects(string $key) {
+    public function get_field_by_original_key_from_objects(string $key)
+    {
 
         $found_field = false;
 
         /** @var Field $field */
-        foreach($this->items AS $field) {
+        foreach ($this->items AS $field) {
 
-            if($field->get_original_key() === $key) {
+            if ($field->get_original_key() === $key) {
 
                 $found_field = $field;
                 break;
@@ -722,7 +736,8 @@ class FieldCollection extends Collection implements FieldCollectionInterface
      * @param $item
      * @return bool
      */
-    protected function key_search_match($key_to_search_for, $array_key, $item) {
+    protected function key_search_match($key_to_search_for, $array_key, $item)
+    {
 
         return $item->get_key() === $key_to_search_for;
 
