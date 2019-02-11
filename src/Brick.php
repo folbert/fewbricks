@@ -460,7 +460,7 @@ class Brick extends FieldCollection implements BrickInterface
      * @param bool $group_name Use this if you want to create groups of data.
      * @return $this
      */
-    public function set_data_item($item_name, $value, $auto_prefix_brick_name = true, $group_name = false)
+    public function add_data_item($item_name, $value, $auto_prefix_brick_name = true, $group_name = false)
     {
 
         if($auto_prefix_brick_name) {
@@ -474,6 +474,27 @@ class Brick extends FieldCollection implements BrickInterface
         } else {
 
             $this->data[$group_name][$item_name] = $value;
+
+        }
+
+        return $this;
+
+    }
+
+    /**
+     * Use this to set custom data for the brick.
+     *
+     * @param array $names_and_values
+     * @param bool $auto_prefix_brick_name Set to true to have the name of the brick be prepended to $field_name
+     * @param bool $group_name Use this if you want to create groups of data.
+     * @return $this
+     */
+    public function add_data_items($names_and_values, $auto_prefix_brick_name = true, $group_name = false)
+    {
+
+        foreach($names_and_values AS $name => $value) {
+
+            $this->add_data_item($name, $value, $auto_prefix_brick_name, $group_name);
 
         }
 
