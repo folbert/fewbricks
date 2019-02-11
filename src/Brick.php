@@ -456,11 +456,16 @@ class Brick extends FieldCollection implements BrickInterface
      *
      * @param string $item_name The name of the item.
      * @param mixed $value The value of the item.
+     * @param bool $auto_prefix_brick_name Set to true to have the name of the brick be prepended to $field_name
      * @param bool $group_name Use this if you want to create groups of data.
      * @return $this
      */
-    public function set_data_item($item_name, $value, $group_name = false)
+    public function set_data_item($item_name, $value, $auto_prefix_brick_name = true, $group_name = false)
     {
+
+        if($auto_prefix_brick_name) {
+            $item_name = $this->name . '_' . $item_name;
+        }
 
         if ($group_name === false) {
 
