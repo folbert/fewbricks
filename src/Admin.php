@@ -32,13 +32,13 @@ class Admin
 
         if (Helper::page_is_fewbricks_admin_page()) {
 
-            wp_enqueue_style('fewbricks-admin', plugins_url('../assets/styles/styles.css', __FILE__), [],
+            wp_enqueue_style('fewbricks-admin', Helper::get_fewbricks_assets_base_uri() . '/assets/styles/styles.css', [],
                 Helper::get_installed_version_or_timestamp());
 
             wp_enqueue_style('acf-input', acf_get_dir('assets/css/acf-input.css'), ['acf-global'],
                 acf_get_setting('version'));
 
-            wp_enqueue_script('fewbricks-admin-js', plugins_url('../assets/js/js.js', __FILE__), ['jquery'],
+            wp_enqueue_script('fewbricks-admin-js', Helper::get_fewbricks_assets_base_uri() . '/assets/js/js.js', ['jquery'],
                 Helper::get_installed_version_or_timestamp(), true);
 
         }

@@ -43,6 +43,8 @@ class Helper
     public static function fewbricks_hidden_is_activated()
     {
 
+        return true;
+
         // We must include this file here since we are calling is_plugin_active in an unusual place.
         include_once(ABSPATH . 'wp-admin/includes/plugin.php');
 
@@ -192,22 +194,30 @@ class Helper
     }
 
     /**
+     * Returns install uri without trailing slash
      * @return string
      */
     public static function get_fewbricks_install_uri()
     {
 
-        return plugins_url('fewbricks');
+        $install_url = apply_filters('fewbricks/settings/url', plugins_url('fewbricks'));
+
+        if(substr($install_url, -1) === '/') {
+            $install_url = substr($install_url, 0, -1);
+        }
+
+        return $install_url;
 
     }
 
     /**
+     * Returns assets base uri without trailing url
      * @return string
      */
     public static function get_fewbricks_assets_base_uri()
     {
 
-        return plugins_url('fewbricks') . '/assets';
+        return self::get_fewbricks_install_uri() . '/assets';
 
     }
 
