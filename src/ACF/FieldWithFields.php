@@ -20,7 +20,7 @@ class FieldWithFields extends Field implements FieldCollectionInterface
     /**
      * FieldWithSubFields constructor.
      *
-     * @param string $label
+     * @param string|boolean $label
      * @param string $name
      * @param string $key
      */
@@ -41,6 +41,10 @@ class FieldWithFields extends Field implements FieldCollectionInterface
     {
 
         $this->fields->add_brick($brick);
+
+        if($this->label === false) {
+            $this->label = $brick->get_label();
+        }
 
         return $this;
 

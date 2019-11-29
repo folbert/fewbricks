@@ -47,6 +47,11 @@ class Brick extends FieldCollection implements BrickInterface
     protected $name;
 
     /**
+     * @var string
+     */
+    protected $label;
+
+    /**
      * @var int What post id we should get field from.
      */
     private $post_id_to_get_field_from;
@@ -539,6 +544,26 @@ class Brick extends FieldCollection implements BrickInterface
             parent::prepare_for_acf_array();
 
         }
+
+    }
+
+    /**
+     * @param $label
+     */
+    public function set_label($label)
+    {
+
+        $this->label = $label;
+
+    }
+
+    /**
+     * @return string
+     */
+    public function get_label()
+    {
+
+        return $this->label;
 
     }
 
