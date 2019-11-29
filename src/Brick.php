@@ -68,9 +68,11 @@ class Brick extends FieldCollection implements BrickInterface
         $this->is_sub_field = false;
         $this->post_id_to_get_field_from = false;
 
-        if ($name === false) {
+        // const NAME was used in early stages of beta so we still have to check it.
+        // The constant is now deprecated and "protected $name" should be sued in bricks instead
+        if ($name === false && defined('static::NAME')) {
             $this->name = static::NAME;
-        } else {
+        } else if($name !== false) {
             $this->name = $name;
         }
 
