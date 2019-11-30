@@ -46,6 +46,10 @@ class FieldWithFields extends Field implements FieldCollectionInterface
             $this->label = $brick->get_label();
         }
 
+        // Set the name of the layout to that of the brick.
+        // This way we san use get_row_layout to get the name of the brick when fetching data
+        $this->name = $brick->get_name();
+
         return $this;
 
     }

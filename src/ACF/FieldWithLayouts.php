@@ -3,6 +3,7 @@
 namespace Fewbricks\ACF;
 
 use Fewbricks\ACF\Fields\Layout;
+use Fewbricks\Brick;
 
 /**
  * Class FieldWithLayouts
@@ -99,6 +100,26 @@ class FieldWithLayouts extends Field
     {
 
         return $this->set_setting('button_label', $button_label);
+
+    }
+
+    /**
+     * @return Brick
+     */
+    public static function get_brick_in_row() {
+
+        $row_layout = get_row_layout();
+
+        $class_name = get_sub_field($row_layout . '_' . \Fewbricks\Brick::BRICK_CLASS_FIELD_NAME);
+
+        /** @var Brick $brick_instance */
+        $brick_instance = new $class_name('', $row_layout);
+
+        $brick_instance->set_row_layout($row_layout);
+
+        $brick_instance->set_is_layout(true);
+
+        return $brick_instance;
 
     }
 

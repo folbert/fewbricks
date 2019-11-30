@@ -43,7 +43,9 @@ class Helper
     public static function fewbricks_hidden_is_activated()
     {
 
-        return true;
+        if(class_exists('acf_field_fewbricks_hidden')) {
+            return true;
+        }
 
         // We must include this file here since we are calling is_plugin_active in an unusual place.
         include_once(ABSPATH . 'wp-admin/includes/plugin.php');

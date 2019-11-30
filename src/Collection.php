@@ -46,11 +46,11 @@ class Collection
 
         } else {
 
-            $tmpKey = $item->get_key_prefix_from_parents() . $key;
+            $tmp_key = $item->get_key_prefix_from_parents() . $key;
 
             // If parents are not empty, we are dealing with an item that will get parents keys prepended to its own
             // and if the key is still non unique after that, it will be caught by the field group.
-            if(isset($this->items[$tmpKey])) {
+            if(isset($this->items[$tmp_key])) {
 
                 $message = 'Fewbricks says: trying to add an item with the key "' . $key . '". The key already exists
                 for a field and keys must be unique.';
@@ -74,7 +74,7 @@ class Collection
 
             }
 
-            $this->items[$tmpKey] = $item;
+            $this->items[$tmp_key] = $item;
 
         }
 

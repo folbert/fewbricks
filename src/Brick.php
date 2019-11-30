@@ -4,6 +4,7 @@ namespace Fewbricks;
 
 use Fewbricks\ACF\Field;
 use Fewbricks\ACF\FieldCollection;
+use Fewbricks\ACF\Fields\Extensions\FewbricksHidden;
 use Fewbricks\ACF\RuleGroupCollection;
 
 /**
@@ -11,9 +12,15 @@ use Fewbricks\ACF\RuleGroupCollection;
  *
  * @package Fewbricks
  */
-class Brick extends FieldCollection implements BrickInterface
+abstract class Brick extends FieldCollection implements BrickInterface
 {
 
+    // FIBC = Fewbricks Internal Brick Class Name and then some random letters to avoid collisions
+    const BRICK_CLASS_FIELD_NAME = 'fibcn_7tigo8y9';
+
+    /**
+     *
+     */
     const CLASS_ID_STRING = 'brick';
 
     /**
@@ -25,6 +32,11 @@ class Brick extends FieldCollection implements BrickInterface
      * @var array
      */
     protected $data;
+
+    /**
+     * @var boolean
+     */
+    protected $have_brick_class_field;
 
     /**
      * @var bool True if the brick is a layout for flexible content
@@ -63,6 +75,7 @@ class Brick extends FieldCollection implements BrickInterface
      * @param string|boolean $name Name to use when fetching data for the brick. Set to false to use constant NAME
      * @param array $arguments Arbitrary arguments you want to pass to a brick instance to be used within your brick
      * class. This base class does not take any of those arguments into consideration.
+     * @throws \ReflectionException
      */
     public function __construct(string $key = '', $name = false, array $arguments = [])
     {
@@ -72,6 +85,7 @@ class Brick extends FieldCollection implements BrickInterface
         $this->is_option = false;
         $this->is_sub_field = false;
         $this->post_id_to_get_field_from = false;
+        $this->have_brick_class_field = false;
 
         // const NAME was used in early stages of beta so we still have to check it.
         // The constant is now deprecated and "protected $name" should be sued in bricks instead
@@ -84,6 +98,27 @@ class Brick extends FieldCollection implements BrickInterface
         $this->clear_conditional_logic();
 
         parent::__construct($key, $arguments);
+
+        $this->add_brick_class_field();
+
+    }
+
+    /**
+     * @throws \ReflectionException
+     */
+    private function add_brick_class_field()
+    {
+
+        if($this->have_brick_class_field) {
+            return;
+        }
+
+        // We need a way to find out which brick class to load when using it in, for example,  a layout
+        $brick_class_field = new FewbricksHidden('Fewbricks Internal - Brick class', self::BRICK_CLASS_FIELD_NAME, 'as3687117858hd89to');
+        $brick_class_field->set_default_value((new \ReflectionClass($this))->getName());
+        $this->add_field($brick_class_field);
+
+        $this->have_brick_class_field = true;
 
     }
 
@@ -179,7 +214,7 @@ class Brick extends FieldCollection implements BrickInterface
 
         }
 
-        return (new $class_name($brick_name))
+        return (new $class_name(false, $brick_name))
             ->set_is_layout($is_layout)
             ->set_is_sub_field($is_sub_field)
             ->set_is_option($is_option);
@@ -266,7 +301,7 @@ class Brick extends FieldCollection implements BrickInterface
      * @link https://www.advancedcustomfields.com/resources/get_sub_field/
      * @link https://www.advancedcustomfields.com/resources/get_field/
      */
-    protected function get_field_value(string $field_name, $post_id = false, $format_value = true,
+    public function get_field_value(string $field_name, $post_id = false, $format_value = true,
                                        bool $prepend_current_objects_name = true, bool $get_from_sub_field = false
     )
     {
@@ -544,6 +579,39 @@ class Brick extends FieldCollection implements BrickInterface
             parent::prepare_for_acf_array();
 
         }
+
+    }
+
+    /**
+     * Wrapper function for ACFs have_rows()
+     * @param $name
+     * @param bool $post_id Specific post ID where your value was entered.
+     * Defaults to current post ID (not required). This can also be options / taxonomies / users / etc
+     * See https://www.advancedcustomfields.com/resources/have_rows/
+     * @return bool
+     */
+    protected function have_rows($name, $post_id = false)
+    {
+
+        if($post_id !== false) {
+            $outcome = have_rows($this->name . '_' . $name, $post_id);
+        } elseif ($this->is_option) {
+            $outcome = have_rows($this->get_data_name('_' . $name), 'option');
+        } else {
+            $outcome = have_rows($this->name . '_' . $name);
+        }
+
+        return $outcome;
+
+    }
+
+    /**
+     * Wrapper function for ACFs the_row to avoid confusion on when to use $this or not for ACF functions.
+     */
+    protected function the_row()
+    {
+
+        the_row();
 
     }
 
