@@ -87,6 +87,8 @@ Initial release.*/
 
 namespace Fewbricks;
 
+use Fewbricks\Helpers\Helper;
+
 /**
  * Class AcfFieldSnitch
  *
@@ -103,7 +105,7 @@ class AcfFieldSnitch
 
         add_action('admin_enqueue_scripts', function () {
 
-            $base_url = plugins_url() . '/fewbricks/assets';
+            $base_url = Helper::get_fewbricks_assets_base_uri();
 
             wp_enqueue_script(
                 'fewbricks-acf-field-snitch',
