@@ -348,7 +348,7 @@ abstract class Brick extends FieldCollection implements BrickInterface
             } else {*/
             // Not ACF option
 
-            if (null !== ($value = get_sub_field($name, $format_value))) {
+            if (!is_null($value = get_sub_field($name, $format_value))) {
 
                 $data_value = $value;
 
