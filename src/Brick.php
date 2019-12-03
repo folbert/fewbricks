@@ -35,6 +35,12 @@ abstract class Brick extends FieldCollection implements BrickInterface
 
     /**
      * @var boolean
+     * @todo Describe this. It can be sued to make a brick live outside of a loop. Check LinkGroup for example.
+     */
+    protected $detached_from_acf_loop;
+
+    /**
+     * @var boolean
      */
     protected $have_brick_class_field;
 
@@ -75,7 +81,6 @@ abstract class Brick extends FieldCollection implements BrickInterface
      * @param string|boolean $name Name to use when fetching data for the brick. Set to false to use constant NAME
      * @param array $arguments Arbitrary arguments you want to pass to a brick instance to be used within your brick
      * class. This base class does not take any of those arguments into consideration.
-     * @throws \ReflectionException
      */
     public function __construct(string $key = '', $name = false, array $arguments = [])
     {
@@ -86,6 +91,7 @@ abstract class Brick extends FieldCollection implements BrickInterface
         $this->is_sub_field = false;
         $this->post_id_to_get_field_from = false;
         $this->have_brick_class_field = false;
+        $this->detached_from_acf_loop = false;
 
         // const NAME was used in early stages of beta so we still have to check it.
         // The constant is now deprecated and "protected $name" should be sued in bricks instead
@@ -104,7 +110,7 @@ abstract class Brick extends FieldCollection implements BrickInterface
     }
 
     /**
-     * @throws \ReflectionException
+     *
      */
     private function add_brick_class_field()
     {
@@ -115,7 +121,7 @@ abstract class Brick extends FieldCollection implements BrickInterface
 
         // We need a way to find out which brick class to load when using it in, for example,  a layout
         $brick_class_field = new FewbricksHidden('Fewbricks Internal - Brick class', self::BRICK_CLASS_FIELD_NAME, 'as3687117858hd89to');
-        $brick_class_field->set_default_value((new \ReflectionClass($this))->getName());
+        $brick_class_field->set_default_value(get_class($this));
         $this->add_field($brick_class_field);
 
         $this->have_brick_class_field = true;
@@ -320,6 +326,8 @@ abstract class Brick extends FieldCollection implements BrickInterface
 
         }
 
+        $name = $this->field_names_prefix . $name;
+
         if ($post_id === false && $this->post_id_to_get_field_from !== false) {
             $post_id = $this->post_id_to_get_field_from;
         }
@@ -376,6 +384,28 @@ abstract class Brick extends FieldCollection implements BrickInterface
         }
 
         return $data_value;
+
+    }
+
+    /**
+     *
+     */
+    public function detach_from_acf_loop()
+    {
+
+        if($this->detached_from_acf_loop) {
+            return;
+        }
+
+        $active_loop = acf_get_loop('active');
+
+        if(!$active_loop) {
+            return;
+        }
+
+        $this->set_field_names_prefix($active_loop['name'] . '_' . $active_loop['i'] . '_');
+        $this->set_is_layout(false);
+        $this->detached_from_acf_loop = true;
 
     }
 
