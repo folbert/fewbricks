@@ -20,6 +20,11 @@ class Field
     private $conditional_logic_rule_groups;
 
     /**
+     * @var
+     */
+    protected $is_option;
+
+    /**
      * @var string The key required by ACF. Must be unique across the site.
      */
     protected $key;
@@ -78,6 +83,7 @@ class Field
         $this->label = $label;
         $this->name = $name;
         $this->key = $key;
+        $this->is_option = false;
         $this->key_prefix = '';
         $this->original_key = $key;
         $this->parents = [];
@@ -539,6 +545,22 @@ class Field
         $this->label .= $suffix;
 
         return $this;
+
+    }
+
+    public function set_is_option($is_option)
+    {
+
+        $this->is_option = $is_option;
+
+        return $this;
+
+    }
+
+    public function get_is_option($is_option)
+    {
+
+        return $this->is_option;
 
     }
 

@@ -205,25 +205,34 @@ abstract class Brick extends FieldCollection implements BrickInterface
      * @return object An instance of the class passed as $className with the name of $brick_name prepended with the
      * name of the current brick.
      */
-    public function get_child_brick(string $class_name, string $brick_name, bool $is_layout = false,
+    public function get_child_brick(string $class_name = '', string $brick_name = '', bool $is_layout = false,
                                     bool $is_sub_field = false, bool $is_option = false)
     {
+
+        if(empty($class_name)) {
+            $row_layout = get_row_layout();
+            $class_name = get_sub_field($row_layout . '_' . \Fewbricks\Brick::BRICK_CLASS_FIELD_NAME);
+        }
+
+        /** @var Brick $brick_instance */
+        $brick_instance = new $class_name('', $brick_name);
+
+        $brick_instance->set_is_layout($this->is_layout);
+        $brick_instance->set_is_sub_field($this->is_sub_field);
+        $brick_instance->set_is_option($this->is_option);
 
         // If no special case has been forced on the function call...
         if ($is_layout === false && $is_sub_field === false && $is_option === false) {
 
-            // ...let the calling (parent) object decide
+            /*// ...let the calling (parent) object decide
             $is_layout = $this->is_layout;
             $is_sub_field = $this->is_sub_field;
-            $is_option = $this->is_option;
-            $brick_name = $this->name . '_' . $brick_name;
+            $is_option = $this->is_option;*/
+            //$brick_name = $this->name . '_' . $brick_name;
 
         }
 
-        return (new $class_name(false, $brick_name))
-            ->set_is_layout($is_layout)
-            ->set_is_sub_field($is_sub_field)
-            ->set_is_option($is_option);
+        return $brick_instance;
 
     }
 
@@ -341,28 +350,9 @@ abstract class Brick extends FieldCollection implements BrickInterface
 
         } else if ($post_id === false && ($get_from_sub_field || $this->is_layout || $this->is_sub_field)) {
 
+            $data_value = $this->get_field_value_from_sub_field($name, $format_value);
+
             // We should get data using acf functions and we are dealing with layout or sub field
-
-            // Is it an ACF option?
-            // get_sub_field can not deal with "option". Error in fewbricks 1
-            /*if ($this->is_option === true) {
-
-                if (null !== ($value = get_sub_field($name, 'options'))) {
-
-                    $data_value = $value;
-
-                }
-
-            } else {*/
-            // Not ACF option
-
-            if (!is_null($value = get_sub_field($name, $format_value))) {
-
-                $data_value = $value;
-
-            }
-
-            //}
 
         } else {
             // ACF data which is not a layout or sub field
@@ -376,6 +366,41 @@ abstract class Brick extends FieldCollection implements BrickInterface
                 }
 
             } else if (null !== ($value = get_field($name, $post_id, $format_value))) {
+
+                $data_value = $value;
+
+            }
+
+        }
+
+        return $data_value;
+
+    }
+
+    /**
+     * @param $name
+     * @param $format_value
+     * @return bool|null
+     */
+    public function get_field_value_from_sub_field($name, $format_value)
+    {
+
+        $data_value = null;
+
+        // Is it an ACF option?
+        // get_sub_field can not deal with "option". Error in fewbricks 1
+        if ($this->is_option === true) {
+
+            if (null !== ($value = get_sub_field($name, 'options'))) {
+
+                $data_value = $value;
+
+            }
+
+        } else {
+            // Not ACF option
+
+            if (!is_null($value = get_sub_field($name, $format_value))) {
 
                 $data_value = $value;
 
@@ -626,7 +651,7 @@ abstract class Brick extends FieldCollection implements BrickInterface
         if($post_id !== false) {
             $outcome = have_rows($this->name . '_' . $name, $post_id);
         } elseif ($this->is_option) {
-            $outcome = have_rows($this->get_data_name('_' . $name), 'option');
+            $outcome = have_rows($this->name . '_' . $name, 'option');
         } else {
             $outcome = have_rows($this->name . '_' . $name);
         }

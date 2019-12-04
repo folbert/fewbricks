@@ -106,7 +106,7 @@ class FieldWithLayouts extends Field
     /**
      * @return Brick
      */
-    public static function get_brick_in_row() {
+    public function get_brick_in_row() {
 
         $row_layout = get_row_layout();
 
@@ -116,10 +116,47 @@ class FieldWithLayouts extends Field
         $brick_instance = new $class_name('', $row_layout);
 
         $brick_instance->set_row_layout($row_layout);
-
         $brick_instance->set_is_layout(true);
+        $brick_instance->set_is_option($this->is_option);
 
         return $brick_instance;
+
+    }
+
+    /**
+     * Wrapper function for ACFs have_rows()
+     * @param bool $post_id Specific post ID where your value was entered.
+     * Defaults to current post ID (not required). This can also be options / taxonomies / users / etc
+     * See https://www.advancedcustomfields.com/resources/have_rows/
+     * @return bool
+     */
+    public function have_rows($post_id = false)
+    {
+
+        dump('Loop');
+        dump(acf_get_loop('active'));
+
+        if($post_id !== false) {
+            $outcome = have_rows($this->name, $post_id);
+        } elseif ($this->is_option) {
+            $outcome = have_rows($this->name, 'option');
+        } else {
+            dump('Checking for');
+            dump($this->name);
+            $outcome = have_rows($this->name);
+        }
+
+        return $outcome;
+
+    }
+
+    /**
+     * Wrapper function for ACFs the_row to avoid confusion on when to use $this or not for ACF functions.
+     */
+    public function the_row()
+    {
+
+        the_row();
 
     }
 
