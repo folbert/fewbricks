@@ -1,6 +1,7 @@
 .idea
 .DS_Store
 /gitignored/*
-composer.lock
+/composer.lock
 vendor/
 /fewbricks-demo/acf-json/
+/fewbricks # symlink
