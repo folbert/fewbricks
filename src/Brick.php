@@ -70,6 +70,11 @@ abstract class Brick extends FieldCollection implements BrickInterface
     protected $label;
 
     /**
+     * @var
+     */
+    protected $template;
+
+    /**
      * @var int What post id we should get field from.
      */
     private $post_id_to_get_field_from;
@@ -94,7 +99,7 @@ abstract class Brick extends FieldCollection implements BrickInterface
         $this->detached_from_acf_loop = false;
 
         // const NAME was used in early stages of beta so we still have to check it.
-        // The constant is now deprecated and "protected $name" should be sued in bricks instead
+        // The constant is now deprecated and "protected $name" should be used in bricks instead
         if ($name === false && defined('static::NAME')) {
             $this->name = static::NAME;
         } else if($name !== false) {
@@ -700,6 +705,18 @@ abstract class Brick extends FieldCollection implements BrickInterface
     {
 
         return $this->label;
+
+    }
+
+    /**
+     * @param $template
+     * @return Brick
+     */
+    public function set_template($template)
+    {
+
+        $this->template = $template;
+        return $this;
 
     }
 

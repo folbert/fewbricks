@@ -133,16 +133,11 @@ class FieldWithLayouts extends Field
     public function have_rows($post_id = false)
     {
 
-        dump('Loop');
-        dump(acf_get_loop('active'));
-
         if($post_id !== false) {
             $outcome = have_rows($this->name, $post_id);
         } elseif ($this->is_option) {
             $outcome = have_rows($this->name, 'option');
         } else {
-            dump('Checking for');
-            dump($this->name);
             $outcome = have_rows($this->name);
         }
 
