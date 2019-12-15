@@ -161,6 +161,16 @@ abstract class Brick extends FieldCollection implements BrickInterface
     }
 
     /**
+     * @param $prefix
+     */
+    public function prefix_name($prefix)
+    {
+
+        $this->name = $prefix . $this->name;
+
+    }
+
+    /**
      * @param ConditionalLogicRuleGroup[] $rule_groups
      * @return $this
      */
