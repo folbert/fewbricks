@@ -672,11 +672,14 @@ abstract class Brick extends FieldCollection implements BrickInterface
 
     /**
      * @param $label
+     * @return Brick
      */
     public function set_label($label)
     {
 
         $this->label = $label;
+
+        return $this;
 
     }
 
