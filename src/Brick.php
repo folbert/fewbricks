@@ -5,6 +5,7 @@ namespace Fewbricks;
 use Fewbricks\ACF\Field;
 use Fewbricks\ACF\FieldCollection;
 use Fewbricks\ACF\Fields\Extensions\FewbricksHidden;
+use Fewbricks\ACF\Fields\FlexibleContent;
 use Fewbricks\ACF\RuleGroupCollection;
 
 /**
@@ -717,6 +718,18 @@ abstract class Brick extends FieldCollection implements BrickInterface
 
         $this->template = $template;
         return $this;
+
+    }
+
+    /**
+     * @param $flexible_content_field_name
+     * @return FlexibleContent
+     */
+    public function get_flexible_content_for_view($flexible_content_field_name)
+    {
+
+        return (new FlexibleContent('', $this->name . '_' . $flexible_content_field_name, ''))
+            ->set_is_option($this->is_option);
 
     }
 
