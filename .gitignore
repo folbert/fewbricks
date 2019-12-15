@@ -4,4 +4,5 @@
 /composer.lock
 vendor/
 /fewbricks-demo/acf-json/
-/fewbricks # symlink
+#symlink used in dev
+/fewbricks
