@@ -102,7 +102,22 @@ class FieldCollection extends Collection implements FieldCollectionInterface
     private function prepare_brick_for_add(&$brick)
     {
 
+        if(!empty($this->field_names_prefix)) {
+            $brick->prefix_name($this->field_names_prefix);
+        }
+
         $brick->set_up();
+
+        if(!empty($this->field_names_prefix)) {
+
+            /** @var Field $field */
+            foreach ($brick->get_fields() AS &$field) {
+                // Since the prefix has been added to the brick
+                $field->add_skip_name_prefixes_from(spl_object_hash($this));
+            }
+
+        }
+
         $brick->prepare_for_acf_array();
 
     }
@@ -154,7 +169,10 @@ class FieldCollection extends Collection implements FieldCollectionInterface
             /** @var Field $field */
             foreach ($this->items AS &$field) {
 
-                $field->prefix_name($this->field_names_prefix);
+                if(!empty($this->field_names_prefix) && !in_array(spl_object_hash($this), $field->get_skip_name_prefixes_from())) {
+                    $field->prefix_name($this->field_names_prefix);
+                }
+
                 $field->prefix_label($this->field_labels_prefix);
                 $field->suffix_label($this->field_labels_suffix);
 

@@ -45,6 +45,12 @@ class Field
     protected $name;
 
     /**
+     * @var array to keep track of objects whose name prefixes should be skipped.
+     * @link https://www.php.net/manual/en/function.spl-object-hash.php
+     */
+    private $skip_name_prefixes_from;
+
+    /**
      * @var string|boolean A place to store the original key before we merge it
      * with parent field groups, bricks etc.
      */
@@ -85,6 +91,7 @@ class Field
         $this->key = $key;
         $this->is_option = false;
         $this->key_prefix = '';
+        $this->skip_name_prefixes_from = [];
         $this->original_key = $key;
         $this->parents = [];
 
@@ -602,6 +609,20 @@ class Field
 
         return $settings;
 
+    }
+
+    /**
+     * @param $item
+     */
+    public function add_skip_name_prefixes_from($item) {
+        $this->skip_name_prefixes_from[] = $item;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function get_skip_name_prefixes_from() {
+        return $this->skip_name_prefixes_from;
     }
 
 }
