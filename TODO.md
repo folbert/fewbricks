@@ -1,7 +1,5 @@
 # ToDo
 
-@todo Remove checks and dependencies of FewbricksHidden since that is most likely not needed (?)
-
 @todo Set up travis
 
 @todo Set up Jekyll
