@@ -5,20 +5,19 @@ Notes to Fewbricks Developers (a.k.a. me/Björn Folbert).
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 **Table of Contents**  *generated with [DocToc](https://github.com/thlorenz/doctoc)*
 
-- [Fewbricks Development Workflow](#fewbricks-development-workflow)
-  - [Testing as both plugin and custom install location](#testing-as-both-plugin-and-custom-install-location)
-    - [As composer package in theme](#as-composer-package-in-theme)
-      - [Create symlink](#create-symlink)
-      - [Remove symlink](#remove-symlink)
-    - [As plugin](#as-plugin)
-      - [Create symlink](#create-symlink-1)
-    - [Remove symlink](#remove-symlink-1)
-  - [Testing in other environments](#testing-in-other-environments)
-  - [Documentation](#documentation)
-    - [Writing](#writing)
-    - [Publishing](#publishing)
-  - [Release Workflow](#release-workflow)
-    - [After release has been created on GitHub:](#after-release-has-been-created-on-github)
+- [Testing as both plugin and custom install location](#testing-as-both-plugin-and-custom-install-location)
+  - [As composer package in theme](#as-composer-package-in-theme)
+    - [Create symlink](#create-symlink)
+    - [Remove symlink](#remove-symlink)
+  - [As plugin](#as-plugin)
+    - [Create symlink](#create-symlink-1)
+  - [Remove symlink](#remove-symlink-1)
+- [Testing in other environments](#testing-in-other-environments)
+- [Documentation](#documentation)
+  - [Writing](#writing)
+  - [Publishing](#publishing)
+- [Release Workflow](#release-workflow)
+  - [After release has been created on GitHub:](#after-release-has-been-created-on-github)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
@@ -45,12 +44,25 @@ vagrant ssh -- -t "cd /var/www/web/app/plugins/; unlink fewbricks; unlink acf-fe
 We can have multiple test servers set up which, using Composer, pulls branches (feature or release) and tests them.
 
 ## Documentation
+For easy access to built docs, add a symlink from the web folder to the build site using this command:
+
+`vagrant ssh -- -t "ln -s /var/www/___fewbricksrepos___/fewbricks/docs/_site/ /var/www/web/docs"`
+
+You can now view the docs at https://fewbricks.test/docs
 
 ### Writing
-@todo
+The documentation is written using [Jekyll](https://jekyllrb.com/).
+Ruby version is managed using [RBENV](https://github.com/rbenv/rbenv) ([RBENV info in Jekyll documentation](https://jekyllrb.com/docs/installation/macos/#rbenv)).
+
+After you have Jekyll set up, you can use these commands (and [https://jekyllrb.com/docs/usage/](more)).
+
+`bundle exec jekyll serve` to be able to view the site at http://127.0.0.1:4000/ which will rebuild automatically when you edit a MD-file.
+
+`bundle exec jekyll build` which will build the site and prepare it for deploy.
+
 
 ### Publishing
-@todo
+Use the publish script located in the docs folder to rsync to https://fewbricks2.folbert.com
 
 ## Release Workflow
 These are notes to make sure that I don't forget anything when creating a new release.
