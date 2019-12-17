@@ -8,7 +8,8 @@ vendor/
 /fewbricks
 
 # DOCS
-docs/vendor
-docs/_site
-docs/.sass-cache
+docs/.bundle
 docs/.jekyll-metadata
+docs/.sass-cache
+docs/_site
+docs/vendor
