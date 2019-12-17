@@ -6,3 +6,9 @@ vendor/
 /fewbricks-demo/acf-json/
 #symlink used in dev
 /fewbricks
+
+# DOCS
+docs/vendor
+docs/_site
+docs/.sass-cache
+docs/.jekyll-metadata
