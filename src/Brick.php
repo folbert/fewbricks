@@ -111,6 +111,13 @@ abstract class Brick extends FieldCollection implements BrickInterface
 
         parent::__construct($key, $arguments);
 
+    }
+
+    /**
+     *
+     */
+    public function prepare_for_add_to_field_with_fields() {
+
         $this->add_brick_class_field();
 
     }

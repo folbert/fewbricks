@@ -40,6 +40,8 @@ class FieldWithFields extends Field implements FieldCollectionInterface
     public function add_brick($brick)
     {
 
+        $brick->prepare_for_add_to_field_with_fields();
+
         $this->fields->add_brick($brick);
 
         if($this->label === false) {
