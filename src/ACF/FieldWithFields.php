@@ -40,8 +40,6 @@ class FieldWithFields extends Field implements FieldCollectionInterface
     public function add_brick($brick)
     {
 
-        $brick->prepare_for_add_to_field_with_fields();
-
         $this->fields->add_brick($brick);
 
         if($this->label === false) {
@@ -49,7 +47,6 @@ class FieldWithFields extends Field implements FieldCollectionInterface
         }
 
         // Set the name of the layout to that of the brick.
-        // This way we san use get_row_layout to get the name of the brick when fetching data
         $this->name = $brick->get_name();
 
         return $this;

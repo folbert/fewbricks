@@ -91,4 +91,16 @@ class Layout extends FieldWithFields implements FieldInterface
 
     }
 
+    /**
+     * @param \Fewbricks\Brick $brick
+     * @return FieldWithFields
+     */
+    public function add_brick($brick)
+    {
+
+        $brick->prepare_for_add_to_field_with_fields();
+
+        return parent::add_brick($brick);
+    }
+
 }
