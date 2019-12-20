@@ -135,7 +135,7 @@ abstract class Brick extends FieldCollection implements BrickInterface
         // We need a way to find out which brick class to load when using it in, for example,  a layout
         $brick_class_field = new FewbricksHidden('Fewbricks Internal - Brick class', self::BRICK_CLASS_FIELD_NAME, 'as3687117858hd89to');
         $brick_class_field->set_default_value(get_class($this));
-        $this->add_field($brick_class_field);
+        $this->add_field_to_beginning($brick_class_field);
 
         $this->have_brick_class_field = true;
 
