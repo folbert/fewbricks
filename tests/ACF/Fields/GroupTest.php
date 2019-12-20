@@ -219,7 +219,7 @@ final class GroupTest extends FieldTest
         $field->add_field(new Text('A text1', 'a_text_1', '1812291546a'));
         $field->add_field(new Text('A text2', 'a_text_2', '1812291546b'));
 
-        $brick = new TextAndUrlBrick('brickkey_dg4f', 'image_and_text_brick_3');
+        $brick = new TextAndUrlBrick('brickkey_dg4f', 'image_and_text_brick_1');
 
         $field->add_brick_before_field_by_name($brick, 'a_text_2');
 
@@ -233,7 +233,7 @@ final class GroupTest extends FieldTest
                     'fewbricks__parents' => [
                         [
                             'key' => 'brickkey_dg4f',
-                            'name' => 'image_and_text_brick_3',
+                            'name' => 'image_and_text_brick_1',
                             'type' => 'brick'
                         ],
                     ],
@@ -243,7 +243,7 @@ final class GroupTest extends FieldTest
                     'fewbricks__parents' => [
                         [
                             'key' => 'brickkey_dg4f',
-                            'name' => 'image_and_text_brick_3',
+                            'name' => 'image_and_text_brick_1',
                             'type' => 'brick'
                         ],
                     ],
