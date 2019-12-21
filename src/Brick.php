@@ -72,11 +72,6 @@ abstract class Brick extends FieldCollection implements BrickInterface
     protected $label;
 
     /**
-     * @var
-     */
-    protected $template;
-
-    /**
      * @var int What post id we should get field from.
      */
     private $post_id_to_get_field_from;
@@ -737,18 +732,6 @@ abstract class Brick extends FieldCollection implements BrickInterface
     {
 
         return $this->label;
-
-    }
-
-    /**
-     * @param $template
-     * @return Brick
-     */
-    public function set_template($template)
-    {
-
-        $this->template = $template;
-        return $this;
 
     }
 
