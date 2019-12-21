@@ -356,14 +356,15 @@ abstract class Brick extends FieldCollection implements BrickInterface
      * @param bool $prepend_current_objects_name If the current objects name should be prepended to $data_name
      * @param bool $get_from_sub_field
      *
+     * @param bool $default_value
      * @return bool|mixed|null
      *
      * @link https://www.advancedcustomfields.com/resources/get_sub_field/
      * @link https://www.advancedcustomfields.com/resources/get_field/
      */
     public function get_field_value(string $field_name, $post_id = false, $format_value = true,
-                                       bool $prepend_current_objects_name = true, bool $get_from_sub_field = false
-    )
+                                       bool $prepend_current_objects_name = true, bool $get_from_sub_field = false,
+                                        $default_value = null)
     {
 
         if ($prepend_current_objects_name) {
@@ -386,7 +387,7 @@ abstract class Brick extends FieldCollection implements BrickInterface
             $post_id = $this->post_id_to_get_field_from;
         }
 
-        $data_value = null;
+        $data_value = $default_value;
 
         // Do we have some manually set data?
         if ($this->data !== false && array_key_exists($name, $this->data)) {
