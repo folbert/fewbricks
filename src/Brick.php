@@ -424,33 +424,34 @@ abstract class Brick extends FieldCollection implements BrickInterface
     }
 
     /**
-     * @param $name
-     * @param $format_value
+     * Alias function for get_field_value_from_sub_field
+     * @param string $name
+     * @param bool $format_value
+     * @param bool $default_value
      * @return bool|null
      */
-    public function get_field_value_from_sub_field($name, $format_value)
+    public function get_sub_field_value(string $name, $format_value = true, $default_value = false)
     {
 
-        $data_value = null;
+        return $this->get_field_value_from_sub_field($name, $format_value, $default_value);
+
+    }
+
+    /**
+     * @param string $name
+     * @param bool $format_value Whether to apply formatting logic. Defaults to true.
+     * @param bool $default_value
+     * @return bool|null
+     */
+    public function get_field_value_from_sub_field(string $name, $format_value = true, $default_value = false)
+    {
+
+        $data_value = $default_value;
 
         // Is it an ACF option?
-        // get_sub_field can not deal with "option". Error in fewbricks 1
-        if ($this->is_option === true) {
+        if (!is_null($value = get_sub_field($name, $format_value))) {
 
-            if (null !== ($value = get_sub_field($name, 'options'))) {
-
-                $data_value = $value;
-
-            }
-
-        } else {
-            // Not ACF option
-
-            if (!is_null($value = get_sub_field($name, $format_value))) {
-
-                $data_value = $value;
-
-            }
+            $data_value = $value;
 
         }
 
