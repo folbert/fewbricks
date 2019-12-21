@@ -6,6 +6,7 @@ use Fewbricks\ACF\Field;
 use Fewbricks\ACF\FieldCollection;
 use Fewbricks\ACF\Fields\Extensions\FewbricksHidden;
 use Fewbricks\ACF\Fields\FlexibleContent;
+use Fewbricks\ACF\Fields\Repeater;
 use Fewbricks\ACF\RuleGroupCollection;
 
 /**
@@ -140,6 +141,27 @@ abstract class Brick extends FieldCollection implements BrickInterface
         $this->have_brick_class_field = true;
 
     }
+
+    /**
+     * @param $flexible_content
+     */
+    public function add_flexible_content(FlexibleContent $flexible_content)
+    {
+
+        $this->add_field($flexible_content);
+
+    }
+
+    /**
+     * @param $repeater
+     */
+    public function add_repeater(Repeater $repeater)
+    {
+
+        $this->add_field($repeater);
+
+    }
+
 
     /**
      * @return $this
