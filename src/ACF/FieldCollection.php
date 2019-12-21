@@ -2,6 +2,9 @@
 
 namespace Fewbricks\ACF;
 
+use Fewbricks\ACF\Fields\FlexibleContent;
+use Fewbricks\ACF\Fields\Layout;
+use Fewbricks\ACF\Fields\Repeater;
 use Fewbricks\Brick;
 use Fewbricks\Collection;
 
@@ -188,7 +191,7 @@ class FieldCollection extends Collection implements FieldCollectionInterface
      * @param Field $field
      * @return $this
      */
-    public function add_field($field)
+    public function add_field(Field $field)
     {
 
         parent::add_item($field, $field->get_key());

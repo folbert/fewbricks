@@ -100,7 +100,13 @@ class Layout extends FieldWithFields implements FieldInterface
 
         $brick->prepare_for_add_to_field_with_fields();
 
-        return parent::add_brick($brick);
+        parent::add_brick($brick);
+
+        // Set the name of the layout to that of the brick.
+        $this->name = $brick->get_name();
+
+        return $this;
+
     }
 
 }

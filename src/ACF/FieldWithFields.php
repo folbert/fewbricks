@@ -2,6 +2,7 @@
 
 namespace Fewbricks\ACF;
 
+use Fewbricks\ACF\Fields\Layout;
 use Fewbricks\Brick;
 
 /**
@@ -45,9 +46,6 @@ class FieldWithFields extends Field implements FieldCollectionInterface
         if($this->label === false) {
             $this->label = $brick->get_label();
         }
-
-        // Set the name of the layout to that of the brick.
-        $this->name = $brick->get_name();
 
         return $this;
 
@@ -293,7 +291,7 @@ class FieldWithFields extends Field implements FieldCollectionInterface
      * @param string $key_of_field_to_replace
      * @return $this
      */
-    public function replace_field_by_key($new_field, string $key_of_field_to_replace)
+    public function replace_field_by_key(Field $new_field, string $key_of_field_to_replace)
     {
 
         $this->fields->replace_field_by_key($new_field, $key_of_field_to_replace);
@@ -307,7 +305,7 @@ class FieldWithFields extends Field implements FieldCollectionInterface
      * @param string $name_of_field_to_replace
      * @return $this
      */
-    public function replace_field_by_name($new_field, string $name_of_field_to_replace)
+    public function replace_field_by_name(Field $new_field, string $name_of_field_to_replace)
     {
 
         $this->fields->replace_field_by_name($new_field, $name_of_field_to_replace);
