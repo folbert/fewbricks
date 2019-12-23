@@ -443,7 +443,6 @@ abstract class Brick extends FieldCollection implements BrickInterface
 
         $data_value = $default_value;
 
-        // Is it an ACF option?
         if (!is_null($value = get_sub_field($name, $format_value))) {
 
             $data_value = $value;
@@ -690,12 +689,14 @@ abstract class Brick extends FieldCollection implements BrickInterface
     protected function have_rows($name, $post_id = false)
     {
 
+        $name = $this->name . '_' . $name;
+
         if($post_id !== false) {
-            $outcome = have_rows($this->name . '_' . $name, $post_id);
+            $outcome = have_rows($name, $post_id);
         } elseif ($this->is_option) {
-            $outcome = have_rows($this->name . '_' . $name, 'option');
+            $outcome = have_rows($name, 'option');
         } else {
-            $outcome = have_rows($this->name . '_' . $name);
+            $outcome = have_rows($name);
         }
 
         return $outcome;
