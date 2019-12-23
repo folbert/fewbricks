@@ -10,14 +10,6 @@ add_filter('fewbricks/dev_mode', '__return_true');
 
 add_filter('fewbricks/dev_tools/show_fields_info', '__return_true');
 
-add_filter('fewbricks/templater/brick_templates_base_path', function () {
-    return __DIR__ . '/views/brick-templates';
-});
-
-add_filter('fewbricks/templater/brick_layouts_base_path', function () {
-    return __DIR__ . '/views/brick-layouts';
-});
-
 add_filter('fewbricks/dev_tools/display', function () {
     return true;
 });
