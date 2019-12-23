@@ -80,11 +80,11 @@ abstract class Brick extends FieldCollection implements BrickInterface
      * @param string $key This value must be unique system wide. See the documentation for more info on this.
      * Note that it only needs to be set when registering the brick to a field group, layout etc. There's no need to
      * pass it when called from the frontend to print the brick.
-     * @param string|boolean $name Name to use when fetching data for the brick. Set to false to use constant NAME
+     * @param string|boolean $name Name to use when fetching data for the brick.
      * @param array $arguments Arbitrary arguments you want to pass to a brick instance to be used within your brick
      * class. This base class does not take any of those arguments into consideration.
      */
-    public function __construct(string $key = '', $name = false, array $arguments = [])
+    public function __construct(string $key = '', string $name, array $arguments = [])
     {
 
         $this->data = [];
@@ -96,10 +96,10 @@ abstract class Brick extends FieldCollection implements BrickInterface
         $this->detached_from_acf_loop = false;
 
         // const NAME was used in early stages of beta so we still have to check it.
-        // The constant is now deprecated and "protected $name" should be used in bricks instead
+        // The constant is now deprecated and name should always be passed.
         if ($name === false && defined('static::NAME')) {
             $this->name = static::NAME;
-        } else if($name !== false) {
+        } else {
             $this->name = $name;
         }
 
