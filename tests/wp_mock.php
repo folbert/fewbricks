@@ -4,7 +4,7 @@ function apply_filters($filter) {
 
     switch($filter) {
 
-        case 'fewbricks/dev_mode' :
+        case 'fewbricks/dev_mode/enable' :
             return false;
 
         case 'fewbricks/info_pane/display' :

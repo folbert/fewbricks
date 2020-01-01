@@ -17,6 +17,7 @@ is what you want.
 - `true` - display the info pane with a start height of "minimized".
 - a numeric value between `0` and `100` to use for the css property "vh" on the info pane main element.
 
+## Example
 ```php
 <?php
 add_filter('fewbricks/info_pane/display', function() {

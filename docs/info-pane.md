@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Info Pane
-nav_order: 110
+nav_order: 95
 permalink: /info-pane/
 ---
 

@@ -59,7 +59,7 @@ use \Fewbricks\InfoPane;
         ?>
 
         <h2>Dev mode</h2>
-        <a href="<?php echo \Fewbricks\Helpers\Helper::get_documentation_url('filters/dev_mode/'); ?>" target="_blank">DevMode</a>
+        <a href="<?php echo \Fewbricks\Helpers\Helper::get_documentation_url('filters/dev_mode/enable'); ?>" target="_blank">DevMode</a>
         is <?php echo (\Fewbricks\Helpers\Filters::dev_mode_is_enabled() ? 'enabled' : 'disabled') ?>.
 
         <h2>Execution time</h2>

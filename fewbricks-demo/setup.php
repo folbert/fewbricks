@@ -6,7 +6,7 @@ namespace FewbricksDemo;
  * Check the documentation for info on filters
  */
 
-add_filter('fewbricks/dev_mode', '__return_true');
+add_filter('fewbricks/dev_mode/enable', '__return_true');
 
 add_filter('fewbricks/show_fields_info', '__return_true');
 
