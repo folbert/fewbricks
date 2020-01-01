@@ -3,7 +3,7 @@
 namespace Fewbricks\Helpers;
 
 use Fewbricks\AcfFieldSnitch;
-use Fewbricks\DevTools;
+use Fewbricks\InfoPane;
 
 /**
  * Class Helper
@@ -148,9 +148,9 @@ class Helper
     public static function init_debug()
     {
 
-        if (DevTools::is_activated()) {
+        if (InfoPane::is_activated()) {
 
-            DevTools::run(DevTools::get_display_filter_value());
+            InfoPane::run(InfoPane::get_display_filter_value());
 
         }
 

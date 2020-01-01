@@ -1,25 +1,25 @@
 <?php
-use \Fewbricks\DevTools;
+use \Fewbricks\InfoPane;
 ?>
 
-<div id="fewbricks-dev-tools">
+<div id="fewbricks-info-pane">
     <div>
 
-        <h1>Fewbricks\DevTools</h1>
+        <h1>Fewbricks\InfoPane</h1>
 
         <?php
-        if(!empty(DevTools::get_acf_settings_arrays())) {
+        if(!empty(InfoPane::get_acf_settings_arrays())) {
             ?>
 
             <h2>Data sent to ACF</h2>
 
             <?php
-            if (!empty(DevTools::get_filter_string())) {
+            if (!empty(InfoPane::get_filter_string())) {
                 ?>
 
-                <p>Using the filter "fewbricks/fewbricks/dev_tools/acf_arrays/keys", you asked DevHelper to display data
+                <p>Using the filter "fewbricks/info_pane/acf_arrays/keys", you asked the Fewbricks Info Pane to display data
                     for:<br>
-                    <?php echo DevTools::get_filter_string(); ?></p>
+                    <?php echo InfoPane::get_filter_string(); ?></p>
 
                 <?php
             }
@@ -30,10 +30,10 @@ use \Fewbricks\DevTools;
 
             <?php
 
-            foreach (DevTools::get_acf_settings_arrays() AS $acfSettingsArray) {
+            foreach (InfoPane::get_acf_settings_arrays() AS $acfSettingsArray) {
 
                 ?>
-                <h3 class="fewbricks-dev-tools__section-sub-title"><?php echo DevTools::get_title_from_acf_array($acfSettingsArray);
+                <h3 class="fewbricks-info-pane__section-sub-title"><?php echo InfoPane::get_title_from_acf_array($acfSettingsArray);
                 ?></h3>
 
                 <?php
@@ -64,7 +64,7 @@ use \Fewbricks\DevTools;
 
         <h2>Execution time</h2>
         <p>Execution time for everything using the action "fewbricks/init":<br>
-            <?php echo DevTools::get_execution_time();  ?> seconds.</p>
+            <?php echo InfoPane::get_execution_time();  ?> seconds.</p>
 
         <h2>Versions</h2>
         <b>Fewbricks:</b> <span><?php echo \Fewbricks\Fewbricks::get_version(); ?></span><br>
@@ -79,11 +79,11 @@ use \Fewbricks\DevTools;
             <li><a href="https://github.com/folbert/fewbricks" target="_blank">Fewbricks on GitHub</a></li>
         </ul>
 
-        <div class="fewbricks-dev-tools__togglers-wrapper">
-            <button class="fewbricks-dev-tools__toggler" data-height="minimized">Minimized</button>
-            <button class="fewbricks-dev-tools__toggler" data-height="33">33%</button>
-            <button class="fewbricks-dev-tools__toggler" data-height="50">50%</button>
-            <button class="fewbricks-dev-tools__toggler" data-height="100">100%</button>
+        <div class="fewbricks-info-pane__togglers-wrapper">
+            <button class="fewbricks-info-pane__toggler" data-height="minimized">Minimized</button>
+            <button class="fewbricks-info-pane__toggler" data-height="33">33%</button>
+            <button class="fewbricks-info-pane__toggler" data-height="50">50%</button>
+            <button class="fewbricks-info-pane__toggler" data-height="100">100%</button>
         </div>
 
     </div>

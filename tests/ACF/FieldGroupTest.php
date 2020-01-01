@@ -1060,7 +1060,7 @@ final class FieldGroupTest extends TestCase
         $fieldGroup = new FieldGroup('A field group', '1812132149a');
 
         $fieldGroup->add_field(new Text('Text field 1', 'text_field_1', '1812132204a'));
-        $fieldGroup->set_display_in_fewbricks_dev_tools(true);
+        $fieldGroup->set_display_in_fewbricks_info_pane(true);
         $fieldGroup->set_setting('setting_1_name', 'setting_1_value');
         $fieldGroup->set_menu_order(78);
         $fieldGroup->set_position('the_position_dgigk');
@@ -1077,7 +1077,7 @@ final class FieldGroupTest extends TestCase
             'key' => 'group_1812132149a',
             'title' => 'A new title dy8ohl',
             'location' => [],
-            'fewbricks__display_in_dev_tools' => true,
+            'fewbricks__display_in_info_pane' => true,
             'setting_1_name' => 'setting_1_value',
             'menu_order' => 78,
             'position' => 'the_position_dgigk',
@@ -1119,14 +1119,14 @@ final class FieldGroupTest extends TestCase
 
     }
 
-    public function testSetShowInFewbricksDevTools()
+    public function testSetShowInFewbricksInfoPane()
     {
 
         $fieldGroup = new FieldGroup('', '');
 
-        $fieldGroup->set_display_in_fewbricks_dev_tools(true);
+        $fieldGroup->set_display_in_fewbricks_info_pane(true);
 
-        $this->assertEquals(true, $fieldGroup->get_display_in_fewbricks_dev_tools());
+        $this->assertEquals(true, $fieldGroup->get_display_in_fewbricks_info_pane());
 
     }
 

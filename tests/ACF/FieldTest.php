@@ -99,16 +99,16 @@ class FieldTest extends TestCase
 
     }
 
-    public function testSetAndGetDisplayInFewbricksDevTools()
+    public function testSetAndGetDisplayInFewbricksInfoPane()
     {
 
         $display = true;
 
         $field = new Text('Text', 'text', '1812132258a');
 
-        $field->set_display_in_fewbricks_dev_tools($display);
+        $field->set_display_in_fewbricks_info_pane($display);
 
-        $this->assertEquals($display, $field->get_display_in_fewbricks_dev_tools());
+        $this->assertEquals($display, $field->get_display_in_fewbricks_info_pane());
 
     }
 

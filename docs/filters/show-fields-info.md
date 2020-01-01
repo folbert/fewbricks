@@ -1,9 +1,9 @@
 ---
 parent: Filters
 layout: default
-title: dev-tools/show_fields_info
+title: info_pane/show_fields_info
 nav_order: 30
-permalink: /filters/dev_tools--show_fields_info/
+permalink: /filters/show_fields_info/
 ---
 
 # Filter - show_fields_info
@@ -14,4 +14,4 @@ may not necessarily want to clutter the backend with field info at the same time
 
 ## Example
 
-add_filter('fewbricks/dev_tools/show_fields_info', '__return_true');
+add_filter('fewbricks/show_fields_info', '__return_true');

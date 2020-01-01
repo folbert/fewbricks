@@ -1,6 +1,6 @@
 # ToDo
 
-@todo Set up travis
+@todo Remove all templating code from src and move it to demo. No filters for templates etc.
 
 @todo Create functions on each field type for their specific settings.
 

@@ -104,12 +104,12 @@ class Fewbricks
 
         self::display_notices();
 
-        // More efficient to just start it than to first check if DevTools are enabled.
-        DevTools::start_execution_timer();
+        // More efficient to just start it than to first check if InfoPane is enabled.
+        InfoPane::start_execution_timer();
 
         do_action('fewbricks/init');
 
-        DevTools::end_execution_timer();
+        InfoPane::end_execution_timer();
 
         Helper::init_debug();
 

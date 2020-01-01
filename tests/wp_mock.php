@@ -7,7 +7,7 @@ function apply_filters($filter) {
         case 'fewbricks/dev_mode' :
             return false;
 
-        case 'fewbricks/dev_tools/display' :
+        case 'fewbricks/info_pane/display' :
             return false;
 
         case 'fewbricks/exporter/auto_write_php_code_file' :

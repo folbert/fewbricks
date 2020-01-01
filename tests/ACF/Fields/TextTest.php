@@ -64,8 +64,8 @@ final class TextTest extends FieldTest
         $expectedArray['custom_setting2'] = 'custom_setting_value2';
         $expectedArray['custom_setting3'] = 'custom_setting_value3';
 
-        $field->set_display_in_fewbricks_dev_tools(true);
-        $expectedArray['fewbricks__display_in_dev_tools'] = true;
+        $field->set_display_in_fewbricks_info_pane(true);
+        $expectedArray['fewbricks__display_in_info_pane'] = true;
 
         $expectedArray = array_merge(
             FieldHelper::getExpectedFieldValues($field, $settings),

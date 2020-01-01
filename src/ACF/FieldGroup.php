@@ -2,7 +2,7 @@
 
 namespace Fewbricks\ACF;
 
-use Fewbricks\DevTools;
+use Fewbricks\InfoPane;
 use Fewbricks\Exporter;
 use Fewbricks\Helpers\Helper;
 use Fewbricks\Helpers\Filters;
@@ -346,7 +346,7 @@ class FieldGroup extends FieldCollection implements FieldGroupInterface
 
         Exporter::maybe_store_simple_field_group_data($acf_settings_array['title'], $acf_settings_array['key']);
         Exporter::maybe_store_field_group_acf_settings($acf_settings_array);
-        DevTools::maybe_store_acf_settings_array_for_dev_display($acf_settings_array);
+        InfoPane::maybe_store_acf_settings_array_for_dev_display($acf_settings_array);
 
         acf_add_local_field_group($acf_settings_array);
 
@@ -395,20 +395,20 @@ class FieldGroup extends FieldCollection implements FieldGroupInterface
      * @param bool $show
      * @return $this
      */
-    public function set_display_in_fewbricks_dev_tools(bool $show)
+    public function set_display_in_fewbricks_info_pane(bool $show)
     {
 
-        return $this->set_setting(DevTools::SETTINGS_NAME_FOR_DISPLAYING_ACF_ARRAY, $show);
+        return $this->set_setting(InfoPane::SETTINGS_NAME_FOR_DISPLAYING_ACF_ARRAY, $show);
 
     }
 
     /**
      * @return bool|mixed
      */
-    public function get_display_in_fewbricks_dev_tools()
+    public function get_display_in_fewbricks_info_pane()
     {
 
-        return $this->get_setting(DevTools::SETTINGS_NAME_FOR_DISPLAYING_ACF_ARRAY, false);
+        return $this->get_setting(InfoPane::SETTINGS_NAME_FOR_DISPLAYING_ACF_ARRAY, false);
 
     }
 

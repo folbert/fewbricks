@@ -3,7 +3,7 @@
 namespace Fewbricks\ACF;
 
 use Fewbricks\Brick;
-use Fewbricks\DevTools;
+use Fewbricks\InfoPane;
 use Fewbricks\Helpers\Helper;
 
 /**
@@ -125,20 +125,20 @@ class Field
      * @param bool $display
      * @return $this
      */
-    public function set_display_in_fewbricks_dev_tools(bool $display)
+    public function set_display_in_fewbricks_info_pane(bool $display)
     {
 
-        return $this->set_setting(DevTools::SETTINGS_NAME_FOR_DISPLAYING_ACF_ARRAY, $display);
+        return $this->set_setting(InfoPane::SETTINGS_NAME_FOR_DISPLAYING_ACF_ARRAY, $display);
 
     }
 
     /**
      * @return $this
      */
-    public function get_display_in_fewbricks_dev_tools()
+    public function get_display_in_fewbricks_info_pane()
     {
 
-        return $this->get_setting(DevTools::SETTINGS_NAME_FOR_DISPLAYING_ACF_ARRAY, false);
+        return $this->get_setting(InfoPane::SETTINGS_NAME_FOR_DISPLAYING_ACF_ARRAY, false);
 
     }
 

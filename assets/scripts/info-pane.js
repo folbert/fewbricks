@@ -9,7 +9,7 @@
          */
         this.init = function() {
 
-            $this.cssClassFull = 'fewbricks-dev-tools--full';
+            $this.cssClassFull = 'fewbricks-info-pane--full';
 
             $this.initMailElm();
             $this.initToggler();
@@ -18,17 +18,17 @@
 
         this.initMailElm = function() {
 
-            $this.$mainElm = $('#fewbricks-dev-tools');
+            $this.$mainElm = $('#fewbricks-info-pane');
 
-            if(typeof fewbricksDevTools !== 'undefined' && typeof fewbricksDevTools.startHeight !== 'undefined') {
-                $this.toggleMainElm(fewbricksDevTools.startHeight);
+            if(typeof fewbricksInfoPane !== 'undefined' && typeof fewbricksInfoPane.startHeight !== 'undefined') {
+                $this.toggleMainElm(fewbricksInfoPane.startHeight);
             }
 
         }
 
         this.initToggler = function() {
 
-            $('.fewbricks-dev-tools__toggler')
+            $('.fewbricks-info-pane__toggler')
                 .unbind('click')
                 .on('click', function() {
 

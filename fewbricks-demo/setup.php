@@ -8,13 +8,13 @@ namespace FewbricksDemo;
 
 add_filter('fewbricks/dev_mode', '__return_true');
 
-add_filter('fewbricks/dev_tools/show_fields_info', '__return_true');
+add_filter('fewbricks/show_fields_info', '__return_true');
 
-add_filter('fewbricks/dev_tools/display', function () {
+add_filter('fewbricks/info_pane/display', function () {
     return true;
 });
 
-add_filter('fewbricks/dev_tools/acf_arrays/keys', function () {
+add_filter('fewbricks/info_pane/acf_arrays/keys', function () {
     return false;
 });
 

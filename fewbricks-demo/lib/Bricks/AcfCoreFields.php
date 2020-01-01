@@ -225,7 +225,7 @@ class AcfCoreFields extends Brick
                             new ConditionalLogicRule('1711231901b', '==', 'banana')
                         )
                 )
-                ->set_display_in_fewbricks_dev_tools(true)
+                ->set_display_in_fewbricks_info_pane(true)
         );
 
         $this->add_field(

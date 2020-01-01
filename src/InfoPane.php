@@ -5,16 +5,16 @@ namespace Fewbricks;
 use Fewbricks\Helpers\Helper;
 
 /**
- * Class DevTools
+ * Class InfoPane
  * @package Fewbricks
  */
-class DevTools
+class InfoPane
 {
 
     /**
      *
      */
-    const SETTINGS_NAME_FOR_DISPLAYING_ACF_ARRAY = 'fewbricks__display_in_dev_tools';
+    const SETTINGS_NAME_FOR_DISPLAYING_ACF_ARRAY = 'fewbricks__display_in_info_pane';
 
     /**
      * @var array
@@ -56,7 +56,7 @@ class DevTools
     private static function set_start_height($start_height)
     {
 
-        if (isset($_GET['fewbricks-dev-tools-takeover'])) {
+        if (isset($_GET['fewbricks-info-pane-takeover'])) {
             $start_height = 100;
         } else if ($start_height === true) {
             $start_height = '"minimized"';
@@ -75,8 +75,8 @@ class DevTools
         add_action('admin_head', function () {
 
             echo '<script>
-              var fewbricksDevTools = {
-                startHeight: ' . DevTools::$start_height . '
+              var fewbricksInfoPane = {
+                startHeight: ' . InfoPane::$start_height . '
               };
             </script>';
 
@@ -90,10 +90,10 @@ class DevTools
     public static function enqueue_assets()
     {
 
-        wp_enqueue_script('fewbricks-dev-tools', Helper::get_fewbricks_assets_base_uri() . '/scripts/dev-tools.js',
+        wp_enqueue_script('fewbricks-info-pane', Helper::get_fewbricks_assets_base_uri() . '/scripts/info-pane.js',
             [], Helper::get_installed_version_or_timestamp(), true);
 
-        wp_enqueue_style('fewbricks-dev-tools', Helper::get_fewbricks_assets_base_uri() . '/styles/dev-tools.css',
+        wp_enqueue_style('fewbricks-info-pane', Helper::get_fewbricks_assets_base_uri() . '/styles/info-pane.css',
             [], Helper::get_installed_version_or_timestamp(), false);
 
     }
@@ -105,7 +105,7 @@ class DevTools
     {
 
         ob_start();
-        require_once __DIR__ . '/../views/dev-tools.view.php';
+        require_once __DIR__ . '/../views/info-pane.view.php';
         echo ob_get_clean();
 
     }
@@ -233,7 +233,7 @@ class DevTools
     public static function get_display_filter_value()
     {
 
-        return apply_filters('fewbricks/dev_tools/display', false);
+        return apply_filters('fewbricks/info_pane/display', false);
 
     }
 
@@ -243,7 +243,7 @@ class DevTools
     public static function get_keys_to_display_settings_for()
     {
 
-        return apply_filters('fewbricks/dev_tools/acf_arrays/keys', false);
+        return apply_filters('fewbricks/info_pane/acf_arrays/keys', false);
 
     }
 

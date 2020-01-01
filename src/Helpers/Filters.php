@@ -20,7 +20,7 @@ class Filters {
     public static function field_snitch_is_enabled()
     {
 
-        return apply_filters('fewbricks/dev_tools/show_fields_info', false);
+        return apply_filters('fewbricks/show_fields_info', false);
 
     }
 
