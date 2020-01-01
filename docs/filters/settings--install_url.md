@@ -1,21 +1,21 @@
 ---
 parent: Filters
 layout: default
-title: settings/url
+title: fewbricks/settings/install_url
 nav_order: 85
-permalink: /filters/settings--url/
+permalink: /filters/settings--install_url/
 ---
 
-# Filters - fewbricks/templater/brick_templates_base_path
+# Filters - fewbricks/settings/install_url
 
 If you have installed Fewbricks somewhere else than in the plugin directory, for example as composer dependency in your theme, Fewbricks need to know that in order to load assets correctly.
 
-For example:
+## Example
 
 ```php
-add_filter('fewbricks/settings/url', function( $url ) {
+add_filter('fewbricks/settings/install_url', function( $url ) {
     return get_stylesheet_directory_uri() . '/vendor/folbert/fewbricks';
 });
 ```
 
-Note the lack of a trailing slash. Should you happen to add one, Fewbricks will remove it for you.
+Note the lack of a trailing slash.

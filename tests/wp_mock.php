@@ -10,7 +10,7 @@ function apply_filters($filter) {
         case 'fewbricks/info_pane/display' :
             return false;
 
-        case 'fewbricks/exporter/auto_write_php_code_file' :
+        case 'fewbricks/exporter/php/auto_write_target' :
             return false;
 
     }

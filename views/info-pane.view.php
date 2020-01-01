@@ -13,18 +13,6 @@ use \Fewbricks\InfoPane;
 
             <h2>Data sent to ACF</h2>
 
-            <?php
-            if (!empty(InfoPane::get_filter_string())) {
-                ?>
-
-                <p>Using the filter "fewbricks/info_pane/acf_arrays/keys", you asked the Fewbricks Info Pane to display data
-                    for:<br>
-                    <?php echo InfoPane::get_filter_string(); ?></p>
-
-                <?php
-            }
-            ?>
-
             <p>If the data below is displayed using dump(), you can expand all items in an array by holding `CMD`
                 and click on a right-arrow.</p>
 

@@ -269,7 +269,7 @@ class Exporter
     public static function get_auto_write_php_code_file()
     {
 
-        return apply_filters('fewbricks/exporter/auto_write_php_code_file', false);
+        return apply_filters('fewbricks/exporter/php/auto_write_target', false);
 
     }
 

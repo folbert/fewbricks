@@ -1,7 +1,7 @@
 ---
 parent: Filters
 layout: default
-title: info_pane/display
+title: fewbricks/info_pane/display
 nav_order: 20
 permalink: /filters/info_pane--display/
 ---
@@ -20,7 +20,5 @@ is what you want.
 ## Example
 ```php
 <?php
-add_filter('fewbricks/info_pane/display', function() {
-    return true;
-});
+add_filter('fewbricks/info_pane/display', '__return_true');
 ```

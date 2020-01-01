@@ -56,8 +56,8 @@ class InfoPane
     private static function set_start_height($start_height)
     {
 
-        if (isset($_GET['fewbricks-info-pane-takeover'])) {
-            $start_height = 100;
+        if (isset($_GET['fewbricks-info-pane-height'])) {
+            $start_height = $_GET['fewbricks-info-pane-height'];
         } else if ($start_height === true) {
             $start_height = '"minimized"';
         }
@@ -125,14 +125,7 @@ class InfoPane
                     isset($acf_settings_array[self::SETTINGS_NAME_FOR_DISPLAYING_ACF_ARRAY]) &&
                     $acf_settings_array[self::SETTINGS_NAME_FOR_DISPLAYING_ACF_ARRAY] === true
                 ) ||
-                (
-                    (false !== ($filter_value = self::get_keys_to_display_settings_for())) &&
-                    (
-                        $filter_value === true || // Not being false does not mean that it is true in this case
-                        ($filter_value === $settings_key) ||
-                        (is_array($filter_value) && in_array($settings_key, $filter_value))
-                    )
-                )
+                self::display_all_acf_arrays()
             ) {
 
                 self::$acf_settings_arrays[$settings_key] = $acf_settings_array;
@@ -148,36 +141,6 @@ class InfoPane
             }
 
         }
-
-    }
-
-    /**
-     * @return string
-     */
-    public static function get_filter_string()
-    {
-
-        $filter_value = self::get_keys_to_display_settings_for();
-
-        if (is_array($filter_value)) {
-
-            $string = '[' . implode(', ', $filter_value) . ']';
-
-        } elseif ($filter_value === true) {
-
-            $string = 'all field groups (since you sent "true")';
-
-        } elseif ($filter_value === false) {
-
-            $string = '';
-
-        } else {
-
-            $string = '"' . (string)$filter_value . '"';
-
-        }
-
-        return $string;
 
     }
 
@@ -238,12 +201,12 @@ class InfoPane
     }
 
     /**
-     * @return mixed
+     * @return bool
      */
-    public static function get_keys_to_display_settings_for()
+    public static function display_all_acf_arrays()
     {
 
-        return apply_filters('fewbricks/info_pane/acf_arrays/keys', false);
+        return apply_filters('fewbricks/info_pane/acf_arrays/display_all', true);
 
     }
 

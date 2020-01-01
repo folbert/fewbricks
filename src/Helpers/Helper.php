@@ -202,13 +202,7 @@ class Helper
     public static function get_fewbricks_install_uri()
     {
 
-        $install_url = apply_filters('fewbricks/settings/url', plugins_url('fewbricks'));
-
-        if(substr($install_url, -1) === '/') {
-            $install_url = substr($install_url, 0, -1);
-        }
-
-        return $install_url;
+        return apply_filters('fewbricks/settings/install_url', plugins_url('fewbricks'));
 
     }
 

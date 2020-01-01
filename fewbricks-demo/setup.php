@@ -14,11 +14,11 @@ add_filter('fewbricks/info_pane/display', function () {
     return true;
 });
 
-add_filter('fewbricks/info_pane/acf_arrays/keys', function () {
+add_filter('fewbricks/info_pane/acf_arrays/display_all', function () {
     return false;
 });
 
-add_filter('fewbricks/exporter/auto_write_php_code_file', function () {
+add_filter('fewbricks/exporter/php/auto_write_target', function () {
     return false;
     //return Helper::getFewbricksInstallPath() . '/gitignored/fewbricks-php.php';
 });

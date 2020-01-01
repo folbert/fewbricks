@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Field Groups
-nav_order: 40
+nav_order: 50
 permalink: /field-groups/
 ---
 
@@ -12,65 +12,38 @@ Note that you should strive to use the action 'fewbricks/init' to start off all 
  you can be sure that ACF and Fewbricks is ready. If you, for some reason, can not use that action, you will most
  likely be ok anyway.
 
-## Quick example
+## Example code
+The code below assumes that you have written the code in [Fields](/fields#example-code) and have access to the variables created there.
 
 ```php
 <?php
 
-add_action('fewbricks/init', function() {
+namespace FewbricksDemo;
 
-// Instantiate a field group with a title and a key. More on keys below.
-$darkTowerContestFieldGroup = (new FieldGroup('Dark Tower Contest', '1811252128a'))
-// Tell the field group where it should show up
-->add_location_rule_group(
+use Fewbricks\ACF\FieldGroup;
+use Fewbricks\ACF\FieldGroupLocationRule;
+use Fewbricks\ACF\FieldGroupLocationRuleGroup;
+use Fewbricks\ACF\Fields\Email;
+use FewbricksDemo\Bricks\ImageAndText;
+
+(new FieldGroup('Main content', '1811252128a'))
+  ->add_location_rule_group(
     (new FieldGroupLocationRuleGroup())
         ->add_field_group_location_rule(
-            // When editing a post
             new FieldGroupLocationRule('post_type', '==', 'post')
         )
-) // ...or ...
-->add_location_rule_group(
-    (new FieldGroupLocationRuleGroup())
-        ->add_field_group_location_rule(
-            // ...when editing a page...
-            new FieldGroupLocationRule('post_type', '==', 'page')
-        )
-        ->add_field_group_location_rule(
-            // ...and the user is an editor.
-            new FieldGroupLocationRule('user_role', '==', 'editor')
-        )
-)
-// Read more about this under Info Pane
-->set_show_in_fewbricks_info_pane(true)
-// Hide everything that ACF can hide
-->set_hide_on_screen('all')
-// Assuming we have some fields stored in variables. See under Fields for more info
-->add_field($someField)
-->add_fields([
-    $someOtherField,
-    $yetAnotherField,
-    // Creating a field on the fly
-    (new \Fewbricks\ACF\Fields\Text('A text field', 'a_text_field', '1811302037a'))
-])
-// Adding a Brick. Read more about those under Bricks.
-->add_brick(new \FewbricksDemo\Bricks\ImageAndText('image_and_text', '1811392037o'))
-// ...but show permalink
-->set_show_on_screen('permalink');
-
-});
-
-```
-
-We have to hold off registering the field group until we have added some fields (which could have been done by
-chaining the functions for adding fields etc. but for the sake of having code for fields on its own documentation
-pages, we save that for later). When it's time to register, you simply call the function `register()` on the field
-group like so:
-
-```php
-<?php
-
-$darkTowerContestFieldGroup->register();
-
+  )
+  ->set_hide_on_screen('all')
+  ->set_show_on_screen('permalink')
+  ->add_field($favourite_character) // Add a single field or...
+  ->add_fields([ // ...add multiple fields.
+    $other_favourite_character,
+    $motivation,
+    // Create an inline field
+    (new Email('Enter your e-mail for a chance to win!', 'e_mail', '1811281100a'))
+        ->set_required(true)
+  ])
+->register();
 ```
 
 In the example above, we have created a field group with just a couple of lines of code. Since FieldGroup is a class
@@ -81,26 +54,28 @@ in Fewbricks, you could create your own field group classes and have them extend
 
 namespace FewbricksDemo\FieldGroups;
 
+use Fewbricks\ACF\Text;
 use Fewbricks\ACF\FieldGroup;
 use Fewbricks\ACF\FieldGroupLocationRule;
 use Fewbricks\ACF\FieldGroupLocationRuleGroup;
-use FewbricksDemo\Bricks\Headline;
 
-class FooterGlobalTexts extends FieldGroup
+class Content extends FieldGroup
 {
 
     public function set_up()
     {
 
-        $this->add_brick(
-            (new Headline('column_1_headline', '1811292314a'))
-            ->add_argument('label', 'Column 1 Headline')
+        $this->add_field(
+            (new Text('Headline', 'column_1_headline', '1811292314a'))
         );
 
         $this->add_location_rule_group(
             (new FieldGroupLocationRuleGroup())
             ->add_field_group_location_rule(
-                new FieldGroupLocationRule('options_page', '==', 'fewbricks-demo-options--global-texts')
+                new FieldGroupLocationRule('post_type', '==', 'page')
+            )
+            ->add_field_group_location_rule(
+                new FieldGroupLocationRule('post_type', '==', 'post')
             )
         );
 
@@ -115,31 +90,20 @@ class FooterGlobalTexts extends FieldGroup
 
 ```
 
-Then you could create and register the field group by calling `(new FooterGlobalTexts('Global texts', '1812010004a'')
+Then you could create and register the field group by calling `(new Content('Content', '1812010004a'')
 ->set_up()`.
 
-## Keys
+## Constructor arguments
+
+### 1. Label
+The label of the field group which will be used when showing the field group in the backend.
+
+### 2. Key
 The second argument when creating a field group is a key that must be unique across the site. Check [the FAQ](/faq/)
 for more on keys.
 
 ## ACF settings
-In Fewbricks FieldGroup class we have implemented getters and setters for all the ACF settings that are available at the
-time of writing this (ACF v.5.7.7). You can also use the generic functions `set_setting()` and `get_setting()` to set
-and get any new settings that ACF introduces without having to wait for Fewbricks to be updated with new getters and
-setters. This also applies to settings that are introduced by any extension that you install. Yes, you can use those
-generic functions instead of Fewbricks settings-specific functions as well if you want but having for example
-`set_label_placement()` popping up if your editor handles auto complete is way easier than having to remember every
-settings name like in Fewbricks 1.
-
-The function names are camelCaseVersions of ACFs snake_case_names. So for example the setting "label_placement" is
-set by calling `set_label_placement('value')` and "Description" is set by `set_description()`. Most of the times you will
-be able to calculate the name that ACF stores a setting under by looking at the (english) label in ACFs GUI when
-creating a field group. For example "Active" is stored under "active" which in turn can be set in Fewbricks by
-calling `set_active(true)` (or `set_active(false)`). There are however some cases where the label does not directly
-corresponds to you what the ACF setting is called. An example of this is "Order" which ACF stores as "menu_order"
-which corresponds to `set_menu_order()` in Fewbricks. The easiest way to find out what the setting is called is by
-using the filter [fewbricks/show_fields_info](/filters/show_fields_info/). This will display what
-each setting is actually stored as by ACF.
+Check [Fields](/fields/#acf-settings) for info on ACF settings.
 
 ## Fewbricks functions
 Besides setting and getting all the ACF settings, the following functions are available for you to interact with field
@@ -150,7 +114,7 @@ code.
 
 `add_field()` - add fields to the field group. More on that under [Fields](/fields/).
 
-`addBrickBeforeByName()` and `add_brick_after_field_by_name()` - add a Brick before/after an existing field by sending
+`add_brick_before_by_name()` and `add_brick_after_field_by_name()` - add a Brick before/after an existing field by sending
 the name of the field to add before/after.
 
 `add_brick_to_beginning()`

@@ -1,7 +1,7 @@
 ---
 parent: Filters
 layout: default
-title: info_pane/show_fields_info
+title: fewbricks/show_fields_info
 nav_order: 30
 permalink: /filters/show_fields_info/
 ---
