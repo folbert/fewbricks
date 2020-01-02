@@ -23,7 +23,7 @@ add_filter('fewbricks/exporter/php/auto_write_target', function () {
     //return Helper::getFewbricksInstallPath() . '/gitignored/fewbricks-php.php';
 });
 
-add_filter('fewbricks/exporter/display_php_file_written_message', '__return_true');
+add_filter('fewbricks/exporter/php/display_file_written_message', '__return_true');
 
 /**
  * Simple autoloader

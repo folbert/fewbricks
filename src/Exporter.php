@@ -158,7 +158,7 @@ class Exporter
     public static function display_php_file_written_message()
     {
 
-        return apply_filters('fewbricks/exporter/display_php_file_written_message', '__return_true');
+        return apply_filters('fewbricks/exporter/php/display_file_written_message', '__return_true');
 
     }
 
