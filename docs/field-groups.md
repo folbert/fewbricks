@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Field Groups
-nav_order: 50
+nav_order: 45
 permalink: /field-groups/
 ---
 
@@ -23,8 +23,7 @@ namespace FewbricksDemo;
 use Fewbricks\ACF\FieldGroup;
 use Fewbricks\ACF\FieldGroupLocationRule;
 use Fewbricks\ACF\FieldGroupLocationRuleGroup;
-use Fewbricks\ACF\Fields\Email;
-use FewbricksDemo\Bricks\ImageAndText;
+use Fewbricks\ACF\Fields\Email;;
 
 (new FieldGroup('Main content', '1811252128a'))
   ->add_location_rule_group(
@@ -121,7 +120,7 @@ the name of the field to add before/after.
 
 `add_field_to_beginning()` and `add_fields_to_beginning()`
 
-`add_field_after_field_by_name()`, `addFieldsAfterFieldByName()`, `add_field_before_field_by_name()` and
+`add_field_after_field_by_name()`, `add_fields_after_field_by_name()`, `add_field_before_field_by_name()` and
 `add_fields_before_field_by_name()` - same as above but add field/fields instead of Bricks.
 
 `remove_brick_by_key()` and `remove_brick_by_name()` - remove all fields that were added to a field group from a brick.

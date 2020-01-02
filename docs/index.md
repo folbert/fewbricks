@@ -15,7 +15,7 @@ first non-beta-release.
 - TOC
 {:toc}
 
-## Quick example
+## Example code
 Want to see some code right away? Start at [Fields](/fields) and continue from there.
 
 ## In short, Fewbricks...

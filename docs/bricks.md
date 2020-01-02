@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Bricks
-nav_order: 45
+nav_order: 50
 has_children: true
 permalink: /bricks/
 ---
@@ -27,7 +27,7 @@ class ImageAndText extends Brick
 
     /**
      * Set the fields that the Brick is made up of.
-     * The setup function is automatically called by the parent Brick class.
+     * The set_up function is automatically called by the parent Brick class.
      */
     public function set_up()
     {
