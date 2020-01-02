@@ -154,12 +154,39 @@ class Field
     }
 
     /**
+     * @param string $key
+     * @return Field
+     */
+    public function set_key(string $key)
+    {
+
+        $this->key = $key;
+        $this->set_original_key($key);
+        return $this;
+
+    }
+
+    /**
+     * @param string $name
+     * @return $this
+     */
+    public function set_name(string $name)
+    {
+
+        $this->name = $name;
+        return $this;
+
+    }
+
+    /**
      * @param $original_key
+     * @return Field
      */
     protected function set_original_key(string $original_key)
     {
 
         $this->original_key = $original_key;
+        return $this;
 
     }
 
