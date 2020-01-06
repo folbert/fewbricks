@@ -4,6 +4,7 @@ namespace Fewbricks\ACF\Fields;
 
 use Fewbricks\ACF\FieldInterface;
 use Fewbricks\ACF\FieldWithFields;
+use Fewbricks\ACF\Traits\RowLogic;
 use Fewbricks\Helpers\Helper;
 
 /**
@@ -14,6 +15,8 @@ use Fewbricks\Helpers\Helper;
  */
 class Repeater extends FieldWithFields implements FieldInterface
 {
+
+    use RowLogic;
 
     const TYPE = 'repeater';
 

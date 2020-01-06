@@ -25,7 +25,7 @@ class FieldWithFields extends Field implements FieldCollectionInterface
      * @param string $name
      * @param string $key
      */
-    public function __construct($label, $name, $key)
+    public function __construct($label = '', $name = '', $key = '')
     {
 
         parent::__construct($label, $name, $key);

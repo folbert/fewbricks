@@ -58,7 +58,7 @@ class Fewbricks
         if ($display_message && $message !== false) {
 
             add_action('admin_notices', function () use ($message) {
-                echo '<div class="notice notice-warning"><p>' . $message . '</p></div>';
+                echo '<div class="notice notice-error"><p>' . $message . '</p></div>';
             });
 
         }

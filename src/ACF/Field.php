@@ -81,7 +81,7 @@ class Field
      * @param string $name The name of the field
      * @param string $key The key of the field. Must be unique across the entire app
      */
-    public function __construct($label, $name, string $key)
+    public function __construct($label = '', $name = '', string $key = '')
     {
 
         // Lets keep these crucial settings as class vars to make them easier and nicer to access.

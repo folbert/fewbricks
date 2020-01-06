@@ -84,7 +84,7 @@ abstract class Brick extends FieldCollection implements BrickInterface
      * @param array $arguments Arbitrary arguments you want to pass to a brick instance to be used within your brick
      * class. This base class does not take any of those arguments into consideration.
      */
-    public function __construct(string $key = '', string $name, array $arguments = [])
+    public function __construct(string $key = '', string $name = '', array $arguments = [])
     {
 
         $this->data = [];
@@ -106,6 +106,18 @@ abstract class Brick extends FieldCollection implements BrickInterface
         $this->clear_conditional_logic();
 
         parent::__construct($key, $arguments);
+
+    }
+
+    /**
+     * @param $name
+     * @return Brick
+     */
+    public function set_name($name)
+    {
+
+        $this->name = $name;
+        return $this;
 
     }
 
@@ -743,8 +755,28 @@ abstract class Brick extends FieldCollection implements BrickInterface
     public function get_flexible_content_for_view($flexible_content_field_name)
     {
 
-        return (new FlexibleContent('', $this->name . '_' . $flexible_content_field_name, ''))
-            ->set_is_option($this->is_option);
+        $prefix = $this->field_names_prefix . $this->name;
+
+        return ((new FlexibleContent())
+            ->set_name($prefix . '_' . $flexible_content_field_name, '')
+            ->set_is_option($this->is_option)
+        );
+
+    }
+
+    /**
+     * @param string $repeater_field_name
+     * @return Repeater
+     */
+    public function get_repeater_for_view($repeater_field_name)
+    {
+
+        $prefix = $this->field_names_prefix . $this->name;
+
+        return ((new Repeater())
+            ->set_name($prefix . '_' . $repeater_field_name, '')
+            ->set_is_option($this->is_option)
+        );
 
     }
 
