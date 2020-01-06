@@ -35,7 +35,9 @@ vagrant ssh -- -t "cd /var/www/web/app/themes/echocrate-sage-9_0_9/vendor/; unli
 ### As plugin
 
 #### Create symlink
-vagrant ssh -- -t "ln -s /var/www/___fewbricksrepos___/fewbricks/ /var/www/web/app/plugins/fewbricks; ln -s /var/www/___fewbricksrepos___/fewbricks/ /var/www/web/app/plugins/acf-fewbricks-hidden"
+vagrant ssh -- -t "ln -s /var/www/___fewbricksrepos___/fewbricks/ /var/www/web/app/plugins/fewbricks; ln -s /var/www/___fewbricksrepos___/acf-fewbricks-hidden/ /var/www/web/app/plugins/acf-fewbricks-hidden"
+
+Note that you must enable the plugin as any other WP plugin.
 
 ### Remove symlink
 vagrant ssh -- -t "cd /var/www/web/app/plugins/; unlink fewbricks; unlink acf-fewbricks-hidden"
