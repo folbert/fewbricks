@@ -267,20 +267,20 @@ abstract class Brick extends FieldCollection implements BrickInterface
         }
 
         /** @var Brick $brick_instance */
-        $brick_instance = new $class_name('', $brick_name);
-
-        $brick_instance->set_is_layout($this->is_layout);
-        $brick_instance->set_is_sub_field($this->is_sub_field);
-        $brick_instance->set_is_option($this->is_option);
+        $brick_instance = (new $class_name())->set_name($this->field_names_prefix . $this->name . '_' . $brick_name);
 
         // If no special case has been forced on the function call...
         if ($is_layout === false && $is_sub_field === false && $is_option === false) {
 
-            /*// ...let the calling (parent) object decide
-            $is_layout = $this->is_layout;
-            $is_sub_field = $this->is_sub_field;
-            $is_option = $this->is_option;*/
-            //$brick_name = $this->name . '_' . $brick_name;
+            $brick_instance->set_is_layout($this->is_layout);
+            $brick_instance->set_is_sub_field($this->is_sub_field);
+            $brick_instance->set_is_option($this->is_option);
+
+        } else {
+
+            $brick_instance->set_is_layout($is_layout);
+            $brick_instance->set_is_sub_field($is_sub_field);
+            $brick_instance->set_is_option($is_option);
 
         }
 
