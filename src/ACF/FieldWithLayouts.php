@@ -111,14 +111,14 @@ class FieldWithLayouts extends Field
      */
     public function get_brick_in_row() {
 
-        $row_layout = get_row_layout();
+        $row_layout_name = get_row_layout();
 
-        $class_name = get_sub_field($row_layout . '_' . \Fewbricks\Brick::BRICK_CLASS_FIELD_NAME);
+        $class_name = get_sub_field($row_layout_name . '_' . \Fewbricks\Brick::BRICK_CLASS_FIELD_NAME);
 
         /** @var Brick $brick_instance */
-        $brick_instance = new $class_name('', $row_layout);
+        $brick_instance = new $class_name('', $row_layout_name);
 
-        $brick_instance->set_row_layout($row_layout);
+        $brick_instance->set_row_layout_name($row_layout_name);
         $brick_instance->set_is_layout(true);
         $brick_instance->set_is_option($this->is_option);
 

@@ -17,7 +17,11 @@ use Fewbricks\ACF\RuleGroupCollection;
 abstract class Brick extends FieldCollection implements BrickInterface
 {
 
-    // FIBC = Fewbricks Internal Brick Class Name and then some random letters to avoid collisions
+    /**
+     * Name of the hidden field that will hold the brick class name when brick is added to a field with fields (Layout
+     * or Repeater).
+     * FIBC = Fewbricks Internal Brick Class Name and then some random letters to avoid collisions
+     */
     const BRICK_CLASS_FIELD_NAME = 'fibcn_7tigo8y9';
 
     /**
@@ -64,17 +68,22 @@ abstract class Brick extends FieldCollection implements BrickInterface
     /**
      * @var string
      */
-    protected $name;
+    protected $label;
 
     /**
      * @var string
      */
-    protected $label;
+    protected $name;
 
     /**
      * @var int What post id we should get field from.
      */
     private $post_id_to_get_field_from;
+
+    /**
+     * @var string|bool The name of any layout that the brick is part of
+     */
+    protected $row_layout_name;
 
     /**
      * @param string $key This value must be unique system wide. See the documentation for more info on this.
@@ -88,12 +97,13 @@ abstract class Brick extends FieldCollection implements BrickInterface
     {
 
         $this->data = [];
+        $this->detached_from_acf_loop = false;
+        $this->have_brick_class_field = false;
         $this->is_layout = false;
         $this->is_option = false;
         $this->is_sub_field = false;
         $this->post_id_to_get_field_from = false;
-        $this->have_brick_class_field = false;
-        $this->detached_from_acf_loop = false;
+        $this->row_layout_name = false;
 
         // const NAME was used in early stages of beta so we still have to check it.
         // The constant is now deprecated and name should always be passed.
@@ -262,8 +272,8 @@ abstract class Brick extends FieldCollection implements BrickInterface
     {
 
         if(empty($class_name)) {
-            $row_layout = get_row_layout();
-            $class_name = get_sub_field($row_layout . '_' . \Fewbricks\Brick::BRICK_CLASS_FIELD_NAME);
+            $row_layout_name = get_row_layout();
+            $class_name = get_sub_field($row_layout_name . '_' . \Fewbricks\Brick::BRICK_CLASS_FIELD_NAME);
         }
 
         /** @var Brick $brick_instance */
@@ -558,16 +568,6 @@ abstract class Brick extends FieldCollection implements BrickInterface
     }
 
     /**
-     * @return mixed
-     */
-    public function get_post_id_to_get_field_from()
-    {
-
-        return $this->post_id_to_get_field_from;
-
-    }
-
-    /**
      * Set a value that should be passed as the second argument to ACFs get_field.
      * Note that it can also be options, taxonomies, users etc. For more info, see "Get a value from different
      * objects" at the link below.
@@ -587,19 +587,34 @@ abstract class Brick extends FieldCollection implements BrickInterface
     }
 
     /**
-     * Checks if the brick has a layout with the name that you pass to the function. Returns true if it does, false if
-     * not.
-     *
-     * @param string $brickLayoutName
-     *
-     * @return boolean True if the brick has a layout with the passed name, false if not.
+     * @return mixed
      */
-    /*public function has_brick_layout($brick_layout_name)
+    public function get_post_id_to_get_field_from()
     {
 
-        return in_array($brick_layout_name, $this->brick_layouts);
+        return $this->post_id_to_get_field_from;
 
-    }*/
+    }
+
+    /**
+     * @param $row_layout_name
+     */
+    public function set_row_layout_name($row_layout_name)
+    {
+
+        $this->row_layout_name = $row_layout_name;
+
+    }
+
+    /**
+     * @return bool|string
+     */
+    public function get_row_layout_name()
+    {
+
+        return $this->row_layout_name;
+
+    }
 
     /**
      * Use this to set custom data for the brick.
