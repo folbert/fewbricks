@@ -11,28 +11,49 @@
 
             $this.cssClassFull = 'fewbricks-info-pane--full';
 
-            $this.initMailElm();
+            if(!$this.initMainElm()) {
+                return;
+            }
+
             $this.initToggler();
+
+            $this.$mainElm.show();
 
         }
 
-        this.initMailElm = function() {
+        /**
+         *
+         */
+        this.initMainElm = function() {
 
             $this.$mainElm = $('#fewbricks-info-pane');
+
+            if($this.$mainElm.length === 0) {
+                return false;
+            }
 
             if(typeof fewbricksInfoPane !== 'undefined' && typeof fewbricksInfoPane.startHeight !== 'undefined') {
                 $this.toggleMainElm(fewbricksInfoPane.startHeight);
             }
 
+            return true;
+
         }
 
+        /**
+         *
+         */
         this.initToggler = function() {
 
-            $('.fewbricks-info-pane__toggler')
+            $('[data-fewbricks-info-pane-toggler]')
                 .unbind('click')
                 .on('click', function() {
 
-                    $this.toggleMainElm($(this).attr('data-height'));
+                    let height = $(this).attr('data-fewbricks-info-pane-height');
+
+                    $this.toggleMainElm(height);
+
+                    document.cookie = 'fewbricks_info_pane_height=' + height;
 
                 });
 
@@ -73,4 +94,5 @@
         (new FewbricksDevHelper()).init();
 
     });
+    
 })(jQuery);

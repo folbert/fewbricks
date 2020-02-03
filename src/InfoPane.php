@@ -58,6 +58,8 @@ class InfoPane
 
         if (isset($_GET['fewbricks-info-pane-height'])) {
             $start_height = $_GET['fewbricks-info-pane-height'];
+        } elseif(isset($_COOKIE['fewbricks_info_pane_height'])) {
+            $start_height = $_COOKIE['fewbricks_info_pane_height'];
         } else if ($start_height === true) {
             $start_height = '"minimized"';
         }

@@ -1,4 +1,5 @@
 #fewbricks-info-pane {
+    display: none;
     position: fixed;
     z-index: 999999;
     background: #18171B;

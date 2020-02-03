@@ -68,10 +68,10 @@ use \Fewbricks\InfoPane;
         </ul>
 
         <div class="fewbricks-info-pane__togglers-wrapper">
-            <button class="fewbricks-info-pane__toggler" data-height="minimized">Minimized</button>
-            <button class="fewbricks-info-pane__toggler" data-height="33">33%</button>
-            <button class="fewbricks-info-pane__toggler" data-height="50">50%</button>
-            <button class="fewbricks-info-pane__toggler" data-height="100">100%</button>
+            <button class="fewbricks-info-pane__toggler" data-fewbricks-info-pane-toggler data-fewbricks-info-pane-height="minimized">Minimized</button>
+            <button class="fewbricks-info-pane__toggler" data-fewbricks-info-pane-toggler data-fewbricks-info-pane-height="33">33%</button>
+            <button class="fewbricks-info-pane__toggler" data-fewbricks-info-pane-toggler data-fewbricks-info-pane-height="50">50%</button>
+            <button class="fewbricks-info-pane__toggler" data-fewbricks-info-pane-toggler data-fewbricks-info-pane-height="100">100%</button>
         </div>
 
     </div>
