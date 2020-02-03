@@ -18,10 +18,10 @@ use \Fewbricks\InfoPane;
 
             <?php
 
-            foreach (InfoPane::get_acf_settings_arrays() AS $acfSettingsArray) {
+            foreach (InfoPane::get_acf_settings_arrays() AS $acf_settings_array) {
 
                 ?>
-                <h3 class="fewbricks-info-pane__section-sub-title"><?php echo InfoPane::get_title_from_acf_array($acfSettingsArray);
+                <h3 class="fewbricks-info-pane__section-sub-title"><?php echo InfoPane::get_title_from_acf_array($acf_settings_array);
                 ?></h3>
 
                 <?php
@@ -29,10 +29,10 @@ use \Fewbricks\InfoPane;
                 ob_start();
 
                 if (function_exists('dump')) {
-                    dump($acfSettingsArray);
+                    dump($acf_settings_array);
                 } else {
                     echo '<pre class="fdt-pre">';
-                    print_r($acfSettingsArray);
+                    print_r($acf_settings_array);
                     echo '</pre>';
                 }
 

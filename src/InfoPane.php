@@ -211,21 +211,21 @@ class InfoPane
     }
 
     /**
-     * @param $acfSettingsArray
+     * @param $acf_settings_array
      * @return string
      */
-    public static function get_title_from_acf_array(array $acfSettingsArray)
+    public static function get_title_from_acf_array(array $acf_settings_array)
     {
 
         $title = '<i>unknown title</i>';
 
         $possibleKeys = ['title', 'label'];
 
-        foreach($possibleKeys AS $possibleKey) {
+        foreach($possibleKeys AS $possible_key) {
 
-            if(isset($acfSettingsArray[$possibleKey])) {
+            if(isset($acf_settings_array[$possible_key])) {
 
-                $title = $acfSettingsArray[$possibleKey];
+                $title = $acf_settings_array[$possible_key];
                 break;
 
             }
