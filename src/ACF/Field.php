@@ -468,6 +468,18 @@ class Field
     }
 
     /**
+     * @param $label
+     * @return Field
+     */
+    public function set_label($label)
+    {
+
+        $this->label = $label;
+        return $this;
+
+    }
+
+    /**
      * @return string
      */
     public function get_name()
