@@ -309,16 +309,6 @@ abstract class Brick extends FieldCollection implements BrickInterface
     }
 
     /**
-     * @return array
-     */
-    public function get_view_data()
-    {
-
-        return [];
-
-    }
-
-    /**
      * @param array $data
      * @return $this
      */
