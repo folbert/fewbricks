@@ -59,10 +59,10 @@ class FieldGroup extends FieldCollection implements FieldGroupInterface
     /**
      * FieldGroup constructor.
      *
-     * @param string $title
-     * @param string $key
+     * @param string $title Must be set when registering fields to the field group.
+     * @param string $key Must be set when registering fields to the field group.
      */
-    public function __construct(string $title, string $key)
+    public function __construct(string $title = '', string $key = '')
     {
 
         // Let's keep these crucial settings as class vars to enable nicer
