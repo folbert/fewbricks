@@ -51,6 +51,34 @@ class FieldWithLayouts extends Field
     }
 
     /**
+     * Add layouts where each layout consist of one Brick.
+     * @param $layout_settings
+     * @return $this
+     */
+    public function add_brick_layouts($layout_settings)
+    {
+
+        foreach($layout_settings AS $layout_settings) {
+
+            $layout_settings['layout_name'] = (isset($layout_settings['layout_name']))
+                ? $layout_settings['layout_name'] : false;
+
+            $layout = new Layout($layout_settings['layout_label'], $layout_settings['layout_name'], $layout_settings['layout_key']);
+
+            $brick_class_name = $layout_settings['brick_class_name'];
+            $brick = new $brick_class_name($layout_settings['brick_key'], $layout_settings['brick_name']);
+
+            $layout->add_brick($brick);
+
+            $this->add_layout($layout);
+
+        }
+
+        return $this;
+
+    }
+
+    /**
      * @return mixed The value of the ACF setting "button_label". Returns the default ACF value "Add row" (or
      * translation thereof) if none has been set using Fewbricks.
      */
