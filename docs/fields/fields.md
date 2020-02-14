@@ -7,6 +7,25 @@ permalink: /fields/
 ---
 
 # Fields
+{: .no_toc }
+
+## Table of contents
+{: .no_toc .text-delta }
+
+- TOC
+{:toc}
+
+Note that you should strive to use the action 'fewbricks/init' to start off all your Fewbricks related code. This way
+ you can be sure that ACF and Fewbricks is ready. If you, for some reason, can not use that action, you will most
+ likely be ok anyway.
+
+```php
+<?php
+add_action('fewbricks/init', function() {
+    // Register fields and field groups and/or call your PHP classes here.
+});
+```
+
 
 ## Example code
 The code is written using a minimum of indentation and long lines to allow for reading on small screens.
@@ -65,14 +84,17 @@ All field types that are available in ACF are available in Fewbricks. With one e
 `new Field('Label', 'Name', 'Key')`
 
 ### Label
+{: .no_toc }
 The label to be shown next to the field in the admin area.
 
 ### Name
+{: .no_toc }
 The name by which to fetch the fields data. If adding a field to a flexible content, repeater or Brick, the name will be prepended with the name of the brick. Fewbricks will take care of most of those instances when you are fetching field data through Fewbricks functions so you can often pass the original field name and the code will make sure you get the correct data. If you are having trouble fetching data, use the filter [fewbricks/show_fields_info](/filters/#fewbricksshow_fields_info) to see the name of the field in the admin area when editing a post.
 
 Due to restrictions in the WordPress table structure, the max length of a field name is 255 characters. So if you have fields that go a couple of levels deep (for example a brick in a flexible field that have a repeater), the field name could potentially exceed that limit. This should be considered when creating instances of bricks and fields. If [dev-mode](/dev-mode) is enabled, Fewbricks takes care of checking that your field name does not exceed the max length and will die if it does. If the value of a field is not saved, the reason is most likely that the name is too long. In which case the only  solution is to shorten the field and/or brick names.
 
 ### Key
+{: .no_toc }
 Check the [FAQ](/faq/) for info on the site wide unique keys.
 
 ## ACF settings
@@ -83,6 +105,7 @@ The function names are made up of ACFs snake_case_names. So for example the sett
 Fewbricks does not check to make sure that values being sent to the setter functions are correct. This is since ACF may suddenly allow for some new value which Fewbricks should then accept without the code having to be updated.
 
 ### Quick example
+{: .no_toc }
 
 ```php
 <?php

@@ -7,6 +7,13 @@ permalink: /bricks/
 ---
 
 # Bricks
+{: .no_toc }
+
+## Table of contents
+{: .no_toc .text-delta }
+
+- TOC
+{:toc}
 
 ## Create a Brick
 You don't have to use Bricks when using Fewbricks but it is, in my humble opinion, one of Fewbricks greatest features. Simply put, a Brick is a reusable collections of fields. A Brick can include or extend other Bricks and you have a lot of functions available to change Bricks on the fly.

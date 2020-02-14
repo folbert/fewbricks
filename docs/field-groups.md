@@ -6,11 +6,26 @@ permalink: /field-groups/
 ---
 
 # Field Groups
+{: .no_toc }
+
+## Table of contents
+{: .no_toc .text-delta }
+
+- TOC
+{:toc}
+
 Every field in ACF (and therefore also Fewbricks) must belong to a field group.
 
 Note that you should strive to use the action 'fewbricks/init' to start off all your Fewbricks related code. This way
  you can be sure that ACF and Fewbricks is ready. If you, for some reason, can not use that action, you will most
  likely be ok anyway.
+
+```php
+<?php
+add_action('fewbricks/init', function() {
+    // Register fields and field groups and/or call your PHP classes here.
+});
+```
 
 ## Example code
 The code below assumes that you have written the code in [Fields](/fields#example-code) and have access to the variables created there.
@@ -94,11 +109,15 @@ Then you could create and register the field group by calling `(new Content('Con
 
 ## Constructor arguments
 
-### 1. Label
+`new FieldGroup('Label', 'key')`
+
+### Label
+{: .no_toc }
 The label of the field group which will be used when showing the field group in the backend.
 
-### 2. Key
-The second argument when creating a field group is a key that must be unique across the site. Check [the FAQ](/faq/)
+### Key
+{: .no_toc }
+The second argument when creating a field group is a key that must be unique across the site. Check [the FAQ](/faq/#whats-up-with-the-weird-strings-like-1811302108a)
 for more on keys.
 
 ## ACF settings
@@ -109,30 +128,20 @@ Besides setting and getting all the ACF settings, the following functions are av
 groups. For info on which arguments to pass to each function, please refer to each functions docblock or body in the
 code.
 
-`add_brick()` - read more about Bricks under [Bricks](/bricks/).
+### Fields
+{: .no_toc }
+`add_field()` - add a field to the field group.
 
-`add_field()` - add fields to the field group. More on that under [Fields](/fields/).
-
-`add_brick_before_by_name()` and `add_brick_after_field_by_name()` - add a Brick before/after an existing field by sending
-the name of the field to add before/after.
-
-`add_brick_to_beginning()`
+`add_fields()` - add fields to the field group.
 
 `add_field_to_beginning()` and `add_fields_to_beginning()`
+
+`remove_fields_by_key()`, `remove_field_by_key()`, `remove_field_by_name()` and `remove_fields_by_name()` - remove fields
 
 `add_field_after_field_by_name()`, `add_fields_after_field_by_name()`, `add_field_before_field_by_name()` and
 `add_fields_before_field_by_name()` - same as above but add field/fields instead of Bricks.
 
-`remove_brick_by_key()` and `remove_brick_by_name()` - remove all fields that were added to a field group from a brick.
-
-`remove_fields_by_key()`, `remove_field_by_key()`, `remove_field_by_name()` and `remove_fields_by_name()` - remove fields
-
 `replace_field_by_key()` and `replace_field_by_name()` - replace existing field.
-
-`add_arguments()` and `add_argument()` - add arbitrary arguments that you can use if you for example are using classes
-to extend Fewbricks FieldGroup class.
-
-`get_argument()` - retrieve an argument previously added to the field group.
 
 `get_fields()` - get all the fields that has been added to the field group.
 
@@ -141,6 +150,24 @@ to extend Fewbricks FieldGroup class.
 `set_field_labels_prefix()` - send a string to prefix the labels of all the fields in the group with.
 
 `set_field_names_prefix()` - send a string to prefix the names of all the fields in the group with.
+
+### Bricks
+{: .no_toc }
+`add_brick()` - read more about Bricks under [Bricks](/bricks/).
+
+`add_brick_before_by_name()` and `add_brick_after_field_by_name()` - add a Brick before/after an existing field by sending
+the name of the field to add before/after.
+
+`add_brick_to_beginning()`
+
+`remove_brick_by_key()` and `remove_brick_by_name()` - remove all fields that were added to a field group from a brick.
+
+### Other
+{: .no_toc }
+`add_arguments()` and `add_argument()` - add arbitrary arguments that you can use if you for example are using classes
+to extend Fewbricks FieldGroup class.
+
+`get_argument()` - retrieve an argument previously added to the field group.
 
 `clear_location_rule_groups()` - remove all location rules that have been set on the field group.
 
