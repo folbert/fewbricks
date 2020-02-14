@@ -62,11 +62,13 @@ All field types that are available in ACF are available in Fewbricks. With one e
 
 ## Constructor arguments
 
+`new Field('Label', 'Name', 'Key')`
+
 ### Label
 The label to be shown next to the field in the admin area.
 
 ### Name
-The name by which to fetch the fields data. If adding a field to a flexible content, repeater or Brick, the name will be prepended with the name of the brick. Fewbricks will take care of most of those instances when you are fetching field data through Fewbricks functions so you can often pass the original field name and the code will make sure you get the correct data. If you are having trouble fetching data, enable [show_fields_info](/filters/show_fields_info/) to see the name of the field in the admin area when editing a post.
+The name by which to fetch the fields data. If adding a field to a flexible content, repeater or Brick, the name will be prepended with the name of the brick. Fewbricks will take care of most of those instances when you are fetching field data through Fewbricks functions so you can often pass the original field name and the code will make sure you get the correct data. If you are having trouble fetching data, use the filter [fewbricks/show_fields_info](/filters/#fewbricksshow_fields_info) to see the name of the field in the admin area when editing a post.
 
 Due to restrictions in the WordPress table structure, the max length of a field name is 255 characters. So if you have fields that go a couple of levels deep (for example a brick in a flexible field that have a repeater), the field name could potentially exceed that limit. This should be considered when creating instances of bricks and fields. If [dev-mode](/dev-mode) is enabled, Fewbricks takes care of checking that your field name does not exceed the max length and will die if it does. If the value of a field is not saved, the reason is most likely that the name is too long. In which case the only  solution is to shorten the field and/or brick names.
 
@@ -74,19 +76,31 @@ Due to restrictions in the WordPress table structure, the max length of a field 
 Check the [FAQ](/faq/) for info on the site wide unique keys.
 
 ## ACF settings
-In Fewbricks FieldGroup class we have implemented getters and setters for all the ACF settings that are available at the time of writing this (ACF v.5.7.7). You can also use the generic functions `set_setting()` and `get_setting()` to set and get any new settings that ACF introduces without having to wait for Fewbricks to be updated with new getters and setters. This also applies to settings that are introduced by any extension that you install. Yes, you can use those generic functions instead of Fewbricks settings-specific functions as well if you want but having for example `set_label_placement()` popping up if your editor handles auto complete is way easier than having to remember every settings name like in Fewbricks 1 which mainly used associative arrays.
+In the field classes we have implemented getters and setters for all the ACF settings that are available at the time of writing this (ACF v.5.7.7). You can also use the generic functions `set_setting()` and `get_setting()` to set and get any new settings that ACF introduces without having to wait for Fewbricks to be updated with new getters and setters. This also applies to settings that are introduced by any extension that you install. Yes, you can use those generic functions instead of Fewbricks settings-specific functions as well if you want, but having for example `set_label_placement()` popping up if your editor has intelligent code completion is way easier than having to remember every settings name like in Fewbricks 1 which mainly used associative arrays.
 
-The function names are camelCaseVersions of ACFs snake_case_names. So for example the setting "label_placement" is set by calling `set_label_placement('value')` and "Description" is set by `set_description('Just do it!')`. Most of the times you will be able to calculate the name that ACF stores a setting under by looking at the (english) label in ACFs GUI when creating a field group. For example "Active" is stored under "active" which in turn can be set in Fewbricks by calling `set_active(true)` (or `set_active(false)`). There are however some cases where the label does not directly corresponds to you what the ACF setting is called. An example of this is "Order" which ACF stores as "menu_order" which in turn corresponds to `set_menu_order()` in Fewbricks. The easiest way to find out what the setting is called is by using the filter [fewbricks/show_fields_info](/filters/show_fields_info/) to display in the backend what each setting is actually stored as by ACF.
+The function names are made up of ACFs snake_case_names. So for example the setting "label_placement" is set by calling `set_label_placement('value')` and "Description" is set by `set_description('Just do it!')`. Most of the times you will be able to figure out the name that ACF stores a setting under by looking at the english label in ACFs GUI when creating a field group. For example "Required" is stored as "required" which in turn can be set in Fewbricks by calling `set_required(true)` (or `set_required(false)`). There are however some cases where the label does not directly corresponds to you what the ACF setting is called. An example of this is "Order" which ACF stores as "menu_order" which in turn corresponds to `set_menu_order()` in Fewbricks. The easiest way to find out what the setting is called is by using the filter [fewbricks/show_fields_info](/filters/#fewbricksshow_fields_info) to display each setting fields name in the ACF GUI.
 
-The code does not do any checks to make sure that values being sent to the setter functions are correct. This is since ACF may suddenly allow for some new value which Fewbricks should accept without the code having to be updated.
+Fewbricks does not check to make sure that values being sent to the setter functions are correct. This is since ACF may suddenly allow for some new value which Fewbricks should then accept without the code having to be updated.
 
 ### Quick example
 
 ```php
 <?php
+$text_field = new Text('The text', 'the_text', '2002142238a');
+$text_field->set_default_value('Some text');
+$text_field->set_max_length(200);
 
-$textField->set_default_value('Some text');
-$textField->getMaxLength();
+$text_field->get_max_length(200);
+
+```
+
+You can also use chaining like so:
+
+```php
+<?php
+$text_field = (new Text('The text', 'the_text', '2002142238a'))
+->set_default_value('Some text')
+->set_max_length(200);
 
 ```
 
@@ -119,7 +133,7 @@ _or_
 - The field with the id 1711172249u has a value of "black"
 
 Even if Fewbricks adds to the key that you give a field you should always use the key that you set and not the one
-that Fewbricks generated.
+that Fewbricks generated. Fewbricks will then take care of creating the correct rule based on the key.
 
 ## Adding new field types
 Read under [Extensions](/fields/extensions/) for info on how to support non-ACF-core fields.

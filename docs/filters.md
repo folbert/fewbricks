@@ -124,7 +124,7 @@ Note the lack of a trailing slash.
 
 
 
-# fewbricks/show_fields_info
+## fewbricks/show_fields_info
 Set to `true` to display info about each field in the backend.
 This is separated this from the debug-mode filter (described further down) because while you may want to debug, you
 may not necessarily want to clutter the backend with field info at the same time.
