@@ -94,5 +94,5 @@
         (new FewbricksDevHelper()).init();
 
     });
-    
+
 })(jQuery);

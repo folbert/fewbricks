@@ -130,7 +130,7 @@ class Wysiwyg extends Field implements FieldInterface
      *
      * @link https://www.advancedcustomfields.com/resources/customize-the-wysiwyg-toolbars/
      *
-     * @param string $toolbar "full", "basic" or any custom value.
+     * @param string $toolbar "full", "basic" or any custom value added using the filter acf/fields/wysiwyg/toolbars
      * @return $this
      */
     public function set_toolbar($toolbar)
