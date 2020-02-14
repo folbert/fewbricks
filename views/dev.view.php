@@ -26,7 +26,7 @@
                                             field group
                                             "<?php echo $data[0] . '"  with key <i>' . $fieldGroupKey
                                                         . '</i>'; ?></b></label></p>
-                                <textarea readonly class="fewbricks__export-textarea" id="fewbricks-php-export-<?php echo $fieldGroupKey; ?>"><?php echo $data[1];
+                                <textarea readonly class="fewbricks__export-textarea" id="fewbricks-php-export-<?php echo $fieldGroupKey; ?>" style="width: 100%"><?php echo $data[1];
                                 ?></textarea>
 
                                 <?php
@@ -42,7 +42,7 @@
 
                             }
 
-                            echo '<textarea readonly class="fewbricks__export-textarea">' . $textareaContent
+                            echo '<textarea readonly class="fewbricks__export-textarea" style="width: 100%; min-height: 30rem">' . $textareaContent
                                  . '</textarea>';
 
                         }
@@ -69,7 +69,7 @@
 
             <div class="inside">
 
-                <p><?php _e('Here you can export all the field groups and fields that are registered using 
+                <p><?php _e('Here you can export all the field groups and fields that are registered using
                 Fewbricks. Use the download button to export to a .json file which you can then import to another ACF installation. Use the generate button to export to PHP code which you can place in your theme.',
                         'fewbricks'); ?></p>
 
@@ -124,13 +124,13 @@
                                     <hr>
 
                                     <div class="acf-label">
-                                        <label for="fewbricks_generate_php_split"><?php _e('Generate (only applied when 
+                                        <label for="fewbricks_generate_php_split"><?php _e('Generate (only applied when
                                         generating PHP):', 'fewbricks'); ?></label>
                                     </div>
                                     <select name="fewbricks_generate_php_split" id="fewbricks_generate_php_split">
-                                        <option value="no_split"><?php _e('One textarea with all field groups in 
+                                        <option value="no_split"><?php _e('One textarea with all field groups in
                                         it', 'fewbricks'); ?></option>
-                                        <option value="one_per_field_group"><?php _e('One textarea per field 
+                                        <option value="one_per_field_group"><?php _e('One textarea per field
                                         group', 'fewbricks'); ?></option>
                                     </select>
 

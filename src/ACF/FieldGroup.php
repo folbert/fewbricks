@@ -392,13 +392,13 @@ class FieldGroup extends FieldCollection implements FieldGroupInterface
     }
 
     /**
-     * @param bool $show
+     * @param bool $display
      * @return $this
      */
-    public function set_display_in_fewbricks_info_pane(bool $show)
+    public function set_display_in_fewbricks_info_pane(bool $display)
     {
 
-        return $this->set_setting(InfoPane::SETTINGS_NAME_FOR_DISPLAYING_ACF_ARRAY, $show);
+        return $this->set_setting(InfoPane::SETTINGS_NAME_FOR_DISPLAYING_ACF_ARRAY, $display);
 
     }
 
