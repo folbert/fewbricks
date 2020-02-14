@@ -64,11 +64,7 @@ class ImageAndText extends Brick
 When added to a field group or another brick, bricks are just a collection of fields which will be added just like
 they would if you used `add_field()` or `add_fields()`.
 
-## Templates
-
-## get_brick_html()
-If you want to use
-
-## getHtml()
 
 ## set_up() called on every instance
+
+## You can add Conditional Logic on a brick which will be applied to all fields in the brick. See Link.php.
