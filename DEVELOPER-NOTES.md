@@ -22,9 +22,9 @@ Notes to Fewbricks Developers (a.k.a. me/Björn Folbert).
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
 ## Testing as both plugin and custom install location
-The Fewbricks repo is placed in a dedicated folder outside of the WordPress-installation and the dev server. We then use symlinks to that folder in order to be able to test running Fewbricks from different locations.
+In the development environment, the Fewbricks and Fewbricks Hidden repos are placed in a dedicated folder outside of the WordPress-installation and the dev server. We then use symlinks to that folder in order to be able to test running Fewbricks from different locations.
 
-### As composer package in theme
+### Test as composer package in theme
 
 #### Create symlink
 vagrant ssh -- -t "ln -s /var/www/___fewbricksrepos___/ /var/www/web/app/themes/echocrate-sage-9_0_9/vendor/folbert"
@@ -32,7 +32,7 @@ vagrant ssh -- -t "ln -s /var/www/___fewbricksrepos___/ /var/www/web/app/themes/
 #### Remove symlink
 vagrant ssh -- -t "cd /var/www/web/app/themes/echocrate-sage-9_0_9/vendor/; unlink folbert"
 
-### As plugin
+### Test as plugin
 
 #### Create symlink
 vagrant ssh -- -t "ln -s /var/www/___fewbricksrepos___/fewbricks/ /var/www/web/app/plugins/fewbricks; ln -s /var/www/___fewbricksrepos___/acf-fewbricks-hidden/ /var/www/web/app/plugins/acf-fewbricks-hidden"
