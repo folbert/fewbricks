@@ -28,7 +28,9 @@ add_action('fewbricks/init', function() {
 ```
 
 ## Example code
-The code below assumes that you have written the code in [Fields](/fields#example-code) and have access to the variables created there.
+Below you will find some simple demo code to show you how to get started. For a more advanced OOP approach, how to use Bricks for layouts, how to display the data and more tips and tricks check out [The Fewbricks Demo Theme](https://github.com/folbert/fewbricks-demo-theme).
+
+The code assumes that you have written the code in [Fields](/fields#example-code) and have access to the variables created there.
 
 ```php
 <?php

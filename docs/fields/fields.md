@@ -22,13 +22,14 @@ Note that you should strive to use the action 'fewbricks/init' to start off all 
 ```php
 <?php
 add_action('fewbricks/init', function() {
-    // Register fields and field groups and/or call your PHP classes here.
+    // Register fields and field groups and/or
+    // call your PHP classes and files which uses Fewbricks from here.
 });
 ```
 
 
 ## Example code
-The code is written using a minimum of indentation and long lines to allow for reading on small screens.
+Below you will find some simple demo code to show you how to get started. For a more advanced OOP approach, how to use Bricks for layouts, how to display the data and more tips and tricks check out [The Fewbricks Demo Theme](https://github.com/folbert/fewbricks-demo-theme).
 
 ```php
 <?php

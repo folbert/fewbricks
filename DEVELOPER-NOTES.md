@@ -7,17 +7,17 @@ Notes to Fewbricks Developers (a.k.a. me/Björn Folbert).
 
 - [Testing as both plugin and custom install location](#testing-as-both-plugin-and-custom-install-location)
   - [Test as composer package in theme](#test-as-composer-package-in-theme)
-    - [Create symlink](#create-symlink)
-    - [Remove symlink](#remove-symlink)
+    - [Create symlinks](#create-symlinks)
+    - [Remove symlinks](#remove-symlinks)
   - [Test as plugin](#test-as-plugin)
-    - [Create symlink](#create-symlink-1)
-  - [Remove symlink](#remove-symlink-1)
+    - [Create symlinks](#create-symlinks-1)
+  - [Remove symlinks](#remove-symlinks-1)
 - [Testing in other environments](#testing-in-other-environments)
-- [Documentation](#documentation)"
+- [Documentation](#documentation)
   - [Writing](#writing)
+  - [Testing](#testing)
   - [Publishing](#publishing)
 - [Release Workflow](#release-workflow)
-  - [After release has been created on GitHub:](#after-release-has-been-created-on-github)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
@@ -51,7 +51,7 @@ We can have multiple test servers set up which, using Composer, pulls branches (
 The documentation is written using [Jekyll](https://jekyllrb.com/).
 Ruby version is managed using [RBENV](https://github.com/rbenv/rbenv) ([RBENV info in Jekyll documentation](https://jekyllrb.com/docs/installation/macos/#rbenv)).
 
-After you have Jekyll set up, you can use these commands (and [https://jekyllrb.com/docs/usage/](more)).
+After you have Jekyll set up, head into the docs folder and use these commands (and [https://jekyllrb.com/docs/usage/](more)).
 
 `bundle exec jekyll serve` to be able to view the site at http://127.0.0.1:4000/ which will rebuild automatically when you edit a MD-file.
 
@@ -70,6 +70,8 @@ To remove the symlink
 ### Publishing
 Use the publish script located in the docs folder to rsync to https://fewbricks2.folbert.com
 
+``
+
 ## Release Workflow
 These are notes to make sure that I don't forget anything when creating a new release.
 
@@ -80,23 +82,4 @@ Version numbering follows [Semantic Versioning](http://semver.org/).
 3. Change version nr for $plugin_current_version in fewbricks.php
 
 After master has been pushed, create release on GitHub.
-
-### After release has been created on GitHub:
-
-These steps are to make sure that a notice about the new version is displayed when listing plugins in the WordPress admin system.
-
-1. Download Zip from [https://github.com/folbert/fewbricks/releases](https://github.com/folbert/fewbricks/releases)
-2. Unzip
-3. Remove .gitignore from unzipped dir
-4. Rename directory to "fewbricks"
-5. Re-Zip
-6. Upload to fewbricks.folbert.com/update/zips/[version-nr]/
-7. Edit update.php:
-    1. Update $obj->new_version
-    2. Update $obj->package
-    3. Update $obj->last_updated
-    4. Check $obj->tested
-    5. Check $obj->requires
-8. Save
-9. Check folbert.com and force a plugin update check to make sure changes are correct
 

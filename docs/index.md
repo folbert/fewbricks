@@ -5,8 +5,7 @@ nav_order: 1
 permalink: /
 ---
 
-November 2018: Please note that Fewbricks2 is very much a work in progress. As such, the documentation will change back and forth before the
-first non-beta-release.
+February 2020: Fewbricks2 is currently in beta and being tested in a cpl of live projects before the stable release.
 {: .label .label-red}
 
 # Fewbricks2
@@ -21,13 +20,14 @@ Want to see some code right away? Start at [Fields](fields) and continue from th
 
 ## Elevator pitch
 {: .no_toc }
-- Fewbricks is a framework allowing you to write code to create field groups and fields for the awesome WordPress plugin [Advanced Custom Fields v5 Pro](http://www.advancedcustomfields.com/) or ACF for short.
-- Fewbricks gives you the power to create reusable field collections which we have named [Bricks](/bricks). Check them out, they are pretty neat IMHO.
-- Fewbricks ultimately generates the same kind of arrays that are passed to ACFs `acf_add_local_field_group()` when you use "Generate PHP"
+Fewbricks...
+- ...is a framework allowing you to write code to create field groups and fields for the awesome WordPress plugin [Advanced Custom Fields v5 Pro](http://www.advancedcustomfields.com/) or ACF for short.
+- ...gives you the power to create reusable field collections which we have named [Bricks](/bricks). Check them out, they are pretty neat IMHO.
+- ...ultimately generates the same kind of arrays that are passed to ACFs `acf_add_local_field_group()` when you use "Generate PHP"
  on the ACF Tools screen. It even passes the generated arrays to that very function. So, sorry to disappoint, there's no black magic in Fewbricks.
-- Fewbricks is [available at GitHub](https://github.com/folbert/fewbricks) where [issues](https://github
+- ...is [available at GitHub](https://github.com/folbert/fewbricks) where [issues](https://github
 .com/folbert/fewbricks/issues) can be used to ask questions, report bugs and anything else discussed. Pull requests are welcome and will be dealt with when time allows.
-- Fewbricks is primarily developed by [Björn Folbert](https://folbert.com), web developer at [KAN](https://kan.se) in Malmö,
+- ...is primarily developed by [Björn Folbert](https://folbert.com), web developer at [KAN](https://kan.se) in Malmö,
 Sweden.
 
 ## Main concepts

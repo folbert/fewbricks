@@ -15,11 +15,13 @@ permalink: /bricks/
 - TOC
 {:toc}
 
-## Create a Brick
 You don't have to use Bricks when using Fewbricks but it is, in my humble opinion, one of Fewbricks greatest features. Simply put, a Brick is a reusable collections of fields. A Brick can include or extend other Bricks and you have a lot of functions available to change Bricks on the fly.
 
 Just like fields, Bricks will not show up in WordPress unless they are added to a field group. That will be done
 later on in this example.
+
+## Example code
+Below you will find some simple demo code to show you how to get started. For a more advanced OOP approach, how to use Bricks for layouts, how to display the data and more tips and tricks check out [The Fewbricks Demo Theme](https://github.com/folbert/fewbricks-demo-theme).
 
 ```php
 <?php
@@ -70,8 +72,3 @@ class ImageAndText extends Brick
 
 When added to a field group or another brick, bricks are just a collection of fields which will be added just like
 they would if you used `add_field()` or `add_fields()`.
-
-
-## set_up() called on every instance
-
-## You can add Conditional Logic on a brick which will be applied to all fields in the brick. See Link.php.
