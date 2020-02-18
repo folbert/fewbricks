@@ -77,9 +77,16 @@ These are notes to make sure that I don't forget anything when creating a new re
 
 Version numbering follows [Semantic Versioning](http://semver.org/).
 
-1. Describe new version in changelog.md
+1. Describe new version in CHANGELOG.md
 2. Change version nr in comment in fewbricks.php
-3. Change version nr for $plugin_current_version in fewbricks.php
+3. Change FEWBRICKS_VERSION in lib/Fewbricks.php
+3. Change version nr in readme.txt
+
+Create release locally and push.
 
 After master has been pushed, create release on GitHub.
+
+Start version number with a "v".
+
+Update https://version.fewbricks2.folbert.com/version-info.php with the correct data
 

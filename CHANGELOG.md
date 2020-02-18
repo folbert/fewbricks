@@ -1,9 +1,10 @@
 # Fewbricks changelog
+An incomplete log of changes.
 
 ## 1.6 - March 19, 2017
 * Added function `get_field_values()`to `brick`
 * Added function `get_get_html_arg()` to `brick`
-* Added ability to pass $post_id to `have_rows()` in `brick` 
+* Added ability to pass $post_id to `have_rows()` in `brick`
 
 ## 1.5.1 - February 13, 2017
 * Changed name on filter for project files base path
@@ -29,7 +30,7 @@
 * Added support for placing fewbricks in child theme
 
 ## 1.1.1 - April 24, 2016
-* Hotfix for Timber dependency in demo 
+* Hotfix for Timber dependency in demo
 
 ## 1.1.0 - April 23, 2016
 * Added autoupdate functionality when viewing the plugin in plugins list.
