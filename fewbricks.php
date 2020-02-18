@@ -5,7 +5,7 @@ Plugin Name: Fewbricks
 Plugin URI: https://github.com/folbert/fewbricks
 Description: A module extension to Advanced Custom Fields
 Author: Björn Folbert
-Version: 2.0-alpha1
+Version: 2.0-beta1
 Author URI: https://folbert.com
 License: GPLv3
 */
@@ -37,6 +37,18 @@ if(file_exists(__DIR__.'/vendor/autoload.php')) {
         }
 
     });
+
+}
+
+if(class_exists('Puc_v4_Factory')) {
+
+    $update_checker = Puc_v4_Factory::buildUpdateChecker(
+        'https://github.com/folbert/fewbricks',
+        __FILE__,
+        'fewbricks'
+    );
+
+    //dump($update_checker);
 
 }
 

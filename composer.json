@@ -25,7 +25,8 @@
     },
     "require": {
         "php": ">=7.1",
-        "folbert/acf-fewbricks-hidden": "1.2"
+        "folbert/acf-fewbricks-hidden": "1.2",
+        "yahnis-elsts/plugin-update-checker": "4.9"
     },
     "require-dev": {
         "phpunit/phpunit": "7.5.18"
