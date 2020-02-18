@@ -79,7 +79,7 @@ class FieldCollection extends Collection implements FieldCollectionInterface
      * @param Brick $brick
      * @return $this
      */
-    public function add_brick($brick)
+    public function add_brick(Brick $brick)
     {
 
         $this->prepare_brick_for_add($brick);

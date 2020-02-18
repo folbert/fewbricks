@@ -7,7 +7,7 @@ permalink: /requirements/
 
 # Requirements
 
-- PHP 7.1+. But we highly recommend 7.2+ since 7.1 [has reached its EOL](https://www.php.net/supported-versions.php).
+- PHP 7.2+.
 
 - [Advanced Custom Fields PRO 5](https://www.advancedcustomfields.com)
 
