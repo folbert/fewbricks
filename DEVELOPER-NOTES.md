@@ -80,7 +80,6 @@ Version numbering follows [Semantic Versioning](http://semver.org/).
 1. Describe new version in CHANGELOG.md
 2. Change version nr in comment in fewbricks.php
 3. Change FEWBRICKS_VERSION in lib/Fewbricks.php
-3. Change version nr in readme.txt
 
 Create release locally and push.
 
