@@ -6,4 +6,4 @@ permalink: /demo/
 ---
 
 # Demo
-I am busy working on a demo theme. Please stand by.
+I have made a [WordPress theme to show some of the ways you can use Fewbricks2](https://github.com/folbert/fewbricks2-demo-theme).
