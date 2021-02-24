@@ -35,12 +35,12 @@ vagrant ssh -- -t "cd /var/www/web/app/themes/echocrate-sage-9_0_9/vendor/; unli
 ### Test as plugin
 
 #### Create symlinks
-vagrant ssh -- -t "ln -s /var/www/___fewbricksrepos___/fewbricks/ /var/www/web/app/plugins/fewbricks; ln -s /var/www/___fewbricksrepos___/acf-fewbricks-hidden/ /var/www/web/app/plugins/acf-fewbricks-hidden"
+vagrant ssh -- -t "ln -s /home/vagrant/code/___fewbricksrepos___/fewbricks/ /home/vagrant/code/web/app/plugins/fewbricks; ln -s /home/vagrant/code/___fewbricksrepos___/acf-fewbricks-hidden/ /home/vagrant/code/web/app/plugins/acf-fewbricks-hidden"
 
 Note that you must enable the plugin as any other WP plugin.
 
 ### Remove symlinks
-vagrant ssh -- -t "cd /var/www/web/app/plugins/; unlink fewbricks; unlink acf-fewbricks-hidden"
+vagrant ssh -- -t "cd /home/vagrant/code/web/app/plugins/; unlink fewbricks; unlink acf-fewbricks-hidden"
 
 ## Testing in other environments
 We can have multiple test servers set up which, using Composer, pulls branches (feature or release) and tests them.
