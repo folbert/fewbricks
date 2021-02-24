@@ -5,9 +5,6 @@ nav_order: 1
 permalink: /
 ---
 
-February 2020: Fewbricks2 is currently in beta and being tested in a cpl of live projects before the stable release.
-{: .label .label-red}
-
 # Fewbricks2
 {: .no_toc }
 
