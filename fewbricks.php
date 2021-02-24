@@ -2,11 +2,11 @@
 
 /*
 Plugin Name: Fewbricks
-Plugin URI: https://github.com/fewagency/fewbricks
+Plugin URI: https://github.com/folbert/fewbricks
 Description: A module extension to Advanced Custom Fields
 Author: Björn Folbert
-Version: 1.7.1
-Author URI: http://folbert.com
+Version: 2.0.0
+Author URI: https://folbert.com
 License: GPLv3
 */
 
@@ -15,31 +15,51 @@ if (!defined('ABSPATH')) {
     exit;
 }
 
-$fewbricks_lib_path = plugin_dir_path(__FILE__) . 'lib/';
+if(file_exists(__DIR__.'/vendor/autoload.php')) {
+    require_once __DIR__.'/vendor/autoload.php';
+} else {
 
-require_once($fewbricks_lib_path . 'fewbricks.php');
+    // Lets use a custom autoload regardless of if Fewbricks has been installed using Composer or not.
+    spl_autoload_register(function ($class) {
 
-add_action('after_setup_theme', function() {
-    fewbricks\fewbricks::construct();
+        $namespaceParts = explode('\\', $class);
+
+        // Make sure that we are dealing with something in the Fewbricks namespace
+        if (count($namespaceParts) > 1
+            && $namespaceParts[0] === 'Fewbricks'
+        ) {
+
+            // First item will always be "Fewbricks" and we don't need that when building the path
+            // Yes, by not checking of the file exists, we do get ugly error messages but we save some execution time.
+            /** @noinspection PhpIncludeInspection */
+            include __DIR__ . '/src/' . implode('/', array_slice($namespaceParts, 1)) . '.php';
+
+        }
+
+    });
+
+}
+
+add_action('acf/init', function () {
+    \Fewbricks\Fewbricks::run();
 });
 
-/**
- * Update related stuff
- */
-require_once($fewbricks_lib_path . 'wp-autoupdate.php');
+if(!function_exists('fewbricks_check_version')) {
 
-add_action('init', function() {
+    add_action('init', 'fewbricks_check_version');
 
-    // set auto-update params
-    $plugin_current_version = '1.7.1';
-    $plugin_remote_path = 'http://fewbricks.folbert.com/update/update.php';
-    $plugin_slug = plugin_basename(__FILE__);
-    $license_user = 'null';
-    $license_key = 'null';
+    function fewbricks_check_version()
+    {
 
-    // only perform Auto-Update call if a license_user and license_key is given
-    if ($license_user && $license_key && $plugin_remote_path) {
-        new wp_autoupdate ($plugin_current_version, $plugin_remote_path, $plugin_slug, $license_user, $license_key);
+        require_once 'src/WP_AutoUpdate.php';
+
+        // set auto-update params
+        $plugin_current_version = \Fewbricks\Fewbricks::FEWBRICKS_VERSION;
+        $plugin_remote_path = 'https://version.fewbricks2.folbert.com/version-info.php';
+        $plugin_slug = plugin_basename(__FILE__);
+
+        new WP_AutoUpdate($plugin_current_version, $plugin_remote_path, $plugin_slug);
+
     }
 
-});
+}

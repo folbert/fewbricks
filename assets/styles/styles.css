@@ -1,0 +1,9 @@
+.fewbricks__export-textarea {
+    display: block;
+    width: 100%;
+    min-height: 500px;
+    background: #fafafa;
+    box-shadow: none;
+    padding: 7px;
+    border-radius: 3px;
+}

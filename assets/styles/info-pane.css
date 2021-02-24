@@ -1,0 +1,91 @@
+#fewbricks-info-pane {
+    display: none;
+    position: fixed;
+    z-index: 999999;
+    background: #18171B;
+    height: 32px;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    padding: 0 1rem;
+    overflow-y: scroll;
+    border-top: solid 2px #fff;
+}
+
+#fewbricks-info-pane.fewbricks-info-pane--full {
+    height: 100vh;
+}
+
+#fewbricks-info-pane > div {
+    position: relative;
+    width: 96vw;
+    height: 100%;
+    padding-top: 8px;
+}
+
+/* All this since we don't want to mess with dump() */
+#fewbricks-info-pane > div > h1,
+#fewbricks-info-pane > div > h2,
+#fewbricks-info-pane > div > h3,
+#fewbricks-info-pane > div > p,
+#fewbricks-info-pane > div > span,
+#fewbricks-info-pane > div > ul,
+#fewbricks-info-pane > div > .fdt-pre,
+#fewbricks-info-pane .fewbricks-info-pane__toggler,
+#fewbricks-info-pane a {
+    color: #7294b3;
+}
+
+#fewbricks-info-pane > div > h1,
+#fewbricks-info-pane > div > h2,
+#fewbricks-info-pane > div > h3,
+#fewbricks-info-pane > div > p,
+#fewbricks-info-pane > div > span,
+#fewbricks-info-pane > div > ul,
+#fewbricks-info-pane > div > .fdt-pre,
+#fewbricks-info-pane .fewbricks-info-pane__toggler {
+    max-width: 960px;
+    font-family: Menlo, Monaco, Consolas, monospace;
+}
+
+#fewbricks-info-pane a {
+    text-decoration: underline;
+}
+
+#fewbricks-info-pane a:hover {
+    text-decoration: none;
+}
+
+#fewbricks-info-pane > div > h1 {
+    font-size: 1.2rem;
+    margin-top: 0;
+}
+
+#fewbricks-info-pane > div > h2 {
+    font-size: 1.1rem;
+    margin-bottom: 2px;
+}
+
+#fewbricks-info-pane > div > h3 {
+    font-size: 1rem;
+    margin-bottom: 2px;
+}
+
+#fewbricks-info-pane > div > p,
+#fewbricks-info-pane > div > ul {
+    margin-top: 0;
+}
+
+#fewbricks-info-pane .fewbricks-info-pane__togglers-wrapper {
+    position: fixed;
+    bottom: 6px;
+    right: 6px;
+    z-index: 99999; /* Over dump()-output */
+    display: inline-block;
+    background: #18171B;
+}
+
+#fewbricks-info-pane .fewbricks-info-pane__toggler {
+    font-size: 12px;
+    font-weight: normal;
+}
