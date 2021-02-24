@@ -1,2 +1,15 @@
 .idea
 .DS_Store
+/gitignored/*
+/composer.lock
+vendor/
+/fewbricks-demo/acf-json/
+#symlink used in dev
+/fewbricks
+
+# DOCS
+docs/.bundle
+docs/.jekyll-metadata
+docs/.sass-cache
+docs/_site
+docs/vendor
