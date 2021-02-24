@@ -1,6 +1,10 @@
 # Fewbricks changelog
 An incomplete log of changes.
 
+## 2.0.1 - February 24
+* Remove unused Gemfile and Gemfile.lock from root
+* Update documentation
+
 ## 2.0.0 - February 24
 * Version 2! Make sure to check out https://fewbricks2.folbert.com/
 
