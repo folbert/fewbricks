@@ -2,6 +2,7 @@
 
 namespace Fewbricks;
 
+use Fewbricks\ACF\ConditionalLogicRuleGroup;
 use Fewbricks\ACF\Field;
 use Fewbricks\ACF\FieldCollection;
 use Fewbricks\ACF\Fields\Extensions\FewbricksHidden;
