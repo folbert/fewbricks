@@ -1,6 +1,9 @@
 # Fewbricks changelog
 An incomplete log of changes.
 
+## 2.0.0 - February 24
+* Version 2! Make sure to check out https://fewbricks2.folbert.com/
+
 ## 2.0.0-beta1 - February 19, 2020
 Lets try this!
 
@@ -10,7 +13,7 @@ Lets try this!
 ## 1.7 - December 12, 2017
 * Added support for field "date_picker"
 * Added support for field "date_time_picker"
-* Thanks to https://github.com/mariemanandise for both of the above 
+* Thanks to https://github.com/mariemanandise for both of the above
 
 ## 1.6 - March 19, 2017
 * Added function `get_field_values()`to `brick`
