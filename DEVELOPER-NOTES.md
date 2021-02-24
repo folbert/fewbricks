@@ -80,9 +80,11 @@ Version numbering follows [Semantic Versioning](http://semver.org/).
 Start version number with a "v".
 
 1. Start a release locally. Start version number with a "v".
+
 2. Describe new version in CHANGELOG.md
 3. Change version nr in comment in fewbricks.php
-4. Change FEWBRICKS_VERSION in lib/Fewbricks.php
+4. Change FEWBRICKS_VERSION in src/Fewbricks.php
+
 5. Finish the release
 6. Push
 7. After master has been pushed, create release on GitHub.

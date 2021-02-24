@@ -15,7 +15,7 @@ class Fewbricks
     /**
      *
      */
-    const FEWBRICKS_VERSION = '2.0.0';
+    const FEWBRICKS_VERSION = '2.0.1';
 
     /**
      *
